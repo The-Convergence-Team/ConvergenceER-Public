@@ -1,55 +1,55 @@
-*.log
-*.bak
-*.prev
-*.ct
-*.dsasbak
-*.dsaproj
-*dcx/
 *-dcx-wanibnd/
+*.bak
+*.created.bnk
+*.ct
+*.dsaproj
+*.dsasbak
+*.log
+*.prev
+*.temp
+*dcx/
 *tpfbhd/
-launchmod_eldenring.bat
-/mod/.smithbox/ER/
+/.vscode
 /mod/.smithbox/Assets/
-recovery/
-mod/project.json
-mod/menu/*.xml
+/mod/.smithbox/ER/
+/mod/.smithbox/Workflow/FMG Entry Generators
+/mod/.smithbox/Workflow/Naming Templates
+/mod/.smithbox/Workflow/Stripped Row Names
+/mod/script/talk/m*-only
+/mod/sd/enus/**/
+/Resources/Console Apps/GenerateLanguagePacks/Output
+/Resources/Console Apps/MassReplaceNpcParamPerMap/Input
+/ScalingJsonOutput
+/SeamlessCoop
+#Resources/Console Apps/**/bin/Debug
+debug.dll
+elden_ring_seamless_coop.dll
+ersc_settings.ini
+ersc.dll
+launchmod_eldenring.bat
+locale/english.json
+mod/_DSAS_CACHE
+mod/action/script/common_define.hks
+mod/chr/_DSAS_CACHE/
+mod/chr/_DSAS_PROJECT.json
+mod/chr/_DSAS_WORKSPACE.json
+mod/debug.dll
 mod/menu/*.dds
 mod/menu/*.tga
+mod/menu/*.xml
+mod/menu/font.gfx
 mod/node_modules/
 mod/package-lock.json
 mod/package.json
 mod/param/systemparam/
-regulation-bin/
-mod/_DSAS_CACHE
-mod/chr/_DSAS_CACHE/
-mod/chr/_DSAS_PROJECT.json
-mod/chr/_DSAS_WORKSPACE.json
-mod/sfx/*-ffxbnd-dcx-wffxbnd
-#Resources/Console Apps/**/bin/Debug
-Resources/Console Apps/**/obj/Debug
-locale/english.json
-elden_ring_seamless_coop.dll
-seamlesscoopsettings.ini
-SeamlessCoop/crashpad/crashpad_handler.exe
-SeamlessCoop/locale/*.json
-ersc.dll
-ersc_settings.ini
-SkipTheIntro.dll
-/mod/.smithbox/Workflow/FMG Entry Generators
-*.temp
-/mod/.smithbox/Workflow/Naming Templates
-/SeamlessCoop
-/mod/sd/enus/**/
-*.created.bnk
-/.vscode
-/Resources/Console Apps/GenerateLanguagePacks/Output
+mod/project.json
 mod/script/talk/ESDStudioProject.toml
 mod/script/talk/esdtoolconfig.json
-/mod/.smithbox/Workflow/Stripped Row Names
-/mod/script/talk/m*-only
-/ScalingJsonOutput
-mod/debug.dll
-mod/menu/font.gfx
-/Resources/Console Apps/MassReplaceNpcParamPerMap/Input
-mod/action/script/common_define.hks
-debug.dll
+mod/sfx/*-ffxbnd-dcx-wffxbnd
+recovery/
+regulation-bin/
+Resources/Console Apps/**/obj/Debug
+SeamlessCoop/crashpad/crashpad_handler.exe
+SeamlessCoop/locale/*.json
+seamlesscoopsettings.ini
+SkipTheIntro.dll
