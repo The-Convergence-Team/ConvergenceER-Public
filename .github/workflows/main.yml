@@ -1,0 +1,55 @@
+name: Generate Manifest 
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  generate-manifest:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout current branch
+      uses: actions/checkout@v3
+
+    - name: Set up Python (for hashing & manifest generation)
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Generate manifest.json
+      run: |
+        import os, hashlib, json
+
+        root_dir = "."
+        manifest = []
+
+        for foldername, _, filenames in os.walk(root_dir):
+            for filename in filenames:
+                filepath = os.path.join(foldername, filename)
+                if filepath.startswith("./.git") or filepath.startswith("./.github") or filename == "manifest.json":
+                    continue
+
+                with open(filepath, "rb") as f:
+                    sha256 = hashlib.sha256(f.read()).hexdigest()
+                
+                rel_path = os.path.relpath(filepath, root_dir).replace("\\", "/")
+                size = os.path.getsize(filepath)
+
+                manifest.append({
+                    "path": rel_path,
+                    "sha256": sha256,
+                    "size": size
+                })
+
+        with open("manifest.json", "w") as f:
+            json.dump(manifest, f, indent=2)
+
+      shell: python
+
+    - name: Commit and push manifest
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add manifest.json
+        git commit -m "Auto-generate manifest.json"
+        git push
