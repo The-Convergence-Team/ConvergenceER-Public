@@ -56,3 +56,4 @@ SkipTheIntro.dll
 PublicRelease/project.json
 *.py
 PublicRelease/sfx/.gitattributes
+PublicRelease/script/talk/ESDDescriptions.toml
