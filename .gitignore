@@ -53,3 +53,6 @@ SeamlessCoop/crashpad/crashpad_handler.exe
 SeamlessCoop/locale/*.json
 seamlesscoopsettings.ini
 SkipTheIntro.dll
+PublicRelease/project.json
+*.py
+PublicRelease/sfx/.gitattributes

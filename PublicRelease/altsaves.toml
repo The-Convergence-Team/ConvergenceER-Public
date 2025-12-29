@@ -1,0 +1,5 @@
+# Extension you want to use for the save files
+extension = ".cnv"
+
+# Extension you want use for the save files while playing with seamless coop enabled.
+seamless_extension = ".cnv.co2"
