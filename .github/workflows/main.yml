@@ -3,6 +3,9 @@ name: Generate Manifest
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   generate-manifest:
     runs-on: ubuntu-latest
