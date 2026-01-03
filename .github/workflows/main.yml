@@ -14,6 +14,12 @@ jobs:
     - name: Checkout current branch
       uses: actions/checkout@v3
 
+    - name: Install Git LFS
+      run: git lfs install
+
+    - name: Pull LFS files
+      run: git lfs pull
+
     - name: Set up Python (for hashing & manifest generation)
       uses: actions/setup-python@v5
       with:
@@ -57,3 +63,4 @@ jobs:
         git add PublicRelease/manifest.json
         git commit -m "Auto-generate manifest.json" || true
         git push
+
