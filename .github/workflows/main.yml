@@ -30,7 +30,7 @@ jobs:
         import os, hashlib, json
 
         root_dir = "PublicRelease"
-        manifest = []
+        manifest = {}
         manifest_path = os.path.join("DownloaderContent", "manifest.json")
 
         for foldername, _, filenames in os.walk(root_dir):
@@ -43,11 +43,10 @@ jobs:
                 rel_path = os.path.relpath(filepath, root_dir).replace("\\", "/")
                 size = os.path.getsize(filepath)
 
-                manifest.append({
-                    "path": rel_path,
+                manifest[rel_path] = {
                     "sha256": sha256,
                     "size": size
-                })
+                }
 
         with open(manifest_path, "w") as f:
             json.dump(manifest, f, indent=2)
@@ -61,6 +60,3 @@ jobs:
         git add DownloaderContent/manifest.json
         git commit -m "Auto-generate manifest.json" || true
         git push
-
-
-
