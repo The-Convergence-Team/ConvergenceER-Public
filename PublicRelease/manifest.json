@@ -9336,8 +9336,8 @@
   },
   {
     "path": "mod/sfx/sfxbnd_commoneffects.ffxbnd.dcx",
-    "sha256": "dbebcf008e8afe060265b1e5c495d8ebfedb61e8f43d652b2a894a682d96db18",
-    "size": 134
+    "sha256": "a518ec8ffe862c52a302aebcbe5d043c9ede05ee38d44dbc2a367208f5705c37",
+    "size": 113327650
   },
   {
     "path": "mod/menu/01_000_fe.gfx",
@@ -9411,8 +9411,8 @@
   },
   {
     "path": "mod/menu/71_maptile.tpfbdt",
-    "sha256": "8224cdbd0ec23417dc21d2415a2721ff72b6d57641c318bd4566955b4b1de6ac",
-    "size": 135
+    "sha256": "c2771a696a3128bd94b28ce5e03e7f2fc34ca26d4549c1d0584390d75e9d057c",
+    "size": 1257812683
   },
   {
     "path": "mod/menu/02_020_inventory.gfx",
@@ -9436,8 +9436,8 @@
   },
   {
     "path": "mod/menu/hi/01_common.tpf.dcx",
-    "sha256": "efb0bb03369d76a2f1f728aa4959dafe28c4738bda686d8140e04cbe83b825fa",
-    "size": 134
+    "sha256": "83d7d61708ab281e27a78f27bb6228db2d9728c0881d57d2ce8643d8408e7e62",
+    "size": 104061639
   },
   {
     "path": "mod/menu/hi/00_solo.tpfbhd",
