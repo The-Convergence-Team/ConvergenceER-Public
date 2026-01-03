@@ -1,9 +1,11 @@
+*.aipbnd.dcx
 *.bak
 *.created.bnk
 *.ct
 *.dds
 *.dsaproj
 *.dsasbak
+*.fxr
 *.log
 *.prev
 *.py
@@ -11,25 +13,29 @@
 *.tga
 *.xml
 
+debug.dll
 elden_ring_seamless_coop.dll
-seamlesscoopsettings.ini
+erhkshotloader.dll
 ersc_settings.ini
 ersc.dll
-debug.dll
+fxr_ws_reloader_config.json
+fxr_ws_reloader.dll
+seamlesscoopsettings.ini
 SkipTheIntro.dll
 
+_.hks
 _DSAS_PROJECT.json
 _DSAS_WORKSPACE.json
 common_define.hks
-_.hks
 ESDStudioProject.toml
 esdtoolconfig.json
 font.gfx
-project.json
 package-lock.json
 package.json
+project.json
 PublicRelease/mod/sfx/.gitattributes
 PublicRelease/version.txt
+
 
 *-dcx-wanibnd/
 *-dcx-wffxbnd/
@@ -37,14 +43,15 @@ PublicRelease/version.txt
 *-tpfbdt/
 *-tpfbhd/
 
-Resources/
 .vscode/
-ScalingJsonOutput/
+cs_main/
+node_modules/
 recovery/
 regulation-bin/
-node_modules/
-systemparam/
+Resources/
+ScalingJsonOutput/
 SeamlessCoop/
+systemparam/
 
-.smithbox/
 _DSAS_CACHE/
+.smithbox/
