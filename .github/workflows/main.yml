@@ -31,13 +31,11 @@ jobs:
 
         root_dir = "PublicRelease"
         manifest = []
-        manifest_path = os.path.join(root_dir, "manifest.json")
+        manifest_path = os.path.join("DownloaderContent", "manifest.json")
 
         for foldername, _, filenames in os.walk(root_dir):
             for filename in filenames:
                 filepath = os.path.join(foldername, filename)
-                if os.path.normpath(filepath) == os.path.normpath(manifest_path):
-                    continue
 
                 with open(filepath, "rb") as f:
                     sha256 = hashlib.sha256(f.read()).hexdigest()
@@ -63,5 +61,6 @@ jobs:
         git add DownloaderContent/manifest.json
         git commit -m "Auto-generate manifest.json" || true
         git push
+
 
 
