@@ -2,3 +2,4 @@
 71_maptile.tpfbdt filter=lfs diff=lfs merge=lfs -text
 sfxbnd_commoneffects.ffxbnd.dcx filter=lfs diff=lfs merge=lfs -text
 01_common.tpf.dcx filter=lfs diff=lfs merge=lfs -text
+00_solo.tpfbdt filter=lfs diff=lfs merge=lfs -text
