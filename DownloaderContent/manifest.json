@@ -1203,10 +1203,6 @@
     "sha256": "b9e11c044968754edc798abd681bbf87975e73f017930cab99c6bca0a1b54ae6",
     "size": 1745408
   },
-  "mod/manifest.json": {
-    "sha256": "01ad7df535b86662cdfbc25eb49fa5dfd9f0e9193f53b24932dc3c287340e8be",
-    "size": 467942
-  },
   "mod/Scripts-Data-Exposer-FS.dll": {
     "sha256": "79c6fc68267bc4c8fe334f3532c39ebf92f38787f7ba588ff7120249ef72d9a2",
     "size": 54784
