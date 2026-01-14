@@ -1,0 +1,441 @@
+[
+  {
+    "DiscordUserId": "284092878563704835",
+    "Name": "CouchJockey",
+    "InternalName": "CJ",
+    "Title": "Creative Director and Systems Lead",
+    "Type": "Developer"
+  },
+  {
+    "DiscordUserId": "318845477124833290",
+    "Name": "TigerG92",
+    "InternalName": "Tiger",
+    "Title": "Database Lead, Systems- and Gameplay Designer ",
+    "Type": "Developer"
+  },
+  {
+    "DiscordUserId": "305479324872474624",
+    "Name": "AronTheBaron",
+    "InternalName": "Aron",
+    "Title": "Lead Artist and Gameplay Designer",
+    "Type": "Developer"
+  },
+  {
+    "DiscordUserId": "1090679546547798048",
+    "Name": "Lord Exelot",
+    "InternalName": "Exelot",
+    "Title": "Lead Programmer, Level- and Systems Designer",
+    "Type": "Developer"
+  },
+  {
+    "DiscordUserId": "241375390545870848",
+    "Name": "AcetoneEyedrops",
+    "InternalName": "Ace",
+    "Title": "Lead Animator and Level Designer",
+    "Type": "Developer"
+  },
+  {
+    "DiscordUserId": "319188274591563779",
+    "Name": "Zeno",
+    "InternalName": "Zeno",
+    "Title": "Lead Level Designer",
+    "Type": "Developer"
+  },
+  {
+    "DiscordUserId": "187000689644404739",
+    "Name": "Solemn",
+    "InternalName": "Solemn",
+    "Title": "Quality Assurance Lead and Wiki Management",
+    "Type": "Developer"
+  },
+  {
+    "DiscordUserId": "101746181775843328",
+    "Name": "Sinlore Kain",
+    "InternalName": "Kain",
+    "Title": "AI Scripter",
+    "Type": "Developer"
+  },
+  {
+    "DiscordUserId": "214535667227557888",
+    "Name": "Tessa_Kitt",
+    "InternalName": "Tessa",
+    "Title": "Level Designer",
+    "Type": "Developer"
+  },
+  {
+    "DiscordUserId": "696647146975264790",
+    "Name": "Time",
+    "InternalName": "Time",
+    "Title": "Level Designer and Wiki Editor",
+    "Type": "Developer"
+  },
+  {
+    "DiscordUserId": "386206896391979030",
+    "Name": "Kmstr",
+    "InternalName": "Kmstr",
+    "Title": "Animator",
+    "Type": "Developer"
+  },
+
+  {
+    "DiscordUserId": "530179897633538061",
+    "Name": "Freemathieuroy",
+    "InternalName": "Mathieu",
+    "Title": "Rigging and Cloth Simulation",
+    "Type": "Contributor"
+  },
+  {
+    "DiscordUserId": "990074875362287676",
+    "Name": "Blubber",
+    "InternalName": "Blubber",
+    "Title": "Animations",
+    "Type": "Contributor"
+  },
+  {
+    "DiscordUserId": "710688030318657608",
+    "Name": "NickPotterMusic",
+    "InternalName": "Nick",
+    "Title": "Composer",
+    "Type": "Contributor"
+  },
+  {
+    "DiscordUserId": "130420235835670528",
+    "Name": "Kidius Shredius",
+    "InternalName": "Kidius",
+    "Title": "Composer",
+    "Type": "Contributor"
+  },
+  {
+    "DiscordUserId": "781743199722274828",
+    "Name": "Vahar",
+    "InternalName": "Vahar",
+    "Title": "Tester and Wiki Editor",
+    "Type": "Contributor"
+  },
+  {
+    "DiscordUserId": "320155120534945802",
+    "Name": "Vargram",
+    "InternalName": "Vargram",
+    "Title": "Level Designer and Quality Assurance",
+    "Type": "Contributor"
+  },
+  {
+    "DiscordUserId": "429755235389669377",
+    "Name": "umbra_Rose",
+    "InternalName": "umbra_Rose",
+    "Title": "Texture Artist",
+    "Type": "Contributor"
+  },
+  {
+    "DiscordUserId": "277133065569042444",
+    "Name": "Sunflower",
+    "InternalName": "Sunflower",
+    "Title": "Artist and Wiki Editor",
+    "Type": "Contributor"
+  },
+  {
+    "DiscordUserId": "1004836789015560353",
+    "Name": "sekirodubi",
+    "InternalName": "sekirodubi",
+    "Title": "Script Interpreter",
+    "Type": "Contributor"
+  },
+  {
+    "DiscordUserId": "251425451950604288",
+    "Name": "TomClarck",
+    "InternalName": "Tom",
+    "Title": "Reverse Engineering Support",
+    "Type": "Contributor"
+  },
+
+  {
+    "DiscordUserId": "none",
+    "Name": "Sunbleached Angel",
+    "InternalName": "SunbleachedAngel",
+    "Title": "Wiki Management",
+    "Type": "WikiEditor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Asharpole",
+    "InternalName": "Ashar",
+    "Title": "Wiki Editor",
+    "Type": "WikiEditor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Asnia_Kriptosis",
+    "InternalName": "Asnia_Kriptosis",
+    "Title": "Wiki Editor",
+    "Type": "WikiEditor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Crispy",
+    "InternalName": "Crispy",
+    "Title": "Wiki Editor",
+    "Type": "WikiEditor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "FelixTheLad",
+    "InternalName": "Felix",
+    "Title": "Wiki Editor",
+    "Type": "WikiEditor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Kai0t",
+    "InternalName": "Kai0t",
+    "Title": "Wiki Editor",
+    "Type": "WikiEditor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "OnionOfPower",
+    "InternalName": "Onion",
+    "Title": "Wiki Editor",
+    "Type": "WikiEditor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Lord_Shmaxx",
+    "InternalName": "Shmaxx",
+    "Title": "Wiki Editor",
+    "Type": "WikiEditor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Lumitko",
+    "InternalName": "Lumitko",
+    "Title": "Wiki Editor",
+    "Type": "WikiEditor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Memento",
+    "InternalName": "Memento",
+    "Title": "Wiki Editor",
+    "Type": "WikiEditor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Sagittariod",
+    "InternalName": "Sagittariod",
+    "Title": "Wiki Editor",
+    "Type": "WikiEditor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Sherlock",
+    "InternalName": "Sherlock",
+    "Title": "Wiki Editor",
+    "Type": "WikiEditor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "SummersMoons",
+    "InternalName": "SummersMoons",
+    "Title": "Wiki Editor",
+    "Type": "WikiEditor"
+  },
+
+  {
+    "DiscordUserId": "none",
+    "Name": "Cleverraptor6",
+    "InternalName": "Clever",
+    "Title": "Animations",
+    "Type": "FormerContributor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Cyanic",
+    "InternalName": "Cyanic",
+    "Title": "AI Scripter",
+    "Type": "FormerContributor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Detriax / Canada",
+    "InternalName": "Canada",
+    "Title": "Level Designer and Wiki Editor",
+    "Type": "FormerContributor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "SuperTatchi",
+    "InternalName": "SuperTatchi",
+    "Title": "Level Designer",
+    "Type": "FormerContributor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Looker",
+    "InternalName": "Looker",
+    "Title": "Icon Artist",
+    "Type": "FormerContributor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Retro",
+    "InternalName": "Retro",
+    "Title": "Icon Artist",
+    "Type": "FormerContributor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Skeryboi",
+    "InternalName": "Skeryboi",
+    "Title": "Icon Artist",
+    "Type": "FormerContributor"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Ebbn",
+    "InternalName": "Ebbn",
+    "Title": "Wiki Management",
+    "Type": "FormerContributor"
+  },
+
+  {
+    "DiscordUserId": "815065611830951947",
+    "Name": "Pear",
+    "InternalName": "Pear",
+    "Title": "CMI, FLVER Editor, Icon Automator Pro, NavMeshStudio",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Nordgaren",
+    "InternalName": "Nordgaren",
+    "Title": "ErdTools, BoundingBoxCalc, General Assistance",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "DSMS team",
+    "InternalName": "DSMS team",
+    "Title": "DarkSoulsMapStudio",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Vawser",
+    "InternalName": "Vawser",
+    "Title": "Smithbox",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Chainfailure",
+    "InternalName": "Chainfailure",
+    "Title": "AlternateSaveMod, ReWWise",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "TomClark",
+    "InternalName": "TomClark",
+    "Title": "Transmogify Armor",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "ElaDiDu",
+    "InternalName": "ElaDiDu",
+    "Title": "Script Data Exposer",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "The12thAvenger",
+    "InternalName": "The12thAvenger",
+    "Title": "FbxImporter, ErClipGen",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Grimrukh",
+    "InternalName": "Grimrukh",
+    "Title": "Soulstruct",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Xylozi",
+    "InternalName": "Xylozi",
+    "Title": "Yabber, Yapped, Unpacked hks",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "TKGP",
+    "InternalName": "TKGP",
+    "Title": "Yapped, SoulsFormats",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Ivi",
+    "InternalName": "Ivi",
+    "Title": "Unpacked hks, WitchyBND",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Meowmaritus",
+    "InternalName": "Meowmaritus",
+    "Title": "DsAnimStudio",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Katalash",
+    "InternalName": "Katalash",
+    "Title": "Mod Engine, LuaDecompiler",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "NamelessHoodie",
+    "InternalName": "NamelessHoodie",
+    "Title": "DantelionFxrTool",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "AinTunez",
+    "InternalName": "AinTunez",
+    "Title": "DarkScript3",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "thefifthmatt",
+    "InternalName": "thefifthmatt",
+    "Title": "ESDLang, DarkScript3",
+    "Type": "ToolMaker"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "Gomp",
+    "InternalName": "Gomp",
+    "Title": "ESDStudio",
+    "Type": "ToolMaker"
+  },
+
+  {
+    "DiscordUserId": "none",
+    "Name": "CarsonDrewIt",
+    "InternalName": "CarsonDrewIt",
+    "Title": "Logo Design",
+    "Type": "SpecialThanks"
+  },
+  {
+    "DiscordUserId": "none",
+    "Name": "BigBoss",
+    "InternalName": "BigBoss",
+    "Title": "Animation Retargeting Assistance",
+    "Type": "SpecialThanks"
+  }
+]
