@@ -144,7 +144,7 @@
     "DiscordUserId": "251425451950604288",
     "Name": "TomClarck",
     "InternalName": "Tom",
-    "Title": "Reverse Engineering Support",
+    "Title": "Reverse Engineering Support, Transmogrify Armor and ER-Dyes",
     "Type": "Contributor"
   },
 
@@ -305,7 +305,7 @@
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
+    "DiscordUserId": "382638147101655051",
     "Name": "Nordgaren",
     "InternalName": "Nordgaren",
     "Title": "ErdTools, BoundingBoxCalc, General Assistance",
@@ -319,35 +319,28 @@
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
+    "DiscordUserId": "228172504554930176",
     "Name": "Vawser",
     "InternalName": "Vawser",
     "Title": "Smithbox",
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
+    "DiscordUserId": "450973448051752960",
     "Name": "Chainfailure",
     "InternalName": "Chainfailure",
     "Title": "AlternateSaveMod, ReWWise",
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
-    "Name": "TomClark",
-    "InternalName": "TomClark",
-    "Title": "Transmogify Armor",
-    "Type": "ToolMaker"
-  },
-  {
-    "DiscordUserId": "none",
+    "DiscordUserId": "237647551287787520",
     "Name": "ElaDiDu",
     "InternalName": "ElaDiDu",
     "Title": "Script Data Exposer",
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
+    "DiscordUserId": "359354414961524736",
     "Name": "The12thAvenger",
     "InternalName": "The12thAvenger",
     "Title": "FbxImporter, ErClipGen",
@@ -368,28 +361,28 @@
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
+    "DiscordUserId": "154695351582982144",
     "Name": "TKGP",
     "InternalName": "TKGP",
     "Title": "Yapped, SoulsFormats",
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
-    "Name": "Ivi",
-    "InternalName": "Ivi",
+    "DiscordUserId": "124218818644934656",
+    "Name": "ivi",
+    "InternalName": "ivi",
     "Title": "Unpacked hks, WitchyBND",
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
+    "DiscordUserId": "1001001318699253801",
     "Name": "Meowmaritus",
     "InternalName": "Meowmaritus",
     "Title": "DsAnimStudio",
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
+    "DiscordUserId": "212090123771314177",
     "Name": "Katalash",
     "InternalName": "Katalash",
     "Title": "Mod Engine, LuaDecompiler",
@@ -410,14 +403,14 @@
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
+    "DiscordUserId": "147193705013575681",
     "Name": "thefifthmatt",
     "InternalName": "thefifthmatt",
     "Title": "ESDLang, DarkScript3",
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
+    "DiscordUserId": "341773267406684162",
     "Name": "Gomp",
     "InternalName": "Gomp",
     "Title": "ESDStudio",
@@ -432,7 +425,7 @@
     "Type": "SpecialThanks"
   },
   {
-    "DiscordUserId": "none",
+    "DiscordUserId": "724675471819931777",
     "Name": "BigBoss",
     "InternalName": "BigBoss",
     "Title": "Animation Retargeting Assistance",
