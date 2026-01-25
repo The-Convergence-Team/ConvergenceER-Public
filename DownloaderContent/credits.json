@@ -78,20 +78,6 @@
   },
 
   {
-    "DiscordUserId": "530179897633538061",
-    "Name": "Freemathieuroy",
-    "InternalName": "Mathieu",
-    "Title": "Rigging and Cloth Simulation",
-    "Type": "Contributor"
-  },
-  {
-    "DiscordUserId": "990074875362287676",
-    "Name": "Blubber",
-    "InternalName": "Blubber",
-    "Title": "Animations",
-    "Type": "Contributor"
-  },
-  {
     "DiscordUserId": "710688030318657608",
     "Name": "NickPotterMusic",
     "InternalName": "Nick",
@@ -103,13 +89,6 @@
     "Name": "Kidius Shredius",
     "InternalName": "Kidius",
     "Title": "Composer",
-    "Type": "Contributor"
-  },
-  {
-    "DiscordUserId": "781743199722274828",
-    "Name": "Vahar",
-    "InternalName": "Vahar",
-    "Title": "Tester and Wiki Editor",
     "Type": "Contributor"
   },
   {
@@ -127,10 +106,10 @@
     "Type": "Contributor"
   },
   {
-    "DiscordUserId": "429755235389669377",
-    "Name": "umbra_Rose",
-    "InternalName": "umbra_Rose",
-    "Title": "Texture Artist",
+    "DiscordUserId": "501046210099150860",
+    "Name": "Mihai",
+    "InternalName": "Mihai",
+    "Title": "Enemy- Design and Behavior",
     "Type": "Contributor"
   },
   {
@@ -141,17 +120,10 @@
     "Type": "Contributor"
   },
   {
-    "DiscordUserId": "1349589907693109293",
-    "Name": "Shmaxx",
-    "InternalName": "Shmaxx",
-    "Title": "VFX Artist",
-    "Type": "Contributor"
-  },
-  {
-    "DiscordUserId": "1004836789015560353",
-    "Name": "sekirodubi",
-    "InternalName": "sekirodubi",
-    "Title": "Script Interpreter",
+    "DiscordUserId": "251425451950604288",
+    "Name": "TomClarck",
+    "InternalName": "Tom",
+    "Title": "Reverse Engineering Support, Transmogrify Armor and ER-Dyes",
     "Type": "Contributor"
   },
   {
@@ -162,10 +134,17 @@
     "Type": "Contributor"
   },
   {
-    "DiscordUserId": "501046210099150860",
-    "Name": "Mihai",
-    "InternalName": "Mihai",
-    "Title": "Enemy- Design and Behavior",
+    "DiscordUserId": "781743199722274828",
+    "Name": "Vahar",
+    "InternalName": "Vahar",
+    "Title": "Tester and Wiki Editor",
+    "Type": "Contributor"
+  },
+  {
+    "DiscordUserId": "1349589907693109293",
+    "Name": "Shmaxx",
+    "InternalName": "Shmaxx",
+    "Title": "VFX Artist",
     "Type": "Contributor"
   },
   {
@@ -180,13 +159,6 @@
     "Name": "Dragonblade",
     "InternalName": "Dragonblade",
     "Title": "VFX Artist",
-    "Type": "Contributor"
-  },
-  {
-    "DiscordUserId": "251425451950604288",
-    "Name": "TomClarck",
-    "InternalName": "Tom",
-    "Title": "Reverse Engineering Support, Transmogrify Armor and ER-Dyes",
     "Type": "Contributor"
   },
 
@@ -283,10 +255,38 @@
   },
 
   {
+    "DiscordUserId": "530179897633538061",
+    "Name": "Freemathieuroy",
+    "InternalName": "Mathieu",
+    "Title": "Rigging and Cloth Simulation",
+    "Type": "FormerContributor"
+  },
+  {
+    "DiscordUserId": "990074875362287676",
+    "Name": "Blubber",
+    "InternalName": "Blubber",
+    "Title": "Animations",
+    "Type": "FormerContributor"
+  },
+  {
+    "DiscordUserId": "1004836789015560353",
+    "Name": "sekirodubi",
+    "InternalName": "sekirodubi",
+    "Title": "Script Interpreter",
+    "Type": "FormerContributor"
+  },
+  {
     "DiscordUserId": "none",
     "Name": "Cleverraptor6",
     "InternalName": "Clever",
     "Title": "Animations",
+    "Type": "FormerContributor"
+  },
+  {
+    "DiscordUserId": "429755235389669377",
+    "Name": "umbra_Rose",
+    "InternalName": "umbra_Rose",
+    "Title": "Texture Artist",
     "Type": "FormerContributor"
   },
   {
