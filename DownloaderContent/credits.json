@@ -52,7 +52,7 @@
     "DiscordUserId": "101746181775843328",
     "Name": "Sinlore Kain",
     "InternalName": "Kain",
-    "Title": "AI Scripter",
+    "Title": "Enemy Behavior & Programming",
     "Type": "Developer"
   },
   {
@@ -120,6 +120,13 @@
     "Type": "Contributor"
   },
   {
+    "DiscordUserId": "338542366983979010",
+    "Name": "Sil",
+    "InternalName": "Sil",
+    "Title": "Cutscene Designer and Video Editor",
+    "Type": "Contributor"
+  },
+  {
     "DiscordUserId": "429755235389669377",
     "Name": "umbra_Rose",
     "InternalName": "umbra_Rose",
@@ -134,10 +141,45 @@
     "Type": "Contributor"
   },
   {
+    "DiscordUserId": "1349589907693109293",
+    "Name": "Shmaxx",
+    "InternalName": "Shmaxx",
+    "Title": "VFX Artist",
+    "Type": "Contributor"
+  },
+  {
     "DiscordUserId": "1004836789015560353",
     "Name": "sekirodubi",
     "InternalName": "sekirodubi",
     "Title": "Script Interpreter",
+    "Type": "Contributor"
+  },
+  {
+    "DiscordUserId": "485884731116748805",
+    "Name": "Joshy",
+    "InternalName": "Joshy",
+    "Title": "Interactive Map Creator",
+    "Type": "Contributor"
+  },
+  {
+    "DiscordUserId": "501046210099150860",
+    "Name": "Mihai",
+    "InternalName": "Mihai",
+    "Title": "Enemy- Design and Behavior",
+    "Type": "Contributor"
+  },
+  {
+    "DiscordUserId": "633684386973220868",
+    "Name": "Rayan",
+    "InternalName": "Rayan",
+    "Title": "VFX Artist",
+    "Type": "Contributor"
+  },
+  {
+    "DiscordUserId": "409600808519335946",
+    "Name": "Dragonblade",
+    "InternalName": "Dragonblade",
+    "Title": "VFX Artist",
     "Type": "Contributor"
   },
   {
