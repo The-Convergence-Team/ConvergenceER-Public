@@ -164,13 +164,6 @@
 
   {
     "DiscordUserId": "none",
-    "Name": "Sunbleached Angel",
-    "InternalName": "SunbleachedAngel",
-    "Title": "Wiki Management",
-    "Type": "WikiEditor"
-  },
-  {
-    "DiscordUserId": "none",
     "Name": "Asharpole",
     "InternalName": "Ashar",
     "Title": "Wiki Editor",
@@ -253,6 +246,8 @@
     "Title": "Wiki Editor",
     "Type": "WikiEditor"
   },
+
+
 
   {
     "DiscordUserId": "530179897633538061",
@@ -338,6 +333,15 @@
     "Title": "Wiki Management",
     "Type": "FormerContributor"
   },
+  {
+    "DiscordUserId": "none",
+    "Name": "Sunbleached Angel",
+    "InternalName": "SunbleachedAngel",
+    "Title": "Wiki Management",
+    "Type": "FormerContributor"
+  },
+
+
 
   {
     "DiscordUserId": "815065611830951947",
@@ -458,6 +462,8 @@
     "Title": "ESDStudio",
     "Type": "ToolMaker"
   },
+
+  
 
   {
     "DiscordUserId": "none",
