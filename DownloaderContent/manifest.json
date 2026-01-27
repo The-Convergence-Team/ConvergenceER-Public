@@ -1195,6 +1195,26 @@
     "sha256": "c50c08c73a6a88c6d5d26b87165aa832afb5c677a920f62616c9bf40ad8d8590",
     "size": 4871
   },
+  "me3/convergence.me3": {
+    "sha256": "56511bbe5918eaf68d1d10ac24ab4665344d508ee935ebc6c3b0b142e8d34e2b",
+    "size": 346
+  },
+  "me3/Linux/me3": {
+    "sha256": "367631950ea77a5b6a08babe1f4408097c99290a0db1647e247bfdf81c123b7c",
+    "size": 6206672
+  },
+  "me3/Linux/win64/me3.exe": {
+    "sha256": "077eb55ee87a12f4672d38349639249e5666d2479c379129cfaba27f44512969",
+    "size": 5385680
+  },
+  "me3/Linux/win64/me3_mod_host.dll": {
+    "sha256": "edb986e689d7dcfa7ec9e3ea69b3c64552d55cb72b828a7d585a55c1c3c663ca",
+    "size": 6470608
+  },
+  "me3/Linux/win64/me3-launcher.exe": {
+    "sha256": "c374a4a3380b84a7dc3339948dbee8786eddddc8ae26ac53f74b361e23f12f5a",
+    "size": 4077520
+  },
   "mod/regulation.bin": {
     "sha256": "7fb78a97b6514e07fc289364b303835aed0c9c03c5c7ab1ed2794ce1189f4cae",
     "size": 2780928
