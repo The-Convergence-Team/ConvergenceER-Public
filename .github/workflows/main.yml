@@ -69,20 +69,20 @@ jobs:
                 filepath = os.path.join(foldername, filename)
                 rel_path = os.path.relpath(filepath, root_dir).replace('\\', '/')
 
+                # Determine whether this file is considered LFS by .gitattributes
                 try:
-                    if patterns and not matches_patterns(rel_path):
-                        continue
+                    is_lfs = bool(patterns) and matches_patterns(rel_path)
                 except Exception:
-                    # If pattern matching fails for any reason, skip this file
-                    continue
+                    # If pattern matching fails, treat as non-LFS to avoid skipping files
+                    is_lfs = False
 
                 try:
                     size = os.path.getsize(filepath)
                 except OSError:
                     continue
 
-                # If file is larger than segment size, split into parts following .p{index}.part
-                if size > segment_size:
+                # If file is LFS and larger than segment size, split into parts following .p{index}.part
+                if is_lfs and size > segment_size:
                     # remove any existing parts for consistency
                     for existing in glob.glob(filepath + '.p*.part'):
                         try:
