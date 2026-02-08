@@ -27,27 +27,100 @@ jobs:
 
     - name: Generate manifest.json
       run: |
-        import os, hashlib, json
+        import os, hashlib, json, fnmatch, glob
 
+        # Split large LFS files into 50MB segments following the .p{index}.part convention
+        segment_size = 50 * 1024 * 1024
         root_dir = "PublicRelease"
+
+        # Parse .gitattributes to find LFS patterns
+        patterns = []
+        try:
+            with open('.gitattributes', 'r') as ga:
+                for line in ga:
+                    line = line.strip()
+                    if not line or line.startswith('#'):
+                        continue
+                    if 'filter=lfs' in line:
+                        parts = line.split()
+                        if parts:
+                            patterns.append(parts[0].lstrip('./'))
+        except FileNotFoundError:
+            patterns = []
+
+        def matches_patterns(rel_path):
+            for p in patterns:
+                # try matching the pattern against the relative path and the basename
+                if fnmatch.fnmatch(rel_path, p) or fnmatch.fnmatch(rel_path, p.lstrip('/')) or fnmatch.fnmatch(os.path.basename(rel_path), p):
+                    return True
+            return False
+
+        # Single pass: for each original file (skip any existing part files),
+        # optionally create parts, and add the original file to the manifest.
         manifest = {}
         manifest_path = os.path.join("DownloaderContent", "manifest.json")
 
         for foldername, _, filenames in os.walk(root_dir):
             for filename in filenames:
+                # Skip generated part files
+                if filename.endswith('.part') and '.p' in filename:
+                    continue
+
                 filepath = os.path.join(foldername, filename)
+                rel_path = os.path.relpath(filepath, root_dir).replace('\\', '/')
 
-                with open(filepath, "rb") as f:
-                    sha256 = hashlib.sha256(f.read()).hexdigest()
+                try:
+                    if patterns and not matches_patterns(rel_path):
+                        continue
+                except Exception:
+                    # If pattern matching fails for any reason, skip this file
+                    continue
 
-                rel_path = os.path.relpath(filepath, root_dir).replace("\\", "/")
-                size = os.path.getsize(filepath)
+                try:
+                    size = os.path.getsize(filepath)
+                except OSError:
+                    continue
+
+                # If file is larger than segment size, split into parts following .p{index}.part
+                if size > segment_size:
+                    # remove any existing parts for consistency
+                    for existing in glob.glob(filepath + '.p*.part'):
+                        try:
+                            os.remove(existing)
+                        except Exception:
+                            pass
+
+                    with open(filepath, 'rb') as src:
+                        idx = 1
+                        while True:
+                            chunk = src.read(segment_size)
+                            if not chunk:
+                                break
+                            idx_str = str(idx).zfill(2)  # zero-pad to two digits
+                            partpath = f"{filepath}.p{idx_str}.part"
+                            with open(partpath, 'wb') as pf:
+                                pf.write(chunk)
+                            idx += 1
+
+                # Compute SHA256 of the original file (do not include parts in manifest)
+                try:
+                    h = hashlib.sha256()
+                    with open(filepath, 'rb') as f:
+                        while True:
+                            buf = f.read(8192)
+                            if not buf:
+                                break
+                            h.update(buf)
+                    sha256 = h.hexdigest()
+                except Exception:
+                    continue
 
                 manifest[rel_path] = {
                     "sha256": sha256,
                     "size": size
                 }
 
+        os.makedirs(os.path.dirname(manifest_path), exist_ok=True)
         with open(manifest_path, "w") as f:
             json.dump(manifest, f, indent=2)
 
@@ -58,5 +131,17 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         git add DownloaderContent/manifest.json
-        git commit -m "Auto-generate manifest.json" || true
-        git push
+
+        # Add generated part files if any exist (two-digit padded .pNN.part)
+        parts=$(git ls-files --others --exclude-standard PublicRelease | grep -E '\.p[0-9]{2}\.part$' || true)
+        if [ -n "$parts" ]; then
+          echo "$parts" | xargs -r git add
+        fi
+
+        # Commit only if there are staged changes to avoid noisy empty commits
+        if git diff --cached --quiet; then
+          echo "No changes to commit."
+        else
+          git commit -m "Auto-generate manifest.json and split LFS files into parts"
+          git push
+        fi
