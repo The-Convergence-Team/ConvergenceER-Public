@@ -130,18 +130,44 @@ jobs:
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
+
+        # Always add manifest (will be included in the first commit if parts exist)
         git add DownloaderContent/manifest.json
 
-        # Add generated part files if any exist (two-digit padded .pNN.part)
+        # Discover generated part files (two-digit padded .pNN.part)
         parts=$(git ls-files --others --exclude-standard PublicRelease | grep -E '\.p[0-9]{2}\.part$' || true)
-        if [ -n "$parts" ]; then
-          echo "$parts" | xargs -r git add
+        if [ -z "$parts" ]; then
+          # No parts: commit manifest only if changed
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Auto-generate manifest.json"
+            git push
+          fi
+          exit 0
         fi
 
-        # Commit only if there are staged changes to avoid noisy empty commits
-        if git diff --cached --quiet; then
-          echo "No changes to commit."
-        else
-          git commit -m "Auto-generate manifest.json and split LFS files into parts"
-          git push
-        fi
+        # Split parts into smaller batches to avoid pushing too many files at once
+        mapfile -t arr <<<"$parts"
+        batch_size=20
+        total=${#arr[@]}
+
+        for ((i=0;i<total;i+=batch_size)); do
+          j=$((i/batch_size+1))
+          slice=("${arr[@]:i:batch_size}")
+
+          # Add this batch of parts
+          printf "%s\n" "${slice[@]}" | xargs -r git add
+
+          # Include manifest only in the first batch
+          if [ $i -eq 0 ]; then
+            git add DownloaderContent/manifest.json
+          fi
+
+          if git diff --cached --quiet; then
+            echo "No staged changes for batch $j, skipping commit."
+          else
+            git commit -m "Auto-generate split LFS parts (batch $j)"
+            git push
+          fi
+        done
