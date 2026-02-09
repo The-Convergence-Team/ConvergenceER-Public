@@ -7563,10 +7563,6 @@
     "sha256": "b5cc5ed95baece7a8f5a98ff4d23a19c9cde196e76adc97c8e7cc70058d7d569",
     "size": 28173
   },
-  "mod/menu/hi/01_common.tpf.dcx.part2.temp": {
-    "sha256": "281ecdbfdcec647dc68a8d704c5a333e01fd086ca92ba6b6638e2cd13c78735d",
-    "size": 51632839
-  },
   "mod/menu/hi/01_common.tpf.dcx": {
     "sha256": "83d7d61708ab281e27a78f27bb6228db2d9728c0881d57d2ce8643d8408e7e62",
     "size": 104061639
@@ -7574,10 +7570,6 @@
   "mod/menu/hi/00_solo.tpfbhd": {
     "sha256": "1ef2e5b79b2b2ebe46ecbfb57ab15ef2de94e15c79bbd0fdfd0cdee497af04c6",
     "size": 331328
-  },
-  "mod/menu/hi/01_common.tpf.dcx.part1.temp": {
-    "sha256": "55d2263ac81efcb7053dbc6c33f7957712312903ba491c4d2457b5702a1a0651",
-    "size": 52428800
   },
   "mod/menu/hi/00_solo.tpfbdt": {
     "sha256": "77ac577af079cb14a9feb272b8121eeff2948c2eb03777fb666fdcf4783d2b26",
