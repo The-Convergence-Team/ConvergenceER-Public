@@ -14,7 +14,6 @@
 *.tga
 *.xml
 *.lnk
-!*.part*.temp
 
 debug.dll
 elden_ring_seamless_coop.dll
