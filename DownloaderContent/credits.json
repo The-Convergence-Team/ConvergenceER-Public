@@ -351,7 +351,7 @@
     "DiscordUserId": "815065611830951947",
     "Name": "Pear",
     "InternalName": "Pear",
-    "Title": "CMI, FLVER Editor, Icon Automator Pro, NavMeshStudio",
+    "Title": "CMI, FLVER Editor, Icon Automator Pro, NavMeshStudio, ERMapGenerator",
     "Type": "ToolMaker"
   },
   {
@@ -484,3 +484,4 @@
     "Type": "SpecialThanks"
   }
 ]
+
