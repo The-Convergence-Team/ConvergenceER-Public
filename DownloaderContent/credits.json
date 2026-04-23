@@ -160,91 +160,407 @@
 
 
   {
-    "DiscordUserId": "none",
     "Name": "Asharpole",
-    "InternalName": "Ashar",
     "Title": "Wiki Editor",
     "Type": "WikiEditor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Asnia_Kriptosis",
-    "InternalName": "Asnia_Kriptosis",
     "Title": "Wiki Editor",
     "Type": "WikiEditor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Crispy",
-    "InternalName": "Crispy",
     "Title": "Wiki Editor",
     "Type": "WikiEditor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "FelixTheLad",
-    "InternalName": "Felix",
     "Title": "Wiki Editor",
     "Type": "WikiEditor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Kai0t",
-    "InternalName": "Kai0t",
     "Title": "Wiki Editor",
     "Type": "WikiEditor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "OnionOfPower",
-    "InternalName": "Onion",
     "Title": "Wiki Editor",
     "Type": "WikiEditor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Lord_Shmaxx",
     "InternalName": "Shmaxx",
     "Title": "Wiki Editor",
     "Type": "WikiEditor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Lumitko",
-    "InternalName": "Lumitko",
     "Title": "Wiki Editor",
     "Type": "WikiEditor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Memento",
-    "InternalName": "Memento",
     "Title": "Wiki Editor",
     "Type": "WikiEditor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Sagittariod",
-    "InternalName": "Sagittariod",
     "Title": "Wiki Editor",
     "Type": "WikiEditor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Sherlock",
-    "InternalName": "Sherlock",
     "Title": "Wiki Editor",
     "Type": "WikiEditor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "SummersMoons",
-    "InternalName": "SummersMoons",
     "Title": "Wiki Editor",
     "Type": "WikiEditor"
   },
 
 
+
+  {
+    "Name": "Antho",
+    "Title": "French",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Asharpole",
+    "InternalName": "Ashar",
+    "Title": "Italian",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Bencor",
+    "Title": "French",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Bloom",
+    "Title": "Portugese (Brazil)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "BrunoTTw",
+    "Title": "Portugese (Brazil)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Carpiulnaris",
+    "Title": "Spanish (Spain)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "CrimsonGaligula",
+    "Title": "German",
+    "Type": "Translator"
+  },
+  {
+    "Name": "CybranLord",
+    "Title": "French",
+    "Type": "Translator"
+  },
+  {
+    "Name": "DamSF",
+    "Title": "Portugese (Brazil)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Edd",
+    "Title": "Portugese (Brazil)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Enatsyrte",
+    "Title": "French",
+    "Type": "Translator"
+  },
+  {
+    "Name": "endlessparadox",
+    "Title": "Spanish (Latin America)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Ereno",
+    "Title": "Polish",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Falk",
+    "Title": "Spanish (Latin America)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Fere00lxrd",
+    "Title": "Spanish (Spain)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Firecraft811",
+    "Title": "Spanish (Spain)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "FrannyStein",
+    "Title": "Chinese",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Gabi",
+    "Title": "French",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Gabri3lArts",
+    "Title": "Portugese (Brazil)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Generalleutnant Otta van Garnier",
+    "Title": "Portugese (Brazil)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Haosfortum",
+    "Title": "Russian",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Haru72",
+    "Title": "Spanish (Spain)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Hukyji",
+    "Title": "Spanish (Latin America)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Hurricane",
+    "Title": "Portugese (Brazil)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "hyunwooya1123",
+    "Title": "Korean",
+    "Type": "Translator"
+  },
+  {
+    "Name": "IM_JIGHOUL",
+    "Title": "Russian",
+    "Type": "Translator"
+  },
+  {
+    "Name": "KarlvonBismarx",
+    "Title": "German",
+    "Type": "Translator"
+  },
+  {
+    "Name": "KaruMiraii",
+    "Title": "French",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Kirku",
+    "Title": "Polish",
+    "Type": "Translator"
+  },
+  {
+    "Name": "KrukaL",
+    "Title": "Chinese",
+    "Type": "Translator"
+  },
+  {
+    "Name": "leehee",
+    "Title": "Korean",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Lery",
+    "Title": "Chinese",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Lilian Desabres",
+    "Title": "French",
+    "Type": "Translator"
+  },
+  {
+    "Name": "listro2",
+    "Title": "Portugese (Brazil)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Lumitko",
+    "Title": "Polish",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Lunaris",
+    "Title": "Spanish (Spain)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "MakDau",
+    "Title": "French",
+    "Type": "Translator"
+  },
+  {
+    "Name": "mascotte",
+    "Title": "French",
+    "Type": "Translator"
+  },
+  {
+    "Name": "mikk",
+    "Title": "Polish",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Mister Duck_.",
+    "Title": "Portugese (Brazil)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Miyako",
+    "Title": "German",
+    "Type": "Translator"
+  },
+  {
+    "Name": "monnui",
+    "Title": "Italian",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Mr.Glaquette",
+    "Title": "French",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Nakatita",
+    "Title": "Russian",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Neo",
+    "Title": "Portugese (Brazil)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Neuronalon",
+    "Title": "German",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Night",
+    "Title": "German",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Paco Rabanne",
+    "Title": "Italian",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Pekzer",
+    "Title": "Spanish (Latin America)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Ppe",
+    "Title": "Portugese (Brazil)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Ralfatum",
+    "Title": "Polish",
+    "Type": "Translator"
+  },
+  {
+    "Name": "RIPTO",
+    "Title": "Portugese (Brazil)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Rochehdz18",
+    "Title": "Spanish (Spain)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Ryan Gosler",
+    "Title": "Portugese (Brazil)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "sei la",
+    "Title": "Portugese (Brazil)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Shadowek",
+    "Title": "Polish",
+    "Type": "Translator"
+  },
+  {
+    "Name": "skadguide",
+    "Title": "Thai",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Sozer",
+    "Title": "Spanish (Spain)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Strade",
+    "Title": "French",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Tarathyl",
+    "Title": "Arabic",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Toastedpants",
+    "Title": "French",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Velthrax",
+    "Title": "German",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Jovixx",
+    "Title": "Spanish (Latin America)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Yonchi Chikito",
+    "Title": "Spanish (Spain)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "Zenki",
+    "Title": "Spanish (Latin America)",
+    "Type": "Translator"
+  },
+  {
+    "Name": "룰루랄라",
+    "Title": "Korean",
+    "Type": "Translator"
+  },
+  {
+    "Name": "鼠人Kasaki",
+    "Title": "Chinese",
+    "Type": "Translator"
+  },
+
+  
 
   {
     "DiscordUserId": "530179897633538061",
@@ -268,7 +584,6 @@
     "Type": "FormerContributor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Cleverraptor6",
     "InternalName": "Clever",
     "Title": "Animations",
@@ -282,56 +597,48 @@
     "Type": "FormerContributor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Cyanic",
     "InternalName": "Cyanic",
     "Title": "AI Scripter",
     "Type": "FormerContributor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Detriax / Canada",
     "InternalName": "Canada",
     "Title": "Level Designer and Wiki Editor",
     "Type": "FormerContributor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "SuperTatchi",
     "InternalName": "SuperTatchi",
     "Title": "Level Designer",
     "Type": "FormerContributor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Looker",
     "InternalName": "Looker",
     "Title": "Icon Artist",
     "Type": "FormerContributor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Retro",
     "InternalName": "Retro",
     "Title": "Icon Artist",
     "Type": "FormerContributor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Skeryboi",
     "InternalName": "Skeryboi",
     "Title": "Icon Artist",
     "Type": "FormerContributor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Ebbn",
     "InternalName": "Ebbn",
     "Title": "Wiki Management",
     "Type": "FormerContributor"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Sunbleached Angel",
     "InternalName": "SunbleachedAngel",
     "Title": "Wiki Management",
@@ -355,7 +662,6 @@
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
     "Name": "DSMS team",
     "InternalName": "DSMS team",
     "Title": "DarkSoulsMapStudio",
@@ -390,14 +696,12 @@
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Grimrukh",
     "InternalName": "Grimrukh",
     "Title": "Soulstruct",
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
     "Name": "Xylozi",
     "InternalName": "Xylozi",
     "Title": "Yabber, Yapped, Unpacked hks",
@@ -432,14 +736,12 @@
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
     "Name": "NamelessHoodie",
     "InternalName": "NamelessHoodie",
     "Title": "DantelionFxrTool",
     "Type": "ToolMaker"
   },
   {
-    "DiscordUserId": "none",
     "Name": "AinTunez",
     "InternalName": "AinTunez",
     "Title": "DarkScript3",
@@ -463,7 +765,6 @@
 
 
   {
-    "DiscordUserId": "none",
     "Name": "CarsonDrewIt",
     "InternalName": "CarsonDrewIt",
     "Title": "Logo Design",
