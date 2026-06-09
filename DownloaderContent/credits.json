@@ -76,6 +76,13 @@
     "Title": "Animator",
     "Type": "Developer"
   },
+  {
+    "DiscordUserId": "320155120534945802",
+    "Name": "Vargram",
+    "InternalName": "Vargram",
+    "Title": "Level Designer and Quality Assurance",
+    "Type": "Developer"
+  },
 
   
 
@@ -91,13 +98,6 @@
     "Name": "Kidius Shredius",
     "InternalName": "Kidius",
     "Title": "Composer",
-    "Type": "Contributor"
-  },
-  {
-    "DiscordUserId": "320155120534945802",
-    "Name": "Vargram",
-    "InternalName": "Vargram",
-    "Title": "Level Designer and Quality Assurance",
     "Type": "Contributor"
   },
   {
