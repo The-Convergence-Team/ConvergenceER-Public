@@ -1,0 +1,21 @@
+profileVersion = "v1"
+savefile = "ER0000.cnv"
+
+[[supports]]
+game = "eldenring"
+
+[[package]]
+id = "convergence-er"
+path = "./../mod"
+
+[[natives]]
+path = './../mod/ErdTools.dll'
+
+[[natives]]
+path = './../mod/erdyes.dll'
+
+[[natives]]
+path = './../mod/ertransmogrify.dll'
+
+[[natives]]
+path = './../mod/Scripts-Data-Exposer-FS.dll'
