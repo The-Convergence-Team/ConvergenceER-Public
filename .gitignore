@@ -37,6 +37,8 @@ package.json
 project.json
 PublicRelease/mod/sfx/.gitattributes
 PublicRelease/version.txt
+EarlyAccess/mod/sfx/.gitattributes
+EarlyAccess/version.txt
 
 # Folders
 
