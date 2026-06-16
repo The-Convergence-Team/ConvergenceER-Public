@@ -1,8 +1,4 @@
 {
-  "version.txt": {
-    "sha256": "2f517ca438606d95c032f8b412f82aaeb0ac9ae15209423ce17a7b1d77faeb60",
-    "size": 7
-  },
   "modengine2_launcher.exe": {
     "sha256": "4a8a99ac7e2d6734229437b241269aaf0edfa387a1a4dab62f515cf0976be105",
     "size": 544256
