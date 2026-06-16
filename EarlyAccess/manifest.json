@@ -59,10 +59,6 @@
     "sha256": "fcb9d1570ffea16b65a42606a12f4dd0ab4b9ad636899b8daae2a02cecbc10e9",
     "size": 800256
   },
-  "mod/sound copy.json": {
-    "sha256": "8dc18db74be53387de92e2701dd13fdb78f2ea78da06a28d51b1e46f10a43137",
-    "size": 10991
-  },
   "mod/sfx/sfxbnd_m12.ffxbnd.dcx": {
     "sha256": "38bdd4cc004adf720c668e1292de887e80b03352626928136bea76d0864f1cbb",
     "size": 176768
