@@ -1,8 +1,4 @@
 {
-  "manifest.json": {
-    "sha256": "03f35da82bd43577642daf82f8489f6d1955e70fcd70f463846501d76ffbb8e4",
-    "size": 477199
-  },
   "Start_Convergence.bat": {
     "sha256": "3e846b4975501efe68958c27ef7023bb9ddb2becb609ea6cd4b81ae4c7f9d83f",
     "size": 4414
