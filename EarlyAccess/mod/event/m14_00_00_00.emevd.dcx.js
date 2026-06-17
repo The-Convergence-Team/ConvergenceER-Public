@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.5
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -15,6 +15,10 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 9005810, 14000850, 14000000, 14000950, 14001950, 1084227584);
     InitializeCommonEvent(0, 9005810, 14000850, 14000001, 14000951, 14001951, 1084227584);
     InitializeEvent(0, 14002080, 0);
+    InitializeEvent(0, 14002081, 14007005); //Award Erudiction --> Twinsage Glintstone Crown
+    InitializeEvent(1, 14002081, 14007015); //Award Erudiction --> Olivinus Glintstone Crown
+    InitializeEvent(2, 14002081, 14007025); //Award Erudiction --> Lazuli Glintstone Crown
+    InitializeEvent(3, 14002081, 14007035); //Award Erudiction --> Karolos Glintstone Crown
     InitializeEvent(0, 14002665, 0);
     DisableHitBackreadMask(0);
     InitializeEvent(0, 14002800, 0);
@@ -229,6 +233,10 @@ $Event(0, Default, function() {
     InitializeEvent(4, 14003888, 14000890, 14005805, 3007, 190, 15172, 252); // Comet Azur frontal
     InitializeEvent(5, 14003888, 14000891, 14005805, 3007, 190, 15172, 253);
     InitializeEvent(2, 14003889, 14005805, 3007, 190);
+    
+    //Mimic
+    InitializeCommonEvent(0, 20000352, 14000650);
+    InitializeCommonEvent(0, 20000353, 14000651, 14000650, 514000650);
 });
 
 $Event(50, Default, function() {
@@ -374,6 +382,15 @@ $Event(14002080, Default, function() {
     SetPlayerRespawnPoint(16002080);
     SaveRequest();
     SetEventFlagID(16000540, ON);
+});
+
+$Event(14002081, Restart, function(X0_4) {
+    EndIf(!PlayerIsInOwnWorld());
+    EndIf(EventFlag(16000545));
+    WaitFor(EventFlagState(ON, TargetEventFlagType.EventFlag, X0_4));
+    AwardGesture(103);
+    SetEventFlagID(16000545, ON);
+    EndEvent();
 });
 
 $Event(14002145, Restart, function() {

@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.5
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -38,14 +38,14 @@ $Event(0, Default, function() {
     InitializeEvent(12, 10012510, 60912, 17, 6790, 6740, 0); //Fundamentalist
     InitializeEvent(13, 10012510, 60913, 18, 7510, 2007740, 0); //Bestial Devout
     InitializeEvent(14, 10012510, 60914, 19, 6960, 2006920, 0); //Dragon Cultist
-    InitializeEvent(15, 10012510, 60915, 13, 5031, 8158, 0); //Necromancer
+    InitializeEvent(15, 10012510, 60915, 13, 5031, 5070, 8158); //Necromancer
     InitializeEvent(16, 10012510, 60916, 10, 0, 0, 0); //Volcanist
     InitializeEvent(17, 10012510, 60917, 12, 6520, 0, 0); //Nox Oracle
     InitializeEvent(18, 10012510, 60918, 11, 5271, 0, 0); //Storm Caller
     InitializeEvent(19, 10012510, 60919, 20, 0, 0, 0); //Godskin Celebrant
-    InitializeEvent(20, 10012510, 60920, 21, 0, 0, 0); //Frenzied Zealot
-    InitializeEvent(21, 10012510, 60921, 14, 0, 0, 0); //Frost Witch
-    InitializeEvent(22, 10012510, 60922, 15, 0, 0, 0); //Aberrant Heretic
+    InitializeEvent(20, 10012510, 60920, 21, 7322, 0, 0); //Frenzied Zealot
+    InitializeEvent(21, 10012510, 60921, 14, 4400, 0, 0); //Frost Witch
+    InitializeEvent(22, 10012510, 60922, 15, 4980, 0, 0); //Aberrant Heretic
     InitializeEvent(23, 10012510, 60923, 22, 6320, 0, 0); //Blood Initiate
     InitializeEvent(24, 10012510, 60924, 23, 7230, 0, 0); //Servant of Rot
     InitializeEvent(25, 10012510, 60925, 24, 7442, 8158, 0); //Mystic
@@ -75,7 +75,7 @@ $Event(0, Default, function() {
     InitializeEvent(11, 10015600, 10017511, 10011011, 32, 100120, 2510, 0, 0) // Status: Rot
     InitializeEvent(12, 10015600, 10017512, 10011012, 32, 100130, 2520, 0, 0) // Status: Blood
     InitializeEvent(13, 10015600, 10017513, 10011013, 32, 100140, 2530, 0, 0) // Status: Frost
-    InitializeEvent(14, 10015600, 10017514, 10011014, 32, 100150, 2540, 0, 0) // Status: Sleep
+    InitializeEvent(14, 10015600, 10017514, 10011014, 32, 100150, 2540, 2541, 0) // Status: Sleep
     InitializeEvent(15, 10015600, 10017515, 10011015, 32, 100160, 2550, 0, 0) // Status: Madness
     InitializeEvent(16, 10015600, 10017516, 10011016, 32, 100170, 2560, 0, 0) // Status: Death
     // Equipment                       
@@ -105,7 +105,7 @@ $Event(0, Default, function() {
     InitializeEvent(38, 10015600, 10017538, 10011038, 32, 100390, 2780, 2781, 0) // Current
     InitializeEvent(39, 10015600, 10017539, 10011039, 32, 100400, 2790, 2791, 0) // Soul Burn and Soul Annihilation
     // Socials
-    //InitializeEvent(0, 10015700, 10017540, 10011040, 46, 100410, 4040, 10015100, 101210) // Wiki
+    InitializeEvent(0, 10015700, 10017540, 10011040, 46, 100410, 4040, 10015100, 101210) // Wiki
     InitializeEvent(1, 10015700, 10017541, 10011041, 46, 100420, 4041, 10015101, 101211) // Discord
     InitializeEvent(2, 10015700, 10017542, 10011042, 46, 100430, 4042, 10015102, 101212) // Twitter
     InitializeEvent(3, 10015700, 10017543, 10011043, 46, 100440, 4043, 10015103, 101213) // Youtube
@@ -313,11 +313,11 @@ $Event(10012503, Restart, function() {
     SetEventFlagID(60000, ON);
     
     if (EventFlag(60900)) {
-        SetEventFlagID(73257, ON); // Gael Tunnel
-        SetEventFlagID(32070001, ON);
-        WarpPlayer(32, 7, 0, 0, 32070985, 60); //Prisoner
+        SetEventFlagID(76105, ON); // Fort Haight
+        SetEventFlagID(1045360000, ON);
+        WarpPlayer(60, 46, 36, 0, 1046360985, 60); //Prisoner
         SaveRequest();
-        SetPlayerRespawnPoint(32070985);
+        SetPlayerRespawnPoint(1046360985);
     } 
     else if (EventFlag(60901)) {
         SetEventFlagID(76111, ON); //Gatefront
@@ -467,11 +467,11 @@ $Event(10012503, Restart, function() {
         SetPlayerRespawnPoint(1042330985);
     }
     else if (EventFlag(60922)) {
-        SetEventFlagID(76217, ON); //Artist's Shack
-        SetEventFlagID(1038450000, ON);
-        WarpPlayer(60, 38, 45, 0, 1038450985, 60); //Aberrant Heretic
+        SetEventFlagID(76106, ON); //Agheel Lake South
+        SetEventFlagID(1044350000, ON);
+        WarpPlayer(60, 43, 34, 0, 1043340985, 60); //Aberrant Heretic
         SaveRequest();
-        SetPlayerRespawnPoint(1038450985);
+        SetPlayerRespawnPoint(1043340985);
     }
     else if (EventFlag(60923)) {
         SetEventFlagID(76236, ON); //Rose Church
@@ -692,24 +692,18 @@ $Event(10015600, Default, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4)
     
     WaitFor(ActionButtonInArea(X12_4, X4_4));
     SetSpEffect(10000, 101200);
-    WaitFixedTimeFrames(1);
+    WaitFixedTimeSeconds(0.2);
     
     if (!EventFlag(10014640)) {
         SetEventFlagID(10014640, ON);
         ShowTutorialPopup(2810, true, true); // One time message, welcome
-        SetSpEffect(10000, 101200);
-        WaitFixedTimeRealFrames(1);
     }
     
     ShowTutorialPopup(X16_4, true, true);
     if (X20_4 != 0) {
-        SetSpEffect(10000, 101200);
-        WaitFixedTimeRealFrames(1);
         ShowTutorialPopup(X20_4, true, true);
     }
     if (X24_4 != 0) {
-        SetSpEffect(10000, 101200);
-        WaitFixedTimeRealFrames(1);
         ShowTutorialPopup(X24_4, true, true);
     }
     RestartIf(EventFlag(X0_4));
@@ -719,6 +713,8 @@ $Event(10015600, Default, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4)
     DeleteAssetfollowingSFX(X4_4, false);
     CreateAssetfollowingSFX(X4_4, 100, 47);
     SetThisEventSlot(ON);
+    
+    ClearSpEffect(10000, 101200);
     RestartEvent();
 });
 
@@ -797,9 +793,10 @@ $Event(10015713, Default, function() {
 
 // Ambient Music Handler
 $Event(10015714, Default, function() {
+    DisableNetworkSync();
     EndIf(!InArea(10000, 10012705));
     WaitFixedTimeFrames(1);
-    SetEventFlagID(10012706, ON);
+    SetBossBGM(393200, BossBGMState.Start);
 });
 
 // Owl Forced Hoot x4

@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -80,7 +80,7 @@ $Event(0, Default, function() {
     InitializeEvent(0, 30082800, 0);
     InitializeEvent(0, 30082810, 0);
     InitializeEvent(0, 30082849, 0);
-    InitializeEvent(0, 30082811, 0);
+    //InitializeEvent(0, 30082811, 0); //Zamor Knight Boss Phase 2 Handler
 });
 
 $Event(50, Default, function() {
@@ -383,7 +383,7 @@ L2:
     EnableCharacterAI(30080800);
     DisableCharacterInvincibility(30080800);
     SetNetworkUpdateRate(30080800, true, CharacterUpdateFrequency.AlwaysUpdate);
-    DisplayBossHealthBar(Enabled, 30080800, 0, 907100300);
+    DisplayBossHealthBar(Enabled, 30080800, 0, 903310501); //Name change to Tempestcaller Corwynt
 });
 
 $Event(30082811, Restart, function() {
@@ -396,5 +396,5 @@ $Event(30082849, Restart, function() {
     InitializeCommonEvent(0, 9005800, 30080800, 30081800, 30082800, 30082805, 30085800, 10000, 0, 0);
     InitializeCommonEvent(0, 9005801, 30080800, 30081800, 30082800, 30082805, 30082806, 10000);
     InitializeCommonEvent(0, 9005811, 30080800, 30081800, 3, 0);
-    InitializeCommonEvent(0, 9005822, 30080800, 920200, 30082805, 30082806, 0, 30082802, 0, 0);
+    InitializeCommonEvent(0, 9005822, 30080800, 930000, 30082805, 30082806, 0, 30082802, 0, 0); //Changed to Grave Warden theme
 });

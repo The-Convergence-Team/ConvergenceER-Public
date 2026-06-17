@@ -4,10 +4,11 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
+    RegisterBonfire(76970, 2046451950, 0, 0, 0, 5);
     InitializeEvent(0, 2046452800, 0);
     InitializeEvent(0, 2046452810, 0);
     InitializeEvent(0, 2046452849, 0);
@@ -36,6 +37,9 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005221, 2046450365, 30000, 20000, 0, 0);
     InitializeCommonEvent(0, 900005610, 2046451599, 100, 800, 0);
     InitializeEvent(0, 2046452550, 580410, 580110, 2046450550, 30015, 20015, 2046451550, 2046451560);
+    $InitializeCommonEvent(0, 20000350, 2046451701, 2046451702, 2055550101, 2055550111, 2046450551, 2046451703); // Shrine Init
+    InitializeCommonEvent(0, 90005250, 2046450333, 2046452333, 0, -1); //npc Bender encounter
+    InitializeCommonEvent(0, 90005300, 2046450333, 2046450333, 2046450810, 0, 0); // Death + Reward Script
 });
 
 $Event(2046452550, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4) {
@@ -113,5 +117,3 @@ $Event(2046452849, Restart, function() {
     InitializeCommonEvent(0, 9005811, 2046450800, 2046451800, 3, 0);
     InitializeCommonEvent(0, 9005822, 2046450800, 921100, 2046452805, 2046452806, 0, 2046452802, 0, 0);
 });
-
-

@@ -1,0 +1,119 @@
+local quicksilverEffects = {
+    [108610] = true, -- Quicksilver DOT (Jewel Oath of Darkness)
+    [1460100] = true, -- Quicksilver Affliction
+    [1460600] = true, -- Quicksilver Affliction (Jewel)
+    [1460300] = true, -- Quicksilver Shard
+    [1460800] = true, -- Quicksilver Shard (Jewel)
+    [1462100] = true, -- Quicksilver Comet
+    [1462200] = true, -- Quicksilver Comet (Jewel)
+}
+local FulminatedQuicksilverPoiseDmg = 33
+function FulminatedQuicksilver()
+    if env(GetSpEffectID, 1460500) == FALSE then
+        return FALSE
+    end
+    act(ClearSpEffect, 1460500)
+
+    local spEffects = GetSpEffectsInfo()
+    local damage = 0
+    for _, spEffect in ipairs(spEffects) do
+        if quicksilverEffects[spEffect.ID] then
+            act(ClearSpEffect, spEffect.ID)
+            
+            local interval = GetParamValue(PARAM.SpEffectParam.TRIGGER_INTERVAL, spEffect.ID)
+            local percentageValue = GetParamValue(PARAM.SpEffectParam.CHANGE_HP_PERCENTAGE, spEffect.ID) / 100
+            local flatDmg = GetParamValue(PARAM.SpEffectParam.CHANGE_HP_FLAT, spEffect.ID)
+
+            local remainingTicks = math.floor(spEffect.RemainingDuration / interval)
+            local percentageDamage = math.floor((env(GetMaxHP) * percentageValue) + 0.5)
+            damage = damage + ((percentageDamage + flatDmg) * remainingTicks)
+        end
+    end
+
+    if damage > 0 then
+        local multiplier = 1
+        if GetEntityId() == 17000850 then -- Quicksilver Husk
+            multiplier = 0.5
+        end
+        act(ChangeHP, -(damage * 0.5 * multiplier))
+        act(AddSpEffect, 1460505) -- Fulminated Quicksilver Explosion Visual
+        local currentPoise = env(GetPoise)
+        if currentPoise > FulminatedQuicksilverPoiseDmg then
+            SetPointerValue(CHR_INS_BASE.CHR_MODULES.SUPER_ARMOR_MODULE.POISE, currentPoise - FulminatedQuicksilverPoiseDmg)
+            local recoveryTimer = GetPointerValue(CHR_INS_BASE.CHR_MODULES.SUPER_ARMOR_MODULE.RECOVERY_TIMER)
+            SetPointerValue(CHR_INS_BASE.CHR_MODULES.SUPER_ARMOR_MODULE.RECOVERY_TIMER, recoveryTimer + 2.5) -- Delay poise recovery by 2.5 seconds
+            ExecNewDamageDefault(DAMAGE_LEVEL_LARGE)
+        else
+            ForcePoiseBreak()
+        end
+        return TRUE
+    end
+    return FALSE
+end
+
+local PureDarknessCost = 65
+local ShadowArcCost = 20
+local hasRestoredCosts = false
+local hasReducedCosts = false
+function NoxJewel_OathOfDarknessCostReduction()
+    if env(GetSpEffectID, Jewel_of_the_Darkness) == FALSE or env(GetSpEffectID, 1467100) == FALSE then
+        if not hasRestoredCosts then
+            hasRestoredCosts = true
+            hasReducedCosts = false
+
+            if GetParamValue(PARAM.Magic.FP_CONSUMPTION, 4652) ~= PureDarknessCost then
+                SetParamValue(PARAM.Magic.FP_CONSUMPTION, 4652, PureDarknessCost)
+            end
+            if GetParamValue(PARAM.Magic.FP_CONSUMPTION, 4690) ~= ShadowArcCost then
+                SetParamValue(PARAM.Magic.FP_CONSUMPTION, 4690, ShadowArcCost)
+            end
+        end
+        return
+    end
+
+    if hasReducedCosts then
+        return
+    end
+    
+    hasReducedCosts = true
+    hasRestoredCosts = false
+
+    local reducedPureDarknessCost = math.max(1, math.floor(PureDarknessCost * 0.1))
+    local reducedShadowArcCost = math.max(1, math.floor(ShadowArcCost * 0.1))
+
+    if GetParamValue(PARAM.Magic.FP_CONSUMPTION, 4652) ~= reducedPureDarknessCost then
+        SetParamValue(PARAM.Magic.FP_CONSUMPTION, 4652, reducedPureDarknessCost)
+    end
+    if GetParamValue(PARAM.Magic.FP_CONSUMPTION, 4690) ~= reducedShadowArcCost then
+        SetParamValue(PARAM.Magic.FP_CONSUMPTION, 4690, reducedShadowArcCost)
+    end
+end
+
+function CurseOfShadow()
+    if env(GetSpEffectID, 1460410) == FALSE then
+        return FALSE
+    end
+    act(ClearSpEffect, 1460410)
+
+    if env(GetSpEffectID, SP_EFFECT_ENABLE_SA_BREAK_THROW) == TRUE then
+        -- Allow
+    elseif LAST_HKB_STATES[1] ~= "W_SABreak" then
+        return FALSE
+    end
+    
+    if IsExistAnime(ANIME_ID_THROW_DEF_TRUNK_FRONT) == TRUE then
+        act(AddSpEffect, 1460412) -- Damage after 2.800 seconds
+        SetVariable("ThrowID", ANIME_ID_THROW_DEF_TRUNK_FRONT)
+    elseif IsExistAnime(ANIME_ID_THROW_DEF_TRUNK_BACK) == TRUE then
+        act(AddSpEffect, 1460412) -- Damage after 2.800 seconds
+        SetVariable("ThrowID", ANIME_ID_THROW_DEF_TRUNK_BACK)
+    elseif IsExistAnime(ANIME_ID_THROW_DEF_PARRY) == TRUE then
+        act(AddSpEffect, 1460411) -- Damage after 3.433 seconds
+        SetVariable("ThrowID", ANIME_ID_THROW_DEF_PARRY)
+    else
+        return FALSE
+    end
+
+    Fire("W_ThrowDef")
+    return TRUE
+end

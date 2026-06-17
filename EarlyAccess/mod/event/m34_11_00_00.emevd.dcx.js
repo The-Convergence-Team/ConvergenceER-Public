@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -78,6 +78,12 @@ $Event(0, Default, function() {
     InitializeEvent(5, 34112813, 34110815);
     InitializeEvent(6, 34112813, 34110816);
     InitializeEvent(7, 34112813, 34110817);
+    
+    // Matriarch Taunt (Act25 called via interrupt)
+    InitializeEvent(0, 34112814, 0);
+    
+    // Matriarch Taunt Request AI Replan
+    InitializeEvent(0, 34112815, 0);
     
     // Killbox Fixer in case of CE tp
     InitializeEvent(0, 34112950, 0);
@@ -1550,7 +1556,6 @@ $Event(34112800, Restart, function() {
     //SetEventFlagID(34110800, OFF);
     EndIf(EventFlag(34110800));
     WaitFor(CharacterHPValue(34110800) <= 0);
-    SetEventFlagID(34112804, ON);
     WaitFixedTimeSeconds(4);
     DeleteMapSFX(34115800, true);
     DeleteMapSFX(34115820, true);
@@ -1565,18 +1570,11 @@ $Event(34112800, Restart, function() {
     WaitFor(CharacterDead(34110800));
     HandleBossDefeatAndDisplayBanner(34110800, TextBannerType.GreatEnemyFelled);
     SetEventFlagID(34110800, ON);
-    SetEventFlagID(34115840, ON); //music handler eventflag
-    SetEventFlagID(34112802, OFF);
-    SetEventFlagID(34112805, OFF);
+    SetBossBGM(392600, BossBGMState.Stop1);
     SetEventFlagID(9186, ON);
     if (PlayerIsInOwnWorld()) {
         SetEventFlagID(61186, ON);
     }
-    WaitFixedTimeSeconds(6);
-    SetEventFlagID(34112807, OFF);
-    SetEventFlagID(34115840, OFF); //music handler eventflag
-    WaitFixedTimeSeconds(9);
-    SetEventFlagID(34112804, OFF);
 });
 
 //Activation
@@ -1645,11 +1643,8 @@ $Event(34112811, Restart, function() {
     //SetEventFlagID(34110800, OFF);
     DeleteMapSFX(34115800, true);
     WaitFor(CharacterHasSpEffect(34110800, 19955));
-    SetEventFlagID(34112802, ON);
-    SetEventFlagID(34112803, ON);
+    SetEventFlagID(34112802, ON); // Phase change flag
     WaitFor(CharacterHasSpEffect(34110800, 15520));
-    SetEventFlagID(34112805, OFF);
-    SetEventFlagID(34112803, OFF);
     RequestCharacterAIReplan(34110800);
     SetCurrentTime(0, 0, 0, false, false, false, 0, 0, 0);
     SpawnMapSFX(34115800);
@@ -1669,8 +1664,6 @@ $Event(34112811, Restart, function() {
     SpawnMapSFX(34115826);
     ChangeWeather(Weather.Rain, -1, false);
     WaitFor(HPRatio(34110800) <= 0.25);
-    SetEventFlagID(34112805, OFF);
-    SetEventFlagID(34112807, ON);
     EndEvent();
 });
 
@@ -1701,13 +1694,29 @@ $Event(34112813, Restart, function(X0_4) {
     SetCharacterBackreadState(X0_4, false);
 });
 
+// Matriarch Taunt (Act25 called via interrupt)
+$Event(34112814, Default, function() {
+    EndIf(EventFlag(34110800));
+    EndIf(ThisEventSlot());
+    WaitFor(InArea(10000, 34112615, 1) && !InArea(10000, 34112616, 1) && HPRatio(10000) == 0);
+    RequestCharacterAICommand(34110800, 1, 0);
+});
+
+// Matriarch Taunt RequestAIReplan(tae 20000)
+$Event(34112815, Restart, function() {
+    EndIf(EventFlag(34110800));
+    WaitFor(CharacterHasSpEffect(34110800, 19961));
+    RequestCharacterAIReplan(34110800);
+    RestartEvent();
+});
+    
 //Fogwall and Music
 $Event(34112849, Restart, function() {
     InitializeCommonEvent(0, 9005800, 34110800, 34111800, 34112800, 34112805, 34115800, 10000, 0, 0);
     InitializeCommonEvent(0, 9005801, 34110800, 34111800, 34112800, 34112805, 34112806, 10000);
     InitializeCommonEvent(0, 9005811, 34110800, 34111800, 3, 0);
     InitializeCommonEvent(0, 930000, 34110800, 930000, 34112805, 34112806, 0, 34132802, 0, 0);
-    InitializeCommonEvent(0, 9005822, 34110800, 921600, 34112805, 34112806, 0, 34112802, 0, 0);
+    InitializeCommonEvent(0, 9005822, 34110800, 392600, 34112805, 34112806, 0, 34112802, 0, 0);
 });
 
 //Disable Killboxes if cheated

@@ -1,0 +1,80 @@
+function DealDamageToSpiritAshes(ashHandles, ashHandlesCount, damage)
+    local hurtSummons = 0
+
+    for j = 0, 100, 1 do
+        local chrInsPointer = GAME_BASE.WORLD_CHR_MAN.BUDDY_CHR_SET.SPIRIT_SUMMON_CHR_INS(j)
+        local _b1, _b2, _b3, _b4 = GetAltChrInsPointerValue(chrInsPointer, CHR_INS_BASE.FIELD_INS_HANDLE)
+        if _b1 ~= nil and _b2 ~= nil and _b3 ~= nil and _b4 ~= nil then
+            local key = tostring(_b1) .. ":" .. tostring(_b2) .. ":" .. tostring(_b3) .. ":" .. tostring(_b4)
+            if ashHandles[key] then
+                local hpPtr = CHR_INS_BASE.CHR_MODULES.DATA_MODULE.HP
+                local newHp = GetAltChrInsPointerValue(chrInsPointer, hpPtr) - damage
+                if newHp < 0 then 
+                    newHp = 0 
+                end
+                SetAltChrInsPointerValue(chrInsPointer, hpPtr, newHp)
+                
+                hurtSummons = hurtSummons + 1
+                if hurtSummons >= ashHandlesCount then
+                    break
+                end
+            end
+        end
+    end
+end
+
+function NecromancerJewel_DivideDamageToSpiritAsh()
+    if not IsLocalPlayer() or env(GetSpEffectID, Jewel_of_the_Prince) == FALSE or env(GetSpEffectID, 100875) == FALSE then
+        return
+    end
+
+    local damageTaken = (hpTrackerTable[2].hp - hpTrackerTable[1].hp) * 0.25
+    if damageTaken <= 0 then
+        return
+    end
+
+    local spiritSummons = {}
+    local ashHandlesCount = 0
+    for i = 0, 4, 1 do
+        local b1, b2, b3, b4 = GetPointerValue(GAME_BASE.CS_FE_MAN.CS_FE_SPIRIT_ASH_DISPLAY.SPIRIT_FIELD_INS_HANDLE(i))
+        if b1 ~= 65535 or b2 ~= 65535 or b3 ~= 65535 or b4 ~= 65535 then
+            local key = tostring(b1) .. ":" .. tostring(b2) .. ":" .. tostring(b3) .. ":" .. tostring(b4)
+            spiritSummons[key] = true
+            ashHandlesCount = ashHandlesCount + 1
+        else
+            break
+        end
+    end
+
+    if ashHandlesCount == 0 then 
+        return 
+    end
+
+    local damagePerSpirit = math.floor((damageTaken / ashHandlesCount) + 0.5)
+
+    DealDamageToSpiritAshes(spiritSummons, ashHandlesCount, damagePerSpirit)
+end
+
+local isBlighted = false
+function NecromancerJewel_DeathblightHandler()
+    if env(GetSpEffectID, 391320) == FALSE then
+        return
+    elseif env(GetSpEffectType, 117) == FALSE then
+        if isBlighted then
+            isBlighted = false
+        end
+        return
+    elseif isBlighted then
+        return
+    end
+
+    isBlighted = true
+    act(AddSpEffect, 391330)
+    act(AddSpEffect, 391333)
+end
+
+function NecromancerJewel_DeathblightClear()
+    if (env(GetSpEffectType, 117) == TRUE or g_BlightImmuneSpEffectID > 0) and env(GetSpEffectID, 391331) == TRUE then
+        act(ClearSpEffect, 391331)
+    end
+end

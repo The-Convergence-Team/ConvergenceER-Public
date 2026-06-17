@@ -1,0 +1,314 @@
+-- Local Position
+function GetLocalPositionVector()
+    local x, y, z = GetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.LOCAL_POSITION)
+    return hkVector4.new(x, y, z, 0)
+end
+
+function GetLocalPositionPlayerVector()
+    local x, y, z = GetLocalPlayerPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.LOCAL_POSITION)
+    return hkVector4.new(x, y, z, 0)
+end
+
+function GetLocalPositionTargetVector()
+    local x, y, z = GetTargetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.LOCAL_POSITION)
+    return hkVector4.new(x, y, z, 0)
+end
+
+-- Chunk Position
+function GetChunkPositionVector()
+    local x, y, z = GetPointerValue(CHR_INS_BASE.CHUNK_POSITION)
+    return hkVector4.new(x, y, z, 0)
+end
+
+function GetChunkPositionPlayerVector()
+    local x, y, z = GetLocalPlayerPointerValue(CHR_INS_BASE.CHUNK_POSITION)
+    return hkVector4.new(x, y, z, 0)
+end
+
+function GetChunkPositionTargetVector()
+    local x, y, z = GetTargetPointerValue(CHR_INS_BASE.CHUNK_POSITION)
+    return hkVector4.new(x, y, z, 0)
+end
+
+-- Other
+function GetRotation()
+    local x, y, z, w = GetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.QUAT_POSITION)
+    return hkQuaternion.new(x, y, z, w)
+end
+
+function RotateVectorByQuaternion(forwardVector, quaternion)
+    -- Extract axis-angle representation from the quaternion
+    local axis = hkVector4.new()
+    Log()
+    local angle = quaternion:getAngle()
+    Log()
+    quaternion:decomposeRestAxis(axis)
+    Log()
+
+    -- Compute sin and cos of the rotation angle
+    local cosTheta = math.cos(angle)
+    Log()
+    local sinTheta = math.sin(angle)
+    Log()
+
+    -- Compute cross product of axis and forwardVector
+    local axisCrossForward = hkVector4.new()
+    Log()
+    axisCrossForward:setCross(axis, forwardVector)
+    Log()
+
+    -- Compute dot product using dot3 (since dot() is unsupported)
+    local axisDotForward = axis:dot3(forwardVector)
+    Log()
+
+    -- Apply Rodrigues' Rotation Formula
+    local term1 = hkVector4.new()
+    Log()
+    term1:setMul4(forwardVector, cosTheta)
+    Log()
+
+    local term2 = hkVector4.new()
+    Log()
+    term2:setMul4(axisCrossForward, sinTheta)
+    Log()
+
+    local term3 = hkVector4.new()
+    Log()
+    term3:setMul4(axis, axisDotForward * (1 - cosTheta))
+    Log()
+
+    -- Compute final rotated vector
+    local rotatedVector = hkVector4.new()
+    Log()
+    rotatedVector:setAdd4(term1, term2)
+    Log()
+    rotatedVector:add4(term3)
+    Log()
+
+    return rotatedVector
+end
+
+local heighestPoint = 0
+function MonitorFallHeight(isLanding)
+    if env(GetSpEffectID, Jewel_of_the_Reckless) == FALSE then
+        return
+    end
+    
+    local height = env(GetFallHeight) / 100
+    if isLanding or height == 0 then
+        if heighestPoint > 8 then -- Heavy Landing
+            act(AddSpEffect, 390350) -- Shell Ring Heavy Landing
+        end
+
+        heighestPoint = 0
+        return
+    elseif height > heighestPoint then
+        heighestPoint = height
+    end
+end
+
+local OverworldLoadState = {
+    NotLoaded = -1,
+    LandsBetween_Loaded = 0,
+    RealmOfShadow_Loaded = 1,
+}
+function GetLoadedMaps()
+    local maps = {}
+    local overworldLoadState = OverworldLoadState.NotLoaded
+    for i = 0, 193 do
+        local areaId, blockId, regionId, indexId = GetPointerValue(GAME_BASE.WORLD_MAP_MAN.WORLD_INFO.WORLD_BLOCK_INFO.MAP_ID(i))
+
+        if areaId ~= "00" and GetPointerValue(GAME_BASE.WORLD_MAP_MAN.WORLD_INFO.WORLD_BLOCK_INFO.IS_LOADED(i)) == TRUE then
+            if areaId == "60" then
+                overworldLoadState = OverworldLoadState.LandsBetween_Loaded
+            elseif areaId == "61" then
+                overworldLoadState = OverworldLoadState.RealmOfShadow_Loaded
+            else
+                local mapId = 'm' .. areaId .. '_' .. blockId .. '_' .. regionId .. '_' .. indexId
+                maps[mapId] = true
+            end            
+        end
+    end
+
+    if overworldLoadState == OverworldLoadState.NotLoaded then
+        return maps
+    end    
+
+    local stack = {{ 0x8 }}
+    while #stack > 0 do
+        local nodeTable = table.remove(stack) -- pop from stack
+
+        if GetPointerValue(GAME_BASE.WORLD_MAP_MAN.WORLD_INFO.WORLD_GRID_AREA_INFO.TREE.IS_NIL(overworldLoadState, nodeTable)) == FALSE then
+            local areaId, blockId, regionId, indexId = GetPointerValue(GAME_BASE.WORLD_MAP_MAN.WORLD_INFO.WORLD_GRID_AREA_INFO.TREE.VALUE.MAP_ID(overworldLoadState, nodeTable))
+            local mapId = 'm' .. areaId .. '_' .. blockId .. '_' .. regionId .. '_' .. indexId
+            maps[mapId] = true
+
+            -- Push right and left branches onto the stack
+            local rightTable = { unpack(nodeTable) }
+            table.insert(rightTable, 0x10) -- right offset
+            table.insert(stack, rightTable)
+
+            local leftTable = { unpack(nodeTable) }
+            table.insert(leftTable, 0x0) -- left offset
+            table.insert(stack, leftTable)
+        end
+    end
+
+    return maps
+end
+
+function TeleportMark(spEffect, recallInfo, originalMagicId, replacerMagicId)
+    if (spEffect ~= nil and env(GetSpEffectID, spEffect) == FALSE) then
+        return recallInfo
+    end
+    act(ClearSpEffect, spEffect)
+
+    local localPosX, localPosY, localPosZ = GetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.LOCAL_POSITION)
+    local blockPosX, blockPosY, blockPosZ = GetPointerValue(CHR_INS_BASE.CHUNK_POSITION)
+    local rotationX, rotationY, rotationZ, rotationW = GetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.QUAT_POSITION)
+
+    if localPosX == nil or blockPosX == nil or rotationX == nil then
+        return nil
+    end
+
+    local localCords = { x = localPosX, y = localPosY, z = localPosZ }
+    local blockCords = { x = blockPosX, y = blockPosY, z = blockPosZ }
+    local rotation = { x = rotationX, y = rotationY, z = rotationZ, w = rotationW } -- Quaternion
+
+    local areaId, blockId, regionId, indexId = GetPointerValue(CHR_INS_BASE.CURRENT_MAP_ID)
+    local _mapId = 'm' .. areaId .. '_' .. blockId .. '_' .. regionId .. '_' .. indexId
+
+    SetMagicParam(originalMagicId, replacerMagicId)
+    return { MapId = _mapId, LocalCords = localCords, BlockCords = blockCords, Rotation = rotation }
+end
+
+function TeleportRecall(spEffect, recallInfo, originalMagicId, replacerMagicId)    
+    if recallInfo == nil then
+        return nil
+    elseif GetLoadedMaps()[recallInfo.MapId] ~= true then
+        SetMagicParam(replacerMagicId, originalMagicId)
+        act(AddSpEffect, 1654010) -- Mark expired message
+        return nil
+    elseif env(GetSpEffectID, spEffect) == FALSE then
+        return recallInfo
+    end
+    act(ClearSpEffect, spEffect)
+
+    local currentBlockX, currentBlockY, currentBlockZ = GetPointerValue(CHR_INS_BASE.CHUNK_POSITION)
+
+    local blockDiffX = recallInfo.BlockCords.x - currentBlockX;
+    local blockDiffY = recallInfo.BlockCords.y - currentBlockY;
+    local blockDiffZ = recallInfo.BlockCords.z - currentBlockZ;
+    local offset_X = recallInfo.LocalCords.x - blockDiffX
+    local offset_Y = recallInfo.LocalCords.y - blockDiffY
+    local offset_Z = recallInfo.LocalCords.z - blockDiffZ
+
+    SetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.QUAT_POSITION, recallInfo.Rotation )
+    SetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.LOCAL_POSITION, offset_X, offset_Y, offset_Z)
+    SetPointerValue(GAME_BASE.WORLD_CHR_MAN.CHR_CAM.REQUEST_CAMERA_RESET, TRUE)
+
+    SetMagicParam(replacerMagicId, originalMagicId)
+    return nil
+end
+
+local function TeleportToPosition(myX, myY, myZ, targetX, targetY, targetZ, distanceFromTarget, minimumDistance, failDistance)
+    local dx = targetX - myX
+    local dy = targetY - myY
+    local dz = targetZ - myZ
+
+    local distance = math.sqrt(dx*dx + dy*dy + dz*dz)
+    if (failDistance and distance <= failDistance) or (minimumDistance and distance > minimumDistance) then
+        return -- Too close or too far, do not teleport
+    end
+
+    if distanceFromTarget == 0 then
+        SetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.LOCAL_POSITION, targetX, targetY, targetZ)
+        return
+    end
+
+    local length = distance ~= 0 and distance or 1
+    local nx, ny, nz = dx / length, dy / length, dz / length
+
+    local offsetX = nx * -distanceFromTarget
+    local offsetY = ny * -distanceFromTarget
+    local offsetZ = nz * -distanceFromTarget
+
+    local newX = targetX + offsetX
+    local newY = targetY + offsetY
+    local newZ = targetZ + offsetZ
+
+    SetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.LOCAL_POSITION, newX, newY, newZ)
+end
+
+function TeleportToTarget(spEffect, distanceFromTarget, minimumDistance, failDistance)
+    if GetVariable("IsLockon") ~= true or env(GetSpEffectID, spEffect) == FALSE then
+        return
+    end
+    act(ClearSpEffect, spEffect)
+
+    local myX, myY, myZ = GetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.LOCAL_POSITION)
+    local targetX, targetY, targetZ = GetTargetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.LOCAL_POSITION)
+
+    TeleportToPosition(myX, myY, myZ, targetX, targetY, targetZ, distanceFromTarget, minimumDistance, failDistance)
+end
+
+function TeleportTargetToSelf(spEffect, distanceFromTarget, failDistance)
+    if env(GetSpEffectID, spEffect) == FALSE then
+        return
+    end
+    act(ClearSpEffect, spEffect)
+
+    if not GetVariable("IsLockon") or GetThreatLevel(GetTargetPointerValue) == ThreatLevel.BossEnemy then
+        return
+    end
+
+    local myX, myY, myZ = GetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.LOCAL_POSITION)
+    local targetX, targetY, targetZ = GetTargetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.LOCAL_POSITION)
+
+    TeleportToPosition(targetX, targetY, targetZ, myX, myY, myZ, distanceFromTarget, nil, failDistance)
+end
+
+function GetTargetDistance()
+    if not GetVariable("IsLockon") then
+        return 0
+    end
+
+    local playerPosition = GetLocalPositionVector()
+    local targetPosition = GetLocalPositionTargetVector()    
+    return CalculateDistance(playerPosition, targetPosition)
+end
+
+function CalculateDistance(targetA, targetB)
+    local distanceVector = hkVector4.new()
+    distanceVector:setSub4(targetA, targetB)
+    
+    local distance = distanceVector:length3()
+    return distance
+end
+
+MONITOR_POSITION = false
+POSITION_CONTAINER = { }
+function MonitorPosition()
+    if not MONITOR_POSITION then
+        return
+    elseif env(GetSpEffectID, 32) == TRUE or env(IsFalling) == TRUE or env(IsLanding) == FALSE then
+        return
+    elseif env(IsOnMount) == TRUE then
+        POSITION_CONTAINER = { }
+        return
+    end
+
+    local myX, myY, myZ = GetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.LOCAL_POSITION)
+    local blockX, blockY, blockZ = GetPointerValue(CHR_INS_BASE.CHUNK_POSITION)
+    local rotationX, rotationY, rotationZ, rotationW = GetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.QUAT_POSITION)
+    table.insert(POSITION_CONTAINER, { 
+        Coordinates = { X = myX, Y = myY, Z = myZ },
+        BlockCoordinates = { X = blockX, Y = blockY, Z = blockZ },
+        Rotation = { X = rotationX, Y = rotationY, Z = rotationZ, W = rotationW },
+        DeltaTimestamp = g_DeltaTimeCount 
+    })
+    
+    while g_DeltaTimeCount - POSITION_CONTAINER[1].DeltaTimestamp > 6.0 and #POSITION_CONTAINER > 1 do
+        table.remove(POSITION_CONTAINER, 1)
+    end
+end

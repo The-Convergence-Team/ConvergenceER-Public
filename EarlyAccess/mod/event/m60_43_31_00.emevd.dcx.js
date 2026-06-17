@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.5
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -170,6 +170,15 @@ $Event(0, Default, function() {
     InitializeCommonEvent(3, 9005999, 1043312353);
     InitializeCommonEvent(4, 9005999, 1043312354);
     
+    // Madness Cliff stare dmg
+    InitializeEvent(0, 1043312320, 1043310921, 0); // Bullet Madness + Scaling
+    
+    
+    InitializeEvent(0, 1043312311, 0); // Madness Cliff Fire Toggle
+    InitializeEvent(0, 1043312312, 0); // Door Teleport
+    InitializeEvent(0, 1043312313, 0); // Shrine Interact
+    InitializeEvent(0, 1043312314, 0); // Shrine Complete
+    
     // Madness cliff groundfire
     InitializeEvent(0, 1043310955, 1043312853);
     InitializeEvent(1, 1043310955, 1043312854);
@@ -182,8 +191,12 @@ $Event(0, Default, function() {
     InitializeEvent(0, 1043313906, 0);
     
     // Fundi NPC
-    InitializeCommonEvent(0, 90005250, 1043310610, 1043312285, 0, -1); //Fundi NPC trigger box
+    InitializeCommonEvent(0, 90005250, 1043310610, 1043312285, 0, -1); // Fundi NPC trigger box
     InitializeCommonEvent(0, 90005300, 1043310610, 1043310610, 105500, 0, 0); // Reward
+    
+    //Mimic
+    InitializeCommonEvent(0, 20000352, 1043310620);
+    InitializeCommonEvent(0, 20000353, 1043310621, 1043310620, 1043312620);
 });
 
 $Event(50, Default, function() {
@@ -202,17 +215,6 @@ $Event(50, Default, function() {
     InitializeCommonEvent(1, 20000343, 1043310341, 1043310340, 0); // Commoner-Troll OTK
     InitializeCommonEvent(2, 20000343, 1043310345, 1043312345, 1043310920); // Archer OTK
     
-    // Shrine
-    InitializeEvent(0, 1043312310, 1043310921); // Initialization
-    InitializeEvent(0, 1043312312, 0); // Warp Behind Door
-    InitializeEvent(0, 1043311711, 0); // Pocket Dimension Teleport
-    InitializeEvent(0, 1043311712, 0); // Boss Init
-    InitializeEvent(0, 1043310949, 0);
-    InitializeEvent(0, 1043310950, 0); // Toggle shrine bullets based on range
-    InitializeEvent(0, 1043312320, 1043310921, 0); // Bullet Madness + Scaling
-    InitializeEvent(1, 1043312320, 1043310922, 0);
-    InitializeEvent(2, 1043312320, 1043310923, 1);
-
     // Beach
     InitializeEvent(0, 1043311530, 1043311530, 0); // Bloated guys ambush
     InitializeEvent(1, 1043311530, 1043311531, 8);
@@ -224,9 +226,11 @@ $Event(50, Default, function() {
     // Wall
     InitializeEvent(0, 1043311695, 0); // Does not open from this side msg 4 door
    
+    // Ambient Music
+    //InitializeCommonEvent(0, 90005878, 1043412900, 1043315900, 1043315901, 1043315902);
+    //InitializeCommonEvent(0, 90005878, 1043412910, 1043315910, 1043315911, 1043315912);
+    //InitializeCommonEvent(0, 90005878, 1043412920, 1043315920, 1043315921, 1043315922);
 });
-
-
 
 $Event(1043312443, Restart, function(X0_4, X4_4) {
     onlineChrSpArea = PlayerIsInOwnWorld()
@@ -316,6 +320,7 @@ $Event(1043312580, Default, function() {
     RegisterLadder(1043310609, 1043310882, 1043311609);
     RegisterLadder(1043310611, 1043310884, 1043311610);
     RegisterLadder(1043310612, 1043310886, 1043311612);
+    RegisterLadder(1043310613, 1043310887, 1043311613);
     InitializeCommonEvent(0, 90005520, 1043310576, 1043311601, 1043311601, 1043310881); // Kick Ladder
     InitializeCommonEvent(0, 90005520, 1043310577, 1043311584, 1043310584, 1043310855); // Kick Ladder
     EndEvent();
@@ -412,14 +417,6 @@ L1:
 });
 
 // - - - Madness Cliff - - -
-// Used EventFlagIDs:
-const TrollOTK = 1043314340 // One time kill handler for jumping troll
-const BossEncountered = 1043310910 // Has started the bossfight once before
-const ShrineComplete = 1043310920 // Has killed the boss and completed the shrine
-
-// Arena Cloud Balancing Values
-const DisableCloudPhase = 0 // [0/1] If you dont want the second phase to have the cloud mechanic, you can disable it here
-const CloudCount = 9 // Also needs map edits adding more SFX with the established EntityID setup
 
 // Makes commoner play song
 $Event(1043310790, Restart, function(X0_4, X4_4) {
@@ -429,7 +426,7 @@ $Event(1043310790, Restart, function(X0_4, X4_4) {
 
 // Troll Jump
 $Event(1043310340, Restart, function(X0_4) {
-    EndIf(EventFlag(TrollOTK));
+    EndIf(EventFlag(1043314340));
     SetCharacterAIState(X0_4, Disabled);
     WaitFor(
         HasDamageType(1043310340, 0, DamageType.Unspecified)
@@ -451,110 +448,17 @@ $Event(1043310340, Restart, function(X0_4) {
     }
 });
 
-// Shrine Initialization
-$Event(1043312310, Restart, function(X0_4) {
-    //SetEventFlagID(TrollOTK, OFF); // EVENT TESTER TROLL
-    //SetEventFlagID(BossEncountered, OFF); // EVENT TESTER BOSS ENTERANCE
-    //SetEventFlagID(1043317420, OFF); // EVENT TESTER SHINY AMBUSH
-    //SetEventFlagID(ShrineComplete, OFF); // EVENT TESTER SHRINE
-    //SetEventFlagID(1043318694, OFF); // EVENT TESTER DOOR
-    //SetEventFlagID(1043317410, OFF); // EVENT TESTER REWARD
-    
-    // If the shrine has already been absorbed
-    GotoIf(L0, EventFlag(ShrineComplete));
-    
-    // Basic Setup
-    DisableNetworkSync();
-    EnableCharacterDefaultBackread(X0_4);
-    DisableCharacterGravity(X0_4);
-    
-    // Arena SFX (needs a lotta time)
-    WaitFor(InArea(10000, 1043310949));
-    InitializeEvent(0, 1043311713, 1);
-    
-    // Anim
-    WaitFor(ActionButtonInArea(9100, 1043310922));
-    SetEventFlagID(1043312949, ON);
-    RotateCharacter(10000, 1043310920, -1, true);
-    ForceAnimationPlayback(10000, 60550, false, false, false, Equal, 1);
-    
-    // Pocket Dimension Prep
-    if (!CharacterDead(1043310800)) {
-        ChangeWeather(Weather.Fog, -1, false);
-        WaitFixedTimeSeconds(1.5);
-        FadeToBlack(1, 0.8, false, -1);
-        WaitFixedTimeSeconds(1);
-        
-        // Pocket Dimension Teleport
-        IssueShortWarpRequest(10000, TargetEntityType.Area, 43312851, -1);
-        SetPlayerPositionDisplay(Enabled, false, 60, 43, 31, 0, -25, -185, -25);
-        SetCameraAngle(1, -135);
-        
-        // Yellow phantom on player
-        SetSpEffect(10000, 360950);
-        
-        SetCurrentTime(0, 0, 0, false, false, false, 0, 0, 0);
-        FreezeTime(true);
-        WaitFixedTimeSeconds(2);
-        FadeToBlack(0, 0.8, false, -1);
-        
-        // Boss Defeat Handling
-        WaitFor(CharacterDead(1043310800));
-        SetEventFlagID(1043312267, OFF); // Special Clause #1 - In case of boss instakilled
-        SetEventFlagID(1043312265, OFF); // Special Clause #2 - In case of boss instakilled
-        SetEventFlagID(1043312260, ON); //music handler - boss death
-        SetEventFlagID(1043312266, OFF); //temp flag for 2nd phase OFF
-        WaitFixedTimeSeconds(2);
-        ForceCharacterDeath(1043310921, false); // Disable BulletDummy
-        WaitFixedTimeSeconds(4);
-        SetEventFlagID(1043312260, OFF); //music handler - boss death
-        FreezeTime(false);
-        ChangeWeather(Weather.Rain, -1, false);
-        ReproduceAssetAnimation(1043311930, 1);
-        WarpCharacterAndCopyFloorWithFadeout(10000, TargetEntityType.Area, 43312852, -1, 10000, false, true);
-        SetPlayerPositionDisplay(Enabled, false, 60, 43, 31, 0, 40, 33, -1);
-        WaitFixedTimeFrames(55);
-        
-        // Yellow phantom off player
-        ClearSpEffect(10000, 360950);
-        WaitFixedTimeFrames(15);
-    }
-    else {
-        ChangeWeather(Weather.Rain, -1, false);
-        ForceCharacterDeath(1043310921, false); // Disable BulletDummy
-        WaitFixedTimeFrames(45);
-    }
-    
-    // SFX
-    DeleteMapSFX(1043310920, false); // Remove Orb
-    SpawnOneshotSFX(TargetEntityType.Area, 1043310920, 100, 450282); // Orb explodes
-    InitializeEvent(0, 1043311713, 0); // Remove Arena SFX
-    InitializeEvent(0, 1043312311, 0); // Gradually delete fire
-    
-    // Award and flag
-    WaitFixedTimeSeconds(0.6);
-    HandleBossDefeatAndDisplayBanner(1043310800, TextBannerType.EnemyFelled);
-    AwardItemLot(1043310410);
-    SetEventFlagID(ShrineComplete, ON);
-    SetEventFlagID(9273, ON);
-    EndEvent();
-L0:
-    // In case event was already completed
-    ForceCharacterDeath(1043310921, false);
-    ReproduceAssetAnimation(1043311930, 1);
-    DeleteMapSFX(1043310920, false);
-    InitializeEvent(0, 1043311713, 0); // Remove Arena SFX
-    InitializeEvent(0, 1043312311, 1); // Instantly delete fire
-    EndEvent();
-});
-
+const ShrineComplete = 1043310920 // Has killed the boss and completed the shrine
+const FireDeletionCompleted = 1043310921
 // Gradual/Instant Fire Removal
-$Event(1043312311, Restart, function(X0_4) {
+$Event(1043312311, Restart, function() {
+    WaitFor(EventFlag(ShrineComplete))
     for (let i = 1; i <= 14; i++) {
-        if (X0_4 == 0) // Gradual
+        if (!EventFlag(FireDeletionCompleted)) // Gradual
             WaitFixedTimeFrames(10 + (i * 2));
         DeleteMapSFX(1043310930 + i, false);
     }
+    SetEventFlagID(FireDeletionCompleted, ON);
 });
 
 // Frenzy Door Teleporter
@@ -569,6 +473,51 @@ $Event(1043312312, Restart, function() {
     SaveRequest();
     SetPlayerRespawnPoint(1038482660);
     RestartEvent();
+});
+
+// Shrine Interact
+$Event(1043312313, Restart, function() {
+    DisableNetworkSync();
+    if (EventFlag(ShrineComplete)) {
+        DisableCharacter(1043310921);
+        DisableCharacterCollision(1043310921);
+        SetCharacterBackreadState(1043310921, true);
+        ForceCharacterDeath(1043310921, false);
+        
+        ReproduceAssetAnimation(1043311930, 1); // Door
+        DeleteMapSFX(1043310920, false); // Eye VFX
+        DeleteMapSFX(1043310927, false); // Glow
+        EndEvent();
+    }
+    
+    EndIf(EventFlag(2044440800));
+    WaitFor(ActionButtonInArea(9100, 1043310922));
+    DisableCharacter(1043310921);
+    RotateCharacter(10000, 1043310920, 60550, false);
+    WaitFixedTimeFrames(75);
+    WarpPlayer(31, 82, 0, 0, 3182002001, 60);
+});
+
+
+// Shrine Complete
+$Event(1043312314, Restart, function() {
+    EndIf(EventFlag(ShrineComplete) || !EventFlag(2044440800));
+    
+    DisableCharacter(1043310921);
+    DisableCharacterCollision(1043310921);
+    SetCharacterBackreadState(1043310921, true);
+    ForceCharacterDeath(1043310921, false);
+    
+    ChangeWeather(Weather.Rain, -1, false);
+    ReproduceAssetAnimation(1043311930, 1); // Door
+    
+    WaitFixedTimeRealFrames(1);
+    WaitFixedTimeSeconds(3);
+        
+    DeleteMapSFX(1043310920, false); // Remove Orb
+    DeleteMapSFX(1043310927, false); // Glow
+    SpawnOneshotSFX(TargetEntityType.Area, 1043310920, 100, 450282); // Orb explodes
+    SetEventFlagID(ShrineComplete, ON);
 });
 
 // Apply scaling and enable madness bullets
@@ -612,200 +561,6 @@ $Event(1043312320, Restart, function(X0_4, X4_4) {
         EndEvent();
     }        
 });
-
-// Post BossFight Entertance
-$Event(1043311711, Restart, function() {
-    if (!EventFlag(ShrineComplete)) {
-        DeleteMapSFX(1043311712, false);
-        DisableAsset(1043311713);
-    
-        WaitFor(EventFlag(ShrineComplete));
-        SpawnMapSFX(1043311712);
-        EnableAsset(1043311713);
-    }
-    
-    WaitFor(InArea(10000, 1043311711));
-    //WarpCharacterAndCopyFloorWithFadeout(10000, TargetEntityType.Area, 43312852, -1, 10000, false, true);
-    //SetPlayerPositionDisplay(Enabled, false, 60, 43, 31, 0, 40, 33, -1);
-    WarpCharacterAndCopyFloorWithFadeout(10000, TargetEntityType.Area, 43312851, -1, 10000, false, true);
-    SetPlayerPositionDisplay(Enabled, false, 60, 43, 31, 0, -25, -185, -25);
-    
-    InitializeEvent(0, 1043311713, 1);
-    ChangeWeather(Weather.Fog, -1, false);
-    SetCurrentTime(0, 0, 0, true, false, false, 0, 0, 0);
-    FreezeTime(true);
-    
-    WaitFixedTimeFrames(80);
-    SetSpEffect(10000, 360950); 
-});
-
-// 920700
-// 921600
-const BGM = 921600
-
-// Pocket Dimension Boss Initialization
-$Event(1043311712, Restart, function() {
-    InitializeEvent(0, 1043311713, 0); // Remove Arena SFX
-    //InitializeCommonEvent(0, 9005822, 1043310800, 921600, 1043312265, 1043312265, 0, 1043312266, 0, 0);
-    
-    if (EventFlag(ShrineComplete)) {
-        // Boss
-        DisableCharacter(1043310800);
-        DisableCharacterCollision(1043310800);
-        ForceCharacterDeath(1043310800, false);
-        // Outer Core
-        DisableCharacter(1043310922);
-        DisableCharacterCollision(1043310922);
-        ForceCharacterDeath(1043310922, false);
-        // Inner Core
-        DisableCharacter(1043310923);
-        DisableCharacterCollision(1043310923);
-        ForceCharacterDeath(1043310923, false);
-        
-        EndEvent();
-    }
-    
-    DisableCharacterAI(1043310800);
-    DisableCharacterGravity(1043310924);
-    SetSpEffect(1043310800, 4301); // Fade out after death
-    
-    EnableCharacterDefaultBackread(1043310922);
-    EnableCharacterDefaultBackread(1043310923);
-    DisableCharacterGravity(1043310922);
-    DisableCharacterGravity(1043310923);
-    InitializeEvent(0, 1043311714, 1043310922, 1043310830); // Outer core damage
-    InitializeEvent(1, 1043311714, 1043310923, 1043310831); // Inner core damage
-    
-    if (!EventFlag(BossEncountered)) {
-        //DisableCharacter(1043310800);
-        ForceAnimationPlayback(1043310800, 703, true, false, false, Equal, 1);
-        dmg = HasDamageType(1043310800, 10000, DamageType.Unspecified);
-        WaitFor(
-            PlayerIsInOwnWorld() && InArea(10000, 43311712)
-            || dmg);
-            
-        if (!dmg.Passed)
-            WaitFixedTimeSeconds(8.5);
-        SetNetworkconnectedEventFlagID(BossEncountered, ON);
-        
-        //EnableCharacter(1043310800);
-        ForceAnimationPlayback(1043310800, 20004, false, false, false, Equal, 1);
-        SetEventFlagID(1043312265, ON);
-        SetBossBGM(BGM, BossBGMState.Start);
-        //WaitFixedTimeFrames(75);
-        EnableCharacterAI(1043310800);
-        SetNetworkUpdateRate(1043310800, true, CharacterUpdateFrequency.AlwaysUpdate);
-    }
-    else {
-        WaitFor(InArea(10000, 43311712));
-        WaitFixedTimeSeconds(4);
-        SetEventFlagID(1043312265, ON);
-        SetBossBGM(BGM, BossBGMState.Start);
-        EnableCharacterAI(1043310800);
-        SetNetworkUpdateRate(1043310800, true, CharacterUpdateFrequency.AlwaysUpdate);
-        WaitFixedTimeSeconds(2.5);
-    }
-    
-    if (!CharacterDead(1043310800)) {
-        DisplayBossHealthBar(Enabled, 1043310800, 0, 904140305);
-        //SetEventFlagID(1043312265, ON);
-        //SetBossBGM(BGM, BossBGMState.Start);
-        TriggerAISound(6203, 10000, TargetEntityType.Area);
-        
-        InitializeEvent(0, 1043311717, 0); // Second Phase handler
-        WaitFor(CharacterDead(1043310800));
-        SetEventFlagID(1043310800, ON);
-        //WaitFixedTimeSeconds(2);
-        SetBossBGM(BGM, BossBGMState.Stop2);
-    }
-
-    // Outer Core
-    DisableCharacter(1043310922);
-    DisableCharacterCollision(1043310922);
-    ForceCharacterDeath(1043310922, false);
-    // Inner Core
-    DisableCharacter(1043310923);
-    DisableCharacterCollision(1043310923);
-    ForceCharacterDeath(1043310923, false);
-});
-
-// Spawn or despawn arena SFX
-$Event(1043311713, Restart, function(X0_4) {
-    if (X0_4 == 0) {
-        for (let i = 1; i <= 13; i++) {
-            DeleteMapSFX(1043310949 + i, false);
-        }
-    }
-    else {
-        for (let i = 1; i <= 13; i++) {
-            SpawnMapSFX(1043310949 + i);
-            WaitFixedTimeRealFrames(30); // Otherwise it lags
-        }
-    }
-});
-
-// Arena Eye Core Damage Toggle
-$Event(1043311714, Restart, function(X0_4, X4_4) {
-    stop = EventFlag(ShrineComplete);
-    DisableCharacter(X0_4);
-    SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.NoUpdate);
-    EndIf(stop);
-    
-    WaitFor(InArea(10000, X4_4) || stop);
-    EndIf(stop.Passed);
-    EnableCharacter(X0_4);
-    SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AlwaysUpdate);
-    
-    WaitFor(!InArea(10000, X4_4) || stop)
-    RestartEvent();
-});
-
-// Shoot 1~3 bullets from a cloud
-$Event(1043311715, Restart, function() {
-    EndIf(CharacterDead(1043310800)); 
-    
-    // Shoot 3 bullets out of 1~3 cloud(s)
-    InitializeEvent(0, 1043311716, 0);
-    InitializeEvent(1, 1043311716, 0);
-    InitializeEvent(2, 1043311716, 0);
-    
-    WaitFixedTimeSeconds(1);    
-    RestartEvent();
-});
-
-// Shoot bullet out of random cloud
-$Event(1043311716, Restart, function() {
-    RandomlySetEventFlagInRange(1043310423, 1043310430, ON);
-    for (let i = 0; i < CloudCount; i++) {
-        ShootBullet(1043310924, 1043310964 + i, -1, 160, 0, 0, 0);
-    }
-    BatchSetEventFlags(1043310423, 1043310430, OFF);
-});
-
-// Second Phase Handler
-$Event(1043311717, Restart, function() {
-    EndIf(EventFlag(ShrineComplete));
-    WaitFor(CharacterHasSpEffect(1043310800, 19955));
-    EndIf(CharacterDead(1043310800));
-    SetEventFlagID(1043312267, ON);
-    WaitFor(CharacterHasSpEffect(1043310800, 15530));
-    EndIf(CharacterDead(1043310800));
-    SetBossBGM(BGM, BossBGMState.HeatUp);
-    SetEventFlagID(1043312267, OFF);
-    SetEventFlagID(1043312265, OFF); //temp flag for boss start OFF
-    SetEventFlagID(1043312266, ON);
-    
-    EndIf(DisableCloudPhase == 1);
-    for (let i = 0; i < CloudCount; i++) {
-        SpawnMapSFX(1043310965 + i);
-        CreateAssetfollowingSFX(1043310965 + i, -1, 7193010);
-        //WaitFixedTimeRealFrames(30); // Otherwise it lags
-    }
-    WaitFixedTimeSeconds(1.5);
-    CreateBulletOwner(1043310924);
-    InitializeEvent(0, 1043311715, 0);
-});
-
 // - - Madness Cliff (Beach) - - 
 
 // Bloated guys ambush
@@ -850,31 +605,6 @@ $Event(1043310877, Restart, function() {
         RestartEvent();
     }
     DisplayGenericDialog(4010, PromptType.OKCANCEL, NumberofOptions.NoButtons, 0, 1);
-    RestartEvent();
-});
-
-$Event(1043310949, Restart, function() {
-    EndIf(EventFlag(ShrineComplete));
-    WaitFor(InArea(10000, 1043310949) && !EventFlag(1043312949));
-    
-    SetEventFlagID(1043318949, ON);
-    
-    WaitFor(!InArea(10000, 1043310949) || InArea(10000, 43311712) || EventFlag(1043312949));
-    SetEventFlagID(1043318949, OFF);
-    RestartEvent();
-});
-
-$Event(1043310950, Restart, function() {
-    EndIf(EventFlag(ShrineComplete));
-    
-    DisableCharacter(1043310921);
-    SetNetworkUpdateRate(1043310921, true, CharacterUpdateFrequency.NoUpdate);
-    
-    WaitFor(EventFlag(1043318949));
-    EnableCharacter(1043310921);
-    SetNetworkUpdateRate(1043310921, true, CharacterUpdateFrequency.AlwaysUpdate);
-    
-    WaitFor(!EventFlag(1043318949))
     RestartEvent();
 });
 
@@ -925,9 +655,15 @@ L0:
 
 // Inner Wall Gölem
 $Event(1043312345, Restart, function() {
-    DisableCharacterAI(1043312345);
+    EndIf(EventFlag(1043310345));
+    if (!ThisEvent()) {
+        DisableCharacterAI(1043312345);
+        SetThisEvent(ON);
+    }
+    SetSpEffect(1043312345, 100656);
     WaitFor(InArea(10000, 1043312342) || InArea(10000, 1043312343) || InArea(10000, 1043312344) || InArea(10000, 1043312346) || InArea(10000, 1043312347));
     EnableCharacterAI(1043312345);
+    ClearSpEffect(1043312345, 100656);
     WaitFor(!InArea(10000, 1043312342) && !InArea(10000, 1043312343) && !InArea(10000, 1043312344) && !InArea(10000, 1043312346) && !InArea(10000, 1043312347));
     RestartEvent();
 })

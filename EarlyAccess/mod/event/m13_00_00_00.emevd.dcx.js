@@ -20,6 +20,7 @@ $Event(0, Default, function() {
     RegisterBonfire(13000012, 13001962, 0, 0, 0, 5);
     RegisterBonfire(13000013, 13001963, 0, 0, 0, 5);
     RegisterBonfire(13000014, 13001964, 0, 0, 0, 5);
+    RegisterBonfire(13000015, 13001965, 0, 0, 0, 5);
     InitializeCommonEvent(0, 9005810, 13000800, 13000000, 13000950, 13001950, 0);
     InitializeCommonEvent(0, 9005810, 13000830, 13000001, 13000951, 13001951, 1084227584);
     InitializeCommonEvent(0, 9005810, 13000850, 13000002, 13000952, 13001952, 1084227584);
@@ -39,9 +40,9 @@ $Event(0, Default, function() {
     InitializeEvent(0, 13002841, 0);
     InitializeEvent(0, 13002849, 0);
     InitializeEvent(0, 13002850, 0);
-    InitializeEvent(0, 13002860, 0);
+    InitializeEvent(0, 13003783, 0);
     InitializeEvent(0, 13002861, 0);
-    InitializeEvent(0, 13002865, 0);
+    InitializeEvent(0, 13002867, 0);
     InitializeEvent(0, 13002890, 13002944, 13000851, 13000852, 15504);
     InitializeEvent(0, 13002891, 13002944, 13003851, 13000852, 15506, 13000851, 13002873);
     InitializeEvent(1, 13002890, 13002945, 13000852, 13000851, 15454);
@@ -52,7 +53,7 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005300, 13000341, 13000341, 40772, 0, 0);
     InitializeCommonEvent(0, 90005300, 13000342, 13000342, 40774, 0, 0);
     InitializeCommonEvent(0, 90005300, 13000343, 13000343, 40776, 0, 0);
-    InitializeCommonEvent(0, 90005300, 13000369, 13000369, 0, 0, 0);
+    //InitializeCommonEvent(0, 90005300, 13000369, 13000369, 0, 0, 0);
     InitializeCommonEvent(0, 90005300, 13000490, 13000490, 13002091, 0, 0);
     InitializeEvent(0, 13002493, 13000490, 13002641, 13002640);
     InitializeEvent(0, 13002646, 13000492, 13002492, 13000492, 1092616192);
@@ -107,8 +108,13 @@ $Event(0, Default, function() {
     InitializeEvent(0, 13003721, 0);
     InitializeEvent(0, 13003780, 0);
     InitializeEvent(0, 13003781, 0);
-    InitializeEvent(0, 13003782, 0);
-    InitializeEvent(0, 13003783, 0);
+    
+    //Lansseax Boss Script Initializations
+    InitializeCommonEvent(0, 9005800, 13000860, 13001860, 13002860, 13002865, 13000860, 10000, 0, 0);
+    InitializeCommonEvent(0, 9005801, 13000860, 13001860, 13002860, 13002865, 13002866, 10000);
+    InitializeCommonEvent(0, 9005811, 13000860, 13001860, 5, 0);
+    InitializeCommonEvent(1, 9005811, 13000860, 13001862, 5, 0);
+    
     //New Elevator
     InitializeCommonEvent(0, 90005501, 13000534, 13000535, 0, 13001534, 13001536, 13001538, 13000536, 0);
     InitializeEvent(0, 13002787, 0);
@@ -124,6 +130,63 @@ $Event(0, Default, function() {
     InitializeEvent(3, 13003787, 13001271, 13001273);
     InitializeEvent(4, 13003787, 13001274, 13001275);
     InitializeEvent(5, 13003787, 13001274, 13001276);
+    //One way Prompt
+    InitializeEvent(0, 13003788, 13008560, 13001560, 13002561);
+    InitializeEvent(1, 13003788, 13008561, 13001561, 13002562);
+    
+    //Jagged Peak Waygate Initialization
+    //InitializeEvent(0, 13003790, 0);
+    
+    //Jagged Peak Waygate Fire Lightning Field Initialization
+    InitializeEvent(0, 13003791, 13000790, 13002501);
+    InitializeEvent(1, 13003791, 13000791, 13002501);
+    
+    //Dragon Lord's Recall Scarab One Time Handler
+    InitializeCommonEvent(0, 90005300, 13000542, 13000542, 13000625, 0, 0);
+    
+    //BlightPole Skull Destruction Handler
+    InitializeEvent(0, 13003792, 0);
+    
+    //Mystic Huntress Boss Death Handler
+    InitializeEvent(0, 13003793, 0);
+    
+    //Mystic Huntress Boss Start Handler
+    InitializeEvent(0, 13003794, 0);
+    
+    //Mystic Huntress Summon Attacks Initialization (Needs updates: dummpolyIds)
+    InitializeEvent(0, 13003795, 13000871, 11641, 246, 20006, 13002882); //Ancestral Spirit 1
+    InitializeEvent(1, 13003795, 13000874, 11642, 246, 20007, 13002883); //Ancestral Spirit 2
+    InitializeEvent(2, 13003795, 13000875, 11643, 247, 20008, 13002884); //Ancestral Spirit 3
+    InitializeEvent(3, 13003795, 13000876, 11644, 247, 3024, 13002885); //Ancestral Spirit 4
+    InitializeEvent(4, 13003795, 13000877, 11645, 247, 3038, 13002886); //Ancestral Spirit 5
+    
+    //Mystic Huntress Sound Dummies Initialization (Entity ID)
+    InitializeEvent(0, 13003796, 13000872); //Ancestral Follower Shaman
+    InitializeEvent(1, 13003796, 13000873); //Depraved Perfumer
+    InitializeEvent(2, 13003796, 13000878); //Rellana, Twin Moon Knight
+    InitializeEvent(3, 13003796, 13000880); //Ancestral Spirit
+    
+    
+    //Mystic Huntress Boss Common Scripts (Fogwalls)
+    InitializeEvent(0, 13003797, 0);
+    
+    //Scarab Kill Plane Handler Initialization
+    InitializeEvent(0, 13003798, 0);
+    
+    //Ancestral Spirit Carcass State Handler Initialization
+    InitializeEvent(0, 13003799, 0);
+    
+    //Mystic Huntress Warp to Arena Upon Fall
+    InitializeEvent(0, 13003800, 0);
+    
+    //Mystic Huntress Music Phase Transition Handler Initialization
+    InitializeEvent(0, 13003801, 0);
+    
+    //Waygate to Jagged Peak (Asset, areaID, blockID, regionID, indexID, initialAreaEntityID, (optional) awaited eventflag)
+    InitializeCommonEvent(0, 98005307, 13001789, 61, 51, 41, 0, 2051412561, 0);
+    
+    //Placidusax Mark and Recall Clear Handler Initialization
+    InitializeEvent(0, 13003802, 0);
 });
 
 $Event(50, Default, function() {
@@ -216,6 +279,9 @@ $Event(50, Default, function() {
     InitializeCommonEvent(0, 90005200, 13000457, 30018, 20018, 13002459, 1069547520, 0, 1, 0, 0);
     InitializeCommonEvent(0, 90005200, 13000458, 30018, 20018, 13002459, 1073741824, 0, 1, 0, 0);
     InitializeCommonEvent(0, 90005221, 13000459, 30018, 20018, 0, 0);
+    InitializeCommonEvent(0, 90005221, 13000546, 30018, 20018, 0, 0); //Blightpole Hanging Skeleton 1
+    InitializeCommonEvent(0, 90005221, 13000547, 30018, 20018, 0, 0); //Blightpole Hanging Skeleton 2
+    InitializeCommonEvent(0, 90005221, 13000548, 30018, 20018, 0, 0); //Blightpole Hanging Skeleton 3
     InitializeCommonEvent(0, 90005200, 13000461, 30018, 20018, 13002459, 0, 0, 1, 0, 0);
     InitializeCommonEvent(0, 90005221, 13000472, 30018, 20018, 0, 0);
     InitializeCommonEvent(0, 90005221, 13000473, 30018, 20018, 0, 0);
@@ -270,9 +336,9 @@ $Event(50, Default, function() {
     InitializeCommonEvent(0, 90005200, 13000371, 30000, 20000, 13002372, 0, 0, 1, 0, 0);
     InitializeCommonEvent(0, 90005200, 13000372, 30000, 20000, 13002372, 0, 0, 1, 0, 0);
     InitializeCommonEvent(0, 90005200, 13000373, 30001, 20001, 13002300, 0, 0, 1, 0, 0);
-    InitializeCommonEvent(0, 90005200, 13000376, 30001, 20001, 13002372, 0, 0, 1, 0, 0);
+    InitializeCommonEvent(0, 90005200, 13000376, 30001, 20005, 13002372, 0, 0, 1, 0, 0); //Knelt Huntress
     InitializeCommonEvent(0, 90005261, 13000374, 13002374, 1077936128, 0, -1);
-    InitializeCommonEvent(0, 90005200, 13000375, 30000, 20000, 13002375, 0, 0, 1, 0, 0);
+    InitializeCommonEvent(0, 90005200, 13000375, 30000, 20004, 13002375, 0, 0, 1, 0, 0); //Lying on Belly Huntress
     InitializeCommonEvent(0, 90005250, 13000377, 13002377, 0, -1);
     InitializeCommonEvent(0, 90005200, 13000378, 30000, 20000, 13002369, 0, 0, 1, 0, 0);
     InitializeCommonEvent(0, 90005200, 13000379, 30000, 20000, 13002369, 0, 0, 1, 0, 0);
@@ -284,6 +350,8 @@ $Event(50, Default, function() {
     InitializeCommonEvent(0, 90005250, 13000295, 13002295, 0, -1);
     InitializeCommonEvent(0, 90005250, 13000296, 13002297, 0, -1);
     InitializeCommonEvent(0, 90005261, 13000496, 13002496, 1109393408, 0, -1);
+    //Skeleton Stander Enemy Activation
+    InitializeCommonEvent(0, 90005250, 13000541, 13002298, 0, -1);
     //0, 90005261, EnemyEntityID, RegionEntityID, FloatValueOfDistanceBetweenPlayer&Enemy, ActivationTime, AnimationID
     //EnemyAct New Skeleton Area Lower
     InitializeCommonEvent(0, 90005261, 13000501, 13002503, 1109393408, 0, -1);
@@ -311,7 +379,7 @@ $Event(50, Default, function() {
     //Kickdown Ladder
     InitializeCommonEvent(0, 90005520, 13000601, 13001600, 13002602, 13002601);
     //New Elevator
-    InitializeEvent(0, 13000788, 0);
+    //InitializeEvent(0, 13000788, 0);
     //Post Lansseax Fall Item Corpse
     InitializeEvent(0, 13000789, 13001601);
 });
@@ -658,9 +726,9 @@ $Event(13002828, Restart, function() {
 });
 
 $Event(13002829, Restart, function() {
-    InitializeCommonEvent(0, 9005800, 13000800, 13001800, 13002800, 13002805, 13005800, 10000, 0, 0);
-    InitializeCommonEvent(0, 9005801, 13000800, 13001800, 13002800, 13002805, 13002806, 10000);
-    InitializeCommonEvent(0, 9005811, 13000800, 13001800, 4, 0);
+    InitializeCommonEvent(1, 9005800, 13000800, 13001800, 13002800, 13002805, 13005800, 10000, 0, 0);
+    InitializeCommonEvent(1, 9005801, 13000800, 13001800, 13002800, 13002805, 13002806, 10000);
+    InitializeCommonEvent(2, 9005811, 13000800, 13001800, 4, 0);
     InitializeCommonEvent(0, 9005822, 13000800, 211000, 13002805, 13002806, 0, 13002802, 1, 1);
 });
 
@@ -786,7 +854,7 @@ $Event(13002846, Restart, function(X0_4, X4_4, X8_4) {
 
 $Event(13002849, Restart, function() {
     InitializeEvent(0, 13002846, 13000830, 13002835, 13002836);
-    InitializeCommonEvent(0, 9005822, 13000830, 452000, 13002835, 13002836, 0, 13002832, 0, 1);
+    InitializeCommonEvent(1, 9005822, 13000830, 452000, 13002835, 13002836, 0, 13002832, 0, 1);
 });
 
 $Event(13002850, Restart, function() {
@@ -841,7 +909,7 @@ L0:
     SetNetworkUpdateRate(13000720, true, CharacterUpdateFrequency.AlwaysUpdate);
 });
 
-$Event(13002860, Restart, function() {
+$Event(13003783, Restart, function() {
     if (EventFlag(13000850)) {
         DisableCharacter(13000855);
         DisableCharacter(13000856);
@@ -904,19 +972,19 @@ $Event(13002891, Restart, function() {
 $Event(13002892, Restart, function() {
 });
 
-$Event(13002865, Restart, function() {
-    InitializeCommonEvent(0, 9005800, 13000850, 13001850, 13002850, 13002855, 13000850, 10000, 13000851, 13002851);
-    InitializeCommonEvent(0, 9005800, 13000850, 13001852, 13002852, 13002855, 13000850, 10000, 13000851, 13002851);
-    InitializeCommonEvent(0, 9005800, 13000850, 13001853, 13002853, 13002855, 13000850, 10000, 13000851, 13002851);
-    InitializeCommonEvent(0, 9005801, 13000850, 13001850, 13002850, 13002855, 13002856, 10000);
-    InitializeCommonEvent(0, 9005801, 13000850, 13001852, 13002852, 13002855, 13002856, 10000);
-    InitializeCommonEvent(0, 9005801, 13000850, 13001853, 13002853, 13002855, 13002856, 10000);
-    InitializeCommonEvent(0, 9005811, 13000850, 13001850, 5, 13000851);
-    InitializeCommonEvent(0, 9005811, 13000850, 13001852, 5, 13000851);
-    InitializeCommonEvent(0, 9005811, 13000850, 13001853, 5, 13000851);
-    InitializeCommonEvent(0, 9005811, 13000850, 13001854, 5, 13000851);
-    InitializeCommonEvent(0, 9005811, 13000850, 13001855, 5, 13000851);
-    InitializeCommonEvent(0, 9005822, 13000850, 921600, 13002855, 13002856, 0, 13002852, 0, 0);
+$Event(13002867, Restart, function() {
+    InitializeCommonEvent(2, 9005800, 13000850, 13001850, 13002850, 13002855, 13000850, 10000, 13000851, 13002851);
+    InitializeCommonEvent(3, 9005800, 13000850, 13001852, 13002852, 13002855, 13000850, 10000, 13000851, 13002851);
+    InitializeCommonEvent(4, 9005800, 13000850, 13001853, 13002853, 13002855, 13000850, 10000, 13000851, 13002851);
+    InitializeCommonEvent(2, 9005801, 13000850, 13001850, 13002850, 13002855, 13002856, 10000);
+    InitializeCommonEvent(3, 9005801, 13000850, 13001852, 13002852, 13002855, 13002856, 10000);
+    InitializeCommonEvent(4, 9005801, 13000850, 13001853, 13002853, 13002855, 13002856, 10000);
+    InitializeCommonEvent(3, 9005811, 13000850, 13001850, 5, 13000851);
+    InitializeCommonEvent(4, 9005811, 13000850, 13001852, 5, 13000851);
+    InitializeCommonEvent(5, 9005811, 13000850, 13001853, 5, 13000851);
+    InitializeCommonEvent(6, 9005811, 13000850, 13001854, 5, 13000851);
+    InitializeCommonEvent(7, 9005811, 13000850, 13001855, 5, 13000851);
+    InitializeCommonEvent(2, 9005822, 13000850, 392300, 13002855, 13002856, 0, 13002852, 0, 0);
 });
 
 $Event(13002600, Restart, function(X0_4, X4_4, X8_4, X12_4) {
@@ -1271,21 +1339,6 @@ L0:
     DisplayBossHealthBar(Enabled, 13000860, 0, 904510600);
 });
 
-$Event(13003782, Restart, function() {
-    EndIf(EventFlag(13000860));
-    WaitFor(HPRatio(13000860) <= 0.5);
-    SetEventFlagID(13002862, ON);
-});
-
-
-$Event(13003783, Restart, function() {
-    InitializeCommonEvent(0, 9005800, 13000860, 13001860, 13002860, 13002865, 13000860, 10000, 0, 0);
-    InitializeCommonEvent(0, 9005801, 13000860, 13001860, 13002860, 13002865, 13002866, 10000);
-    InitializeCommonEvent(0, 9005811, 13000860, 13001860, 5, 0);
-    InitializeCommonEvent(0, 9005811, 13000860, 13001862, 5, 0);
-    InitializeCommonEvent(0, 9005822, 13000860, 451000, 13002865, 13002866, 0, 13002862, 0, 0);
-});
-
 $Event(13003784, Default, function(X0_4, X4_4, X8_4) {
     WaitFor(InArea(10000, X0_4) && HPRatio(X4_4) == 1);
     ForceAnimationPlayback(X4_4, X8_4, false, true, false);
@@ -1366,6 +1419,12 @@ $Event(13003786, Restart, function() {
     DisableMapPart(13001765);
     DisableMapPart(13001766);
     DisableMapPart(13001767);
+    DisableMapPart(13001768);
+    DisableMapPart(13001769);
+    DisableMapPart(13001770);
+    DisableMapPart(13001771);
+    DisableMapPart(13001772);
+    DisableMapPart(13001773);
 //Keep Asset but Hide Collision
     DisableHit(13001740);
     DisableHit(13001741);
@@ -1390,6 +1449,23 @@ $Event(13003787, Restart, function(X0_4, X4_4) {
     EndEvent();
 });
 
+$Event(13003788, Restart, function(X0_4, X4_4, X8_4) {
+    EndIf(EventFlag(X0_4));
+    if (InArea(10000, X8_4))
+    {
+        IfActionButtonInArea(MAIN, 8100, X4_4);
+        DisplayGenericDialog(4010, PromptType.OKCANCEL, NumberofOptions.NoButtons, 0, 1);
+    }
+    if (!EventFlag(X0_4))
+    {
+        WaitFixedTimeSeconds(3);
+        RestartEvent();
+    }
+    else
+    {
+        EndEvent();
+    }
+});
 
 //Fall Immunity Area Between Lansseax and Placi - Forced Asset Destruction Event
 $Event(13012500, Restart, function() {
@@ -1406,4 +1482,273 @@ SetEventFlagID(13010500, ON);
 //Post Lansseax Fall Item Corpse
 $Event(13000789, Restart, function(X0_4) {
     ForceCharacterDeath(X0_4, false);
+});
+
+//Jagged Peak Waygate Handler
+$Event(13003790, Restart, function() {
+    IfActionButtonInArea(MAIN, 6350, 13001789);
+    RotateCharacter(10000, 13001789, -1, true);
+    ForceAnimationPlayback(10000, 60010, false, false, false, Equal, 1);
+    WaitFixedTimeSeconds(2);
+    
+    //SpawnOneshotSFX(TargetEntityType.Area, 13001774, -1, 530365);
+    //SpawnOneshotSFX(TargetEntityType.Area, 13001774, -1, 303150);
+    //SpawnOneshotSFX(TargetEntityType.Area, 13001774, -1, 450153);
+    WaitFixedTimeSeconds(1.5);
+    
+    WarpPlayer(61, 51, 41, 0, 2051411565, 0); //(Moorth Ruins Spawn Point ID 2049442722) [Needs to be setup for Jagged Peak]
+    SaveRequest();
+    SetPlayerRespawnPoint(2051411565);
+    RestartEvent();
+});
+
+//WIP Jagged Peak Lightning for Jagged Peak Waygate area
+//Uses NG+ cycles to scale the lightning bolt damage
+//(characterEntityID, areaEntityID)
+$Event(13003791, Restart, function(X0_4, X4_4) {
+    EndIf(EventFlag(2054390800)); //Bayle is dead
+    DisableNetworkSync();
+    CreateBulletOwner(X0_4);
+    WaitFor(InArea(10000, X4_4));
+    WaitRandomTimeSeconds(1, 5);
+    if (!EventFlag(70)) { //Consort Radahn is not dead (includes other requisites)
+        if (EventFlag(50)) {
+            ShootBullet(X0_4, X0_4, -1, 804008500, 0, 0, 0);
+        }
+        if (EventFlag(51)) {
+            ShootBullet(X0_4, X0_4, -1, 804008510, 0, 0, 0);
+        }
+        if (EventFlag(52)) {
+            ShootBullet(X0_4, X0_4, -1, 804008520, 0, 0, 0);
+        }
+        if (EventFlag(53)) {
+            ShootBullet(X0_4, X0_4, -1, 804008530, 0, 0, 0);
+        }
+        if (EventFlag(54)) {
+            ShootBullet(X0_4, X0_4, -1, 804008540, 0, 0, 0);
+        }
+        if (EventFlag(55)) {
+            ShootBullet(X0_4, X0_4, -1, 804008550, 0, 0, 0);
+        }
+        if (EventFlag(56)) {
+            ShootBullet(X0_4, X0_4, -1, 804008560, 0, 0, 0);
+        }
+        if (EventFlag(57)) {
+            ShootBullet(X0_4, X0_4, -1, 804008570, 0, 0, 0);
+        }
+    } else {
+L0:
+        if (EventFlag(50)) {
+            ShootBullet(X0_4, X0_4, -1, 804018500, 0, 0, 0);
+        }
+        if (EventFlag(51)) {
+            ShootBullet(X0_4, X0_4, -1, 804018510, 0, 0, 0);
+        }
+        if (EventFlag(52)) {
+            ShootBullet(X0_4, X0_4, -1, 804018520, 0, 0, 0);
+        }
+        if (EventFlag(53)) {
+            ShootBullet(X0_4, X0_4, -1, 804018530, 0, 0, 0);
+        }
+        if (EventFlag(54)) {
+            ShootBullet(X0_4, X0_4, -1, 804018540, 0, 0, 0);
+        }
+        if (EventFlag(55)) {
+            ShootBullet(X0_4, X0_4, -1, 804018550, 0, 0, 0);
+        }
+        if (EventFlag(56)) {
+            ShootBullet(X0_4, X0_4, -1, 804018560, 0, 0, 0);
+        }
+        if (EventFlag(57)) {
+            ShootBullet(X0_4, X0_4, -1, 804018570, 0, 0, 0);
+        }
+    }
+L1:
+    WaitFixedTimeSeconds(1);
+    RestartEvent();
+});
+
+//BlightPole Skull Destruction Handler
+$Event(13003792, Restart, function() {
+    AttachAssetToAsset(13000544, 13000545, 100);
+    WaitForAssetDestroyed(1, 13000543, 0, 1);
+    RequestAssetDestruction(13000544, 1);
+});
+
+//Mystic Huntress Boss Death Handler
+$Event(13003793, Restart, function() {
+    EndIf(EventFlag(13000870)); //if Mystic Huntress is defeated
+    WaitFor(CharacterHPValue(13000870) <= 0); //wait for Mystic Huntress defeated
+    ForceCharacterDeath(13000870, false); //Mystic Huntress dead
+    WaitFixedTimeSeconds(4);
+    PlaySE(13000870, SoundType.SFX, 888880000); //Boss defeat sound
+    WaitFor(CharacterDead(13000870)); //wait for Mystic Huntress dead
+    HandleBossDefeatAndDisplayBanner(13000870, TextBannerType.GreatEnemyFelled);
+    SetEventFlagID(13000870, ON); //Boss defeat flag
+    SetEventFlagID(9194, ON); //AwardItem Death Flag (In common.emevd)
+    //if (PlayerIsInOwnWorld()) {
+    //    SetEventFlagID(61185, ON); //Needs new value
+    //}
+});
+
+//Mystic Huntress Boss Start Handler
+$Event(13003794, Restart, function() {
+    if (EventFlag(13000870)) { //if Mystic Huntress is defeated
+        DisableCharacter(13000870); //Mystic Huntress disabled
+        DisableCharacterCollision(13000870); //Mystic Huntress collision disabled
+        ForceCharacterDeath(13000870, false); //Mystic Huntress dead
+        //Ancestral 1
+        DisableCharacter(13000871); //disable Ancestral Spirit
+        DisableCharacterCollision(13000871); //disable Ancestral Spirit collision
+        ForceCharacterDeath(13000871, false); //Ancestral Spirit dead
+        //Ancestral 2
+        DisableCharacter(13000874); //disable Ancestral Spirit
+        DisableCharacterCollision(13000874); //disable Ancestral Spirit collision
+        ForceCharacterDeath(13000874, false); //Ancestral Spirit dead
+        //Ancestral 3
+        DisableCharacter(13000875); //disable Ancestral Spirit
+        DisableCharacterCollision(13000875); //disable Ancestral Spirit collision
+        ForceCharacterDeath(13000875, false); //Ancestral Spirit dead
+        //Ancestral 4
+        DisableCharacter(13000876); //disable Ancestral Spirit
+        DisableCharacterCollision(13000876); //disable Ancestral Spirit collision
+        ForceCharacterDeath(13000876, false); //Ancestral Spirit dead
+        //Ancestral 5
+        DisableCharacter(13000877); //disable Ancestral Spirit
+        DisableCharacterCollision(13000877); //disable Ancestral Spirit collision
+        ForceCharacterDeath(13000877, false); //Ancestral Spirit dead
+        
+        EndEvent();
+    }
+L0:
+    DisableCharacterAI(13000870); //Mystic Huntress AI disabled
+    DisableCharacter(13000870); //Mystic Huntress disabled
+    WaitFor(EventFlag(13002875) && InArea(10000, 13002647)); //Wait for fight start flag and arena volume entry
+    EnableCharacter(13000870); //Mystic Huntress enabled
+    EnableCharacterAI(13000870); //Mystic Huntress AI enabled
+    SetNetworkUpdateRate(13000870, true, CharacterUpdateFrequency.AlwaysUpdate); //Mystic Huntress rendering at higher framerate
+    SetNetworkUpdateAuthority(13000870, AuthorityLevel.Forced); //Seamless for Mystic Huntress
+    SetNetworkUpdateAuthority(13000871, AuthorityLevel.Forced); //Seamless for Ancestral Spirit 1
+    SetNetworkUpdateAuthority(13000874, AuthorityLevel.Forced); //Seamless for Ancestral Spirit 2
+    SetNetworkUpdateAuthority(13000875, AuthorityLevel.Forced); //Seamless for Ancestral Spirit 3
+    SetNetworkUpdateAuthority(13000876, AuthorityLevel.Forced); //Seamless for Ancestral Spirit 4
+    SetNetworkUpdateAuthority(13000877, AuthorityLevel.Forced); //Seamless for Ancestral Spirit 5
+    EnableCharacterCollision(13000870); //Mystic Huntress collision enabled
+    ForceAnimationPlayback(13000870, 20003, false, false, false); //Will potentially use this with different ID, might setup more commands for initial encounter
+    DisplayBossHealthBar(Enabled, 13000870, 0, 903805301); //need new msg row and new name ID value
+});
+
+//Mystic Huntress Summon Attacks
+//Arguments: (Ancestral Spirit Entity ID, spEffectId, Warp Point dummypolyId, animationId, Hiding Spot Warp Point Entity ID)
+//Mystic Huntress Entity ID: 13000870
+$Event(13003795, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
+    DisableLockOnPoint(X0_4, 220); //removed Ancestral Spirit lock-on point (add other lock-on points to list)
+    DisableLockOnPoint(X0_4, 221); //removed Ancestral Spirit lock-on point
+    DisableLockOnPoint(X0_4, 222); //removed Ancestral Spirit lock-on point
+    DisableLockOnPoint(X0_4, 223); //removed Ancestral Spirit lock-on point
+    DisableLockOnPoint(X0_4, 224); //removed Ancestral Spirit lock-on point
+    DisableCharacterGravity(X0_4); //disable Ancestral Spirit gravity
+    DisableCharacterCollision(X0_4); //disable Ancestral Spirit collision (problematic with current map, requires investigation)
+    WarpCharacterAndCopyFloor(X0_4, TargetEntityType.Area, X16_4, -1, X16_4); //Ancestral Summon Attack Hiding Spot
+    DisableCharacter(X0_4); //disable Ancestral Spirit
+    EndIf(EventFlag(13000870)); //end if mystic huntress is dead
+    DisableNetworkSync(); //for seamless coop
+    EnableCharacterImmortality(X0_4); //enable Ancestral Spirit immortality
+    WaitFor(CharacterHasSpEffect(13000870, X4_4)); //wait for mystic huntress to use summon attack speffect
+    EnableCharacter(X0_4); //enable Ancestral Spirit
+    SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AlwaysUpdate); //Ancestral Spirit rendering at higher framerate
+    EnableCharacterAI(X0_4); //enabled Ancestral Spirit ai
+    WaitFixedTimeFrames(1);
+    WarpCharacterAndCopyFloor(X0_4, TargetEntityType.Character, 13000870, X8_4, 13000870); //New Dami poli created: 246
+    RotateCharacter(X0_4, 10000, X12_4, false); //rotate towards player and play unique summon anim
+    ForceAnimationPlayback(X0_4, X12_4, false, false, false, 0, 1); //necessary additional animation playback as rotatecharacter does not play the animation (requires investigation as this behavior is not consistent)
+    WaitFor(CharacterHasSpEffect(X0_4, X4_4)); //speffect
+    WaitFixedTimeFrames(1);
+    WaitFor(!CharacterHasSpEffect(X0_4, X4_4)); //same speffect
+    RestartEvent();
+});
+
+//Mystic Huntress Sound Dummies (Enitity ID)
+$Event(13003796, Restart, function(X0_4) {
+    DisableCharacter(X0_4);
+});
+
+//Mystic Huntress Boss Common Scripts (Fogwalls)
+$Event(13003797, Restart, function() {
+    InitializeCommonEvent(0, 9005800, 13000870, 13001870, 13002870, 13002875, 13000870, 10000, 0, 0);
+    InitializeCommonEvent(0, 9005801, 13000870, 13001870, 13002870, 13002875, 13002876, 10000);
+    InitializeCommonEvent(0, 9005811, 13000870, 13001870, 5, 0); //Unique Fogwall ID 5
+    //Add 9005822 for boss music
+    InitializeCommonEvent(0, 9005822, 13000870, 467000, 13002875, 13002876, 0, 13002872, 0, 0);
+});
+
+//Scarab Kill Plane Handler 13002506 13000542
+$Event(13003798, Restart, function() {
+    EndIf(EventFlag(13000542));
+    WaitFor(InArea(13000542, 13002506, 1));
+    ForceCharacterDeath(13000542, true);
+});
+
+//Ancestral Spirit Carcass State Handler
+$Event(13003799, Restart, function() {
+    if (InArea(10000, 13002877, 1) && EventFlag(13000870)) { //If player in Carcass region and boss is dead
+        IssueShortWarpRequest(10000, TargetEntityType.Area, 13002878, -1); //Warp player to point nearby
+    }
+    EndIf(EventFlag(13000870)); //End if Mystic Huntress defeated
+    DisableAsset(13001574); //Disable Ancestral Spirit Carcass
+});
+
+//Mystic Huntress Warp to Arena Upon Fall
+//Uses NG+ cycles to scale the butterfly damage
+$Event(13003800, Restart, function() {
+    EndIf(EventFlag(13000870)); //Huntress is dead
+    DisableNetworkSync();
+    WaitFor(InArea(13000870, 13002879, 1)); //WaitFor Mystic Huntress in Fall Capture Region
+    WarpCharacterAndCopyFloor(13000870, TargetEntityType.Area, 13002886, -1, 13002886); //Warp Mystic Huntress to Ancestral Box
+    CreateBulletOwner(13000879); //Butterfly Spawner
+    WaitFixedTimeSeconds(3);
+    DisplayBossHealthBar(Disabled, 13000870, 0, 903805301); //Hide Healthbar
+    if (EventFlag(50)) { //NG
+        ShootBullet(13000879, 13000879, -1, 804008600, 0, 0, 0);
+    }
+    if (EventFlag(51)) { //NG+1
+        ShootBullet(13000879, 13000879, -1, 804008610, 0, 0, 0);
+    }
+    if (EventFlag(52)) { //So on
+        ShootBullet(13000879, 13000879, -1, 804008620, 0, 0, 0);
+    }
+    if (EventFlag(53)) {
+        ShootBullet(13000879, 13000879, -1, 804008630, 0, 0, 0);
+    }
+    if (EventFlag(54)) {
+        ShootBullet(13000879, 13000879, -1, 804008640, 0, 0, 0);
+    }
+    if (EventFlag(55)) {
+        ShootBullet(13000879, 13000879, -1, 804008650, 0, 0, 0);
+    }
+    if (EventFlag(56)) {
+        ShootBullet(13000879, 13000879, -1, 804008660, 0, 0, 0);
+    }
+    if (EventFlag(57)) {
+        ShootBullet(13000879, 13000879, -1, 804008670, 0, 0, 0);
+    }
+    WaitFixedTimeSeconds(4); //Bullet duration
+    WarpCharacterAndCopyFloor(13000870, TargetEntityType.Area, 13002887, -1, 13002887); //Warp Huntress to Return from Fall
+    ForceAnimationPlayback(13000870, 20003, false, false, false); //Huntress plays Fade in walk
+    DisplayBossHealthBar(Enabled, 13000870, 0, 903805301); //Reveal Healthbar
+    RestartEvent();
+});
+
+//Mystic Huntress Music Phase Transition Handler
+$Event(13003801, Restart, function() {
+    EndIf(EventFlag(13000870));
+    SetEventFlagID(13002872, OFF);
+    WaitFor(CharacterHasSpEffect(13000870, 11640, Equal, 1));
+    SetEventFlagID(13002872, ON);
+});
+
+//Placidusax Mark and Recall Clear Handler
+$Event(13003802, Restart, function() {
+    WaitFor(InArea(10000, 13002050, 1));
+    SetSpEffect(10000, 2054);
 });

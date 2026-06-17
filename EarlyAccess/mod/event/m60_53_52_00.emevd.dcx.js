@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -44,7 +44,12 @@ $Event(1053521001, Default, function() {
         || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120007)
         || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120008)
         || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120009)
-        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120010))) {
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120010)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120011)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120012)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120013)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120014)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120015))) {
     WaitFor(ActionButtonInArea(9532, 1053521001));
     DeleteAssetfollowingSFX(1053521001, true);
     DeleteAssetfollowingSFX(1053521003, true);
@@ -72,7 +77,12 @@ $Event(1053521005, Default, function() {
         || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120007)
         || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120008)
         || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120009)
-        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120010))) {
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120010)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120011)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120012)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120013)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120014)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 3120015))) {
         SetEventFlagID(1053521011, ON);
     }
 });

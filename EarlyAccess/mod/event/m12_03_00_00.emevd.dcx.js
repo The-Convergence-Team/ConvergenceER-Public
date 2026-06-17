@@ -4,247 +4,264 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
+// コンストラクタ -- constructor
 $Event(0, Default, function() {
+    // Graces
     RegisterBonfire(71231, 12031951, 0, 0, 0, 5);
     RegisterBonfire(71232, 12031952, 0, 0, 0, 5);
     RegisterBonfire(71233, 12031953, 0, 0, 0, 5);
     RegisterBonfire(71234, 12031954, 0, 0, 0, 5);
     RegisterBonfire(71235, 12031955, 0, 0, 0, 5);
-    InitializeCommonEvent(0, 9005810, 12030850, 71230, 12030950, 12031950, 1084227584);
-    InitializeCommonEvent(0, 9005810, 12030860, 12030000, 12030956, 12031956, 1084227584); //guardian grace
-    InitializeEvent(0, 12032800, 0);
-    InitializeEvent(0, 12032810, 0);
-    InitializeEvent(0, 12032811, 0);
-    InitializeEvent(0, 12032812, 0);
-    InitializeEvent(0, 12032849, 0);
-    InitializeEvent(0, 12032841, 0);
-    SetEventFlag(TargetEventFlagType.EventFlag, 12030800, ON);
-    ChangeCharacterEnableState(12030800, Disabled);
-    ChangeCharacterEnableState(12030810, Disabled);
-    ChangeCharacterEnableState(12030811, Disabled);
-    ChangeCharacterEnableState(12030812, Disabled);
-    ChangeCharacterEnableState(12030813, Disabled);
-    ChangeCharacterEnableState(12030814, Disabled);
-    InitializeEvent(0, 12032850, 0);
-    InitializeEvent(0, 12032860, 0);
-    InitializeEvent(0, 12032859, 0);
-    InitializeEvent(0, 12032899, 0);
-    InitializeEvent(0, 12032861, 0);
-    InitializeEvent(0, 12032862, 0);
-    InitializeEvent(0, 12032310, 12030240);
-    InitializeEvent(1, 12032310, 12030241);
-    InitializeEvent(2, 12032310, 12030242);
-    InitializeEvent(3, 12032310, 12030243);
-    InitializeEvent(4, 12032310, 12030244);
-    InitializeEvent(5, 12032310, 12030245);
-    InitializeEvent(6, 12032310, 12030246);
-    InitializeEvent(7, 12032310, 12030247);
-    InitializeEvent(8, 12032310, 12030248);
-    InitializeEvent(9, 12032310, 12030249);
-    InitializeEvent(10, 12032310, 12030250);
-    InitializeEvent(11, 12032310, 12030251);
-    InitializeEvent(12, 12032310, 12030252);
-    InitializeEvent(13, 12032310, 12030253);
-    InitializeEvent(14, 12032310, 12030254);
-    InitializeEvent(15, 12032310, 12030255);
-    InitializeEvent(16, 12032310, 12030256);
-    InitializeEvent(17, 12032310, 12030257);
-    InitializeEvent(0, 12032241, 12030242, 0);
-    InitializeEvent(1, 12032241, 12030243, 0);
-    InitializeEvent(2, 12032241, 12030244, 1090519040);
-    InitializeEvent(3, 12032241, 12030245, 0);
-    InitializeEvent(4, 12032241, 12030246, 1091567616);
-    InitializeEvent(5, 12032241, 12030247, 1091567616);
-    InitializeEvent(6, 12032241, 12030248, 1098383360);
-    InitializeEvent(7, 12032241, 12030249, 1098907648);
-    InitializeEvent(8, 12032241, 12030250, 1098907648);
-    InitializeEvent(9, 12032241, 12030251, 1105199104);
-    InitializeEvent(10, 12032241, 12030252, 1105199104);
-    InitializeEvent(11, 12032241, 12030253, 1105199104);
-    InitializeEvent(12, 12032241, 12030254, 1103626240);
-    InitializeEvent(13, 12032241, 12030255, 1101004800);
-    InitializeCommonEvent(0, 90005261, 12030200, 12032200, 1112014848, 0, -1);
-    InitializeCommonEvent(0, 90005261, 12030210, 12032200, 1112014848, 0, -1);
-    InitializeCommonEvent(0, 90005261, 12030211, 12032200, 1112014848, 0, -1);
-    InitializeCommonEvent(0, 90005261, 12030212, 12032200, 1112014848, 0, -1);
-    InitializeCommonEvent(0, 90005261, 12030213, 12032200, 1112014848, 0, -1);
-    InitializeCommonEvent(0, 90005261, 12030214, 12032200, 1112014848, 0, -1);
-    InitializeCommonEvent(0, 90005300, 12030240, 12030240, 12030800, 1069547520, 0);
-    InitializeCommonEvent(0, 90005300, 12030241, 12030241, 12030810, 1069547520, 0);
-    InitializeCommonEvent(0, 90005300, 12030256, 12030256, 12030820, 1069547520, 0);
-    InitializeCommonEvent(0, 90005300, 12030257, 12030257, 12030830, 1069547520, 0);
-    InitializeCommonEvent(0, 90005300, 12030297, 12030297, 12030840, 1069547520, 0);
-    InitializeCommonEvent(0, 90005300, 12030201, 12030201, 12030850, 1069547520, 0);
-    InitializeCommonEvent(0, 90005251, 12030303, 1090519040, 0, -1);
-    InitializeCommonEvent(0, 90005300, 12030350, 12030350, 40660, 1069547520, 0);
-    InitializeCommonEvent(0, 90005300, 12030354, 12030354, 40668, 1069547520, 0);
-    InitializeCommonEvent(0, 90005300, 12030355, 12030355, 40670, 1069547520, 0);
-    //InitializeCommonEvent(0, 90005860, 12030390, 0, 12030390, 1, 12030950, 0);
+    
+    //Float Values: enemyDeactivationDistance
+    InitializeCommonEvent(0, 9005810, 12030850, 71230, 12030950, 12031950, 1084227584); //5
+    
+    // Fia's Champions
+    SetEventFlagID(12030800, ON); // Fia's Champs defeated
+    SetEventFlagID(12030801, ON); // Fia's Champs encountered
+    //$InitializeEvent(0, 12032800);
+    $InitializeEvent(0, 12032810);
+    //$InitializeEvent(0, 12032811);
+    //$InitializeEvent(0, 12032812);
+    $InitializeEvent(0, 12032849); //Fortissax fogwall asset event handler initialization from this initialization
+    //$InitializeEvent(0, 12032841);
+    //ChangeCharacterEnableState(12030800, Disabled);
+    //ChangeCharacterEnableState(12030810, Disabled);
+    //ChangeCharacterEnableState(12030811, Disabled);
+    //ChangeCharacterEnableState(12030812, Disabled);
+    //ChangeCharacterEnableState(12030813, Disabled);
+    //ChangeCharacterEnableState(12030814, Disabled);
+    
+    $InitializeEvent(0, 12032850);
+    $InitializeEvent(0, 12032860);
+    $InitializeEvent(0, 12032859);
+    $InitializeEvent(0, 12032899);
+    $InitializeEvent(0, 12032861);
+    $InitializeEvent(0, 12032862);
+    $InitializeEvent(0, 12032310, 12030240);
+    $InitializeEvent(1, 12032310, 12030241);
+    $InitializeEvent(2, 12032310, 12030242);
+    $InitializeEvent(3, 12032310, 12030243);
+    $InitializeEvent(4, 12032310, 12030244);
+    $InitializeEvent(5, 12032310, 12030245);
+    $InitializeEvent(6, 12032310, 12030246);
+    $InitializeEvent(7, 12032310, 12030247);
+    $InitializeEvent(8, 12032310, 12030248);
+    $InitializeEvent(9, 12032310, 12030249);
+    $InitializeEvent(10, 12032310, 12030250);
+    $InitializeEvent(11, 12032310, 12030251);
+    $InitializeEvent(12, 12032310, 12030252);
+    $InitializeEvent(13, 12032310, 12030253);
+    $InitializeEvent(14, 12032310, 12030254);
+    $InitializeEvent(15, 12032310, 12030255);
+    $InitializeEvent(16, 12032310, 12030256);
+    $InitializeEvent(17, 12032310, 12030257);
+    $InitializeEvent(0, 12032241, 12030242, 0);
+    $InitializeEvent(1, 12032241, 12030243, 0);
+    $InitializeEvent(2, 12032241, 12030244, 8);
+    $InitializeEvent(3, 12032241, 12030245, 0);
+    $InitializeEvent(4, 12032241, 12030246, 9);
+    $InitializeEvent(5, 12032241, 12030247, 9);
+    $InitializeEvent(6, 12032241, 12030248, 15.5);
+    $InitializeEvent(7, 12032241, 12030249, 16);
+    $InitializeEvent(8, 12032241, 12030250, 16);
+    $InitializeEvent(9, 12032241, 12030251, 28);
+    $InitializeEvent(10, 12032241, 12030252, 28);
+    $InitializeEvent(11, 12032241, 12030253, 28);
+    $InitializeEvent(12, 12032241, 12030254, 25);
+    $InitializeEvent(13, 12032241, 12030255, 20);
+    
+    //Float Values: targetDistance
+    InitializeCommonEvent(0, 90005261, 12030200, 12032200, 1112014848, 0, -1); //50
+    InitializeCommonEvent(0, 90005261, 12030210, 12032200, 1112014848, 0, -1); //50
+    InitializeCommonEvent(0, 90005261, 12030211, 12032200, 1112014848, 0, -1); //50
+    InitializeCommonEvent(0, 90005261, 12030212, 12032200, 1112014848, 0, -1); //50
+    InitializeCommonEvent(0, 90005261, 12030213, 12032200, 1112014848, 0, -1); //50
+    InitializeCommonEvent(0, 90005261, 12030214, 12032200, 1112014848, 0, -1); //50
+    
+    //Float Values: timeSeconds
+    InitializeCommonEvent(0, 90005300, 12030240, 12030240, 12030800, 1069547520, 0); //1.5
+    InitializeCommonEvent(0, 90005300, 12030241, 12030241, 12030810, 1069547520, 0); //1.5
+    InitializeCommonEvent(0, 90005300, 12030256, 12030256, 12030820, 1069547520, 0); //1.5
+    InitializeCommonEvent(0, 90005300, 12030257, 12030257, 12030830, 1069547520, 0); //1.5
+    InitializeCommonEvent(0, 90005300, 12030297, 12030297, 12030840, 1069547520, 0); //1.5
+    InitializeCommonEvent(0, 90005300, 12030201, 12030201, 12030850, 1069547520, 0); //1.5
+    
+    InitializeCommonEvent(0, 90005251, 12030303, 8, 0, -1);
+    
+    //Float Values: timeSeconds
+    InitializeCommonEvent(0, 90005300, 12030350, 12030350, 40660, 1069547520, 0); //1.5
+    InitializeCommonEvent(0, 90005300, 12030354, 12030354, 40668, 1069547520, 0); //1.5
+    InitializeCommonEvent(0, 90005300, 12030355, 12030355, 40670, 1069547520, 0); //1.5
+    
+    //InitializeCommonEvent(0, 90005860, 12030390, 0, 12030390, 1, 12030950, 0); // Siluria Boss Defeat
     InitializeCommonEvent(0, 90005870, 12030390, 902500600, 12);
     InitializeCommonEvent(0, 90005872, 12030390, 12, 0);
-    InitializeCommonEvent(0, 90005300, 12030391, 12030391, 12030960, 1069547520, 0);
+    
+    //Float Values: timeSeconds
+    InitializeCommonEvent(0, 90005300, 12030391, 12030391, 12030960, 1069547520, 0); //1.5
+    
     InitializeCommonEvent(0, 90005250, 12030391, 12032391, 0, -1);
-    InitializeEvent(0, 90005540, 12030520, 12031021, 12031020, 12032020, -1, 1, 2); //(eventflag, gate id, lever id, objacteventflag, objactparamid, anim id, anim id)
-    InitializeEvent(1, 90005540, 12030530, 12031031, 12031030, 12032030, -1, 1, 2); //(eventflag, gate id, lever id, objacteventflag, objactparamid, anim id, anim id)
-    InitializeEvent(0, 12032504, 0);
-    InitializeEvent(0, 12032509, 0);
-    InitializeCommonEvent(0, 90005251, 12030400, 1128792064, 1092616192, -1);
+    $InitializeEvent(0, 12032504);
+    $InitializeEvent(0, 12032509);
+    
+    //Float Values: targetDistance, timeSeconds
+    InitializeCommonEvent(0, 90005251, 12030400, 1128792064, 1092616192, -1); //200, 10
+    
     InitializeCommonEvent(0, 90005451, 12030400, 12036420);
     InitializeCommonEvent(0, 90005452, 12030400, 12030400);
     InitializeCommonEvent(0, 90005454, 12030400, 12032400, 12030400);
     InitializeCommonEvent(0, 90005456, 12030400, 12031410, 12031418, 12030400);
     InitializeCommonEvent(0, 90005458, 12030400, 12031401);
+    
+    //Float Values: timeSeconds
     InitializeCommonEvent(0, 90005453, 12030400, 12031420, 60, 0);
-    InitializeCommonEvent(1, 90005453, 12030400, 12031421, 61, 1036831949);
-    InitializeCommonEvent(0, 90005453, 12030400, 12031422, 62, 1045220557);
-    InitializeCommonEvent(0, 90005453, 12030400, 12031423, 63, 1050253722);
-    InitializeCommonEvent(0, 90005453, 12030400, 12031424, 64, 1053609165);
-    InitializeCommonEvent(0, 90005453, 12030400, 12031425, 65, 1056964608);
-    InitializeCommonEvent(0, 90005453, 12030400, 12031426, 66, 1058642330);
-    InitializeCommonEvent(0, 90005453, 12030400, 12031427, 67, 1060320051);
-    InitializeCommonEvent(0, 90005453, 12030400, 12031428, 68, 1061997773);
-    InitializeCommonEvent(0, 90005453, 12030400, 12031429, 69, 1063675494);
-    InitializeCommonEvent(0, 90005453, 12030400, 12031430, 70, 1065353216);
-    InitializeCommonEvent(0, 90005453, 12030400, 12031431, 71, 1036831949);
-    InitializeCommonEvent(0, 90005453, 12030400, 12031432, 72, 1045220557);
-    InitializeCommonEvent(0, 90005453, 12030400, 12031433, 73, 1050253722);
-    InitializeCommonEvent(0, 90005453, 12030400, 12031434, 74, 1053609165);
-    InitializeCommonEvent(0, 90005453, 12030400, 12031435, 75, 1056964608);
-    InitializeEvent(0, 12032300, 12035380, 1065353216);
-    InitializeEvent(0, 12032500, 0);
-    InitializeEvent(0, 12030050, 0);
+    InitializeCommonEvent(1, 90005453, 12030400, 12031421, 61, 1036831949); //0.1
+    InitializeCommonEvent(0, 90005453, 12030400, 12031422, 62, 1045220557); //0.2
+    InitializeCommonEvent(0, 90005453, 12030400, 12031423, 63, 1050253722); //0.3
+    InitializeCommonEvent(0, 90005453, 12030400, 12031424, 64, 1053609165); //0.4
+    InitializeCommonEvent(0, 90005453, 12030400, 12031425, 65, 1056964608); //0.5
+    InitializeCommonEvent(0, 90005453, 12030400, 12031426, 66, 1058642330); //0.6
+    InitializeCommonEvent(0, 90005453, 12030400, 12031427, 67, 1060320051); //0.7
+    InitializeCommonEvent(0, 90005453, 12030400, 12031428, 68, 1061997773); //0.8
+    InitializeCommonEvent(0, 90005453, 12030400, 12031429, 69, 1063675494); //0.9
+    InitializeCommonEvent(0, 90005453, 12030400, 12031430, 70, 1065353216); //1
+    InitializeCommonEvent(0, 90005453, 12030400, 12031431, 71, 1036831949); //0.1
+    InitializeCommonEvent(0, 90005453, 12030400, 12031432, 72, 1045220557); //0.2
+    InitializeCommonEvent(0, 90005453, 12030400, 12031433, 73, 1050253722); //0.3
+    InitializeCommonEvent(0, 90005453, 12030400, 12031434, 74, 1053609165); //0.4
+    InitializeCommonEvent(0, 90005453, 12030400, 12031435, 75, 1056964608); //0.5
+    
+    $InitializeEvent(0, 12032300, 12035380, 1);
+    $InitializeEvent(0, 12032500);
+    $InitializeEvent(0, 12030050);
     InitializeCommonEvent(0, 90005704, 12030710, 4061, 4060, 12039001, 3);
     InitializeCommonEvent(0, 90005703, 12030710, 4061, 4062, 12039001, 4061, 4060, 4063, -1);
     InitializeCommonEvent(0, 90005702, 12030710, 4063, 4060, 4063);
-    InitializeEvent(0, 12030710, 12030710);
+    $InitializeEvent(0, 12030710, 12030710);
     InitializeCommonEvent(0, 90005750, 12031720, 4350, 103410, 400348, 400348, 4067, 0);
     InitializeCommonEvent(0, 90005704, 12030702, 4121, 4120, 12039051, 3);
     InitializeCommonEvent(0, 90005703, 12030702, 4121, 4122, 12039051, 4121, 4120, 4123, -1);
     InitializeCommonEvent(0, 90005702, 12030702, 4123, 4120, 4123);
-    InitializeEvent(0, 12030700, 12030702);
-    InitializeEvent(0, 12030701, 12030700, 12031730);
-    InitializeEvent(0, 12030702, 12030703);
-    InitializeEvent(0, 12030703, 12030701, 12031701, 12031702);
-    InitializeEvent(0, 12030709, 12039179);
-    InitializeEvent(0, 12030704, 0);
-    InitializeEvent(0, 12030705, 0);
-    InitializeEvent(0, 12030706, 0);
-    InitializeCommonEvent(0, 90005740, 12032715, 12032716, 12032717, 12030702, 702, 12031731, 702, 1053609165, 90305, 90307, -1, 1067869798);
-    InitializeCommonEvent(0, 90005741, 12032718, 12032719, 12032717, 12030702, 90330, 0, 90332, -1, 1056964608);
-    InitializeEvent(0, 12030707, 0);
-    InitializeEvent(0, 12030708, 12030702);
+    $InitializeEvent(0, 12030700, 12030702);
+    $InitializeEvent(0, 12030701, 12030700, 12031730);
+    $InitializeEvent(0, 12030702, 12030703);
+    $InitializeEvent(0, 12030703, 12030701, 12031701, 12031702);
+    $InitializeEvent(0, 12030709, 12039179);
+    $InitializeEvent(0, 12030704);
+    $InitializeEvent(0, 12030705);
+    $InitializeEvent(0, 12030706);
+    InitializeCommonEvent(0, 90005740, 12032715, 12032716, 12032717, 12030702, 702, 12031731, 702, floatArg(0.4), 90305, 90307, -1, floatArg(1.3));
+    InitializeCommonEvent(0, 90005741, 12032718, 12032719, 12032717, 12030702, 90330, 0, 90332, -1, floatArg(0.5));
+    $InitializeEvent(0, 12030707);
+    $InitializeEvent(0, 12030708, 12030702);
     InitializeCommonEvent(0, 90005750, 12031710, 6460, 103350, 9502, 9502, 4131, 806781);
     InitializeCommonEvent(0, 90005750, 12031710, 4110, 113300, 400339, 400339, 12039162, 0);
     InitializeCommonEvent(0, 90005733, 12032714);
-    InitializeCommonEvent(0, 90005740, 12032725, 12032726, 0, 12030700, 0, 0, 0, 1067869798, 90305, 90307, -1, 1067869798);
-    InitializeCommonEvent(0, 90005752, 12031730, 200, 120, 1077936128);
-    InitializeEvent(0, 12030720, 12030725);
-    //Erdtree Warps - Enemy, Obj, Guardian
-    InitializeCommonEvent(0, 9005995, 12030750, 12030725, 12030860)
-    //Erdtree Sentry
-    InitializeCommonEvent(0, 90005876, 12030860, 12030861, 904640000, 920600);
-    InitializeCommonEvent(0, 90005875, 12030860, 30640, 920600);
-    InitializeCommonEvent(0, 90005890, 12030860, 12030862, 12030862);
-    InitializeEvent(0, 12030866, 0);
-    InitializeCommonEvent(0, 90005891, 12030860, 12030861, 12030862);
-    //InitializeCommonEvent(0, 90005870, 12030860, 904810603, 18);
-    //InitializeCommonEvent(0, 90005860, 12030860, 0, 12030860, 0, 30640, 0);
-    //InitializeCommonEvent(0, 90005251, 12030860, 1101004800, 0, 0);
-    //InitializeEvent(0, 12032055, 0);
-    //Lichdragon Seal Events
     
-    //EntityIDs
-    //12030390 Crucible Miniboss
-    //12031390 Crucible Beacon
-    //12032390 Crucible Seal Light
-    //12033390 Crucible Fogwall
-    //12032810 Crucible Activation Zone
-
-    //12030392 Skeleton Miniboss
-    //12031392 Skeleton Beacon
-    //12032392 Skeleton Seal Light
-    //12033392 Skeleton Fogwall
-    //12032811 Skeleton Activation Zone
-
-    //12030393 Death Knight Miniboss
-    //12031393 Death Knight Beacon
-    //12032393 Death Knight Seal Light
-    //12033393 Death Knight Fogwall 1
-    //12033394 Death Knight Fogwall 2
-    //12033395 Death Knight Fogwall 3
-    //12032812 Death Knight Activation Zone
+    //Float Values: targetDistance, targetDistance
+    InitializeCommonEvent(0, 90005740, 12032725, 12032726, 0, 12030700, 0, 0, 0, 1067869798, 90305, 90307, -1, 1067869798); //1.3, 1.3
     
+    //Float Values:targetTimeSeconds
+    InitializeCommonEvent(0, 90005752, 12031730, 200, 120, 1077936128); //3
     
-    //12032394 Lichdragon Seal
+    $InitializeEvent(0, 12030720, 12030725);
     
-    //Miniboss Beacon/Seal Light Events
-    InitializeEvent(0, 12030900, 12030390, 12031390, 12032390);
-    InitializeEvent(1, 12030900, 12030392, 12031392, 12032392);
-    InitializeEvent(2, 12030900, 12030393, 12031393, 12032393);
+    // === Convergence Starts Here ===
     
-    //Crucible Miniboss
-    InitializeEvent(0, 12030901, 12030390, 902500600, 12033390, 0, 0, 12032814, -1, 12033810);
-    InitializeEvent(0, 12030902, 12030390, 12030390, 30700, 12033390, 0, 0, 530700, 9285, -1, 0, 0);
-    InitializeEvent(0, 12030904, 12030390, 12033390, -1, -1, 1511, 0);
-    InitializeEvent(0, 12030905, 12030390, 12032814, 12033810); //Short warp if boss not dead
-    InitializeCommonEvent(0, 9005800, 12030390, 12033390, 12032814, 12032815, 12030390, 10000, 0, 0);
-    InitializeCommonEvent(0, 9005801, 12030390, 12033390, 12032814, 12032815, 12032821, 10000);
-    InitializeCommonEvent(0, 9005811, 12030390, 12033390, 1511, 0);
-    InitializeCommonEvent(0, 9005822, 12030390, 920200, 12032815, 12032821, 0, 0, 0, 0);
-    
-    //Skeleton Miniboss
-    InitializeEvent(1, 12030901, 12030392, 902500601, 12033392, 0, 0, 12032811, 12031675, 12033811);
-    InitializeEvent(1, 12030902, 12030392, 12030392, 10350, 12033392, 0, 0, 510350, 9286, 12031675, 12035392, 12032816);
-    InitializeEvent(1, 12030904, 12030392, 12033392, -1, -1, 1511, 0);
-    InitializeEvent(1, 12030905, 12030392, 12032811, 12033811); //Short warp if boss not dead
-    InitializeCommonEvent(0, 9005800, 12030392, 12033392, 12032811, 12032816, 12030392, 10000, 0, 0);
-    InitializeCommonEvent(0, 9005801, 12030392, 12033392, 12032811, 12032816, 12032822, 10000);
-    InitializeCommonEvent(0, 9005811, 12030392, 12033392, 1511, 0);
-    InitializeCommonEvent(0, 9005822, 12030392, 921600, 12032816, 12032822, 0, 0, 0, 0);
-    
-    //Death Knight Miniboss
-    InitializeEvent(2, 12030901, 12030393, 902500603, 12033393, 12033394, 12033395, 12032812, -1, 12033812);
-    InitializeEvent(2, 12030902, 12030393, 12030393, -1, 12033393, 12033394, 12033395, -1, 9272, -1, 0, 0);
-    InitializeEvent(2, 12030904, 12030393, 12033393, 12033394, 12033395, 1511, 0);
-    InitializeEvent(2, 12030905, 12030393, 12032812, 12033812); //Short warp if boss not dead
-    InitializeCommonEvent(0, 9005800, 12030393, 12033393, 12032812, 12032817, 12030393, 10000, 0, 0);
-    InitializeCommonEvent(0, 9005801, 12030393, 12033393, 12032812, 12032817, 12032823, 10000);
-    InitializeCommonEvent(0, 9005811, 12030393, 12033393, 1511, 0);
-    InitializeCommonEvent(0, 9005811, 12030393, 12033394, 1511, 0);
-    InitializeCommonEvent(0, 9005811, 12030393, 12033395, 1511, 0);
-    InitializeCommonEvent(0, 9005822, 12030393, 940000, 12032817, 12032823, 0, 0, 0, 0);
-    
-    // NPC
-    InitializeCommonEvent(0, 90005250, 12030103, 12030101, 0, -1);
+    // Generic
+    InitializeCommonEvent(0, 9006900, 12030400, 12031418, 12039050); // Weapon Duplication at the Walking Masoleum
+    InitializeCommonEvent(0, 90005250, 12030103, 12030101, 0, -1); // Hostile NPC
     InitializeCommonEvent(0, 90005300, 12030103, 12030103, 108700, 0, 0);
+    InitializeCommonEvent(0, 90005877, 12, 3, 0, 0, 12035900, 12035901, 12035902); // Ambient Music
     
+    // Shortcuts
+    InitializeEvent(0, 90005540, 12030520, 12031021, 12031020, 12032020, -1, 1, 2); // Gates
+    InitializeEvent(1, 90005540, 12030530, 12031031, 12031030, 12032030, -1, 1, 2);
+    InitializeCommonEvent(0, 90005520, 6001, 12031576, 12032576, 12032577); // Forced Ladder Down
+    $InitializeEvent(0, 12032420); // Twin Found
+    $InitializeEvent(0, 12032421); // Third Twin
+    $InitializeEvent(0, 12032422); // Death Knight Black Stone Key
+    $InitializeEvent(0, 12032450); // Seek my Twin Statue
+    $InitializeEvent(0, 12032405); // Black Stone Gate
     
-    //Lichdragon Seal Event
-    InitializeEvent(0, 12030903, 0);
+    //Erdtree Waygate
+    InitializeCommonEvent(0, 9005810, 12030860, 12030000, 12030956, 12031956, 1084227584); // Erdtree Boss Grace, Float Value: enemyDeactivationDistance 5
+    InitializeCommonEvent(0, 9005995, 12030750, 12030725, 12030860); // Portal
+    InitializeCommonEvent(0, 90005876, 12030860, 12030861, 904640000, 920600); // Boss Start
+    InitializeCommonEvent(0, 90005875, 12030860, 30640, 920600); // Boss Death
+    InitializeCommonEvent(0, 90005890, 12030860, 12030862, 12030862); // Zone Handling
+    InitializeCommonEvent(0, 90005891, 12030860, 12030861, 12030862); // Wall Handler
+    $InitializeEvent(0, 12030866); // Boss Defeat Wall Disabler
     
-    //kick ladder
-    InitializeCommonEvent(0, 90005520, 12030576, 12031576, 12032576, 12032577);
-    SetEventFlagID(12030576, ON);
-    //No Torrent floor fog
-    InitializeCommonEvent(0, 900005610, 12031577, 100, 800, 0);
+    // Bridge
+    $InitializeEvent(0, 12032060); // Collision
+    InitializeCommonEvent(0, 9005999, 12032840); // Killboxes
+    InitializeCommonEvent(1, 9005999, 12032841);
+    InitializeCommonEvent(0, 900005610, 12031577, 100, 800, 0); //No Torrent floor fog
     InitializeCommonEvent(0, 900005610, 12031578, 100, 800, 0);
     InitializeCommonEvent(0, 900005610, 12031579, 100, 800, 0);
     
-    InitializeEvent(0, 12032420, 0);
-    InitializeEvent(0, 12032421, 0);
-    InitializeEvent(0, 12032422, 0);
-    InitializeEvent(0, 12032450, 0);
-    InitializeEvent(0, 12032405, 0);
-    //Killboxes
-    InitializeCommonEvent(0, 9005999, 12032840);
-    InitializeCommonEvent(1, 9005999, 12032841);
-    //Bridge Collision
-    InitializeEvent(0, 12032060, 0);
+    // Lichdragon Seal Event
+    $InitializeEvent(0, 12030903);
+    
+    // Miniboss Beacon/Seal Light Events
+    $InitializeEvent(0, 12030900, 12030390, 12031390, 12032390);
+    $InitializeEvent(1, 12030900, 12030392, 12031392, 12032392);
+    $InitializeEvent(2, 12030900, 12030393, 12031393, 12032393);
+    
+    // Crucible Miniboss
+    // 12030390 Crucible Miniboss
+    // 12031390 Crucible Beacon
+    // 12032390 Crucible Seal Light
+    // 12033390 Crucible Fogwall
+    // 12032810 Crucible Activation Zone
+    InitializeEvent(0, 12030901, 12030390, 902500600, 12032814); // Boss Init
+    InitializeEvent(0, 12030902, 12030390, 0, 0, 9285); // Boss Death
+    InitializeCommonEvent(0, 9005800, 12030390, 12033390, 12032814, 12032815, 12030390, 10000, 0, 0); // Boss Start
+    InitializeCommonEvent(0, 9005801, 12030390, 12033390, 12032814, 12032815, 12032821, 10000); // Boss Start Seamless
+    InitializeCommonEvent(0, 9005811, 12030390, 12033390, 1511, 0); // Fogwall Handler
+    InitializeCommonEvent(0, 9005822, 12030390, 920200, 12032815, 12032821, 0, 0, 0, 0); // Music Handler
+    InitializeCommonEvent(0, 98005309, 12030390, 12032814, 12033810); // Custom Playzone
+    
+    // Skeleton Miniboss
+    // 12030392 Skeleton Miniboss
+    // 12031392 Skeleton Beacon
+    // 12032392 Skeleton Seal Light
+    // 12033392 Skeleton Fogwall
+    // 12032811 Skeleton Activation Zone
+    InitializeEvent(1, 12030901, 12030392, 902500601, 12032811); // Boss Init
+    InitializeEvent(1, 12030902, 12030392, 12035392, 12032816, 9286); // Boss Death
+    InitializeCommonEvent(0, 9005800, 12030392, 12033392, 12032811, 12032816, 12030392, 10000, 0, 0); // Boss Start
+    InitializeCommonEvent(0, 9005801, 12030392, 12033392, 12032811, 12032816, 12032822, 10000); // Boss Start Seamless
+    InitializeCommonEvent(0, 9005811, 12030392, 12033392, 1511, 0); // Fogwall Handler
+    InitializeCommonEvent(0, 9005822, 12030392, 391400, 12032816, 12032822, 0, 0, 0, 0); // Music Handler
+    InitializeCommonEvent(0, 98005309, 12030392, 12032811, 12033811); // Custom Playzone
+    InitializeEvent(0, 12030904, 0); // Chest Closed
+    
+    // Death Knight Miniboss
+    // 12030393 Death Knight Miniboss
+    // 12031393 Death Knight Beacon
+    // 12032393 Death Knight Seal Light
+    // 12033393 Death Knight Fogwall 1
+    // 12033394 Death Knight Fogwall 2
+    // 12033395 Death Knight Fogwall 3
+    // 12032812 Death Knight Activation Zone
+    InitializeEvent(2, 12030901, 12030393, 902500603, 12032813); // Boss Init
+    InitializeEvent(2, 12030902, 12030393, 0, 0, 0, 30780); // Boss Death
+    InitializeCommonEvent(0, 9005800, 12030393, 12033393, 12032813, 12032817, 12030393, 10000, 0, 0); // Boss Start
+    InitializeCommonEvent(0, 9005801, 12030393, 12033393, 12032813, 12032817, 12032823, 10000); // Boss Start Seamless
+    InitializeCommonEvent(0, 9005811, 12030393, 12033393, 1511, 0); // Fogwalls
+    InitializeCommonEvent(0, 9005811, 12030393, 12033394, 1511, 0);
+    InitializeCommonEvent(0, 9005811, 12030393, 12033395, 1511, 0);
+    InitializeCommonEvent(0, 9005822, 12030393, 940000, 12032817, 12032823, 0, 12030395, 0, 0); // Music Handler
+    InitializeCommonEvent(0, 98005309, 12030393, 12032812, 12033812); // Custom Playzone
 });
 
+// プリコンストラクタ -- preconstructor
 $Event(50, Default, function() {
     SetCharacterBackreadState(12030700, true);
     SetCharacterBackreadState(12030701, true);
@@ -257,25 +274,20 @@ $Event(50, Default, function() {
     SetCharacterBackreadState(12030721, true);
     SetCharacterBackreadState(12030725, true);
     DisableAsset(12031730);
-    //InitializeEvent(0, 12032820, 0);
+    //InitializeEvent(0, 12032820, 0); // Fia's Champions Online Stuff
     InitializeCommonEvent(0, 90005450, 12030400, 12031400, 12031410, 12031418);
-    InitializeCommonEvent(0, 9006900, 12030400, 12031418, 12039050); // Weapon Duplication at the Walking Masoleum
 });
 
+// m12_03_00_00用初期フラグ設定 -- Initial flag setting for m12_03_00_00
 $Event(12030050, Restart, function() {
-    SetSpEffect(12030400, 12460);
-    SetEventFlagID(12030400, ON);
+    SetSpEffect(12030400, 12460); // Forced Sit down
+    SetEventFlagID(12030400, ON); // Save sit down
     EndIf(ThisEventSlot());
     SetEventFlagID(12030401, ON);
     SetEventFlagID(12030402, OFF);
 });
 
-$Event(12032055, Restart, function() {
-    DisableCharacter(12030861);
-    DisableCharacterCollision(12030861);
-    ForceCharacterDeath(12030861, false);
-});
-
+// Bridge Collision
 $Event(12032060, Restart, function() {
     DisableHit(12031630);
     DisableHit(12031631);
@@ -287,35 +299,35 @@ $Event(12032060, Restart, function() {
     DisableMapPart(12031636);
 });
 
+// 歩く霊廟設定 -- walking mausoleum setting
 $Event(12032400, Restart, function() {
     EndIf(ThisEventSlot());
     SetNetworkUpdateRate(12030400, true, CharacterUpdateFrequency.AlwaysUpdate);
 });
 
+// Black Stone Gate
 $Event(12032405, Restart, function() {
     if (EventFlag(12030564)) {
         ReproduceAssetAnimation(12031564, 0);
         EndEvent();
     }
     
-    WaitFor(ActionButtonInArea(7320, 12031565) || ActionButtonInArea(7320, 12031566))
+    WaitFor(ActionButtonInArea(7320, 12031565) || ActionButtonInArea(7320, 12031566));
     
     if (!PlayerHasItem(ItemType.Goods, 8139) && InArea(10000, 12031575)) {
         DisplayGenericDialog(4018, PromptType.YESNO, NumberofOptions.NoButtons, 10000, 1);
         WaitFixedTimeSeconds(1);
         RestartEvent();
     }
-
-    if (InArea(10000, 12031575)){
-     IssueShortWarpRequest(10000, TargetEntityType.Asset, 12031564, 121);
-     ForceAnimationPlayback(10000, 60000, false, false, true);
+    
+    if (InArea(10000, 12031575)) {
+        IssueShortWarpRequest(10000, TargetEntityType.Asset, 12031564, 121);
+        ForceAnimationPlayback(10000, 60000, false, false, true);
+    } else {
+        IssueShortWarpRequest(10000, TargetEntityType.Asset, 12031564, 120);
+        ForceAnimationPlayback(10000, 60002, false, false, true);
     }
-    else
-    {
-     IssueShortWarpRequest(10000, TargetEntityType.Asset, 12031564, 120);
-     ForceAnimationPlayback(10000, 60002, false, false, true);
-    }
- 
+    
     WaitFixedTimeFrames(1);
     RotateCharacter(10000, 12031564, -1, false);
     ForceAnimationPlayback(12031564, 0, false, false, true);
@@ -324,28 +336,28 @@ $Event(12032405, Restart, function() {
     DisplayGenericDialog(0, PromptType.YESNO, NumberofOptions.NoButtons, 10000, 1);
 });
 
+// Twin Found
 $Event(12032420, Restart, function() {
-    if (!EventFlag(12030421)){
-        CreateAssetfollowingSFX(12031003, 200, 1501);
-        CreateAssetfollowingSFX(12031004, 200, 1501);
-    }
-    else
-    {
-        DisableAsset(12031001);
-        DisableAsset(12031002);
-        DisableAsset(12031003);
-        DisableAsset(12031004);
-        DisableAsset(12031005);
-        DeleteAssetfollowingSFX(12031003, true);
-        DeleteAssetfollowingSFX(12031004, true);
-        DeleteMapSFX(12031010, false);
-        DeleteMapSFX(12031011, false);
-        DeleteMapSFX(12031012, false);
-        EndEvent();
-    }
-
+    GotoIf(S0, EventFlag(12030421));
+    CreateAssetfollowingSFX(12031003, 200, 1501);
+    CreateAssetfollowingSFX(12031004, 200, 1501);
+    Goto(S1);
+S0:
+    DisableAsset(12031001);
+    DisableAsset(12031002);
+    DisableAsset(12031003);
+    DisableAsset(12031004);
+    DisableAsset(12031005);
+    DeleteAssetfollowingSFX(12031003, true);
+    DeleteAssetfollowingSFX(12031004, true);
+    DeleteMapSFX(12031010, false);
+    DeleteMapSFX(12031011, false);
+    DeleteMapSFX(12031012, false);
+    EndEvent();
+    
+S1:
     WaitFor(PlayerIsInOwnWorld() && ActionButtonInArea(9210, 12031002));
-    DisplayGenericDialog(30016, PromptType.OKCANCEL, NumberofOptions.OneButton, 12031002, 3); 
+    DisplayGenericDialog(30016, PromptType.OKCANCEL, NumberofOptions.OneButton, 12031002, 3);
     PlaySE(12031002, SoundType.SFX, 806855);
     SpawnOneshotSFX(TargetEntityType.Area, 12031011, -1, 304637);
     SetEventFlagID(12030421, ON);
@@ -365,7 +377,7 @@ $Event(12032420, Restart, function() {
 $Event(12032421, Restart, function() {
     EndIf(EventFlag(12030421));
     WaitFor(PlayerIsInOwnWorld() && ActionButtonInArea(9210, 12031005));
-    DisplayGenericDialog(30016, PromptType.OKCANCEL, NumberofOptions.OneButton, 12031005, 3); 
+    DisplayGenericDialog(30016, PromptType.OKCANCEL, NumberofOptions.OneButton, 12031005, 3);
     PlaySE(12031005, SoundType.SFX, 806855);
     SpawnOneshotSFX(TargetEntityType.Area, 12031012, -1, 304637);
     SetEventFlagID(12030421, ON);
@@ -382,21 +394,24 @@ $Event(12032421, Restart, function() {
     EndEvent();
 });
 
+// Death Knight Black Stone Key
 $Event(12032422, Restart, function() {
     WaitFor(CharacterDead(12030393));
     AwardItemLot(30650);
     EndEvent();
 });
 
+// Seek my Twin Statue
 $Event(12032450, Restart, function() {
     EndIf(EventFlag(12030421));
     EndIf(!PlayerIsInOwnWorld());
     WaitFor(PlayerIsInOwnWorld() && ActionButtonInArea(9210, 12031001));
-    DisplayGenericDialog(4201, PromptType.OKCANCEL, NumberofOptions.OneButton, 12031001, 3); 
+    DisplayGenericDialog(4201, PromptType.OKCANCEL, NumberofOptions.OneButton, 12031001, 3);
     WaitFixedTimeSeconds(1);
     RestartEvent();
 });
 
+// 王都へのワープ -- Warp to the capital
 $Event(12032500, Restart, function() {
     EndIf(!PlayerIsInOwnWorld());
     SetEventFlagID(12032501, OFF);
@@ -413,7 +428,7 @@ $Event(12032500, Restart, function() {
     }
     if (!(HasMultiplayerState(MultiplayerState.Multiplayer)
         || HasMultiplayerState(MultiplayerState.MultiplayerPending)
-        //|| !EventFlag(182)
+    //|| !EventFlag(182) // Two Greatrunes
         || !EventFlag(105)
         || EventFlag(300)
         || !EventFlag(12030800)
@@ -430,7 +445,7 @@ L1:
         && ActionButtonInArea(9140, 12031500);
     onlineFlag = (HasMultiplayerState(MultiplayerState.Multiplayer)
         || HasMultiplayerState(MultiplayerState.MultiplayerPending)
-        //|| !EventFlag(182)
+        //|| !EventFlag(182) // Two Greatrunes
         || !EventFlag(105)
         || EventFlag(300))
         && EventFlag(12032503);
@@ -441,11 +456,11 @@ L1:
                 && !(HasMultiplayerState(MultiplayerState.Multiplayer)
                     || HasMultiplayerState(MultiplayerState.MultiplayerPending))
                 && !EventFlag(12032503))
-                //|| (EventFlagState(CHANGE, TargetEventFlagType.EventFlag, 182)
-                || EventFlagState(CHANGE, TargetEventFlagType.EventFlag, 105)
-                || EventFlagState(CHANGE, TargetEventFlagType.EventFlag, 300)
-                || EventFlagState(CHANGE, TargetEventFlagType.EventFlag, 12032870)
-                || EventFlagState(CHANGE, TargetEventFlagType.EventFlag, 12030800));
+            //|| (EventFlagState(CHANGE, TargetEventFlagType.EventFlag, 182) // Two Greatrunes
+            || EventFlagState(CHANGE, TargetEventFlagType.EventFlag, 105)
+            || EventFlagState(CHANGE, TargetEventFlagType.EventFlag, 300)
+            || EventFlagState(CHANGE, TargetEventFlagType.EventFlag, 12032870)
+            || EventFlagState(CHANGE, TargetEventFlagType.EventFlag, 12030800));
     if (!onlineAct.Passed) {
         if (onlineFlag.Passed) {
             DeleteAssetfollowingSFX(12031500, true);
@@ -459,7 +474,7 @@ L3:
     GotoIf(L10, !EventFlag(12030800));
     GotoIf(L10, EventFlag(12032870));
     GotoIf(L10, EventFlag(300));
-    //GotoIf(L4, !EventFlag(182));
+    //GotoIf(L4, !EventFlag(182)); // Two Greatrunes
     GotoIf(L5, EventFlag(105));
 L4:
     DisplayGenericDialog(20004, PromptType.YESNO, NumberofOptions.NoButtons, 12031500, 3);
@@ -472,8 +487,8 @@ L10:
 L5:
     //DisplayGenericDialogAndSetEventFlags(4300, PromptType.YESNO, NumberofOptions.TwoButtons, 12031500, 3, 12032501, 12032502, 12032502);
     //if (!EventFlag(12032501)) {
-        //WaitFixedTimeSeconds(1);
-        //RestartEvent();
+    //WaitFixedTimeSeconds(1);
+    //RestartEvent();
     //}
 L6:
     RestartIf(
@@ -495,6 +510,7 @@ L18:
     RestartEvent();
 });
 
+// 滝壺ダイブ -- Waterfall diving
 $Event(12032504, Default, function() {
     EndIf(!PlayerIsInOwnWorld());
     DisableNetworkSync();
@@ -520,6 +536,7 @@ L5:
     DisplayAreaWelcomeMessage(12010);
 });
 
+// 石棺滝登り_滝下 -- Sarcophagus waterfall climbing_Takishita
 $Event(12032509, Default, function() {
     DisableNetworkSync();
     WaitFor(EventFlag(12020800) && PlayerIsInOwnWorld() && ActionButtonInArea(9710, 12021502));
@@ -535,74 +552,78 @@ $Event(12032509, Default, function() {
     DisplayAreaWelcomeMessage(12030);
 });
 
-$Event(12032300, Restart, function(X0_4, X4_4) {
+// 霊廟守りイベント -- Mausoleum protection event
+$Event(12032300, Restart, function(chrEntityId, timeSeconds) {
     if (EventFlag(12030400)) {
-        DisableCharacter(X0_4);
-        DisableCharacterCollision(X0_4);
+        DisableCharacter(chrEntityId);
+        DisableCharacterCollision(chrEntityId);
         EndEvent();
     }
 L0:
     WaitFor(EventFlag(12030400));
-    WaitFixedTimeSeconds(X4_4);
-    ForceCharacterDeath(X0_4, false);
+    WaitFixedTimeSeconds(timeSeconds);
+    ForceCharacterDeath(chrEntityId, false);
 });
 
-$Event(12032310, Restart, function(X0_4) {
+// 天井の蟻が落ちてくるイベント判定_XX -- Event determination where ants fall from the ceiling_XX
+$Event(12032310, Restart, function(chrEntityId) {
     EndIf(EventFlag(12032240));
     SetEventFlagID(12032240, OFF);
-    SetSpEffect(X0_4, 10949);
+    SetSpEffect(chrEntityId, 10949);
     WaitFor(
-        HasDamageType(X0_4, 0, DamageType.Unspecified)
-            || CharacterHasStateInfo(X0_4, 436)
-            || CharacterHasStateInfo(X0_4, 2)
-            || CharacterHasStateInfo(X0_4, 5)
-            || CharacterHasStateInfo(X0_4, 6)
-            || CharacterHasStateInfo(X0_4, 260)
+        HasDamageType(chrEntityId, 0, DamageType.Unspecified)
+            || CharacterHasStateInfo(chrEntityId, 436)
+            || CharacterHasStateInfo(chrEntityId, 2)
+            || CharacterHasStateInfo(chrEntityId, 5)
+            || CharacterHasStateInfo(chrEntityId, 6)
+            || CharacterHasStateInfo(chrEntityId, 260)
             || InArea(10000, 12032240)
-            || (CharacterHasSpEffect(X0_4, 481)
-                && !CharacterHasSpEffect(X0_4, 90100)
-                && !CharacterHasSpEffect(X0_4, 90110)
-                && !CharacterHasSpEffect(X0_4, 90160))
-            || (CharacterHasSpEffect(X0_4, 482)
-                && !CharacterHasSpEffect(X0_4, 90100)
-                && !CharacterHasSpEffect(X0_4, 90120)
-                && !CharacterHasSpEffect(X0_4, 90160)
-                && !CharacterHasSpEffect(X0_4, 90162))
-            || (CharacterHasSpEffect(X0_4, 483)
-                && !CharacterHasSpEffect(X0_4, 90100)
-                && !CharacterHasSpEffect(X0_4, 90140)
-                && !CharacterHasSpEffect(X0_4, 90160)
-                && !CharacterHasSpEffect(X0_4, 90161))
-            || (CharacterHasSpEffect(X0_4, 484)
-                && !CharacterHasSpEffect(X0_4, 90100)
-                && !CharacterHasSpEffect(X0_4, 90130)
-                && !CharacterHasSpEffect(X0_4, 90161)
-                && !CharacterHasSpEffect(X0_4, 90162))
-            || (CharacterHasSpEffect(X0_4, 487)
-                && !CharacterHasSpEffect(X0_4, 90100)
-                && !CharacterHasSpEffect(X0_4, 90150)
-                && !CharacterHasSpEffect(X0_4, 90160)));
+            || (CharacterHasSpEffect(chrEntityId, 481)
+                && !CharacterHasSpEffect(chrEntityId, 90100)
+                && !CharacterHasSpEffect(chrEntityId, 90110)
+                && !CharacterHasSpEffect(chrEntityId, 90160))
+            || (CharacterHasSpEffect(chrEntityId, 482)
+                && !CharacterHasSpEffect(chrEntityId, 90100)
+                && !CharacterHasSpEffect(chrEntityId, 90120)
+                && !CharacterHasSpEffect(chrEntityId, 90160)
+                && !CharacterHasSpEffect(chrEntityId, 90162))
+            || (CharacterHasSpEffect(chrEntityId, 483)
+                && !CharacterHasSpEffect(chrEntityId, 90100)
+                && !CharacterHasSpEffect(chrEntityId, 90140)
+                && !CharacterHasSpEffect(chrEntityId, 90160)
+                && !CharacterHasSpEffect(chrEntityId, 90161))
+            || (CharacterHasSpEffect(chrEntityId, 484)
+                && !CharacterHasSpEffect(chrEntityId, 90100)
+                && !CharacterHasSpEffect(chrEntityId, 90130)
+                && !CharacterHasSpEffect(chrEntityId, 90161)
+                && !CharacterHasSpEffect(chrEntityId, 90162))
+            || (CharacterHasSpEffect(chrEntityId, 487)
+                && !CharacterHasSpEffect(chrEntityId, 90100)
+                && !CharacterHasSpEffect(chrEntityId, 90150)
+                && !CharacterHasSpEffect(chrEntityId, 90160)));
     SetEventFlagID(12032240, ON);
 });
 
-$Event(12032241, Restart, function(X0_4, X4_4) {
+// 天井の蟻が落ちてくるイベント_XX -- Event where ants fall from the ceiling_XX
+$Event(12032241, Restart, function(chrEntityId, timeSeconds) {
     SetCharacterTeamType(12035240, TeamType.Enemy);
     SetCharacterTeamType(12035241, TeamType.Enemy);
     SetCharacterTeamType(12035256, TeamType.Enemy);
     SetCharacterTeamType(12035257, TeamType.Enemy);
-    SetCharacterTeamType(X0_4, TeamType.Enemy);
-    SetSpEffect(X0_4, 2900);
-    EndIf(SpecialStandbyEndedFlag(X0_4));
-    ForceAnimationPlayback(X0_4, 30001, true, false, false);
-    WaitFor(HasDamageType(X0_4, 0, DamageType.Unspecified) || EventFlag(12032240));
+    SetCharacterTeamType(chrEntityId, TeamType.Enemy);
+    SetSpEffect(chrEntityId, 2900);
+    EndIf(SpecialStandbyEndedFlag(chrEntityId));
+    ForceAnimationPlayback(chrEntityId, 30001, true, false, false);
+    WaitFor(HasDamageType(chrEntityId, 0, DamageType.Unspecified) || EventFlag(12032240));
     WaitFixedTimeSeconds(0.1);
     SetNetworkconnectedThisEventSlot(ON);
-    SetSpecialStandbyEndedFlag(X0_4, ON);
-    WaitFixedTimeSeconds(X4_4);
-    ForceAnimationPlayback(X0_4, 20001, true, false, false);
+    SetSpecialStandbyEndedFlag(chrEntityId, ON);
+    WaitFixedTimeSeconds(timeSeconds);
+    ForceAnimationPlayback(chrEntityId, 20001, true, false, false);
     EndEvent();
 });
 
+// ボス撃破 -- Defeat the boss
 $Event(12032800, Restart, function() {
     EndIf(EventFlag(12030800));
     WaitFor(
@@ -629,6 +650,7 @@ $Event(12032800, Restart, function() {
     SetEventFlagID(61135, ON);
 });
 
+// ボス出現 -- Boss appears
 $Event(12032810, Restart, function() {
     if (EventFlag(12030800)) {
         DisableCharacter(12030800);
@@ -708,6 +730,7 @@ L8:
     SetNetworkconnectedEventFlagID(12032810, ON);
 });
 
+// ボス_ロジェール参戦イベント -- Boss_Roger participation event
 $Event(12032811, Restart, function() {
     EndIf(EventFlag(12030800));
     WaitFor(CharacterDead(12030800) && EventFlag(12032810));
@@ -726,6 +749,7 @@ $Event(12032811, Restart, function() {
     DisplayBossHealthBar(Enabled, 12030810, 0, 132500);
 });
 
+// ボス_３体同時登場イベント -- Boss_3 characters appearing at the same time event
 $Event(12032812, Restart, function() {
     EndIf(EventFlag(12030800));
     WaitFor(CharacterDead(12030810) && EventFlag(12032811));
@@ -796,43 +820,47 @@ L9:
     DisplayBossHealthBar(Enabled, 12030812, 2, 137100);
 });
 
+// ボス_PCキャラデータコピー -- Boss_PC character data copy
 $Event(12032820, Default, function() {
     EndIf(!PlayerIsInOwnWorld());
     WaitFor(PlayerInMap(12, 3, 0, 0));
     RequestCharacterDataFromOnlinePlayers(0, 3);
 });
 
-$Event(12032830, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4, X28_4) {
-    if (!EventFlag(X0_4)) {
+// ホストがボス部屋入場_地下迷宮王都版 -- Host enters the boss room_Underground Labyrinth Royal Capital Edition
+$Event(12032830, Restart, function(eventFlagId, entityId, areaEntityId, eventFlagId2, chrEntityId, timeSeconds, eventFlagId3, areaEntityId2) {
+    if (!EventFlag(eventFlagId)) {
         WaitFixedTimeFrames(1);
-        if (EventFlag(X24_4)) {
+        if (EventFlag(eventFlagId3)) {
         }
 L0:
-        if (X28_4 != 0) {
-            area = InArea(10000, X28_4);
+        if (areaEntityId2 != 0) {
+            area = InArea(10000, areaEntityId2);
         }
-        WaitFor((area && PlayerIsInOwnWorld()) || EventFlag(X0_4));
+        WaitFor((area && PlayerIsInOwnWorld()) || EventFlag(eventFlagId));
         GotoIf(L2, !PlayerIsInOwnWorld());
-        if (!EventFlag(X24_4)) {
+        if (!EventFlag(eventFlagId3)) {
             SendInvadingPhantomsHome(0);
         }
-        RestartIf(EventFlag(X0_4));
+        RestartIf(EventFlag(eventFlagId));
         Goto(L1);
 L3:
-        GotoIf(L1, EventFlag(X12_4));
+        GotoIf(L1, EventFlag(eventFlagId2));
         time = ElapsedSeconds(3);
         WaitFor(
-            ((InArea(10000, X8_4) || time) && PlayerIsInOwnWorld() && !EventFlag(X0_4))
-                || EventFlag(X0_4));
-        RestartIf(EventFlag(X0_4));
+            ((InArea(10000, areaEntityId) || time)
+                && PlayerIsInOwnWorld()
+                && !EventFlag(eventFlagId))
+                || EventFlag(eventFlagId));
+        RestartIf(EventFlag(eventFlagId));
         RestartIf(time.Passed);
 L1:
         GotoIf(L2, !PlayerIsInOwnWorld());
         IssueBossRoomEntryNotification();
-        SetNetworkUpdateAuthority(X16_4, AuthorityLevel.Forced);
+        SetNetworkUpdateAuthority(chrEntityId, AuthorityLevel.Forced);
 L2:
-        ActivateMultiplayerdependantBuffs(X16_4);
-        SetNetworkconnectedEventFlagID(X12_4, ON);
+        ActivateMultiplayerdependantBuffs(chrEntityId);
+        SetNetworkconnectedEventFlagID(eventFlagId2, ON);
         EndIf(!PlayerIsInOwnWorld());
         EndEvent();
     }
@@ -840,16 +868,17 @@ L10:
     EndIf(!PlayerIsInOwnWorld());
     WaitFor(
         PlayerIsInOwnWorld()
-            && EventFlag(X0_4)
+            && EventFlag(eventFlagId)
             && (HasMultiplayerState(MultiplayerState.Invasion)
                 || HasMultiplayerState(MultiplayerState.InvasionPending))
-            && ActionButtonInArea(10000, X4_4));
-    RotateCharacter(10000, X8_4, 60060, true);
+            && ActionButtonInArea(10000, entityId));
+    RotateCharacter(10000, areaEntityId, 60060, true);
     SendInvadingPhantomsHome(0);
     RestartEvent();
-    WaitFixedTimeSeconds(X20_4);
+    WaitFixedTimeSeconds(timeSeconds);
 });
 
+// ボス_ゲストキャラを封牢の中へワープ -- Boss_Warp the guest character into the prison
 $Event(12032840, Restart, function() {
     DisableNetworkSync();
     EndIf(EventFlag(12030800));
@@ -875,6 +904,7 @@ $Event(12032840, Restart, function() {
     RestartEvent();
 });
 
+// ボス_闇霊を強制送還 -- Boss_Forcibly repatriate dark spirits
 $Event(12032841, Restart, function() {
     WaitFor(PlayerIsInOwnWorld() && InArea(10000, 12032807));
     SendInvadingPhantomsHome(0);
@@ -882,73 +912,76 @@ $Event(12032841, Restart, function() {
     RestartEvent();
 });
 
-$Event(12032842, Restart, function(X0_4, X4_4, X8_4, X12_4) {
+// ボス用白扉処理_地下迷宮王都版 -- Boss white door processing_underground labyrinth capital version
+$Event(12032842, Restart, function(eventFlagId, assetEntityId, sfxId, eventFlagId2) {
     DisableNetworkSync();
-    DisableAsset(X4_4);
-    DeleteAssetfollowingSFX(X4_4, true);
+    DisableAsset(assetEntityId);
+    DeleteAssetfollowingSFX(assetEntityId, true);
     chrFlag = (CharacterType(10000, TargetType.BlackPhantom)
         || CharacterType(10000, TargetType.Invader)
         || CharacterType(10000, TargetType.Invader2)
         || CharacterType(10000, TargetType.Invader3))
-        && !EventFlag(X0_4);
+        && !EventFlag(eventFlagId);
     chrFlag2 = (CharacterType(10000, TargetType.WhitePhantom) || CharacterType(10000, TargetType.BluePhantom))
-        && !EventFlag(X0_4);
-    if (0 != X12_4) {
-        flag &= EventFlag(X12_4);
+        && !EventFlag(eventFlagId);
+    if (0 != eventFlagId2) {
+        flag &= EventFlag(eventFlagId2);
     }
-    flag &= !EventFlag(X0_4);
+    flag &= !EventFlag(eventFlagId);
     WaitFor(
         chrFlag
             || chrFlag2
             || flag
             || ((HasMultiplayerState(MultiplayerState.Invasion)
                 || HasMultiplayerState(MultiplayerState.InvasionPending))
-                && EventFlag(X0_4)
+                && EventFlag(eventFlagId)
                 && !CharacterType(10000, TargetType.WhitePhantom))
             || ((HasMultiplayerState(MultiplayerState.Invasion)
                 || HasMultiplayerState(MultiplayerState.InvasionPending))
-                && EventFlag(X0_4)
+                && EventFlag(eventFlagId)
                 && CharacterType(10000, TargetType.WhitePhantom)
-                && !EntityInRadiusOfEntity(10000, X4_4, 1, 1)));
+                && !EntityInRadiusOfEntity(10000, assetEntityId, 1, 1)));
     if (!PlayerIsInOwnWorld()) {
-        EnableAsset(X4_4);
-        DeleteAssetfollowingSFX(X4_4, true);
-        CreateAssetfollowingSFX(X4_4, 101, X8_4);
+        EnableAsset(assetEntityId);
+        DeleteAssetfollowingSFX(assetEntityId, true);
+        CreateAssetfollowingSFX(assetEntityId, 101, sfxId);
     }
     chrFlag3 = (CharacterType(10000, TargetType.BlackPhantom)
         || CharacterType(10000, TargetType.Invader)
         || CharacterType(10000, TargetType.Invader2)
         || CharacterType(10000, TargetType.Invader3))
-        && !EventFlag(X0_4);
+        && !EventFlag(eventFlagId);
     chrFlag4 = (CharacterType(10000, TargetType.WhitePhantom) || CharacterType(10000, TargetType.BluePhantom))
-        && !EventFlag(X0_4);
-    if (0 != X12_4) {
-        flag2 &= EventFlag(X12_4);
+        && !EventFlag(eventFlagId);
+    if (0 != eventFlagId2) {
+        flag2 &= EventFlag(eventFlagId2);
     }
-    flag2 &= !EventFlag(X0_4);
+    flag2 &= !EventFlag(eventFlagId);
     WaitFor(
         !chrFlag3
             && !chrFlag4
             && !flag2
             && !((HasMultiplayerState(MultiplayerState.Invasion)
                 || HasMultiplayerState(MultiplayerState.InvasionPending))
-                && EventFlag(X0_4)
+                && EventFlag(eventFlagId)
                 && !CharacterType(10000, TargetType.WhitePhantom))
             && !((HasMultiplayerState(MultiplayerState.Invasion)
                 || HasMultiplayerState(MultiplayerState.InvasionPending))
-                && EventFlag(X0_4)
+                && EventFlag(eventFlagId)
                 && CharacterType(10000, TargetType.WhitePhantom)
-                && !EntityInRadiusOfEntity(10000, X4_4, 1, 1)));
+                && !EntityInRadiusOfEntity(10000, assetEntityId, 1, 1)));
     RestartEvent();
 });
 
+// ボス_イベント起動 -- Boss_event activation
 $Event(12032849, Restart, function() {
-    InitializeEvent(0, 12032830, 12030800, 12031800, 12032800, 12032805, 12035800, 0, 12030801, 12032801);
-    InitializeEvent(0, 12032840, 0);
-    InitializeCommonEvent(0, 12032842, 12030800, 12031800, 5, 12030801);
-    InitializeCommonEvent(0, 9005822, 12030800, 921100, 12032805, 12032806, 12032803, 0, 0, 0);
+    //$InitializeEvent(0, 12032830, 12030800, 12031800, 12032800, 12032805, 12035800, 0, 12030801, 12032801);
+    //$InitializeEvent(0, 12032840);
+    $InitializeEvent(0, 12032842, 12030800, 12031800, 5, 12030801);
+    //InitializeCommonEvent(0, 9005822, 12030800, 921100, 12032805, 12032806, 12032803, 0, 0, 0);
 });
 
+// 守護末ボス部屋ワープイベント -- Guardian end boss room warp event
 $Event(12032859, Restart, function() {
     DisableCharacter(12030850);
     EndIf(EventFlag(12030850));
@@ -970,6 +1003,7 @@ $Event(12032859, Restart, function() {
     SetEventFlagID(12032858, ON);
 });
 
+// 本ボス撃破 -- Defeat the main boss
 $Event(12032850, Restart, function() {
     if (EventFlag(12030850)) {
         EnableCharacter(12030950);
@@ -1012,6 +1046,7 @@ L10:
     SetNetworkconnectedEventFlagID(12032870, OFF);
 });
 
+// 本ボス出現 -- Main boss appears
 $Event(12032860, Restart, function() {
     if (EventFlag(12030850)) {
         DisableCharacter(12030850);
@@ -1043,20 +1078,25 @@ L0:
     SetNetworkconnectedEventFlagID(12032870, ON);
 });
 
-$Event(12032896, Restart, function(X0_4, X4_4, X8_4) {
+// 守護末用ゲストがボス部屋入場 -- Shugo end guest enters boss room
+$Event(12032896, Restart, function(eventFlagId, eventFlagId2, eventFlagId3) {
     DisableNetworkSync();
-    EndIf(EventFlag(X0_4));
-    WaitFor(!EventFlag(X0_4) && EventFlag(X4_4) && CharacterType(10000, TargetType.WhitePhantom));
-    SetEventFlagID(X8_4, ON);
+    EndIf(EventFlag(eventFlagId));
+    WaitFor(
+        !EventFlag(eventFlagId)
+            && EventFlag(eventFlagId2)
+            && CharacterType(10000, TargetType.WhitePhantom));
+    SetEventFlagID(eventFlagId3, ON);
     RestartEvent();
 });
 
+// 本ボス_イベント起動 -- Main boss_event activation
 $Event(12032899, Restart, function() {
-    InitializeCommonEvent(0, 12032896, 12030850, 12032860, 12032856);
+    $InitializeEvent(0, 12032896, 12030850, 12032860, 12032856);
     InitializeCommonEvent(0, 9005822, 12030850, 451000, 12032860, 12032856, 12030852, 12032852, 0, 0);
 });
 
-//lightning curse setup
+// 守護末_自動ニト剣発動 -- Shugo End_Automatic Nito Sword Activation
 $Event(12032861, Restart, function() {
     if (!ThisEventSlot()) {
         DisableNetworkSync();
@@ -1077,6 +1117,7 @@ L0:
     RestartEvent();
 });
 
+// 守護末_ゴッドウィンアーツ発動時カメラ切り替え -- Shugosue_Camera switch when Godwin Arts is activated
 $Event(12032862, Restart, function() {
     WaitFor(CharacterHasSpEffect(12030850, 14875));
     SetLockcamSlotNumber(12, 3, 0);
@@ -1091,7 +1132,8 @@ L0:
     RestartEvent();
 });
 
-$Event(12030700, Restart, function(X0_4) {
+// NPC322ユリア_NPC初期化イベント_死王子の死体近く -- NPC322 Yuria_NPC initialization event_near the dead prince's corpse
+$Event(12030700, Restart, function(chrEntityId) {
     DisableNetworkSync();
     WaitFixedTimeFrames(1);
     if (PlayerIsInOwnWorld()) {
@@ -1102,8 +1144,8 @@ $Event(12030700, Restart, function(X0_4) {
 L10:
     GotoIf(L8, EventFlag(4128));
     GotoIf(L9, EventFlag(4129));
-    DisableCharacter(X0_4);
-    SetCharacterBackreadState(X0_4, true);
+    DisableCharacter(chrEntityId);
+    SetCharacterBackreadState(chrEntityId, true);
     WaitFor(AnyBatchEventFlags(4128, 4129));
     RestartEvent();
 L8:
@@ -1112,98 +1154,102 @@ L9:
     GotoIf(L1, EventFlag(4121));
     GotoIf(L3, EventFlag(4123));
 L0:
-    EnableCharacter(X0_4);
-    SetCharacterBackreadState(X0_4, false);
-    ForceAnimationPlayback(X0_4, 90103, false, false, false);
+    EnableCharacter(chrEntityId);
+    SetCharacterBackreadState(chrEntityId, false);
+    ForceAnimationPlayback(chrEntityId, 90103, false, false, false);
     Goto(L20);
 L1:
-    EnableCharacter(X0_4);
-    SetCharacterBackreadState(X0_4, false);
-    SetCharacterTeamType(X0_4, TeamType.HostileNPC);
-    ForceAnimationPlayback(X0_4, 90103, false, false, false);
-    SetSpEffect(X0_4, 9628);
+    EnableCharacter(chrEntityId);
+    SetCharacterBackreadState(chrEntityId, false);
+    SetCharacterTeamType(chrEntityId, TeamType.HostileNPC);
+    ForceAnimationPlayback(chrEntityId, 90103, false, false, false);
+    SetSpEffect(chrEntityId, 9628);
     Goto(L20);
 L3:
-    DisableCharacter(X0_4);
-    SetCharacterBackreadState(X0_4, true);
+    DisableCharacter(chrEntityId);
+    SetCharacterBackreadState(chrEntityId, true);
     Goto(L20);
 L20:
     WaitFor(!AnyBatchEventFlags(4128, 4129));
     RestartEvent();
 });
 
-$Event(12030701, Restart, function(X0_4, X4_4) {
+// NPC322ユリア_NPC初期化イベント_ボスワープOBJ化 -- NPC322 Yuria_NPC initialization event_Boss warp OBJ
+$Event(12030701, Restart, function(chrEntityId, assetEntityId) {
     DisableNetworkSync();
     WaitFixedTimeFrames(1);
     if (PlayerIsInOwnWorld()) {
     }
 L10:
     if (!EventFlag(4130)) {
-        DisableCharacter(X0_4);
-        SetCharacterBackreadState(X0_4, true);
-        DisableAsset(X4_4);
+        DisableCharacter(chrEntityId);
+        SetCharacterBackreadState(chrEntityId, true);
+        DisableAsset(assetEntityId);
         WaitFor(EventFlag(4130));
         RestartEvent();
     }
 L9:
-    EnableCharacter(X0_4);
-    SetCharacterBackreadState(X0_4, false);
-    ForceAnimationPlayback(X0_4, 90104, false, false, false);
-    EnableAsset(X4_4);
+    EnableCharacter(chrEntityId);
+    SetCharacterBackreadState(chrEntityId, false);
+    ForceAnimationPlayback(chrEntityId, 90104, false, false, false);
+    EnableAsset(assetEntityId);
     Goto(L20);
 L20:
     WaitFor(!EventFlag(4130));
     RestartEvent();
 });
 
-$Event(12030702, Restart, function(X0_4) {
+// NPC322ユリア_NPC初期化イベント_死体通常版 -- NPC322 Yuria_NPC initialization event_corpse regular version
+$Event(12030702, Restart, function(chrEntityId) {
     DisableNetworkSync();
     WaitFixedTimeFrames(1);
     if (PlayerIsInOwnWorld()) {
     }
 L10:
     if (!EventFlag(4131)) {
-        DisableCharacter(X0_4);
-        SetCharacterBackreadState(X0_4, true);
+        DisableCharacter(chrEntityId);
+        SetCharacterBackreadState(chrEntityId, true);
         WaitFor(EventFlag(4131));
         RestartEvent();
     }
 L10:
-    EnableCharacter(X0_4);
-    SetCharacterBackreadState(X0_4, false);
-    ForceAnimationPlayback(X0_4, 90106, false, false, false);
+    EnableCharacter(chrEntityId);
+    SetCharacterBackreadState(chrEntityId, false);
+    ForceAnimationPlayback(chrEntityId, 90106, false, false, false);
     Goto(L20);
 L20:
     WaitFor(!EventFlag(4131));
     RestartEvent();
 });
 
-$Event(12030703, Restart, function(X0_4, X4_4, X8_4) {
+// NPC322ユリア_NPC初期化イベント_死体ダニー版 -- NPC322 Yuria_NPC initialization event_Corpse Danny version
+$Event(12030703, Restart, function(chrEntityId, assetEntityId, assetEntityId2) {
     DisableNetworkSync();
     WaitFixedTimeFrames(1);
     if (PlayerIsInOwnWorld()) {
     }
 L10:
     if (!EventFlag(4132)) {
-        DisableCharacter(X0_4);
-        SetCharacterBackreadState(X0_4, true);
-        DisableAsset(X4_4);
-        DisableAsset(X8_4);
+        DisableCharacter(chrEntityId);
+        SetCharacterBackreadState(chrEntityId, true);
+        DisableAsset(assetEntityId);
+        DisableAsset(assetEntityId2);
         WaitFor(EventFlag(4132));
         RestartEvent();
     }
 L11:
-    EnableCharacter(X0_4);
-    SetCharacterBackreadState(X0_4, false);
-    EnableAsset(X4_4);
-    EnableAsset(X8_4);
-    ForceAnimationPlayback(X0_4, 90106, false, false, false);
+    EnableCharacter(chrEntityId);
+    SetCharacterBackreadState(chrEntityId, false);
+    EnableAsset(assetEntityId);
+    EnableAsset(assetEntityId2);
+    ForceAnimationPlayback(chrEntityId, 90106, false, false, false);
     Goto(L20);
 L20:
     WaitFor(!EventFlag(4132));
     RestartEvent();
 });
 
+// NPC322ユリア_同衾たち撃破後リアルタイム遷移 -- NPC322 Yuria_Real-time transition after defeating classmates
 $Event(12030704, Restart, function() {
     EndIf(!PlayerIsInOwnWorld());
     EndIf(EventFlag(12030800));
@@ -1211,6 +1257,7 @@ $Event(12030704, Restart, function() {
     SetEventFlagID(4138, ON);
 });
 
+// NPC322ユリア_守護者の末裔戦リアルタイム遷移 -- NPC322 Yuria_Descendants of the Guardian Battle Real-time Transition
 $Event(12030705, Restart, function() {
     EndIf(!PlayerIsInOwnWorld());
     EndIf(EventFlag(12030850));
@@ -1218,6 +1265,7 @@ $Event(12030705, Restart, function() {
     SetEventFlagID(4138, ON);
 });
 
+// NPC322ユリア_守護者の末裔撃破後リアルタイム遷移 -- NPC322 Yuria_Real-time transition after defeating the Guardian's Descendant
 $Event(12030706, Restart, function() {
     EndIf(!PlayerIsInOwnWorld());
     EndIf(EventFlag(12030850));
@@ -1225,6 +1273,7 @@ $Event(12030706, Restart, function() {
     SetEventFlagID(4138, ON);
 });
 
+// NPC322ユリア_最後の強く抱く_PCアニメ -- NPC322 Yuria_last strong hug_PC anime
 $Event(12030707, Restart, function() {
     EndIf(!PlayerIsInOwnWorld());
     SetEventFlagID(12032720, OFF);
@@ -1234,30 +1283,33 @@ $Event(12030707, Restart, function() {
     RestartEvent();
 });
 
-$Event(12030708, Restart, function(X0_4) {
+// NPC322ユリア_最後の強く抱く_話者アニメ -- NPC322 Yuria_last strong hug_speaker animation
+$Event(12030708, Restart, function(entityId) {
     EndIf(!PlayerIsInOwnWorld());
     SetEventFlagID(12032723, OFF);
     WaitFor(EventFlag(12032723));
-    ForceAnimationPlayback(X0_4, 90208, false, true, false);
+    ForceAnimationPlayback(entityId, 90208, false, true, false);
     SetEventFlagID(12032724, ON);
     RestartEvent();
 });
 
-$Event(12030709, Restart, function(X0_4) {
+// NPC322ユリア_ボス戦デバッグ用フラグセットアップ -- NPC322 Yuria_Boss battle debugging flag setup
+$Event(12030709, Restart, function(eventFlagId) {
     EndIf(!PlayerIsInOwnWorld());
-    WaitFor(!EventFlag(X0_4));
-    WaitFor(EventFlag(X0_4));
+    WaitFor(!EventFlag(eventFlagId));
+    WaitFor(EventFlag(eventFlagId));
     BatchSetNetworkconnectedEventFlags(4120, 4124, OFF);
     SetNetworkconnectedEventFlagID(4120, ON);
     BatchSetNetworkconnectedEventFlags(4125, 4137, OFF);
     SetNetworkconnectedEventFlagID(4130, ON);
-    WaitFor(!EventFlag(X0_4));
+    WaitFor(!EventFlag(eventFlagId));
     BatchSetNetworkconnectedEventFlags(4120, 4137, OFF);
     SetEventFlagID(4138, ON);
     RestartEvent();
 });
 
-$Event(12030710, Restart, function(X0_4) {
+// NPC319ダニー_NPC初期化イベント -- NPC319 Danny_NPC initialization event
+$Event(12030710, Restart, function(chrEntityId) {
     DisableNetworkSync();
     WaitFixedTimeFrames(1);
     if (PlayerIsInOwnWorld()) {
@@ -1267,8 +1319,8 @@ $Event(12030710, Restart, function(X0_4) {
     }
 L19:
     if (!EventFlag(4066)) {
-        DisableCharacter(X0_4);
-        SetCharacterBackreadState(X0_4, true);
+        DisableCharacter(chrEntityId);
+        SetCharacterBackreadState(chrEntityId, true);
         WaitFor(EventFlag(4066));
         RestartEvent();
     }
@@ -1277,280 +1329,124 @@ L6:
     GotoIf(L1, EventFlag(4061));
     GotoIf(L3, EventFlag(4063));
 L0:
-    EnableCharacter(X0_4);
-    SetCharacterBackreadState(X0_4, false);
-    ForceAnimationPlayback(X0_4, 90102, false, false, false);
-    SetCharacterTalkRange(X0_4, 100);
+    EnableCharacter(chrEntityId);
+    SetCharacterBackreadState(chrEntityId, false);
+    ForceAnimationPlayback(chrEntityId, 90102, false, false, false);
+    SetCharacterTalkRange(chrEntityId, 100);
     Goto(L20);
 L1:
-    EnableCharacter(X0_4);
-    SetCharacterBackreadState(X0_4, false);
-    SetCharacterTeamType(X0_4, TeamType.HostileNPC);
+    EnableCharacter(chrEntityId);
+    SetCharacterBackreadState(chrEntityId, false);
+    SetCharacterTeamType(chrEntityId, TeamType.HostileNPC);
     Goto(L20);
 L3:
-    ForceCharacterTreasure(X0_4);
-    DisableCharacter(X0_4);
-    SetCharacterBackreadState(X0_4, true);
+    ForceCharacterTreasure(chrEntityId);
+    DisableCharacter(chrEntityId);
+    SetCharacterBackreadState(chrEntityId, true);
     Goto(L20);
 L20:
     WaitFor(!EventFlag(4066));
     RestartEvent();
 });
 
-$Event(12030720, Restart, function(X0_4) {
+// NPC101道標老婆_死亡遷移イベント_地下迷宮 -- NPC101 Signpost Old Woman_Death Transition Event_Underground Labyrinth
+$Event(12030720, Restart, function(chrEntityId) {
     WaitFixedTimeFrames(1);
-    ForceAnimationPlayback(X0_4, 930013, false, false, false);
-    EnableCharacter(X0_4);
-    SetCharacterBackreadState(X0_4, false);
-    EnableCharacterCollision(X0_4);
+    ForceAnimationPlayback(chrEntityId, 930013, false, false, false);
+    EnableCharacter(chrEntityId);
+    SetCharacterBackreadState(chrEntityId, false);
+    EnableCharacterCollision(chrEntityId);
     EndIf(!PlayerIsInOwnWorld());
-    EnableCharacterImmortality(X0_4);
-    WaitFor(HasDamageType(X0_4, 10000, DamageType.Unspecified));
-    ForceAnimationPlayback(X0_4, 20025, false, false, false);
-    DisableCharacterCollision(X0_4);
+    EnableCharacterImmortality(chrEntityId);
+    WaitFor(HasDamageType(chrEntityId, 10000, DamageType.Unspecified));
+    ForceAnimationPlayback(chrEntityId, 20025, false, false, false);
+    DisableCharacterCollision(chrEntityId);
     WaitFixedTimeSeconds(10);
-    DisableCharacter(X0_4);
-    SetCharacterBackreadState(X0_4, true);
+    DisableCharacter(chrEntityId);
+    SetCharacterBackreadState(chrEntityId, true);
     EndEvent();
 });
 
 //Miniboss Beacon/Seal Light Event
-$Event(12030900, Restart, function(X0_4, X4_4, X8_4) {
-    IfEventFlag(OR_01, ON, TargetEventFlagType.EventFlag, X0_4);
-    IfEventFlag(OR_01, ON, TargetEventFlagType.EventFlag, 12030394);
-    IfConditionGroup(MAIN, PASS, OR_01);
-    DeleteMapSFX(X4_4, false);
-    DeleteMapSFX(X8_4, false);
+$Event(12030900, Restart, function(eventFlagId, entityId, entityId2) {
+    WaitFor(EventFlag(eventFlagId) || EventFlag(12030394));
+    DeleteMapSFX(entityId, false);
+    DeleteMapSFX(entityId2, false);
 });
 
-//Miniboss BGM Event
-$Event(12030901, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4, X28_4) {
+//Miniboss Start NEW (Entity/Flag, Text, Region)
+$Event(12030901, Restart, function(X0_4, X4_4, X8_4) {
     if (EventFlag(X0_4)) {
         DisableCharacter(X0_4);
         DisableCharacterCollision(X0_4);
         ForceCharacterDeath(X0_4, false);
         EndEvent();
     }
-    SetCharacterAIState(X0_4, Disabled);
-    SetCharacterInvincibility(X0_4, Enabled);
-    DisableObjAct(X24_4, -1);
-    //ChangeAssetEnableState(X12_4, Enabled);
-    //CreateAssetfollowingSFX(X12_4, 101, 1511);
-    //ChangeAssetEnableState(X16_4, Enabled);
-    //CreateAssetfollowingSFX(X16_4, 101, 1511);
-    WaitFixedTimeFrames(3);
-    WaitFor(InArea(10000, X20_4, 1) && !InArea(10000, X28_4, 1));
-    SetCharacterAIState(X0_4, Enabled);
-    SetCharacterInvincibility(X0_4, Disabled);
-    WaitFor(
-    CharacterAIState(X0_4, AIStateType.Combat) && !EventFlag(9000));
-    //ChangeAssetEnableState(X8_4, Enabled);
-    //CreateAssetfollowingSFX(X8_4, 101, 1511);
-    GotoIf(L0, !EventFlag(9290));
-    WaitFixedTimeSeconds(1);
 L0:
-    SetEventFlag(TargetEventFlagType.EventFlag, 9290, ON);
-    WaitFixedTimeSeconds(1);
+    DisableCharacterAI(X0_4);
+    EnableCharacterInvincibility(X0_4);
+    DisableCharacterCollision(X0_4);
+    WaitFor(InArea(10000, X8_4));
+L2:
+    EnableCharacterAI(X0_4);
+    DisableCharacterInvincibility(X0_4);
+    EnableCharacterCollision(X0_4);
+    SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AlwaysUpdate);
     DisplayBossHealthBar(Enabled, X0_4, 0, X4_4);
-    if (PlayerIsInOwnWorld()) {
-        SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Forced);
-        SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
-    }
-    WaitFor(
-    !(CharacterAIState(X0_4, AIStateType.Combat))
-            || CharacterDead(X0_4)
-            || EventFlag(9000));
-    if (CharacterDead(X0_4)) {
-        WaitFixedTimeSeconds(3);
-    } else {
-        GotoIf(S0, EventFlag(9000));
-        WaitFixedTimeSeconds(1);
-    }
-S0:
-    DisplayBossHealthBar(Disabled, X0_4, 0, X4_4);
-    if (PlayerIsInOwnWorld()) {
-        SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Normal);
-        SetNetworkUpdateRate(X0_4, false, CharacterUpdateFrequency.AtLeastEvery2Frames);
-    }
-    SetEventFlag(TargetEventFlagType.EventFlag, 9290, OFF);
-    RestartEvent();
 });
 
-//Miniboss Death Event (boss event flag, entity id, item rewards, unused, unused, unused, unused, item event flag, objact, music handler eventflag, boss start eventflag)
-$Event(12030902, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4, X28_4, X32_4, X36_4, X40_4) {
+//Miniboss Death Event - flag/entity, music handler eventflag, boss start eventflag)
+$Event(12030902, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
     EndIf(EventFlag(X0_4));
-    WaitFor(CharacterHPValue(X0_4) <= 0);
+    WaitFor((CharacterHPValue(X0_4) <= 0) || (CharacterHasSpEffect(X0_4, 11785))); //Optional Logic Check for Blighted Nox Ancestor Divine Death 
     WaitFixedTimeSeconds(4);
     PlaySE(X0_4, SoundType.SFX, 888880000);
     WaitFor(CharacterDead(X0_4));
     
     SetSpEffect(10000, 3450);
     HandleBossDefeatAndDisplayBanner(X0_4, TextBannerType.GreatEnemyFelled);
-    EnableObjAct(X32_4, -1);
+    AwardItemsIncludingClients(X16_4);
     
     SetEventFlagID(X0_4, ON);
-    SetEventFlagID(X28_4, ON);
-    SetEventFlagID(X36_4, ON); //music handler eventflag
-    SetEventFlagID(X40_4, OFF);
+    SetEventFlagID(X4_4, ON); // Music handler eventflag
+    SetEventFlagID(X12_4, ON); // Common AwardPlayerItem
+    SetEventFlagID(X8_4, OFF);
     WaitFixedTimeSeconds(6);
-    SetEventFlagID(X36_4, OFF); //music handler eventflag
-//    ChangeAssetEnableState(X12_4, Disabled);
-//    DeleteAssetfollowingSFX(X12_4, true);
-//    ChangeAssetEnableState(X16_4, Disabled);
-//    DeleteAssetfollowingSFX(X16_4, true);
-//    ChangeAssetEnableState(X20_4, Disabled);
-//    DeleteAssetfollowingSFX(X20_4, true);
-//    if (EventFlag(X0_4)) {
-//        ChangeCharacterEnableState(X4_4, Disabled);
-//        ChangeCharacterCollisionState(X4_4, Disabled);
-//        ChangeAssetEnableState(X12_4, Disabled);
-//        DeleteAssetfollowingSFX(X12_4, true);
-//        ChangeAssetEnableState(X16_4, Disabled);
-//        DeleteAssetfollowingSFX(X16_4, true);
-//        ChangeAssetEnableState(X20_4, Disabled);
-//        DeleteAssetfollowingSFX(X20_4, true);
-//        ForceCharacterDeath(X4_4, false);
-//        EndIf(EventFlag(X24_4));
-//        WaitFixedTimeSeconds(1);
-//        AwardItemsIncludingClients(X8_4);
-//        ClearSpEffect(10000, 40002);
-//        ClearSpEffect(10000, 40012);
-//        ClearSpEffect(10000, 40022);
-//        ClearSpEffect(10000, 40032);
-//        ClearSpEffect(10000, 40042);
-//        ClearSpEffect(10000, 40052);
-//        ClearSpEffect(10000, 40062);
-//        ClearSpEffect(10000, 40072);
-//        ClearSpEffect(10000, 40082);
-//        ClearSpEffect(10000, 40092);
-//        ClearSpEffect(10000, 40102);
-//        ClearSpEffect(10000, 40112);
-//        ClearSpEffect(10000, 40122);
-//        SetEventFlag(TargetEventFlagType.EventFlag, 97491, OFF);
-//        SetEventFlag(TargetEventFlagType.EventFlag, 97492, OFF);
-//        SetEventFlag(TargetEventFlagType.EventFlag, 97493, OFF);
-//        SetEventFlag(TargetEventFlagType.EventFlag, 97494, OFF);
-//        SetEventFlag(TargetEventFlagType.EventFlag, 97495, OFF);
-//        EndEvent();
-//    }
-//L0:
-//    WaitFor(CharacterHPValue(X4_4) <= 0);
-//    WaitFixedTimeSeconds(2);
-//    PlaySE(X4_4, SoundType.SFX, 888880000);
-//    WaitFor(CharacterDead(X4_4));
-//    HandleBossDefeatAndDisplayBanner(X4_4, TextBannerType.GreatEnemyFelled);
-//    SetEventFlag(TargetEventFlagType.EventFlag, X0_4, ON);
-//    SetEventFlag(TargetEventFlagType.EventFlag, X28_4, ON);
-//    ChangeAssetEnableState(X12_4, Disabled);
-//    DeleteAssetfollowingSFX(X12_4, true);
-//    ChangeAssetEnableState(X16_4, Disabled);
-//    DeleteAssetfollowingSFX(X16_4, true);
-//    ChangeAssetEnableState(X20_4, Disabled);
-//    DeleteAssetfollowingSFX(X20_4, true);
-//    SetSpEffect(10000, 3450);
-//    RestartEvent();
+    SetEventFlagID(X4_4, OFF); // Music handler eventflag
 });
 
-//Lichdragon Seal Event
-$Event(12030903, Restart, function() {
+// Lichdragon Seal Event
+$Event(12030903, Default, function() {
     //SetEventFlag(TargetEventFlagType.EventFlag, 12030390, OFF);
     //SetEventFlag(TargetEventFlagType.EventFlag, 12030392, OFF);
     //SetEventFlag(TargetEventFlagType.EventFlag, 12030393, OFF);
     //SetEventFlag(TargetEventFlagType.EventFlag, 12030394, OFF);
-    ChangeAssetEnableState(12032394, Disabled);
-    DeleteAssetfollowingSFX(12032394, true);
-    EndIf(EventFlag(12030394));
-    ChangeAssetEnableState(12032394, Enabled);
-    CreateAssetfollowingSFX(12032394, 101, 1510);
-    IfEventFlag(AND_01, ON, TargetEventFlagType.EventFlag, 12030390);
-    IfEventFlag(AND_01, ON, TargetEventFlagType.EventFlag, 12030392);
-    IfEventFlag(AND_01, ON, TargetEventFlagType.EventFlag, 12030393);
-    IfConditionGroup(MAIN, PASS, AND_01);
-    SetEventFlag(TargetEventFlagType.EventFlag, 12030394, ON);
-    ChangeAssetEnableState(12032394, Disabled);
+    CreateAssetfollowingSFX(12032394, 101, 1510); //Lichdragon Seal Wall SFX
+    
+    if (EventFlag(12030394)) {
+        DeleteAssetfollowingSFX(12032394, true);
+        DisableAsset(12032394);
+        EndEvent()
+    }
+    
+    if (!ThisEventSlot()) {
+        CreateAssetfollowingSFX(12032394, 101, 1510);
+        SetThisEventSlot(ON);
+    }
+    
+    WaitFor(EventFlag(12030390) && EventFlag(12030392) && EventFlag(12030393));
+    SetEventFlagID(12030394, ON);
+    DisableAsset(12032394);
     DeleteAssetfollowingSFX(12032394, true);
     DisplayGenericDialog(408001, PromptType.OKCANCEL, NumberofOptions.OneButton, 0, 0);
 });
 
-$Event(12030904, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4) {
-    SetNetworkSyncState(Disabled);
-    ChangeAssetEnableState(X4_4, Disabled);
-    DeleteAssetfollowingSFX(X4_4, true);
-    ChangeAssetEnableState(X8_4, Disabled);
-    DeleteAssetfollowingSFX(X8_4, true);
-    ChangeAssetEnableState(X12_4, Disabled);
-    DeleteAssetfollowingSFX(X12_4, true);
-    chrFlag = (CharacterType(10000, TargetType.BlackPhantom)
-        || CharacterType(10000, TargetType.Invader)
-        || CharacterType(10000, TargetType.Invader2)
-        || CharacterType(10000, TargetType.Invader3))
-        && !EventFlag(X0_4);
-    chrFlag2 = (CharacterType(10000, TargetType.WhitePhantom) || CharacterType(10000, TargetType.BluePhantom))
-        && !EventFlag(X0_4);
-    if (0 != X20_4) {
-            flag &= EventFlag(X20_4);
-    }
-    flag &= !EventFlag(X0_4);
-    WaitFor(
-        chrFlag
-            || chrFlag2
-            || flag
-            || ((HasMultiplayerState(MultiplayerState.Invasion)
-                || HasMultiplayerState(MultiplayerState.InvasionPending))
-                && EventFlag(X0_4)
-                && !CharacterType(10000, TargetType.WhitePhantom))
-            || ((HasMultiplayerState(MultiplayerState.Invasion)
-                || HasMultiplayerState(MultiplayerState.InvasionPending))
-                && EventFlag(X0_4)
-                && CharacterType(10000, TargetType.WhitePhantom)
-                && !EntityInRadiusOfEntity(10000, X4_4, 1, 1)
-                && !EntityInRadiusOfEntity(10000, X8_4, 1, 1)
-                && !EntityInRadiusOfEntity(10000, X12_4, 1, 1)));
-    ChangeAssetEnableState(X4_4, Enabled);
-    DeleteAssetfollowingSFX(X4_4, true);
-    CreateAssetfollowingSFX(X4_4, 101, X16_4)
-    ChangeAssetEnableState(X8_4, Enabled);
-    DeleteAssetfollowingSFX(X8_4, true);
-    CreateAssetfollowingSFX(X8_4, 101, X16_4)
-    ChangeAssetEnableState(X12_4, Enabled);
-    DeleteAssetfollowingSFX(X12_4, true);
-    CreateAssetfollowingSFX(X12_4, 101, X16_4);
-    chrFlag3 = (CharacterType(10000, TargetType.BlackPhantom)
-        || CharacterType(10000, TargetType.Invader)
-        || CharacterType(10000, TargetType.Invader2)
-        || CharacterType(10000, TargetType.Invader3))
-        && !EventFlag(X0_4);
-    chrFlag4 = (CharacterType(10000, TargetType.WhitePhantom) || CharacterType(10000, TargetType.BluePhantom))
-        && !EventFlag(X0_4);
-    if (0 != X20_4) {
-        flag2 &= EventFlag(X20_4);
-    }
-    flag2 &= !EventFlag(X0_4);
-    WaitFor(
-        !chrFlag3
-            && !chrFlag4
-            && !flag2
-            && !((HasMultiplayerState(MultiplayerState.Invasion)
-                || HasMultiplayerState(MultiplayerState.InvasionPending))
-                && EventFlag(X0_4)
-                && !CharacterType(10000, TargetType.WhitePhantom))
-            && !((HasMultiplayerState(MultiplayerState.Invasion)
-                || HasMultiplayerState(MultiplayerState.InvasionPending))
-                && EventFlag(X0_4)
-                && CharacterType(10000, TargetType.WhitePhantom)
-                && !EntityInRadiusOfEntity(10000, X4_4, 1, 1)
-                && !EntityInRadiusOfEntity(10000, X8_4, 1, 1)
-                && !EntityInRadiusOfEntity(10000, X12_4, 1, 1)));
-    RestartEvent();
-});
-
-$Event(12030905, Default, function(X0_4, X4_4, X8_4) {
-    EndIf(EventFlag(X0_4));
-    //WaitFixedTimeFrames(1);
-    if (InArea(10000, X4_4)) {
-        IssueShortWarpRequest(10000, TargetEntityType.Area, X8_4, -1);
-        SetCharacterAIState(X0_4, Disabled);
-    }
+// Skeleton Boss Chest Handler
+$Event(12030904, Restart, function() {
+    EndIf(EventFlag(12030392))
+    DisableObjAct(12031675, -1); 
+    WaitFor(EventFlag(12030392))
+    EnableObjAct(12031675, -1);
 });
 
 // Boss Defeat Logic + Wall Toggler
@@ -1589,4 +1485,11 @@ L2:
     DisableAsset(12030863);
     DisableAsset(12030864);
     DisableAsset(12030865);
+});
+
+//Death Knight Phase 2 Music Handler
+$Event(40012811, Restart, function() {
+    EndIf(EventFlag(12030393));
+    WaitFor(HPRatio(12030393) <= 0.7);
+    SetEventFlagID(12030395, ON);
 });

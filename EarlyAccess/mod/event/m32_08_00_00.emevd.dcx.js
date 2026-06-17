@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.5
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -235,7 +235,7 @@ $Event(32082582, Restart, function(X0_4) {
     EnableCharacterAI(32080311);
     EnableCharacterAI(32080312);
     SetSpEffect(32080310, 1477000);
-    SetSpEffect(32080310, 7120);
+    //SetSpEffect(32080310, 7120);
     
     WaitFixedTimeSeconds(3);
     SetCharacterTeamType(32080311, TeamType.Enemy);
@@ -253,7 +253,7 @@ $Event(32082583, Restart, function(X0_4) {
     WaitFor(HasDamageType(32080313, 10000, 0) || InArea(10000, 32082252));
     EnableCharacterAI(32080313);
     SetSpEffect(32080313, 1477000);
-    SetSpEffect(32080313, 7120);
+    //SetSpEffect(32080313, 7120);
     WaitFor(CharacterDead(32080313));
     SetEventFlagID(32080802, ON);
     SpawnOneshotSFX(0, X0_4, 200, 304631)

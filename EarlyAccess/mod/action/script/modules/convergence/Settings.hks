@@ -1,0 +1,23 @@
+function DisableRaytracing()
+    SetPointerValue(GAME_BASE.CS_WINDOW.RTX_QUALITY, FALSE)
+end
+
+local TutorialToggled = false
+function ToggleTutorials()
+    if env(GetSpEffectID, 101200) == FALSE and not TutorialToggled then
+        return
+    elseif env(GetSpEffectID, 101200) == TRUE and TutorialToggled then
+        return
+    end
+
+    if not TutorialToggled and GetPointerValue(GAME_BASE.GAME_DATA_MAN.SOUND_DISPLAY_SETTINGS.SETTING_SHOW_TUTORIALS) == TRUE then
+        return
+    end
+
+    TutorialToggled = not TutorialToggled
+    if TutorialToggled then
+        SetPointerValue(GAME_BASE.GAME_DATA_MAN.SOUND_DISPLAY_SETTINGS.SETTING_SHOW_TUTORIALS, TRUE)
+    else
+        SetPointerValue(GAME_BASE.GAME_DATA_MAN.SOUND_DISPLAY_SETTINGS.SETTING_SHOW_TUTORIALS, FALSE)
+    end
+end

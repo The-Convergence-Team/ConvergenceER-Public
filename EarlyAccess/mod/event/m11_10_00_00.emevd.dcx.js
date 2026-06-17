@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -1978,6 +1978,7 @@ $Event(1099006110, Default, function(X0_4) {
 // Dummy Selection - EventFlag / EntityID, PhantomParamType
 $Event(1099006120, Restart, function(X0_4, X4_4) {
     // Setup
+    SetSpEffect(X0_4, 100656);
     DisableCharacterAI(X0_4);
     DisableCharacter(X0_4);
     if (!EventFlag(X0_4)) { // If not selected
@@ -1996,6 +1997,7 @@ $Event(1099006120, Restart, function(X0_4, X4_4) {
     SetCharacterBackreadState(X0_4, false);
     EnableCharacter(X0_4);
     EnableCharacterCollision(X0_4);
+    RequestCharacterAIReplan(X0_4);
     SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AlwaysUpdate);
     ClearSpEffect(X0_4, 10124); // Fade
     
@@ -2007,7 +2009,7 @@ $Event(1099006120, Restart, function(X0_4, X4_4) {
         SetSpEffect(X0_4, 5360); 
         SetSpEffect(X0_4, 5601);
         SetSpEffect(X0_4, 5602);
-        SetSpEffect(X0_4, 9648);
+        //SetSpEffect(X0_4, 9648);
     }
     else {
         if (X0_4 != 1099009261)
@@ -2057,16 +2059,6 @@ $Event(1099006120, Restart, function(X0_4, X4_4) {
         SetSpEffect(X0_4, 7150);
     else if (EventFlag(1099009125)) // 19 - Elden Throne
         SetSpEffect(X0_4, 7170);
-    
-    // Remove Statusses
-    SetSpEffect(X0_4, 102);
-    SetSpEffect(X0_4, 103);
-    SetSpEffect(X0_4, 104);
-    SetSpEffect(X0_4, 105);
-    SetSpEffect(X0_4, 106);
-    SetSpEffect(X0_4, 107);
-    SetSpEffect(X0_4, 108);
-    SetSpEffect(X0_4, 109);
     
     // Heal the Dummy
     SetSpEffect(X0_4, 3000);
@@ -2134,6 +2126,16 @@ $Event(1099006120, Restart, function(X0_4, X4_4) {
     IssueShortWarpRequest(X0_4, TargetEntityType.Area, 1099009104, -1);
     SetCharacterHome(X0_4, 1099009104);
     
+    // Remove Statusses
+    SetSpEffect(X0_4, 102);
+    SetSpEffect(X0_4, 103);
+    SetSpEffect(X0_4, 104);
+    SetSpEffect(X0_4, 105);
+    SetSpEffect(X0_4, 106);
+    SetSpEffect(X0_4, 107);
+    SetSpEffect(X0_4, 108);
+    SetSpEffect(X0_4, 109);
+    
     // Prevent looping while outside
     WaitFor(InArea(10000, 1099009105));
     
@@ -2152,6 +2154,7 @@ $Event(1099006120, Restart, function(X0_4, X4_4) {
         )));
         RestartIf(shouldEscape.Passed);
         EnableCharacterAI(X0_4);
+        ClearSpEffect(X0_4, 100656);
     }
     
     // - Restart Conditions -
@@ -2165,7 +2168,7 @@ $Event(1099006120, Restart, function(X0_4, X4_4) {
     
     // Respawn Handling
     if (shouldRespawn.Passed) {
-        DisableCharacterAI(X0_4);
+        SetSpEffect(X0_4, 100656);
         DisableCharacterGravity(X0_4);
         DisableCharacterCollision(X0_4);
         DisableLockOnPoint(X0_4, 220);
@@ -2197,8 +2200,8 @@ $Event(11100040, Restart, function(X0_4, X4_4) {
     //ChangeCharacterEnableState(X0_4, Enabled);
     //SetCharacterBackreadState(X0_4, false);
     
-    rememberance = AnyBatchEventFlags(97510, 97540);
-    nonRememberance = AnyBatchEventFlags(97600, 97621);
+    rememberance = AnyBatchEventFlags(97510, 97541);
+    nonRememberance = AnyBatchEventFlags(97600, 97626);
     
     WaitFor(rememberance || nonRememberance);
     
@@ -2238,13 +2241,28 @@ L0:     // - - Rememberance Bosses - -
         } 
         //Radahn
         else if (EventFlag(97512)) {
-            SetEventFlagID(310, OFF);
+            SetEventFlagID(310, OFF); //Radahn Starfall Cutscene Played Flag
             SetEventFlagID(2052, OFF); 
-            //SetEventFlagID(9130, OFF);
-            SetEventFlagID(9415, OFF);
+            SetEventFlagID(9130, OFF); //Radahn Festival Event Termination Flag (Triggers 9413) [Previously used in Resurrection and Enia talkscript]
+            SetEventFlagID(9412, OFF); //Radahn Death Flag
+            SetEventFlagID(9413, OFF); //Cancel Festival Flag
+            SetEventFlagID(9414, OFF); //Radahn Death Timer before Starfall Cutscene
+            SetEventFlagID(9415, OFF); //Starfall Cutscene Event Reset
+            SetEventFlagID(9416, OFF); //Disable area welcome message after Starfall Cutscene
             SetEventFlagID(61130, OFF);
             SetEventFlagID(76422, OFF);
             SetEventFlagID(1252380800, OFF);
+            SetEventFlagID(1051360230, OFF); //Jerren Cutscene and Door State (Off is Closed)
+            if (EventFlag(3367)) { //Jerren - Radahn Defeated, immediately after Festival state
+                SetEventFlagID(3367, OFF);
+                SetEventFlagID(3366, ON); //Jerren - Radahn Festival "Are you good and prepared, young chum?"
+            }
+            if (!EventFlag(3366) && !EventFlag(3367)) { //Jerren is no longer at the Festival
+                SetEventFlagID(1051360230, ON); //Open the Door
+            }
+            if (!EventFlag(1051360800)) { //If Dakk is alive
+                SetEventFlagID(9410, OFF); //Deactivate Festival
+            }
             
             SetEventFlagID(97512, OFF);
             WarpPlayer(60, 51, 37, 0, 1051373900, 60);
@@ -2526,6 +2544,16 @@ L0:     // - - Rememberance Bosses - -
             WarpPlayer(20, 1, 0, 0, 20012075, 60);
             SetPlayerRespawnPoint(20012075);
         }
+        // DLC: Daergraf
+        else if (EventFlag(97541)) {
+            SetEventFlagID(17000800, OFF);
+            SetEventFlagID(17000801, OFF);
+            SetEventFlagID(71702, OFF); //grace flag
+            
+            SetEventFlagID(97541, OFF); 
+            WarpPlayer(17, 0, 0, 0, 17001208, 60);
+            SetPlayerRespawnPoint(17001208);
+        }
         else EndEvent();
     }
 L1:     // - - Non-Rememberance Bosses - - 
@@ -2674,8 +2702,13 @@ L1:     // - - Non-Rememberance Bosses - -
         else if (EventFlag(97616)) {
             SetEventFlagID(1043310920, OFF);
             
-            SetEventFlagID(97616, OFF); 
-            SetEventFlagID(1043318949, ON); // turning on the bullet dummy at the shrine
+            SetEventFlagID(97616, OFF);
+            SetEventFlagID(2044440800, OFF); // Boss 
+            SetEventFlagID(2044440801, OFF); // First Time Entry Eye
+            SetEventFlagID(2044440500, OFF); // First Time Entry Torches
+            SetEventFlagID(1043310920, OFF); // Shrine Completion
+            SetEventFlagID(1043310921, OFF); // Shrine Fire
+            
             WarpPlayer(60, 43, 31, 0, 1043310926, 60);
             SetPlayerRespawnPoint(1043310926);
         }
@@ -2684,8 +2717,8 @@ L1:     // - - Non-Rememberance Bosses - -
             SetEventFlagID(76419, OFF); // Grace Flag
             SetEventFlagID(1051360800, OFF); // Boss Spawn Flag
             
-            if (!AnyBatchEventFlags(9412, 9413)) { // Only if the festival isn't complete yet
-                SetEventFlagID(3366, OFF); // Jirren
+            if (!EventFlag(9412) || !EventFlag(9413)) { // Only if the festival isn't complete yet
+                SetEventFlagID(3366, OFF); // Jerren - Radahn Festival "Are you good and prepared, young chum?"
                 SetEventFlagID(3611, OFF); // Blaidd
                 SetEventFlagID(3667, OFF); // Alexander
                 
@@ -2725,7 +2758,7 @@ L1:     // - - Non-Rememberance Bosses - -
             WarpPlayer(61, 54, 39, 0, 2054390825, 60);
             SetPlayerRespawnPoint(2054390825);
         }
-        // Rotbach
+        // Konrad
         else if (EventFlag(97621)) {
             SetEventFlagID(12050850, OFF);
             SetEventFlagID(71254, OFF); // Grace Flag
@@ -2733,6 +2766,47 @@ L1:     // - - Non-Rememberance Bosses - -
             SetEventFlagID(97621, OFF); 
             WarpPlayer(12, 5, 0, 0, 12052999, 60);
             SetPlayerRespawnPoint(12052999);
+        }
+        //Husk (Noxumbra)
+        else if (EventFlag(97622)) {
+            SetEventFlagID(17000850, OFF);
+            SetEventFlagID(71701, OFF); // Grace Flag
+            
+            SetEventFlagID(97622, OFF); 
+            WarpPlayer(17, 0, 0, 0, 17001209, 60);
+            SetPlayerRespawnPoint(17001209);
+        }
+        //Man Serpent Priest
+        else if (EventFlag(97623)) {
+            SetEventFlagID(30190800, OFF);
+            
+            SetEventFlagID(97623, OFF); 
+            WarpPlayer(30, 19, 0, 0, 30190999, 60);
+            SetPlayerRespawnPoint(30190999);
+        }
+        //Vulgar Militia Chief
+        else if (EventFlag(97624)) {
+            SetEventFlagID(30200800, OFF);
+            
+            SetEventFlagID(97624, OFF); 
+            WarpPlayer(30, 21, 0, 0, 30200890, 60);
+            SetPlayerRespawnPoint(30200890);
+        }
+        //Idris, Godskin Deceiver
+        else if (EventFlag(97625)) {
+            SetEventFlagID(40000800, OFF);
+            
+            SetEventFlagID(97625, OFF); 
+            WarpPlayer(40, 0, 0, 0, 40000970, 60);
+            SetPlayerRespawnPoint(40000970);
+        }
+        //Mystic Huntress of the Lost Tribe
+        else if (EventFlag(97626)) {
+            SetEventFlagID(13000870, OFF);
+            
+            SetEventFlagID(97626, OFF); 
+            WarpPlayer(13, 0, 0, 0, 13002888, 60);
+            SetPlayerRespawnPoint(13002888);
         }
         else EndEvent();
     }

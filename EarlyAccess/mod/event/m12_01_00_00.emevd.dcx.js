@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -108,7 +108,7 @@ $Event(0, Default, function() {
     InitializeEvent(0, 12012800, 0);
     InitializeEvent(0, 12012810, 0);
     InitializeEvent(0, 12012849, 0);
-    InitializeEvent(0, 12012820, 0);
+    InitializeEvent(0, 12012835, 0);
     InitializeEvent(0, 12012830, 0);
     InitializeEvent(0, 12012811, 0);
     InitializeEvent(0, 12012812, 0);
@@ -194,6 +194,12 @@ $Event(0, Default, function() {
     InitializeEvent(2, 12012601, 12010602, 12011602, 12011612);
     InitializeEvent(0, 12012602, 12010603, 12011603, 12011613);
     
+    // Cloister Gate Flame Cutscenes
+    InitializeEvent(0, 12012603, CutscenePlayMode.Skippable);
+    InitializeEvent(0, 12012604, CutscenePlayMode.Skippable);
+    InitializeEvent(0, 12012605, CutscenePlayMode.Skippable);
+    InitializeEvent(0, 12012606, CutscenePlayMode.Skippable);
+    
     //Breakable Floor
     InitializeEvent(0, 12012610, 0);
     
@@ -213,7 +219,7 @@ $Event(0, Default, function() {
     InitializeEvent(3, 12012592, 12010590, 12010333, 12011333);
     InitializeEvent(4, 12012592, 12010590, 12010334, 12011334);
     InitializeEvent(5, 12012592, 12010590, 12010335, 12011335);
-    InitializeEvent(6, 12012592, 12010590, 12010336, 12011336);
+    InitializeEvent(6, 12012592, 12010591, 12010336, 12011336);
     InitializeEvent(7, 12012592, 12010591, 12010337, 12011337);
     InitializeEvent(8, 12012592, 12010591, 12010338, 12011338);
     InitializeEvent(9, 12012592, 12010591, 12010339, 12011339);
@@ -259,6 +265,8 @@ $Event(0, Default, function() {
     
     InitializeCommonEvent(0, 90005250, 12010344, 12010345, 0, -1); //Rot NPC trigger box
     InitializeCommonEvent(0, 90005300, 12010344, 12010344, 105800, 0, 0); // Rot NPC reward
+    
+    //InitializeCommonEvent(0, 90005878, 12012900, 12015900, 12015901, 12015902, 12010850, 12010850, 12015903); // Ambient Music Lake of Rot
 });
 
 $Event(50, Default, function() {
@@ -1036,7 +1044,7 @@ L2:
     DisplayBossHealthBar(Enabled, 12010800, 0, 904650000);
 });
 
-$Event(12012820, Restart, function() {
+$Event(12012835, Restart, function() {
     EndIf(EventFlag(12010800));
     WaitFor(
         EntityInRadiusOfEntity(12010802, 10000, 50, 1) && CharacterHasSpEffect(12010802, 13208));
@@ -1629,6 +1637,210 @@ L10:
     EndEvent();
 });
 
+// Torch 1 cutscene handler
+$Event(12012603, Default, function(X0_4) {
+    EndIf(EventFlag(12010600));
+    WaitFor(EventFlag(12010600));
+    WaitFixedTimeFrames(45);
+    
+    FadeToBlack(1, 0.3, false, 0);
+    WaitFixedTimeSeconds(0.3);
+    
+    if (EventFlag(12010601)) { // Torch 2 is ON
+        if (EventFlag(12010602)) { // Torch 3 is ON
+            if (EventFlag(12010603)) { // Torch 4 is ON
+                PlayCutsceneToPlayer(12011222, X0_4, 10000);
+                PlayCutsceneToPlayer(12012222, X0_4, 10000)
+            }
+            else { // Torch 4 is OFF
+                PlayCutsceneToPlayer(12011220, X0_4, 10000);
+            }
+        }
+        else { // Torch 3 is OFF
+            if (EventFlag(12010603)) { // Torch 4 is ON
+                PlayCutsceneToPlayer(12011202, X0_4, 10000);
+            }
+            else { // Torch 4 is OFF
+                PlayCutsceneToPlayer(12011200, X0_4, 10000);
+            }
+        }
+    }
+    else // Torch 2 is OFF
+    {
+        if (EventFlag(12010602)) { // Torch 3 is ON
+            if (EventFlag(12010603)) { // Torch 4 is ON
+                PlayCutsceneToPlayer(12011022, X0_4, 10000);
+            }
+            else { // Torch 4 is OFF
+                PlayCutsceneToPlayer(12011020, X0_4, 10000);
+            }
+        } 
+        else { // Torch 3 is OFF
+            if (EventFlag(12010603)) { // Torch 4 is ON
+                PlayCutsceneToPlayer(12011002, X0_4, 10000);
+            }
+            else { // Torch 4 is OFF
+                PlayCutsceneToPlayer(12011000, CutscenePlayMode.Skippable, 10000);
+            }
+        }
+    }
+    //WaitFor(!EventFlag(12010600));
+    //RestartEvent()
+});
+
+// Torch 2 cutscene handler
+$Event(12012604, Default, function(X0_4) {
+    EndIf(EventFlag(12010601));
+    WaitFor(EventFlag(12010601));
+    WaitFixedTimeFrames(45);
+    
+    FadeToBlack(1, 0.3, false, 0);
+    WaitFixedTimeSeconds(0.3);
+    
+    if (EventFlag(12010600)) {// Torch 1
+        if (EventFlag(12010602)) { // Torch 3
+            if (EventFlag(12010603)) { // Torch 4
+                PlayCutsceneToPlayer(12012122, X0_4, 10000);
+                PlayCutsceneToPlayer(12012222, X0_4, 10000)
+            }
+            else {
+                PlayCutsceneToPlayer(12012120, X0_4, 10000);
+            }
+        }
+        else {
+            if (EventFlag(12010603)) { // Torch 4
+                PlayCutsceneToPlayer(12012102, X0_4, 10000);
+            }
+            else {
+                PlayCutsceneToPlayer(12012100, X0_4, 10000);
+            }
+        }
+    }
+    else
+    {
+        if (EventFlag(12010602)) { // Torch 3
+            if (EventFlag(12010603)) { // Torch 4
+                PlayCutsceneToPlayer(12010122, X0_4, 10000);
+            }
+            else {
+                PlayCutsceneToPlayer(12010120, X0_4, 10000);
+            }
+        }
+        else {
+            if (EventFlag(12010603)) { // Torch 4
+                PlayCutsceneToPlayer(12010102, X0_4, 10000);
+            }
+            else {
+                PlayCutsceneToPlayer(12010100, X0_4, 10000);
+            }
+        }
+    }
+    //WaitFor(!EventFlag(12010601));
+    //RestartEvent()
+});
+
+// Torch 3 cutscene handler
+$Event(12012605, Default, function(X0_4) {
+    EndIf(EventFlag(12010602));
+    WaitFor(EventFlag(12010602));
+    WaitFixedTimeFrames(45);
+    
+    FadeToBlack(1, 0.3, false, 0);
+    WaitFixedTimeSeconds(0.3);
+    
+    if (EventFlag(12010600)) {// Torch 1
+        if (EventFlag(12010601)) { // Torch 2
+            if (EventFlag(12010603)) { // Torch 4
+                PlayCutsceneToPlayer(12012212, X0_4, 10000);
+                PlayCutsceneToPlayer(12012222, X0_4, 10000)
+            }
+            else {
+                PlayCutsceneToPlayer(12012210, X0_4, 10000);
+            }
+        }
+        else {
+            if (EventFlag(12010603)) { // Torch 4
+                PlayCutsceneToPlayer(12012012, X0_4, 10000);
+            }
+            else {
+                PlayCutsceneToPlayer(12012010, X0_4, 10000);
+            }
+        }
+    }
+    else
+    {
+        if (EventFlag(12010601)) { // Torch 2
+            if (EventFlag(12010603)) { // Torch 4
+                PlayCutsceneToPlayer(12010212, X0_4, 10000);
+            }
+            else {
+                PlayCutsceneToPlayer(12010210, X0_4, 10000);
+            }
+        }
+        else {
+            if (EventFlag(12010603)) { // Torch 4
+                PlayCutsceneToPlayer(12010012, X0_4, 10000);
+            }
+            else {
+                PlayCutsceneToPlayer(12010010, X0_4, 10000);
+            }
+        }
+    }
+    //WaitFor(!EventFlag(12010602));
+    //RestartEvent()
+});
+
+// Torch 4 cutscene handler
+$Event(12012606, Default, function(X0_4) {
+    EndIf(EventFlag(12010603));
+    WaitFor(EventFlag(12010603));
+    WaitFixedTimeFrames(45);
+    
+    FadeToBlack(1, 0.3, false, 0);
+    WaitFixedTimeSeconds(0.3);
+    
+    if (EventFlag(12010600)) {// Torch 1
+        if (EventFlag(12010601)) { // Torch 2
+            if (EventFlag(12010602)) { // Torch 3
+                PlayCutsceneToPlayer(12012221, X0_4, 10000);
+                PlayCutsceneToPlayer(12012222, X0_4, 10000)
+            }
+            else {
+                PlayCutsceneToPlayer(12012201, X0_4, 10000);
+            }
+        }
+        else {
+            if (EventFlag(12010602)) { // Torch 3
+                PlayCutsceneToPlayer(12012021, X0_4, 10000);
+            }
+            else {
+                PlayCutsceneToPlayer(12012001, X0_4, 10000);
+            }
+        }
+    }
+    else
+    {
+        if (EventFlag(12010601)) { // Torch 2
+            if (EventFlag(12010602)) { // Torch 3
+                PlayCutsceneToPlayer(12010221, X0_4, 10000);
+            }
+            else {
+                PlayCutsceneToPlayer(12010201, X0_4, 10000);
+            }
+        }
+        else {
+            if (EventFlag(12010602)) { // Torch 3
+                PlayCutsceneToPlayer(12010021, X0_4, 10000);
+            }
+            else {
+                PlayCutsceneToPlayer(12010003, X0_4, 10000); // 03 instead of 01 due to conflict
+            }
+        }
+    }
+    //WaitFor(!EventFlag(12010603));
+    //RestartEvent()
+});
+
 //Breakable Floor
 $Event(12012610, Restart, function() {
     if (EventFlag(12010620)) {
@@ -1665,6 +1877,7 @@ L0:
     ChangeAssetEnableState(12011617, Enabled);
     DeleteAssetfollowingSFX(12011617, true);
     SetCharacterInvincibility(12010850, Disabled);
+    SetEventFlagID(12012619, ON);
 L10:
     WaitFor(EventFlag(12010850));
     ChangeAssetEnableState(12011615, Disabled);
@@ -1672,6 +1885,7 @@ L10:
     ChangeAssetEnableState(12011617, Disabled);
     DeleteAssetfollowingSFX(12011615, true);
     DeleteAssetfollowingSFX(12011616, true);
+    SetEventFlagID(12012619, OFF);
     EndEvent();
 });
 
@@ -1790,11 +2004,14 @@ $Event(12012850, Restart, function() {
     
     DisplayBossHealthBar(Disabled, 12010811, 0, 902036001);
     DisableLockOnPoint(12010811, 220);
+    DisableLockOnPoint(12010811, 221);
     DisableCharacterAI(12010811);
     ForceAnimationPlayback(12010811, 3031, false, false, true, Equal, 1);
+    SetBossBGM(393000, BossBGMState.Stop1);
     //SetBossBGM(212000, BossBGMState.Stop2);
     SetEventFlagID(12012822, ON);
     SetEventFlagID(12012816, OFF);
+    SetEventFlagID(12012826, OFF);
     
     WaitFor(CharacterHasSpEffect(12010811, 11707, Equal, 1));
     
@@ -1807,6 +2024,7 @@ $Event(12012850, Restart, function() {
     //SetSpEffect(12010810, 100);
     
     DisplayBossHealthBar(Enabled, 12010812, 0, 902036000);
+    SetBossBGM(393000, BossBGMState.HeatUp);
     //SetBossBGM(212000, BossBGMState.HeatUp);
     SetEventFlagID(12012819, ON);
     SetCharacterAIState(12010812, Enabled);
@@ -1821,16 +2039,20 @@ $Event(12012850, Restart, function() {
 $Event(12012851, Restart, function() {
     EndIf(EventFlag(12010810));
     WaitFor(CharacterHPValue(12010812) <= 0);
+    ForceCharacterDeath(12010810, false);
+    ForceCharacterDeath(12010811, false);
     ForceCharacterDeath(12010812, false);
     WaitFixedTimeSeconds(4);
     PlaySE(12010812, SoundType.SFX, 888880000);
     WaitFor(CharacterDead(12010812));
     HandleBossDefeatAndDisplayBanner(12010812, TextBannerType.LegendFelled);
+    SetBossBGM(393000, BossBGMState.Stop1);
     //SetBossBGM(212000, BossBGMState.Stop2);
     SetEventFlagID(12012819, OFF);
     SetEventFlagID(12010810, ON);
-    SetEventFlagID(12012825, ON); //music handler eventflag
+    //SetEventFlagID(12012825, ON); //music handler eventflag
     SetEventFlagID(12012813, OFF);
+    SetEventFlagID(12012826, OFF);
     SetEventFlagID(12012820, OFF);
     SetEventFlagID(9188, ON);
     SetSpEffect(10000, 3450); // Rune Arc
@@ -1838,7 +2060,9 @@ $Event(12012851, Restart, function() {
         SetEventFlagID(61188, ON);
     }
     WaitFixedTimeSeconds(6);
-    SetEventFlagID(12012825, OFF); //music handler eventflag
+    //SetEventFlagID(12012825, OFF); //music handler eventflag
+    WaitFixedTimeSeconds(3);
+    SetEventFlagID(1099000200, OFF); //Boss Custom Music Active Flag (For ambient script)
 });
 
 $Event(12012852, Restart, function() {
@@ -1884,6 +2108,7 @@ L1:
         WaitFor((InArea(10000, 12012815)) && EventFlag(12012820));
     }
 L2:
+    SetEventFlagID(1099000200, ON); //Boss Custom Music Active Flag (For ambient script)
     DisableCharacterInvincibility(12010811);
     EnableCharacterImmortality(12010811);
     EnableCharacterAI(12010811);
@@ -1892,6 +2117,10 @@ L2:
     DisplayBossHealthBar(Enabled, 12010811, 0, 902036001);
     //SetBossBGM(212000, BossBGMState.Start);
     SetEventFlagID(12012816, ON);
+    WaitFor(CharacterHasSpEffect(12010811, 10581));
+    SetEventFlagID(12012826, ON);
+    SetEventFlagID(12012816, OFF);
+    SetEventFlagID(12012820, OFF);
 });
 
 $Event(12012853, Restart, function() {
@@ -1899,7 +2128,7 @@ $Event(12012853, Restart, function() {
     InitializeCommonEvent(0, 9005801, 12010810, 12011810, 12012815, 12012820, 12012821, 10000);
     InitializeCommonEvent(0, 9005811, 12010810, 12011810, 5, 12010811);
     //InitializeCommonEvent(0, 930000, 12010810, 212000, 12012815, 12012817, 0, 12012813, 0, 0);
-    InitializeCommonEvent(0, 9005822, 12010810, 921600, 12012820, 12012821, 0, 12012813, 0, 0);
+    InitializeCommonEvent(0, 9005822, 12010810, 393000, 12012820, 12012821, 0, 12012813, 0, 0);
 });
 
 $Event(12012854, Default, function() {

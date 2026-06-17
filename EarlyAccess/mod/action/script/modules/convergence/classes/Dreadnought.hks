@@ -1,0 +1,5 @@
+function DreadnoughtJewel_OnTakingHit()
+    if env(GetSpEffectID, Jewel_of_the_Immovable) == TRUE and env(GetSpEffectType, 32) == FALSE then -- paralysis
+        act(AddSpEffect, 390410 + math.floor(GetTotalAbsorptionBy(PHYSICAL_ABSORB_CONTAINER) / 10))
+    end
+end

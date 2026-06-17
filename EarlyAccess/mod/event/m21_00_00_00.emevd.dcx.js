@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -83,6 +83,14 @@ $Event(0, Default, function() {
     InitializeEvent(1, 21000735, 21000745, 21000740, 30);
     InitializeEvent(0, 21000725, 2048459220, 21010800, 21019205, 4898);
     InitializeCommonEvent(0, 90005706, 21000750, 30010, 0);
+        //Radahn & Mogh check region
+    InitializeEvent(0, 21002751, 0);
+        //Miqi Fog Gate
+    InitializeEvent(0, 21001751, 0);
+            //Radahn & Mogh check region 2
+    InitializeEvent(0, 21002752, 0);
+            //Miqi Fog Gate 2
+    InitializeEvent(0, 21001752, 0);
 });
 
 $Event(50, Default, function() {
@@ -317,6 +325,11 @@ $Event(21002500, Restart, function() {
         ForceAnimationPlayback(21001500, 12, false, false, false);
         DisableAssetInvunerability(21001502);
         DisableAsset(21006500);
+        EnableAsset(21006501);
+        DeleteMapSFX(21006502,0);
+        DeleteMapSFX(21006503,0);
+        DeleteMapSFX(21006504,0);
+        DeleteMapSFX(21006505,0);
         DisableHit(21007500);
         WarpAssetToCharacter(21001509, 21000509, -1);
         ReproduceAssetAnimation(21001509, 10);
@@ -340,6 +353,11 @@ L0:
     WaitFixedTimeRealFrames(1);
     DisableAssetInvunerability(21001502);
     DisableAsset(21006500);
+    EnableAsset(21006501);
+    DeleteMapSFX(21006502,0);
+    DeleteMapSFX(21006503,0);
+    DeleteMapSFX(21006504,0);
+    DeleteMapSFX(21006505,0);
     DisableHit(21007500);
     WarpAssetToCharacter(21001509, 21000509, -1);
     ReproduceAssetAnimation(21001509, 10);
@@ -510,7 +528,7 @@ $Event(21002899, Restart, function() {
     InitializeCommonEvent(0, 9005800, 21000850, 21001850, 21002850, 21002855, 21005850, 10000, 21000851, 21002851);
     InitializeCommonEvent(0, 9005801, 21000850, 21001850, 21002850, 21002855, 21002856, 10000);
     InitializeCommonEvent(0, 9005811, 21000850, 21001850, 5, 21000851);
-    InitializeCommonEvent(0, 9005822, 21000850, 920600, 21002855, 21002856, 0, 21002852, 0, 0);
+    InitializeCommonEvent(0, 9005822, 21000850, 392200, 21002855, 21002856, 0, 21002852, 0, 0);
     InitializeCommonEvent(0, 9005812, 21000850, 21001851, 5, 21000851, 0);
     InitializeCommonEvent(0, 9005812, 21000850, 21001852, 5, 21000851, 0);
 });
@@ -854,4 +872,95 @@ $Event(21000735, Restart, function(X0_4, X4_4, X8_4) {
     DisableCharacterAI(X4_4);
 });
 
-
+$Event(21002752, Restart, function() { //large enterance
+    EndIf(EventFlag(4927));
+    EndIf(!EventFlag(9112) || !EventFlag(9130)); // 9112 Mogh | 9130 Radahn
+    WaitFor(InArea(10000, 21002752) && PlayerIsInOwnWorld());
+    SetNetworkconnectedEventFlagID(4927, ON);
+    SetSpEffect(20000, 20004230);
+});
+$Event(21001752, Restart, function() {
+    if (EventFlag(21002570)) {
+        DisableAsset(21001752);
+        DisableAsset(21001753);
+        EndEvent();
+    }
+L0:
+    if (PlayerIsInOwnWorld()) {
+        if (!EventFlag(21002550)) {//21002550
+            DeleteAssetfollowingSFX(21001752, true);
+            CreateAssetfollowingSFX(21001752, 101, -1);
+            DeleteAssetfollowingSFX(21001753, true);
+            CreateAssetfollowingSFX(21001753, 101, 999991550);
+            SetNetworkconnectedEventFlagID(21002550, ON);
+        }
+L2:
+        onlineAct = PlayerIsInOwnWorld() && ActionButtonInArea(209504, 21001752);
+        flag = EventFlag(4927);
+        WaitFor(onlineAct || flag);
+        if (!flag.Passed) {
+            DisplayGenericDialog(2020004, PromptType.YESNO, NumberofOptions.NoButtons, 21001752, 3);
+            WaitFixedTimeSeconds(1);
+            RestartEvent();
+        }
+L3:
+        SetNetworkconnectedEventFlagID(21002570, ON);
+        DeleteAssetfollowingSFX(21001752, true);
+        DisableAsset(21001752);
+        DeleteAssetfollowingSFX(21001753, true);
+        DisableAsset(21001753);
+        EndEvent();
+    }
+L1:
+    DeleteAssetfollowingSFX(21001752, true);
+    CreateAssetfollowingSFX(21001752, 101, -1);
+    DeleteAssetfollowingSFX(21001753, true);
+    CreateAssetfollowingSFX(21001753, 101, 999991550);
+    EndEvent();
+});
+$Event(21002751, Restart, function() { //small entrance
+    EndIf(EventFlag(4927));
+    EndIf(!EventFlag(9112) || !EventFlag(9130)); // 9112 Mogh | 9130 Radahn
+    WaitFor(InArea(10000, 21002751) && PlayerIsInOwnWorld());
+    SetNetworkconnectedEventFlagID(4927, ON);
+    SetSpEffect(20000, 20004230);
+});
+$Event(21001751, Restart, function() {
+    if (EventFlag(21002571)) {
+        DisableAsset(21001751);
+        DisableAsset(21001754);
+        EndEvent();
+    }
+L0:
+    if (PlayerIsInOwnWorld()) {
+        if (!EventFlag(21002551)) {
+            DeleteAssetfollowingSFX(21001751, true);
+            CreateAssetfollowingSFX(21001751, 101, 1550);
+            DeleteAssetfollowingSFX(21001754, true);
+            CreateAssetfollowingSFX(21001754, 101, 1550);
+            SetNetworkconnectedEventFlagID(21002551, ON);
+        }
+L2:
+        onlineAct = PlayerIsInOwnWorld() && ActionButtonInArea(209504, 21001751);
+        flag = EventFlag(4927);
+        WaitFor(onlineAct || flag);
+        if (!flag.Passed) {
+            DisplayGenericDialog(2020004, PromptType.YESNO, NumberofOptions.NoButtons, 21001751, 3);
+            WaitFixedTimeSeconds(1);
+            RestartEvent();
+        }
+L3:
+        SetNetworkconnectedEventFlagID(21002571, ON);
+        DeleteAssetfollowingSFX(21001751, true);
+        DisableAsset(21001751);
+        DeleteAssetfollowingSFX(21001754, true);
+        DisableAsset(21001754);
+        EndEvent();
+    }
+L1:
+    DeleteAssetfollowingSFX(21001751, true);
+    CreateAssetfollowingSFX(21001751, 101, -1);
+    DeleteAssetfollowingSFX(21001754, true);
+    CreateAssetfollowingSFX(21001754, 101, 1550);
+    EndEvent();
+});

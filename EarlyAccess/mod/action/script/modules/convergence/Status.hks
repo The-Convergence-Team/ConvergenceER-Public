@@ -1,0 +1,352 @@
+-- General
+StatusEffects = {
+    Poison = 1,
+    Rot = 2,
+    Bleed = 3,
+    Blight = 4,
+    Frost = 5,
+    Sleep = 6,
+    Frenzy = 7,
+}
+
+local statusEffectInfo = {
+    { current = CHR_INS_BASE.CHR_MODULES.AUX_EFFECT_MODULE.POISON, maximum = CHR_INS_BASE.CHR_MODULES.AUX_EFFECT_MODULE.POISON_MAX, stateInfo = 2,   appliedSpEffect = 106275, IsImmune = function() return 0 < g_PoisonImmuneSpEffectID end },
+    { current = CHR_INS_BASE.CHR_MODULES.AUX_EFFECT_MODULE.ROT,    maximum = CHR_INS_BASE.CHR_MODULES.AUX_EFFECT_MODULE.ROT_MAX,    stateInfo = 5,   appliedSpEffect = 107275, IsImmune = function() return 0 < g_RotImmuneSpEffectID end    },
+    { current = CHR_INS_BASE.CHR_MODULES.AUX_EFFECT_MODULE.BLEED,  maximum = CHR_INS_BASE.CHR_MODULES.AUX_EFFECT_MODULE.BLEED_MAX,  stateInfo = 6,   appliedSpEffect = 105275, IsImmune = function() return 0 < g_BleedImmuneSpEffectID end  },
+    { current = CHR_INS_BASE.CHR_MODULES.AUX_EFFECT_MODULE.BLIGHT, maximum = CHR_INS_BASE.CHR_MODULES.AUX_EFFECT_MODULE.BLIGHT_MAX, stateInfo = 117, appliedSpEffect = 108275, IsImmune = function() return 0 < g_BlightImmuneSpEffectID end },
+    { current = CHR_INS_BASE.CHR_MODULES.AUX_EFFECT_MODULE.FROST,  maximum = CHR_INS_BASE.CHR_MODULES.AUX_EFFECT_MODULE.FROST_MAX,  stateInfo = 260, appliedSpEffect = 107725, IsImmune = function() return 0 < g_FrostImmuneSpEffectID end  },
+    { current = CHR_INS_BASE.CHR_MODULES.AUX_EFFECT_MODULE.SLEEP,  maximum = CHR_INS_BASE.CHR_MODULES.AUX_EFFECT_MODULE.SLEEP_MAX,  stateInfo = 436, appliedSpEffect = 105725, IsImmune = function() return 0 < g_SleepImmuneSpEffectID end  },
+    { current = CHR_INS_BASE.CHR_MODULES.AUX_EFFECT_MODULE.FRENZY, maximum = CHR_INS_BASE.CHR_MODULES.AUX_EFFECT_MODULE.FRENZY_MAX, stateInfo = 437, appliedSpEffect = 6775  , IsImmune = function() return 0 < g_FrenzyImmuneSpEffectID end },
+}
+
+function GetStatusEffectInfo(statusEffect)
+    return statusEffectInfo[statusEffect]
+end
+
+function IncreaseStatusBuildup(statusEffect, incriment)
+    if incriment == nil or incriment == 0 then
+        return
+    end
+
+    local info = GetStatusEffectInfo(statusEffect)
+    if env(GetSpEffectType, info.stateInfo) == TRUE then
+        return
+    end
+
+    local currentValue = GetPointerValue(info.current)
+
+    local newValue = currentValue - incriment
+    if newValue <= 0 then
+        act(AddSpEffect, info.appliedSpEffect)
+    else
+        SetPointerValue(info.current, newValue)
+    end
+end
+
+function RemoveStatusByType(statusType)
+    local stateInfo = GetStatusEffectInfo(statusType).stateInfo
+    if env(GetSpEffectType, stateInfo) == FALSE then
+        return
+    end
+
+    for _, spEffect in ipairs(GetSpEffectsInfo()) do
+        if GetParamValue(PARAM.SpEffectParam.STATE_INFO, spEffect.ID) == stateInfo then
+            act(ClearSpEffect, spEffect.ID)
+        end
+    end
+end
+
+g_PoisonImmuneSpEffectID = 0
+g_RotImmuneSpEffectID = 0
+g_FrostImmuneSpEffectID = 0
+g_BleedImmuneSpEffectID = 0
+g_BlightImmuneSpEffectID = 0
+g_SleepImmuneSpEffectID = 0
+g_FrenzyImmuneSpEffectID = 0
+local immunitiesInitialized = false
+function InitializeImmunities()
+    if immunitiesInitialized then
+        return
+    end
+    immunitiesInitialized = true
+
+    local spEffects = GetSpEffectsInfo()
+    for index, spEffect in pairs(spEffects) do
+        if GetParamValue(PARAM.SpEffectParam.DISABLE_POISON, spEffect.ID) == TRUE then
+            g_PoisonImmuneSpEffectID = spEffect.ID
+        end
+        if GetParamValue(PARAM.SpEffectParam.DISABLE_ROT, spEffect.ID) == TRUE then
+            g_RotImmuneSpEffectID = spEffect.ID
+        end
+        if GetParamValue(PARAM.SpEffectParam.DISABLE_FROST, spEffect.ID) == TRUE then
+            g_FrostImmuneSpEffectID = spEffect.ID
+        end
+        if GetParamValue(PARAM.SpEffectParam.DISABLE_BLEED, spEffect.ID) == TRUE then
+            g_BleedImmuneSpEffectID = spEffect.ID
+        end
+        if GetParamValue(PARAM.SpEffectParam.DISABLE_BLIGHT, spEffect.ID) == TRUE then
+            g_BlightImmuneSpEffectID = spEffect.ID
+        end
+        if GetParamValue(PARAM.SpEffectParam.DISABLE_SLEEP, spEffect.ID) == TRUE then
+            g_SleepImmuneSpEffectID = spEffect.ID
+        end
+        if GetParamValue(PARAM.SpEffectParam.DISABLE_MADNESS, spEffect.ID) == TRUE then
+            g_FrenzyImmuneSpEffectID = spEffect.ID
+        end
+    end
+
+    if g_PoisonImmuneSpEffectID == 0 then
+        g_PoisonImmuneSpEffectID = -1
+    end
+    if g_RotImmuneSpEffectID == 0 then
+        g_RotImmuneSpEffectID = -1
+    end
+    if g_FrostImmuneSpEffectID == 0 then
+        g_FrostImmuneSpEffectID = -1
+    end
+    if g_BleedImmuneSpEffectID == 0 then
+        g_BleedImmuneSpEffectID = -1
+    end
+    if g_BlightImmuneSpEffectID == 0 then
+        g_BlightImmuneSpEffectID = -1
+    end
+    if g_SleepImmuneSpEffectID == 0 then
+        g_SleepImmuneSpEffectID = -1
+    end
+    if g_FrenzyImmuneSpEffectID == 0 then
+        g_FrenzyImmuneSpEffectID = -1
+    end
+end
+
+local triggerSpEffectHandled = {}
+function StripImmunity(statusToStrip, triggerSpEffect, immunitySpEffect, reductionSpEffects)
+    if immunitySpEffect == 0 then -- Wait for immunity to be scanned
+        return
+    elseif env(GetSpEffectID, triggerSpEffect) == FALSE then
+        if immunitySpEffect > 0 and env(GetSpEffectID, immunitySpEffect) == FALSE then
+            act(AddSpEffect, immunitySpEffect)
+            RemoveStatusByType(statusToStrip)
+        end
+        triggerSpEffectHandled[statusToStrip] = false
+        return
+    elseif triggerSpEffectHandled[statusToStrip] then
+        return
+    end
+    triggerSpEffectHandled[statusToStrip] = true
+
+    if immunitySpEffect == -1 then
+        return
+    end
+    act(ClearSpEffect, immunitySpEffect)
+
+    local highestMaxStatusResist = -1    
+    for _, status in pairs(StatusEffects) do
+        if statusToStrip ~= status then
+            local info = GetStatusEffectInfo(status)
+            local maximum = GetPointerValue(info.maximum)
+            if not info.IsImmune() and maximum >= highestMaxStatusResist then
+                highestMaxStatusResist = maximum
+            end
+        end
+    end
+    
+    local currentResistance = GetPointerValue(GetStatusEffectInfo(statusToStrip).maximum)    
+    if currentResistance <= highestMaxStatusResist or highestMaxStatusResist < 0 then
+        return
+    end
+
+    for i = 9, 1, -1 do -- Apply the reduc spEffect that brings the resistance just above the highest max status resistance
+        local reductionPercent = i * 0.1
+        local newResistance = currentResistance * (1 - reductionPercent)
+        if newResistance > highestMaxStatusResist then
+            act(AddSpEffect, reductionSpEffects[i])
+            break
+        end
+    end
+end
+
+local poisonResistanceReductionSpEffects = {
+    [1] = 392388, -- Reduc 10% Poison Resistance
+    [2] = 392387, -- Reduc 20% Poison Resistance
+    [3] = 392386, -- Reduc 30% Poison Resistance
+    [4] = 392385, -- Reduc 40% Poison Resistance
+    [5] = 392384, -- Reduc 50% Poison Resistance
+    [6] = 392383, -- Reduc 60% Poison Resistance
+    [7] = 392382, -- Reduc 70% Poison Resistance
+    [8] = 392381, -- Reduc 80% Poison Resistance
+    [9] = 392380, -- Reduc 90% Poison Resistance
+}
+local rotResistanceReductionSpEffects = {
+    [1] = 392398, -- Reduc 10% Rot Resistance
+    [2] = 392397, -- Reduc 20% Rot Resistance
+    [3] = 392396, -- Reduc 30% Rot Resistance
+    [4] = 392395, -- Reduc 40% Rot Resistance
+    [5] = 392394, -- Reduc 50% Rot Resistance
+    [6] = 392393, -- Reduc 60% Rot Resistance
+    [7] = 392392, -- Reduc 70% Rot Resistance
+    [8] = 392391, -- Reduc 80% Rot Resistance
+    [9] = 392390, -- Reduc 90% Rot Resistance
+}
+local bleedResistanceReductionSpEffects = {
+    [1] = 391528, -- Reduc 10% Bleed Resistance
+    [2] = 391527, -- Reduc 20% Bleed Resistance
+    [3] = 391526, -- Reduc 30% Bleed Resistance
+    [4] = 391525, -- Reduc 40% Bleed Resistance
+    [5] = 391524, -- Reduc 50% Bleed Resistance
+    [6] = 391523, -- Reduc 60% Bleed Resistance
+    [7] = 391522, -- Reduc 70% Bleed Resistance
+    [8] = 391521, -- Reduc 80% Bleed Resistance
+    [9] = 391520, -- Reduc 90% Bleed Resistance
+}
+
+function ImmunityStripping()
+    StripImmunity(StatusEffects.Poison, 392320, g_PoisonImmuneSpEffectID, poisonResistanceReductionSpEffects)
+    StripImmunity(StatusEffects.Rot, 392320, g_RotImmuneSpEffectID, rotResistanceReductionSpEffects)
+    StripImmunity(StatusEffects.Bleed, 391510, g_BleedImmuneSpEffectID, bleedResistanceReductionSpEffects)
+end
+
+-- Sleep
+local sleepSpEffectDelay = 0
+function RemoveSleepDebuffAndImmunity()
+    if env(GetSpEffectID, 1743202) == FALSE then
+        sleepSpEffectDelay = 0
+        return
+    elseif sleepSpEffectDelay == 0 then
+        sleepSpEffectDelay = 1
+        return
+    end
+
+    act(ClearSpEffect, 1743202) -- Recurring Nightmare [Remove Debuff]
+    act(AddSpEffect, 1743203) -- Recurring Nightmare [Remove Sleep Buildup]
+    act(ClearSpEffect, 100741) -- Sleep Debuff High Resist / Resist
+    act(ClearSpEffect, 100742) -- Sleep Immunity Resist
+    act(ClearSpEffect, 100743) -- Sleep Debuff Loop
+    act(ClearSpEffect, 100744) -- Sleep Immunity Loop
+    act(ClearSpEffect, 100745) -- Sleep Immunity High Resist
+    act(ClearSpEffect, 100746) -- Deep Sleep Debuff Loop
+    act(ClearSpEffect, 100747) -- Deep Sleep Immunity Delay
+    act(ClearSpEffect, 100748) -- Deep Sleep Debuff High Resist / Resist
+    act(ClearSpEffect, 100749) -- Deep Sleep Immunity High Resist
+    act(ClearSpEffect, 100751) -- Sleep Debuff Resist
+    act(ClearSpEffect, 100752) -- Sleep Debuff Loop (304 & 308)
+    act(ClearSpEffect, 100753) -- Deep Sleep Immunity Delay
+end
+
+local hasCheckedSleep = false
+function HasNoSleepAnim()
+    if hasCheckedSleep or env(GetSpEffectID, 100740) == TRUE then
+        return
+    end
+    hasCheckedSleep = true
+
+    if IsExistAnime(ANIME_ID_SLEEP_START) == FALSE and IsExistAnime(ANIME_ID_SLEEP_RESIST) == FALSE then
+        act(AddSpEffect, 100740)
+    end
+end
+
+function HasNoSleepAnimDebuff()
+    if env(GetSpEffectID, SP_EFFECT_DEEP_SLEEP) == TRUE and env(GetSpEffectID, 100740) == TRUE and env(GetSpEffectID, 100748) == FALSE and sleepSpEffectDelay == 0 then
+        act(AddSpEffect, 100748) -- Deep Sleep Debuff High Resist / Resist
+        act(AddSpEffect, 100749) -- Deep Sleep Immunity High Resist
+        act(ClearSpEffect, 100741) -- Sleep Debuff High Resist Cleanup
+    elseif env(GetSpEffectType, SP_EFFECT_TYPE_SLEEP) == TRUE and env(GetSpEffectID, SP_EFFECT_DEEP_SLEEP) == FALSE and env(GetSpEffectID, 100740) == TRUE and env(GetSpEffectID, 100741) == FALSE and env(GetSpEffectID, 100748) == FALSE and sleepSpEffectDelay == 0 then
+        act(AddSpEffect, 100741) -- Sleep Debuff High Resist
+        act(AddSpEffect, 100745) -- Sleep Immunity High Resist
+    end
+end
+
+Sleep_Resist_onUpdate = AttachBefore(Sleep_Resist_onUpdate, HasNoSleepAnimDebuff)
+Ride_Enemy_Sleep_Resist_onUpdate = AttachBefore(Ride_Enemy_Sleep_Resist_onUpdate, HasNoSleepAnimDebuff)
+Ridden_Enemy_Sleep_Resist_onUpdate = AttachBefore(Ridden_Enemy_Sleep_Resist_onUpdate, HasNoSleepAnimDebuff)
+
+function SleepLoopImmunityApplication()
+    if IsExistAnime(ANIME_ID_SLEEP_START) == FALSE or IsExistAnime(ANIME_ID_SLEEP_LOOP) == FALSE or IsExistAnime(ANIME_ID_SLEEP_END) == FALSE then -- Sleep Loop Check
+        return
+    end
+  
+    if env(GetSpEffectID, 102304) == TRUE and (env(GetSpEffectID, 102321) == TRUE or env(GetSpEffectID, 102302) == TRUE or env(GetSpEffectID, 102301) == TRUE) and env(GetSpEffectID, 100752) == TRUE then -- Deep Sleep 60 sec Duration, Cleanup of Sleep Debuff
+		act(ClearSpEffect, 100752) -- Sleep Loop Debuff (304) Cleanup
+    elseif env(GetSpEffectID, 102304) == TRUE and (env(GetSpEffectID, 102321) == TRUE or env(GetSpEffectID, 102302) == TRUE or env(GetSpEffectID, 102301) == TRUE) and env(GetSpEffectID, 100747) == FALSE then -- Deep Sleep 60 sec Duration, delayed by 100747 (10 sec delay for deep sleep and birbs)
+		act(AddSpEffect, 100744) -- Sleep Immunity Loop
+    elseif env(GetSpEffectID, 102308) == TRUE and env(GetSpEffectID, 90300) == FALSE and env(GetSpEffectID, 5841) == FALSE and env(GetSpEffectID, 5842) == FALSE and env(GetSpEffectType, SP_EFFECT_TYPE_SLEEP) == TRUE and env(GetSpEffectID, SP_EFFECT_DEEP_SLEEP) == TRUE and env(GetSpEffectID, 100752) == TRUE then -- Sleep (Birbs), Cleanup of Sleep Debuff
+		act(ClearSpEffect, 100752) -- Sleep Loop Debuff (308 for birbs) Cleanup
+    elseif env(GetSpEffectID, 102308) == TRUE and env(GetSpEffectID, 90300) == FALSE and env(GetSpEffectID, 5841) == FALSE and env(GetSpEffectID, 5842) == FALSE and env(GetSpEffectID, 102305) == FALSE and env(GetSpEffectType, SP_EFFECT_TYPE_SLEEP) == TRUE and env(GetSpEffectID, 100753) == FALSE then -- Sleep (Birbs), delayed by 100753 (4 sec delay for deep sleep birbs)
+		act(AddSpEffect, 100744) -- Sleep Immunity Loop
+    elseif env(GetSpEffectID, 90300) == FALSE and env(GetSpEffectID, 5841) == FALSE and env(GetSpEffectID, 5842) == FALSE and env(GetSpEffectID, 102305) == FALSE and env(GetSpEffectID, SP_EFFECT_DEEP_SLEEP) == FALSE and env(GetSpEffectType, SP_EFFECT_TYPE_SLEEP) == TRUE and env(GetSpEffectID, 100747) == FALSE then -- Sleep (No Special Behavior), delayed by 100747 (10 sec delay for deep sleep)
+		act(AddSpEffect, 100744) -- Sleep Immunity Loop
+    elseif env(GetSpEffectID, 102304) == FALSE and env(GetSpEffectID, 102308) == FALSE and env(GetSpEffectID, SP_EFFECT_DEEP_SLEEP) == TRUE and env(GetSpEffectID, 100743) == TRUE then -- Deep Sleep Permanent Loop Debuff Cleanup
+        act(ClearSpEffect, 100743) -- Sleep Loop Debuff Cleanup
+	end
+end
+
+-- Deathblight
+function DeathblightProcHandler()
+    local blightInfo = GetStatusEffectInfo(StatusEffects.Blight)
+    if env(GetSpEffectType, blightInfo.stateInfo) == FALSE then
+        return
+    end
+
+    local enemyInfo = GetEnemyInfo()
+    local deathblightSize = enemyInfo.DeathBlightSize
+    if deathblightSize == DeathBlightSize.None then
+        return
+    end
+
+    act(AddSpEffect, deathblightSize)
+end
+
+-- Frenzy
+function FrenzyProcHandler(isRide)
+    act(AddSpEffect, 1738110) -- Trigger for scripting purposes
+    act(AddSpEffect, 26250) -- Debuff
+
+    if env(GetSpEffectID, 1738100) == TRUE then -- Three Fingers Embrace
+        act(AddSpEffect, 26205) -- Resource Depletion (Three Fingers Embrace)
+        act(AddSpEffect, 1738120) -- Three Fingers Embrace Explosion
+    else
+        act(AddSpEffect, 26200) -- Resource Depletion (Normal)
+        if isRide then
+            FireRideEvent("W_RideDamageMad", "W_RideRun_End", FALSE)
+        else
+            ExecEventAllBody("W_DamageMad") -- Madness animation
+        end
+    end
+end
+
+local enemyFrenzyProcHandled = false
+function EnemyFrenzyProcHandler()
+    if env(GetSpEffectType, 437) == FALSE and env(GetDamageSpecialAttribute, STATUS_EFFECT_MADNESS) == FALSE then
+        enemyFrenzyProcHandled = false
+        return FALSE
+    elseif enemyFrenzyProcHandled then
+        return FALSE
+    end
+
+    enemyFrenzyProcHandled = true
+    act(AddSpEffect, 26200) -- Resource Depletion
+    act(AddSpEffect, 26250) -- Debuff
+    act(ClearSpEffect, 102380) -- Remove the cooldown for enemies
+    return FrenzyJewel_MadnessHandler()
+end
+
+-- Frost
+local frostbiteProcTriggered = false
+function FrostbiteProcHandler()
+    if env(GetSpEffectType, 260) == FALSE then
+        return
+    elseif frostbiteProcTriggered == true then
+        return
+    end
+    frostbiteProcTriggered = true
+    if env(IsCOMPlayer) == TRUE and env(GetSpEffectID, 391410) == TRUE then -- Enemy side: If player has Frost jewel, increased dmg
+        act(AddSpEffect, 6731) -- Frostbite Proc Damage with Jewel
+    else
+        act(AddSpEffect, 6730) -- Frostbite Proc Damage
+    end
+end
+
+function ResetFrostbiteLogic()
+    if frostbiteProcTriggered and env(GetSpEffectType, 260) == FALSE then
+        frostbiteProcTriggered = false
+    end
+end

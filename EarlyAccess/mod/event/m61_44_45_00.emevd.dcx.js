@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -40,13 +40,17 @@ $Event(2044450800, Default, function() {
     }
 L0:
     WaitFor(CharacterHPValue(2044450800) <= 0);
+    //SetEventFlagID(2044452809, ON); //music death flag
     WaitFixedTimeSeconds(4);
+    //(2044452802, OFF); //this prevents P2 music from starting up after death sting plays
     PlaySE(2044450800, SoundType.SFX, 888880000);
     WaitFor(
         (PlayerIsInOwnWorld() && CharacterDead(2044450800) && !CharacterHasSpEffect(10000, 9646))
             || EventFlag(2044450800));
     HandleBossDefeatAndDisplayBanner(2044450800, TextBannerType.LegendFelled);
+    //SetEventFlagID(2044452809, OFF); //CMI fadeout initiation
     SetNetworkconnectedEventFlagID(2044450800, ON);
+    SetBossBGM(392700, BossBGMState.Stop1);
     SetEventFlagID(9160, ON);
     if (PlayerIsInOwnWorld()) {
         SetEventFlagID(61160, ON);
@@ -76,6 +80,8 @@ $Event(2044452811, Restart, function() {
     EndIf(EventFlag(2044450800));
     WaitFor(CharacterHasSpEffect(2044450800, 10010050));
     SetEventFlagID(2044452802, ON);
+    WaitFixedTimeRealFrames(1);
+    //SetEventFlagID(2044452805, OFF); //this disables P1 music from starting up after death sting plays
 });
 
 $Event(2044452820, Restart, function() {
@@ -150,7 +156,5 @@ $Event(2044452849, Restart, function() {
     InitializeCommonEvent(0, 9005801, 2044450800, 2044451800, 2044452800, 2044452805, 2044452806, 10000);
     InitializeCommonEvent(0, 9005811, 2044450800, 2044451800, 5, 0);
     InitializeCommonEvent(0, 9005811, 2044450800, 2044451801, 5, 0);
-    InitializeCommonEvent(0, 9005822, 2044450800, 503000, 2044452805, 2044452806, 2044452805, 2044452802, 0, 0);
+    InitializeCommonEvent(0, 9005822, 2044450800, 392700, 2044452805, 2044452806, 2044452805, 2044452802, 0, 0);
 });
-
-

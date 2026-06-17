@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000N:\\GR\\data\\Param\\event\\m60.emevd\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82,166]
-// @version    3.4.2
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -99,6 +99,8 @@ $Event(0, Default, function() {
     InitializeCommonEvent(9, 98005301, 60920, 1044330209);
     InitializeCommonEvent(10, 98005301, 60920, 1044330210);
     InitializeCommonEvent(11, 98005301, 60920, 1044330211);
+    // Enemy Patrol fight
+    InitializeEvent(0, 1044333701, 0);
 });
 
 $Event(50, Default, function() {
@@ -113,10 +115,10 @@ $Event(50, Default, function() {
     InitializeCommonEvent(0, 90005250, 1044330273, 1044332231, 0, -1);
     InitializeCommonEvent(0, 90005250, 1044330274, 1044332231, 0, -1);
     InitializeCommonEvent(0, 90005251, 1044330340, 1077936128, 0, -1);
-    InitializeCommonEvent(0, 90005261, 1044330260, 1044332260, 1084227584, 0, -1);
-    InitializeCommonEvent(0, 90005261, 1044330261, 1044332260, 1084227584, 0, -1);
-    InitializeCommonEvent(0, 90005261, 1044330262, 1044332260, 1084227584, 0, -1);
-    InitializeCommonEvent(0, 90005261, 1044330263, 1044332260, 1084227584, 0, -1);
+    //InitializeCommonEvent(0, 90005261, 1044330260, 1044332260, 1084227584, 0, -1);
+    //InitializeCommonEvent(0, 90005261, 1044330261, 1044332260, 1084227584, 0, -1);
+    //InitializeCommonEvent(0, 90005261, 1044330262, 1044332260, 1084227584, 0, -1);
+    //InitializeCommonEvent(0, 90005261, 1044330263, 1044332260, 1084227584, 0, -1);
     InitializeCommonEvent(0, 90005251, 1044330200, 1082130432, 0, -1);
     InitializeCommonEvent(0, 90005251, 1044330201, 1082130432, 0, -1);
     InitializeCommonEvent(0, 90005251, 1044330202, 1082130432, 0, -1);
@@ -278,5 +280,11 @@ $Event(1044333700, Restart, function(X0_4) {
     WaitFixedTimeSeconds(10);
     DisableCharacter(X0_4);
     SetCharacterBackreadState(X0_4, true);
+    EndEvent();
+});
+
+$Event(1044333701, Default, function() {
+    SetCharacterTeamType(1044335102, TeamType.Enemy);
+    SetCharacterTeamType(1044335101, TeamType.Enemy2);
     EndEvent();
 });

@@ -1,0 +1,486 @@
+ThreatLevel =
+{
+    None = 0,
+    LesserEnemy = 1,
+    GreaterEnemy = 2,
+    BossEnemy = 3
+}
+
+DeathBlightSize = 
+{
+    None = 0,
+    S = 6820,
+    M = 6821,
+    L = 6822,
+    Bayle = 6823,
+    XL = 6824,
+    Placi = 6825
+}
+
+CHR_MODEL_DICTIONARY = {
+    { ChrId = 0,    ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Tarnished
+    { ChrId = 100,  ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Dummy
+    { ChrId = 110,  ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Dummy
+    { ChrId = 120,  ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Dummy
+    { ChrId = 130,  ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Dummy
+    { ChrId = 1000, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Dummy
+    { ChrId = 2010, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Blaidd
+    { ChrId = 2030, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- Rennala
+    { ChrId = 2031, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- Rennala
+    { ChrId = 2035, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Godskin Matriarch
+    { ChrId = 2040, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Juvenile Scholar
+    { ChrId = 2041, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Larva of Rot
+    { ChrId = 2050, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Ranni the Witch
+    { ChrId = 2051, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Ranni the Witch
+    { ChrId = 2060, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- The Two Fingers
+    { ChrId = 2070, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- The Three Fingers
+    { ChrId = 2100, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Black Knife Assassin
+    { ChrId = 2110, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Beast Clergyman
+    { ChrId = 2120, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Malenia
+    { ChrId = 2130, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Morgott
+    { ChrId = 2131, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Morgott (Dead)
+    { ChrId = 2140, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Omen
+    { ChrId = 2150, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Lightning Ball
+    { ChrId = 2151, ThreatLevel = ThreatLevel.BossEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Quicksilver Husk
+    { ChrId = 2160, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Finger Reader Crone
+    { ChrId = 2170, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Finger Reader Crone
+    { ChrId = 2180, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- Melina
+    { ChrId = 2190, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Radagon
+    { ChrId = 2191, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Radagon (Crucified)
+    { ChrId = 2200, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Elden Beast
+    { ChrId = 2270, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- Giant Crab
+    { ChrId = 2271, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Crab
+    { ChrId = 2272, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- Giant Black Crab
+    { ChrId = 2273, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Black Crab
+    { ChrId = 2274, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- Giant Albinauric Crab
+    { ChrId = 2275, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Albinauric Crab
+    { ChrId = 2276, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- Giant Death Crab
+    { ChrId = 2277, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Death Crab
+    { ChrId = 2300, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Crab
+    { ChrId = 2500, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Crucible Knight
+    { ChrId = 2501, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Skarde
+    { ChrId = 3000, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Exile Soldier
+    { ChrId = 3010, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Banished Knight
+    { ChrId = 3020, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Exile Soldier (Large)
+    { ChrId = 3050, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Commander Niall/O'Neill
+    { ChrId = 3060, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Giant Skeleton
+    { ChrId = 3061, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Giant Beast Skeleton
+    { ChrId = 3062, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- Blighted Nox Ancestor
+    { ChrId = 3070, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Dominula Celebrant
+    { ChrId = 3071, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [CONV] Noxumbra Villager
+    { ChrId = 3080, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Imp
+    { ChrId = 3100, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Elemer of the Briar
+    { ChrId = 3150, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- Night's Cavalry
+    { ChrId = 3155, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Rhys, Carian Knight
+    { ChrId = 3160, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Funeral Steed
+    { ChrId = 3170, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Albinauric Archer
+    { ChrId = 3171, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Phillia- Towering Little Sister
+    { ChrId = 3180, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Albinauric Archer's Wolf
+    { ChrId = 3181, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Red Wolf of Radagon
+    { ChrId = 3200, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Nomadic Merchant
+    { ChrId = 3201, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Frenzied Nomad
+    { ChrId = 3202, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Nomadic Merchant
+    { ChrId = 3210, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Nomadic Merchant's Donkey
+    { ChrId = 3250, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Draconic Tree Sentinel
+    { ChrId = 3251, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Tree Sentinel
+    { ChrId = 3252, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Loretta
+    { ChrId = 3300, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Nox Swordstress/Monk/Nightmaiden
+    { ChrId = 3301, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- [CONV] Tyrna, Nox Night Maiden
+    { ChrId = 3302, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- [CONV] Ghost Nox
+    { ChrId = 3310, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Stormcaller/Tempestcaller
+    { ChrId = 3320, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Silver Tear
+    { ChrId = 3330, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Giant Silver Tear
+    { ChrId = 3350, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Crystalian
+    { ChrId = 3360, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Ancestral Follower
+    { ChrId = 3361, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Putrid Ancestral Follower
+    { ChrId = 3370, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Ancestral Follower Shaman
+    { ChrId = 3371, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Putrid Ancestral Follower Shaman
+    { ChrId = 3400, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Grave Warden Duelist
+    { ChrId = 3401, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [CONV] Sigur Night's Captain
+    { ChrId = 3450, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Misbegotten
+    { ChrId = 3451, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Scaly Misbegotten
+    { ChrId = 3460, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Leonine Misbegotten
+    { ChrId = 3470, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Albinauric
+    { ChrId = 3471, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Large Albinauric
+    { ChrId = 3480, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [CONV] Dyru Scavenger King
+    { ChrId = 3500, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Skeletal Militiaman/Bandit/Knight/Grave Warden
+    { ChrId = 3510, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Catacomb Skeleton
+    { ChrId = 3550, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Sanguine Noble
+    { ChrId = 3560, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Godskin Apostle
+    { ChrId = 3570, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Godskin Noble
+    { ChrId = 3600, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Alabaster Lord
+    { ChrId = 3601, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [CONV] Euclus, Alabaster Demiurge
+    { ChrId = 3610, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Oracle Envoy
+    { ChrId = 3620, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Oracle Envoy (Large)
+    { ChrId = 3630, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- Oracle Envoy (Giant)
+    { ChrId = 3650, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Guardian
+    { ChrId = 3655, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [CONV] Blood Guardian
+    { ChrId = 3660, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Commoner
+    { ChrId = 3661, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Putrid Corpse
+    { ChrId = 3662, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Putrid Corpse (Large)
+    { ChrId = 3664, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- Cemetery Shade
+    { ChrId = 3665, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Gostoc
+    { ChrId = 3666, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- The Noble Goldmask
+    { ChrId = 3670, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Elder Albinauric
+    { ChrId = 3700, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Depraved Perfumer
+    { ChrId = 3701, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Perfumer
+    { ChrId = 3702, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Glintstone Sorcerer
+    { ChrId = 3703, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Page
+    { ChrId = 3704, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Battlemage
+    { ChrId = 3705, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [CONV]  Shabriri's Chosen
+    { ChrId = 3710, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Azur
+    { ChrId = 3720, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Lusat
+    { ChrId = 3730, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Graven School
+    { ChrId = 3750, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Clayman
+    { ChrId = 3755, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [CONV] Rootman
+    { ChrId = 3800, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Cleanrot Knight
+    { ChrId = 3805, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [CONV] Mystic Huntress
+    { ChrId = 3810, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Kindred of Rot
+    { ChrId = 3850, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Marionette Soldier
+    { ChrId = 3860, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Avionette Soldier
+    { ChrId = 3900, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Fire Monk
+    { ChrId = 3901, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Blackflame Monk
+    { ChrId = 3902, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Rot Monk
+    { ChrId = 3910, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Fire Prelate
+    { ChrId = 3920, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [CONV] Einar Ice Guardian
+    { ChrId = 3950, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Man-Serpent
+    { ChrId = 3970, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Azula Beastman
+    { ChrId = 3971, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [CONV] Noxumbra Beastman
+    { ChrId = 4000, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Revenant Follower
+    { ChrId = 4020, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Royal Revenant
+    { ChrId = 4040, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Slug
+    { ChrId = 4050, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Kaiden Sellsword
+    { ChrId = 4051, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- [CONV] Dakk, Starcaller Lord
+    { ChrId = 4060, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Kaiden Sellsword's Horse
+    { ChrId = 4070, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Wolf
+    { ChrId = 4071, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- White Wolf
+    { ChrId = 4072, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [CONV] Caimar's Wolf
+    { ChrId = 4080, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Rat
+    { ChrId = 4090, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Giant Rat
+    { ChrId = 4100, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Demi-Human
+    { ChrId = 4101, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Demi-Human (Large)
+    { ChrId = 4110, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Demi-Human Shaman
+    { ChrId = 4120, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Demi-Human Chief
+    { ChrId = 4130, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Demi-Human Queen
+    { ChrId = 4135, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [CONV] Scion of the Sealed God Phase 1
+    { ChrId = 4140, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Snail
+    { ChrId = 4150, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Basilisk
+    { ChrId = 4151, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Bloodflame Basilisk
+    { ChrId = 4160, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Stray (Large)
+    { ChrId = 4161, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Stray
+    { ChrId = 4162, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Farum Azula Stray (Large)
+    { ChrId = 4163, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Farum Azula Stray
+    { ChrId = 4164, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Bloodbane Stray (Large)
+    { ChrId = 4165, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Bloodbane Stray
+    { ChrId = 4166, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Rotten Stray (Large)
+    { ChrId = 4167, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Rotten Stray
+    { ChrId = 4170, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Putrid Flesh
+    { ChrId = 4171, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.L }, -- Putrid Flesh (Large)
+    { ChrId = 4180, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Spirit Jellyfish
+    { ChrId = 4190, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Large Scarab
+    { ChrId = 4191, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Scarab
+    { ChrId = 4192, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Giant Scarab
+    { ChrId = 4200, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Man-Bat
+    { ChrId = 4201, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Operatic Bat
+    { ChrId = 4210, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Warhawk
+    { ChrId = 4220, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- Land Octopus (Large)
+    { ChrId = 4230, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Land Octopus (Small)
+    { ChrId = 4240, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Fingercreeper
+    { ChrId = 4241, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Fingercreeper (Large)
+    { ChrId = 4250, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Charred Fingercreeper (small)
+    { ChrId = 4250, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Fingercreeper (Small)
+    { ChrId = 4260, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Erdtree Burial Watchdog
+    { ChrId = 4270, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Elder Lion
+    { ChrId = 4271, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [CONV] Seera, Blade of the Ancients
+    { ChrId = 4280, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Giant Ant
+    { ChrId = 4281, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Giant Ant (Skull Plate)
+    { ChrId = 4290, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Bloodhound Knight
+    { ChrId = 4300, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Wandering Noble
+    { ChrId = 4310, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Lordsworn Soldier
+    { ChrId = 4311, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Godrick Soldier
+    { ChrId = 4312, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Raya Lucaria Soldier
+    { ChrId = 4313, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Leyndell Soldier
+    { ChrId = 4314, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Radahn Soldier
+    { ChrId = 4315, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Mausoleum Soldier
+    { ChrId = 4316, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Haligtree Soldier
+    { ChrId = 4321, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Vulgar Militia
+    { ChrId = 4340, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Mad Pumpkin Head
+    { ChrId = 4341, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Mad Pumpkin Head (Thin)
+    { ChrId = 4342, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- [CONV] Tesla Head
+    { ChrId = 4350, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Lordsworn Knight
+    { ChrId = 4351, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Godrick Knight
+    { ChrId = 4352, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Cuckoo Knight
+    { ChrId = 4353, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Leyndell Knight
+    { ChrId = 4354, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Redmane Knight
+    { ChrId = 4355, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Mausoleum Knight
+    { ChrId = 4356, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Haligtree Knight
+    { ChrId = 4357, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Gelmir Knight
+    { ChrId = 4360, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Lordsworn Knight's Horse
+    { ChrId = 4361, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Godrick Knight's Horse
+    { ChrId = 4362, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Cuckoo Knight's Horse
+    { ChrId = 4363, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Leyndell Knight's Horse
+    { ChrId = 4364, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Redmane Knight's Horse
+    { ChrId = 4365, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Mausoleum Knight's Horse
+    { ChrId = 4370, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Foot Soldier
+    { ChrId = 4371, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Godrick Foot Soldier
+    { ChrId = 4372, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Raya Lucaria Foot Soldier
+    { ChrId = 4373, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Leyndell Foot Soldier
+    { ChrId = 4374, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Radahn Foot Soldier
+    { ChrId = 4375, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Mausoleum Foot Soldier
+    { ChrId = 4376, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Haligtree Foot Soldier
+    { ChrId = 4377, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Highwayman
+    { ChrId = 4380, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Starcaller
+    { ChrId = 4381, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Guilty
+    { ChrId = 4382, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Stonedigger
+    { ChrId = 4383, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Glintstone Digger
+    { ChrId = 4384, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Glintstone Digger - Small Sack
+    { ChrId = 4385, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.L }, -- Disciple of Rot
+    { ChrId = 4400, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [CONV] Scion of the Sealed God Phase 2
+    { ChrId = 4420, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Giant Crayfish
+    { ChrId = 4421, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Giant Crayfish
+    { ChrId = 4430, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Watcher Stones
+    { ChrId = 4440, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Land Squirt
+    { ChrId = 4441, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.L }, -- Giant Land Squirt
+    { ChrId = 4442, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.L }, -- Giant Rotten Land Squirt
+    { ChrId = 4450, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Walking Mausoleum
+    { ChrId = 4460, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.L }, -- Flame Chariot
+    { ChrId = 4470, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Abductor Virgin
+    { ChrId = 4480, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Miranda Blossom
+    { ChrId = 4481, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Miranda Sprout
+    { ChrId = 4482, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.L }, -- Rotten Miranda Blossom
+    { ChrId = 4483, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Rotten Miranda Sprout
+    { ChrId = 4484, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- [CONV] Blood Miranda Sprout
+    { ChrId = 4490, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Living Jar Warrior
+    { ChrId = 4491, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Living Jar
+    { ChrId = 4492, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Greatjar
+    { ChrId = 4500, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.XL }, -- Flying Dragon
+    { ChrId = 4501, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.XL }, -- Decaying Ekzykes
+    { ChrId = 4502, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.XL }, -- Glintstone Dragon
+    { ChrId = 4503, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.XL }, -- Borealis the Freezing Fog
+    { ChrId = 4504, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.XL }, -- Elder Dragon Greyoll
+    { ChrId = 4505, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.XL }, -- Flying Dragon (Small)
+    { ChrId = 4510, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.XL }, -- Ancient Dragon
+    { ChrId = 4511, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.XL }, -- Lichdragon Fortissax
+    { ChrId = 4520, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.Placi }, -- Dragonlord Placidusax
+    { ChrId = 4550, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Giant Dog
+    { ChrId = 4560, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Giant Crow
+    { ChrId = 4561, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Giant Crow
+    { ChrId = 4570, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Wormface
+    { ChrId = 4580, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- Large Wormface
+    { ChrId = 4600, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- Troll
+    { ChrId = 4601, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- Troll Knight
+    { ChrId = 4602, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- Snowfield Troll
+    { ChrId = 4603, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- Stonedigger Troll
+    { ChrId = 4604, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- War Counselor Iji
+    { ChrId = 4620, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Astel- Naturalborn of the Void
+    { ChrId = 4630, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- Runebear
+    { ChrId = 4640, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Ulcerated Tree Spirit
+    { ChrId = 4650, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Dragonkin Soldier
+    { ChrId = 4660, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- Guardian Golem
+    { ChrId = 4670, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Ancestor Spirit
+    { ChrId = 4680, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Falling-star Beast
+    { ChrId = 4690, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Grafted Scion
+    { ChrId = 4710, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.XL }, -- God-Devouring Serpent / Rykard- Lord of Blasphemy
+    { ChrId = 4711, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.M }, -- Rykard's Corpse
+    { ChrId = 4720, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Godfrey- First Elden Lord
+    { ChrId = 4721, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Hoarah Loux- Warrior
+    { ChrId = 4730, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Starscourge Radahn
+    { ChrId = 4750, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Godrick the Grafted
+    { ChrId = 4751, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.S }, -- Godrick's Corpse
+    { ChrId = 4760, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.XL }, -- Fire Giant
+    { ChrId = 4770, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Valiant Gargoyle
+    { ChrId = 4800, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Mohg- Lord of Blood
+    { ChrId = 4801, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Mohg- Lord of Blood (Unknown)
+    { ChrId = 4810, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Erdtree Avatar
+    { ChrId = 4811, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Putrid Avatar
+    { ChrId = 4820, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Omenkiller
+    { ChrId = 4850, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [CONV] Spiritshaper Caimar
+    { ChrId = 4910, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Magma Wyrm
+    { ChrId = 4911, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- Great Wyrm Theodorix
+    { ChrId = 4950, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Tibia Mariner
+    { ChrId = 4960, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- Giant Skeleton Torso
+    { ChrId = 4980, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Death Rite Bird
+    { ChrId = 5000, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [DLC] Commander Gaius
+    { ChrId = 5010, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- [DLC] Golden Hippopotamus
+    { ChrId = 5011, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [DLC] Golden Hippopotamus (Golden Wings)
+    { ChrId = 5020, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [DLC] Putrescent Knight
+    { ChrId = 5030, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [DLC] Romina- Saint of the Bud
+    { ChrId = 5040, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- [DLC] Curseblade
+    { ChrId = 5050, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Midra - Human
+    { ChrId = 5051, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- [DLC] Midra- Lord of Frenzied Flame
+    { ChrId = 5060, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Lamprey
+    { ChrId = 5061, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- [DLC] Lamprey (Large)
+    { ChrId = 5070, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- [DLC] Death Knight
+    { ChrId = 5080, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- [DLC] Bloodfiend
+    { ChrId = 5081, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [DLC] Chief Bloodfiend
+    { ChrId = 5090, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Gravebird
+    { ChrId = 5110, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Ghostly Worm
+    { ChrId = 5120, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.Bayle }, -- [DLC] Bayle the Dread
+    { ChrId = 5130, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [DLC] Messmer the Impaler
+    { ChrId = 5131, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [DLC] Messmer the Impaler
+    { ChrId = 5132, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [DLC] Messmer the Impaler
+    { ChrId = 5140, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [DLC] Messmer: Base Serpent
+    { ChrId = 5141, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [DLC] Messmer: Base Serpent
+    { ChrId = 5160, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- [DLC] Fire Knight
+    { ChrId = 5165, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [CONV] Konrad - Pureblood Knight
+    { ChrId = 5170, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.XL }, -- [DLC] Furnace Golem
+    { ChrId = 5180, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [DLC] Dummy Entity
+    { ChrId = 5181, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [DLC] Dummy Entity
+    { ChrId = 5190, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- [DLC] Spider Scorpion
+    { ChrId = 5192, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- [DLC] Spider Scorpion
+    { ChrId = 5193, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- [DLC] Spider Scorpion
+    { ChrId = 5200, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [DLC] Metyr- Mother of Fingers
+    { ChrId = 5210, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [DLC] Divine Beast Dancing Lion
+    { ChrId = 5220, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [DLC] Promised Consort Radahn
+    { ChrId = 5221, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [DLC] Miquella's Arms
+    { ChrId = 5230, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [DLC] Scadutree Avatar
+    { ChrId = 5240, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Commoner (Pot)
+    { ChrId = 5241, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Commoner
+    { ChrId = 5250, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- [DLC] Horned Warrior
+    { ChrId = 5251, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Horned Shaman
+    { ChrId = 5252, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- [CONV] Soldier of Chadrick
+    { ChrId = 5260, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- [DLC] Golem Smith
+    { ChrId = 5270, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- [DLC] Jar Innards
+    { ChrId = 5271, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- [DLC] Jar Innards
+    { ChrId = 5280, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- [DLC] Winter-Lantern
+    { ChrId = 5300, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- [DLC] Rellana- Twin Moon Knight
+    { ChrId = 5311, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Inquisitor (Candles)
+    { ChrId = 5312, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Inquisitor (Staff)
+    { ChrId = 5320, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- [DLC] Fat Inquisitor
+    { ChrId = 5330, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [DLC] St. Trina
+    { ChrId = 5340, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [DLC] Dummy Entity
+    { ChrId = 5350, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [DLC] Basilisk Eyes
+    { ChrId = 5360, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- [DLC] Giant Beast Skeleton
+    { ChrId = 5370, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [DLC] Ancient Dragon Senessax
+    { ChrId = 5380, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- [DLC] Miranda Blossom
+    { ChrId = 5381, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Miranda Sprout
+    { ChrId = 5390, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- [DLC] Troll
+    { ChrId = 5391, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- [DLC] Troll Knight
+    { ChrId = 5392, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- [DLC] Troll - Unknown
+    { ChrId = 5401, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Eagle
+    { ChrId = 5410, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Deer
+    { ChrId = 5421, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- [DLC] Red Bear
+    { ChrId = 5430, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Owl
+    { ChrId = 5440, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Boar
+    { ChrId = 5450, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Ram
+    { ChrId = 5460, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Murre
+    { ChrId = 5470, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Dragonfly
+    { ChrId = 5471, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Yellow Dragonfly
+    { ChrId = 5472, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Great Dragonfly
+    { ChrId = 5480, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Turtle
+    { ChrId = 5490, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Springhare
+    { ChrId = 5500, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Living Magma
+    { ChrId = 5501, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Living Magma
+    { ChrId = 5511, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Shade
+    { ChrId = 5512, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Shade
+    { ChrId = 5513, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- [DLC] Cemetary Shade
+    { ChrId = 5520, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Stray
+    { ChrId = 5521, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Stray
+    { ChrId = 5522, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Stray
+    { ChrId = 5523, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Stray
+    { ChrId = 5524, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Braided Stray
+    { ChrId = 5525, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Braided Stray
+    { ChrId = 5526, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Bloodbane Stray
+    { ChrId = 5527, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Bloodbane Stray
+    { ChrId = 5530, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Man-Bat
+    { ChrId = 5540, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Wolf
+    { ChrId = 5541, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Wolf
+    { ChrId = 5550, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Fingercreeper
+    { ChrId = 5551, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- [DLC] Fingercreeper (Large)
+    { ChrId = 5560, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Fingercreeper (Small)
+    { ChrId = 5570, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Marionette Soldier
+    { ChrId = 5580, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- [DLC] Jagged Peak Drake
+    { ChrId = 5581, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- [DLC] Jagged Peak Drake
+    { ChrId = 5590, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Putrid Flesh
+    { ChrId = 5591, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.L }, -- [DLC] Putrid Flesh (Large)
+    { ChrId = 5600, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Catacomb Skeleton
+    { ChrId = 5620, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [DLC] Tibia Mariner
+    { ChrId = 5630, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- [DLC] Giant Crayfish
+    { ChrId = 5640, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- [DLC] Giant Crab
+    { ChrId = 5641, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Crab
+    { ChrId = 5651, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Messmer Foot Soldier
+    { ChrId = 5661, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Shadow Militia
+    { ChrId = 5680, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [DLC] Wheeled Ballista
+    { ChrId = 5690, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [DLC] Dragon-faced Flamethrower
+    { ChrId = 5700, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Demi-Human
+    { ChrId = 5701, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Demi-Human (Large)
+    { ChrId = 5710, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Demi-Human Shaman
+    { ChrId = 5720, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- [DLC] Demi-Human Chief
+    { ChrId = 5730, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [DLC] Demi-Human Queen
+    { ChrId = 5740, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Kindred of Rot
+    { ChrId = 5750, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- [DLC] Living Jar Warrior
+    { ChrId = 5751, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Living Jar
+    { ChrId = 5760, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Rat
+    { ChrId = 5761, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- [DLC] Giant Rat
+    { ChrId = 5780, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- [DLC] Runebear
+    { ChrId = 5790, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- [DLC] Guardian Golem
+    { ChrId = 5800, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [DLC] Crucible Knight Devonia
+    { ChrId = 5810, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- [DLC] Demi-Human Swordmaster Onze
+    { ChrId = 5820, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [DLC] Great Red Bear
+    { ChrId = 5830, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Messmer Soldier
+    { ChrId = 5840, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- [DLC] Black Knight
+    { ChrId = 5850, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- [DLC] Giant Ram
+    { ChrId = 5860, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [DLC] Ghostflame Dragon
+    { ChrId = 5861, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [CONV] Bloodflame Dragon
+    { ChrId = 5870, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Imp (Lion Head)
+    { ChrId = 5871, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Imp (Dragon Head)
+    { ChrId = 5872, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.L }, -- [DLC] Imp (Dragon Head - Big)
+    { ChrId = 5880, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Catacombs Sorcerer
+    { ChrId = 5890, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Black Knight Horse
+    { ChrId = 5900, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Man-Fly
+    { ChrId = 5910, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [DLC] Hornsent Grandam
+    { ChrId = 5920, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M, }, -- [DLC] Magma Wyrm
+    { ChrId = 5930, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- [DLC] Giant Skeleton
+    { ChrId = 5931, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Giant Beast Skeleton
+    { ChrId = 5940, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Watcher Stones
+    { ChrId = 5950, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- [DLC] Leonine Misbegotten
+    { ChrId = 5960, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [DLC] Ulcerated Tree Spirit
+    { ChrId = 5970, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- [DLC] Abductor Virgin
+    { ChrId = 5980, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- [DLC] Omenkiller
+    { ChrId = 5990, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Basilisk
+    { ChrId = 6001, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Eagle
+    { ChrId = 6010, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Deer
+    { ChrId = 6031, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.M }, -- Bear
+    { ChrId = 6040, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Owl
+    { ChrId = 6050, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Boar
+    { ChrId = 6060, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Goat
+    { ChrId = 6070, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Murre
+    { ChrId = 6072, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Carrier Pigeon
+    { ChrId = 6080, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Dragonfly
+    { ChrId = 6081, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Yellow Dragonfly
+    { ChrId = 6082, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Great Dragonfly
+    { ChrId = 6090, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Turtle
+    { ChrId = 6091, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Miriel- Pastor of Vows
+    { ChrId = 6100, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Springhare
+    { ChrId = 6200, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Scarab
+    { ChrId = 6201, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Scarab
+    { ChrId = 6202, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Scarab
+    { ChrId = 6210, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Albinauric Archer
+    { ChrId = 6220, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Wolf
+    { ChrId = 6221, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Wolf
+    { ChrId = 6231, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Perfumer
+    { ChrId = 6233, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- [DLC] Page
+    { ChrId = 6240, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [DLC] Dummy
+    { ChrId = 6251, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [DLC] Tree Sentinel
+    { ChrId = 6260, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [DLC] Death Rite Bird
+    { ChrId = 6270, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- [DLC] Royal Revenant
+    { ChrId = 6290, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Misbegotten
+    { ChrId = 6291, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Scaly Misbegotten
+    { ChrId = 6300, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Snail (Base)
+    { ChrId = 6310, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.L }, -- [DLC] Fallingstar Beast (Base)
+    { ChrId = 7000, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Fallen Hawks Soldier
+    { ChrId = 7005, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Mystic Pigmen
+    { ChrId = 7100, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Ancient Hero
+    { ChrId = 7101, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Erdtree Sentry
+    { ChrId = 7102, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Erdtree Sentry (Rotten)
+    { ChrId = 8000, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Torrent
+    { ChrId = 8001, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [CONV] Torrent
+    { ChrId = 8002, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [CONV] Torrent
+    { ChrId = 8003, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [CONV] Torrent
+    { ChrId = 8004, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [CONV] Torrent
+    { ChrId = 8005, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [CONV] Torrent
+    { ChrId = 8100, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Ballista
+    { ChrId = 8101, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Trebuchet
+    { ChrId = 8110, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Dragon-faced Flamethrower
+    { ChrId = 8120, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Merciless Chariot
+}

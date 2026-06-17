@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common.emevd\u0000N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\m60.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000"
 // @linked    [0,72,154,220]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -409,9 +409,9 @@ $Event(1049392863, Restart, function() {
     InitializeEvent(0, 1049392862, 1049390816, 1049390817, 1049390818);                          //Enable Second Team Gravity
     // Special Effects for Elite starcallers | scaling and gravity armor
     SetSpEffect(1049390816, 1477000);
-    SetSpEffect(1049390816, 7120);
+    //SetSpEffect(1049390816, 7120);
     SetSpEffect(1049390817, 1477000);
-    SetSpEffect(1049390817, 7120);
+    //SetSpEffect(1049390817, 7120);
     InitializeEvent(1, 1049392862, 1049390834, 1049390835, 1049390836);                                      //Enable Second Team Nox  
     EndEvent();
 });
@@ -427,9 +427,9 @@ $Event(1049392864, Restart, function() {
     InitializeEvent(0, 1049392862, 1049390816, 1049390817, 1049390818);                                                //Enable Second Team Gravity
     // Special Effects for Elite starcallers | scaling and gravity armor
     SetSpEffect(1049390816, 1477000);
-    SetSpEffect(1049390816, 7120);
+    //SetSpEffect(1049390816, 7120);
     SetSpEffect(1049390817, 1477000);
-    SetSpEffect(1049390817, 7120);
+    //SetSpEffect(1049390817, 7120);
     EndEvent();
 });
 
@@ -448,7 +448,7 @@ $Event(1049392875, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_
     EndEvent();
 });
 
-//Meteoer Shower, start of Battle.
+//Meteor Shower, start of Battle.
 $Event(1049392876, Default, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
     EndIf(EventFlag(1049390015));
     EndIf(EventFlag(1049390016));

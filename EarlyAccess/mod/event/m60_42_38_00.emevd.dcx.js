@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -15,12 +15,21 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005460, 1042380210);
     InitializeCommonEvent(0, 90005461, 1042380210);
     InitializeCommonEvent(0, 90005462, 1042380210);
+    
+    //Bell Bearing Hunter Boss Event -- Force Anim and Night Check Confirm
     InitializeCommonEvent(0, 90005760, 1042380850, 1042380850, 1042382360, 1042382718);
+    
+    //Set Network Connected Flag (1042380701)
     InitializeCommonEvent(0, 90005770, 1042380701);
+    
+    //Bell Bearing Hunter Boss Events
     InitializeCommonEvent(0, 90005860, 1042380850, 0, 1042380850, 0, 1042380410, 0);
     InitializeCommonEvent(0, 90005870, 1042380850, 903100600, 10);
     InitializeCommonEvent(0, 90005872, 1042380850, 10, 0);
+    
+    //Bernahl Script Handler -- Bell Bearing Hunter Night Check
     InitializeEvent(0, 1042383700, 1042380710);
+    
     InitializeCommonEvent(0, 90005704, 1042380710, 3881, 3880, 1042389251, 3);
     InitializeCommonEvent(0, 90005703, 1042380710, 3881, 3882, 1042389251, 3881, 3880, 3884, -1);
     InitializeCommonEvent(0, 90005702, 1042380710, 3883, 3880, 3884);
@@ -241,6 +250,7 @@ $Event(1042382651, Restart, function(X0_4, X4_4) {
     DirectlyGivePlayerItem(ItemType.Goods, 9111, X4_4, 1);
 });
 
+//Bernahl Script Handler -- Bell Bearing Hunter Night Check
 $Event(1042383700, Restart, function(X0_4) {
     WaitFixedTimeFrames(1);
     DisableNetworkSync();
@@ -252,13 +262,12 @@ $Event(1042383700, Restart, function(X0_4) {
 L10:
     if (!EventFlag(1042382719)) {
         SetNetworkconnectedEventFlagID(1042382718, OFF);
-        if (TimeOfDayInRange(20, 0, 0, 5, 30, 0)
-            && !EventFlag(1042380850)
-            && (EventFlag(1042380701)
-                || EventFlag(3881)
-                || EventFlag(3882)
-                || EventFlag(3883)
-                || !EventFlag(3885))) {
+        if (TimeOfDayInRange(20, 0, 0, 5, 30, 0) && !EventFlag(1042380850)) {
+            //&& (EventFlag(1042380701) //Event flags associated with Bernahl talk script states
+                //|| EventFlag(3881)
+                //|| EventFlag(3882)
+                //|| EventFlag(3883)
+                //|| !EventFlag(3885)))
             SetNetworkconnectedEventFlagID(1042382718, ON);
         }
     }

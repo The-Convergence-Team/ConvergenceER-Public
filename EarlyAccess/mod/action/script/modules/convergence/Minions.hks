@@ -1,0 +1,197 @@
+-- Player Side
+function SummonMinionLib()
+    SummonMinion(21745000, 5, 5560, "155600050", "55600000") -- Gravity: Creepign Offspring
+end
+
+local summonQuantityHolder = 0
+local summonTotal = 0
+function SummonMinion(spEffect, quantity, chrId, npcParam, thinkParam)
+    if (env(GetSpEffectID, spEffect) == FALSE and summonQuantityHolder == 0) or summonTotal + quantity >= 35 then
+        return
+    end
+
+    if quantity > summonQuantityHolder then
+        summonQuantityHolder = summonQuantityHolder + 1
+    else
+        summonQuantityHolder = 0
+        act(ClearSpEffect, spEffect)
+        return
+    end
+
+    local pos = GetPointerValue(CHR_INS_BASE.CHR_MODULES.PHYSICS_MODULE.LOCAL_POSITION)
+    local radius = 2
+    local angleDeg = (summonQuantityHolder - 1) * (360 / quantity)
+    local angleRad = math.rad(angleDeg)
+    pos.x = pos.x + math.cos(angleRad) * radius
+    pos.z = pos.z + math.sin(angleRad) * radius
+
+    summonTotal = summonTotal + 1
+    SetDebugChrSpawnData(TRUE, chrId, npcParam, thinkParam, 0, 0, pos.x, pos.y + 0.3, pos.z, FALSE, 0)
+end
+
+--This function does not spawn a character by itself, it only sets data and tells the debug chr creator to spawn when it can.
+--This means that you can only create 1 chr per frame using this.
+function SetDebugChrSpawnData(spawnThisFrame, chrId, npcParamId, npcThinkParamId, eventEntityId, talkId, posX, posY, posZ, isPlayer, charaInitParam)
+    if chrId < 0 or chrId > 9999 then
+        return
+    end
+
+    -- For cleaner repeat calls to the same section in the table
+    local _DEBUG_CHR_CREATOR = GAME_BASE.WORLD_CHR_MAN.DEBUG_CHR_CREATOR
+
+    --Translate chrId to wide string in the form of "c0000" or "c4700"
+    SetPointerValue(_DEBUG_CHR_CREATOR.MODEL(0), 0x63) -- first char is 'c'
+    for i = 4, 1, -1 do
+        local digit = chrId % 10
+        SetPointerValue(_DEBUG_CHR_CREATOR.MODEL(i), 0x30 + digit)
+        chrId = math.floor(chrId / 10)
+    end
+    
+    SetPointerValue(_DEBUG_CHR_CREATOR.CHR_NPC_PARAM, npcParamId)
+    SetPointerValue(_DEBUG_CHR_CREATOR.CHR_NPC_THINK_PARAM, npcThinkParamId)
+    SetPointerValue(_DEBUG_CHR_CREATOR.CHR_EVENT_ENTITY_ID, eventEntityId)
+    SetPointerValue(_DEBUG_CHR_CREATOR.CHR_TALK_ID, talkId)
+    SetPointerValue(_DEBUG_CHR_CREATOR.CHR_POS, {posX, posY, posZ})
+
+    SetPointerValue(_DEBUG_CHR_CREATOR.IS_PLAYER, isPlayer)
+    SetPointerValue(_DEBUG_CHR_CREATOR.CHR_CHARA_INIT_PARAM, charaInitParam)
+
+    if spawnThisFrame == TRUE then
+        SetPointerValue(_DEBUG_CHR_CREATOR.IS_SPAWN, TRUE)
+    end
+end
+
+-- Minion Side
+local oneShotEnemyOffset = 0
+minionInitialized = false
+function MinionApplyEffect()
+    if env(GetSpEffectID, 3000700) == FALSE or minionInitialized then
+        return
+    end
+    minionInitialized = true
+
+    local spellHand = nil
+    if LocalPlayerHasSpEffect(3000500) == TRUE then
+        spellHand = HAND_LEFT
+    elseif LocalPlayerHasSpEffect(3000501) == TRUE then
+        spellHand = HAND_RIGHT
+    end
+    local weaponID = GetLocalPlayerWeaponID(spellHand, 4)
+
+    local corrections = { }
+    local scaling = { }
+    if env(GetSpEffectID, 3000600) == TRUE then
+        table.insert(corrections, PARAM.EquipParamWeapon.CORRECT_MAGIC)
+        table.insert(scaling, CHR_INS_BASE.PLAYER_GAME_DATA.INTELLIGENCE)
+    end
+    if env(GetSpEffectID, 3000601) == TRUE then
+        table.insert(corrections, PARAM.EquipParamWeapon.CORRECT_FAITH)
+        table.insert(scaling, CHR_INS_BASE.PLAYER_GAME_DATA.FAITH)
+    end
+    if env(GetSpEffectID, 3000602) == TRUE then
+        table.insert(corrections, PARAM.EquipParamWeapon.CORRECT_ARCANE)
+        table.insert(scaling, CHR_INS_BASE.PLAYER_GAME_DATA.ARCANE)
+    end
+
+    if env(GetSpEffectID, 3001500) == TRUE then
+        oneShotEnemyOffset = 1000
+    end
+
+    MinionApplyEffect_ScalingStat(scaling)
+    MinionApplyEffect_WeaponScaling(spellHand)
+    MinionApplyEffect_CatalystTier(weaponID, corrections)
+    MinionApplyEffect_CatalystAffinity(weaponID)
+end
+
+function MinionApplyEffect_ScalingStat(statArray)
+    local spEffects = {
+        { 90, 3000109 }, -- Tier 10
+        { 80, 3000108 }, -- Tier  9
+        { 70, 3000107 }, -- Tier  8
+        { 60, 3000106 }, -- Tier  7
+        { 50, 3000105 }, -- Tier  6
+        { 40, 3000104 }, -- Tier  5
+        { 30, 3000103 }, -- Tier  4
+        { 20, 3000102 }, -- Tier  3
+        { 10, 3000101 }, -- Tier  2
+        {  1, 3000100 }, -- Tier  1
+    }
+
+    local statTotal = 0
+    for i = 1, #statArray, 1 do
+        statTotal = statTotal + GetLocalPlayerPointerValue(statArray[i])
+    end
+
+    for i = 1, #spEffects, 1 do
+        if statTotal >= spEffects[i][1] then
+            act(AddSpEffect, spEffects[i][2] + oneShotEnemyOffset)
+            break
+        end
+    end
+end
+
+function MinionApplyEffect_WeaponScaling(spellHand)
+    local spEffects = {
+        {  0, 3000000 }, -- + 0
+        {  1, 3000001 }, -- + 1
+        {  2, 3000002 }, -- + 2
+        {  3, 3000003 }, -- + 3
+        {  4, 3000004 }, -- + 4
+        {  5, 3000005 }, -- + 5
+        {  6, 3000006 }, -- + 6
+        {  7, 3000007 }, -- + 7
+        {  8, 3000008 }, -- + 8
+        {  9, 3000009 }, -- + 9
+        { 10, 3000010 }, -- +10
+        { 11, 3000011 }, -- +11
+        { 12, 3000012 }, -- +12
+        { 13, 3000013 }, -- +13
+        { 14, 3000014 }, -- +14
+        { 15, 3000015 }, -- +15
+    }
+
+    local weaponID = GetLocalPlayerWeaponID(spellHand, 0)
+    local weaponUpgradeLevel = tonumber(string.sub(weaponID, -2))
+    act(AddSpEffect, spEffects[weaponUpgradeLevel + 1][2] + oneShotEnemyOffset)
+end
+
+function MinionApplyEffect_CatalystTier(weaponID, scalings)
+    for i = 1, #scalings, 1 do
+        local scaling = GetParamValue(scalings[i], weaponID)
+        if scaling == 0 then
+            -- Nothing
+        elseif scaling == 80 then
+            act(AddSpEffect, 3000300 + oneShotEnemyOffset) -- 0.8x reductions
+            break
+        elseif scaling == 100 then
+            act(AddSpEffect, 3000301 + oneShotEnemyOffset) -- no reductions
+            break
+        end
+    end
+end
+
+function MinionApplyEffect_CatalystAffinity(weaponID)
+    local damageType = nil
+    if env(GetSpEffectID, 3000400) == TRUE then
+        damageType = PARAM.EquipParamWeapon.CORRECT_TYPE_PHYSICAL
+    elseif env(GetSpEffectID, 3000401) == TRUE then
+        damageType = PARAM.EquipParamWeapon.CORRECT_TYPE_MAGIC
+    elseif env(GetSpEffectID, 3000402) == TRUE then
+        damageType = PARAM.EquipParamWeapon.CORRECT_TYPE_FIRE
+    elseif env(GetSpEffectID, 3000403) == TRUE then
+        damageType = PARAM.EquipParamWeapon.CORRECT_TYPE_LIGHTNING
+    elseif env(GetSpEffectID, 3000404) == TRUE then
+        damageType = PARAM.EquipParamWeapon.CORRECT_TYPE_HOLY
+    end
+
+    local calcCorrect = GetParamValue(damageType, weaponID)
+    if calcCorrect == 20 or calcCorrect == 23 then
+        act(AddSpEffect, 3000203 + oneShotEnemyOffset) -- no reductions
+    elseif calcCorrect == 21 or calcCorrect == 24 then
+        act(AddSpEffect, 3000202 + oneShotEnemyOffset) -- 0.8x reductions
+    elseif calcCorrect == 22 or calcCorrect == 25 then
+        act(AddSpEffect, 3000201 + oneShotEnemyOffset) -- 0.6x reductions
+    elseif calcCorrect == 26 or calcCorrect == 27 then
+        act(AddSpEffect, 3000200 + oneShotEnemyOffset) -- 0.4x reductions
+    end
+end

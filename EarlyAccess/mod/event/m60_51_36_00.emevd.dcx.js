@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -419,19 +419,21 @@ $Event(1051362800, Restart, function() {
 $Event(1051362810, Restart, function() {
     if (EventFlag(1051360800)) {
         ChangeCharacterEnableState(1051360800, Disabled);
-        ChangeCharacterCollisionState(1051360800, Disabled);
-        ForceCharacterDeath(1051360800, false);
         ChangeCharacterEnableState(1051360801, Disabled);
-        ChangeCharacterCollisionState(1051360801, Disabled);
-        ForceCharacterDeath(1051360801, false);
         ChangeCharacterEnableState(1051360802, Disabled);
-        ChangeCharacterCollisionState(1051360802, Disabled);
-        ForceCharacterDeath(1051360802, false);
         ChangeCharacterEnableState(1051360803, Disabled);
-        ChangeCharacterCollisionState(1051360803, Disabled);
-        ForceCharacterDeath(1051360803, false);
         ChangeCharacterEnableState(1051360804, Disabled);
+        
+        ChangeCharacterCollisionState(1051360800, Disabled);
+        ChangeCharacterCollisionState(1051360801, Disabled);
+        ChangeCharacterCollisionState(1051360802, Disabled);
+        ChangeCharacterCollisionState(1051360803, Disabled);
         ChangeCharacterCollisionState(1051360804, Disabled);
+        
+        ForceCharacterDeath(1051360800, false);
+        ForceCharacterDeath(1051360801, false);
+        ForceCharacterDeath(1051360802, false);
+        ForceCharacterDeath(1051360803, false);
         ForceCharacterDeath(1051360804, false);
         EndEvent();
     }
@@ -440,45 +442,47 @@ L0:
     EnableCharacterInvincibility(1051360800);
     GotoIf(L5, !EventFlag(9410));
     GotoIf(L5, EventFlag(9413));
+    
     ChangeCharacterEnableState(1051360800, Disabled);
-    ChangeCharacterCollisionState(1051360800, Disabled);
-    ForceCharacterDeath(1051360800, false);
     ChangeCharacterEnableState(1051360801, Disabled);
-    ChangeCharacterCollisionState(1051360801, Disabled);
-    ForceCharacterDeath(1051360801, false);
     ChangeCharacterEnableState(1051360802, Disabled);
-    ChangeCharacterCollisionState(1051360802, Disabled);
-    ForceCharacterDeath(1051360802, false);
     ChangeCharacterEnableState(1051360803, Disabled);
-    ChangeCharacterCollisionState(1051360803, Disabled);
-    ForceCharacterDeath(1051360803, false);
     ChangeCharacterEnableState(1051360804, Disabled);
+    
+    ChangeCharacterCollisionState(1051360800, Disabled);
+    ChangeCharacterCollisionState(1051360801, Disabled);
+    ChangeCharacterCollisionState(1051360802, Disabled);
+    ChangeCharacterCollisionState(1051360803, Disabled);
     ChangeCharacterCollisionState(1051360804, Disabled);
+    
+    ForceCharacterDeath(1051360800, false);
+    ForceCharacterDeath(1051360801, false);
+    ForceCharacterDeath(1051360802, false);
+    ForceCharacterDeath(1051360803, false);
     ForceCharacterDeath(1051360804, false);
     EndEvent();
 L5:
     SetCharacterAIState(1051360801, Disabled);
-    ChangeCharacterEnableState(1051360801, Disabled);
     SetCharacterAIState(1051360802, Disabled);
-    ChangeCharacterEnableState(1051360802, Disabled);
     SetCharacterAIState(1051360803, Disabled);
+    ChangeCharacterEnableState(1051360801, Disabled);
+    ChangeCharacterEnableState(1051360802, Disabled);
     ChangeCharacterEnableState(1051360803, Disabled);
     ChangeCharacterEnableState(1051360804, Disabled);
     ChangeCharacterCollisionState(1051360804, Disabled);
+    
     ForceCharacterDeath(1051360804, false);
     SetCharacterAIState(1051360800, Disabled);
-    //WaitFor(EventFlag(1051362805) && cond && InArea(10000, 1051362800));
-    IfInoutsideArea(MAIN, InsideOutsideState.Inside, 10000, 1051362800, 1);
-    //SetCharacterAIState(1051360801, Enabled);
-    //SetNetworkUpdateRate(1051360801, true, CharacterUpdateFrequency.AlwaysUpdate);
-    //DisplayBossHealthBar(Enabled, 1051360801, 0, 903460501);
+    WaitFor(InArea(10000, 1051362800));
+    
     CreateBulletOwner(1051360801);
     ForceAnimationPlayback(1051360800, 703, true, false, true, Equal, 1);
     ShootBullet(1051360801, 1051362810, -1, 240510700, 15, 180, 0);
-    WaitFor(ElapsedSeconds(2.25));
+    WaitFixedTimeSeconds(2.25);
+    
     ForceAnimationPlayback(1051360800, 1703, false, false, true, Equal, 1);
-    //IfCharacterHasSpEffect(MAIN, 1051360800, 5030, true, Equal, 1);
-    IfEventFlag(MAIN, ON, TargetEventFlagType.EventFlag, 1051362805);
+    WaitFor(EventFlag(1051362805));
+    
     DisableCharacterInvincibility(1051360800);
     SetCharacterAIState(1051360800, Enabled);
     SetNetworkUpdateRate(1051360800, true, CharacterUpdateFrequency.AlwaysUpdate);
@@ -502,10 +506,10 @@ $Event(1051362849, Restart, function() {
     InitializeCommonEvent(0, 9005801, 1051360800, 1051361800, 1051362800, 1051362805, 1051362806, 10000);
     InitializeCommonEvent(0, 9005811, 1051360800, 1051361800, 5, 0);
     InitializeCommonEvent(0, 9005811, 1051360800, 1051361801, 3, 0);
-    InitializeCommonEvent(0, 9005822, 1051360800, 921600, 1051362805, 1051362806, 0, 1051362802, 0, 0);
+    InitializeCommonEvent(0, 9005822, 1051360800, 391500, 1051362805, 1051362806, 0, 1051362802, 0, 0);
 });
 
-$Event(1051363700, Restart, function() {
+$Event(1051363700, Restart, function() { //Not initialized
     WaitFor(EventFlag(1051362702) && EventFlag(9410) && !EventFlag(9411));
     PlayCutsceneToPlayer(60510000, CutscenePlayMode.Skippable, 10000);
     WaitFixedTimeRealFrames(1);

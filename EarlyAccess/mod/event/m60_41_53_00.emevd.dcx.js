@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -13,7 +13,10 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005860, 1041530800, 0, 1041530800, 0, 30320, 0);
     InitializeCommonEvent(0, 90005636, 32058691, 1041530650, 1041531650, 4470, 1041532650, 1041532651, 1041532650, 1041533650, 0);
     InitializeCommonEvent(0, 90005637, 32058691, 1041530650, 1041531650);
-    InitializeCommonEvent(0, 90005300, 1041530500, 1041530500, 40308, 0, 0);
+    
+    InitializeCommonEvent(0, 90005250, 1041530500, 1041531850, 0, -1); //NPC Bee Activation Initialization 
+    InitializeCommonEvent(0, 90005300, 1041530500, 1041530500, 40308, 0, 0); //NPC Bee One Time AwardItem/Death
+    
     //Erdtree Warps - Enemy, Obj, Guardian
     InitializeCommonEvent(0, 9005995, 1041530750, 1041530725, 1041530800);
     InitializeCommonEvent(0, 90005890, 1041530800, 1041530801, 1041530801);

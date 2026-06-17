@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -212,6 +212,10 @@ L0:
 L2:
     EnableCharacterAI(12090800);
     DisableCharacterInvincibility(12090800);
+    EnableLockOnPoint(12090800, 21);
+    EnableLockOnPoint(12090800, 23);
+    EnableLockOnPoint(12090800, 26);
+    EnableLockOnPoint(12090800, 28);
     SetNetworkUpdateRate(12090800, true, CharacterUpdateFrequency.AlwaysUpdate);
     DisplayBossHealthBar(Enabled, 12090800, 0, 904670001);
 });

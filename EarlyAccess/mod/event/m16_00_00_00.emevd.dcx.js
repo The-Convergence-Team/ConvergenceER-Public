@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -149,6 +149,10 @@ $Event(0, Default, function() {
     InitializeEvent(0, 16001732, 0);
     InitializeCommonEvent(0, 90005525, 16002015, 16002115); // illusion wall
     InitializeEvent(0, 16001733, 0); //dropdown boi
+    
+    //Mimic
+    InitializeCommonEvent(0, 20000352, 16000650);
+    InitializeCommonEvent(0, 20000353, 16000651, 16000650, 516000650);
 });
 
 $Event(50, Default, function() {
@@ -180,7 +184,7 @@ $Event(50, Default, function() {
     InitializeCommonEvent(0, 90005250, 16000349, 16002343, 0, -1);
     InitializeCommonEvent(0, 90005250, 16000350, 16002343, 0, -1);
     InitializeCommonEvent(0, 90005250, 16000354, 16002343, 0, -1);
-    InitializeCommonEvent(0, 90005251, 16000520, 1090519040, 0, -1);
+    InitializeCommonEvent(0, 90005251, 16000522, 1090519040, 0, -1); //Bloodhound Knight Activation Initialization
     InitializeCommonEvent(0, 16002310, 16000316, 1099956224, 0, -1);
     InitializeCommonEvent(0, 90005251, 16000311, 1103626240, 0, -1);
     InitializeCommonEvent(0, 90005251, 16000224, 1090519040, 0, -1);
@@ -445,8 +449,10 @@ $Event(16002580, Restart, function() {
     RegisterLadder(16000590, 16000591, 16001590);
     RegisterLadder(16000592, 16000593, 16001592);
     RegisterLadder(16000594, 16000595, 16001594);
-    RegisterLadder(16000596, 16000597, 16001596)
-    RegisterLadder(16000598, 16000599, 16001598)
+    RegisterLadder(16000596, 16000597, 16001596);
+    RegisterLadder(16000598, 16000599, 16001598);
+    RegisterLadder(16000585, 16000586, 16001585);   
+    RegisterLadder(16000588, 16000587, 16001588);   
 });
 
 $Event(16002590, Restart, function() {
@@ -1509,6 +1515,7 @@ L1:
     if (EventFlag(16009327)) {
         SetEventFlagID(16009329, ON);
     }
+    DisableCharacter(16000241);
     SetCharacterBackreadState(X0_4, false);
     EnableCharacter(X0_4);
     SetCharacterBackreadState(X4_4, false);

@@ -4,12 +4,12 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
     DisableAsset(15001702);
-    InitializeCommonEvent(0, 9005810, 15000800, 15000000, 15000950, 15001950, 0);
+    InitializeCommonEvent(0, 9005810, 15000800, 15000000, 15000950, 15001950, 0); //Malenia Bonfire Registration
     InitializeCommonEvent(0, 9005810, 15000850, 15000005, 15000955, 15001955, 0);
     RegisterBonfire(15000001, 15001951, 0, 0, 0, 8);
     RegisterBonfire(15000002, 15001952, 0, 0, 0, 8);
@@ -18,23 +18,36 @@ $Event(0, Default, function() {
     RegisterBonfire(15000006, 15001956, 0, 0, 0, 8);
     RegisterBonfire(15000007, 15001957, 0, 0, 0, 8);
     RegisterBonfire(15000008, 15001958, 0, 0, 0, 8);
-    InitializeEvent(0, 15002800, 0);
-    InitializeEvent(0, 15002810, 0);
-    InitializeEvent(0, 15002811, 0);
-    InitializeEvent(0, 15002820, 15000802, 3030, 18451);
-    InitializeEvent(1, 15002820, 15000803, 3031, 18452);
-    InitializeEvent(2, 15002820, 15000804, 3032, 18453);
-    InitializeEvent(3, 15002820, 15000805, 3033, 18454);
-    InitializeEvent(0, 15002830, 18410, 18420);
-    InitializeEvent(1, 15002830, 18411, 18421);
-    InitializeEvent(2, 15002830, 18412, 18422);
-    InitializeEvent(3, 15002830, 18413, 18423);
-    InitializeEvent(4, 15002830, 18414, 18424);
-    InitializeEvent(5, 15002830, 18415, 18425);
-    InitializeEvent(6, 15002830, 18416, 18426);
-    InitializeEvent(7, 15002830, 18417, 18427);
-    InitializeEvent(8, 15002830, 18418, 18428);
-    InitializeEvent(9, 15002830, 18419, 18429);
+    InitializeEvent(0, 15002800, 0); //Malenia Death Handler
+    InitializeEvent(0, 15002810, 0); //Malenia Boss Initialization
+    InitializeEvent(0, 15002811, 0); //Malenia Phase Change
+    InitializeEvent(0, 15002820, 15000802, 3030, 18451); //Malenia Vortex Clone Attack 02
+    InitializeEvent(1, 15002820, 15000803, 3031, 18452); //Malenia Vortex Clone Attack 03
+    InitializeEvent(2, 15002820, 15000804, 3032, 18453); //Malenia Vortex Clone Attack 04
+    InitializeEvent(3, 15002820, 15000805, 3033, 18454); //Malenia Vortex Clone Attack 05
+    
+    //Malenia Hp Recovery On Hit (Malenia SpEffect, Player SpEffect, Entity ID)
+    InitializeEvent(0, 15002830, 18410, 18420, 15000800);
+    InitializeEvent(1, 15002830, 18411, 18421, 15000800);
+    InitializeEvent(2, 15002830, 18412, 18422, 15000800);
+    InitializeEvent(3, 15002830, 18413, 18423, 15000800);
+    InitializeEvent(4, 15002830, 18414, 18424, 15000800);
+    InitializeEvent(5, 15002830, 18415, 18425, 15000800);
+    InitializeEvent(6, 15002830, 18416, 18426, 15000800);
+    InitializeEvent(7, 15002830, 18417, 18427, 15000800);
+    InitializeEvent(8, 15002830, 18418, 18428, 15000800);
+    InitializeEvent(9, 15002830, 18419, 18429, 15000800);
+    InitializeEvent(10, 15002830, 18410, 18420, 15000806); //Phase 2 Malenia
+    InitializeEvent(11, 15002830, 18411, 18421, 15000806); //Phase 2 Malenia
+    InitializeEvent(12, 15002830, 18412, 18422, 15000806); //Phase 2 Malenia
+    InitializeEvent(13, 15002830, 18413, 18423, 15000806); //Phase 2 Malenia
+    InitializeEvent(14, 15002830, 18414, 18424, 15000806); //Phase 2 Malenia
+    InitializeEvent(15, 15002830, 18415, 18425, 15000806); //Phase 2 Malenia
+    InitializeEvent(16, 15002830, 18416, 18426, 15000806); //Phase 2 Malenia
+    InitializeEvent(17, 15002830, 18417, 18427, 15000806); //Phase 2 Malenia
+    InitializeEvent(18, 15002830, 18418, 18428, 15000806); //Phase 2 Malenia
+    InitializeEvent(19, 15002830, 18419, 18429, 15000806); //Phase 2 Malenia
+    
     InitializeEvent(0, 15002848, 18031, 2122);
     InitializeEvent(0, 15002849, 0);
     InitializeEvent(0, 15002850, 0);
@@ -255,9 +268,9 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005211, 15000718, 30004, 20004, 0, 1065353216, 0, 0, 0, 0, 0); //kneeling soldier in lower area
     InitializeCommonEvent(0, 90005211, 15000719, 30004, 20004, 15002579, 1065353216, 0, 0, 0, 0, 0); //kaboom 1
   // bubble blowing parkour guy
-  InitializeCommonEvent(0, 90005261, 15000720, 15002720, 1065353216, 0, 3005);
+  //InitializeCommonEvent(0, 90005261, 15000720, 15002720, 1065353216, 0, 3005); // superseded
   // bubble blowing guys 2
-  InitializeCommonEvent(0, 90005261, 15000721, 15002721, 1065353216, 0, 3005);
+  //InitializeCommonEvent(0, 90005261, 15000721, 15002721, 1065353216, 0, 3005);
   InitializeCommonEvent(0, 90005250, 15000722, 15002722, 0, -1); //3some 1
   InitializeCommonEvent(0, 90005250, 15000723, 15002722, 0, -1); //3some 2
   InitializeCommonEvent(0, 90005250, 15000724, 15002722, 0, -1); //3some 2
@@ -281,6 +294,31 @@ $Event(0, Default, function() {
   InitializeCommonEvent(0, 90005250, 15000742, 15002742, 0, -1); //Misbegotten Upper Activation 2
   InitializeCommonEvent(0, 90005250, 15000743, 15002743, 0, 3020); //Storeroom Ambush
   InitializeCommonEvent(0, 90005250, 15000744, 15002743, 0, 3020); //Storeroom Ambush
+  
+  //Bubble Blowing Boys Music
+  InitializeCommonEvent(0, 90005221, 15000745, 30000, 20000, 0, 0);
+  InitializeCommonEvent(0, 90005221, 15000746, 30000, 20000, 0, 0);
+  InitializeCommonEvent(0, 90005221, 15000747, 30000, 20000, 0, 0);
+  InitializeCommonEvent(0, 90005221, 15000748, 30000, 20000, 0, 0);
+  InitializeCommonEvent(0, 90005221, 15000749, 30000, 20000, 0, 0);
+  InitializeCommonEvent(0, 90005221, 15000750, 30000, 20000, 0, 0);
+  InitializeCommonEvent(0, 90005221, 15000751, 30000, 20000, 0, 0);
+  InitializeCommonEvent(0, 90005221, 15000752, 30000, 20000, 0, 0);
+  InitializeCommonEvent(0, 90005221, 15000753, 30000, 20000, 0, 0);
+  
+  //Biggest Bubble Boys Music and Activate Region
+  InitializeCommonEvent(0, 90005200, 15000720, 30000, 20000, 15002720, 0, 0, 0, 0, 0);
+  InitializeCommonEvent(0, 90005200, 15000721, 30000, 20000, 15002721, 0, 0, 0, 0, 0);
+  
+  //Rotten Erdtree Sentry Barrier Handler
+  InitializeCommonEvent(0, 9005811, 15000754, 15001877, 1540, 0);
+  
+  //Rotten Erdtree Sentry One Time Kill Handler
+  InitializeCommonEvent(0, 90005300, 15000754, 15000755, 0, 0, 0);
+  
+  //Mimic
+  InitializeCommonEvent(0, 20000352, 15000650);
+  InitializeCommonEvent(0, 20000353, 15001650, 15000650, 515000650);
 });
 
 $Event(50, Default, function() {
@@ -520,6 +558,102 @@ $Event(15002550, Restart, function() {
     DisableMapPart(15001782); //
     DisableMapPart(15001783); //
     DisableMapPart(15001784); //
+    DisableHit(15001785); // Skip Roof (Not Done Yet)
+    DisableHit(15001786);
+    DisableHit(15001787);
+    DisableHit(15001788);
+    DisableHit(15001789);
+    DisableHit(15001790);
+    DisableHit(15001791);
+    DisableHit(15001792);
+    DisableHit(15001793);
+    DisableHit(15001794);
+    DisableHit(15001795);
+    DisableHit(15001796);
+    DisableHit(15001797);
+    DisableHit(15001798);
+    DisableHit(15001799);
+    DisableHit(15001800);
+    DisableHit(15001801);
+    DisableHit(15001802);
+    DisableHit(15001803);
+    DisableHit(15001804);
+    DisableHit(15001805);
+    DisableHit(15001806);
+    DisableHit(15001807);
+    DisableHit(15001808);
+    DisableHit(15001809);
+    DisableHit(15001810);
+    DisableHit(15001811);
+    DisableHit(15001812);
+    DisableHit(15001813);
+    DisableHit(15001814);
+    DisableHit(15001815);
+    DisableHit(15001816);
+    DisableHit(15001817);
+    DisableHit(15001818);
+    DisableHit(15001819);
+    DisableHit(15001820);
+    DisableHit(15001821);
+    DisableHit(15001822);
+    DisableHit(15001823);
+    DisableHit(15001824);
+    DisableHit(15001825);
+    DisableHit(15001826);
+    DisableHit(15001827);
+    DisableHit(15001828);
+    DisableHit(15001829);
+    DisableHit(15001830);
+    DisableHit(15001831);
+    DisableHit(15001832);
+    DisableHit(15001833);
+    DisableHit(15001834);
+    DisableHit(15001835); // Hopefully Enough
+    DisableHit(15001836);
+    DisableHit(15001837);
+    DisableHit(15001838);
+    DisableHit(15001839);
+    DisableHit(15001840);
+    DisableHit(15001841);
+    DisableHit(15001842);
+    DisableHit(15001843);
+    DisableHit(15001844);
+    DisableHit(15001845); // :( It was not enough
+    DisableHit(15001846); // :(
+     //Skip Custom Coll
+    DisableMapPart(15001847);
+    DisableMapPart(15001848);
+    DisableMapPart(15001849);
+    DisableMapPart(15001850);
+    DisableMapPart(15001851);
+    DisableMapPart(15001852);
+    DisableMapPart(15001853);
+    DisableMapPart(15001854);
+    DisableMapPart(15001855);
+    DisableMapPart(15001856);
+    DisableMapPart(15001857);
+    DisableMapPart(15001858); // done
+    DisableMapPart(15001859); // misbegotten jump
+    DisableHit(15001860); //mj2
+    DisableHit(15001861); //mj2
+    DisableMapPart(15001862);
+    DisableMapPart(15001863);
+    DisableMapPart(15001864); //wall_jump_fix
+    DisableMapPart(15001865); //infinite_fall_fix
+    
+    //Left of waterfall in lower Elphael - Wall No Collision Fix
+    DisableMapPart(15001866);
+    DisableMapPart(15001867);
+    DisableMapPart(15001868);
+    DisableMapPart(15001869);
+    DisableMapPart(15001870);
+    DisableMapPart(15001871);
+    DisableHit(15001872);
+    DisableHit(15001873);
+    DisableMapPart(15001874);
+    DisableMapPart(15001875);
+    DisableMapPart(15001876);
+    //bubble bois music
 });
 
 $Event(15002580, Restart, function() {
@@ -546,15 +680,16 @@ $Event(15002680, Restart, function() {
     
 });
 
+//Malenia Defeat Handler
 $Event(15002800, Restart, function() {
     EndIf(EventFlag(15000800));
-    WaitFor(CharacterHPValue(15000800) <= 0);
+    WaitFor(CharacterHPValue(15000806) <= 0); //Phase 2 Malenia
     WaitFixedTimeSeconds(4);
-    PlaySE(15008000, SoundType.SFX, 888880000);
+    PlaySE(15008006, SoundType.SFX, 888880000); //Phase 2 Malenia
     WaitFor(
-        (PlayerIsInOwnWorld() && CharacterDead(15000800) && !CharacterHasSpEffect(10000, 9646))
+        (PlayerIsInOwnWorld() && CharacterDead(15000806) && !CharacterHasSpEffect(10000, 9646)) //Phase 2 Malenia
             || EventFlag(15000800));
-    HandleBossDefeatAndDisplayBanner(15000800, TextBannerType.DemigodFelled);
+    HandleBossDefeatAndDisplayBanner(15000806, TextBannerType.DemigodFelled); //Phase 2 Malenia
     if (PlayerIsInOwnWorld()) {
         TriggerMultiplayerEvent(0);
     }
@@ -566,6 +701,7 @@ $Event(15002800, Restart, function() {
     }
 });
 
+//Malenia Boss Initialization
 $Event(15002810, Restart, function() {
     if (EventFlag(15000800)) {
         DisableCharacter(15005800);
@@ -594,6 +730,9 @@ L0:
     DisableCharacter(15000805);
     DisableCharacterCollision(15000805);
     EnableLockOnPoint(15000805, 220);
+    EnableCharacter(15000806); //Phase 2 (First time load fade skip)
+    DisableCharacter(15000806); //Phase 2
+    DisableCharacterCollision(15000806); //Phase 2
     DisableAssetTreasure(15001810);
     EndIf(
         CharacterType(10000, TargetType.BlackPhantom)
@@ -601,7 +740,7 @@ L0:
             || CharacterType(10000, TargetType.Invader2)
             || CharacterType(10000, TargetType.Invader3)
             || CharacterType(10000, TargetType.BluePhantom));
-    if (!EventFlag(15000801)) {
+    if (!EventFlag(15000801)) { //First time encounter flag
         SetSpEffect(15000800, 5402);
         DisableCharacterCollision(15000800);
         DisableCharacterGravity(15000800);
@@ -647,62 +786,77 @@ L2:
     ClearSpEffect(15000800, 16141);
 });
 
+//Malenia Phase Change
 $Event(15002811, Restart, function() {
     EndIf(EventFlag(15000800));
     WaitFor(
         CharacterHPValue(15000800) <= 1
-            && !CharacterHasSpEffect(15000800, 18480)
+            //&& !CharacterHasSpEffect(15000800, 18480)
             && HasDamageType(15000800, 0, DamageType.Unspecified));
     if (PlayerIsInOwnWorld()) {
         PlayCutsceneToPlayerAndWarp(15000010, CutscenePlayMode.Skippable, 15002815, 15000000, 10000, 0, false);
     } else {
         PlayCutsceneToPlayer(15000010, CutscenePlayMode.Skippable, 10000);
     }
+    EnableCharacter(15000806); //Phase 2 Malenia
+    EnableCharacterCollision(15000806); //Phase 2 Malenia
+    SetNetworkUpdateRate(15000806, true, CharacterUpdateFrequency.AlwaysUpdate);
     WaitFixedTimeRealFrames(1);
-    SetEventFlagID(15002802, ON);
+    if (PlayerIsInOwnWorld()) {
+        IssueShortWarpRequest(10000, TargetEntityType.Area, 15002815, -1); //Potential Riposte Warp Fix (Necessary after delay)
+    }
+    SetEventFlagID(15002802, ON); //Phase 2 Event Flag (Music)
     if (PlayerIsInOwnWorld()) {
         ChangeCamera(2121, 2121);
     }
-    IssueShortWarpRequest(15000800, TargetEntityType.Area, 15002816, -1);
+    IssueShortWarpRequest(15000800, TargetEntityType.Area, 15002817, -1); //Phase 1 Malenia Warp Point (Under Map)
+    DisableCharacter(15000800); //Phase 1 Malenia
+    DisableCharacterCollision(15000800); //Phase 1 Malenia
+    DisableCharacterAI(15000800); //Phase 1 Malenia
+    IssueShortWarpRequest(15000806, TargetEntityType.Area, 15002816, -1); //Phase 2 Malenia Warp Point
     SetCameraAngle(-29, 68.8);
-    DisplayBossHealthBar(Enabled, 15000800, 0, 902120001);
-    SetSpEffect(15000800, 18000);
-    SetSpEffect(15000800, 18001);
-    SetSpEffect(15000800, 18002);
+    DisplayBossHealthBar(Disabled, 15000800, 0, 902120000); //Phase 1 Healthbar Removal
+    DisplayBossHealthBar(Enabled, 15000806, 0, 902120001); //Phase 2 Malenia
+    SetSpEffect(15000806, 18404); //Change to set HP to 80% (Either through forced setting it or reducing by 20%)
+    SetSpEffect(15000806, 18000); //Phase 2 Malenia
+    SetSpEffect(15000806, 18001); //Phase 2 Malenia
+    SetSpEffect(15000806, 18002); //Phase 2 Malenia
     ClearSpEffect(15000800, 18015);
-    SetSpEffect(15000800, 18016);
-    ChangeCharacterDispmask(15000800, 10, OFF);
-    ChangeCharacterDispmask(15000800, 11, ON);
-    ChangeCharacterDispmask(15000800, 12, OFF);
-    CreateNPCPart(15000800, 10, NPCPartType.Part1, 99999, 1, 1, false, false);
-    SetNPCPartSEAndSFX(15000800, 10, 109, 109, 139, 139, 0);
-    CreateNPCPart(15000800, 310, NPCPartType.WeakPoint, 99999, 1, 1, false, false);
-    SetNPCPartSEAndSFX(15000800, 310, 110, 110, 139, 139, 0);
-    SetSpEffect(15000800, 18400);
+    ClearSpEffect(15000806, 18015); //Phase 2 Malenia
+    SetSpEffect(15000806, 18016); //Phase 2 Malenia
+    ChangeCharacterDispmask(15000806, 10, OFF); //Phase 2 Malenia
+    ChangeCharacterDispmask(15000806, 11, ON); //Phase 2 Malenia
+    ChangeCharacterDispmask(15000806, 12, OFF); //Phase 2 Malenia
+    CreateNPCPart(15000806, 10, NPCPartType.Part1, 99999, 1, 1, false, false); //Phase 2 Malenia
+    SetNPCPartSEAndSFX(15000806, 10, 109, 109, 139, 139, 0); //Phase 2 Malenia
+    CreateNPCPart(15000806, 310, NPCPartType.WeakPoint, 99999, 1, 1, false, false); //Phase 2 Malenia
+    SetNPCPartSEAndSFX(15000806, 310, 110, 110, 139, 139, 0); //Phase 2 Malenia
+    SetSpEffect(15000806, 18400); //Phase 2 Malenia
     SetSpEffect(15000801, 18400);
-    DisableCharacterHPBarDisplay(15000801);
-    ForceAnimationPlayback(15000800, 20002, false, false, false);
+    DisableCharacterHPBarDisplay(15000801); //Phase 1
+    ForceAnimationPlayback(15000806, 20002, false, false, false); //Phase 2 Malenia
     WaitFixedTimeFrames(1);
-    RequestCharacterAIReplan(15000800);
+    RequestCharacterAIReplan(15000806); //Phase 2 Malenia
     WaitFixedTimeSeconds(3.2);
-    DisableCharacterImmortality(15000800);
+    //DisableCharacterImmortality(15000800);
     if (PlayerIsInOwnWorld()) {
         ChangeCamera(2120, 2120);
     }
 });
 
+//Malenia Vortex Clone Attack
 $Event(15002820, Default, function(X0_4, X4_4, X8_4) {
     EndIf(EventFlag(15000800));
     DisableCharacter(X0_4);
     DisableCharacterCollision(X0_4);
     DisableCharacterAI(X0_4);
     WaitFor(
-        (!EventFlag(15002803) && CharacterHasSpEffect(15000800, X8_4))
+        (!EventFlag(15002803) && CharacterHasSpEffect(15000806, X8_4)) //Phase 2 Malenia
             || (EventFlag(15002803) && CharacterHasSpEffect(15000801, X8_4)));
     EnableCharacter(X0_4);
     WaitFixedTimeFrames(1);
     if (!EventFlag(15002803)) {
-        WarpCharacterAndCopyFloor(X0_4, TargetEntityType.Character, 15000800, 228, 15000800);
+        WarpCharacterAndCopyFloor(X0_4, TargetEntityType.Character, 15000806, 228, 15000806); //Phase 2 Malenia
     } else {
         WarpCharacterAndCopyFloor(X0_4, TargetEntityType.Character, 15000801, 228, 15000801);
     }
@@ -715,16 +869,18 @@ $Event(15002820, Default, function(X0_4, X4_4, X8_4) {
     RestartEvent();
 });
 
-$Event(15002830, Default, function(X0_4, X4_4) {
+//Malenia Hp Recovery on hit, applied speffect in atkparam, why do it like this FS :(
+$Event(15002830, Default, function(X0_4, X4_4, X8_4) {
     EndIf(EventFlag(15000800));
     WaitFor(!PlayerIsInOwnWorld() && CharacterHasSpEffect(10000, X4_4));
     if (PlayerIsInOwnWorld()) {
-        SetSpEffect(15000800, X0_4);
+        SetSpEffect(X8_4, X0_4);
     }
     WaitFixedTimeSeconds(0.2);
     RestartEvent();
 });
 
+//Not Initialized (Unused)
 $Event(15002840, Default, function(X0_4, X4_4, X8_1) {
     EndIf(EventFlag(15000800));
     WaitFor(CharacterHasSpEffect(X0_4, 18037));
@@ -744,6 +900,7 @@ $Event(15002840, Default, function(X0_4, X4_4, X8_1) {
     RestartEvent();
 });
 
+//Not Initialized (Unused)
 $Event(15002842, Default, function(X0_4, X4_4, X8_4) {
     EndIf(EventFlag(15000800));
     SetSpEffect(X0_4, X4_4);
@@ -768,16 +925,17 @@ $Event(15002842, Default, function(X0_4, X4_4, X8_4) {
     RestartEvent();
 });
 
+//Malenia Phase 2? Camera Tilt
 $Event(15002848, Default, function(X0_4, X4_4) {
     DisableNetworkSync();
     EndIf(EventFlag(15000800));
-    flagSp &= EventFlag(15002810);
+    flagSp &= EventFlag(15002810); //Unused Flag
     if (PlayerIsInOwnWorld()) {
-        flagSp &= EventFlag(15002805);
+        flagSp &= EventFlag(15002805); //Fight Started Event Flag
     } else {
-        flagSp &= EventFlag(15002806);
+        flagSp &= EventFlag(15002806); //Music Start Event Flag
     }
-    flagSp &= !CharacterHasSpEffect(15000800, X0_4) && !CharacterHasSpEffect(15000800, 18032);
+    flagSp &= !CharacterHasSpEffect(15000800, X0_4) && !CharacterHasSpEffect(15000800, 18032); //Never Applied SpEffects
     WaitFor(flagSp || EventFlag(15000800));
     EndIf(EventFlag(15000800));
     ChangeCamera(2120, 2120);
@@ -791,6 +949,7 @@ $Event(15002848, Default, function(X0_4, X4_4) {
     RestartEvent();
 });
 
+//Malenia Boss Common Events (Phase 2 Malenia Covered)
 $Event(15002849, Restart, function() {
     InitializeCommonEvent(0, 9005800, 15000800, 15001800, 15002800, 15002805, 15005800, 10000, 0, 0);
     InitializeCommonEvent(0, 9005801, 15000800, 15001800, 15002800, 15002805, 15002806, 10000);
@@ -798,6 +957,7 @@ $Event(15002849, Restart, function() {
     InitializeCommonEvent(0, 9005822, 15002800, 212000, 15002805, 15002806, 0, 15002802, 1, 1);
 });
 
+//Loretta Defeat Handler
 $Event(15002850, Restart, function() {
     EndIf(EventFlag(15000850));
     WaitFor(CharacterHPValue(15000850) <= 0);
@@ -806,7 +966,7 @@ $Event(15002850, Restart, function() {
     WaitFor(CharacterDead(15000850));
     HandleBossDefeatAndDisplayBanner(15000850, TextBannerType.GreatEnemyFelled);
     SetEventFlagID(15000850, ON);
-    SetEventFlagID(15005865, ON); //music handler flag
+    //SetEventFlagID(15005865, ON); //music handler flag
     SetEventFlagID(15002852, OFF);
     SetEventFlagID(15002855, OFF);
     SetEventFlagID(9119, ON);
@@ -814,7 +974,7 @@ $Event(15002850, Restart, function() {
         SetEventFlagID(61119, ON);
     }
     WaitFixedTimeSeconds(6);
-    SetEventFlagID(15005865, OFF); //music handler flag
+    //SetEventFlagID(15005865, OFF); //music handler flag
 });
 
 $Event(15002860, Restart, function() {
@@ -825,7 +985,7 @@ $Event(15002860, Restart, function() {
         EndEvent();
     }
 L0:
-    SetCurrentTime(17, 59, 0, false, false, false, 0, 0, 0) // Forced morning as long as Loretta is alive
+    //SetCurrentTime(17, 59, 0, false, false, false, 0, 0, 0) // Forced morning as long as Loretta is alive
     DisableCharacterAI(15005850);
     EnableCharacterInvincibility(15005850);
     ForceAnimationPlayback(15000850, 30001, false, false, false);
@@ -862,29 +1022,34 @@ $Event(15002899, Restart, function() {
     InitializeCommonEvent(0, 9005801, 15000850, 15001850, 15002850, 15002855, 15002856, 10000);
     InitializeCommonEvent(0, 9005811, 15000850, 15001850, 3, 15000851);
     InitializeCommonEvent(0, 9005811, 15000850, 15001851, 3, 0);
-    InitializeCommonEvent(0, 9005822, 15000850, 921600, 15002855, 15002856, 0, 15002852, 0, 0);
+    InitializeCommonEvent(0, 9005822, 15000850, 391900, 15002855, 15002856, 0, 15002852, 0, 0);
 });
 
+//Malenia Talk Related
 $Event(15000700, Default, function() {
     EndIf(!PlayerIsInOwnWorld());
     EndIf(EventFlag(15000800));
-    EndIf(EventFlag(15002700));
-    WaitFor(EventFlag(15002805));
+    EndIf(EventFlag(15002700)); //Flag turned on after "The Mark of a True Lord" on defeat
+    WaitFor(EventFlag(15002805)); //Fight Started Event Flag
     SetCharacterTalkRange(15000800, 100);
+    SetCharacterTalkRange(15000806, 100); //Phase 2 Malenia
     WaitFor(EventFlag(15002701));
     SetCharacterTalkRange(15000800, 17);
+    SetCharacterTalkRange(15000806, 17); //Phase 2 Malenia
 });
 
+//Malenia Related Script (Triggers once Malenia defeated, alters backread state)
 $Event(15000701, Default, function() {
     EndIf(!PlayerIsInOwnWorld());
     EndIf(EventFlag(15000800));
-    EndIf(EventFlag(15002700));
-    WaitFor(PlayerIsInOwnWorld() && CharacterHPValue(15000800) == 0);
-    EnableCharacterDefaultBackread(15000800);
-    WaitFor(ElapsedSeconds(100) || EventFlag(15002701));
-    DisableCharacterDefaultBackread(15000800);
+    EndIf(EventFlag(15002700)); //Flag turned on after "The Mark of a True Lord" on defeat
+    WaitFor(PlayerIsInOwnWorld() && CharacterHPValue(15000806) == 0); //Phase 2 Malenia
+    EnableCharacterDefaultBackread(15000806); //Phase 2 Malenia
+    WaitFor(ElapsedSeconds(100) || EventFlag(15002701)); //Flag turned on after "I'm sorry, I finally met my match" on defeat
+    DisableCharacterDefaultBackread(15000806); //Phase 2 Malenia
 });
 
+//Malenia Related (Possibly aeonia flower asset enabled)
 $Event(15000702, Restart, function(X0_4, X4_4) {
     DisableAsset(X0_4);
     DisableAsset(X4_4);

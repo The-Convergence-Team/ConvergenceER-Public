@@ -4,10 +4,11 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
+    RegisterBonfire(2048400001, 2048401950, 0, 0, 0, 5);
     InitializeEvent(0, 2048402200, 2048400200, 2048402200, 2048402201);
     InitializeEvent(1, 2048402200, 2048400201, 2048402200, 2048402202);
     InitializeCommonEvent(0, 90005639, 2048400500, 2048401500, 2048401501, 2048401502, 1073741824);
@@ -25,6 +26,7 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005767, 2045429280, 4380, 4383, 2048400700, 4901, 2048400701, 2045429297);
     InitializeCommonEvent(0, 90005777, 2048400701, 4965, 4383, 2048402181);
     InitializeCommonEvent(0, 90005774, 2045429297, 116401, 400645);
+    $InitializeCommonEvent(0, 20000350, 2048401701, 2048401702, 2055550108, 2055550118, 2048400550, 2048401703); // Shrine Init
 });
 
 $Event(50, Default, function() {
@@ -106,5 +108,3 @@ L1:
     WaitFixedTimeSeconds(1);
     RestartEvent();
 });
-
-

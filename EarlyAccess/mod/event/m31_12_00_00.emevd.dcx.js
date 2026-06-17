@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -15,6 +15,8 @@ $Event(0, Default, function() {
     InitializeEvent(0, 31122811, 0);
     InitializeCommonEvent(0, 900005610, 31121200, 100, 800, 0);
     InitializeCommonEvent(0, 90005646, 31120800, 31122840, 31122841, 31121840, 31122840, 3103);
+    InitializeCommonEvent(0, 90005512, 31128560, 31122560, 31122561);
+    InitializeEvent(0, 31122812, 0);
 });
 
 $Event(50, Default, function() {
@@ -71,6 +73,11 @@ $Event(31122811, Restart, function() {
     EndIf(EventFlag(31120800));
     WaitFor(HPRatio(31120800) <= 0.6);
     SetEventFlagID(31122802, ON);
+});
+
+$Event(31122812, Restart, function() {
+    WaitFor(EventFlag(31128562));
+    DisableObjAct(31121562, 449009);
 });
 
 $Event(31122849, Restart, function() {

@@ -1,0 +1,230 @@
+------------------------------------------
+--Custom Envs from Scripts-Data-Exposer
+------------------------------------------
+
+ExposeDebugPrint = 10001 --args <string>
+GetEventFlag = 10003 --args <flagId>
+
+------------------------------------------
+--Custom Acts from Scripts-Data-Exposer
+------------------------------------------
+local UNSIGNED_BYTE = 0
+local SIGNED_BYTE = 1
+local UNSIGNED_SHORT = 2
+local SIGNED_SHORT = 3
+local UNSIGNED_INT = 4
+local SIGNED_INT = 5
+local FLOAT = 6
+local BIT = 7
+
+local BIG_SIGNED_INT = 100
+local ARRAY_OF_BYTES = 101
+local COORDINATES = 102
+local QUATERNION = 103
+local CHARACTERMODEL = 104
+local MAPID = 105
+local CHRINS = 106
+
+UpdateMagicIdToActive = 10002
+SetEventFlag = 10003 --args <flagId>, <value>
+ESD_ReplaceTool = 100059 --args <to replace>, <replace with>, <unk>
+
+------------------------------------------
+--Helper Functions made by Lord Exelot (designed to work with offset tables provided by Convergence)
+------------------------------------------
+
+function HandlePointerIncriment(table, startIndex, incrimentValue)
+    local newTable = { unpack(table, startIndex, #table) }
+    newTable[#newTable] = newTable[#newTable] + incrimentValue
+    return unpack(newTable)
+end
+
+--Get param value.
+--env only returns ints so floats will still need conversion in lua
+--bitOffset only used if value type is BIT
+local _GetParamValue = 10004 --args <param type>, <row>, <offset>, <value type>, <bitOffset/pointer offset1>, <pointer offsets...>
+function GetParamValue(pointerTable, row)
+    return env(_GetParamValue, pointerTable[1], row, unpack(pointerTable, 2, #pointerTable))
+end
+
+--Set param value.
+--bitOffset only used if value type is BIT
+local _SetParamValue = 10004 --args <param type>, <row>, <offset>, <value type>, <value>, <bitOffset>
+function SetParamValue(pointerTable, row, value)
+    if pointerTable[3] == BIT then
+        act(_SetParamValue, pointerTable[1], row, pointerTable[2], pointerTable[3], value, pointerTable[4])
+        return
+    end
+    act(_SetParamValue, pointerTable[1], row, pointerTable[2], pointerTable[3], value)
+end
+
+local TraversePointerChain = 10000 --args <starting base>, <value type>, <bitOffset/pointer offset1>, <pointer offsets...>
+-- New Helper Object Type
+function GetPointerValue(pointerTable)
+    local objectType = pointerTable[2]
+    if objectType < BIG_SIGNED_INT then
+        return env(TraversePointerChain, unpack(pointerTable))
+    end
+
+    local _end = #pointerTable
+
+    if objectType == ARRAY_OF_BYTES then
+        local byte1 = env(TraversePointerChain, pointerTable[1], UNSIGNED_SHORT, unpack(pointerTable, 3, _end))
+        local byte2 = env(TraversePointerChain, pointerTable[1], UNSIGNED_SHORT, HandlePointerIncriment(pointerTable, 3, 0x2))
+        local byte3 = env(TraversePointerChain, pointerTable[1], UNSIGNED_SHORT, HandlePointerIncriment(pointerTable, 3, 0x4))
+        local byte4 = env(TraversePointerChain, pointerTable[1], UNSIGNED_SHORT, HandlePointerIncriment(pointerTable, 3, 0x6))
+
+        return byte1, byte2, byte3, byte4
+    elseif objectType == BIG_SIGNED_INT then
+        local byte1 = env(TraversePointerChain, pointerTable[1], SIGNED_BYTE, unpack(pointerTable, 3, _end))
+        local byte2 = env(TraversePointerChain, pointerTable[1], SIGNED_BYTE, HandlePointerIncriment(pointerTable, 3, 1))
+        local byte3 = env(TraversePointerChain, pointerTable[1], SIGNED_BYTE, HandlePointerIncriment(pointerTable, 3, 2))
+        local byte4 = env(TraversePointerChain, pointerTable[1], SIGNED_BYTE, HandlePointerIncriment(pointerTable, 3, 3))
+
+        return bytesToInt32(byte1, byte2, byte3, byte4)
+    elseif objectType == COORDINATES then
+        local x = env(TraversePointerChain, pointerTable[1], FLOAT, unpack(pointerTable, 3, _end))
+        local y = env(TraversePointerChain, pointerTable[1], FLOAT, HandlePointerIncriment(pointerTable, 3, 4))
+        local z = env(TraversePointerChain, pointerTable[1], FLOAT, HandlePointerIncriment(pointerTable, 3, 8))
+
+        return x, y, z
+    elseif objectType == QUATERNION then
+        local x = env(TraversePointerChain, pointerTable[1], FLOAT, unpack(pointerTable, 3, _end))
+        local y = env(TraversePointerChain, pointerTable[1], FLOAT, HandlePointerIncriment(pointerTable, 3, 4))
+        local z = env(TraversePointerChain, pointerTable[1], FLOAT, HandlePointerIncriment(pointerTable, 3, 8))
+        local w = env(TraversePointerChain, pointerTable[1], FLOAT, HandlePointerIncriment(pointerTable, 3, 12))
+
+        return x, y, z, w
+    elseif objectType == CHARACTERMODEL then
+        local modelPart1 = env(TraversePointerChain, pointerTable[1], SIGNED_SHORT, unpack(pointerTable, 3, _end)) - 0x30
+        local modelPart2 = env(TraversePointerChain, pointerTable[1], SIGNED_SHORT, HandlePointerIncriment(pointerTable, 3, 2)) - 0x30
+        local modelPart3 = env(TraversePointerChain, pointerTable[1], SIGNED_SHORT, HandlePointerIncriment(pointerTable, 3, 4)) - 0x30
+        local modelPart4 = env(TraversePointerChain, pointerTable[1], SIGNED_SHORT, HandlePointerIncriment(pointerTable, 3, 6)) - 0x30
+
+        return modelPart1 * 1000 + modelPart2 * 100 + modelPart3 * 10 + modelPart4
+    elseif objectType == MAPID then
+        local indexId =  string.format("%02d", env(TraversePointerChain, pointerTable[1], SIGNED_BYTE, unpack(pointerTable, 3, _end)))
+        local regionId = string.format("%02d", env(TraversePointerChain, pointerTable[1], SIGNED_BYTE, HandlePointerIncriment(pointerTable, 3, 1)))
+        local blockId =  string.format("%02d", env(TraversePointerChain, pointerTable[1], SIGNED_BYTE, HandlePointerIncriment(pointerTable, 3, 2)))
+        local areaId =   string.format("%02d", env(TraversePointerChain, pointerTable[1], SIGNED_BYTE, HandlePointerIncriment(pointerTable, 3, 3)))
+        return areaId, blockId, regionId, indexId
+    elseif objectType == CHRINS then
+        act(10001, "[WARNING!] - CHRINS type passed into GetPointerValue, did you mean to use GetAltChrInsPointerValue instead?")
+    elseif noLog == false then
+        act(10001, "[WARNING!] - Object Type: " .. objectType .. " not found in GetPointerValue")
+    end
+end
+
+local TARGET_CHR_INS_BASE = 2
+function GetTargetPointerValue(pointerTable)
+    if pointerTable[1] ~= 1 then
+        act(10001, "[WARNING!] - GetTargetPointerValue pointerValue[1] expected: 1, received " ..  pointerTable[1])
+        return
+    end
+
+    local _pointerTable = { unpack(pointerTable) }
+    _pointerTable[1] = TARGET_CHR_INS_BASE
+
+    return GetPointerValue(_pointerTable)
+end
+
+function GetAltChrInsPointerValue(chrInsPointerTable, targetPointerTable)
+    if targetPointerTable[1] ~= 1 then
+        act(10001, "[WARNING!] - GetAltChrInsPointerValue targetPointerTable[1] expected: 1, received " ..  targetPointerTable[1])
+        return nil
+    elseif chrInsPointerTable[2] ~= CHRINS then        
+        act(10001, "[WARNING!] - GetAltChrInsPointerValue chrInsPointerTable[2] expected: 106, received " ..  chrInsPointerTable[2])
+        return nil
+    end
+
+    local blendedTable = {
+        chrInsPointerTable[1], -- GAME_BASE
+        targetPointerTable[2], -- Actual ObjectType
+    }
+    for i = 3, #chrInsPointerTable do
+        table.insert(blendedTable, chrInsPointerTable[i])
+    end
+    for i = 3, #targetPointerTable do
+        table.insert(blendedTable, targetPointerTable[i])
+    end
+    return GetPointerValue(blendedTable)
+end
+
+function GetLocalPlayerPointerValue(pointerTable)
+    return GetAltChrInsPointerValue(GAME_BASE.WORLD_CHR_MAN.LOCAL_PLAYER_CHR_INS, pointerTable)
+end
+
+local WritePointerChain = 10000 --args <starting base>, <value type>, <value>, <bitOffset/pointer offset1>, <pointer offsets...>
+function SetPointerValue(pointerTable, ...)
+    local objectType = pointerTable[2]
+    local args = { ... }
+
+    if objectType < BIG_SIGNED_INT then
+        act(WritePointerChain, pointerTable[1], objectType, args[1], unpack(pointerTable, 3, #pointerTable))
+        return
+    end
+
+    local _end = #pointerTable
+
+    if objectType == BIG_SIGNED_INT then
+        act(WritePointerChain, pointerTable[1], SIGNED_INT, args[1], unpack(pointerTable, 3, _end))
+    elseif objectType == COORDINATES then
+        act(WritePointerChain, pointerTable[1], FLOAT, args[1], unpack(pointerTable, 3, _end))
+        act(WritePointerChain, pointerTable[1], FLOAT, args[2], HandlePointerIncriment(pointerTable, 3, 4))
+        act(WritePointerChain, pointerTable[1], FLOAT, args[3], HandlePointerIncriment(pointerTable, 3, 8))
+    elseif objectType == QUATERNION then
+        act(WritePointerChain, pointerTable[1], FLOAT, args[1], unpack(pointerTable, 3, _end))
+        act(WritePointerChain, pointerTable[1], FLOAT, args[2], HandlePointerIncriment(pointerTable, 3, 4))
+        act(WritePointerChain, pointerTable[1], FLOAT, args[3], HandlePointerIncriment(pointerTable, 3, 8))
+        act(WritePointerChain, pointerTable[1], FLOAT, args[4], HandlePointerIncriment(pointerTable, 3, 12))
+    elseif objectType == CHRINS then
+        act(10001, "[WARNING!] - CHRINS type passed into SetPointerValue, did you mean to use SetAltChrInsPointerValue instead?")
+    elseif noLog == false then
+        act(10001, "[WARNING!] - Object Type: " .. objectType .. " not found in SetPointerValue")
+    end
+end
+
+function SetTargetPointerValue(pointerTable, ...)
+    if pointerTable[1] ~= 1 then
+        act(10001, "[WARNING!] - SetTargetPointerValue pointerValue[1] expected: 1, received " ..  pointerTable[1])
+        return
+    end
+
+    pointerTable[1] = TARGET_CHR_INS_BASE
+    SetPointerValue(pointerTable, ...)
+    pointerTable[1] = 1
+end
+
+function SetAltChrInsPointerValue(chrInsPointerTable, targetPointerTable, ...)
+    if targetPointerTable[1] ~= 1 then
+        act(10001, "[WARNING!] - SetAltChrInsPointerValue targetPointerTable[1] expected: 1, received " ..  targetPointerTable[1])
+        return
+    elseif chrInsPointerTable[2] ~= CHRINS then        
+        act(10001, "[WARNING!] - SetAltChrInsPointerValue chrInsPointerTable[2] expected: 106, received " ..  chrInsPointerTable[2])
+        return   
+    end
+
+    local blendedTable = {
+        chrInsPointerTable[1], -- GAME_BASE
+        targetPointerTable[2], -- Actual ObjectType
+    }
+    for i = 3, #chrInsPointerTable do
+        table.insert(blendedTable, chrInsPointerTable[i])
+    end
+    for i = 3, #targetPointerTable do
+        table.insert(blendedTable, targetPointerTable[i])
+    end
+    SetPointerValue(blendedTable, ...)
+end
+
+function SetLocalPlayerPointerValue(pointerTable, ...)
+    SetAltChrInsPointerValue(GAME_BASE.WORLD_CHR_MAN.LOCAL_PLAYER_CHR_INS, pointerTable, ...)
+end
+
+function LinkedListItem(index, offsetToNext, baseTable)
+    local linkedList = { unpack(baseTable) }
+    for i = 1, index do
+        table.insert(linkedList, 1, offsetToNext)
+    end
+    return unpack(linkedList)
+end

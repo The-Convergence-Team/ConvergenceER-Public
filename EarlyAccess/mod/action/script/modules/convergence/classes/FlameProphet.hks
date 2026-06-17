@@ -1,0 +1,82 @@
+local stackCount = 0
+local lastStackExplosion = 0
+function ShellRingFlameProphetExplosion()
+    if env(GetSpEffectID, 391605) == FALSE or stackCount == 0 then
+        return
+    end
+    if stackCount == lastStackExplosion then
+        return
+    end
+    if stackCount % 3 ~= 0 then
+        return
+    end
+
+    lastStackExplosion = stackCount
+    act(AddSpEffect, 391610) -- Shell Ring Explosion
+    act(AddSpEffect, 391611) -- Shell Ring Explosion
+end
+
+function ShellRingFlameProphetBetterImmolation()
+    -- SpEffect: Immolation - Weapon effect && SpEffect: Immolation - Non-stackable effect
+    if env(GetSpEffectID, 391605) == FALSE 
+    or (env(GetSpEffectID, 108500) == FALSE 
+    and env(GetSpEffectID, 108501) == FALSE
+    and env(GetSpEffectID, 108510) == FALSE
+    and env(GetSpEffectID, 108511) == FALSE
+    and env(GetSpEffectID, 108512) == FALSE) then
+        return
+    end
+
+    -- Basic
+    local basicStacks = GetSpEffectStackCount(108500)
+    stackCount = stackCount + basicStacks
+    for i = 1, basicStacks, 1 do
+        act(ClearSpEffect, 108500)
+        act(AddSpEffect, 108505) -- SpEffect: Immolation - Enhanced Duration
+    end
+
+    -- Flaming Armament
+    local flamingArmamentStacks = GetSpEffectStackCount(108510)
+    stackCount = stackCount + flamingArmamentStacks
+    for i = 1, flamingArmamentStacks, 1 do
+        act(ClearSpEffect, 108510)
+        act(AddSpEffect, 108513)
+    end
+    
+    -- Flaming Armament (40 FTH+)
+    local flamingArmament40Stacks = GetSpEffectStackCount(108511)
+    stackCount = stackCount + flamingArmament40Stacks
+    for i = 1, flamingArmament40Stacks, 1 do
+        act(ClearSpEffect, 108511)
+        act(AddSpEffect, 108514)
+    end
+
+    -- Flaming Armament (60 FTH+)
+    local flamingArmament60Stacks = GetSpEffectStackCount(108512)
+    stackCount = stackCount + flamingArmament60Stacks
+    for i = 1, flamingArmament60Stacks, 1 do
+        act(ClearSpEffect, 108512)
+        act(AddSpEffect, 108515)
+    end
+
+    -- Non Stackable
+    if env(GetSpEffectID, 108501) == TRUE then
+        stackCount = stackCount + 1
+        act(ClearSpEffect, 108501)
+        act(AddSpEffect, 108506)
+    end
+end
+
+function FlamingArmamentFaithListener()
+    local fth = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.FAITH)
+    if fth >= 60 then
+        act(ClearSpEffect, 1608001)
+        act(AddSpEffect, 1608002) -- Flaming Armament 60 FTH
+    elseif fth >= 40 then
+        act(ClearSpEffect, 1608002)
+        act(AddSpEffect, 1608001) -- Flaming Armament 40 FTH
+    else
+        act(ClearSpEffect, 1608001)
+        act(ClearSpEffect, 1608002)
+    end
+end

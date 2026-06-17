@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0]
-// @version    3.5
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(200, Default, function() {
@@ -315,32 +315,17 @@ $Event(1052522350, Restart, function() {
     
     WaitFor(ActionButtonInArea(9110, 1052521360));
     SetSpEffect(10000, 101200);
-    WaitFixedTimeFrames(1);
+    WaitFixedTimeSeconds(0.2);
     
-    if (!PlayerHasItem(ItemType.Goods, 8060) && !EventFlag(1052520354)) {
+    if (!PlayerHasItem(ItemType.Goods, 8060) && !EventFlag(1052520354))
         ShowTutorialPopup(3000, true, true);
-        SetSpEffect(10000, 101200);
-        WaitFixedTimeRealFrames(1);
-    }
-    if (!PlayerHasItem(ItemType.Goods, 8061) && !EventFlag(1052520355)) {
+    if (!PlayerHasItem(ItemType.Goods, 8061) && !EventFlag(1052520355))
         ShowTutorialPopup(3001, true, true);
-        SetSpEffect(10000, 101200);
-        WaitFixedTimeRealFrames(1);
-    }
-    if (!PlayerHasItem(ItemType.Goods, 8062) && !EventFlag(1052520356)) {
+    if (!PlayerHasItem(ItemType.Goods, 8062) && !EventFlag(1052520356))
         ShowTutorialPopup(3002, true, true);
-        SetSpEffect(10000, 101200);
-        WaitFixedTimeRealFrames(1);
-    }
     if ((!PlayerHasItem(ItemType.Goods, 8063) && !EventFlag(1052520357)) || 
-        (!PlayerHasItem(ItemType.Goods, 8064) && !EventFlag(1052520358))) {
-        ShowTutorialPopup(3003, true, true);
-        SetSpEffect(10000, 101200);
-        WaitFixedTimeRealFrames(1);
-    }
+        (!PlayerHasItem(ItemType.Goods, 8064) && !EventFlag(1052520358)))
+
+    ClearSpEffect(10000, 101200);
     RestartEvent();
 });
-
-
-
-

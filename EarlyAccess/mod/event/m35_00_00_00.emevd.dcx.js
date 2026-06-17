@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -88,6 +88,14 @@ $Event(0, Default, function() {
     InitializeEvent(0, 35002361, 0);
     InitializeEvent(0, 35003790, 0);
     InitializeEvent(0, 35003795, 0);
+    InitializeEvent(0, 35003791, 0);
+    InitializeEvent(0, 35003792, 0);
+    InitializeEvent(0, 35003793, 0);    
+    InitializeEvent(0, 35003794, 0);
+    
+    
+    InitializeCommonEvent(0, 98005307, 35001615, 61, 53, 41, 0, 2053411616, 0); // Teleport to Abandoned Church
+    InitializeCommonEvent(0, 98005307, 35000875, 12, 5, 0, 0, 12050876, 35000850); // Teleport to Mohgwyn
 });
 
 $Event(50, Default, function() {
@@ -1700,14 +1708,80 @@ $Event(35003790, Restart, function() {
     ForceAnimationPlayback(20000, 67020, false, false, false);
     EndEvent();
 });
+$Event(35003791, Default, function() {
+    DisableNetworkSync();
+    EndIf(!PlayerIsInOwnWorld());
+    EndIf(EventFlag(35008832));
+    EnableAsset(35001003);
+    EnableAsset(35001002);
+    if (EventFlag(35008832)) {
+        DisableAsset(35001003)
+        DisableAsset(35001002);
+        EndEvent();
+   }
+});
 
-$Event(35003795, Default, function() {
-    WaitFor(EventFlag(35000850));
-    CreateAssetfollowingSFX(35000875, 200, 806870);
-    IfActionButtonInArea(MAIN, 9140, 35000875);
-    RotateCharacter(10000, 35000875, -1, true);
-    ForceAnimationPlayback(10000, 60490, false, false, false, Equal, 1);
-    WaitFixedTimeSeconds(3);
-    WarpPlayer(12, 5, 0, 0, 12050876, 60);
+$Event(35003792, Default, function() {
+    EndIf(!PlayerIsInOwnWorld());
+    EndIf(EventFlag(35008832));
+    if ((!PlayerHasItemIncludingBBox(ItemType.Weapon, 4140000)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140001)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140002)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140003)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140004)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140005)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140006)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140007)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140008)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140009)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140010)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140011)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140012)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140013)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140014)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140015))) {
+            WaitFor(ActionButtonInArea(6590, 35001001));
+    SpawnMapSFX(35001004);
+    SpawnMapSFX(35001005);
+    WaitFixedTimeSeconds(0.1);
+    DisableAsset(35001003);
+    DisableAsset(35001002);
+    WaitFixedTimeSeconds(0.1);
+    AwardItemLot(35000820);
+    WaitFixedTimeSeconds(0.3);
+    DeleteMapSFX(35001005, true);
+    DeleteMapSFX(35001004, true);
+    SetEventFlagID(35008832, ON);
+    }
+    EndEvent();
+});
+
+$Event(35003793, Default, function() {
+    EndIf(!PlayerIsInOwnWorld());
+    WaitFor(PlayerIsInOwnWorld());
+    if ((!PlayerHasItemIncludingBBox(ItemType.Weapon, 4140000)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140001)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140002)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140003)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140004)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140005)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140006)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140007)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140008)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140009)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140010)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140011)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140012)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140013)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140014)
+        || !PlayerHasItemIncludingBBox(ItemType.Weapon, 4140015))) {
+            SetEventFlagID(35007701, ON);
+    }
+});
+   
+$Event(35003794, Restart, function() {
+    EndIf(!EventFlag(35008832));
+    DisableAsset(35001003);
+    DisableAsset(35001002);
     RestartEvent();
 });

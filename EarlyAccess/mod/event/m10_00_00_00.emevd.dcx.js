@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -202,6 +202,10 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005540, 10000567, 10001533, 10001532, 10008571, -1, 1, 2);
     InitializeCommonEvent(0, 90005540, 10000569, 10001535, 10001534, 10008573, -1, 1, 2);
     InitializeCommonEvent(0, 90005540, 10000571, 10001537, 10001536, 10008575, -1, 1, 2);
+    
+    //Mimic
+    InitializeCommonEvent(0, 20000352, 10000650);
+    InitializeCommonEvent(0, 20000353, 10001650, 10000650, 510000650);
 });
 
 $Event(50, Default, function() {
@@ -369,6 +373,25 @@ $Event(50, Default, function() {
     InitializeEvent(0, 10002911, 10000622, 10000624, 0, -1); // Exile 1
     InitializeEvent(1, 10002911, 10000623, 10000625, 0, -1); // Exile 2
     InitializeEvent(0, 10002912, 10000621); // Lion
+    
+    // Weapon Restoration
+    for (let i = 0; i <= 15; i++) { // Loop over all upgrade levels
+        $InitializeEvent(0   + i, 10005100, 4020000  + i, 50000, 9401, 60000 + (i * 10), true ); // Maliketh's Black Blade -> Restored
+        $InitializeEvent(20  + i, 10005100, 3300000  + i, 50001, 9402, 70000 + (i * 10), true ); // Maliketh's Black Blade <- Restored
+        $InitializeEvent(40  + i, 10005100, 11150000 + i, 50010, 9403, 61000 + (i * 10), true ); // Marika's Hammer        -> Restored
+        $InitializeEvent(60  + i, 10005100, 11200000 + i, 50011, 9404, 71000 + (i * 10), true ); // Marika's Hammer        <- Restored
+        $InitializeEvent(80  + i, 10005100, 23050000 + i, 50020, 9405, 62000 + (i * 10), false); // Axe of Godfrey         -> Restored
+        $InitializeEvent(100 + i, 10005100, 23055000 + i, 50021, 9406, 72000 + (i * 10), false); // Axe of Godfrey         <- Restored
+        $InitializeEvent(120 + i, 10005100, 9020000  + i, 50030, 9407, 0               , false); // Hand of Malenia        -> Restored
+        $InitializeEvent(140 + i, 10005100, 9025000  + i, 50031, 9408, 0               , false); // Hand of Malenia        <- Restored
+        $InitializeEvent(160 + i, 10005100, 15040000 + i, 50040, 9409, 0               , false); // Axe of Godrick         -> Restored
+        $InitializeEvent(180 + i, 10005100, 15045000 + i, 50041, 9410, 0               , false); // Axe of Godrick         <- Restored
+        $InitializeEvent(200 + i, 10005100, 8100000  + i, 50050, 9411, 0               , false); // Morgott's Cane         -> Restored
+        $InitializeEvent(220 + i, 10005100, 8105000  + i, 50051, 9412, 0               , false); // Morgott's Cane         <- Restored
+        $InitializeEvent(240 + i, 10005100, 3140000  + i, 50060, 9413, 0               , false); // Blasphemous Blade      -> Restored
+        $InitializeEvent(260 + i, 10005100, 3145000  + i, 50061, 9414, 0               , false); // Blasphemous Blade      <- Restored
+    }
+    $InitializeEvent(0, 10005110); // No valid weapon equipped
 });
 
 $Event(10002281, Restart, function(X0_4, X4_4, X8_4, X12_4) {
@@ -2119,9 +2142,9 @@ $Event(10002911, Restart, function(X0_4, X4_4, X8_4, X12_4) {
     }
 L1:
     SetCharacterAIState(X0_4, Enabled);
-})
+});
 
-;$Event(10002912, Restart, function(X0_4) {
+$Event(10002912, Restart, function(X0_4) {
     EndIf(ThisEventSlot());
     SetCharacterAIState(X0_4, Disabled);
     chrSp = (CharacterType(10000, TargetType.BlackPhantom) && CharacterHasSpEffect(10000, 3710))
@@ -2173,4 +2196,63 @@ L1:
     SetNetworkconnectedEventFlag(TargetEventFlagType.EventIDSlotNumber, 0, ON);
 L1:
     SetCharacterAIState(X0_4, Enabled);
+});
+
+// Weapon Restoration
+$Event(10005100, Restart, function(originalWeapon, spEffect, actionButton, newWeaponItemlot, isReady) {
+    DisableNetworkSync();
+    WaitFor(PlayerHasItem(ItemType.Weapon, originalWeapon) &&
+            CharacterHasSpEffect(10000, spEffect) &&
+            !CharacterHasSpEffect(10000, 51000) &&
+            ActionButtonInArea(actionButton, 10005101));
+
+    if (isReady == false) {
+        DisplayGenericDialog(20450, PromptType.OKCANCEL, NumberofOptions.OneButton, 10005101, 4);
+        RestartEvent();
+    }
+    
+    SetSpEffect(10000, 51000); // Restoration in progress
+    EnableCharacterImmortality(10000);
+    RotateCharacter(10000, 10005101, 60010, false);
+    
+    WaitFixedTimeFrames(34);
+    RemoveItemFromPlayer(ItemType.Weapon, originalWeapon, 1);
+    SpawnMapSFX(10005102); // Dropped item
+    
+    WaitFixedTimeFrames(2);
+    SpawnOneshotSFX(TargetEntityType.Area, 10005102, -1, 6210);
+    
+    WaitFixedTimeFrames(68);
+    SpawnMapSFX(10005104);
+    SpawnOneshotSFX(TargetEntityType.Area, 10005102, -1, 201004);
+    SpawnOneshotSFX(TargetEntityType.Area, 10005102, -1, 191);
+    
+    WaitFixedTimeFrames(56);
+    SpawnOneshotSFX(TargetEntityType.Area, 10005102, -1, 201004);
+    SpawnOneshotSFX(TargetEntityType.Area, 10005102, -1, 191);
+    
+    WaitFixedTimeFrames(70);
+    SpawnOneshotSFX(TargetEntityType.Area, 10005102, -1, 201004);
+    SpawnOneshotSFX(TargetEntityType.Area, 10005102, -1, 191);
+    SpawnOneshotSFX(TargetEntityType.Area, 10005102, -1, 305301);
+    SpawnOneshotSFX(TargetEntityType.Area, 10005103, -1, 302702);
+    DeleteMapSFX(10005102, true);
+    DeleteMapSFX(10005104, true);
+    SpawnMapSFX(10005105); // Pickupable item
+    
+    WaitFixedTimeFrames(5);
+    WaitFor(ActionButtonInArea(4000, 10005101) || !InArea(10000, 10005109));
+    DeleteMapSFX(10005105, true);
+    AwardItemLot(newWeaponItemlot);
+    ClearSpEffect(10000, 51000);
+    DisableCharacterImmortality(10000);
+    RestartEvent();
+});
+
+// Weapon Restoration action button when no valid 
+$Event(10005110, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(!CharacterHasStateInfo(10000, 555) && ElapsedSeconds(5) && ActionButtonInArea(9400, 10005101));
+    DisplayGenericDialog(20451, PromptType.OKCANCEL, NumberofOptions.OneButton, 10005101, 4);
+    RestartEvent();
 });

@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -27,6 +27,32 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005891, 1052560800, 1052560801, 1052560802);
     InitializeEvent(0, 98005303, 1052560801, 1052560804);
     InitializeEvent(0, 98005304, 1052560801, 1052560804);
+    InitializeEvent(0, 1052562810, 1052565550, 1052562900);
+});
+
+$Event(1052562810, Restart, function(X0_4, X4_4) {
+    EnableNetworkSync();
+    ClearSpEffect(X0_4, 4800);
+    ClearSpEffect(X0_4, 5653);
+    SetSpEffect(X0_4, 4802);
+    EndIf(EventFlag(1043352270));
+    SetSpEffect(X0_4, 4800);
+    SetSpEffect(X0_4, 5653);
+    WaitFor(
+        ((CharacterType(10000, TargetType.BlackPhantom) && CharacterHasSpEffect(10000, 3710))
+            || CharacterType(10000, TargetType.Alive)
+            || CharacterType(10000, TargetType.GrayPhantom)
+            || CharacterType(10000, TargetType.WhitePhantom))
+            && (HasDamageType(X0_4, 10000, DamageType.Unspecified)
+                || HasDamageType(X0_4, 35000, DamageType.Unspecified)
+                || HasDamageType(35000, X0_4, DamageType.Unspecified)
+                || EntityInRadiusOfEntity(10000, X0_4, 10, 1)
+                || EntityInRadiusOfEntity(35000, X0_4, 10, 1)
+                || InArea(10000, X4_4)
+                || InArea(35000, X4_4)));
+    SetNetworkconnectedEventFlagID(1043352270, ON);
+    ClearSpEffect(X0_4, 4800);
+    ClearSpEffect(X0_4, 5653);
 });
 
 $Event(1052562815, Default, function(X0_4, X4_4, X8_4) {

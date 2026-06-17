@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -34,6 +34,7 @@ $Event(0, Default, function() {
     InitializeEvent(0, 12052826, 0);
     InitializeEvent(0, 12052840, 0); //Bloodflame boss - death
     InitializeEvent(0, 12052841, 0); //Bloodflame boss - start
+    InitializeEvent(0, 12052842, 0); //Bloodflame boss - grab player targeting (for seamless)
     InitializeEvent(0, 12052869, 0); //Bloodflame boss - fogwall + music
     InitializeCommonEvent(0, 90005221, 12050200, 30003, 20003, 0, 0);
     InitializeCommonEvent(0, 90005221, 12050202, 30003, 20003, 0, 0);
@@ -203,20 +204,30 @@ $Event(0, Default, function() {
     //SetEventFlag(TargetEventFlagType.EventFlag, 12050850, OFF);
     //SetEventFlag(TargetEventFlagType.EventFlag, 12051670, OFF);
     InitializeCommonEvent(0, 90005525, 12051670, 12051671); // Illusory Wall
+    
     //Gate+Lever script
     InitializeCommonEvent(0, 90005540, 12050565, 12051530, 12051531, 12053530, -1, 1, 2); //(eventflag, gate id, lever id, objacteventflag, objactparamid, anim id, anim id)
+    
     //Bloodflame Dragon Scripts
-    InitializeCommonEvent(0, 90005870, 12050810, 904500602, 22);
-    InitializeCommonEvent(0, 90005860, 12050810, 0, 12050810, 1, 30580, 0);
+    //InitializeCommonEvent(0, 90005873, 12050810, 904500602, 12052865); //Custom Field Boss Start
+    //InitializeCommonEvent(0, 90005863, 12050810, 0, 12050810, 1, 30580, 0, 12055870, 12052865); //Custom Field Boss End
+    //InitializeCommonEvent(0, 9005822, 12050810, 921600, 12052865, 12052866, 0, 0, 0, 0);
+    InitializeCommonEvent(0, 90005860, 12050810, 0, 12050810, 1, 30580, 0); //Field Boss End
+    InitializeCommonEvent(0, 90005870, 12050810, 904500602, 25); //Field Boss Start
     InitializeEvent(0, 12052230, 0);
+    
     // Blood Smoke Statues - Statue, BulletOwner
     InitializeEvent(0, 12052235, 12051612, 12050601);
     InitializeEvent(1, 12052235, 12051613, 12050601);
     InitializeEvent(2, 12052235, 12051614, 12050601);
     InitializeEvent(3, 12052235, 12051615, 12050601);
     InitializeEvent(4, 12052235, 12051616, 12050601);
+    
     // NPC stuff
     InitializeCommonEvent(0, 90005300, 12050425, 12050425, 108500, 0, 0);
+    
+    // Ambient Music
+    //InitializeCommonEvent(0, 90005877, 12, 5, 0, 0, 12055900, 12055901, 12055902);
 });
 
 $Event(50, Default, function() {
@@ -630,10 +641,14 @@ $Event(12052840, Restart, function() {
         TriggerMultiplayerEvent(0);
     }
     SetEventFlagID(12050850, ON);
+    //SetEventFlagID(12055865, ON); //music handler eventflag
+    //SetEventFlagID(12052855, OFF); //to prevent music from starting after death
     SetEventFlagID(9191, ON);
     if (PlayerIsInOwnWorld()) {
         SetEventFlagID(61191, ON);
     }
+    //WaitFixedTimeSeconds(6);
+    //SetEventFlagID(12055865, OFF); //music handler eventflag
 });
 
 $Event(12052841, Restart, function() {
@@ -654,8 +669,8 @@ L0:
         if (PlayerIsInOwnWorld()) {
             SendInvadingPhantomsHome(0);
         }
-        WaitFixedTimeRealFrames(1);
-        SetNetworkconnectedEventFlagID(12050852, ON);
+        //WaitFixedTimeRealFrames(1);
+        //SetNetworkconnectedEventFlagID(12050852, ON);
         EnableCharacterAI(12050850);
         EnableCharacterCollision(12050850);
     } else {
@@ -671,12 +686,22 @@ L2:
     DisplayBossHealthBar(Enabled, 12050850, 0, 904800010);
 });
 
+//Konrad Grab Player Targeting (For Seamless)
+$Event(12052842, Restart, function() {
+    EndIf(EventFlag(12050850));
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 17251));
+    SetCharacterEventTarget(12050850, 10000);
+    WaitFor(!CharacterHasSpEffect(10000, 17251));
+    RestartEvent();
+});
+    
 $Event(12052869, Restart, function() {
     InitializeCommonEvent(0, 9005800, 12050850, 12051850, 12052850, 12052855, 12055850, 10000, 12050851, 12052851);
     InitializeCommonEvent(0, 9005801, 12050850, 12051850, 12052850, 12052855, 12052806, 10000);
     InitializeCommonEvent(0, 9005811, 12050850, 12051850, 4, 12050851);
     InitializeCommonEvent(0, 9005811, 12050850, 12051851, 4, 0);
-    InitializeCommonEvent(0, 9005822, 12050850, 940000, 12052855, 12052856, 0, 0, 0, 0);
+    InitializeCommonEvent(0, 9005822, 12050850, 391200, 12052855, 12052856, 0, 0, 0, 0);
 });
 
 $Event(12052510, Default, function() {

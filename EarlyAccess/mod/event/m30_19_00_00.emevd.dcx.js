@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -56,6 +56,44 @@ $Event(0, Default, function() {
     InitializeEvent(0, 30192800, 0); // Boss Defeat
     InitializeEvent(0, 30192801, 0); // Boss Init
     InitializeEvent(0, 30192811, 0); // Phase two music
+    InitializeEvent(0, 30192812, 0); // teleports
+    InitializeEvent(0, 30192813, 30192711, 30190711); // Area Checks
+    InitializeEvent(1, 30192813, 30192712, 30190712);
+    InitializeEvent(2, 30192813, 30192713, 30190713);
+    InitializeEvent(3, 30192813, 30192714, 30190714);
+    
+    //Ground Eruption Scripts
+    InitializeEvent(0, 30192820, 30192820);
+    InitializeEvent(1, 30192820, 30192821);
+    InitializeEvent(2, 30192820, 30192822);
+    InitializeEvent(3, 30192820, 30192823);
+    InitializeEvent(4, 30192820, 30192824);
+    InitializeEvent(5, 30192820, 30192825);
+    InitializeEvent(6, 30192820, 30192826);
+    InitializeEvent(7, 30192820, 30192827);
+    InitializeEvent(8, 30192820, 30192828);
+    InitializeEvent(9, 30192820, 30192829);
+    InitializeEvent(10, 30192820, 30192830);
+    InitializeEvent(11, 30192820, 30192831);
+    InitializeEvent(12, 30192820, 30192832);
+    InitializeEvent(13, 30192820, 30192833);
+    InitializeEvent(14, 30192820, 30192834);
+    InitializeEvent(0, 30192821, 30192820);
+    InitializeEvent(1, 30192821, 30192821);
+    InitializeEvent(2, 30192821, 30192822);
+    InitializeEvent(3, 30192821, 30192823);
+    InitializeEvent(4, 30192821, 30192824);
+    InitializeEvent(5, 30192821, 30192825);
+    InitializeEvent(6, 30192821, 30192826);
+    InitializeEvent(7, 30192821, 30192827);
+    InitializeEvent(8, 30192821, 30192828);
+    InitializeEvent(9, 30192821, 30192829);
+    InitializeEvent(10, 30192821, 30192830);
+    InitializeEvent(11, 30192821, 30192831);
+    InitializeEvent(12, 30192821, 30192832);
+    InitializeEvent(13, 30192821, 30192833);
+    InitializeEvent(14, 30192821, 30192834);
+    
     InitializeEvent(0, 30192849, 0); // Fogwalls and Music
 });
 
@@ -241,13 +279,19 @@ $Event(30192801, Restart, function() {
         DisableCharacter(30190800);
         DisableCharacterCollision(30190800);
         ForceCharacterDeath(30190800, false);
+        SetCharacterBackreadState(30190801, false);
         EndEvent();
     }
 L0:
+    SetCharacterBackreadState(30190801, true);
+    DisableCharacter(30190800);
     DisableCharacterAI(30190800);
     WaitFor(EventFlag(30192805) && InArea(10000, 30192800));
 L2:
+    SetCharacterBackreadState(30190801, true);
+    EnableCharacter(30190800);
     EnableCharacterAI(30190800);
+    ForceAnimationPlayback(30190800, 20001, false, true, false);
     SetNetworkUpdateRate(30190800, true, CharacterUpdateFrequency.AlwaysUpdate);
     DisplayBossHealthBar(Enabled, 30190800, 0, 903400302);
 });
@@ -255,18 +299,85 @@ L2:
 // Phase two music flag
 $Event(30192811, Restart, function() {
     EndIf(EventFlag(30190800));
-    WaitFor(HPRatio(30190800) <= 0.6);
-    SetEventFlagID(30192802, ON);
+    WaitFor(HPRatio(30190800) <= 0.66);
+    SetSpEffect(30190800, 10721);
+});
+
+//Phase 2 teleports (speffect teleport, dummy entity, area entity)
+$Event(30192812, Restart, function(X0_4) {
+    SetEventFlag(TargetEventFlagType.EventFlag, 30190800, OFF);
+    EndIf(EventFlag(30190800));
+    WaitFor(CharacterHasSpEffect(30190800, 10730));
+    WaitFixedTimeFrames(5);
+    DisableCharacterAI(30190800);
+//    SpawnOneshotSFX(TargetEntityType.Area, X8_4, -1, 529104);
+//    WaitFixedTimeSeconds(2);
+//    SpawnOneshotSFX(TargetEntityType.Area, X8_4, -1, 529105);
+//    WaitFixedTimeSeconds(1);
+//    SpawnOneshotSFX(TargetEntityType.Area, X8_4, -1, 529106);
+
+    if (EventFlag(30190721)){
+        WarpCharacterAndCopyFloor(30190800, TargetEntityType.Area, 30192811, -1, 30192811);
+        SetEventFlagID(30190721, OFF);
+    }
+    else if (EventFlag(30190722)){
+        WarpCharacterAndCopyFloor(30190800, TargetEntityType.Area, 30192812, -1, 30192812);
+        SetEventFlagID(30190722, OFF);
+    }
+    else if (EventFlag(30190723)){
+        WarpCharacterAndCopyFloor(30190800, TargetEntityType.Area, 30192813, -1, 30192813);
+        SetEventFlagID(30190723, OFF);
+    }
+    else if (EventFlag(30190724)){
+        WarpCharacterAndCopyFloor(30190800, TargetEntityType.Area, 30192814, -1, 30192814);
+        SetEventFlagID(30190724, OFF);
+    }
+    else if (EventFlag(30190725)){
+        WarpCharacterAndCopyFloor(30190800, TargetEntityType.Area, 30192815, -1, 30192815);
+        SetEventFlagID(30190725, OFF);
+    }
+    else if (EventFlag(30190726)){
+        WarpCharacterAndCopyFloor(30190800, TargetEntityType.Area, 30192816, -1, 30192816);
+        SetEventFlagID(30190726, OFF);
+    }
+    ForceAnimationPlayback(30190800, 20001, false, true, false);
+    EnableCharacterAI(30190800);
+    RestartEvent();
+});
+
+$Event(30192813, Restart, function(regionID, eventFlagID) {
+    EndIf(EventFlag(30190800));
+    WaitFor(InArea(10000, regionID));
+    SetEventFlagID(eventFlagID, ON);
+    WaitFor(!InArea(10000, regionID));
+    SetEventFlagID(eventFlagID, OFF);
+    RestartEvent();
+});
+
+//Ground Eruption Telegraph
+$Event(30192820, Restart, function(X0_4) {
+    CreateBulletOwner(30190801);
+    WaitFor(CharacterHasSpEffect(30190800, 10735));
+    WaitRandomTimeSeconds(0, 1);
+    ShootBullet(30190801, X0_4, -1, 247400210, 0, 0, 0);
+    WaitFixedTimeSeconds(1);
+    RestartEvent();
+});
+
+//Ground Eruption Bullets
+$Event(30192821, Restart, function(X0_4) {
+    CreateBulletOwner(30190801);
+    WaitFor(CharacterHasSpEffect(30190800, 10736));
+    WaitRandomTimeSeconds(0, 0.5);
+    ShootBullet(30190801, X0_4, -1, 247400215, 0, 0, 0);
+    WaitFixedTimeSeconds(1);
+    RestartEvent();
 });
 
 // Fogwalls and Music
 $Event(30192849, Restart, function() {
-    InitializeCommonEvent(0, 9005800, 30190800, 30191151, 30192800, 30192805, 30195800, 10000, 0, 0);
+    InitializeCommonEvent(0, 9005800, 30190800, 30191151, 30192800, 30192805, 30190800, 10000, 0, 0);
     InitializeCommonEvent(0, 9005801, 30190800, 30191151, 30192800, 30192805, 30192806, 10000);
-    InitializeCommonEvent(0, 9005811, 30190800, 30191151, 0, 0);
-    InitializeCommonEvent(0, 9005813, 30190800, 30191152, 20, 0, 20);
-    InitializeCommonEvent(0, 9005813, 30190800, 30191153, 20, 0, 20);
-    InitializeCommonEvent(0, 9005813, 30190800, 30191154, 20, 0, 20);
-    InitializeCommonEvent(0, 9005813, 30190800, 30191155, 20, 0, 20);
+    InitializeCommonEvent(0, 9005811, 30190800, 30191151, 20, 0);
     InitializeCommonEvent(0, 9005822, 30190800, 930000, 30192805, 30192806, 0, 30192802, 0, 0);
 });

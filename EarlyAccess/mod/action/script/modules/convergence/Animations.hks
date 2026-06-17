@@ -1,0 +1,471 @@
+local maximumJumps = 2
+local enablePassiveDoubleJump_StarcallerJewel = false -- Enable double jump without the jewel
+local enablePassiveDoubleJump_TempestEmbrace = false -- Enable double jump without Tempest Embrace
+
+function SetSpeedModifier(modifier)
+    SetPointerValue(CHR_INS_BASE.CHR_MODULES.BEHAVIOR_MODULE.SPEED_MODIFIER, modifier)
+end
+
+function SetPlayerSpeedModifier(modifier)
+    SetSpeedModifier(modifier)
+    if env(IsOnMount) == TRUE then
+        SetAltChrInsPointerValue(
+            GAME_BASE.WORLD_CHR_MAN.BUDDY_CHR_SET.TORRENT_CHR_INS,
+            CHR_INS_BASE.CHR_MODULES.BEHAVIOR_MODULE.SPEED_MODIFIER,
+            modifier)
+    end
+end
+
+function ForceSmallestStagger()
+    if IsExistAnime(8030) == TRUE then
+        ExecFireBlend(DIRECTION_FORWARD, DAMAGE_FLAG_SMALL)
+        act(SetDamageAnimType, DAMAGE_FLAG_SMALL)
+        Replanning()
+        Fire("W_DamageSmallFront")
+        return TRUE
+    elseif IsExistAnime(8040) == TRUE then
+        ExecFireBlend(DIRECTION_FORWARD, DAMAGE_LEVEL_MIDDLE)
+        act(SetDamageAnimType, DAMAGE_LEVEL_MIDDLE)
+        Replanning()
+        Fire("W_DamageMiddleFront")
+        return TRUE
+    elseif IsExistAnime(8050) == TRUE then
+        ExecFireBlend(DIRECTION_FORWARD, DAMAGE_FLAG_LARGE)
+        act(SetDamageAnimType, DAMAGE_FLAG_LARGE)
+        Replanning()
+        Fire("W_DamageLargeFront")
+        return TRUE     
+    elseif IsExistAnime(ANIME_ID_DAMAGE_WEAK) == TRUE then
+        SetVariable("IndexDamageDirection", DIRECTION_FORWARD)
+        act(SetDamageAnimType, DAMAGE_FLAG_WEAK)
+        Replanning()
+        Fire("W_DamageWeak")
+        return TRUE
+    elseif IsExistAnime(ANIME_ID_SPECIAL_DAMAGE_RANDOM) == TRUE then        
+        local index = GetRandomIndex(ANIME_ID_SPECIAL_DAMAGE_RANDOM, 3, 1)
+        SetVariable("IndexDamageRandom", index)
+        act(SetDamageAnimType, DAMAGE_FLAG_LARGE)
+        Replanning()
+        Fire("W_DamageSpecial")
+        return TRUE
+    end
+    return FALSE
+end
+
+function AnimSpeedupLib()
+    if env(GetHP) <= 0 or env(IsThrowing) == TRUE or IsNodeActive(unpack(ROLLING_CMSGS)) == TRUE then
+        SetPlayerSpeedModifier(1)
+        return
+    end
+
+    local magicIsActive = IsCastingSpell()
+    if magicIsActive then
+        local nonSpedUpSpells = {
+            [7000] = true, -- Dragonfire
+            [7001] = true, -- Agheel's Flame
+            [7010] = true, -- Magma Breath
+            [7011] = true, -- Theodorix's Magma
+            [7020] = true, -- Dragonice
+            [7021] = true, -- Borealis's Mist
+            [7030] = true, -- Rotten Breath
+            [7031] = true, -- Ekzykes's Decay
+            [7040] = true, -- Glintstone Breath
+            [7041] = true, -- Smarag's Glintstone Breath
+            [7050] = true, -- Placidusax's Ruin
+            [7060] = true, -- Dragonclaw
+            [7080] = true, -- Dragonmaw
+            [7090] = true, -- Greyoll's Roar
+            [7240] = true, -- Scarlet Aeonia
+            [53248] = true, -- Scarlet Aeonia (NPC)
+            [53841] = true, -- Glintstone Breath (NPC)
+        }
+        if nonSpedUpSpells[LastCastMagicID] then
+            SetPlayerSpeedModifier(1)
+            return
+        end
+    end
+
+    local speedupSpEffects = { -- Must be sorted highest to lowest on the second value
+        { 198, 999.99, nil }, -- Super Speed (for starting location gestures)
+        { Jewel_of_the_Hunt, 1.70, function() return IsBowstringHeld() or IsBowStanceArtActive() end }, -- Jewel of the Hunt (Marksman)
+        { Jewel_of_the_Hunt, 1.47, function() return IsReloadingBalista() end }, -- Jewel of the Hunt (Marksman)
+        --{ 1477010, 1.25, nil }, -- Gravity Armor (with Primeal Alignment)
+        { 1413009, 1.20, function() return env(GetSpEffectID, Jewel_of_the_Primeval) == TRUE and magicIsActive end }, -- Anima Magica 2nd buff + Jewel of the primeval [while casting spells]
+        { 1729100, 1.20, function() return magicIsActive end }, -- Blessing of the Sealed God [while casting spells]
+        { 7023200, 1.15, function() return env(GetSpEffectID, Jewel_of_the_Relentless) == TRUE end }, -- Ascetic's Wrist Guards [with Jewel of the Relentless]
+        { 1699015, 1.15, nil }, -- Time Warp 15 stacks
+        { 1699014, 1.14, nil }, -- Time Warp 14 stacks
+        { 1699013, 1.13, nil }, -- Time Warp 13 stacks
+        { 1699012, 1.12, nil }, -- Time Warp 12 stacks
+        { 1699011, 1.11, nil }, -- Time Warp 11 stacks
+        { 1699010, 1.10, nil }, -- Time Warp 10 stacks
+        { 7023200, 1.10, nil }, -- Ascetic's Wrist Guards
+        { 1699009, 1.09, nil }, -- Time Warp 9 stacks
+        { 1699008, 1.08, nil }, -- Time Warp 8 stacks
+        { 1699007, 1.07, nil }, -- Time Warp 7 stacks
+        { 1699006, 1.06, nil }, -- Time Warp 6 stacks
+        { 1528500, 1.05, nil }, -- Tempest Embrace (with Jewel of the Storm)
+        { 1528200, 1.05, nil }, -- Tempest Embrace
+        { 1699005, 1.05, nil }, -- Time Warp 5 stacks
+        { 1699004, 1.04, nil }, -- Time Warp 4 stacks
+        { 1699003, 1.03, nil }, -- Time Warp 3 stacks
+        { 1699002, 1.02, nil }, -- Time Warp 2 stacks
+        { 1699001, 1.01, nil }, -- Time Warp 1 stacks
+    }
+
+    local base = 1
+
+    if env(GetSpEffectID, 1696000) == TRUE and IsNodeActive("AttackRight_SM", "AttackBoth_SM") == TRUE then -- Electrify Armament [while attacking with right hand]
+        base = 1.1
+    elseif env(GetSpEffectID, Jewel_of_the_Ancients) == TRUE and c_SwordArtsID == 113 and env(GetSpEffectID, 391934) == TRUE
+        and IsNodeActive("SwordArtsOneShot_CMSG", "SwordArtsOneshotComboEnd_CMSG") == TRUE then
+        base = 2
+    elseif env(GetSpEffectID, Jewel_of_the_Relentless) == TRUE and env(GetSpEffectID, 100002) == TRUE then
+        base = 1.15
+    elseif env(GetSpEffectID, 391940) == TRUE and IsNodeActive("SwordArtsOneShot_CMSG", "SwordArtsChargeCancelEarly_CMSG") == TRUE then -- Jewel of the Ancients + Ancient Lightning Spear
+        base = 1.4
+    elseif env(GetSpEffectID, 391947) == TRUE and IsNodeActive("SwordArtsOneShot_CMSG", "SwordArtsChargeCancelEarly_CMSG") == TRUE then -- Jewel of the Ancients + Flower Dragonbolt
+        base = 1.4
+    end
+
+    local pageSetBonus = PageSetAnimSpeedIncrease()
+    if pageSetBonus > base then
+        base = pageSetBonus
+    end
+
+    for i = 1, #speedupSpEffects, 1 do
+        if env(GetSpEffectID, speedupSpEffects[i][1]) == TRUE
+        and (speedupSpEffects[i][3] == nil or speedupSpEffects[i][3]() == true) then
+            SetPlayerSpeedModifier(base * speedupSpEffects[i][2])
+            return
+        end
+    end
+
+    SetPlayerSpeedModifier(base)
+end
+
+lastRootMotionBase = 1
+function GetRootMotionMulti(baseValue)
+    if baseValue == nil then
+        baseValue = lastRootMotionBase
+    elseif baseValue ~= 0 then
+        lastRootMotionBase = baseValue
+    else
+        return baseValue
+    end
+
+    if env(IsThrowing) == TRUE then
+        return baseValue
+    end
+
+    local movementIncreaseSpEffects = {
+        { 1528500, 0.30, function() return IsNodeActive(unpack(ROLLING_CMSGS)) == TRUE end }, -- Tempest Embrace - With Jewel of the Storm [while rolling]
+        { 1528200, 0.30, function() return IsNodeActive(unpack(ROLLING_CMSGS)) == TRUE end }, -- Tempest Embrace [while rolling]
+        { Jewel_of_the_Hunt, 0.20, function() return IsBowstringHeld() or IsBowStanceArtActive() end }, -- Jewel of the Hunt (Marksman) 
+        { Jewel_of_the_Relentless, 0.15, function() return env(GetSpEffectID, 100002) == TRUE end }, -- Jewel of the Relentless (Sellsword) [while sprinting]
+        { 7006221, 0.10, nil }, -- [High Page Gloves] Player Root Motion
+        { 1479100, 0.07, nil }, -- Meteoric Alignment
+        { 341300 , 0.03, nil }, -- Freedom of movement Talisman
+    }
+
+    local speedMultiplier = baseValue
+    for i = 1, #movementIncreaseSpEffects, 1 do
+        if env(GetSpEffectID, movementIncreaseSpEffects[i][1]) == TRUE 
+        and (movementIncreaseSpEffects[i][3] == nil or movementIncreaseSpEffects[i][3]() == true) then
+            speedMultiplier = speedMultiplier + movementIncreaseSpEffects[i][2]
+        end
+    end
+
+    -- Cap: 30%
+    if speedMultiplier > 1.30 then
+        speedMultiplier = 1.30
+    end
+
+    if env(GetSpEffectID, Jewel_of_the_Ancients) == TRUE and c_SwordArtsID == 113 and env(GetSpEffectID, 391934) == TRUE
+        and IsNodeActive("SwordArtsOneShot_CMSG", "SwordArtsOneshotComboEnd_CMSG") == TRUE then
+        speedMultiplier = speedMultiplier / 2
+    elseif g_EnableMimicry_Jewel == TRUE and g_IsMimicry == TRUE then
+        speedMultiplier = speedMultiplier * 2 -- Jewel of the Devious (Rogue) while Mimicry
+    elseif env(GetSpEffectID, 391939) == TRUE then
+        speedMultiplier = speedMultiplier * 1.35 -- Jewel of the Ancestors + Thundercloud Form
+    elseif env(GetSpEffectID, 391943) == TRUE then
+        speedMultiplier = speedMultiplier * 1.7 -- Jewel of the Ancestors + Blink Bolt
+    elseif env(GetSpEffectID, 391944) == TRUE then
+        speedMultiplier = speedMultiplier * 1.7 -- Jewel of the Ancestors + Blink Bolt TwinAxe
+    elseif env(GetSpEffectID, 391945) == TRUE then
+        speedMultiplier = speedMultiplier * 1.7 -- Jewel of the Ancestors + Blink Bolt Big Axe
+    end
+
+    return speedMultiplier
+end
+
+local lastRootMotionMulti = 1
+function SetRootMotionMultiEnemy()
+    local movementIncreaseSpEffects = {
+        { 21493000, -0.40 }, -- Thorn Field Slow
+        { 21631000, -0.35 }, -- Bloodboon Quagmire (Gigedy gigedy)
+    }
+
+    local speedMultiplier = 1
+    for i = 1, #movementIncreaseSpEffects, 1 do
+        if env(GetSpEffectID, movementIncreaseSpEffects[i][1]) == TRUE then
+            speedMultiplier = speedMultiplier + movementIncreaseSpEffects[i][2]
+        end
+    end
+
+    if speedMultiplier == lastRootMotionMulti then
+        return
+    elseif speedMultiplier > 1.30 then -- Cap: 130%
+        speedMultiplier = 1.30
+    elseif speedMultiplier < 0.50 then -- Cap: 50%
+        speedMultiplier = 0.50
+    end
+
+    act(SetMovementScaleMult, speedMultiplier)
+    lastRootMotionMulti = speedMultiplier
+end
+
+local lastAnimSpeedMulti = 1
+function EnemyAnimSlowdownLib()
+    if env(GetHP) <= 0 then
+        if lastAnimSpeedMulti ~= 1 then
+            SetSpeedModifier(1)
+            lastAnimSpeedMulti = 1
+        end
+        return
+    end
+
+    local slowdownSpEffects = { -- Must be sorted highest to lowest on the second value
+        { nil, 1, g_IsFrozen }, -- Frozen Effect
+        { nil, -0.75, not completedTurn }, -- Fear Effect (Speedup)
+        { 390862, 0.25, true }, -- Jewel of the Cosmos (Gravity) + Meteoric Aligment
+        { 390852, 0.15, true }, -- Jewel of the Cosmos (Gravity) + Primval Alignment
+    }
+
+    for i = 1, #slowdownSpEffects, 1 do
+        if (slowdownSpEffects[i][1] == nil or env(GetSpEffectID, slowdownSpEffects[i][1]) == TRUE) and slowdownSpEffects[i][3] then
+            local speed = 1 - slowdownSpEffects[i][2]
+            if speed ~= lastAnimSpeedMulti then
+                SetSpeedModifier(speed)
+                lastAnimSpeedMulti = speed
+            end
+            return
+        end
+    end
+
+    if lastAnimSpeedMulti ~= 1 then
+        SetSpeedModifier(1)
+        lastAnimSpeedMulti = 1
+    end
+end
+
+function IsDisableThrowDef()
+    local disableThrowSpEffects = {
+        19986, -- Verdigris Discus (Heavy)
+        19987, -- Verdigris Discus (Overweight)
+    }
+    for i = 1, #disableThrowSpEffects, 1 do
+        if env(GetSpEffectID, disableThrowSpEffects[i]) == TRUE then
+            return true
+        end
+    end
+    return false
+end
+
+function ForceGesture(spEffectId, gestureId)
+    if env(GetSpEffectID, spEffectId) == FALSE then
+        return
+    end
+    act(ClearSpEffect, spEffectId)
+
+    local animID = 80000 + gestureId * 10
+    SetVariable("GestureID", gestureId)
+    
+    local isloop = FALSE
+    if env(DoesAnimExist, animID + 1) == TRUE then
+        isloop = TRUE
+    end
+
+    if isloop == TRUE then
+        if GetLocomotionState() == PLAYER_STATE_MOVE then
+            ExecEventHalfBlend(Event_GestureLoopStart, UPPER)
+            return TRUE
+        else
+            ExecEventHalfBlend(Event_GestureLoopStart, ALLBODY)
+            return TRUE
+        end
+    elseif GetLocomotionState() == PLAYER_STATE_MOVE then
+        ExecEventHalfBlend(Event_GestureStart, UPPER)
+        return TRUE
+    else
+        ExecEventHalfBlend(Event_GestureStart, ALLBODY)
+        return TRUE
+    end
+end
+
+function ForceGestureLib()
+    ForceGesture(103000, 91) -- Gesture: Rest
+    ForceGesture(103001, 97) -- Gesture: Balled up
+    ForceGesture(103002, 101) -- Gesture: Prayer
+    ForceGesture(103003, 98) -- Gesture: What do you want?
+    ForceGesture(103004, 102) -- Gesture: Rapture
+    ForceGesture(103005, 106) -- Golden Order Totality
+    ForceGesture(103006, 73) -- Gesture: Finger Snap
+    ForceGesture(103007, 0) -- Gesture: Bow
+    ForceGesture(103008, 1) -- Gesture: Polite Bow
+    ForceGesture(103009, 52) -- Gesture: By my Sword
+    ForceGesture(103010, 23) -- Gesture: Beckon
+    ForceGesture(103011, 80) -- Gesture: Dejection
+
+    if env(GetSpEffectID, 103049) == TRUE and env(GetSpEffectID, 100200) == TRUE then
+        ExecEventHalfBlend(Event_GestureEnd, ALLBODY) -- Force Gesture End
+    end
+end
+
+g_Jump_MoveLevel = 0
+g_Jumps_Performed = 0
+g_Jump_Cooldown = { 0 }
+
+local doubleJump_Queued, readyToDoubleJump = false, false
+function DoubleJump()
+    if env(GetHP) <= 0 then
+        return
+    elseif env(ActionRequest, ACTION_ARM_CHANGE_STYLE) == TRUE then
+        return
+    elseif g_Jumps_Performed == 0 or g_Jumps_Performed >= maximumJumps then
+        readyToDoubleJump = false
+        return
+    elseif env(GetStamina) <= 0 then
+        return
+    end
+
+    local isHoldingJump = env(ActionDuration, ACTION_ARM_CHANGE_STYLE) > 0
+    if not isHoldingJump then
+        readyToDoubleJump = true
+    end
+    
+    if OnCooldown(0.5, g_Jump_Cooldown[1]) then
+        if isHoldingJump and readyToDoubleJump then
+            doubleJump_Queued = true
+            readyToDoubleJump = false -- Prevent multiple queues from same press
+        end
+        return
+    end
+    
+    if not ((isHoldingJump and readyToDoubleJump) or doubleJump_Queued) then
+        return
+    end
+
+    doubleJump_Queued, readyToDoubleJump = false, false    
+    if enablePassiveDoubleJump_StarcallerJewel or env(GetSpEffectID, Jewel_of_the_Cosmos) == TRUE then
+        act(AddSpEffect, 390810) -- Starcaller Jewel Multi Jump Visuals
+    elseif enablePassiveDoubleJump_TempestEmbrace or Stormcaller_DoubleJumpAllowed then
+        act(AddSpEffect, 1528205) -- Tempest Embrace Multi Jump Visuals
+    else
+        return
+    end
+    act(AddSpEffect, 4087)
+    ExecJump(true)
+end
+
+function DoubleJump_OnJump()
+    if not enablePassiveDoubleJump_StarcallerJewel and env(GetSpEffectID, Jewel_of_the_Cosmos) == FALSE
+    and not enablePassiveDoubleJump_TempestEmbrace and env(GetSpEffectID, 1528200) == FALSE and env(GetSpEffectID, 1528500) == FALSE then
+        return
+    end
+
+    g_Jumps_Performed = g_Jumps_Performed + 1
+    g_Jump_Cooldown[1] = g_DeltaTimeCount
+end
+
+function LookAtPlayer(offset)
+    Log()
+    local enemyPosition = GetChunkPositionVector() + GetLocalPositionVector()
+    Log()
+    local enemyToPlayer = (GetChunkPositionPlayerVector() + GetLocalPositionPlayerVector()) - enemyPosition
+    enemyToPlayer:normalize4()
+    Log()
+
+    local enemyRotation = GetRotation()
+    Log()
+    local enemyForward = RotateVectorByQuaternion(hkVector4.new(0, 0, 1, 0), enemyRotation)
+    Log(enemyForward)
+
+    local desiredForward = hkVector4.new()
+    Log()
+    desiredForward:setNeg4(enemyToPlayer)
+    Log()
+
+    -- Compute the angle between enemy's current forward and the desired direction
+    local dot = enemyForward:dot3(desiredForward)
+    Log()
+    local angle = math.acos(math.max(-1, math.min(1, dot)))  -- Clamp dot to avoid NaN errors
+    Log()
+    local angleDegrees = math.deg(angle)
+
+    local rotationAxis = hkVector4.new()
+    rotationAxis:setCross(enemyForward, desiredForward)
+
+    -- If rotationAxis is pointing downward, flip the angle
+    local up = hkVector4.new(0, 1, 0, 0)
+    if rotationAxis:dot3(up) < 0 then
+        angleDegrees = -angleDegrees
+    end
+
+    Log(dot)
+    Log(angle)
+    Log(angleDegrees)
+
+    act(FaceDirection, angleDegrees)
+end
+
+local animationLogEnabled = false
+local animationLogCharacterFilter = 0
+local lastAnimation = "4294967295"
+local lastState = "W_Idle"
+function AnimationLoggerPrep(state)
+    lastState = state
+end
+
+function AnimationLogger(state)
+    if not animationLogEnabled or GetPointerValue(CHR_INS_BASE.UNKNOWN_OFFSET.CHR_MODEL) ~= animationLogCharacterFilter then
+        return
+    end
+
+    local currentAnimID = GetPointerValue(CHR_INS_BASE.CHR_MODULES.TIME_ACT.CURRENT_ANIMATION)
+    if currentAnimID == nil or currentAnimID == lastAnimation then
+        return
+    end
+
+    -- Use string math for large numbers
+    local animStr = tostring(currentAnimID)
+    
+    -- Calculate millions: divide by 1000000
+    local millions = "0"
+    local remainder = animStr
+    
+    -- Simple division by repeated subtraction for millions
+    local millionStr = "1000000"
+    while #remainder > 6 or (tonumber(remainder) and tonumber(remainder) >= 1000000) do
+        remainder = subtractStrings(remainder, millionStr)
+        millions = addStrings(millions, "1")
+    end
+    
+    -- Format: pad millions to 3 digits, remainder to 6 digits
+    millions = string.rep("0", 3 - #millions) .. millions
+    remainder = string.rep("0", 6 - #remainder) .. remainder
+    
+    local formattedAnim = string.format("a%s_%s", millions, remainder)
+    
+    lastAnimation = currentAnimID
+    Log(formattedAnim, lastState)
+end
+
+function ForcePoiseBreak()
+    SetPointerValue(CHR_INS_BASE.CHR_MODULES.SUPER_ARMOR_MODULE.POISE, 0)
+    SetVariable("IndexDamageDirection", 2)
+    act(SetDamageAnimType, DAMAGE_FLAG_MIDDLE)
+    act(TurnTowardAttacker, 0)
+    Replanning()
+    Fire("W_SABreak")
+end

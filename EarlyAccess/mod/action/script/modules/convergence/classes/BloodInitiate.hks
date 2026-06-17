@@ -1,0 +1,103 @@
+function BloodflameInitiateLib()
+    BloodflameHPReduction(500010, 01)
+    BloodflameHPReduction(500011, 02)
+    BloodflameHPReduction(500012, 05)
+    BloodflameHPReduction(500013, 10)
+    BloodflameHPReduction(500014, 15)
+    BloodflameHPReduction(500015, 20)
+    BloodflameHPReduction(500016, 40)
+    BloodflameHPReduction(500017, 60)
+    BloodflameHPReduction(500018, 30)
+    BloodflameHPReduction(500019, 03)
+end
+
+function BloodflameHPReduction(spEffect, hpPercentage)
+    if env(GetSpEffectID, spEffect) == FALSE then 
+        return
+    end
+
+    act(ClearSpEffect, spEffect)
+    if env(GetSpEffectID, 1638120) == TRUE or env(GetSpEffectID, 392201) == TRUE then -- Blood of the Maiden (damage immunity - Hex of Mohgwyn) OR -- 392201 is shell and kill
+        return
+    end
+
+    local newHpPercentage = hpPercentage / 100
+    if env(GetSpEffectID, Jewel_of_the_Wounded) == TRUE then
+        newHpPercentage = newHpPercentage * 0.5
+    end
+    
+    act(ChangeHP, -(env(GetMaxHP) * newHpPercentage))
+end
+
+function BloodOfTheMaiden()
+    if env(GetSpEffectID, 1638100) == FALSE then
+        return
+    end
+    act(ClearSpEffect, 1638100)
+
+    if env(GetSpEffectID, 1630300) == TRUE then -- Boiling Blood
+        act(ClearSpEffect, 1630300)
+        act(AddSpEffect, 1638160) -- Blood of the Maiden (enemy hit while Boiling Blood)
+    end
+    if env(GetSpEffectID, 1632100) == TRUE then -- Hex of Mohgwyn
+        act(ClearSpEffect, 1632100)
+        act(AddSpEffect, 1638170) -- Blood of the Maiden (enemy hit while Hex of Mohgwyn)
+    end
+    if env(GetSpEffectID, 1638000) == TRUE then -- Fiendish Ritual
+        act(ClearSpEffect, 1638000)
+        act(AddSpEffect, 1638140) -- Blood of the Maiden (enemy bigger damage proc - Fiendish Ritual)
+    end
+end
+
+local bloodflameBlade_timingOffset = 0
+function BloodInitiateJewel_BloodflameBlade(spEffect, hand, disableTwoHand, spCategory)
+    if env(GetSpEffectID, Jewel_of_the_Wounded) == FALSE then
+        if env(GetSpEffectID, spEffect) == TRUE then -- Bloodflame Blade
+            act(ClearSpEffect, spEffect)
+        end
+        return
+    elseif env(GetSpEffectID, spEffect) == TRUE or c_Style == disableTwoHand then
+        return
+    end
+
+    bloodflameBlade_timingOffset = bloodflameBlade_timingOffset + 1
+    if bloodflameBlade_timingOffset > 4 then
+        bloodflameBlade_timingOffset = 0
+    else
+        return
+    end
+
+    local weaponId = GetWeaponID(hand)
+    local isBuffable = GetParamValue(PARAM.EquipParamWeapon.IS_BUFFABLE, weaponId)
+    if isBuffable == FALSE then
+        return
+    end
+
+    local spEffects = GetSpEffectsInfo()
+    for _, spEffect in ipairs(spEffects) do
+        local category = GetParamValue(PARAM.SpEffectParam.EFFECT_CATEGORY, spEffect.ID)
+        if category == spCategory then -- Has a weapon buff already
+            return
+        end
+    end
+    
+    act(AddSpEffect, spEffect)
+end
+
+local bleedCooldown = 0
+function BloodflameBladeBleedHandler()
+    if env(GetSpEffectID, 1632001) == FALSE and env(GetSpEffectID, 1632011) == FALSE then
+        return
+    elseif OnCooldown(0.35, bleedCooldown) then
+        return
+    end
+
+    bleedCooldown = g_DeltaTimeCount
+    local info = GetStatusEffectInfo(StatusEffects.Bleed)
+    local maxBuildup = GetPointerValue(info.maximum)
+    local buildupPercentage = 0.05
+    local stacks = GetSpEffectStackCount(1632001, 1632011)
+    local totalBuildup = math.ceil(maxBuildup * buildupPercentage / 5) * stacks
+
+    IncreaseStatusBuildup(StatusEffects.Bleed, totalBuildup)
+end

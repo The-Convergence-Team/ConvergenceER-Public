@@ -1,0 +1,68 @@
+function Tranquility()
+    ReapplySpEffectTillIdle(1749100, 10)
+    TranquilityAiToggle()
+
+    if env(GetSpEffectID, 1749100) == FALSE then
+        return
+    end
+    act(ClearSpEffect, 1749100)
+
+    local threatLevel = GetThreatLevel()
+    if threatLevel > ThreatLevel.None then
+        act(AddSpEffect, 1749100 + (threatLevel * 10))
+    end
+end
+
+local TranqActive = false
+function TranquilityAiToggle()
+    if TranqActive then
+        if env(GetSpEffectType, 570) == FALSE then
+            SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_ATTACK, FALSE)
+            SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_MOVE, FALSE)
+            TranqActive = false
+        end
+        return
+    elseif env(GetSpEffectType, 570) == FALSE then
+        return
+    end
+
+    SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_ATTACK, TRUE)
+    SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_MOVE, TRUE)
+    TranqActive = true
+end
+
+function InvocationOfSaintTrina()
+    if env(GetSpEffectID, 1749220) == FALSE then
+        return
+    end
+    act(ClearSpEffect, 1749220)
+
+    if env(GetSpEffectType, SP_EFFECT_TYPE_SLEEP) == FALSE and env(GetSpEffectType, 560) == FALSE and IsNodeActive("Sleep_SM") == FALSE then
+        act(AddSpEffect, 1749200) -- Sleep Buildup
+        return
+    end
+
+    local threatLevel = GetThreatLevel()
+    local newHP = env(GetHP) - ((env(GetMaxHP) * 0.13) + 400)
+
+    if threatLevel ~= ThreatLevel.LesserEnemy and newHP > 0 then
+        local multiplier = 1
+        if GetEntityId() == 17000850 then -- Quicksilver Husk
+            multiplier = 0.5
+        end
+        act(ChangeHP, -((env(GetMaxHP) * 0.13) + 400) * multiplier) -- Sleep Damage
+        return
+    end
+
+    if IsExistAnime("W_DeathIdleSleep") == TRUE then
+        Fire("W_DeathIdleSleep")
+    elseif IsExistAnime("W_DeathStartSleep") == TRUE then
+        Fire("W_DeathStartSleep")
+    elseif IsExistAnime("W_DeathIdleSleepCollect") == TRUE then
+        Fire("W_DeathIdleSleepCollect")
+    elseif IsExistAnime("W_DeathStartSleepCollect") == TRUE then
+        Fire("W_DeathStartSleepCollect")
+    else
+        act(ChangeHP, -(env(GetHP)))
+    end
+end

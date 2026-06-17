@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -152,6 +152,52 @@ $Event(1051563701, Restart, function(X0_4, X4_4) {
     if (!EventFlag(60829)) {
         SetEventFlagID(60829, ON);
         AwardGesture(72);
+        
+        // Give double Jellyfish summons
+        if (PlayerHasItem(ItemType.Goods, 236010)) {
+            RemoveItemFromPlayer(ItemType.Goods, 2604010, 1);
+            AwardItemLot(1051561010);
+        }
+        else if (PlayerHasItem(ItemType.Goods, 236009)) {
+            RemoveItemFromPlayer(ItemType.Goods, 2604009, 1);
+            AwardItemLot(1051561000);
+        }
+        else if (PlayerHasItem(ItemType.Goods, 236008)) {
+            RemoveItemFromPlayer(ItemType.Goods, 2604008, 1);
+            AwardItemLot(1051560990);
+        }
+        else if (PlayerHasItem(ItemType.Goods, 236007)) {
+            RemoveItemFromPlayer(ItemType.Goods, 2604007, 1);
+            AwardItemLot(1051560980);
+        }
+        else if (PlayerHasItem(ItemType.Goods, 236006)) {
+            RemoveItemFromPlayer(ItemType.Goods, 2604006, 1);
+            AwardItemLot(1051560970);
+        }
+        else if (PlayerHasItem(ItemType.Goods, 236005)) {
+            RemoveItemFromPlayer(ItemType.Goods, 2604005, 1);
+            AwardItemLot(1051560960);
+        }
+        else if (PlayerHasItem(ItemType.Goods, 236004)) {
+            RemoveItemFromPlayer(ItemType.Goods, 2604004, 1);
+            AwardItemLot(1051560950);
+        }
+        else if (PlayerHasItem(ItemType.Goods, 236003)) {
+            RemoveItemFromPlayer(ItemType.Goods, 2604003, 1);
+            AwardItemLot(1051560940);
+        }
+        else if (PlayerHasItem(ItemType.Goods, 236002)) {
+            RemoveItemFromPlayer(ItemType.Goods, 2604002, 1);
+            AwardItemLot(1051560930);
+        }
+        else if (PlayerHasItem(ItemType.Goods, 236001)) {
+            RemoveItemFromPlayer(ItemType.Goods, 2604001, 1);
+            AwardItemLot(1051560920);
+        }
+        else if (PlayerHasItem(ItemType.Goods, 236000)) {
+            RemoveItemFromPlayer(ItemType.Goods, 2604000, 1);
+            AwardItemLot(1051560910);
+        }
     }
     WaitFixedTimeSeconds(8);
     DisableCharacter(X0_4);

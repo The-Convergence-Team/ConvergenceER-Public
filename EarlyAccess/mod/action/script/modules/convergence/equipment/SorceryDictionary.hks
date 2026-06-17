@@ -1,0 +1,422 @@
+__glintSpells = {
+    -- Faint Rune
+    [4010] = { SpEffects =         nil, RestoreFpCost = nil }, -- Swift Glintstone Shard
+    [4440] = { SpEffects =         nil, RestoreFpCost = nil }, -- Carian Slicer
+    [4070] = { SpEffects =         nil, RestoreFpCost = nil }, -- Glintstone Arc
+    [4160] = { SpEffects = { 1416000 }, RestoreFpCost = 25 }, -- Energy Shell
+    -- Shimmering Rune
+    [4001] = { SpEffects =         nil, RestoreFpCost = nil }, -- Great Glintstone Shard
+    [4470] = { SpEffects = { 1447000 }, RestoreFpCost = nil }, -- Scholar's Shield
+    [4460] = { SpEffects = { 1446000, 1446010 }, RestoreFpCost = nil }, -- Scholar's Armament
+    [4450] = { SpEffects =         nil, RestoreFpCost = nil }, -- Carian Piercer
+    [4480] = { SpEffects = { 1448010 }, RestoreFpCost = nil }, -- Sorcerer's Lucidity
+    -- Glowing Rune
+    [4430] = { SpEffects =         nil, RestoreFpCost = nil }, -- Carian Greatsword
+    [4630] = { SpEffects =         nil, RestoreFpCost = nil }, -- Thops's Barrier
+    [4030] = { SpEffects =         nil, RestoreFpCost = nil }, -- Shard Spiral
+    [4302] = { SpEffects =         nil, RestoreFpCost = nil }, -- Greatblade Phalanx
+    [4170] = { SpEffects = { 1417000 }, RestoreFpCost = nil }, -- Carian Acuity
+    -- Shining Rune
+    [4140] = { SpEffects = { 1414000 }, RestoreFpCost = 16 }, -- Starlight
+    [4020] = { SpEffects =         nil, RestoreFpCost = nil }, -- Glintstone Cometshard
+    [4301] = { SpEffects =         nil, RestoreFpCost = nil }, -- Carian Phalanx
+    [4380] = { SpEffects =         nil, RestoreFpCost = nil }, -- Loretta's Greatbow
+    [4150] = { SpEffects =         nil, RestoreFpCost = nil }, -- Glintbeam Orb
+    [4120] = { SpEffects =         nil, RestoreFpCost = nil }, -- Gavel of Haima
+    -- Radiant Rune
+    [4021] = { SpEffects =         nil, RestoreFpCost = nil }, -- Comet
+    [4360] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rennala's Full Moon
+    [4381] = { SpEffects =         nil, RestoreFpCost = nil }, -- Loretta's Mastery
+    [4200] = { SpEffects =         nil, RestoreFpCost = nil }, -- Comet Azur
+    [4130] = { SpEffects = { 1413010 }, RestoreFpCost = 35 }, -- Amina Magica
+    -- Shadow Rune
+    [4131] = { SpEffects = { 1413110 }, RestoreFpCost = 35 }, -- Corpa Magica
+    [2004500] = { SpEffects =      nil, RestoreFpCost = nil }, -- Glintstone Nail
+    [2004510] = { SpEffects =      nil, RestoreFpCost = nil }, -- Nail Volley
+    [2004520] = { SpEffects =      nil, RestoreFpCost = nil }, -- Nail Constellation
+    [2004530] = { SpEffects =      nil, RestoreFpCost = nil }, -- Nail Burst
+
+    -- Etc
+    [4080] = { SpEffects =         nil, RestoreFpCost = nil }, -- Cannon of Haima
+    [7040] = { SpEffects =         nil, RestoreFpCost = nil }, -- Glintstone Breath
+    [7041] = { SpEffects =         nil, RestoreFpCost = nil }, -- Smarag's Glintstone Breath
+    [2004300] = { SpEffects =      nil, RestoreFpCost = nil }, -- Miriam's Vanishing
+    [2004320] = { SpEffects =      nil, RestoreFpCost = nil }, -- Rellana's Twin Moons
+}
+
+__gravitySpells = {
+    -- Faint Rune
+    [4720] = { SpEffects =         nil, RestoreFpCost = nil }, -- Gravity Well
+    [4100] = { SpEffects =         nil, RestoreFpCost = nil }, -- Shatter Earth
+    [4711] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rock Burst
+    -- Shimmering Rune
+    [4710] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rock Sling
+    [4110] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rock Blaster
+    [4770] = { SpEffects = { 1477000 }, RestoreFpCost = nil }, -- Gravity Armor
+    [4721] = { SpEffects =         nil, RestoreFpCost = nil }, -- Collapsing Stars
+    -- Glowing Rune
+    [4700] = { SpEffects =         nil, RestoreFpCost = nil }, -- Meteorite
+    [4730] = { SpEffects =         nil, RestoreFpCost = nil }, -- Implosion
+    [4740] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rock Heave
+    [4731] = { SpEffects =         nil, RestoreFpCost = nil }, -- Distortion Field
+    [2007430] = { SpEffects =         nil, RestoreFpCost = nil }, -- Gaze of Metyr
+    -- Shining Rune
+    [4780] = { SpEffects =         nil, RestoreFpCost = nil }, -- Cosmic Tunnel
+    [4701] = { SpEffects =         nil, RestoreFpCost = nil }, -- Meteorite of Astel
+    [4760] = { SpEffects =         nil, RestoreFpCost = nil }, -- Crush
+    [4722] = { SpEffects =         nil, RestoreFpCost = nil }, -- Collapsing Nebula
+    [4712] = { SpEffects =         nil, RestoreFpCost = nil }, -- Meteor Sling
+    -- Radiant Rune
+    [4750] = { SpEffects =         nil, RestoreFpCost = nil }, -- Gravity Beam
+    [4702] = { SpEffects =         nil, RestoreFpCost = nil }, -- Stellar Bombardment
+    [4790] = { SpEffects = { 1479000 }, RestoreFpCost = 24 }, -- Primeval Alignment
+    [4791] = { SpEffects = { 1479100 }, RestoreFpCost = 10 }, -- Meteoric Alignment
+    -- Shadow Rune
+    [2007400] = { { 
+        21740000, -- Cosmic Surge 1
+        21740001, -- Cosmic Surge 2
+        21740002, -- Cosmic Surge 3
+        21740003, -- Cosmic Surge 4
+        21740004, -- Cosmic Surge 5
+        21740005, -- Cosmic Surge 6
+        21740006, -- Cosmic Surge 7
+        21740007, -- Cosmic Surge 8
+        21740008, -- Cosmic Surge 9
+        21740009, -- Cosmic Surge 10
+        21740010, -- Cosmic Surge 11
+        21740011, -- Cosmic Surge 12
+        21740012, -- Cosmic Surge 13
+        21740013, -- Cosmic Surge 14
+        21740014, -- Cosmic Surge 15
+        21740015, -- Cosmic Surge 16
+        21740016, -- Cosmic Surge 17
+        21740017, -- Cosmic Surge 18
+        21740018, -- Cosmic Surge 19
+        21740019, -- Cosmic Surge 20
+        21740030, -- Cosmic Surge 1 (Primeval)
+        21740031, -- Cosmic Surge 2 (Primeval)
+        21740032, -- Cosmic Surge 3 (Primeval)
+        21740033, -- Cosmic Surge 4 (Primeval)
+        21740034, -- Cosmic Surge 5 (Primeval)
+        21740035, -- Cosmic Surge 6 (Primeval)
+        21740036, -- Cosmic Surge 7 (Primeval)
+        21740037, -- Cosmic Surge 8 (Primeval)
+        21740038, -- Cosmic Surge 9 (Primeval)
+        21740039, -- Cosmic Surge 10 (Primeval)
+        21740040, -- Cosmic Surge 11 (Primeval)
+        21740041, -- Cosmic Surge 12 (Primeval)
+        21740042, -- Cosmic Surge 13 (Primeval)
+        21740043, -- Cosmic Surge 14 (Primeval)
+        21740044, -- Cosmic Surge 15 (Primeval)
+        21740045, -- Cosmic Surge 16 (Primeval)
+        21740046, -- Cosmic Surge 17 (Primeval)
+        21740047, -- Cosmic Surge 18 (Primeval)
+        21740048, -- Cosmic Surge 19 (Primeval)
+        21740049, -- Cosmic Surge 20 (Primeval)
+        21740060, -- Cosmic Surge 1 (Meteoric)
+        21740061, -- Cosmic Surge 2 (Meteoric)
+        21740062, -- Cosmic Surge 3 (Meteoric)
+        21740063, -- Cosmic Surge 4 (Meteoric)
+        21740064, -- Cosmic Surge 5 (Meteoric)
+        21740065, -- Cosmic Surge 6 (Meteoric)
+        21740066, -- Cosmic Surge 7 (Meteoric)
+        21740067, -- Cosmic Surge 8 (Meteoric)
+        21740068, -- Cosmic Surge 9 (Meteoric)
+        21740069, -- Cosmic Surge 10 (Meteoric)
+        21740070, -- Cosmic Surge 11 (Meteoric)
+        21740071, -- Cosmic Surge 12 (Meteoric)
+        21740072, -- Cosmic Surge 13 (Meteoric)
+        21740073, -- Cosmic Surge 14 (Meteoric)
+        21740074, -- Cosmic Surge 15 (Meteoric)
+        21740075, -- Cosmic Surge 16 (Meteoric)
+        21740076, -- Cosmic Surge 17 (Meteoric)
+        21740077, -- Cosmic Surge 18 (Meteoric)
+        21740078, -- Cosmic Surge 19 (Meteoric)
+        21740079, -- Cosmic Surge 20 (Meteoric)
+        }, RestoreFpCost = nil }, 
+
+    [2007410] = { SpEffects =         nil, RestoreFpCost = nil }, -- Fleeting Microcosm
+    [2007420] = { SpEffects =         nil, RestoreFpCost = nil }, -- Cherishing Fingers
+    [2007440] = { SpEffects =         nil, RestoreFpCost = nil }, -- Microcosmic Spree
+    [2007450] = { SpEffects =         nil, RestoreFpCost = nil }, -- Creeping Offspring
+    [2004710] = { SpEffects =         nil, RestoreFpCost = nil }, -- Gravitational Missile
+
+    -- Etc
+    [2004700] = { SpEffects =         nil, RestoreFpCost = nil }, -- Blades of Stone
+}
+
+__dragonkinSpells = {
+    -- Faint Rune
+    [4390] = { SpEffects =         nil, RestoreFpCost = nil }, -- Frozen Cragbolt
+    [5100] = { SpEffects =         nil, RestoreFpCost = nil }, -- Cragbolt Bubbles
+    [4590] = { SpEffects = { 1459005, 1459007 }, RestoreFpCost = nil }, -- Frozen Lightning Armament
+    [4530] = { SpEffects =         nil, RestoreFpCost = nil }, -- Cragbolt Wisp
+    -- Shimmering Rune
+    [5130] = { { 
+        1513000, -- Armor of Bubbles (3)
+        1513001, -- Armor of Bubbles (2)
+        1513002, -- Armor of Bubbles (1)
+        1513500, -- Armor of Bubbles - Jewel (1)
+        1513501, -- Armor of Bubbles - Jewel (2)
+        1513502, -- Armor of Bubbles - Jewel (3)
+    }, RestoreFpCost = nil }, 
+    [2004310] = { SpEffects =      nil, RestoreFpCost = nil }, -- Cragbolt Trio
+    [5110] = { SpEffects =         nil, RestoreFpCost = nil }, -- Great Dragonkin Bubble
+    [4550] = { SpEffects =         nil, RestoreFpCost = nil }, -- Cragbolt Mine
+    [4640] = { SpEffects =         nil, RestoreFpCost = nil }, -- Dragonkin Retaliation
+    [4641] = { SpEffects =         nil, RestoreFpCost = nil }, -- Dragonkin Retaliation +
+    [4642] = { SpEffects =         nil, RestoreFpCost = nil }, -- Dragonkin Retaliation ++
+    -- Glowing Rune
+    [4540] = { SpEffects =         nil, RestoreFpCost = nil }, -- Cragbolt Upwelling
+    [6921] = { SpEffects =         nil, RestoreFpCost = nil }, -- Frozen Lightning Stake
+    [5120] = { SpEffects =         nil, RestoreFpCost = nil }, -- Great Bubble Volley
+    -- Shining Rune
+    [4370] = { SpEffects =         nil, RestoreFpCost = nil }, -- Dragonkin Downpour
+    [5131] = { SpEffects = { 1513100 }, RestoreFpCost = nil }, -- Underworld Bubbleshield
+    [5136] = { SpEffects = {        
+        1513500, -- Underworld Bubbleshield - Jewel (1)
+        1513501, -- Underworld Bubbleshield - Jewel (2)
+        1513502  -- Underworld Bubbleshield - Jewel (3)
+    }, RestoreFpCost = nil }, -- Underworld Bubbleshield (Jewel)
+    [4531] = { SpEffects =         nil, RestoreFpCost = nil }, -- Cragbolt Spear
+    [4551] = { SpEffects =         nil, RestoreFpCost = nil }, -- Dragonkin Minefield
+    [4560] = { SpEffects =         nil, RestoreFpCost = nil }, -- Frozen Lightning Storm
+    -- Radiant Rune
+    [4520] = { SpEffects =         nil, RestoreFpCost = nil }, -- Cragbolt Torrent
+    [4570] = { SpEffects =         nil, RestoreFpCost = nil }, -- Dragonkin Devastation
+    [4580] = { SpEffects = { 1458000 }, RestoreFpCost = 24 }, -- Strenght of the Underworld
+    [4581] = { SpEffects = { 1458100 }, RestoreFpCost = 24 }, -- Wisdom of the Makers
+    -- Shadow Rune
+    [5150] = { SpEffects = nil, RestoreFpCost = nil }, -- Bubble Snare
+    [5155] = { SpEffects = nil, RestoreFpCost = nil }, -- Bubble Snare (Jewel)
+    [5160] = { SpEffects = nil, RestoreFpCost = nil }, -- Galvanic Barrier (Shatter Ice Wall)
+    [5170] = { SpEffects = nil, RestoreFpCost = nil }, -- Cragbolt Dynamo (tesla coil)
+    [5180] = { SpEffects = nil, RestoreFpCost = nil }, -- Galvanic Icefang (Ice Spikes from ground)
+    [5190] = { SpEffects = nil, RestoreFpCost = nil }, -- Maker's Lament (Giga Lightning Stake)
+}
+
+__magmaSpells = {
+    -- Faint Rune
+    [4801] = { SpEffects =         nil, RestoreFpCost = nil }, -- Lava Dart
+    [4800] = { SpEffects =         nil, RestoreFpCost = nil }, -- Magma Shot
+    [4861] = { SpEffects =         nil, RestoreFpCost = nil }, -- Molten Stride
+    -- Shimmering Rune
+    [4802] = { SpEffects =         nil, RestoreFpCost = nil }, -- Burning Rancor
+    [4850] = { SpEffects = { 1485000 }, RestoreFpCost = nil }, -- Familial Consumption
+    [4811] = { SpEffects =         nil, RestoreFpCost = nil }, -- Lava Spray
+    [4853] = { SpEffects = { 1485300 }, RestoreFpCost = nil }, -- Superheat
+    -- Glowing Rune
+    [4820] = { SpEffects =         nil, RestoreFpCost = nil }, -- Roiling Magma
+    [4810] = { SpEffects =         nil, RestoreFpCost = nil }, -- Gelmir's Fury
+    [4851] = { SpEffects = { 1485100 }, RestoreFpCost = nil }, -- Blasphemer's Outrage
+    [4860] = { SpEffects =         nil, RestoreFpCost = nil }, -- Lava Pool
+    -- Shining Rune
+    [4840] = { SpEffects =         nil, RestoreFpCost = nil }, -- Pyroclasm
+    [4841] = { SpEffects =         nil, RestoreFpCost = nil }, -- Lava Blast
+    [4830] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rykard's Rancor
+    [4842] = { SpEffects =         nil, RestoreFpCost = nil }, -- Lava Bomb
+    -- Radiant Rune
+    [4871] = { SpEffects =         nil, RestoreFpCost = nil }, -- Vortex of Eiglay
+    [4870] = { SpEffects =         nil, RestoreFpCost = nil }, -- Magma Missile
+    [4872] = { SpEffects =         nil, RestoreFpCost = nil }, -- Inferno
+    [4852] = { SpEffects = { 1485210 }, RestoreFpCost = 60 }, -- Embrace the Devourer
+    -- Shadow Rune
+    [4880] = { SpEffects =         nil, RestoreFpCost = nil }, -- Slag Spears
+    [4890] = { SpEffects =         nil, RestoreFpCost = nil }, -- Molten Spikes
+    [4881] = { SpEffects =         nil, RestoreFpCost = nil }, -- Annealed Slag
+    [4891] = { SpEffects =         nil, RestoreFpCost = nil }, -- Furnace Maul
+    [4854] = { SpEffects = { 1485400 }, RestoreFpCost = 45 }, -- Living Forge
+
+    -- Etc
+    [7010] = { SpEffects =         nil, RestoreFpCost = nil }, -- Magma Breath
+    [7011] = { SpEffects =         nil, RestoreFpCost = nil }, -- Theodorix's Magma
+}
+
+__stormSpells = {
+    -- Faint Rune
+    [5200] = { SpEffects =         nil, RestoreFpCost = nil }, -- Storm Gust
+    [5210] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rebuff
+    [5250] = { SpEffects = { 1525000 }, RestoreFpCost = nil }, -- Storm Armament
+    [5271] = { SpEffects =         nil, RestoreFpCost = nil }, -- Air Tax
+    -- Shimmering Rune
+    [5201] = { SpEffects =         nil, RestoreFpCost = nil }, -- Twister
+    [5240] = { SpEffects =         nil, RestoreFpCost = nil }, -- Storm Arc
+    [5220] = { SpEffects =         nil, RestoreFpCost = nil }, -- Whirlwind
+    [5241] = { SpEffects =         nil, RestoreFpCost = nil }, -- Storm Call
+    -- Glowing Rune
+    [5260] = { SpEffects = { 1526000 }, RestoreFpCost = nil }, -- Cloud Form
+    [5202] = { SpEffects =         nil, RestoreFpCost = nil }, -- Storm Strike
+    [5230] = { SpEffects =         nil, RestoreFpCost = nil }, -- Gale Blast
+    [5211] = { SpEffects = { 1521100 }, RestoreFpCost = nil }, -- Gathering Storm
+    -- Shining Rune
+    [5221] = { SpEffects =         nil, RestoreFpCost = nil }, -- Cyclone
+    [5261] = { SpEffects = { 1526100 }, RestoreFpCost = nil }, -- Dematerialize
+    [5270] = { SpEffects =         nil, RestoreFpCost = nil }, -- Suffocate
+    [5242] = { SpEffects =         nil, RestoreFpCost = nil }, -- Storm Shatter
+    -- Radiant Rune
+    [5222] = { SpEffects =         nil, RestoreFpCost = nil }, -- Tornado
+    [5280] = { SpEffects = { 1528000 }, RestoreFpCost = 22 }, -- Stormcaller's Sublimity
+    [5281] = { SpEffects = { 1528100 }, RestoreFpCost = 22 }, -- Tempest Form
+    [5232] = { SpEffects =         nil, RestoreFpCost = nil }, -- Tempest Lance
+    -- Shadow Rune
+    [5293] = { SpEffects =         nil, RestoreFpCost = nil }, -- Lion's Breath
+    [5290] = { SpEffects =         nil, RestoreFpCost = nil }, -- Windborne Vault
+    [5282] = { SpEffects = { 1528200 }, RestoreFpCost = nil }, -- Tempest Embrace
+    [5285] = { SpEffects = { 1528500 }, RestoreFpCost = nil }, -- Tempest Embrace (Jewel)
+    [5292] = { SpEffects =         nil, RestoreFpCost = nil }, -- Storm Arc Volley
+    [5291] = { SpEffects =         nil, RestoreFpCost = nil }, -- Zephyr Strike
+
+    -- Etc
+    [2007730] = { SpEffects =      nil, RestoreFpCost = nil }, -- Divine Beast Tornado
+}
+
+__nightSpells = {
+    -- Faint Rune
+    [4610] = { SpEffects =         nil, RestoreFpCost = nil }, -- Night Shard
+    [4601] = { SpEffects =         nil, RestoreFpCost = nil }, -- Quicksilver Affliction
+    [6500] = { SpEffects =         nil, RestoreFpCost = nil }, -- Night Maiden's Mist
+    [6520] = { SpEffects =         nil, RestoreFpCost = nil }, -- Shadow Bait
+    -- Shimmering Rune
+    [6530] = { SpEffects =         nil, RestoreFpCost = nil }, -- Darkness
+    [4660] = { SpEffects = { 1466000 }, RestoreFpCost = nil }, -- Unseen Blade
+    [6510] = { SpEffects = { 1651000 }, RestoreFpCost = nil }, -- Assassin's Approach
+    [4600] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ambush Shard
+    -- Glowing Rune
+    [4040] = { SpEffects =         nil, RestoreFpCost = nil }, -- Night Stars
+    [4602] = { SpEffects =         nil, RestoreFpCost = nil }, -- Curse of Midnight
+    [4050] = { SpEffects =         nil, RestoreFpCost = nil }, -- Star Swarm
+    [4603] = { SpEffects =         nil, RestoreFpCost = nil }, -- Quicksilver Shard
+    -- Shining Rune
+    [4650] = { SpEffects =         nil, RestoreFpCost = nil }, -- Eternal Darkness
+    [6501] = { SpEffects =         nil, RestoreFpCost = nil }, -- Night Maiden's Fog
+    [4620] = { SpEffects =         nil, RestoreFpCost = nil }, -- Night Comet
+    [4670] = { SpEffects = { 1467000 }, RestoreFpCost = nil }, -- Unseen Form
+    -- Radiant Rune
+    [4220] = { SpEffects =         nil, RestoreFpCost = nil }, -- Stars of Ruin
+    [4621] = { SpEffects =         nil, RestoreFpCost = nil }, -- Quicksilver Comet
+    [4210] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rounding Rain of Stars
+    [4671] = { SpEffects = { 1467100 }, RestoreFpCost = 22 }, -- Oath of Darkness
+    [4672] = { SpEffects = { 1467200 }, RestoreFpCost = 22 }, -- Attune to the Black Moon
+    -- Shadow Rune
+    [4605] = { SpEffects =         nil, RestoreFpCost = nil }, -- Fulminated Quicksilver
+    [4690] = { SpEffects =         nil, RestoreFpCost = nil }, -- Shadow Arc
+    [4691] = { SpEffects =         nil, RestoreFpCost = nil }, -- Shadow Arc (Oath of Darkness)
+    [4604] = { SpEffects =         nil, RestoreFpCost = nil }, -- Curse of Shadow
+    [4609] = { SpEffects =         nil, RestoreFpCost = nil }, -- Curse of Shadow (Attune to the Black Moon + Jewel)
+    [4651] = { SpEffects =         nil, RestoreFpCost = nil }, -- Black Moon Eulogy
+    [4652] = { SpEffects = { 1465201 }, RestoreFpCost = nil }, -- Pure Darkness
+}
+
+__necroSpells = {
+    -- Faint Rune
+    [5020] = { SpEffects =         nil, RestoreFpCost = nil }, -- Fia's Mist
+    [5030] = { SpEffects =         nil, RestoreFpCost = nil }, -- Tibia Summons
+    [5082] = { SpEffects =         nil, RestoreFpCost = nil }, -- Reassemble
+    [5070] = { SpEffects = { 1507000 }, RestoreFpCost = nil }, -- Blighted Armament
+    [5031] = { SpEffects =         nil, RestoreFpCost = nil }, -- Tibia’s Conversion
+    -- Shimmering Rune
+    [5000] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rancorcall
+    [5021] = { SpEffects =         nil, RestoreFpCost = nil }, -- Lingering Blight
+    [5081] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rally the Legion
+    [5080] = { SpEffects = { 1508000 }, RestoreFpCost = 25 }, -- Accursed Binding
+    -- Glowing Rune
+    [5001] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ancient Death Rancor
+    [5050] = { SpEffects =         nil, RestoreFpCost = nil }, -- Sacrifice
+    [5022] = { SpEffects =         nil, RestoreFpCost = nil }, -- Curse of Putrefaction
+    [5002] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rancor Bolt
+    -- Shining Rune
+    [5010] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ghostflame Cannon
+    [5023] = { SpEffects =         nil, RestoreFpCost = nil }, -- Wave of Corruption
+    [5011] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rancorstorm
+    [5061] = { SpEffects =         nil, RestoreFpCost = nil }, -- Soul Steal
+    -- Radiant Rune
+    [5060] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ghostflame Embrace
+    [5012] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ritual of Ghostflame
+    [5090] = { SpEffects = { 1509000 }, RestoreFpCost = 20 }, -- Godwyn's Vengeance
+    [5091] = { SpEffects = { 1509100 }, RestoreFpCost = 35 }, -- Phoenix of Death
+    -- Shadow Rune
+    [2006250] = { SpEffects =      nil, RestoreFpCost = nil }, -- Scadu Rebirth
+    [2006220] = { SpEffects =      nil, RestoreFpCost = nil }, -- Putrid Salvo
+    [2006210] = { SpEffects =      nil, RestoreFpCost = nil }, -- Mass of Putrescence
+    [2005000] = { SpEffects =      nil, RestoreFpCost = nil }, -- Rings of Spectral Light
+    [2006260] = { SpEffects = { 21626000 }, RestoreFpCost = nil }, -- Shadow of Death
+    [2006230] = { SpEffects =      nil, RestoreFpCost = nil }, -- Putrid Shardstorm
+
+    -- Other
+    [2006200] = { SpEffects =      nil, RestoreFpCost = nil }, -- Vortex of Putrescence
+    [2007020] = { SpEffects =      nil, RestoreFpCost = nil }, -- Ghostflame Breath
+}
+
+__frostSpells = {
+    -- Faint Rune
+    [4420] = { SpEffects =         nil, RestoreFpCost = nil }, -- Freezing Mist
+    [4401] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ice Dart
+    [4490] = { SpEffects = { 1449000 }, RestoreFpCost = nil }, -- Frozen Armament
+    [4400] = { SpEffects =         nil, RestoreFpCost = nil }, -- Icecrag Arrow
+    -- Shimmering Rune
+    [4412] = { SpEffects =         nil, RestoreFpCost = nil }, -- Renna's Barrier
+    [4411] = { SpEffects =         nil, RestoreFpCost = nil }, -- Frozen Spikes
+    [4413] = { SpEffects = { 1441300 }, RestoreFpCost = nil }, -- Armor of Rime
+    [4432] = { SpEffects =         nil, RestoreFpCost = nil }, -- Freeze Solid
+    -- Glowing Rune
+    [4421] = { SpEffects =         nil, RestoreFpCost = nil }, -- Icecrag Burst
+    [4422] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ice Shards
+    [4431] = { SpEffects =         nil, RestoreFpCost = nil }, -- Adula's Moonblade
+    [4423] = { SpEffects =         nil, RestoreFpCost = nil }, -- Frozen Phalanx
+    -- Shining Rune
+    [4440] = { SpEffects = { 1441600 }, RestoreFpCost = nil }, -- Armor of Ice
+    [4402] = { SpEffects =         nil, RestoreFpCost = nil }, -- Icecrag Spear
+    [4361] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ranni's Dark Moon
+    [4403] = { SpEffects =         nil, RestoreFpCost = nil }, -- Avalanche
+    -- Radiant Rune
+    [4424] = { SpEffects =         nil, RestoreFpCost = nil }, -- Zamor Ice Storm
+    [4414] = { SpEffects = { 1441400 }, RestoreFpCost = 22 }, -- Snow Witch's Cunning
+    [4491] = { SpEffects =         nil, RestoreFpCost = nil }, -- Whiteout
+    [4415] = { SpEffects = { 1441500 }, RestoreFpCost = 20 }, -- Ice Guardian's Reckoning 
+    -- Shadow Rune
+    [4492] = { SpEffects =         nil, RestoreFpCost = nil }, -- Divine Iceburst
+    [4100] = { SpEffects =         nil, RestoreFpCost = nil }, -- Shatter the Shards
+    [4494] = { SpEffects =         nil, RestoreFpCost = nil }, -- Mass Freeze
+    [4495] = { SpEffects =         nil, RestoreFpCost = nil }, -- Icequake
+
+    -- Other
+    [7020] = { SpEffects =         nil, RestoreFpCost = nil }, -- Dragonice
+    [7021] = { SpEffects =         nil, RestoreFpCost = nil }, -- Borealis's Mist
+}
+
+__aberrantSpells = {
+    -- Faint Rune
+    [4920] = { SpEffects = { 1492000 }, RestoreFpCost = nil }, -- Body of Briar
+    [4980] = { SpEffects = { 1498000 }, RestoreFpCost = nil }, -- Briar-Wrapped Armament
+    [4900] = { SpEffects =         nil, RestoreFpCost = nil }, -- Briar of Sin
+    [4970] = { SpEffects =         nil, RestoreFpCost = nil }, -- Close Wound
+    -- Shimmering Rune
+    [4921] = { SpEffects =         nil, RestoreFpCost = nil }, -- Strangling Briars
+    [4901] = { SpEffects =         nil, RestoreFpCost = nil }, -- Thorn Burst
+    [4910] = { SpEffects =         nil, RestoreFpCost = nil }, -- Briars of Punishment
+    [4940] = { SpEffects =         nil, RestoreFpCost = nil }, -- Telekinetic Assault
+    -- Glowing Rune
+    [4941] = { SpEffects =         nil, RestoreFpCost = nil }, -- Telekinetic Shell
+    [4971] = { SpEffects = { 1497100 }, RestoreFpCost = nil }, -- Ritual of Desecration
+    [4930] = { SpEffects =         nil, RestoreFpCost = nil }, -- Red Glinstone Razor
+    [4972] = { SpEffects = { 1497200 }, RestoreFpCost = nil }, -- Sadistic Glee
+    -- Shining Rune
+    [4911] = { SpEffects =         nil, RestoreFpCost = nil }, -- Crimson Rose
+    [4960] = { SpEffects = { 1496000 }, RestoreFpCost = 24 }, -- Blood Star
+    [4932] = { SpEffects =         nil, RestoreFpCost = nil }, -- Red Glintstone Shards
+    [4950] = { SpEffects =         nil, RestoreFpCost = nil }, -- Eochaid's Sap
+    -- Radiant Rune
+    [4931] = { SpEffects =         nil, RestoreFpCost = nil }, -- Blood Comet
+    [4951] = { SpEffects =         nil, RestoreFpCost = nil }, -- Crimson Greatblade
+    [4990] = { SpEffects = { 1499000 }, RestoreFpCost = 22 }, -- Aberrant Ascension
+    [4991] = { SpEffects = { 1499100 }, RestoreFpCost = 22 }, -- Blood Revelry
+    -- Shadow Rune
+    [2004900] = { SpEffects = { 21490000 }, RestoreFpCost = nil }, -- Mantle of Thorns
+    [2004910] = { SpEffects =      nil, RestoreFpCost = nil }, -- Impenentrable Thorns
+    [2006680] = { SpEffects =      nil, RestoreFpCost = nil }, -- Land of Shadows
+    [2004920] = { SpEffects =      nil, RestoreFpCost = nil }, -- Creeping Vines
+    [2004930] = { SpEffects =      nil, RestoreFpCost = nil }, -- Thorn Field
+
+    -- Etc
+    [2004940] = { SpEffects =      nil, RestoreFpCost = nil }, -- Scadutree Coruscation
+}

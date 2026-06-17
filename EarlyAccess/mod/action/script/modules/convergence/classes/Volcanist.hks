@@ -1,0 +1,118 @@
+local LivingForgeStacks = 0
+function LivingForge_Update()
+    if env(GetSpEffectID, 1485400) == FALSE then
+        if LivingForgeStacks ~= 0 then
+            LivingForgeStacks = 0
+            LivingForge_Visibility()
+        end
+        return
+    end
+
+    LivingForge_Visibility()
+    LivingForge_GraceClear()
+end
+
+function LivingForge_GraceClear()
+    if env(GetSpEffectID, 100) == FALSE then
+        return
+    end
+    LivingForgeStacks = 0 -- Clear all stacks on grace rest
+    LivingForge_Visibility()
+end
+
+function LivingForge_Visibility()
+    for i = 1, 5 do
+        act(ClearSpEffect, 1485400 + i) 
+    end
+
+    if LivingForgeStacks == 0 then return end
+    act(AddSpEffect, 1485400 + LivingForgeStacks) 
+end
+
+function LivingForge_OnSpellCast()
+    if env(GetSpEffectID, 1485400) == FALSE or LivingForgeStacks >= 5 then
+        return
+    end
+    
+    for i = 1, #__magmaSpells do
+        if LastCastMagicID == __magmaSpells[i][1] then
+            break
+        elseif i == #__magmaSpells then
+            return
+        end
+    end
+    
+    LivingForgeStacks = LivingForgeStacks + 1
+    LivingForge_Visibility()
+end
+
+local LivingForge_SwordArts = {
+    [13] = true, -- Prelate's Charge
+    [35] = true, -- Magma Crush
+    [56] = true, -- Eruption
+    [121] = true, -- Magma Splash
+    [172] = true, -- Magma Shower
+    [176] = true, -- Magma Guillotine
+    [183] = true, -- Devourer of Worlds
+    [206] = true, -- Sea of Magma
+    [214] = true, -- Taker's Flames
+}
+function LivingForge_OnSwordArts()
+    if env(GetSpEffectID, 1485400) == TRUE and LivingForge_SwordArts[c_SwordArtsID] and LivingForgeStacks < 5 then
+        LivingForgeStacks = LivingForgeStacks + 1
+        LivingForge_Visibility()
+    end
+end
+
+local hasTakenJewelHit = false
+function LivingForge_OnTakingHit()
+    if env(GetSpEffectID, 1485400) == FALSE or LivingForgeStacks < 5 then
+        return
+    end
+
+    if env(GetSpEffectID, Jewel_of_the_Devourer) == TRUE and not hasTakenJewelHit then
+        hasTakenJewelHit = true
+    else
+        LivingForgeStacks = 0
+        hasTakenJewelHit = false
+    end
+
+    act(AddSpEffect, 1485420) -- Living Forge Explosion
+    LivingForge_Visibility()
+end
+
+local VolcanistJewel_Devourer_Stack = 0
+function VolcanistJewel_Devourer_OnSwordArts()
+    if env(GetSpEffectID, Jewel_of_the_Devourer) == FALSE or env(GetSpEffectID, 1485210) == FALSE then
+        return
+    elseif LivingForge_SwordArts[c_SwordArtsID] == nil then
+        return
+    end
+
+    VolcanistJewel_Devourer_Stack = VolcanistJewel_Devourer_Stack + 1
+    if VolcanistJewel_Devourer_Stack >= 5 then
+        VolcanistJewel_Devourer_Stack = 0
+        act(AddSpEffect, 1485211) -- Consider Killing Blow
+    end
+end
+
+function VolcanistJewel_Devourer_OnSpell()
+    if env(GetSpEffectID, Jewel_of_the_Devourer) == FALSE or env(GetSpEffectID, 1485210) == FALSE then
+        return
+    end
+
+    for i = 1, #__magmaSpells do
+        if LastCastMagicID == __magmaSpells[i][1] then
+            Log(LastCastMagicID)
+            break
+        elseif i == #__magmaSpells then
+            return
+        end
+    end
+
+    VolcanistJewel_Devourer_Stack = VolcanistJewel_Devourer_Stack + 1
+    if VolcanistJewel_Devourer_Stack >= 5 then
+        VolcanistJewel_Devourer_Stack = 0
+        act(AddSpEffect, 1485211) -- Consider Killing Blow
+    end    
+end

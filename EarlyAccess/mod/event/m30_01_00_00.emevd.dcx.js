@@ -28,6 +28,10 @@ $Event(0, Default, function() {
     InitializeEvent(0, 30012580, 0);
     InitializeEvent(0, 30010790, 30011520, 30010800);
     InitializeEvent(0, 30012330, 0);
+    
+    // Disable Collision
+    DisableHit(30011550);
+    DisableHit(30011551);
 });
 
 $Event(50, Default, function() {

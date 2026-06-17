@@ -1,0 +1,71 @@
+local _soulTetherHpTracker = { }
+function SoulTether()
+    if env(GetSpEffectID, 1622400) == FALSE then
+        return
+    elseif LocalPlayerHasSpEffect(1622410) == FALSE then
+        return
+    end
+
+    local hp = env(GetHP)
+    local hpBefore = _soulTetherHpTracker[1]
+    if hpBefore == nil then
+        hpBefore = hp
+        table.insert(_soulTetherHpTracker, 1, hp)
+    end
+    local hpDif = hpBefore - hp
+
+    if hpDif == 0 then
+        return
+    elseif hpDif > 0 then
+        local localPlayerHp = GetLocalPlayerPointerValue(CHR_INS_BASE.CHR_MODULES.DATA_MODULE.HP)
+        if localPlayerHp <= 0 then
+            return
+        end
+
+        local hpToAdd = math.ceil(math.max(hpDif / 5, 1) + 0.5)
+        local newLocalPlayerHp = localPlayerHp + hpToAdd
+        SetLocalPlayerPointerValue(CHR_INS_BASE.CHR_MODULES.DATA_MODULE.HP, newLocalPlayerHp)
+    end
+
+    table.insert(_soulTetherHpTracker, 1, hp)
+    if #_soulTetherHpTracker > 10 then
+        table.remove(_soulTetherHpTracker)
+    end
+end
+
+function SeverTheThread()
+    if env(GetSpEffectID, 1622500) == FALSE then
+        return
+    end
+    act(ClearSpEffect, 1622500)
+
+    local didSomething = false
+    if env(GetSpEffectID, 1629000) == TRUE then -- Soul Sear
+        act(ClearSpEffect, 1629000)
+        act(AddSpEffect, 1622510) -- Soul Sear Explosion
+        act(AddSpEffect, 1622515) -- Soul Sear Enemy Interaction
+        didSomething = true
+    end
+
+    if env(GetSpEffectID, 1629200) == TRUE then -- Soul Annihilation
+        act(ClearSpEffect, 1629200)
+        act(AddSpEffect, 1622520) -- Soul Annihilation Explosion
+        act(AddSpEffect, 1622525) -- Soul Annihilation Enemy Interaction
+        didSomething = true
+    end
+
+    if env(GetSpEffectID, 1622400) == TRUE then -- Soul Tether
+        act(AddSpEffect, 1622530) -- Soul Tether Explosion
+        --act(AddSpEffect, 1622535) -- Soul Tether Enemy Interaction
+        if GetHpRatio() <= 0.15 then
+            act(ChangeHP, -env(GetHP))
+        end
+        act(ClearSpEffect, 1622400) -- Need to delete late for cleanup logic
+        act(AddSpEffect, 1622401) -- Player Heal from Soul Tether Expire
+        didSomething = true
+    end
+
+    if didSomething then
+        act(AddSpEffect, 1622550) -- Visual Explosion
+    end
+end

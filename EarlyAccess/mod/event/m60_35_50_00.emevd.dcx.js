@@ -174,6 +174,16 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005300, 1035500711, 1035500711, 108200, 0, 0);
     //Lever relocation light
     InitializeEvent(0, 1035500770,1035500769);
+    
+    //InitializeCommonEvent(0, 90005878, 1035502900, 1035505900, 1035505901, 1035505902); // Ambient Castle
+    //InitializeCommonEvent(0, 90005878, 1035502910, 1035505910, 0, 0); // Ambient Three Sisters
+    //InitializeCommonEvent(0, 90005878, 1035502920, 1035505920, 0, 0); // Ambient Ranni's Rise
+    InitializeCommonEvent(0, 9005999, 1035502750); // Kill box
+    InitializeCommonEvent(1, 9005999, 1035502751); // Kill box
+    
+    //Caria Boss fight opti
+    InitializeEvent(0, 1035500775, 1035502805, 1035500800);
+    InitializeEvent(1, 1035500775, 1035502855, 1035500850);
 });
 
 $Event(50, Default, function() {
@@ -209,7 +219,7 @@ $Event(1035508750, Restart, function() {
     WaitFixedTimeSeconds(2);
     WaitFor(InArea(20000, 1035500751) || InArea(20000, 1035500754) || (InArea(20000, 1035500757) && !EventFlag(1035508756)) || InArea(20000, 1035500760));
     
-    if (InArea(20000, 1035500757) && !EventFlag(1035508756)) { // Zone 3 (Gate)
+    /*  if (InArea(20000, 1035500757) && !EventFlag(1035508756)) { // Zone 3 (Gate)
         EnableCharacter(1035500756);
         SetSpEffect(1035500756, 10124);
         WaitFixedTimeFrames(15);
@@ -255,8 +265,9 @@ $Event(1035508750, Restart, function() {
         
         WaitFixedTimeSeconds(25);
         //ForceCharacterDeath(1035500756, false);
-    }
-    else if (InArea(20000, 1035500754)) { // Zone 2 (Stairs)
+        
+    }*/
+    if (InArea(20000, 1035500754)) { // Zone 2 (Stairs)
         EnableCharacter(1035500753);
         SetSpEffect(1035500753, 10124);
         PlaySE(10000, SoundType.SFX, 530351);
@@ -459,6 +470,7 @@ $Event(1035508780, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4) {
     }
     DisableCharacter(X4_4);
     EnableCharacterFadeOnEnable(X4_4);
+    WaitFor(EntityInRadiusOfEntity(10000, X8_4, 60, 1));
     SpawnMapSFX(X20_4);
     WaitForAssetDestroyed(DestructionState.Destroyed, X8_4, Equal, 1);
     DeleteMapSFX(X20_4, false);
@@ -495,14 +507,14 @@ $Event(1035500800, Restart, function() {
     WaitFor(CharacterDead(1035500800));
     HandleBossDefeatAndDisplayBanner(1035500800, TextBannerType.EnemyFelled);
     SetEventFlagID(1035500800, ON);
-    SetEventFlagID(1035505814, OFF); //music handler eventflag
-    SetEventFlagID(1035505815, ON); //music handler eventflag
+    //SetEventFlagID(1035505814, OFF); //music handler eventflag
+    //SetEventFlagID(1035505815, ON); //music handler eventflag
     SetEventFlagID(9181, ON);
     if (PlayerIsInOwnWorld()) {
         SetEventFlagID(61181, ON);
     }
     WaitFixedTimeSeconds(6);
-    SetEventFlagID(1035505815, OFF); //music handler eventflag
+    //SetEventFlagID(1035505815, OFF); //music handler eventflag
 });
 
 // Boss Activator (Carian)
@@ -529,7 +541,7 @@ L0:
     SpawnOneshotSFX(TargetEntityType.Character, 1035500800, 240, 632585);
     PlaySE(1035500800, SoundType.SFX, 632650);
     SetEventFlagID(1035502806, ON);
-    SetEventFlagID(1035505814, ON); //music handler eventflag
+    //SetEventFlagID(1035505814, ON); //music handler eventflag
 L2:
     EnableCharacterAI(1035500800);
     DisableCharacterInvincibility(1035500800);
@@ -676,7 +688,7 @@ $Event(1035502849, Restart, function() {
     InitializeCommonEvent(0, 9005813, 1035500800, 1035501807, 17, 0, 3);
     InitializeCommonEvent(0, 9005813, 1035500800, 1035501808, 17, 0, 3);
     InitializeCommonEvent(0, 9005813, 1035500800, 1035501809, 17, 0, 3);
-    InitializeCommonEvent(0, 9005822, 1035500800, 921600, 1035502805, 6000, 1035500801, 0, 0, 0);
+    InitializeCommonEvent(0, 9005822, 1035500800, 391800, 1035502805, 6000, 1035500801, 0, 0, 0);
 });
 
 // Boss Defeat (Ainar)
@@ -688,15 +700,16 @@ $Event(1035500850, Restart, function() {
     WaitFor(CharacterDead(1035500850));
     HandleBossDefeatAndDisplayBanner(1035500850, TextBannerType.GreatEnemyFelled);
     SetEventFlagID(1035500850, ON);
-    SetEventFlagID(1035505865, ON); //music handler eventflag
+    //SetEventFlagID(1035505865, ON); //music handler eventflag
     SetEventFlagID(1035502852, OFF);
     SetEventFlagID(1035502855, OFF);
+    SetBossBGM(391700, BossBGMState.Stop1);
     SetEventFlagID(9189, ON);
     if (PlayerIsInOwnWorld()) {
         SetEventFlagID(61189, ON);
     }
     WaitFixedTimeSeconds(6);
-    SetEventFlagID(1035505865, OFF); //music handler eventflag
+    //SetEventFlagID(1035505865, OFF); //music handler eventflag
 });
 
 // Boss Activator (Ainar)
@@ -729,13 +742,10 @@ $Event(1035502861, Restart, function() {
 // Fog walls
 $Event(1035502899, Restart, function() {
     InitializeCommonEvent(0, 9005800, 1035500850, 1035501850, 1035502850, 1035502855, 1035505850, 10000, 0, 0);
-    InitializeCommonEvent(0, 9005800, 1035500850, 1035501851, 1035502851, 1035502855, 1035505851, 10000, 0, 0);
     InitializeCommonEvent(0, 9005801, 1035500850, 1035501850, 1035502850, 1035502855, 1035502856, 10000);
-    InitializeCommonEvent(0, 9005801, 1035500850, 1035501851, 1035502851, 1035502855, 1035502857, 10000);
     InitializeCommonEvent(0, 9005811, 1035500850, 1035501850, 5, 0);
-    InitializeCommonEvent(0, 9005811, 1035500850, 1035501851, 3, 0);
     InitializeCommonEvent(0, 9005811, 1035500850, 1035501852, 5, 0);
-    InitializeCommonEvent(0, 9005822, 1035500850, 921600, 1035502855, 1035502856, 0, 1035502852, 0, 0);
+    InitializeCommonEvent(0, 9005822, 1035500850, 391700, 1035502855, 1035502856, 0, 1035502852, 0, 0);
 });
 
 $Event(1035500700, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
@@ -914,4 +924,14 @@ $Event(1035500703, Restart, function(X0_4, X4_4) {
 $Event(1035500770, Restart, function() {
     EnableAssetInvunerability(1035500771); //light
     EnableAssetInvunerability(1035500772); //light
+});
+
+$Event(1035500775, Restart, function(BossEventFlag, BossDead) {
+    EndIf(EventFlag(BossDead));
+    WaitFor(EventFlag(BossEventFlag));
+    DisableAsset(1035505510);
+    DisableCharacter(1035505511);
+    WaitFor(EventFlag(BossDead));
+    EnableAsset(1035505510);
+    EnableCharacter(1035505511);
 });
