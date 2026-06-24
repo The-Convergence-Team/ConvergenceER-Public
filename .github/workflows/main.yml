@@ -12,331 +12,176 @@ jobs:
 
     steps:
     - name: Checkout current branch
-      uses: actions/checkout@v4
-      with:
-        # Full history required so git diff can reach the prior run's SHA.
-        # LFS content is pulled selectively in a later step.
-        fetch-depth: 0
+      uses: actions/checkout@v3
 
     - name: Install Git LFS
       run: git lfs install
 
-    # -----------------------------------------------------------------------
-    # Find the SHA from the last successful run of this workflow on this
-    # branch so we can diff only the files that actually changed.
-    # -----------------------------------------------------------------------
-    - name: Resolve last successful run SHA
-      id: last_run
-      env:
-        GH_TOKEN: ${{ github.token }}
-      run: |
-        # Extract the workflow filename from the ref
-        # github.workflow_ref looks like: owner/repo/.github/workflows/file.yml@refs/heads/main
-        WORKFLOW_FILE=$(echo "${{ github.workflow_ref }}" | sed 's|.*/\.github/workflows/||' | sed 's|@.*||')
-        echo "Workflow file: $WORKFLOW_FILE"
-
-        LAST_SHA=$(gh api \
-          "repos/${{ github.repository }}/actions/workflows/${WORKFLOW_FILE}/runs?status=success&per_page=1&branch=${GITHUB_REF_NAME}" \
-          --jq '.workflow_runs[0].head_sha // empty' 2>/dev/null || echo "")
-
-        echo "Last successful SHA: ${LAST_SHA:-none}"
-        echo "sha=${LAST_SHA}" >> "$GITHUB_OUTPUT"
-
-    # -----------------------------------------------------------------------
-    # Build the list of files that changed since the last run and write it to
-    # /tmp/changed_files.txt.  Write the mode (incremental / full) to
-    # /tmp/manifest_ctx.env so the Python step can read it.
-    # -----------------------------------------------------------------------
-    - name: Compute changed files
-      run: |
-        LAST_SHA="${{ steps.last_run.outputs.sha }}"
-
-        if [ -n "$LAST_SHA" ] && git cat-file -e "${LAST_SHA}^{commit}" 2>/dev/null; then
-          echo "MODE=incremental" > /tmp/manifest_ctx.env
-          git diff --name-status --diff-filter=AMDRCT "${LAST_SHA}" HEAD \
-            -- PublicRelease/ EarlyAccess/ > /tmp/changed_files.txt
-          echo "Incremental update from ${LAST_SHA}. Changed files:"
-          cat /tmp/changed_files.txt
-        else
-          echo "MODE=full" > /tmp/manifest_ctx.env
-          > /tmp/changed_files.txt
-          echo "No valid prior SHA found — performing full scan."
-        fi
-
-    # -----------------------------------------------------------------------
-    # Pull LFS content: only changed files in incremental mode, everything
-    # in full mode. This avoids downloading all LFS objects on every run.
-    # -----------------------------------------------------------------------
     - name: Pull LFS files
+      run: git lfs pull
+
+    - name: Set up Python (for hashing & manifest generation)
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Generate manifest.json
       run: |
-        MODE=$(grep '^MODE=' /tmp/manifest_ctx.env | cut -d= -f2)
+        import os, hashlib, json, fnmatch, glob
 
-        if [ "$MODE" = "incremental" ]; then
-          # Collect paths for all additions, modifications and type-changes,
-          # plus destination paths from renames (R) and copies (C).
-          includes=$(awk -F'\t' '$1 ~ /^[AMT]$/{print $2}' /tmp/changed_files.txt | paste -sd ',' -)
-          dest=$(awk -F'\t'     '$1 ~ /^[RC]/{print $3}'    /tmp/changed_files.txt | paste -sd ',' -)
+        # Split large LFS files into 50MB segments following the .p{index}.part convention
+        segment_size = 50 * 1024 * 1024
+        root_dirs = ["PublicRelease", "EarlyAccess"]
 
-          all=""
-          [ -n "$includes" ] && all="$includes"
-          [ -n "$dest"     ] && { [ -n "$all" ] && all="$all,$dest" || all="$dest"; }
-
-          if [ -n "$all" ]; then
-            echo "Pulling LFS content for: $all"
-            git lfs pull --include="$all"
-          else
-            echo "No additions or modifications — skipping LFS pull."
-          fi
-        else
-          echo "Full scan — pulling all LFS content."
-          git lfs pull
-        fi
-
-    # -----------------------------------------------------------------------
-    # Incrementally update (or fully rebuild) each manifest.json.
-    # manifest.json itself is never included as a manifest entry.
-    # -----------------------------------------------------------------------
-    - name: Update manifests
-      shell: python
-      run: |
-        import os, re, hashlib, json, fnmatch, glob
-
-        SEGMENT_SIZE = 50 * 1024 * 1024
-        ROOT_DIRS = ["PublicRelease", "EarlyAccess"]
-        _PART_RE = re.compile(r'\.p\d{2,}\.part$')
-
-        # ------------------------------------------------------------------
-        # Read execution context from the previous shell step
-        # ------------------------------------------------------------------
-        mode = "full"
+        # Parse .gitattributes to find LFS patterns
+        patterns = []
         try:
-            with open("/tmp/manifest_ctx.env") as fh:
-                for line in fh:
-                    k, _, v = line.strip().partition("=")
-                    if k == "MODE":
-                        mode = v
-        except FileNotFoundError:
-            pass
-
-        # ------------------------------------------------------------------
-        # Parse .gitattributes for LFS patterns
-        # ------------------------------------------------------------------
-        lfs_patterns = []
-        try:
-            with open(".gitattributes") as ga:
+            with open('.gitattributes', 'r') as ga:
                 for line in ga:
                     line = line.strip()
-                    if line and not line.startswith("#") and "filter=lfs" in line:
+                    if not line or line.startswith('#'):
+                        continue
+                    if 'filter=lfs' in line:
                         parts = line.split()
                         if parts:
-                            lfs_patterns.append(parts[0].lstrip("./"))
+                            patterns.append(parts[0].lstrip('./'))
         except FileNotFoundError:
-            pass
+            patterns = []
 
-        def is_lfs(rel_path):
-            return any(
-                fnmatch.fnmatch(rel_path, p)
-                or fnmatch.fnmatch(rel_path, p.lstrip("/"))
-                or fnmatch.fnmatch(os.path.basename(rel_path), p)
-                for p in lfs_patterns
-            )
+        def matches_patterns(rel_path):
+            for p in patterns:
+                # try matching the pattern against the relative path and the basename
+                if fnmatch.fnmatch(rel_path, p) or fnmatch.fnmatch(rel_path, p.lstrip('/')) or fnmatch.fnmatch(os.path.basename(rel_path), p):
+                    return True
+            return False
 
-        def sha256_of(path):
-            """Hash a file using a 1 MB read buffer to reduce syscall overhead."""
-            h = hashlib.sha256()
-            buf = bytearray(1024 * 1024)
-            mv = memoryview(buf)
-            with open(path, "rb") as f:
-                while n := f.readinto(mv):
-                    h.update(mv[:n])
-            return h.hexdigest()
-
-        def split_parts(filepath):
-            """(Re)create .p{nn}.part segments for an oversized LFS file."""
-            for old in glob.glob(filepath + ".p*.part"):
-                try:
-                    os.remove(old)
-                except Exception:
-                    pass
-            with open(filepath, "rb") as src:
-                idx = 1
-                while chunk := src.read(SEGMENT_SIZE):
-                    with open(f"{filepath}.p{str(idx).zfill(2)}.part", "wb") as pf:
-                        pf.write(chunk)
-                    idx += 1
-
-        def remove_parts(filepath):
-            """Delete all .p{nn}.part files associated with filepath."""
-            for part in glob.glob(filepath + ".p*.part"):
-                try:
-                    os.remove(part)
-                except Exception:
-                    pass
-
-        def is_part_file(name):
-            """Match the .p{nn}.part naming convention precisely."""
-            return bool(_PART_RE.search(os.path.basename(name)))
-
-        def upsert(path, root_dir, manifest):
-            """Add or update the manifest entry for path (repo-root-relative)."""
-            rel = os.path.relpath(path, root_dir).replace("\\", "/")
-            if rel == "manifest.json" or is_part_file(rel):
-                return
-            if not os.path.isfile(path):
-                return
-            try:
-                size = os.path.getsize(path)
-            except OSError:
-                return
-            if lfs_patterns and is_lfs(rel) and size > SEGMENT_SIZE:
-                split_parts(path)
-            try:
-                sha256 = sha256_of(path)
-            except Exception:
-                return
-            manifest[rel] = {"sha256": sha256, "size": size}
-            print(f"  upsert  {rel}")
-
-        def delete_entry(path, root_dir, manifest):
-            """Remove the manifest entry and any associated part files."""
-            rel = os.path.relpath(path, root_dir).replace("\\", "/")
-            if rel in manifest:
-                del manifest[rel]
-                print(f"  delete  {rel}")
-            remove_parts(path)
-
-        # ------------------------------------------------------------------
-        # Parse the diff output (paths are repo-root-relative)
-        # git diff --name-status --diff-filter=AMDRCT formats:
-        #   A/M/D/T  path
-        #   R{score}/C{score}  old_path  new_path
-        # ------------------------------------------------------------------
-        changes = {"A": [], "M": [], "D": [], "R": [], "C": []}
-        if mode == "incremental":
-            try:
-                with open("/tmp/changed_files.txt") as f:
-                    for line in f:
-                        line = line.strip()
-                        if not line:
-                            continue
-                        cols = line.split("\t")
-                        st = cols[0]
-                        if st.startswith("R") and len(cols) >= 3:
-                            changes["R"].append((cols[1], cols[2]))
-                        elif st.startswith("C") and len(cols) >= 3:
-                            # Copy: old path keeps its entry; only new path needs upsert
-                            changes["C"].append((cols[1], cols[2]))
-                        elif st in ("A", "M", "D") and len(cols) >= 2:
-                            changes[st].append(cols[1])
-                        elif st == "T" and len(cols) >= 2:
-                            # Type change (e.g. regular → symlink): treat as modification
-                            changes["M"].append(cols[1])
-            except FileNotFoundError:
-                mode = "full"
-
-        # ------------------------------------------------------------------
-        # Process each root directory
-        # ------------------------------------------------------------------
-        for root_dir in ROOT_DIRS:
+        for root_dir in root_dirs:
             if not os.path.isdir(root_dir):
                 print(f"Skipping {root_dir}: directory not found")
                 continue
 
+            # Single pass: for each original file (skip any existing part files),
+            # optionally create parts, and add the original file to the manifest.
+            manifest = {}
             manifest_path = os.path.join(root_dir, "manifest.json")
 
-            # Load existing manifest for incremental mode; start fresh for full
-            manifest = {}
-            if mode == "incremental" and os.path.isfile(manifest_path):
-                try:
-                    with open(manifest_path) as f:
-                        manifest = json.load(f)
-                except Exception:
-                    manifest = {}
+            for foldername, _, filenames in os.walk(root_dir):
+                for filename in filenames:
+                    # Skip generated part files
+                    if filename.endswith('.part') and '.p' in filename:
+                        continue
 
-            print(f"\n[{root_dir}] mode={mode}, existing entries={len(manifest)}")
+                    filepath = os.path.join(foldername, filename)
+                    rel_path = os.path.relpath(filepath, root_dir).replace('\\', '/')
 
-            if mode == "full":
-                for dirpath, _, filenames in os.walk(root_dir):
-                    for filename in filenames:
-                        upsert(os.path.join(dirpath, filename), root_dir, manifest)
-            else:
-                pfx = root_dir + "/"
+                    # Determine whether this file is considered LFS by .gitattributes
+                    try:
+                        is_lfs = bool(patterns) and matches_patterns(rel_path)
+                    except Exception:
+                        # If pattern matching fails, treat as non-LFS to avoid skipping files
+                        is_lfs = False
 
-                # Deletions: remove entry and clean up parts
-                for path in changes["D"]:
-                    if path.startswith(pfx):
-                        delete_entry(path, root_dir, manifest)
+                    try:
+                        size = os.path.getsize(filepath)
+                    except OSError:
+                        continue
 
-                # Renames: delete old entry, upsert new one
-                for old_path, new_path in changes["R"]:
-                    if old_path.startswith(pfx):
-                        delete_entry(old_path, root_dir, manifest)
-                    if new_path.startswith(pfx):
-                        upsert(new_path, root_dir, manifest)
+                    # If file is LFS and larger than segment size, split into parts following .p{index}.part
+                    if is_lfs and size > segment_size:
+                        # remove any existing parts for consistency
+                        for existing in glob.glob(filepath + '.p*.part'):
+                            try:
+                                os.remove(existing)
+                            except Exception:
+                                pass
 
-                # Copies: old path keeps its entry; upsert the new destination only
-                for _, new_path in changes["C"]:
-                    if new_path.startswith(pfx):
-                        upsert(new_path, root_dir, manifest)
+                        with open(filepath, 'rb') as src:
+                            idx = 1
+                            while True:
+                                chunk = src.read(segment_size)
+                                if not chunk:
+                                    break
+                                idx_str = str(idx).zfill(2)  # zero-pad to two digits
+                                partpath = f"{filepath}.p{idx_str}.part"
+                                with open(partpath, 'wb') as pf:
+                                    pf.write(chunk)
+                                idx += 1
 
-                # Additions and modifications
-                for path in changes["A"] + changes["M"]:
-                    if path.startswith(pfx):
-                        upsert(path, root_dir, manifest)
+                    # Compute SHA256 of the original file (do not include parts in manifest)
+                    try:
+                        h = hashlib.sha256()
+                        with open(filepath, 'rb') as f:
+                            while True:
+                                buf = f.read(8192)
+                                if not buf:
+                                    break
+                                h.update(buf)
+                        sha256 = h.hexdigest()
+                    except Exception:
+                        continue
 
-            # Sort keys for deterministic output and minimal git diffs
+                    manifest[rel_path] = {
+                        "sha256": sha256,
+                        "size": size
+                    }
+
             with open(manifest_path, "w") as f:
-                json.dump(manifest, f, indent=2, sort_keys=True)
+                json.dump(manifest, f, indent=2)
 
-            print(f"Saved {manifest_path} ({len(manifest)} entries)")
+            print(f"Generated {manifest_path} with {len(manifest)} entries")
 
-    # -----------------------------------------------------------------------
-    # Commit the updated manifests, staged deletions, and any new part files.
-    # New part files are batched to stay within push size limits.
-    # -----------------------------------------------------------------------
-    - name: Commit and push changes
+      shell: python
+
+    - name: Commit and push manifest
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
 
-        # Stage updated manifest files
+        # Add manifests for all generated directories
         for dir in PublicRelease EarlyAccess; do
           if [ -f "$dir/manifest.json" ]; then
             git add "$dir/manifest.json"
           fi
         done
 
-        # Stage deletions of tracked files (e.g., part files removed by the Python step)
-        git add -u PublicRelease/ EarlyAccess/ 2>/dev/null || true
-
-        # Discover newly generated (untracked) part files
-        parts=$(git ls-files --others --exclude-standard PublicRelease EarlyAccess | grep -E '\.p[0-9]{2,}\.part$' || true)
-
+        # Discover generated part files from both content directories
+        parts=$(git ls-files --others --exclude-standard PublicRelease EarlyAccess | grep -E '\.p[0-9]{2}\.part$' || true)
         if [ -z "$parts" ]; then
+          # No parts: commit manifests only if changed
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "Auto-update manifest.json"
+            git commit -m "Auto-generate manifest.json"
             git push
           fi
           exit 0
         fi
 
-        # Commit new parts in batches to avoid push size limits.
-        # Manifests and deletions are already staged and included in the first batch.
+        # Split parts into smaller batches to avoid pushing too many files at once
         mapfile -t arr <<<"$parts"
         batch_size=20
         total=${#arr[@]}
 
-        for ((i=0; i<total; i+=batch_size)); do
-          j=$((i / batch_size + 1))
+        for ((i=0;i<total;i+=batch_size)); do
+          j=$((i/batch_size+1))
           slice=("${arr[@]:i:batch_size}")
+
+          # Add this batch of parts
           printf "%s\n" "${slice[@]}" | xargs -r git add
 
+          # Include manifests only in the first batch
+          if [ $i -eq 0 ]; then
+            for dir in PublicRelease EarlyAccess; do
+              if [ -f "$dir/manifest.json" ]; then
+                git add "$dir/manifest.json"
+              fi
+            done
+          fi
+
           if git diff --cached --quiet; then
-            echo "No staged changes for batch $j, skipping."
+            echo "No staged changes for batch $j, skipping commit."
           else
-            git commit -m "Auto-update manifest and LFS parts (batch $j)"
+            git commit -m "Auto-generate split LFS parts (batch $j)"
             git push
           fi
         done
