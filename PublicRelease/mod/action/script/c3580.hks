@@ -1,0 +1,1485 @@
+﻿function Attack3040_onActivate()
+    CallActionState(3040)
+end
+
+function Attack3040_onUpdate()
+    if AttackCommonFunction(3040, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3041_onActivate()
+    CallActionState(3041)
+end
+
+function Attack3041_onUpdate()
+    if AttackCommonFunction(3041, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3042_onActivate()
+    CallActionState(3042)
+end
+
+function Attack3042_onUpdate()
+    if AttackCommonFunction(3042, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3043_onActivate()
+    CallActionState(3043)
+end
+
+function Attack3043_onUpdate()
+    if AttackCommonFunction(3043, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3044_onActivate()
+    CallActionState(3044)
+end
+
+function Attack3044_onUpdate()
+    if AttackCommonFunction(3044, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3045_onActivate()
+    CallActionState(3045)
+end
+
+function Attack3045_onUpdate()
+    if AttackCommonFunction(3045, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3046_onActivate()
+    CallActionState(3046)
+end
+
+function Attack3046_onUpdate()
+    if AttackCommonFunction(3046, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3047_onActivate()
+    CallActionState(3047)
+end
+
+function Attack3047_onUpdate()
+    if AttackCommonFunction(3047, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3048_onActivate()
+    CallActionState(3048)
+end
+
+function Attack3048_onUpdate()
+    if AttackCommonFunction(3048, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3049_onActivate()
+    CallActionState(3049)
+end
+
+function Attack3049_onUpdate()
+    if AttackCommonFunction(3049, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3050_onActivate()
+    CallActionState(3050)
+end
+
+function Attack3050_onUpdate()
+    if AttackCommonFunction(3050, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3051_onActivate()
+    CallActionState(3051)
+end
+
+function Attack3051_onUpdate()
+    if AttackCommonFunction(3051, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3052_onActivate()
+    CallActionState(3052)
+end
+
+function Attack3052_onUpdate()
+    if AttackCommonFunction(3052, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3053_onActivate()
+    CallActionState(3053)
+end
+
+function Attack3053_onUpdate()
+    if AttackCommonFunction(3053, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3054_onActivate()
+    CallActionState(3054)
+end
+
+function Attack3054_onUpdate()
+    if AttackCommonFunction(3054, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3055_onActivate()
+    CallActionState(3055)
+end
+
+function Attack3055_onUpdate()
+    if AttackCommonFunction(3055, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3056_onActivate()
+    CallActionState(3056)
+end
+
+function Attack3056_onUpdate()
+    if AttackCommonFunction(3056, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3057_onActivate()
+    CallActionState(3057)
+end
+
+function Attack3057_onUpdate()
+    if AttackCommonFunction(3057, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3058_onActivate()
+    CallActionState(3058)
+end
+
+function Attack3058_onUpdate()
+    if AttackCommonFunction(3058, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3059_onActivate()
+    CallActionState(3059)
+end
+
+function Attack3059_onUpdate()
+    if AttackCommonFunction(3059, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3060_onActivate()
+    CallActionState(3060)
+end
+
+function Attack3060_onUpdate()
+    if AttackCommonFunction(3060, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3061_onActivate()
+    CallActionState(3061)
+end
+
+function Attack3061_onUpdate()
+    if AttackCommonFunction(3061, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3062_onActivate()
+    CallActionState(3062)
+end
+
+function Attack3062_onUpdate()
+    if AttackCommonFunction(3062, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3063_onActivate()
+    CallActionState(3063)
+end
+
+function Attack3063_onUpdate()
+    if AttackCommonFunction(3063, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3064_onActivate()
+    CallActionState(3064)
+end
+
+function Attack3064_onUpdate()
+    if AttackCommonFunction(3064, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3065_onActivate()
+    CallActionState(3065)
+end
+
+function Attack3065_onUpdate()
+    if AttackCommonFunction(3065, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3066_onActivate()
+    CallActionState(3066)
+end
+
+function Attack3066_onUpdate()
+    if AttackCommonFunction(3066, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3067_onActivate()
+    CallActionState(3067)
+end
+
+function Attack3067_onUpdate()
+    if AttackCommonFunction(3067, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3068_onActivate()
+    CallActionState(3068)
+end
+
+function Attack3068_onUpdate()
+    if AttackCommonFunction(3068, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3069_onActivate()
+    CallActionState(3069)
+end
+
+function Attack3069_onUpdate()
+    if AttackCommonFunction(3069, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3070_onActivate()
+    CallActionState(3070)
+end
+
+function Attack3070_onUpdate()
+    if AttackCommonFunction(3070, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3071_onActivate()
+    CallActionState(3071)
+end
+
+function Attack3071_onUpdate()
+    if AttackCommonFunction(3071, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3072_onActivate()
+    CallActionState(3072)
+end
+
+function Attack3072_onUpdate()
+    if AttackCommonFunction(3072, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3073_onActivate()
+    CallActionState(3073)
+end
+
+function Attack3073_onUpdate()
+    if AttackCommonFunction(3073, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3074_onActivate()
+    CallActionState(3074)
+end
+
+function Attack3074_onUpdate()
+    if AttackCommonFunction(3074, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3075_onActivate()
+    CallActionState(3075)
+end
+
+function Attack3075_onUpdate()
+    if AttackCommonFunction(3075, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3076_onActivate()
+    CallActionState(3076)
+end
+
+function Attack3076_onUpdate()
+    if AttackCommonFunction(3076, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3077_onActivate()
+    CallActionState(3077)
+end
+
+function Attack3077_onUpdate()
+    if AttackCommonFunction(3077, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3078_onActivate()
+    CallActionState(3078)
+end
+
+function Attack3078_onUpdate()
+    if AttackCommonFunction(3078, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3079_onActivate()
+    CallActionState(3079)
+end
+
+function Attack3079_onUpdate()
+    if AttackCommonFunction(3079, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3080_onActivate()
+    CallActionState(3080)
+end
+
+function Attack3080_onUpdate()
+    if AttackCommonFunction(3080, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3081_onActivate()
+    CallActionState(3081)
+end
+
+function Attack3081_onUpdate()
+    if AttackCommonFunction(3081, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3082_onActivate()
+    CallActionState(3082)
+end
+
+function Attack3082_onUpdate()
+    if AttackCommonFunction(3082, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3083_onActivate()
+    CallActionState(3083)
+end
+
+function Attack3083_onUpdate()
+    if AttackCommonFunction(3083, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3084_onActivate()
+    CallActionState(3084)
+end
+
+function Attack3084_onUpdate()
+    if AttackCommonFunction(3084, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3085_onActivate()
+    CallActionState(3085)
+end
+
+function Attack3085_onUpdate()
+    if AttackCommonFunction(3085, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3086_onActivate()
+    CallActionState(3086)
+end
+
+function Attack3086_onUpdate()
+    if AttackCommonFunction(3086, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3087_onActivate()
+    CallActionState(3087)
+end
+
+function Attack3087_onUpdate()
+    if AttackCommonFunction(3087, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3088_onActivate()
+    CallActionState(3088)
+end
+
+function Attack3088_onUpdate()
+    if AttackCommonFunction(3088, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3089_onActivate()
+    CallActionState(3089)
+end
+
+function Attack3089_onUpdate()
+    if AttackCommonFunction(3089, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3090_onActivate()
+    CallActionState(3090)
+end
+
+function Attack3090_onUpdate()
+    if AttackCommonFunction(3090, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3091_onActivate()
+    CallActionState(3091)
+end
+
+function Attack3091_onUpdate()
+    if AttackCommonFunction(3091, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3092_onActivate()
+    CallActionState(3092)
+end
+
+function Attack3092_onUpdate()
+    if AttackCommonFunction(3092, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3093_onActivate()
+    CallActionState(3093)
+end
+
+function Attack3093_onUpdate()
+    if AttackCommonFunction(3093, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3094_onActivate()
+    CallActionState(3094)
+end
+
+function Attack3094_onUpdate()
+    if AttackCommonFunction(3094, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3095_onActivate()
+    CallActionState(3095)
+end
+
+function Attack3095_onUpdate()
+    if AttackCommonFunction(3095, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3096_onActivate()
+    CallActionState(3096)
+end
+
+function Attack3096_onUpdate()
+    if AttackCommonFunction(3096, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3097_onActivate()
+    CallActionState(3097)
+end
+
+function Attack3097_onUpdate()
+    if AttackCommonFunction(3097, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3098_onActivate()
+    CallActionState(3098)
+end
+
+function Attack3098_onUpdate()
+    if AttackCommonFunction(3098, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+function Attack3099_onActivate()
+    CallActionState(3099)
+end
+
+function Attack3099_onUpdate()
+    if AttackCommonFunction(3099, STYLE_DEFAULT, TRUE) == TRUE then
+        return
+    end
+end
+
+
+
+function Event20000_onUpdate()
+    if EventCommonFunction(20000) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20001_onUpdate()
+    if EventCommonFunction(20001) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20002_onUpdate()
+    if EventCommonFunction(20002) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20003_onUpdate()
+    if EventCommonFunction(20003) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20004_onUpdate()
+    if EventCommonFunction(20004) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20005_onUpdate()
+    if EventCommonFunction(20005) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20006_onUpdate()
+    if EventCommonFunction(20006) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20007_onUpdate()
+    if EventCommonFunction(20007) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20008_onUpdate()
+    if EventCommonFunction(20008) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20009_onUpdate()
+    if EventCommonFunction(20009) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20010_onUpdate()
+    if EventCommonFunction(20010) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20011_onUpdate()
+    if EventCommonFunction(20011) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20012_onUpdate()
+    if EventCommonFunction(20012) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20013_onUpdate()
+    if EventCommonFunction(20013) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20014_onUpdate()
+    if EventCommonFunction(20014) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20015_onUpdate()
+    if EventCommonFunction(20015) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20016_onUpdate()
+    if EventCommonFunction(20016) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20017_onUpdate()
+    if EventCommonFunction(20017) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20018_onUpdate()
+    if EventCommonFunction(20018) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20019_onUpdate()
+    if EventCommonFunction(20019) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20020_onUpdate()
+    if EventCommonFunction(20020) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20021_onUpdate()
+    if EventCommonFunction(20021) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20022_onUpdate()
+    if EventCommonFunction(20022) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20023_onUpdate()
+    if EventCommonFunction(20023) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20024_onUpdate()
+    if EventCommonFunction(20024) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20025_onUpdate()
+    if EventCommonFunction(20025) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20026_onUpdate()
+    if EventCommonFunction(20026) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20027_onUpdate()
+    if EventCommonFunction(20027) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20028_onUpdate()
+    if EventCommonFunction(20028) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20029_onUpdate()
+    if EventCommonFunction(20029) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20030_onUpdate()
+    if EventCommonFunction(20030) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20031_onUpdate()
+    if EventCommonFunction(20031) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20032_onUpdate()
+    if EventCommonFunction(20032) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20033_onUpdate()
+    if EventCommonFunction(20033) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20034_onUpdate()
+    if EventCommonFunction(20034) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20035_onUpdate()
+    if EventCommonFunction(20035) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20036_onUpdate()
+    if EventCommonFunction(20036) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20037_onUpdate()
+    if EventCommonFunction(20037) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20038_onUpdate()
+    if EventCommonFunction(20038) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20039_onUpdate()
+    if EventCommonFunction(20039) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20040_onUpdate()
+    if EventCommonFunction(20040) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20041_onUpdate()
+    if EventCommonFunction(20041) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20042_onUpdate()
+    if EventCommonFunction(20042) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20043_onUpdate()
+    if EventCommonFunction(20043) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20044_onUpdate()
+    if EventCommonFunction(20044) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20045_onUpdate()
+    if EventCommonFunction(20045) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20046_onUpdate()
+    if EventCommonFunction(20046) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20047_onUpdate()
+    if EventCommonFunction(20047) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20048_onUpdate()
+    if EventCommonFunction(20048) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20049_onUpdate()
+    if EventCommonFunction(20049) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20050_onUpdate()
+    if EventCommonFunction(20050) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20051_onUpdate()
+    if EventCommonFunction(20051) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20052_onUpdate()
+    if EventCommonFunction(20052) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20053_onUpdate()
+    if EventCommonFunction(20053) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20054_onUpdate()
+    if EventCommonFunction(20054) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20055_onUpdate()
+    if EventCommonFunction(20055) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20056_onUpdate()
+    if EventCommonFunction(20056) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20057_onUpdate()
+    if EventCommonFunction(20057) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20058_onUpdate()
+    if EventCommonFunction(20058) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event20059_onUpdate()
+    if EventCommonFunction(20059) == TRUE then
+        return
+    end
+    if env(339, 1) == TRUE then
+        Fire("W_Idle")
+        return
+    end
+    
+end
+
+function Event30000_onUpdate()
+    if EventCommonFunction(30000) == TRUE then
+        return
+    end
+    
+end
+
+function Event30001_onUpdate()
+    if EventCommonFunction(30001) == TRUE then
+        return
+    end
+    
+end
+
+function Event30002_onUpdate()
+    if EventCommonFunction(30002) == TRUE then
+        return
+    end
+    
+end
+
+function Event30003_onUpdate()
+    if EventCommonFunction(30003) == TRUE then
+        return
+    end
+    
+end
+
+function Event30004_onUpdate()
+    if EventCommonFunction(30004) == TRUE then
+        return
+    end
+    
+end
+
+function Event30005_onUpdate()
+    if EventCommonFunction(30005) == TRUE then
+        return
+    end
+    
+end
+
+function Event30006_onUpdate()
+    if EventCommonFunction(30006) == TRUE then
+        return
+    end
+    
+end
+
+function Event30007_onUpdate()
+    if EventCommonFunction(30007) == TRUE then
+        return
+    end
+    
+end
+
+function Event30008_onUpdate()
+    if EventCommonFunction(30008) == TRUE then
+        return
+    end
+    
+end
+
+function Event30009_onUpdate()
+    if EventCommonFunction(30009) == TRUE then
+        return
+    end
+    
+end
+
+function Event30010_onUpdate()
+    if EventCommonFunction(30010) == TRUE then
+        return
+    end
+    
+end
+
+function Event30011_onUpdate()
+    if EventCommonFunction(30011) == TRUE then
+        return
+    end
+    
+end
+
+function Event30012_onUpdate()
+    if EventCommonFunction(30012) == TRUE then
+        return
+    end
+    
+end
+
+function Event30013_onUpdate()
+    if EventCommonFunction(30013) == TRUE then
+        return
+    end
+    
+end
+
+function Event30014_onUpdate()
+    if EventCommonFunction(30014) == TRUE then
+        return
+    end
+    
+end
+
+function Event30015_onUpdate()
+    if EventCommonFunction(30015) == TRUE then
+        return
+    end
+    
+end
+
+function Event30016_onUpdate()
+    if EventCommonFunction(30016) == TRUE then
+        return
+    end
+    
+end
+
+function Event30017_onUpdate()
+    if EventCommonFunction(30017) == TRUE then
+        return
+    end
+    
+end
+
+function Event30018_onUpdate()
+    if EventCommonFunction(30018) == TRUE then
+        return
+    end
+    
+end
+
+function Event30019_onUpdate()
+    if EventCommonFunction(30019) == TRUE then
+        return
+    end
+    
+end
+
+function Event30020_onUpdate()
+    if EventCommonFunction(30020) == TRUE then
+        return
+    end
+    
+end
+
+function Event30021_onUpdate()
+    if EventCommonFunction(30021) == TRUE then
+        return
+    end
+    
+end
+
+function Event30022_onUpdate()
+    if EventCommonFunction(30022) == TRUE then
+        return
+    end
+    
+end
+
+function Event30023_onUpdate()
+    if EventCommonFunction(30023) == TRUE then
+        return
+    end
+    
+end
+
+function Event30024_onUpdate()
+    if EventCommonFunction(30024) == TRUE then
+        return
+    end
+    
+end
+
+function Event30025_onUpdate()
+    if EventCommonFunction(30025) == TRUE then
+        return
+    end
+    
+end
+
+function Event30026_onUpdate()
+    if EventCommonFunction(30026) == TRUE then
+        return
+    end
+    
+end
+
+function Event30027_onUpdate()
+    if EventCommonFunction(30027) == TRUE then
+        return
+    end
+    
+end
+
+function Event30028_onUpdate()
+    if EventCommonFunction(30028) == TRUE then
+        return
+    end
+    
+end
+
+function Event30029_onUpdate()
+    if EventCommonFunction(30029) == TRUE then
+        return
+    end
+    
+end
+
+global = {}
+
+function dummy()
+    
+end
+
+global.__index = function (table, element)
+    return dummy
+    
+end
+
+setmetatable(_G, global)
+

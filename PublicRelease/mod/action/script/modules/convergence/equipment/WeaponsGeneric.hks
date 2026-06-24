@@ -1,0 +1,449 @@
+-- Getters
+function GetWeaponSlot(hand)
+    if hand == HAND_RIGHT then
+        local equippedSlot = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.CURR_WEP_SLOT_OFFSET_RIGHT)
+        return CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.R_HAND_WEAPON(equippedSlot)
+    end
+
+    local equippedSlot = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.CURR_WEP_SLOT_OFFSET_LEFT)
+    return CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.L_HAND_WEAPON(equippedSlot)
+end
+
+function GetWeaponID(hand, offset)
+    if env(IsCOMPlayer) == TRUE and g_FrameCount < 120 then
+        return '0'
+    end
+
+    if offset == nil or offset > 4 then
+        offset = 4
+    end
+
+    local id = GetPointerValue(GetWeaponSlot(hand))
+
+    if offset == 0 then
+        return id
+    end
+
+    return subtractStrings(id, tonumber(string.sub(tostring(id), 0 - offset)))
+end
+
+function GetLocalPlayerWeaponSlot(hand)
+    if hand == HAND_RIGHT then
+        local equippedSlot = GetLocalPlayerPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.CURR_WEP_SLOT_OFFSET_RIGHT)
+        return CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.R_HAND_WEAPON(equippedSlot)
+    end
+
+    local equippedSlot = GetLocalPlayerPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.CURR_WEP_SLOT_OFFSET_LEFT)
+    return CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.L_HAND_WEAPON(equippedSlot)
+end
+
+function GetLocalPlayerWeaponID(hand, offset)
+    if offset == nil or offset > 4 then
+        offset = 4
+    end
+
+    local id = GetLocalPlayerPointerValue(GetLocalPlayerWeaponSlot(hand))
+
+    if offset == 0 then
+        return id
+    end
+
+    return subtractStrings(id, tonumber(string.sub(tostring(id), 0 - offset)))
+end
+
+-- Trigger
+function OnWeaponAttack(isTransformable)
+    if isTransformable then
+        TrickWeapon_CanDoTransformAttack = TRUE        
+    end
+    RetainerJewel_OneHandedDamageBoost()
+    StormJewel_WeaponDamageBuff()
+end
+
+-- Bullet / VFX state info togglers
+function StateInfoBulletManager(weaponId, stateInfoSpEffect)
+    if (GetWeaponID(HAND_LEFT, 2) == tostring(weaponId) and (c_Style == HAND_LEFT or c_Style == HAND_LEFT_BOTH))
+    or (GetWeaponID(HAND_RIGHT, 2) == tostring(weaponId) and (c_Style == HAND_RIGHT or c_Style == HAND_RIGHT_BOTH)) then
+        act(AddSpEffect, stateInfoSpEffect)
+    elseif env(GetSpEffectID, stateInfoSpEffect) == TRUE then
+        act(ClearSpEffect, stateInfoSpEffect)
+    end
+end
+
+function StateInfoArtsLib()
+    StateInfoBulletManager(3090000, 4000000) -- Dark Moon Greatsword
+    StateInfoBulletManager(8070000, 4000001) -- Monk's Flameblade
+    StateInfoBulletManager(3060000, 4000002) -- Ordovis's Greatsword
+
+    StateInfoBulletManager(11060000, 4000010) -- Varre's Bouquet
+    StateInfoBulletManager(13060000, 4000011) -- Seething Flail
+
+    StateInfoBulletManager(15130000, 4000020) -- Gargoyle's Great Axe
+    StateInfoBulletManager(15140000, 4000021) -- Gargoyle's Black Axe
+
+    StateInfoBulletManager(10080000, 4000030) -- Gargoyle's Twinblade
+    StateInfoBulletManager(10090000, 4000031) -- Gargoyle's Black Blades
+
+    StateInfoBulletManager(5070000, 4000041) -- Thorn of the Guilty
+    
+    StateInfoBulletManager(11190000, 4000052) -- Tricia's Pomander (Fire)
+    StateInfoBulletManager(11191000, 4000055) -- Tricia's Pomander (Lightning)
+    StateInfoBulletManager(11192000, 4000053) -- Tricia's Pomander (Frost)
+    StateInfoBulletManager(11193000, 4000054) -- Tricia's Pomander (Frenzy)
+end
+
+function StateInfoHeavyLib()
+    StateInfoBulletManager(5050000, 4000040) -- Frozen Needle
+    StateInfoBulletManager(5070000, 4000041) -- Thorn of the Guilty
+
+    StateInfoBulletManager(11190000, 4000052) -- Tricia's Pomander (Fire)
+    StateInfoBulletManager(11191000, 4000055) -- Tricia's Pomander (Lightning)
+    StateInfoBulletManager(11192000, 4000053) -- Tricia's Pomander (Frost)
+    StateInfoBulletManager(11193000, 4000054) -- Tricia's Pomander (Frenzy)
+end
+
+-- Detectors
+function IsUsingClassWeapon(scalingWithFth, scalingWithInt, scalingWithArc, paramTable, spEffectIfTrue)
+    local weaponId = GetWeaponID(LAST_ATTACK_HAND, 2)
+
+    local hasDamageType = GetParamValue(paramTable, weaponId) > 0
+    if not hasDamageType then
+        act(ClearSpEffect, spEffectIfTrue)
+        return
+    end
+
+    local checks = {
+        {param = PARAM.EquipParamWeapon.CORRECT_FAITH, uses = scalingWithFth},
+        {param = PARAM.EquipParamWeapon.CORRECT_MAGIC, uses = scalingWithInt},
+        {param = PARAM.EquipParamWeapon.CORRECT_ARC, uses = scalingWithArc},
+    }
+
+    local hasAnyClassScaling = false
+    for _, c in ipairs(checks) do
+        local isScaling = GetParamValue(c.param, weaponId) > 0
+        
+        -- Weapon scales with a stat the class doesn't use -> fail
+        if isScaling and not c.uses then
+            act(ClearSpEffect, spEffectIfTrue)
+            return
+        end
+
+        if isScaling and c.uses then
+            hasAnyClassScaling = true
+        end
+    end
+
+    -- If the class expects scaling but weapon scales with none of those stats -> fail
+    if (scalingWithFth or scalingWithInt or scalingWithArc) and not hasAnyClassScaling then
+        act(ClearSpEffect, spEffectIfTrue)
+        return
+    end
+
+    act(AddSpEffect, spEffectIfTrue)
+end
+
+function AttackBlockDetection()
+    if env(GetSpEffectID, 5322525) == TRUE then -- Skarde Shield Active
+        act(AddSpEffect, 5322516)
+    end
+    act(AddSpEffect, 8000050)
+end
+
+function CriticalHitDetection()
+    if env(GetSpEffectID, Jewel_of_the_Devious) == TRUE then -- Jewel of the Devious (Rogue)
+        if c_Style == HAND_LEFT_BOTH then
+            act(AddSpEffect, 390615) -- Bleed + Poison L
+        else
+            act(AddSpEffect, 390610) -- Bleed + Poison R
+        end
+    elseif env(GetSpEffectID, Jewel_of_the_Darkness) == TRUE then -- Jewel of the Darkness (Nox Oracle)
+        act(AddSpEffect, 391210) -- Knockback Enemies
+    end
+end
+
+function HeldWeaponTypeDetection()
+    local wepHand = HAND_RIGHT
+    if c_Style == HAND_LEFT_BOTH then
+        wepHand = HAND_LEFT
+    end
+
+    if GetEquipType(wepHand, WEAPON_CATEGORY_SMALL_ARROW, WEAPON_CATEGORY_ARROW,
+            WEAPON_CATEGORY_LARGE_ARROW, WEAPON_CATEGORY_CROSSBOW, WEAPON_CATEGORY_BALLISTA) == TRUE then
+        act(AddSpEffect, 8000060) -- Ranged Weapon in hand
+    elseif GetEquipType(wepHand, WEAPON_CATEGORY_STAFF) == TRUE or IsWeaponCatalyst(wepHand, false) == TRUE then
+        act(AddSpEffect, 8000070) -- Catelyst in hand
+    else
+        act(AddSpEffect, 8000080) -- Melee Weapon in hand
+    end
+end
+
+function WeaponAttackDetection()
+    act(AddSpEffect, 100625)
+end
+
+function TwoHandingDetector()
+    if c_Style >= HAND_LEFT_BOTH then
+        act(AddSpEffect, 100627)
+    elseif env(GetSpEffectID, 100627) == TRUE then
+        act(ClearSpEffect, 100627)
+    end
+end
+
+function PowerstanceDetector()
+    if IsEnableDualWielding() == HAND_RIGHT then
+        act(AddSpEffect, 100626)
+    elseif env(GetSpEffectID, 100626) == TRUE then
+        act(ClearSpEffect, 100626)
+    end
+end
+
+-- Trick Weapons
+TrickWeapon_CanDoTransformAttack = FALSE
+function IsTrickWeapon()
+    local trickWeapons = {
+        [34] = true, -- Guardian's Swordspear
+        [87] = true, -- Quality GS
+        [123] = true,-- Morgott's Cane
+		[149] = true, -- Egg mace
+		[148] = true, -- Dragonkin Twinblade
+    }
+    if trickWeapons[c_SwordArtsID] then
+        return TRUE
+    end
+    return FALSE
+end
+
+-- Semi-Trick Weapon
+function IsSemiTrickWeapon(hand)
+    local trickWeapon_list = {
+		[943] = true, -- Conv Fingerslayer
+    }
+	
+	local current_tae = env(GetEquipWeaponSpecialCategoryNumber, hand)	
+	if trickWeapon_list[current_tae] then
+		return TRUE
+	else
+		return FALSE
+	end
+end
+
+-- Currently has no support for transferring infusions
+function TrickWeaponHandler(triggerSpEffect, baseWeaponID, transformWeaponID, cooldown, forceTransform, respectHand)
+    forceTransform = forceTransform or false
+    if env(GetSpEffectID, triggerSpEffect) == FALSE and not forceTransform then
+        return
+    end
+
+    local rightWeapon = GetWeaponID(HAND_RIGHT, 0)
+    local rightModifiers = tostring(tonumber(string.sub(rightWeapon, -2)))
+    local isRightBase = subtractStrings(rightWeapon, rightModifiers) == tostring(baseWeaponID)
+
+    local leftWeapon = GetWeaponID(HAND_LEFT, 0)
+    local leftModifiers = tostring(tonumber(string.sub(leftWeapon, -2)))
+    local isLeftBase = subtractStrings(leftWeapon, leftModifiers) == tostring(baseWeaponID)
+
+    if respectHand == nil then
+        respectHand = true
+    end
+    local weaponHand = HAND_RIGHT
+    if c_Style == HAND_LEFT_BOTH or c_SwordArtsHand == HAND_LEFT then
+        weaponHand = HAND_LEFT
+    end
+
+    if respectHand then
+        if weaponHand == HAND_RIGHT and not isRightBase then
+            return
+        elseif weaponHand == HAND_LEFT and not isLeftBase then
+            return
+        end
+    elseif not isRightBase and not isLeftBase then
+        return
+    end
+
+    if not forceTransform then
+        act(ClearSpEffect, triggerSpEffect)
+    end
+    if OnCooldown(0.33, cooldown[1]) then
+        return
+    end
+    cooldown[1] = g_DeltaTimeCount;
+
+    act(AddSpEffect, 101400)
+    SaveSpEffect(weaponBuffSpEffects)
+
+    -- Fixes sticky spEffects
+    local baseWeaponPassiveSpEffect = GetParamValue(PARAM.EquipParamWeapon.RESIDENT_SP_EFFECT_ID1, baseWeaponID)
+    if baseWeaponPassiveSpEffect > 0 and env(GetSpEffectID, baseWeaponPassiveSpEffect) == TRUE then
+        act(ClearSpEffect, baseWeaponPassiveSpEffect)
+    end
+    local transformWeaponPassiveSpEffect = GetParamValue(PARAM.EquipParamWeapon.RESIDENT_SP_EFFECT_ID1, transformWeaponID)
+    if transformWeaponPassiveSpEffect > 0 and env(GetSpEffectID, transformWeaponPassiveSpEffect) == FALSE then
+        act(AddSpEffect, transformWeaponPassiveSpEffect)
+    end
+
+    if isRightBase and (not respectHand or weaponHand == HAND_RIGHT) then
+        local newWeaponId = addStrings(tostring(transformWeaponID), rightModifiers)
+        SetPointerValue(GetWeaponSlot(HAND_RIGHT), newWeaponId)
+
+        local wepSlot = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.CURR_WEP_SLOT_OFFSET_RIGHT)
+        local ga_handle = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.R_HAND_WEAPON_GA_ITEM_HANDLE(wepSlot))
+        OverwriteGaItemContent(ga_handle, rightWeapon, newWeaponId)
+    end
+    if isLeftBase and (not respectHand or weaponHand == HAND_LEFT) then
+        local newWeaponId = addStrings(tostring(transformWeaponID), leftModifiers)
+        SetPointerValue(GetWeaponSlot(HAND_LEFT), newWeaponId)
+
+        local wepSlot = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.CURR_WEP_SLOT_OFFSET_LEFT)
+        local ga_handle = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.L_HAND_WEAPON_GA_ITEM_HANDLE(wepSlot))
+        OverwriteGaItemContent(ga_handle, leftWeapon, newWeaponId)
+    end
+end
+
+function OverwriteGaItemContent(ga_handle, itemId, newItemId)
+    if not IsLocalPlayer() then
+        return
+    end
+
+    local _, ga_index, _ = ParseGaItemHandle(ga_handle)
+    local ga_itemCategory, ga_itemId = extractBits32String(GetPointerValue(GAME_BASE.CS_GA_ITEM.GA_ITEMS.ITEM_ID(ga_index)))
+    if tostring(ga_itemId) ~= itemId then
+        Log("Something went wrong, these values should be the same:", ga_itemId, itemId)
+        return
+    end
+    
+    local isFound, item = TryGetItemByGaItemHandle(ga_handle)
+    if not isFound or item == nil then
+        Log("Item could not be found in Inventory Array")
+        return
+    end
+
+    local newGaItemId = buildBits32String(ga_itemCategory, newItemId)
+    SetPointerValue(GAME_BASE.GAME_DATA_MAN.PLAYER_GAME_INFO.STORAGE_INVENTORY.FULL_ITEM_ID(item.Index), newGaItemId)
+    SetPointerValue(GAME_BASE.CS_GA_ITEM.GA_ITEMS.ITEM_ID(ga_index), newGaItemId)
+    
+    item.Id = newItemId
+    --item.GaItemHandle = newGaItemId
+    UpdateSingleItem(item)
+end
+
+-- Other
+function MagicWeaponDetection()
+    local rHand = GetWeaponID(HAND_RIGHT, 2)
+    local lHand = GetWeaponID(HAND_LEFT, 2)
+
+    if GetParamValue(PARAM.EquipParamWeapon.CORRECT_MAGIC, rHand) > 0 or GetParamValue(PARAM.EquipParamWeapon.CORRECT_FAITH, rHand) > 0 then
+        if GetEquipType(HAND_RIGHT, WEAPON_CATEGORY_SMALL_ARROW, WEAPON_CATEGORY_ARROW,
+                        WEAPON_CATEGORY_LARGE_ARROW, WEAPON_CATEGORY_CROSSBOW, WEAPON_CATEGORY_BALLISTA) == TRUE then
+            act(AddSpEffect, 109001)
+        elseif GetEquipType(HAND_RIGHT, WEAPON_CATEGORY_SMALL_SHIELD, WEAPON_CATEGORY_MIDDLE_SHIELD, WEAPON_CATEGORY_LARGE_SHIELD) == FALSE
+        or rHand == "31350000" then
+            act(AddSpEffect, 109000)
+        end
+    end
+
+    if GetParamValue(PARAM.EquipParamWeapon.CORRECT_MAGIC, lHand) > 0 or GetParamValue(PARAM.EquipParamWeapon.CORRECT_FAITH, lHand) > 0 then
+        if GetEquipType(HAND_LEFT, WEAPON_CATEGORY_SMALL_ARROW, WEAPON_CATEGORY_ARROW,
+                        WEAPON_CATEGORY_LARGE_ARROW, WEAPON_CATEGORY_CROSSBOW, WEAPON_CATEGORY_BALLISTA) == TRUE then
+            act(AddSpEffect, 109001)
+        elseif GetEquipType(HAND_LEFT, WEAPON_CATEGORY_SMALL_SHIELD, WEAPON_CATEGORY_MIDDLE_SHIELD, WEAPON_CATEGORY_LARGE_SHIELD) == FALSE
+        or lHand == "31350000" then
+            act(AddSpEffect, 109000)
+        end
+    end
+end
+
+local infiniteAmmoActive = false
+function InfiniteAmmo()
+    local infiniteAmmoShouldBeActive = false
+    if env(GetSpEffectID, 7006100) == TRUE then -- Page Armor        
+        infiniteAmmoShouldBeActive = true
+    elseif env(GetSpEffectID, 341400) == TRUE then -- Quiver Talisman
+        infiniteAmmoShouldBeActive = true
+    elseif env(GetSpEffectID, Jewel_of_the_Hunt) == TRUE then
+        infiniteAmmoShouldBeActive = true
+	elseif c_SwordArtsID == 344 and env(GetSpEffectID, 100420) == TRUE then -- scadu bow
+        infiniteAmmoShouldBeActive = true        
+    elseif env(GetEventFlag, "1099002105") == TRUE then -- Training Grounds
+        infiniteAmmoShouldBeActive = true
+    end
+
+    if infiniteAmmoActive then
+        if not infiniteAmmoShouldBeActive then
+            infiniteAmmoActive = false
+            SetPointerValue(GAME_BASE.DEBUG_FLAGS.ALL_NO_ARROW_CONSUME, FALSE)
+        end
+    else
+        if infiniteAmmoShouldBeActive then
+            infiniteAmmoActive = true
+            SetPointerValue(GAME_BASE.DEBUG_FLAGS.ALL_NO_ARROW_CONSUME, TRUE)
+        end
+    end
+end
+
+function WeaponDuplication()
+    if env(GetSpEffectID, 9000050) == FALSE then
+        return
+    end
+
+    local rightWeapon = GetWeaponID(HAND_RIGHT)
+    local leftWeapon = GetWeaponID(HAND_LEFT)
+
+    -- L
+    if leftWeapon ~= "110000" then
+        SetParamValue(PARAM.ItemLotParam_map.LOT_ITEM_ID_0, 9990500, leftWeapon)
+        local rarity = GetParamValue(PARAM.EquipParamWeapon.RARITY, leftWeapon)
+
+        if rarity == 1 then
+            act(SetEventFlag, "1099002010", TRUE)
+        elseif rarity == 2 then
+            act(SetEventFlag, "1099002011", TRUE)
+        elseif rarity == 3 then
+            act(SetEventFlag, "1099002010", TRUE)
+            act(SetEventFlag, "1099002011", TRUE)
+        end
+    else
+        SetParamValue(PARAM.ItemLotParam_map.LOT_ITEM_ID_0, 9990500, 0)
+    end
+
+    -- R
+    if rightWeapon ~= "110000" then
+        SetParamValue(PARAM.ItemLotParam_map.LOT_ITEM_ID_0, 9990510, rightWeapon)
+        local rarity = GetParamValue(PARAM.EquipParamWeapon.RARITY, rightWeapon)
+
+        if rarity == 1 then
+            act(SetEventFlag, "1099002020", TRUE)
+        elseif rarity == 2 then
+            act(SetEventFlag, "1099002021", TRUE)
+        elseif rarity == 3 then
+            act(SetEventFlag, "1099002020", TRUE)
+            act(SetEventFlag, "1099002021", TRUE)
+        end
+    else
+        SetParamValue(PARAM.ItemLotParam_map.LOT_ITEM_ID_0, 9990510, 0)
+    end
+
+    act(ClearSpEffect, 9000050)
+end
+
+SPELLCASTING_ASH = 109
+function IsWeaponCatalyst(wep_hand, isNotAsh)
+    isNotAsh = isNotAsh or false
+
+    if not isNotAsh and c_SwordArtsID == 109 and c_SwordArtsHand == HAND_LEFT then
+        return TRUE
+    end
+
+    if GetWeaponID(wep_hand) == "11110000" and GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.RUNE_LEVEL) == 1 then -- Gideon's Hammer
+        return TRUE
+    end
+
+    local weaponCatalystSpKinds = {
+        [293] = true, -- Carian Sorcery Sword
+    }
+    local sp_kind = env(GetEquipWeaponSpecialCategoryNumber, wep_hand)
+    if weaponCatalystSpKinds[sp_kind] then
+    	return TRUE
+    end
+
+    return FALSE
+end

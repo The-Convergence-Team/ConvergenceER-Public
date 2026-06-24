@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -16,7 +16,6 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005616, 30207910, 30202700);
     InitializeCommonEvent(0, 90005211, 30200200, 30002, 20002, 30202200, 1065353216, 0, 1, 0, 0, 0);
     InitializeCommonEvent(0, 90005211, 30200201, 30002, 20002, 30202201, 1065353216, 0, 1, 0, 0, 0);
-    InitializeCommonEvent(0, 90005211, 30200202, 30002, 20002, 30202202, 1065353216, 1065353216, 1, 0, 0, 0);
     InitializeCommonEvent(0, 90005261, 30200210, 30202200, 1065353216, 1036831949, 0);
     InitializeCommonEvent(0, 90005261, 30200211, 30202200, 1065353216, 1050253722, 0);
     InitializeCommonEvent(0, 90005261, 30200214, 30202257, 1065353216, 1036831949, 0);
@@ -45,9 +44,18 @@ $Event(0, Default, function() {
     InitializeEvent(0, 30202510, 0);
     InitializeCommonEvent(0, 90005650, 30200540, 30201540, 30201541, 30203541, 27115);
     InitializeCommonEvent(0, 90005651, 30200540, 30201540);
-    InitializeEvent(0, 30202200, 0);
-    
+    InitializeEvent(0, 30202200, 30200271);
+    InitializeEvent(1, 30202200, 30200272);
+    InitializeEvent(2, 30202200, 30200273);
+    InitializeEvent(0, 30202210, 0);
+    InitializeEvent(0, 30202220, 30200271);
+    InitializeEvent(1, 30202220, 30200272);
+    InitializeEvent(2, 30202220, 30200273);
+    InitializeEvent(0, 30202201, 30200271);
+    InitializeEvent(1, 30202201, 30200272);
+    InitializeEvent(2, 30202201, 30200273);
     InitializeEvent(0, 30208860, 30200800);
+    InitializeCommonEvent(0, 90005300, 30200202, 30200202, 0, 0, 1);
 });
 
 $Event(50, Default, function() {
@@ -57,9 +65,6 @@ $Event(50, Default, function() {
     InitializeCommonEvent(0, 90005460, 30200201);
     InitializeCommonEvent(0, 90005461, 30200201);
     InitializeCommonEvent(0, 90005462, 30200201);
-    InitializeCommonEvent(0, 90005460, 30200202);
-    InitializeCommonEvent(0, 90005461, 30200202);
-    InitializeCommonEvent(0, 90005462, 30200202);
 });
 
 $Event(30202510, Default, function() {
@@ -79,11 +84,41 @@ L0:
     EnableObjAct(X4_4, -1);
 });
 
-$Event(30202200, Restart, function() {
-    DisableAsset(30201200);
+$Event(30202200, Restart, function(vulgarID) {
+    EndIf(CharacterDead(vulgarID) || HPRatio(vulgarID) > 99);
+    WaitFor(InArea(10000, 30202506));
+        SetNetworkUpdateRate(vulgarID, true, CharacterUpdateFrequency.AlwaysUpdate);
+    WaitFor(!InArea(10000, 30202506));
+        SetNetworkUpdateRate(vulgarID, false, -1);
+    RestartEvent();
+});
+
+$Event(30202201, Restart, function(vulgarID) {
+    SetCharacterTeamType(vulgarID, TeamType.Object);
+    WaitFor(HasDamageType(vulgarID, 10000, DamageType.Unspecified));
+    SetCharacterTeamType(vulgarID, TeamType.Hostile);
     EndEvent();
 });
 
+$Event(30202210, Restart, function() {
+    if (EventFlag(30200822)){
+        ReproduceAssetAnimation(30201552, 0);
+        DisableObjAct(30201551, 27115);
+        EndEvent();
+    }
+    WaitFor(ObjActEventFlag(30203551) || InArea(10000, 30201553));
+    SetEventFlagID(30200822, ON);
+    ForceAnimationPlayback(30201552, 0, false, false, false);
+    EndEvent();
+});
+
+$Event(30202220, Restart, function(vulgarID) {
+    EndIf(CharacterDead(vulgarID) || HPRatio(vulgarID) > 99);
+    WaitRandomTimeFrames(30, 80);
+    PlaySE(vulgarID, SoundType.CharacterMotion, 432008001);
+    RestartEvent();
+});
+/*
 $Event(30202800, Restart, function() {
     EndIf(EventFlag(30200800));
     WaitFor(CharacterHPValue(30200800) <= 0);
@@ -154,3 +189,4 @@ $Event(30208860, Restart, function(X0_4) {
     WaitFixedTimeSeconds(1);
     RestartEvent();
 });
+*/

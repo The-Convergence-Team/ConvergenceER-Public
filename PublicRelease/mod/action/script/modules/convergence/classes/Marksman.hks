@@ -1,0 +1,122 @@
+function ShotArrow()
+    if env(GetSpEffectID, 7005002) == TRUE then -- Snipers Lethality
+        act(AddSpEffect, 7005003)
+    end
+    if env(GetSpEffectID, 341400) == TRUE then -- Quiver Talisman
+        act(AddSpEffect, 341401)
+    end
+    act(AddSpEffect, 8000030) -- Has Shot Arrow
+end
+
+function IsReloadingBalista()
+    local wepHand = HAND_RIGHT
+    if c_Style == HAND_LEFT_BOTH then
+        wepHand = HAND_LEFT
+    end
+
+    return GetEquipType(wepHand, WEAPON_CATEGORY_BALLISTA) == TRUE
+        and IsNodeActive("AttackCrossbowBothRightFire_CMSG", "AttackCrossbowBothLeftFire_CMSG") == TRUE
+end
+
+local pageSetSpEffects =
+{
+    { spEffect = 6022000, animIncrease = 07 },
+    { spEffect = 6022010, animIncrease = 14 },
+    { spEffect = 6022020, animIncrease = 07 },
+    { spEffect = 6022030, animIncrease = 07 }
+}
+function PageSetAnimSpeedIncrease()
+    if c_Style < HAND_LEFT_BOTH then
+        return 1
+    end
+
+    local wepHand = HAND_RIGHT
+    if c_Style == HAND_LEFT_BOTH then
+        wepHand = HAND_LEFT
+    end
+
+    if GetEquipType(wepHand, WEAPON_CATEGORY_LARGE_ARROW) == TRUE then
+        if IsNodeActive("AttackCrossbowBothRight_Upper_SM", "AttackCrossbowBothLeft_Upper_SM") == FALSE then
+            return 1
+        end
+    elseif GetEquipType(wepHand, WEAPON_CATEGORY_BALLISTA) == TRUE then
+        if IsNodeActive("AttackArrowRight_Upper_SM", "AttackArrowLeft_Upper_SM") == FALSE then
+            return 1
+        end
+    else
+        return 1
+    end
+
+    local val = 0
+    for i = 1, #pageSetSpEffects, 1 do
+        if env(GetSpEffectID, pageSetSpEffects[i].spEffect) == TRUE then
+            val = val + pageSetSpEffects[i].animIncrease
+        end
+    end
+
+    return 1 + (val / 100)
+end
+
+function IsBowStanceArtActive()
+    return IsArrowStanceArts(c_SwordArtsID) and IsNodeActive("DrawStanceRight_Upper_SM", "DrawStanceLoopMove_CMSG_Upper") == TRUE
+end
+
+function IsBowstringHeld()
+    return env(GetSpEffectID, 8000000) == TRUE
+end
+
+local marksmanHunterRangeSet = false
+function ShellRingMarksmanLockonRange()
+    if env(GetSpEffectID, Jewel_of_the_Hunt) == FALSE and not marksmanHunterRangeSet then -- SpEffect: Jewel of the Hunt
+        return
+    elseif env(GetSpEffectID, Jewel_of_the_Hunt) == TRUE and marksmanHunterRangeSet then
+        return
+    end
+
+    if marksmanHunterRangeSet then
+        SetPointerValue(GAME_BASE.LOCK_TGT_MAN.LOCK_ON_DISTANCE_BOOST, 0.0) -- Reset Camera Lockon Range
+        marksmanHunterRangeSet = false
+    else
+        SetPointerValue(GAME_BASE.LOCK_TGT_MAN.LOCK_ON_DISTANCE_BOOST, 15.75) -- Set Camera Lockon Range
+        marksmanHunterRangeSet = true
+    end
+end
+
+function ShellRingMarksmanHyperArmor(category)
+    local wepHand = HAND_RIGHT
+    if c_Style == HAND_LEFT_BOTH then
+        wepHand = HAND_LEFT
+    end
+
+    if GetEquipType(wepHand, category) == FALSE then
+        return
+    elseif env(GetSpEffectID, Jewel_of_the_Hunt) == FALSE then
+        return
+    elseif c_Style < HAND_LEFT_BOTH then
+        return
+    end
+
+    act(AddSpEffect, 390210)
+end
+
+function ShellRingMarksmanHyperArmor_Greatbow() ShellRingMarksmanHyperArmor(WEAPON_CATEGORY_LARGE_ARROW) end
+AttackArrowRightStart_Upper_onUpdate = AttachBefore(AttackArrowRightStart_Upper_onUpdate, ShellRingMarksmanHyperArmor_Greatbow)
+AttackArrowRightStartContinue_Upper_onUpdate = AttachBefore(AttackArrowRightStartContinue_Upper_onUpdate, ShellRingMarksmanHyperArmor_Greatbow)
+AttackArrowRightLoop_Upper_onUpdate = AttachBefore(AttackArrowRightLoop_Upper_onUpdate, ShellRingMarksmanHyperArmor_Greatbow)
+AttackArrowRightFire_Upper_onUpdate = AttachBefore(AttackArrowRightFire_Upper_onUpdate, ShellRingMarksmanHyperArmor_Greatbow)
+AttackArrowRightFireMove_Upper_onUpdate = AttachBefore(AttackArrowRightFireMove_Upper_onUpdate, ShellRingMarksmanHyperArmor_Greatbow)
+AttackArrowRightFireDash_Upper_onUpdate = AttachBefore(AttackArrowRightFireDash_Upper_onUpdate, ShellRingMarksmanHyperArmor_Greatbow)
+AttackArrowRightFireStep_Upper_onUpdate = AttachBefore(AttackArrowRightFireStep_Upper_onUpdate, ShellRingMarksmanHyperArmor_Greatbow)
+AttackArrowLeftStart_Upper_onUpdate = AttachBefore(AttackArrowLeftStart_Upper_onUpdate, ShellRingMarksmanHyperArmor_Greatbow)
+AttackArrowLeftStartContinue_Upper_onUpdate = AttachBefore(AttackArrowLeftStartContinue_Upper_onUpdate, ShellRingMarksmanHyperArmor_Greatbow)
+AttackArrowLeftLoop_Upper_onUpdate = AttachBefore(AttackArrowLeftLoop_Upper_onUpdate, ShellRingMarksmanHyperArmor_Greatbow)
+AttackArrowLeftFire_Upper_onUpdate = AttachBefore(AttackArrowLeftFire_Upper_onUpdate, ShellRingMarksmanHyperArmor_Greatbow)
+AttackArrowLeftFireMove_Upper_onUpdate = AttachBefore(AttackArrowLeftFireMove_Upper_onUpdate, ShellRingMarksmanHyperArmor_Greatbow)
+AttackArrowLeftFireDash_Upper_onUpdate = AttachBefore(AttackArrowLeftFireDash_Upper_onUpdate, ShellRingMarksmanHyperArmor_Greatbow)
+AttackArrowLeftFireStep_Upper_onUpdate = AttachBefore(AttackArrowLeftFireStep_Upper_onUpdate, ShellRingMarksmanHyperArmor_Greatbow)
+
+function ShellRingMarksmanHyperArmor_Ballista() ShellRingMarksmanHyperArmor(WEAPON_CATEGORY_BALLISTA) end
+AttackCrossbowBothRightStart_Upper_onUpdate = AttachBefore(AttackCrossbowBothRightStart_Upper_onUpdate, ShellRingMarksmanHyperArmor_Ballista)
+AttackCrossbowBothLeftStart_Upper_onUpdate = AttachBefore(AttackCrossbowBothLeftStart_Upper_onUpdate, ShellRingMarksmanHyperArmor_Ballista)
+AttackCrossbowBothRightLoop_Upper_onUpdate = AttachBefore(AttackCrossbowBothRightLoop_Upper_onUpdate, ShellRingMarksmanHyperArmor_Ballista)
+AttackCrossbowBothLeftLoop_Upper_onUpdate = AttachBefore(AttackCrossbowBothLeftLoop_Upper_onUpdate, ShellRingMarksmanHyperArmor_Ballista)

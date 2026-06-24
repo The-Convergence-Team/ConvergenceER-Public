@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -21,9 +21,9 @@ $Event(0, Default, function() {
     //grace unlock
     InitializeCommonEvent(0, 9005810, 2051470800, 76963, 2051470951, 2051471951, 1084227584);
     //Miqi Fog Gate
-    InitializeEvent(0, 2051471500, 0);
+    // InitializeEvent(0, 2051471500, 0);
     //Radahn & Mogh check region
-    InitializeEvent(0, 2051472490, 0);
+    //InitializeEvent(0, 2051472490, 0);
 });
 
 $Event(50, Default, function() {

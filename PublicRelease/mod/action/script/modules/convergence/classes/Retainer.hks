@@ -1,0 +1,12 @@
+function RetainerJewel_OneHandedDamageBoost()
+    if env(GetSpEffectID, Jewel_of_the_Resolute) == FALSE then
+        act(ClearSpEffect, 390006)
+        return
+    end
+
+    if c_Style < HAND_LEFT_BOTH then
+        act(AddSpEffect, 390006) -- One handed damage boost
+    elseif env(GetSpEffectID, 390006) == TRUE then
+        act(ClearSpEffect, 390006)
+    end
+end

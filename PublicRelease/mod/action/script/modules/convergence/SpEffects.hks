@@ -1,0 +1,286 @@
+weaponBuffSpEffects = {
+--   Right,             Quick Right,       Left,              Quick Left
+    [3140]     = true, [3142]     = true, [3144]     = true, [3146]     = true, -- Freezing Grease -- --
+    [3150]     = true, [3152]     = true, [3154]     = true, [3156]     = true, -- Soporific Grease -- --
+    [3160]     = true, [3161]     = true, [3162]     = true, [3163]     = true, -- Fire Grease -- --
+    [3165]     = true, [3166]     = true, [3167]     = true, [3168]     = true, -- Lightning Grease -- --
+    [3170]     = true, [3171]     = true, [3172]     = true, [3173]     = true, -- Magic Grease -- --
+    [3175]     = true, [3177]     = true, [3179]     = true, [3181]     = true, -- Poison Grease -- --
+    [3185]     = true, [3186]     = true, [3187]     = true, [3188]     = true, -- Holy Grease -- --
+    [3190]     = true, [3192]     = true, [3194]     = true, [3196]     = true, -- Blood Grease -- --
+    [3310]     = true, [3312]     = true, [3314]     = true, [3316]     = true, -- Rot Grease -- --
+    [3375]     = true,                    [3376]     = true,                    -- Holy Water Grease -- -- 
+    [3260]     = true,                    [3262]     = true,                    -- Dragonwound Grease -- --
+    [501690]   = true,                    [501691]   = true,                    -- Shield Grease
+	[102310]   = true, [102312]   = true, [102314]   = true, [102316]   = true, -- Eternal Sleep Grease -- --
+    [20501400] = true, [20501401] = true, [20501402] = true, [20501403] = true, -- Messmerfire Grease -- --
+    [20501410] = true, [20501411] = true, [20501412] = true, [20501413] = true, -- Dragonbolt Grease -- --
+    [20501420] = true, [20501421] = true, [20501422] = true, [20501423] = true, -- Royal Magic Grease -- --
+    [20501430] = true, [20501431] = true, [20501432] = true, [20501433] = true, -- Golden Grease -- --
+    [20501480] = true,                    [20501481] = true,                    -- Dragon Communion Grease
+    [20501620] = true,                    [20501622] = true,                    -- Festive Grease
+    [1446000]  = true,                                                          -- Scholar's Armament
+    [1446010]  = true,                                                          -- Scholar's Armament (Infinite Duration)
+    [1449000]  = true,                                                          -- Frozen Armament
+    [1459000]  = true,                                                          -- Frozen Lightning Armament
+    [1466000]  = true,                                                          -- Unseen Blade
+    [1498000]  = true,                                                          -- Briar Wrapped Armament
+    [1507000]  = true,                                                          -- Blighted Armament
+    [1525000]  = true,                                                          -- Storm Armament
+    [1608000]  = true,                                                          -- Flaming Armament
+    [1625000]  = true,                                                          -- Black Flame Blade
+    [1625500]  = true,                                                          -- Frenzy Flame Blade
+    [1632000]  = true,                                                          -- Bloodflame Blade
+    [1677000]  = true,                                                          -- Order's Blade
+    [1696000]  = true,                                                          -- Electrify Armament
+    [1723000]  = true,                                                          -- Poison Armament
+                                          [1447000] = true,                     -- Scholar's Shield
+                                          [1674000] = true,                     -- Immutable Shield
+    [2080] = true,                		  [2090] = true,						-- Underworld Frozen Lightning Weapon Buff
+}
+
+local savedSpEffects = {}
+local isSavingSpEffects = false
+local saveSpEffectCoolDown = 0
+function SaveSpEffect(map)
+    if env(GetSpEffectID, 101400) == FALSE then
+        if isSavingSpEffects and not OnCooldown(0.13, saveSpEffectCoolDown) then
+            RestoreSpEffects()
+        end
+        return
+    elseif isSavingSpEffects then
+        return
+    end
+
+    isSavingSpEffects = true
+    savedSpEffects = {}
+    saveSpEffectCoolDown = g_DeltaTimeCount
+    local index = 0
+
+    while true do
+        local isValid = GetPointerValue(CHR_INS_BASE.CS_SPECIAL_EFFECT.SPEFFECT_LIST.EXISTS(index))
+        if isValid == FALSE then
+            return
+        end
+
+        local spEffectID = GetPointerValue(CHR_INS_BASE.CS_SPECIAL_EFFECT.SPEFFECT_LIST.SPEFFECT_ID(index))
+        if map[spEffectID] then
+            local remainingDuration = GetPointerValue(CHR_INS_BASE.CS_SPECIAL_EFFECT.SPEFFECT_LIST.SPEFFECT_DURATION2(index))
+            table.insert(savedSpEffects, { spEffectID, remainingDuration })
+        end
+
+        index = index + 1
+    end
+end
+
+function RestoreSpEffects()
+    for i = 1, #savedSpEffects, 1 do
+        local target = savedSpEffects[i][1]
+        act(AddSpEffect, target)
+
+        local index = 0
+        while true do
+            local isValid = GetPointerValue(CHR_INS_BASE.CS_SPECIAL_EFFECT.SPEFFECT_LIST.EXISTS(index))
+            if isValid == FALSE then
+                break
+            end
+
+            local spEffectID = GetPointerValue(CHR_INS_BASE.CS_SPECIAL_EFFECT.SPEFFECT_LIST.SPEFFECT_ID(index))
+            if spEffectID == target then
+                SetPointerValue(CHR_INS_BASE.CS_SPECIAL_EFFECT.SPEFFECT_LIST.SPEFFECT_DURATION2(index), savedSpEffects[i][2])
+                break
+            end
+
+            index = index + 1
+        end
+    end
+    savedSpEffects = {}
+    isSavingSpEffects = false
+end
+
+
+local enableSpEffectLogging = false
+local observeSpEffectCharacterFilter = 3661
+local observedSpEffects = {}
+local observeBlackList = {
+    [31] = true, -- Attack?
+    [45] = true, -- Attack?
+    [195] = true, -- Map Reloader
+    [1665] = true, -- Determination Clear
+    [6902] = true, -- Accumuliator
+    [100000] = true, -- Slow Walking
+    [100001] = true, -- Walking
+    [100002] = true, -- Dashing
+    [100006] = true,
+    [100280] = true, -- Heavy Attack?
+    [100625] = true, -- Light Attack?
+    --109000, -- Magical Weapon Identifier
+    --8000020, -- RL1 detector
+    [8000100] = true, -- Get Damaged Trigger
+    [8000200] = true, -- Get Healed Trigger
+    [8000300] = true, -- Heavy Attack
+    [1477008] = true,
+
+    [5980] = true,
+    [5981] = true,
+    [5990] = true,
+    [4202] = true,
+    [13020] = true,
+    [13021] = true,
+    [89] = true
+}
+function ObserveSpEffects()
+    if enableSpEffectLogging ~= true or EnableDebugLogger ~= true or noLog == true or GetPointerValue(CHR_INS_BASE.UNKNOWN_OFFSET.CHR_MODEL) ~= observeSpEffectCharacterFilter then
+        return
+    end
+
+    local foundSpEffect = GetSpEffectsInfo()
+    if #foundSpEffect <= 0 then
+        return
+    end
+
+    -- Remove blacklisted spEffects
+    for i = #foundSpEffect, 1, -1 do
+        if observeBlackList[foundSpEffect[i].ID] then
+            table.remove(foundSpEffect, i)
+        end
+    end
+
+    if #observedSpEffects > 0 then
+        -- Log all newly found spEffects
+        for i = 1, #foundSpEffect, 1 do
+            local isNew = true
+            for j = 1, #observedSpEffects, 1 do
+                if foundSpEffect[i].ID == observedSpEffects[j].ID then
+                    isNew = false
+                    break
+                end
+            end
+            if isNew then
+                Log("[+]", string.format("%10.0f",foundSpEffect[i].ID), "| dur:", string.format("%7.3f", foundSpEffect[i].RemainingDuration))
+            end
+        end
+        for i = 1, #observedSpEffects, 1 do
+            local isDel = true
+            for j = 1, #foundSpEffect, 1 do
+                if observedSpEffects[i].ID == foundSpEffect[j].ID then
+                    isDel = false
+                    break
+                end
+            end
+            if isDel then
+                Log("[-]", string.format("%10.0f", observedSpEffects[i].ID))
+            end
+        end
+    end
+    observedSpEffects = foundSpEffect
+end
+
+function GetSpEffectsInfo(func)
+    func = func or GetPointerValue
+    local foundSpEffects = {}
+    local index = 0
+
+    while true do
+        local isValid = func(CHR_INS_BASE.CS_SPECIAL_EFFECT.SPEFFECT_LIST.EXISTS(index))
+        if isValid == nil or isValid == FALSE then
+            break
+        end
+
+        local spEffectID = func(CHR_INS_BASE.CS_SPECIAL_EFFECT.SPEFFECT_LIST.SPEFFECT_ID(index))
+        local maxDuration = func(CHR_INS_BASE.CS_SPECIAL_EFFECT.SPEFFECT_LIST.SPEFFECT_MAX_DURATION(index))
+        local remainingDuration = func(CHR_INS_BASE.CS_SPECIAL_EFFECT.SPEFFECT_LIST.SPEFFECT_DURATION2(index))
+        table.insert(foundSpEffects,
+        {
+            ID = spEffectID,
+            MaxDuration = maxDuration,
+            RemainingDuration = remainingDuration
+        })
+        index = index + 1
+    end
+    return foundSpEffects
+end
+
+function LocalPlayerHasSpEffect(spEffectID)
+    local index = 0
+
+    while true do
+        local isValid = GetLocalPlayerPointerValue(CHR_INS_BASE.CS_SPECIAL_EFFECT.SPEFFECT_LIST.EXISTS(index))
+        if isValid == nil or isValid == FALSE then
+            break
+        end
+
+        local foundSpEffect = GetLocalPlayerPointerValue(CHR_INS_BASE.CS_SPECIAL_EFFECT.SPEFFECT_LIST.SPEFFECT_ID(index))
+        if spEffectID == foundSpEffect then
+            return TRUE
+        end
+        index = index + 1
+    end
+
+    return FALSE
+end
+
+function GetSpEffectStackCount(spEffect, spEffect2)
+    if env(GetSpEffectID, spEffect) == FALSE and (spEffect2 == nil or env(GetSpEffectID, spEffect2) == FALSE) then
+        return 0
+    end
+
+    local foundSpEffect = GetSpEffectsInfo()
+    local count = 0
+
+    for i = 1, #foundSpEffect, 1 do
+        local id = foundSpEffect[i].ID
+        if id == spEffect then
+            count = count + 1
+        elseif spEffect2 ~= nil and id == spEffect2 then
+            count = count + 1
+        end
+    end
+
+    return count
+end
+
+function GetChrInsWithSpEffect(spEffectID)
+    local size = (GetPointerValue(GAME_BASE.WORLD_CHR_MAN.CHR_INS_LIST_BY_DISTANCE.END_PTR) - 
+                 GetPointerValue(GAME_BASE.WORLD_CHR_MAN.CHR_INS_LIST_BY_DISTANCE.START_PTR)) / 0x10
+
+    local function getChrInsPointerValue(chrIns)
+        return function(ptr)
+            return GetAltChrInsPointerValue(chrIns, ptr)
+        end
+    end
+
+    for index = 1, size - 5 do
+        local chrIns = GAME_BASE.WORLD_CHR_MAN.CHR_INS_LIST_BY_DISTANCE.CHR_INS(index)
+        local spEffects = GetSpEffectsInfo(getChrInsPointerValue(chrIns))
+        for _, spEffect in ipairs(spEffects) do
+            if spEffect.ID == spEffectID then
+                return chrIns
+            end
+        end
+    end
+
+    return nil
+end
+
+local spEffectIdleSucceeded = {}
+function ReapplySpEffectTillIdle(spEffectBase, threatLevelMultiplier)
+    local threatLevel = GetThreatLevel()
+    if threatLevel == ThreatLevel.None then
+        return
+    end
+
+    local spEffect = spEffectBase + (threatLevel * threatLevelMultiplier)
+    if env(GetSpEffectID, spEffect) == FALSE then
+        spEffectIdleSucceeded[spEffect] = nil
+        return
+    end
+    
+    if IsNodeActive("Idles_SM", "IdleUniques_SM", "IdleUnique_SM", "IdleUniqueToIdle_SM") == FALSE then
+        if spEffectIdleSucceeded[spEffect] == nil then
+            act(AddSpEffect, spEffect)
+        end
+    else
+        spEffectIdleSucceeded[spEffect] = true
+    end
+end

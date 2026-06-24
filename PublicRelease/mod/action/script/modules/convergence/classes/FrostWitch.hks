@@ -1,0 +1,99 @@
+local frostWitch_SwordArts = {
+    [75] = true,-- Chilling Mist
+    [64] = true,-- Ice Spikes
+    [60] = true,-- Hoarfrost Stomp
+    [52] = true,-- Ice Spear
+    [43] = true,-- Ice Fling
+    [31] = true,-- Whirling Iceblades
+    [283] = true,-- Divine Beast Frost Stomp
+    [225] = true,-- Wolf's Assault
+    [208] = true,-- Moonlight Greatsword Frost Blade
+    [168] = true,-- Zamor Ice Storm
+    [165] = true,-- Einar's Icestorm
+}
+function ArmorOfIceHyperArmor(isSpell)
+    if env(GetSpEffectID, 1441600) == FALSE then
+        return
+    end
+
+    if (isSpell and __frostSpells[LastCastMagicID] ~= nil) or frostWitch_SwordArts[c_SwordArtsID] then
+        act(AddSpEffect, 1441605)
+    end
+end
+
+function IceQuakeHyperArmor()
+    if LastCastMagicID == 4495 then
+        act(AddSpEffect, 1449511)
+    end
+end
+
+local freeze_HitCount = 0
+local wasFrozenDuringThisFrostbite = false
+function FrostWitchFreezeEffect(spEffect, countTo, spEffectIfJewel, spEffectIfNoJewel)
+    if env(GetSpEffectType, 260) == FALSE then -- Enemy is not frostbitten
+        wasFrozenDuringThisFrostbite = false
+        freeze_HitCount = 0
+        act(ClearSpEffect, spEffectIfJewel)
+        act(ClearSpEffect, spEffectIfNoJewel)
+        return FALSE
+    elseif env(GetSpEffectID, spEffect) == FALSE then -- Enemy has been hit by Ice Guardian's Reckoning
+        return FALSE
+    end
+    act(ClearSpEffect, spEffect)
+
+    if spEffect == 1441530 then
+        act(AddSpEffect, 1441552)
+        act(AddSpEffect, 1441554)
+    end
+
+    if wasFrozenDuringThisFrostbite then
+        return FALSE
+    end
+
+    freeze_HitCount = freeze_HitCount + 1
+    if freeze_HitCount >= countTo then
+        if env(GetSpEffectID, 391410) == TRUE then
+            act(AddSpEffect, spEffectIfJewel) -- Frozen but with Jewel
+        else
+            act(AddSpEffect, spEffectIfNoJewel) -- Frozen
+        end
+        freeze_HitCount = 0
+        wasFrozenDuringThisFrostbite = true
+        return TRUE
+    end
+    return FALSE
+end
+
+function RemoveFrost()    
+    act(ClearSpEffect, 6960)
+    act(ClearSpEffect, 6961)
+    FreezeEffect(true)
+end
+ThrowDef_onActivate = AttachBefore(ThrowDef_onActivate, RemoveFrost)
+
+g_IsFrozen = false
+local teamType = -1
+function FreezeEffect(forceOff)
+    if g_IsFrozen then
+        if env(GetSpEffectType, 250) == FALSE or forceOff then
+            SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_ATTACK, FALSE)
+            SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_MOVE, FALSE)
+            SetPointerValue(CHR_INS_BASE.TEAM_TYPE, teamType)
+
+            g_IsFrozen = false
+            EnemyAnimSlowdownLib()
+        else
+            SetThrowInvalid()
+        end
+    elseif env(GetSpEffectType, 250) == TRUE and not forceOff then
+        g_IsFrozen = true
+
+        SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_ATTACK, TRUE)
+        SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_MOVE, TRUE)
+
+        teamType = GetPointerValue(CHR_INS_BASE.TEAM_TYPE)
+        SetPointerValue(CHR_INS_BASE.TEAM_TYPE, 41)
+        SetThrowInvalid()
+        EnemyAnimSlowdownLib()
+    end
+end

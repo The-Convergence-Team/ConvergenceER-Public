@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -73,6 +73,10 @@ $Event(0, Default, function() {
     //dummy enemies
     InitializeEvent(0, 11053711, 11050858);
     InitializeEvent(1, 11053711, 11050859);
+    
+    //Mimic
+    InitializeCommonEvent(0, 20000352, 11050660);
+    InitializeCommonEvent(0, 20000353, 11001660, 11050660, 511000660);
 });
 
 $Event(50, Default, function() {
@@ -469,7 +473,7 @@ $Event(11052859, Restart, function() {
     InitializeCommonEvent(0, 9005811, 11050850, 11051855, 5, 11050854);
     InitializeCommonEvent(0, 9005811, 11050850, 11051856, 5, 11050854);
     InitializeCommonEvent(0, 9005811, 11050850, 11051857, 5, 11050854);
-    InitializeCommonEvent(0, 9005822, 11050850, 921600, 11052855, 11052856, 0, 11052852, 0, 0);
+    InitializeCommonEvent(0, 9005822, 11050850, 392400, 11052855, 11052856, 0, 11052852, 0, 0);
 });
 
 $Event(11053700, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {

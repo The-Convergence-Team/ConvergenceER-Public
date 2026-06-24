@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -150,8 +150,6 @@ L1:
     WaitFixedTimeSeconds(5);
     AwardItemsIncludingClients(X16_4);
     WaitFixedTimeSeconds(2);
-    DisplayBlinkingMessage(20801);
+    DisplayBlinkingMessage(30140);
     EndEvent();
 });
-
-

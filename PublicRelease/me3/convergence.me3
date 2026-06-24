@@ -9,13 +9,22 @@ id = "convergence-er"
 path = "./../mod"
 
 [[natives]]
-path = './../mod/ErdTools.dll'
+path = './../mod/dll/ErdTools.dll'
 
 [[natives]]
-path = './../mod/erdyes.dll'
+path = './../mod/dll/erdyes.dll'
 
 [[natives]]
-path = './../mod/ertransmogrify.dll'
+path = './../mod/dll/ertransmogrify.dll'
 
 [[natives]]
-path = './../mod/Scripts-Data-Exposer-FS.dll'
+path = './../mod/dll/Scripts-Data-Exposer-FS.dll'
+
+[[natives]]
+path = './../mod/dll/fxr_ws_reloader.dll'
+
+[[natives]]
+path = './../mod/dll/debug.dll'
+
+[[natives]]
+path = './../mod/dll/unlock_wwise_states_er.dll'

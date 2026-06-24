@@ -1,0 +1,541 @@
+function AttachAfter(func, attachedAfter)
+    local oldFunc = func
+    return function(...)
+        local result = oldFunc(...)
+        attachedAfter(...)
+        return result
+    end
+end
+
+function AttachBefore(func, attachedBefore)
+    local oldFunc = func
+    return function(...)
+        attachedBefore(...)
+        return oldFunc(...)
+    end
+end
+
+function AttachAfterConditional(func, condition, attachedAfter)
+    local oldFunc = func
+    return function(...)
+        local result = oldFunc(...)
+        if result == condition then
+            attachedAfter(...)
+        end
+        return result
+    end
+end
+
+print = AttachBefore(print, Log)
+
+ExecFallAttack = AttachAfterConditional(ExecFallAttack, TRUE, WeaponAttackDetection)
+ThrowBackStab_Activate = AttachAfter(ThrowBackStab_Activate, WeaponAttackDetection)
+Throw_Activate = AttachAfter(Throw_Activate, WeaponAttackDetection)
+JumpAttack_Start_Falling_D_onUpdate = AttachBefore(JumpAttack_Start_Falling_D_onUpdate, WeaponAttackDetection)
+JumpAttack_Start_Falling_D_onActivate = AttachBefore(JumpAttack_Start_Falling_D_onActivate, WeaponAttackDetection)
+JumpAttack_Start_Falling_F_onUpdate = AttachBefore(JumpAttack_Start_Falling_F_onUpdate, WeaponAttackDetection)
+JumpAttack_Start_Falling_F_onActivate = AttachBefore(JumpAttack_Start_Falling_F_onActivate, WeaponAttackDetection)
+JumpAttack_Start_Falling_onUpdate = AttachBefore(JumpAttack_Start_Falling_onUpdate, WeaponAttackDetection)
+JumpAttack_Start_Falling_onActivate = AttachBefore(JumpAttack_Start_Falling_onActivate, WeaponAttackDetection)
+
+-- Trick Weapon
+local GuardianSpearblade_Cooldown = { 0 }
+local MorgottsCane_Cooldown = { 0 }
+local QualityGS_Cooldown = { 0 }
+local PerfumerMace_Cooldown = { 0 }
+local EggMace_Cooldown = { 0 }
+local DKTwinblade_Cooldown = { 0 }
+CultDaggers_Cooldown = { 0 }
+Blightpole_Cooldown = { 0 }
+function InitializeTrickWeapons()
+    --if not IsLocalPlayer() then return end
+    TrickWeaponHandler(4000150, 18110000, 18115000, GuardianSpearblade_Cooldown) -- Guardian Spearblade - Sword to Spear
+    TrickWeaponHandler(4000151, 18115000, 18110000, GuardianSpearblade_Cooldown) -- Guardian Spearblade - Spear to Sword
+
+    TrickWeaponHandler(4000160, 8100000, 8105000, MorgottsCane_Cooldown) -- Morgott's Cane - Great Curved Sword to Light Greatsword
+    TrickWeaponHandler(4000161, 8105000, 8100000, MorgottsCane_Cooldown) -- Morgott's Cane - Light Greatsword to Great Curved Sword
+
+    QualityGreatswordInit()
+
+	TrickWeaponHandler(4000190, 12540000, 12545000, EggMace_Cooldown) -- Egg Mace - beeg to sm0l
+    TrickWeaponHandler(4000191, 12545000, 12540000, EggMace_Cooldown) -- Egg Mace - sm0l to beeg
+	
+	TrickWeaponHandler(4000210, 10200000, 10205000, DKTwinblade_Cooldown) -- [Dragonkin twinblade] - Twinblade to Twin Swords
+    TrickWeaponHandler(4000211, 10205000, 10200000, DKTwinblade_Cooldown) -- [Dragonkin twinblade] - Twin Swords to Twinblade
+
+    TrickWeaponHandler(4000051, 11190000, 11191000, PerfumerMace_Cooldown) -- Tricia's Pomander - Fire to Lightning
+    TrickWeaponHandler(4000051, 11191000, 11192000, PerfumerMace_Cooldown) -- Tricia's Pomander - Lightning to Frost
+    TrickWeaponHandler(4000051, 11192000, 11193000, PerfumerMace_Cooldown) -- Tricia's Pomander - Frost to Madness
+    TrickWeaponHandler(4000051, 11193000, 11190000, PerfumerMace_Cooldown) -- Tricia's Pomander - Madness to Fire
+end
+function QualityGreatswordInit()
+    --if not IsLocalPlayer() then return end
+    TrickWeaponHandler(4000180, 3250000, 3255000, QualityGS_Cooldown) -- Quality Greatsword - Greatsword to Light Greatswords
+    TrickWeaponHandler(4000181, 3255000, 3250000, QualityGS_Cooldown) -- Quality Greatsword - Light Greatswords to Greatsword
+end
+function DragonCultDaggersInit()
+    --if not IsLocalPlayer() then return end
+    TrickWeaponHandler(4000170, 1200000, 1205000, CultDaggers_Cooldown) -- Cult Daggers - Twin Daggers to Throwing Weapons    
+end
+
+SwordArtsOneShot_onUpdate = AttachBefore(SwordArtsOneShot_onUpdate, DragonCultDaggersInit)
+SwordArtsOneShotComboEnd_2_onUpdate = AttachBefore(SwordArtsOneShotComboEnd_2_onUpdate, InitializeTrickWeapons)
+SwordArtsHalfOneShotComboEnd_2_Upper_onUpdate = AttachBefore(SwordArtsHalfOneShotComboEnd_2_Upper_onUpdate, InitializeTrickWeapons)
+SwordArtsOneShotShieldLeft_onUpdate = AttachBefore(SwordArtsOneShotShieldLeft_onUpdate, QualityGreatswordInit)
+SwordArtsHalfOneShotShieldLeft_Upper_onUpdate = AttachBefore(SwordArtsHalfOneShotShieldLeft_Upper_onUpdate, QualityGreatswordInit)
+SwordArtsChargeCancelEarly_onUpdate = AttachBefore(SwordArtsChargeCancelEarly_onUpdate, InitializeTrickWeapons)
+SwordArtsHalfChargeCancelEarly_Upper_onUpdate = AttachBefore(SwordArtsHalfChargeCancelEarly_Upper_onUpdate, InitializeTrickWeapons)
+
+local spellCastCooldown = 0
+function TriggerAfterSpellcast()
+    local state = LAST_HKB_STATES[1]
+    if state == "W_MagicInvalid" or state == "W_MagicInvalid_Upper" or state == "W_RideMagicInvalid" then
+        return
+    elseif OnCooldown(spellCastCooldown, 0.1) then
+        return
+    end
+    spellCastCooldown = g_DeltaTimeCount
+
+    act(AddSpEffect, 100615)
+    LastCastMagicID = GetSelectedEquipMagicData()
+    FrenzyJewel_ImmuneCast()
+    AberrantJewel_RecoveryCast()
+    FundiJewel_OffensiveSpellBuff()
+    ArmorOfIceHyperArmor(true)
+    LivingForge_OnSpellCast()
+    VolcanistJewel_Devourer_OnSpell()
+    --GlintJewel_OnSpell()
+end
+MagicLoopLeft_Upper_onUpdate = AttachBefore(MagicLoopLeft_Upper_onUpdate, TriggerBeforeSpellcast)
+RideMagicLoop_onUpdate = AttachBefore(RideMagicLoop_onUpdate, TriggerBeforeSpellcast)
+
+ExecMagic = AttachAfterConditional(ExecMagic, TRUE, TriggerAfterSpellcast)
+ExecQuickMagic = AttachAfterConditional(ExecQuickMagic, TRUE, TriggerAfterSpellcast)
+ExecComboMagic = AttachAfterConditional(ExecComboMagic, TRUE, TriggerAfterSpellcast)
+ExecStealthMagic = AttachAfterConditional(ExecStealthMagic, TRUE, TriggerAfterSpellcast)
+ExecRollingMagic = AttachAfterConditional(ExecRollingMagic, TRUE, TriggerAfterSpellcast)
+ExecJumpMagic = AttachAfterConditional(ExecJumpMagic, TRUE, TriggerAfterSpellcast)
+ExecFallMagic = AttachAfterConditional(ExecFallMagic, TRUE, TriggerAfterSpellcast)
+
+local _markRecallData = { }
+function TriggerDuringSpellcast()
+    if not IsLocalPlayer() then return end
+    BloodflameInitiateLib()
+    FundiJewel_HyperArmor()
+    IceQuakeHyperArmor()    
+    _markRecallData["nox"] = TeleportMark(1654000, _markRecallData["nox"], 6540, 6541)
+    _markRecallData["nox"] = TeleportRecall(1654100, _markRecallData["nox"], 6540, 6541)
+end
+
+MagicLaunchRight_Upper_onUpdate = AttachBefore(MagicLaunchRight_Upper_onUpdate, TriggerDuringSpellcast)
+MagicLoopRight_Upper_onUpdate = AttachBefore(MagicLoopRight_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireRight_Upper_onUpdate = AttachBefore(MagicFireRight_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireRightCancel_Upper_onUpdate = AttachBefore(MagicFireRightCancel_Upper_onUpdate, TriggerDuringSpellcast)
+MagicLaunchLeft_Upper_onUpdate = AttachBefore(MagicLaunchLeft_Upper_onUpdate, TriggerDuringSpellcast)
+MagicLoopLeft_Upper_onUpdate = AttachBefore(MagicLoopLeft_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireLeftCancel_Upper_onUpdate = AttachBefore(MagicFireLeftCancel_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireRight2_Upper_onUpdate = AttachBefore(MagicFireRight2_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireRight3_Upper_onUpdate = AttachBefore(MagicFireRight3_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireLeft_Upper_onUpdate = AttachBefore(MagicFireLeft_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireRightCancel2_Upper_onUpdate = AttachBefore(MagicFireRightCancel2_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireRightCancel3_Upper_onUpdate = AttachBefore(MagicFireRightCancel3_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireLeftCancel2_Upper_onUpdate = AttachBefore(MagicFireLeftCancel2_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireLeft2_Upper_onUpdate = AttachBefore(MagicFireLeft2_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireLeftCancel3_Upper_onUpdate = AttachBefore(MagicFireLeftCancel3_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireLeft3_Upper_onUpdate = AttachBefore(MagicFireLeft3_Upper_onUpdate, TriggerDuringSpellcast)
+QuickMagicFireRightDash_Upper_onUpdate = AttachBefore(QuickMagicFireRightDash_Upper_onUpdate, TriggerDuringSpellcast)
+QuickMagicFireRightStep_Upper_onUpdate = AttachBefore(QuickMagicFireRightStep_Upper_onUpdate, TriggerDuringSpellcast)
+QuickMagicFireRightBackStep_Upper_onUpdate = AttachBefore(QuickMagicFireRightBackStep_Upper_onUpdate, TriggerDuringSpellcast)
+QuickMagicFireRightAttackLeft_Upper_onUpdate = AttachBefore(QuickMagicFireRightAttackLeft_Upper_onUpdate, TriggerDuringSpellcast)
+QuickMagicFireRightAttackRight_Upper_onUpdate = AttachBefore(QuickMagicFireRightAttackRight_Upper_onUpdate, TriggerDuringSpellcast)
+QuickMagicFireLeftDash_Upper_onUpdate = AttachBefore(QuickMagicFireLeftDash_Upper_onUpdate, TriggerDuringSpellcast)
+QuickMagicFireLeftStep_Upper_onUpdate = AttachBefore(QuickMagicFireLeftStep_Upper_onUpdate, TriggerDuringSpellcast)
+QuickMagicFireLeftBackStep_Upper_onUpdate = AttachBefore(QuickMagicFireLeftBackStep_Upper_onUpdate, TriggerDuringSpellcast)
+QuickMagicFireLeftAttackRight_Upper_onUpdate = AttachBefore(QuickMagicFireLeftAttackRight_Upper_onUpdate, TriggerDuringSpellcast)
+QuickMagicFireLeftAttackLeft_Upper_onUpdate = AttachBefore(QuickMagicFireLeftAttackLeft_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireRightJump_Upper_onUpdate = AttachBefore(MagicFireRightJump_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireRightJumpCancel_Upper_onUpdate = AttachBefore(MagicFireRightJumpCancel_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireLeftJump_Upper_onUpdate = AttachBefore(MagicFireLeftJump_Upper_onUpdate, TriggerDuringSpellcast)
+MagicFireLeftJumpCancel_Upper_onUpdate = AttachBefore(MagicFireLeftJumpCancel_Upper_onUpdate, TriggerDuringSpellcast)
+StealthMagicRightLaunch_Upper_onUpdate = AttachBefore(StealthMagicRightLaunch_Upper_onUpdate, TriggerDuringSpellcast)
+StealthMagicRightFire_Upper_onUpdate = AttachBefore(StealthMagicRightFire_Upper_onUpdate, TriggerDuringSpellcast)
+StealthMagicLeftLaunch_Upper_onUpdate = AttachBefore(StealthMagicLeftLaunch_Upper_onUpdate, TriggerDuringSpellcast)
+StealthMagicLeftFire_Upper_onUpdate = AttachBefore(StealthMagicLeftFire_Upper_onUpdate, TriggerDuringSpellcast)
+RollingMagicRight_Upper_onUpdate = AttachBefore(RollingMagicRight_Upper_onUpdate, TriggerDuringSpellcast)
+RollingMagicLeft_Upper_onUpdate = AttachBefore(RollingMagicLeft_Upper_onUpdate, TriggerDuringSpellcast)
+MagicInvalid_Upper_onUpdate = AttachBefore(MagicInvalid_Upper_onUpdate, TriggerDuringSpellcast)
+SAMagic_Default_onUpdate = AttachBefore(SAMagic_Default_onUpdate, TriggerDuringSpellcast)
+RideMagicLaunch_onUpdate = AttachBefore(RideMagicLaunch_onUpdate, TriggerDuringSpellcast)
+RideMagicLaunch_Upper_onUpdate = AttachBefore(RideMagicLaunch_Upper_onUpdate, TriggerDuringSpellcast)
+RideMagicFire_onUpdate = AttachBefore(RideMagicFire_onUpdate, TriggerDuringSpellcast)
+RideMagicLoop_onUpdate = AttachBefore(RideMagicLoop_onUpdate, TriggerDuringSpellcast)
+RideMagicFireCancel_onUpdate = AttachBefore(RideMagicFireCancel_onUpdate, TriggerDuringSpellcast)
+RideMagicFireCombo1_onUpdate = AttachBefore(RideMagicFireCombo1_onUpdate, TriggerDuringSpellcast)
+RideMagicFireCombo1Cancel_onUpdate = AttachBefore(RideMagicFireCombo1Cancel_onUpdate, TriggerDuringSpellcast)
+RideMagicFireCombo2_onUpdate = AttachBefore(RideMagicFireCombo2_onUpdate, TriggerDuringSpellcast)
+RideMagicFireCombo2Cancel_onUpdate = AttachBefore(RideMagicFireCombo2Cancel_onUpdate, TriggerDuringSpellcast)
+RideMagicInvalid_onUpdate = AttachBefore(RideMagicInvalid_onUpdate, TriggerDuringSpellcast)
+
+function BowstringIsHeld()
+    act(AddSpEffect, 8000000)
+end
+AttackArrowRightLoop_Upper_onUpdate = AttachBefore(AttackArrowRightLoop_Upper_onUpdate, BowstringIsHeld)
+AttackArrowLeftLoop_Upper_onUpdate = AttachBefore(AttackArrowLeftLoop_Upper_onUpdate, BowstringIsHeld)
+AttackCrossbowRightLoop_Upper_onUpdate = AttachBefore(AttackCrossbowRightLoop_Upper_onUpdate, BowstringIsHeld)
+AttackCrossbowLeftLoop_Upper_onUpdate = AttachBefore(AttackCrossbowLeftLoop_Upper_onUpdate, BowstringIsHeld)
+AttackCrossbowBothLeftLoop_Upper_onUpdate = AttachBefore(AttackCrossbowBothLeftLoop_Upper_onUpdate, BowstringIsHeld)
+AttackCrossbowBothRightLoop_Upper_onUpdate = AttachBefore(AttackCrossbowBothRightLoop_Upper_onUpdate, BowstringIsHeld)
+StealthAttackCrossbowRightLoop_Upper_onUpdate = AttachBefore(StealthAttackCrossbowRightLoop_Upper_onUpdate, BowstringIsHeld)
+StealthAttackCrossbowLeftLoop_Upper_onUpdate = AttachBefore(StealthAttackCrossbowLeftLoop_Upper_onUpdate, BowstringIsHeld)
+StealthAttackCrossbowBothLeftLoop_Upper_onUpdate = AttachBefore(StealthAttackCrossbowBothLeftLoop_Upper_onUpdate, BowstringIsHeld)
+StealthAttackCrossbowBothRightLoop_Upper_onUpdate = AttachBefore(StealthAttackCrossbowBothRightLoop_Upper_onUpdate, BowstringIsHeld)
+RideAttackArrowLoop_onUpdate = AttachBefore(RideAttackArrowLoop_onUpdate, BowstringIsHeld)
+StealthAttackArrowLoop_Upper_onUpdate = AttachBefore(StealthAttackArrowLoop_Upper_onUpdate, BowstringIsHeld)
+
+function SetEnableMimicryJewel()
+    g_EnableMimicry_Jewel = TRUE
+end
+ResetMimicry = AttachBefore(ResetMimicry, function() act(ClearSpEffect, 390620) end) -- Jewel of the Devious Mimicry
+SetEnableMimicry = AttachBefore(SetEnableMimicry, function() g_EnableMimicry_Jewel = TRUE end)
+Stealth_to_Stealth_Idle_onUpdate = AttachBefore(Stealth_to_Stealth_Idle_onUpdate, SetEnableMimicryJewel)
+Stealth_Idle_onUpdate = AttachBefore(Stealth_Idle_onUpdate, SetEnableMimicryJewel)
+Stealth_Move_onUpdate = AttachBefore(Stealth_Move_onUpdate, SetEnableMimicryJewel)
+Stealth_Move_Upper_onUpdate = AttachBefore(Stealth_Move_Upper_onUpdate, SetEnableMimicryJewel)
+StealthDashStop_onUpdate = AttachBefore(StealthDashStop_onUpdate, SetEnableMimicryJewel)
+StealthRunStopFront_onUpdate = AttachBefore(StealthRunStopFront_onUpdate, SetEnableMimicryJewel)
+StealthRunStopBack_onUpdate = AttachBefore(StealthRunStopBack_onUpdate, SetEnableMimicryJewel)
+StealthRunStopLeft_onUpdate = AttachBefore(StealthRunStopLeft_onUpdate, SetEnableMimicryJewel)
+StealthRunStopRight_onUpdate = AttachBefore(StealthRunStopRight_onUpdate, SetEnableMimicryJewel)
+
+local hasLandedOn = function()
+    if hasLanded then return end
+
+    hasLanded = true
+    MonitorFallHeight(true)
+end
+JumpLandCommonFunction = AttachBefore(JumpLandCommonFunction, hasLandedOn)
+EvasionCommonFunction = AttachBefore(EvasionCommonFunction, hasLandedOn)
+
+local hasLandedOff = function()
+    hasLanded = false 
+end
+JumpLandCommonFunction = AttachAfterConditional(JumpLandCommonFunction, TRUE, hasLandedOff)
+EvasionCommonFunction = AttachAfter(EvasionCommonFunction, hasLandedOff)
+
+local _trickWeaponTransformAttackOn = function()
+    OnWeaponAttack(true)
+end
+AttackRight_Activate = AttachBefore(AttackRight_Activate, _trickWeaponTransformAttackOn)
+AttackRightWhileGuard_Activate = AttachBefore(AttackRightWhileGuard_Activate, _trickWeaponTransformAttackOn)
+--AttackLeft_Activate = AttachBefore(AttackLeft_Activate, _trickWeaponTransformAttackOn)
+AttackDual_Activate = AttachBefore(AttackDual_Activate, _trickWeaponTransformAttackOn)
+AttackBoth_Activate = AttachBefore(AttackBoth_Activate, _trickWeaponTransformAttackOn)
+AttackArrowRight_Activate = AttachBefore(AttackArrowRight_Activate, _trickWeaponTransformAttackOn)
+AttackArrowLeft_Activate = AttachBefore(AttackArrowLeft_Activate, _trickWeaponTransformAttackOn)
+
+local _trickWeaponTransformAttackOff = function()
+    TrickWeapon_CanDoTransformAttack = FALSE
+end
+MoveStart = AttachAfterConditional(MoveStart, TRUE, _trickWeaponTransformAttackOff)
+Idle_onActivate = AttachBefore(Idle_onActivate, _trickWeaponTransformAttackOff)
+NoArrow_onUpdate = AttachBefore(NoArrow_onUpdate, _trickWeaponTransformAttackOff)
+AttackCrossbowRight_Activate = AttachBefore(AttackCrossbowRight_Activate, _trickWeaponTransformAttackOff)
+AttackCrossbowLeft_Activate = AttachBefore(AttackCrossbowLeft_Activate, _trickWeaponTransformAttackOff)
+SwordArts_Activate = AttachBefore(SwordArts_Activate, _trickWeaponTransformAttackOff)
+
+local _skardeShieldOn = function()
+    SkardeShieldHandler(true)
+end
+BackStepGuardOn_UpperLayer_onUpdate = AttachBefore(BackStepGuardOn_UpperLayer_onUpdate, _skardeShieldOn)
+BackStepGuardOn_Upper_Active = AttachBefore(BackStepGuardOn_Upper_Active, _skardeShieldOn)
+BackStepGuardOn_Upper_Update = AttachBefore(BackStepGuardOn_Upper_Update, _skardeShieldOn)
+GuardStart_Upper_onActivate = AttachBefore(GuardStart_Upper_onActivate, _skardeShieldOn)
+GuardStart_Upper_onUpdate = AttachBefore(GuardStart_Upper_onUpdate, _skardeShieldOn)
+GuardOn_Upper_onActivate = AttachBefore(GuardOn_Upper_onActivate, _skardeShieldOn)
+GuardOn_Upper_onUpdate = AttachBefore(GuardOn_Upper_onUpdate, _skardeShieldOn)
+GuardStart_JustGuard_Upper_onActivate = AttachBefore(GuardStart_JustGuard_Upper_onActivate, _skardeShieldOn)
+GuardStart_JustGuard_Upper_onUpdate = AttachBefore(GuardStart_JustGuard_Upper_onUpdate, _skardeShieldOn)
+GuardStart_JustGuard_SelfTrans_Upper_onActivate = AttachBefore(GuardStart_JustGuard_SelfTrans_Upper_onActivate, _skardeShieldOn)
+GuardStart_JustGuard_SelfTrans_Upper_onUpdate = AttachBefore(GuardStart_JustGuard_SelfTrans_Upper_onUpdate, _skardeShieldOn)
+GuardStart_JustGuard2_Upper_onActivate = AttachBefore(GuardStart_JustGuard2_Upper_onActivate, _skardeShieldOn)
+GuardStart_JustGuard2_Upper_onUpdate = AttachBefore(GuardStart_JustGuard2_Upper_onUpdate, _skardeShieldOn)
+GuardStart_JustGuard2_Upper_onDeactivate = AttachBefore(GuardStart_JustGuard2_Upper_onDeactivate, _skardeShieldOn)
+GuardStart_JustGuard3_Upper_onActivate = AttachBefore(GuardStart_JustGuard3_Upper_onActivate, _skardeShieldOn)
+GuardStart_JustGuard3_Upper_onUpdate = AttachBefore(GuardStart_JustGuard3_Upper_onUpdate, _skardeShieldOn)
+GuardStart_JustGuard3_Upper_onDeactivate = AttachBefore(GuardStart_JustGuard3_Upper_onDeactivate, _skardeShieldOn)
+GuardStart_JustGuard4_Upper_onActivate = AttachBefore(GuardStart_JustGuard4_Upper_onActivate, _skardeShieldOn)
+GuardStart_JustGuard4_Upper_onUpdate = AttachBefore(GuardStart_JustGuard4_Upper_onUpdate, _skardeShieldOn)
+GuardStart_JustGuard4_Upper_onDeactivate = AttachBefore(GuardStart_JustGuard4_Upper_onDeactivate, _skardeShieldOn)
+GuardStart_JustGuard4_SelfTrans_Upper_onActivate = AttachBefore(GuardStart_JustGuard4_SelfTrans_Upper_onActivate, _skardeShieldOn)
+GuardStart_JustGuard4_SelfTrans_Upper_onUpdate = AttachBefore(GuardStart_JustGuard4_SelfTrans_Upper_onUpdate, _skardeShieldOn)
+GuardStart_JustGuard4_SelfTrans_Upper_onDeactivate = AttachBefore(GuardStart_JustGuard4_SelfTrans_Upper_onDeactivate, _skardeShieldOn)
+GuardDamageSmall_onActivate = AttachBefore(GuardDamageSmall_onActivate, _skardeShieldOn)
+GuardDamageSmall_onUpdate = AttachBefore(GuardDamageSmall_onUpdate, _skardeShieldOn)
+GuardDamageMiddle_onActivate = AttachBefore(GuardDamageMiddle_onActivate, _skardeShieldOn)
+GuardDamageMiddle_onUpdate = AttachBefore(GuardDamageMiddle_onUpdate, _skardeShieldOn)
+GuardDamageSmall_JustGuard_onActivate = AttachBefore(GuardDamageSmall_JustGuard_onActivate, _skardeShieldOn)
+GuardDamageSmall_JustGuard_onUpdate = AttachBefore(GuardDamageSmall_JustGuard_onUpdate, _skardeShieldOn)
+GuardDamageMiddle_JustGuard_onActivate = AttachBefore(GuardDamageMiddle_JustGuard_onActivate, _skardeShieldOn)
+GuardDamageMiddle_JustGuard_onUpdate = AttachBefore(GuardDamageMiddle_JustGuard_onUpdate, _skardeShieldOn)
+AttackRightWhileGuard_Activate = AttachBefore(AttackRightWhileGuard_Activate, _skardeShieldOn)
+AttackRightWhileGuard_onUpdate = AttachBefore(AttackRightWhileGuard_onUpdate, _skardeShieldOn)
+SwordArtsLeftGuardCounter_onUpdate = AttachBefore(SwordArtsLeftGuardCounter_onUpdate, _skardeShieldOn)
+SwordArtsBothGuardCounter_onUpdate = AttachBefore(SwordArtsBothGuardCounter_onUpdate, _skardeShieldOn)
+
+local _skardeShieldOff = function()
+    SkardeShieldHandler(false)
+end
+BackStepGuardEnd_Upper_Active = AttachBefore(BackStepGuardEnd_Upper_Active, _skardeShieldOff)
+BackStepGuardEnd_Upper_Update = AttachBefore(BackStepGuardEnd_Upper_Update, _skardeShieldOff)
+GuardEnd_Upper_onActivate = AttachBefore(GuardEnd_Upper_onActivate, _skardeShieldOff)
+GuardEnd_Upper_onUpdate = AttachBefore(GuardEnd_Upper_onUpdate, _skardeShieldOff)
+GuardDamageLarge_onActivate = AttachBefore(GuardDamageLarge_onActivate, _skardeShieldOff)
+GuardDamageLarge_onUpdate = AttachBefore(GuardDamageLarge_onUpdate, _skardeShieldOff)
+GuardDamageLarge_JustGuard_onActivate = AttachBefore(GuardDamageLarge_JustGuard_onActivate, _skardeShieldOff)
+GuardDamageLarge_JustGuard_onUpdate = AttachBefore(GuardDamageLarge_JustGuard_onUpdate, _skardeShieldOff)
+GuardBreak_onUpdate = AttachBefore(GuardBreak_onUpdate, _skardeShieldOff)
+GuardBreakRight_onUpdate = AttachBefore(GuardBreakRight_onUpdate, _skardeShieldOff)
+GuardDamageExLarge_onUpdate = AttachBefore(GuardDamageExLarge_onUpdate, _skardeShieldOff)
+
+SABreak_onActivate = AttachAfter(SABreak_onActivate, function() act(AddSpEffect, 391110) end) -- Poise Break Detected
+
+-- c_WeaponLeft = 0
+-- c_WeaponRight = 0
+-- c_WeaponSwordArts = 0
+-- GetConstVariable = AttachAfter(GetConstVariable, function()
+--     c_WeaponLeft = GetWeaponID(HAND_LEFT)
+--     c_WeaponRight = GetWeaponID(HAND_RIGHT)
+--     if c_SwordArtsHand == HAND_LEFT then
+--         c_WeaponSwordArts = c_WeaponLeft
+--     elseif c_SwordArtsHand == HAND_RIGHT then
+--         c_WeaponSwordArts = c_WeaponRight
+--     end
+-- end)
+
+function DuringFall()
+    if not IsLocalPlayer() then return end
+    MonitorFallHeight(false)
+    ForceFallDeathCam()
+end
+FallCommonFunction = AttachBefore(FallCommonFunction, DuringFall)
+SwordArtsLoopLoop_onUpdate = AttachBefore(SwordArtsLoopLoop_onUpdate, DuringFall)
+LadderDeathLoop_onUpdate = AttachBefore(LadderDeathLoop_onUpdate, DuringFall)
+Act_Jump = AttachBefore(Act_Jump, DuringFall)
+JumpAttack_Start_Falling_onUpdate = AttachBefore(JumpAttack_Start_Falling_onUpdate, DuringFall)
+JumpCommonFunction = AttachBefore(JumpCommonFunction, DuringFall)
+Jump_Loop_onUpdate = AttachBefore(Jump_Loop_onUpdate, DuringFall)
+JumpDamage_Start_onUpdate = AttachBefore(JumpDamage_Start_onUpdate, DuringFall)
+
+function OnDeath()
+    BlightpoleOffHandler()
+end
+
+DeathIdle_onActivate = AttachBefore(DeathIdle_onActivate, OnDeath)
+DeathIdle_onDeactivate = AttachBefore(DeathIdle_onDeactivate, OnDeath)
+ThrowDeath_onActivate = AttachBefore(ThrowDeath_onActivate, OnDeath)
+ThrowDeathIdle_onActivate = AttachBefore(ThrowDeathIdle_onActivate, OnDeath)
+DeathStart_Activate = AttachBefore(DeathStart_Activate, OnDeath)
+LadderDeathStart_onActivate = AttachBefore(LadderDeathStart_onActivate, OnDeath)
+LadderDeathLoop_onUpdate = AttachBefore(LadderDeathLoop_onUpdate, OnDeath)
+LadderDeathIdle_onActivate = AttachBefore(LadderDeathIdle_onActivate, OnDeath)
+LadderDeathIdle_onDeactivate = AttachBefore(LadderDeathIdle_onDeactivate, OnDeath)
+RideDeath_Idle_onActivate = AttachBefore(RideDeath_Idle_onActivate, OnDeath)
+RideDeath_Idle_onDeactivate = AttachBefore(RideDeath_Idle_onDeactivate, OnDeath)
+
+LAST_ATTACK_HAND = -1
+LAST_HKB_STATES = { } -- Last, Second to Last, Third to Last
+hkbFireEvent = AttachAfter(hkbFireEvent, function(state)
+    -- Log(state)
+    -- Log(debug.traceback())
+    AnimationLoggerPrep(state)
+    if (#LAST_HKB_STATES == 2) then
+        table.remove(LAST_HKB_STATES, 2)
+    end
+    table.insert(LAST_HKB_STATES, 1, state)
+    
+    CorpaMagica()
+
+    if state == "W_FallDeath" then
+        OnDeath()
+    end
+
+    if string.find(state, "Left") or (string.find(state, "Both") and c_Style == HAND_LEFT_BOTH) then
+        LAST_ATTACK_HAND = HAND_LEFT
+    else
+        LAST_ATTACK_HAND = HAND_RIGHT
+    end
+end)
+
+Fire = AttachBefore(Fire, function(state)
+    AnimationLogger(state)
+    --Log(state)
+    --Log(debug.traceback())
+end)
+
+local LightAttackRequests =
+{
+    [ATTACK_REQUEST_RIGHT_LIGHT] = true,
+    [ATTACK_REQUEST_LEFT_LIGHT] = true,
+    [ATTACK_REQUEST_BOTH_LIGHT] = true,
+    [ATTACK_REQUEST_DUAL_RIGHT] = true,
+    [ATTACK_REQUEST_DUAL_LEFT] = true,
+    [ATTACK_REQUEST_BOTH_LEFT] = true,
+    [ATTACK_REQUEST_ATTACK_WHILE_GUARD] = true
+}
+local HeavyAttackRequests = 
+{
+    [ATTACK_REQUEST_RIGHT_HEAVY] = true,
+    [ATTACK_REQUEST_LEFT_HEAVY] = true,
+    [ATTACK_REQUEST_BOTH_HEAVY] = true
+}
+local ArtsRequest =
+{
+    [SWORDARTS_REQUEST_LEFT_NORMAL] = true,
+    [SWORDARTS_REQUEST_LEFT_COMBO_1] = true,
+    [SWORDARTS_REQUEST_LEFT_COMBO_2] = true,
+    [SWORDARTS_REQUEST_RIGHT_NORMAL] = true,
+    [SWORDARTS_REQUEST_RIGHT_COMBO_1] = true,
+    [SWORDARTS_REQUEST_RIGHT_COMBO_2] = true,
+    [SWORDARTS_REQUEST_RIGHT_STANCE] = true,
+    [SWORDARTS_REQUEST_RIGHT_STEP] = true,
+    [SWORDARTS_REQUEST_BOTH_NORMAL] = true,
+    [SWORDARTS_REQUEST_BOTH_COMBO_1] = true,
+    [SWORDARTS_REQUEST_BOTH_COMBO_2] = true
+}
+
+LAST_ACTION_REQUEST = ATTACK_REQUEST_INVALID
+local old_GetAttackRequest = GetAttackRequest
+local swordArt_cooldown = 0
+GetAttackRequest = function(is_guard, is_ride)
+    local request = old_GetAttackRequest(is_guard, is_ride)
+    if request ~= ATTACK_REQUEST_INVALID then
+        LAST_ACTION_REQUEST = request
+
+        act(ClearSpEffect, 100550)
+        act(ClearSpEffect, 100551)
+
+        OnWeaponAttack(false)
+
+        if LightAttackRequests[request] then
+            act(AddSpEffect, 100550)
+        elseif HeavyAttackRequests[request] then
+            StateInfoHeavyLib()
+            act(AddSpEffect, 8000300)
+            act(AddSpEffect, 100551)
+        elseif ArtsRequest[request] and not OnCooldown(swordArt_cooldown, 0.01) then
+            swordArt_cooldown = g_DeltaTimeCount
+            StateInfoArtsLib()
+            CultArtsStack_Apply()
+            ArmorOfIceHyperArmor(false)
+            LivingForge_OnSwordArts()
+            FrenzyJewel_ImmuneWeaponArt()
+            BestialJewel_OnAsh()
+            FundiJewel_ArtsBuff()
+            VolcanistJewel_Devourer_OnSwordArts()
+            act(SetMovementScaleMult, 1)
+            act(AddSpEffect, 8000400)            
+        end
+    end
+    return request
+end
+
+local old_GetLandIndex = GetLandIndex
+GetLandIndex = function(height, is_jump)
+    if IsForceSprint() == TRUE or env(GetSpEffectID, 360400) == TRUE then -- Thief's Bauble
+        return LAND_DEFAULT
+    end
+    return old_GetLandIndex(height, is_jump)
+end
+
+local GuardingDamageTypes = {
+    [DAMAGE_TYPE_GUARD] = true,
+    [DAMAGE_TYPE_GUARDED] = true,
+    [DAMAGE_TYPE_GUARDBREAK] = true,
+    [DAMAGE_TYPE_GUARDED_LEFT] = true,
+    [DAMAGE_TYPE_WALL_RIGHT] = true,
+    [DAMAGE_TYPE_WALL_LEFT] = true,
+}
+
+function OnTakingHit(isThrow)
+    NecromancerJewel_DivideDamageToSpiritAsh()
+    if isThrow then return end
+    DreadnoughtJewel_OnTakingHit()
+    LivingForge_OnTakingHit()
+end
+
+function OnExecDamageTrue()
+    if env(IsCOMPlayer) == FALSE then
+        if GuardingDamageTypes[env(GetReceivedDamageType)] == nil then
+            OnTakingHit(false)
+        end
+    else
+        FrostWitchFreezeEffect(1441530, 5, 1441525, 1441520) -- Ice Guardian's Reckoning
+        FrostWitchFreezeEffect(1449410, 0, 1449412, 1449411) -- Freeze Solid
+    end
+end
+
+local old_ExecJump = ExecJump
+ExecJump = function(is_multi_jump)
+    if g_Jumps_Performed > 0 and hasLanded then
+        g_Jumps_Performed = 0
+    end
+
+    local result = old_ExecJump(is_multi_jump)
+    if result == TRUE then
+        if env(IsCOMPlayer) == FALSE then
+            DoubleJump_OnJump()
+        end
+    end
+end
+
+local old_act = act
+act = function(...)
+    local args = {...}
+    local func = args[1]
+
+    if func == SetMovementScaleMult and env(IsCOMPlayer) == FALSE then
+        local baseValue = args[2]
+        local speedMultiplier = GetRootMotionMulti(baseValue)
+        old_act(func, speedMultiplier)
+        return
+    elseif func == ClearSpEffect and args[2] == nil then
+        return
+    elseif func == AddSpEffect and args[2] == nil then
+        return
+    elseif func == SetAllowedThrowDefenseType then
+        if IsDisableThrowDef() then
+            old_act(func, THROW_STATE_INVALID)
+            return
+        end
+    elseif func == SetIsEquipmentMenuAccessOn then
+        if env(GetSpEffectID, 100655) == TRUE then
+            return
+        end
+    end
+    old_act(...)
+end
+
+local old_env = env
+env = function(...)
+    local args = {...}
+    local func = args[1]
+
+    if func == GetSpEffectID then
+        if args[2] == nil then
+            return FALSE
+        end
+    elseif func == GetMoveAnimParamID then
+        local originalValue = old_env(func, args[2])
+        if old_env(GetSpEffectID, 1528200) == TRUE or old_env(GetSpEffectID, 1528500) == TRUE then -- Tempest Embrace
+            Stormcaller_DoubleJumpAllowed = originalValue == WEIGHT_LIGHT
+            return math.max(originalValue - 5, WEIGHT_LIGHT)
+        end
+
+        Stormcaller_DoubleJumpAllowed = false
+        return originalValue
+    elseif func == IsOutOfAmmo then
+        InfiniteAmmo()
+    end
+
+    return old_env(...)
+end

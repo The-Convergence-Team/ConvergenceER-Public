@@ -1,0 +1,83 @@
+local healingMagics = {
+    [6420] = true, -- Urgent Heal
+    [6422] = true, -- Great Heal
+    [6423] = true, -- Lord's Heal
+    [6424] = true, -- Erdtree Heal
+    [2006400] = true, -- Heal from Afar
+}
+function FundiJewel_HyperArmor()
+    if env(GetSpEffectID, Jewel_of_the_Righteous) == FALSE then
+        return
+    end
+
+    if healingMagics[LastCastMagicID] then
+        act(AddSpEffect, 391710) -- Hyper Armor
+    end
+end
+
+local offensiveMagics = {
+    [6400] = true, -- Rejection
+    [6610] = true, -- Rune Shards
+    [6750] = true, -- Sacred Ground
+    [6700] = true, -- Discus of Light
+    [6641] = true, -- Morgott's Spear
+    [6410] = true, -- Wrath of Gold
+    [6701] = true, -- Triple Rings
+    [6710] = true, -- Radagon Rings
+    [6640] = true, -- Golden Spear
+    [6630] = true, -- Elden Blade
+    [6720] = true, -- Elden Stars
+    [2006690] = true, -- Wrath From Afar
+    [2006710] = true, -- Multilayered Ring of Light
+    [2006700] = true, -- Light of Miquella
+}
+function FundiJewel_OffensiveSpellBuff()
+    if env(GetSpEffectID, Jewel_of_the_Righteous) == FALSE then
+        return
+    end
+
+    if offensiveMagics[LastCastMagicID] then
+        act(AddSpEffect, 391720) -- FP/SP Cost Reduc
+    end
+end
+
+local fundiArts = {
+    [34] = true, -- Erdtree Mastery
+    [51] = true, -- Ash of War: Sacred Blade
+    [57] = true, -- Ash of War: Prayerful Strike
+    [70] = true, -- Ash of War: Sacred Ring of Light
+    [84] = true, -- Flash of Gold
+    [62] = true, -- Ash of War: Golden Land
+    [82] = true, -- Virtuous Consecration
+    [97] = true, -- Ash of War: Golden Parry
+    [152] = true, -- Ash of War: Holy Ground
+    [134] = true, -- Ash of War: Sacred Order
+    [116] = true, -- Ash of War: Golden Slam
+    [133] = true, -- Ash of War: Golden Vow
+    [187] = true, -- Sacred Phalanx
+    [189] = true, -- Angel's Wings
+    [191] = true, -- Unblockable Blade
+    [193] = true, -- Erdtree Slam
+    [196] = true, -- Golden Retaliation
+    [203] = true, -- Oracular Bubble
+    [204] = true, -- Bubble Shower
+    [205] = true, -- Great Oracular Bubble
+    [220] = true, -- Wave of Gold
+    [222] = true, -- Establish Order
+    [229] = true, -- Gold Breaker
+    [237] = true, -- Blade of Gold
+    [254] = true, -- Unblockable Blade
+    [252] = true, -- Golden Tempering
+    [287] = true, -- Lord of Light Stance
+    [301] = true, -- Needle Piercer
+    [302] = true, -- Light
+}
+function FundiJewel_ArtsBuff()
+    if env(GetSpEffectID, Jewel_of_the_Righteous) == FALSE then
+        return
+    end
+
+    if fundiArts[c_SwordArtsID] then
+        act(AddSpEffect, 391720) -- FP/SP Cost Reduc
+    end
+end

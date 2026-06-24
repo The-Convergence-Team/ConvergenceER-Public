@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -155,7 +155,7 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005250, 1051390311, 1051392297, 0, -1);
     InitializeCommonEvent(0, 90005250, 1051390312, 1051392297, 0, -1);
     // Rotten Duelist One Time Kill
-    InitializeCommonEvent(0, 20000343, 1051397990, 1051390295, 0);
+    InitializeCommonEvent(0, 20000343, 1051397990, 1051390295, 1051390910);
     // Faroth Key DoorH
     //                  0, EventID, EventFlagID, DoorEntityID, ObjActEntityID, ObjActID, KeyID, 0
     //InitializeCommonEvent(0, 90005510, 10590112, 1051391112, 1051391113, 257020, 208138, 0);

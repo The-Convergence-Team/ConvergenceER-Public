@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -23,12 +23,16 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005706, 1043340700, 930025, 1043341700);
     InitializeCommonEvent(0, 90005771, 1043340950, 1043342700);
        
-    // Make enemies neutral to nox class starters
+    // Make enemies neutral to Necromancer class starters
     InitializeCommonEvent(0, 98005301, 60915, 1043340701);
     InitializeCommonEvent(1, 98005301, 60915, 1043340702);
     InitializeCommonEvent(2, 98005301, 60915, 1043340703);
     InitializeCommonEvent(3, 98005301, 60915, 1043340704);
     InitializeCommonEvent(4, 98005301, 60915, 1043340705);
+    
+    // Make enemies neutral to heretic starters
+    InitializeCommonEvent(0, 98005301, 60922, 1043340725);
+    InitializeEvent(0, 1043342225, 0);
 });
 
 $Event(50, Default, function() {
@@ -38,6 +42,19 @@ $Event(50, Default, function() {
     InitializeCommonEvent(0, 90005211, 1043340213, 30004, 20004, 1043342212, 1092616192, 1065353216, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005211, 1043340214, 30004, 20004, 1043342212, 1092616192, 0, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005250, 1043340300, 1043342300, 0, 3031);
+});
+
+//Heretic starter anims
+$Event(1043342225, Default, function() {
+    EndIf(!InArea(10000, 1043340985) || EventFlag(1043340920) || !EventFlag(60922));
+    SetCameraAngle(20, 95);
+    ForceAnimationPlayback(10000, 90007, false, false, false);
+    WaitFixedTimeFrames(60);
+    SpawnOneshotSFX(TargetEntityType.Character, 10000, 900, 523913);
+    ForceAnimationPlayback(10000, 63021, false, false, false);
+    WaitFixedTimeFrames(30);
+    SpawnOneshotSFX(TargetEntityType.Character, 10000, 900, 523912);
+    SetEventFlagID(1043340920, ON);
 });
 
 $Event(1043342220, Restart, function(X0_4, X4_4, X8_4) {

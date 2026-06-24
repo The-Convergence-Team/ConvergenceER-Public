@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -56,6 +56,10 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005513, 1047380540, 1047381540, 1047381541, 1047383541, 99026, 1, 2);
     InitializeEvent(0, 1047381580, 0);
     InitializeCommonEvent(0, 90005706, 1047380701, 930025, 1047381700);
+    
+    $InitializeEvent(0, 1047382800);
+    $InitializeEvent(0, 1047382810);
+    $InitializeEvent(0, 1047382849);
 });
 
 $Event(50, Default, function() {
@@ -122,4 +126,44 @@ $Event(1047382870, Restart, function() {
     WaitFixedTimeSeconds(3);
     WarpPlayer(60, 46, 36, 0, 1046361661, 60);
     RestartEvent();
+});
+
+$Event(1047382800, Restart, function() {
+    EndIf(EventFlag(1047380800));
+    WaitFor(CharacterHPValue(1047380800) <= 0);
+    WaitFixedTimeSeconds(4);
+    PlaySE(1047380800, SoundType.SFX, 888880000);
+    WaitFor(CharacterDead(1047380800));
+    HandleBossDefeatAndDisplayBanner(1047380800, TextBannerType.EnemyFelled);
+    EnableObjAct(1047380550, -1);
+    SetEventFlagID(1047380800, ON);
+    EndEvent();
+});
+
+$Event(1047382810, Restart, function() {
+    if (EventFlag(1047380800)) {
+        DisableCharacter(1047380800);
+        DisableCharacterCollision(1047380800);
+        ForceCharacterDeath(1047380800, false);
+        EnableObjAct(1047380550, -1);
+        EndEvent();
+    }
+L0:
+    DisableCharacterAI(1047380800);
+    EnableCharacterInvincibility(1047380800);
+    WaitFor(EventFlag(1047382805) && InArea(10000, 1047382800));
+L2:
+    DisableCharacterInvincibility(1047380800);
+    EnableCharacterAI(1047380800);
+    SetNetworkUpdateRate(1047380800, true, CharacterUpdateFrequency.AlwaysUpdate);
+    DisplayBossHealthBar(Enabled, 1047380800, 0, 903400300);
+    DisableObjAct(1047380550, -1);
+});
+
+$Event(1047382849, Restart, function() {
+    InitializeCommonEvent(0, 9005800, 1047380800, 1047381800, 1047382800, 1047382805, 1047385800, 10000, 0, 0);
+    InitializeCommonEvent(0, 9005801, 1047380800, 1047381800, 1047382800, 1047382805, 1047382806, 10000);
+    InitializeCommonEvent(0, 9005811, 1047380800, 1047381800, 3, 0);
+    InitializeCommonEvent(0, 9005822, 1047380800, 920900, 1047382805, 1047382806, 0, 1047382802, 0, 0);
+    InitializeCommonEvent(0, 9005812, 1047380800, 1047381801, 3, 0, 0);
 });

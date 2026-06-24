@@ -1,0 +1,77 @@
+local sprintSpEffects = {
+    1526000, -- Cloud Form
+    1526500, -- Cloud Form (Jewel Variant)
+    7002200, -- Night's Cavalry Gauntlets
+    7010300, -- Bull-Goat Greaves
+    --7006201  -- High Page Page Gloves
+}
+local exceptionSpEffects = {
+    100160, -- HKS - Stance - SetMoveType 3
+    100130, -- HKS - Stance - SetMoveType 1
+    100140, -- HKS - Stance - SetMoveType 2
+    100150, -- HKS - Stance - SetMoveType 0
+    8000000 -- Ammo is Drawn
+}
+function IsForceSprint()
+    for i = 1, #exceptionSpEffects, 1 do
+        if env(GetSpEffectID, exceptionSpEffects[i]) == TRUE then
+            return FALSE
+        end
+    end
+    for i = 1, #sprintSpEffects, 1 do
+        if env(GetSpEffectID, sprintSpEffects[i]) == TRUE then
+            return TRUE
+        end
+    end
+    return FALSE
+end
+
+local cheatSpEffects = {
+    1416000, -- Energy Shell
+    1509101, -- Phoenix of Death | Death Ward & Lionel's Helmet | Fia's Champion
+    7008000, -- Raging Wolf Helmet | Shadowbeast 
+    7015350, -- Drake Knight Helmet | Dimensional Shift
+}
+function HasCheatEffect()
+    for i = 1, #cheatSpEffects, 1 do
+        if env(GetSpEffectID, cheatSpEffects[i]) == TRUE then
+            return TRUE
+        end
+    end
+    return FALSE
+end
+
+local spCostDisableSpEffects = {
+    102360, -- Viridian Hidden Tear
+    7022000, -- Dancer's Hood (Endless Dance)
+    7019100, -- Ragged Armor (Secrets of Wild)
+}
+function ShouldDoStaminaCost()
+    for i = 1, #spCostDisableSpEffects, 1 do
+        if env(GetSpEffectID, spCostDisableSpEffects[i]) == TRUE then
+            return FALSE
+        end
+    end
+    return TRUE
+end
+
+local slowSpEffects = {
+    503520, -- Ironjar Aromatic
+    5520, -- Unknown
+    425, -- Slug Slowing Attack
+    4101, -- Forced Slow Walk/Jump
+    4100, -- Forced Slow Walk/Jump (Excl. Dodge)
+    19670, -- Unknown (DLC)
+}
+function ShouldDoSlowEffect()
+    if env(GetSpEffectID, 341300) == TRUE then -- Freedom of movement Talisman
+        return FALSE
+    end
+
+    for i = 1, #slowSpEffects, 1 do
+        if env(GetSpEffectID, slowSpEffects[i]) == TRUE then
+            return TRUE
+        end
+    end
+    return FALSE
+end

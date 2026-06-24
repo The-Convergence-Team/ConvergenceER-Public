@@ -42,7 +42,7 @@ $Event(50, Default, function() {
     //InitializeCommonEvent(0, 90005250, 32000210, 32002210, 0, -1);
     InitializeCommonEvent(0, 90005250, 32000211, 32002211, 0, -1);
     InitializeCommonEvent(0, 90005250, 32000212, 32002212, 0, -1);
-    InitializeCommonEvent(0, 90005540, 32000460, 32003682, 32003681, 32003680, 99026, 1, 2); // New Gate
+    InitializeCommonEvent(0, 90005540, 32000460, 32003682, 32003681, 32003681, 99026, 1, 2); // New Gate
                                      //(eventflag, gate id, lever id, objecteventflag, objectparamid, anim id, anim id)
 });
 

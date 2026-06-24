@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -201,9 +201,16 @@ $Event(0, Default, function() {
     // Cult NPC
     InitializeCommonEvent(0, 90005250, 11000726, 11002410, 0, -1);
     InitializeCommonEvent(0, 90005300, 11000726, 11000726, 108100, 0, 0);
+    //Mikkaa Npc
+    InitializeCommonEvent(0, 90005300, 11000469, 11000469, 11000805, 0, 0); // Death + Reward Script
     
     // Honse
     InitializeEvent(0, 11003780, 0);
+    
+    //Mimic
+    InitializeCommonEvent(0, 20000352, 11000660);
+    InitializeCommonEvent(0, 20000353, 11001660, 11000660, 511000660);
+    InitializeEvent(0, 11003791, 0) //mimic invun
 });
 
 $Event(50, Default, function() {
@@ -339,7 +346,7 @@ $Event(50, Default, function() {
     InitializeCommonEvent(0, 90005250, 11000451, 11002455, 0, -1);
     InitializeCommonEvent(0, 90005250, 11000455, 11002471, 0, 0);
     InitializeCommonEvent(0, 90005250, 11000459, 11002471, 0, 3009);
-    InitializeCommonEvent(0, 90005250, 11000469, 11002469, 0, -1);
+    InitializeCommonEvent(0, 90005250, 11000469, 11002469, 0, -1); //npc Mikkaa encounter
     InitializeCommonEvent(0, 90005211, 11000425, 11002425, 1077936128, 1065353216, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005201, 11000426, 30005, 20005, 1073741824, 0, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005211, 11000427, 30004, 20004, 11002425, 1077936128, 1077936128, 0, 0, 0, 0);
@@ -410,6 +417,9 @@ $Event(50, Default, function() {
     if (!EventFlag(11008544)) {
         SetEventFlagID(11008544, ON);
     }
+    
+    //Invisible Barrier to prevent Sigur skip
+    
 });
 
 $Event(11002500, Default, function() {
@@ -1288,7 +1298,7 @@ $Event(11002859, Restart, function() {
     InitializeCommonEvent(0, 9005811, 11000850, 11001857, 5, 0);
     InitializeCommonEvent(0, 9005811, 11000850, 11001858, 5, 0);
     InitializeCommonEvent(0, 9005811, 11000850, 11001855, 5, 0);
-    InitializeCommonEvent(0, 9005822, 11000850, 921600, 11002855, 11002856, 0, 11002852, 0, 0);
+    InitializeCommonEvent(0, 9005822, 11000850, 392800, 11002855, 11002856, 0, 11002852, 0, 0);
 });
 
 //Headless Abductor boss death
@@ -1737,4 +1747,17 @@ $Event(11003780, Restart, function() {
     AwardItemsIncludingClients(11000505);
     SetEventFlagID(11000858, ON);
     EndEvent();
+});
+
+//Invisible Barrier to prevent Sigur skip
+$Event(11003790, Restart, function() {
+    EnableHit(11000900);
+    DisableMapPart(11000900);
+});
+$Event(11003791, Default, function() { //mimic invunerability
+    EndIf(EventFlag(11000850));
+    EnableCharacterInvincibility(11000660);
+    WaitFor(EventFlag(11000850));
+    DisableCharacterInvincibility(11000660);
+    
 });

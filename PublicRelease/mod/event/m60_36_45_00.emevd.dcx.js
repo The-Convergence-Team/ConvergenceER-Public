@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000N:\\GR\\data\\Param\\event\\m60.emevd\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82,166]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -78,6 +78,7 @@ L1:
 
 // Nexus Access - interactAsset, sealAsset, spawnPoint, centralizerRegion
 $Event(1036452600, Restart, function(X0_4, X4_4, X8_4, X12_4) {
+    DisableNetworkSync();
     WaitFor(EventFlag(1036454610));
     WaitFor(ActionButtonInArea(9522, X0_4)); 
     

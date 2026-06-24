@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -40,7 +40,6 @@ $Event(0, Default, function() {
     InitializeEvent(0, 2047402200, 2047400450, 2047402450, 2047402460, 1073741824);
     InitializeEvent(1, 2047402200, 2047400451, 2047402451, 2047402461, 1073741824);
     InitializeEvent(2, 2047402200, 2047400452, 2047402452, 2047402462, 1073741824);
-    InitializeEvent(0, 2047402250, 0); //Monstrous Spider Scorpion sleep check + removal
 });
 
 $Event(2047402499, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
@@ -93,19 +92,5 @@ L0:
         ForceAnimationPlayback(X0_4, 3000, false, false, false);
     }
     WaitFixedTimeSeconds(1);
-    RestartEvent();
-});
-
-//Monstrous Spider Scorpion sleep check + removal
-$Event(2047402250, Restart, function() {
-    EndIf(EventFlag(2047400800));
-    WaitFor(CharacterHasSpEffect(2047400800, 54) && (HasDamageType(2047400800, 0, DamageType.Unspecified)
-            || CharacterHasStateInfo(2047400800, 436)
-            || CharacterHasStateInfo(2047400800, 2)
-            || CharacterHasStateInfo(2047400800, 5)
-            || CharacterHasStateInfo(2047400800, 6)
-            || CharacterHasStateInfo(2047400800, 260)))
-    ForceAnimationPlayback(2047400800, 12002, false, false, false);
-    WaitFixedTimeSeconds(3);
     RestartEvent();
 });

@@ -1,0 +1,197 @@
+---------------------------------------------------------------------------
+-- ChrIns
+---------------------------------------------------------------------------
+
+local _CHR_INS_BASE = 1
+
+local UNSIGNED_BYTE = 0
+local SIGNED_BYTE = 1
+local UNSIGNED_SHORT = 2
+local SIGNED_SHORT = 3
+local UNSIGNED_INT = 4
+local SIGNED_INT = 5
+local FLOAT = 6
+local BIT = 7
+
+local BIG_SIGNED_INT = 100 -- returns a string that contains the 32 bit signed integer value
+local ARRAY_OF_BYTES = 101 -- returns 4 elements: byte1, byte2, byte3, byte4
+local COORDINATES = 102 -- returns 3 elements: x, y, z
+local QUATERNION = 103 -- returns 4 elements: x, y, z, w
+local CHARACTERMODEL = 104 -- returns a 4 digit ID
+local MAPID = 105 -- returns 4 elements: areaId, blockId, regionId, indexId
+local CHRINS = 106 -- Should not be used in this file, only GameBasePointers, just here for completionism
+
+---------------------------------------------------------------------------
+-- Pointer Tables
+---------------------------------------------------------------------------
+
+CHR_INS_BASE = {
+    FIELD_INS_HANDLE = { _CHR_INS_BASE, ARRAY_OF_BYTES, 0x8 },
+    UNKNOWN_OFFSET = { -- 0x28
+        CHR_MODEL = { _CHR_INS_BASE, CHARACTERMODEL, 0x28, 0xA8 + 2 }
+    },
+    CURRENT_MAP_ID = { _CHR_INS_BASE, MAPID, 0x30 },
+    EVENT_ENTITY_ID = { _CHR_INS_BASE, UNSIGNED_INT, 0x1E8 },
+    CHR_CTRL = { -- 0x58
+        CHR_MANIPULATOR = { -- 0x18
+            AI = { -- 0xC0
+                NPC_THINK_ID = { _CHR_INS_BASE, SIGNED_INT, 0x58, 0x18, 0xC0, 0x28 }
+            }
+        }
+    },
+    NPC_PARAM_ID = { _CHR_INS_BASE, SIGNED_INT, 0x60 },
+    TEAM_TYPE = { _CHR_INS_BASE, SIGNED_BYTE, 0x6C },
+    CHUNK_POSITION = { _CHR_INS_BASE, COORDINATES, 0x80 },
+    LOCKON_TARGET_POSITION = { _CHR_INS_BASE, COORDINATES, 0xD0 },
+    CS_SPECIAL_EFFECT = { -- 0x178
+        SPEFFECT_LIST = { -- 0x8
+            EXISTS = function(index)
+                return { _CHR_INS_BASE, UNSIGNED_INT, 0x178, 0x8, LinkedListItem(index, 0x30, { }) }
+            end,
+            SPEFFECT_ID = function(index)
+                return { _CHR_INS_BASE, UNSIGNED_INT, 0x178, 0x8, LinkedListItem(index, 0x30, { 0x8 }) }
+            end,
+            SPEFFECT_MAX_DURATION = function(index)
+                return { _CHR_INS_BASE, FLOAT, 0x178, 0x8, LinkedListItem(index, 0x30, { 0x40 }) }
+            end,
+            SPEFFECT_DURATION2 = function(index)
+                return { _CHR_INS_BASE, FLOAT, 0x178, 0x8, LinkedListItem(index, 0x30, { 0x44 }) }
+            end,
+        },
+    },
+    KILLED_BY_CHR_INS_HANDLE = { _CHR_INS_BASE, ARRAY_OF_BYTES, 0x180 },
+    CHR_MODULES = { -- 0x190
+        DATA_MODULE = { -- 0x0
+            HP = { _CHR_INS_BASE, SIGNED_INT, 0x190, 0x0, 0x138 },
+            HP_MAX = { _CHR_INS_BASE, SIGNED_INT, 0x190, 0x0, 0x13C },
+            FP = { _CHR_INS_BASE, SIGNED_INT, 0x190, 0x0, 0x148 },
+            FP_MAX = { _CHR_INS_BASE, SIGNED_INT, 0x190, 0x0, 0x14C },
+            STAMINA = { _CHR_INS_BASE, SIGNED_INT, 0x190, 0x0, 0x154 },
+            STAMINA_MAX = { _CHR_INS_BASE, SIGNED_INT, 0x190, 0x0, 0x158 },
+            DEBUG_FLAGS = { -- 0x19B
+                NO_DEAD = { _CHR_INS_BASE, BIT, 0, 0x190, 0x0, 0x19B },
+                NO_DAMAGE = { _CHR_INS_BASE, BIT, 1, 0x190, 0x0, 0x19B },
+                NO_MAGIC_CONSUME = { _CHR_INS_BASE, BIT, 2, 0x190, 0x0, 0x19B },
+                NO_STAMINA_CONSUME = { _CHR_INS_BASE, BIT, 3, 0x190, 0x0, 0x19B },
+            },
+        },
+        TIME_ACT = { -- 0x18
+            CURRENT_ANIMATION = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x190, 0x18, 0x40 },
+        },
+        AUX_EFFECT_MODULE = { -- 0x20
+            POISON = { _CHR_INS_BASE, UNSIGNED_INT, 0x190, 0x20, 0x10 },
+            ROT = { _CHR_INS_BASE, UNSIGNED_INT, 0x190, 0x20, 0x14 },
+            BLEED = { _CHR_INS_BASE, UNSIGNED_INT, 0x190, 0x20, 0x18 },
+            BLIGHT = { _CHR_INS_BASE, UNSIGNED_INT, 0x190, 0x20, 0x1C },
+            FROST = { _CHR_INS_BASE, UNSIGNED_INT, 0x190, 0x20, 0x20 },
+            SLEEP = { _CHR_INS_BASE, UNSIGNED_INT, 0x190, 0x20, 0x24 },
+            FRENZY = { _CHR_INS_BASE, UNSIGNED_INT, 0x190, 0x20, 0x28 },
+            POISON_MAX = { _CHR_INS_BASE, UNSIGNED_INT, 0x190, 0x20, 0x2C },
+            ROT_MAX = { _CHR_INS_BASE, UNSIGNED_INT, 0x190, 0x20, 0x30 },
+            BLEED_MAX = { _CHR_INS_BASE, UNSIGNED_INT, 0x190, 0x20, 0x34 },
+            BLIGHT_MAX = { _CHR_INS_BASE, UNSIGNED_INT, 0x190, 0x20, 0x38 },
+            FROST_MAX = { _CHR_INS_BASE, UNSIGNED_INT, 0x190, 0x20, 0x3C },
+            SLEEP_MAX = { _CHR_INS_BASE, UNSIGNED_INT, 0x190, 0x20, 0x40 },
+            FRENZY_MAX = { _CHR_INS_BASE, UNSIGNED_INT, 0x190, 0x20, 0x44 },
+        },
+        BEHAVIOR_MODULE = { -- 0x28
+            SPEED_MODIFIER = { _CHR_INS_BASE, FLOAT, 0x190, 0x28, 0x17C8 }
+        },
+        SUPER_ARMOR_MODULE = { -- 0x40
+            POISE = { _CHR_INS_BASE, FLOAT, 0x190, 0x40, 0x10 },
+            MAX_POISE = { _CHR_INS_BASE, FLOAT, 0x190, 0x40, 0x14 },
+            RECOVERY_TIMER = { _CHR_INS_BASE, FLOAT, 0x190, 0x40, 0x20 },
+        },
+        PHYSICS_MODULE = { -- 0x68
+            QUAT_POSITION = { _CHR_INS_BASE, QUATERNION, 0x190, 0x68, 0x50 },
+            LOCAL_POSITION = { _CHR_INS_BASE, COORDINATES, 0x190, 0x68, 0x70 },
+            ROOT_MOTION = { _CHR_INS_BASE, COORDINATES, 0x190, 0x68, 0xD0 },
+            GRAVITY_MULTIPLIER = { _CHR_INS_BASE, FLOAT, 0x190, 0x68, 0x1CC },
+            IS_FALLING = { _CHR_INS_BASE, SIGNED_BYTE, 0x190, 0x68, 0x1D0 },
+            IS_TOUCHING_FLOOR = { _CHR_INS_BASE, SIGNED_BYTE, 0x190, 0x68, 0x1D1 },
+            IS_JUMPING = { _CHR_INS_BASE, SIGNED_BYTE, 0x190, 0x68, 0x1D2 },
+        }
+    },
+    CHR_FLAGS = { -- 0x530 / 0x533
+        NO_HIT = { _CHR_INS_BASE, BIT, 3, 0x530 },
+        NO_ATTACK = { _CHR_INS_BASE, BIT, 4, 0x530 },
+        NO_MOVE = { _CHR_INS_BASE, BIT, 5, 0x530 },
+        NO_UPDATE = { _CHR_INS_BASE, BIT, 0, 0x531 },
+        NO_GOODS_CONSUME = { _CHR_INS_BASE, BIT, 0, 0x532 },
+    },
+    PLAYER_GAME_DATA = { -- 0x580
+        LEVELED_VIGOR = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x3C },
+        LEVELED_MIND = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x40 },
+        LEVELED_ENDURANCE = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x44 },
+        LEVELED_STRENGTH = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x48 },
+        LEVELED_DEXTERITY = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x4C },
+        LEVELED_INTELLIGENCE = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x50 },
+        LEVELED_FAITH = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x54 },
+        LEVELED_ARCANE = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x58 },
+        RUNE_LEVEL = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x68 },
+        SCADUTREE_BLESSING_LEVEL = { _CHR_INS_BASE, SIGNED_BYTE, 0x580, 0xFC },
+        REVERED_SPIRIT_LEVEL = { _CHR_INS_BASE, SIGNED_BYTE, 0x580, 0xFD },
+        VIGOR = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x288 },
+        MIND = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x28C },
+        ENDURANCE = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x290 },
+        STRENGTH = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x298 },
+        DEXTERITY = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x29C },
+        INTELLIGENCE = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x2A0 },
+        FAITH = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x2A4 },
+        ARCANE = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x2A8 },
+        EQUIP_GAME_DATA = { -- 0x2B0
+            CHR_ASM = { -- 0x70
+                ARM_STYLE = { _CHR_INS_BASE, SIGNED_BYTE, 0x2B0, 0x70, 0x08 },
+                CURR_WEP_SLOT_OFFSET_LEFT = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x328 - 0x328) },
+                CURR_WEP_SLOT_OFFSET_RIGHT = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x32C - 0x328) },
+                L_HAND_WEAPON_GA_ITEM_HANDLE = function(index)
+                    return { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + ((0x340 + (index * 0x8)) - 0x328) }
+                end,
+                R_HAND_WEAPON_GA_ITEM_HANDLE = function(index)
+                    return { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + ((0x344 + (index * 0x8)) - 0x328) }
+                end,
+                ARROW_1_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x358 - 0x328) },
+                ARROW_2_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x35C - 0x328) },
+                BOLT_1_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x360 - 0x328) },
+                BOLT_2_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x364 - 0x328) },
+                HELMET_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x370 - 0x328) },
+                ARMOR_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x374 - 0x328) },
+                GAUNTLETS_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x378 - 0x328) },
+                LEGGINGS_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x37C - 0x328) },
+                L_HAND_WEAPON = function(index)
+                    return { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + ((0x398 + (index * 0x8)) - 0x328) }
+                end,
+                R_HAND_WEAPON = function(index)
+                    return { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + ((0x39C + (index * 0x8)) - 0x328) }
+                end,
+                ARROW_1 = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x3B0 - 0x328) },
+                BOLT_1 = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x3B4 - 0x328) },
+                ARROW_2 = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x3B8 - 0x328) },
+                BOLT_2 = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x3BC - 0x328) },
+                HELMET = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x3C8 - 0x328) },
+                ARMOR = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x3CC - 0x328) },
+                GAUNTLETS = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x3D0 - 0x328) },
+                LEGGINGS = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x3D4 - 0x328) },
+            },
+            EQUIP_MAGIC_DATA = { -- 0x280
+                MAGIC_SLOT = function(index)
+                    return { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x2B0 + 0x280, 0x10 + (index * 8) }
+                end,
+                SELECTED_MAGIC_SLOT_INDEX = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x2B0 + 0x280, 0x80 },
+            },
+            EQUIP_ITEM_DATA = { -- 0x288
+                QUICKSLOTS = { -- 0x8
+                    GA_ITEM_HANDLE = function(index)
+                        return { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x288 + 0x8 + (index * 0x8) }
+                    end,
+                    INDEX = function(index)
+                        return { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x2B0 + 0x288 + 0x8 + (index * 0x8) + 0x4 }
+                    end,
+                },
+                EQUIPPED_GREATRUNE = { _CHR_INS_BASE, UNSIGNED_SHORT, 0x580, 0x2B0 + 0x288 + 0x88 },
+                SELECTED_QUICKSLOT = { _CHR_INS_BASE, UNSIGNED_SHORT, 0x580, 0x2B0 + 0x288 + 0xA0 },
+            },
+        },
+    },
+    FALL_CAMERA = { _CHR_INS_BASE, BIT, 2, 0x1C8 }
+}

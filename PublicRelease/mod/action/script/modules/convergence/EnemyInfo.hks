@@ -1,0 +1,142 @@
+function GetNpcThinkParamId()
+    return GetPointerValue(CHR_INS_BASE.CHR_CTRL.CHR_MANIPULATOR.AI.NPC_THINK_ID)
+end
+
+function GetNpcParamId()
+    return GetPointerValue(CHR_INS_BASE.NPC_PARAM_ID)
+end
+
+local model = -1
+function GetModel()
+    if model ~= -1 then
+        return model
+    end
+    model = GetPointerValue(CHR_INS_BASE.UNKNOWN_OFFSET.CHR_MODEL)
+    return model
+end
+
+local entityId = -1
+function GetEntityId()    
+    if entityId ~= -1 then
+        return entityId
+    end
+    entityId = GetPointerValue(CHR_INS_BASE.EVENT_ENTITY_ID)
+    return entityId
+end
+
+local nonHostileTeams = {
+    [0] = true, -- None
+    [1] = true, -- Player
+    [2] = true, -- White Ghost
+    [5] = true, -- White Ghost
+    [8] = true, -- Ally
+    [10] = true, -- Decoy
+    [11] = true, -- Decoy-like
+    [19] = true, -- Host
+    [20] = true, -- Co-op
+    [22] = true, -- Wandering Phantom
+    [26] = true, -- Friendly NPC
+    [28] = true, -- Co-op NPC
+    [30] = true, -- Object
+    [47] = true, -- Spirit Summon
+}
+
+g_EnemyInfo = {}
+function GetEnemyInfo(chrId)    
+    if g_EnemyInfo ~= nil and next(g_EnemyInfo) ~= nil then
+        return g_EnemyInfo
+    end
+
+    local ChrId = chrId or GetPointerValue(CHR_INS_BASE.UNKNOWN_OFFSET.CHR_MODEL)
+    for i = 1, #CHR_MODEL_DICTIONARY, 1 do
+        if CHR_MODEL_DICTIONARY[i].ChrId == ChrId then
+            g_EnemyInfo = CHR_MODEL_DICTIONARY[i]
+            return g_EnemyInfo
+        end
+    end
+end
+
+local threatLevel = -1 
+function GetThreatLevel(targetFunc)
+    if threatLevel ~= -1 then
+        return threatLevel
+    end
+
+    local func = targetFunc or GetPointerValue
+
+    if env(GetSpEffectID, 40500) == TRUE then
+        threatLevel = ThreatLevel.BossEnemy
+        return threatLevel
+    end
+
+    local npcParamID = func(CHR_INS_BASE.NPC_PARAM_ID)
+    if npcParamID == 0 then
+        threatLevel = ThreatLevel.None
+        return threatLevel
+    end
+
+    local teamType = func(CHR_INS_BASE.TEAM_TYPE)
+    if teamType == 7 then
+        threatLevel = ThreatLevel.BossEnemy
+        return threatLevel
+    elseif nonHostileTeams[teamType] then
+        threatLevel = ThreatLevel.LesserEnemy
+        return threatLevel
+    end
+
+
+    local ChrId = func(CHR_INS_BASE.UNKNOWN_OFFSET.CHR_MODEL)
+    local enemyInfo = GetEnemyInfo(ChrId)
+    if enemyInfo ~= nil then
+        threatLevel = enemyInfo.ThreatLevel
+        return threatLevel
+    end
+
+    Log("GetThreatLevel: No threat level found for ChrId:", ChrId)
+    threatLevel = ThreatLevel.LesserEnemy
+    return threatLevel
+end
+
+local hasDisabledAI = false
+function PsudoDisableAI(triggerSpEffect, doThreatSpEffect, doStagger)
+    if GetModel() == 0 and env(IsCOMPlayer) == FALSE then
+        return
+    elseif env(GetSpEffectType, 901) == TRUE then
+        if hasDisabledAI then
+            return
+        end
+    elseif env(GetSpEffectID, triggerSpEffect) == FALSE then
+        if not hasDisabledAI then
+            return
+        end
+        hasDisabledAI = false
+        SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_ATTACK, FALSE)
+        SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_MOVE, FALSE)
+        return
+    end
+
+    hasDisabledAI = true
+    if doThreatSpEffect then
+        act(AddSpEffect, triggerSpEffect + GetThreatLevel())
+        act(ClearSpEffect, triggerSpEffect)
+    end
+    
+    SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_ATTACK, TRUE)
+    SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_MOVE, TRUE)
+    if doStagger then
+        ForceSmallestStagger()
+    end
+end
+
+function DealCalculatedDamage(damage)
+    SetParamValue(PARAM.SpEffectParam.CHANGE_HP_FLAT, 100657, damage)
+    act(AddSpEffect, 100657)
+end
+
+function ForceKill()
+    DealCalculatedDamage(env(GetHP))
+end
+
+function FullHeal()
+    DealCalculatedDamage(-(env(GetMaxHP) - env(GetHP())))
+end

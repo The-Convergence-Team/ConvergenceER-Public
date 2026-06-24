@@ -1,0 +1,425 @@
+__giantsflameSpells = {
+    -- Faint Rune
+    [6000] = { SpEffects =         nil, RestoreFpCost = nil }, -- Catch Flame
+    [6010] = { SpEffects =         nil, RestoreFpCost = nil }, -- Flame Sling
+    [6030] = { SpEffects =         nil, RestoreFpCost = nil }, -- Flame Whirl
+    [6080] = { SpEffects = { 
+        1608000, -- Flaming Armament (0 FTH)
+        1608003, -- Flaming Armament (40 FTH)
+        1608004, -- Flaming Armament (60 FTH)
+    }, RestoreFpCost = nil },
+    -- Shimmering Rune
+    [6190] = { SpEffects =         nil, RestoreFpCost = nil }, -- Flame Surge
+    [6001] = { SpEffects =         nil, RestoreFpCost = nil }, -- Great Flame
+    [6060] = { SpEffects = { 1606000 }, RestoreFpCost = nil }, -- Giantsflame Protection
+    [6040] = { SpEffects =         nil, RestoreFpCost = nil }, -- Purging Flames
+    -- Glowing Rune
+    [7900] = { SpEffects = { 1790000 }, RestoreFpCost = nil }, -- Fire's Deadly Sin
+    [6020] = { SpEffects =         nil, RestoreFpCost = nil }, -- Flame Scatter
+    [6110] = { SpEffects =         nil, RestoreFpCost = nil }, -- Flame of the Fell God
+    [6100] = { SpEffects =         nil, RestoreFpCost = nil }, -- Great Flame Sling
+    -- Shining Rune
+    [6120] = { SpEffects =         nil, RestoreFpCost = nil }, -- Flame Pillars
+    [6140] = { SpEffects =         nil, RestoreFpCost = nil }, -- Flame Strike
+    [6130] = { SpEffects =         nil, RestoreFpCost = nil }, -- Fell Missile
+    [6050] = { SpEffects = { 1605000 }, RestoreFpCost = nil }, -- Stoke the Flames
+    -- Radiant Rune
+    [6031] = { SpEffects =         nil, RestoreFpCost = nil }, -- Incinerate
+    [6070] = { SpEffects = { 1607000 }, RestoreFpCost = 24 }, -- Cyclopean Prophecy
+    [6111] = { SpEffects =         nil, RestoreFpCost = nil }, -- Anger of the Fell God
+    -- Shadow Rune
+    [2007800] = { SpEffects =         nil, RestoreFpCost = nil }, -- Fire Serpent
+    [2007810] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rain of Fire
+    [2007820] = { SpEffects =         nil, RestoreFpCost = nil }, -- Messmer's Orb
+    [6191] = { SpEffects =         nil, RestoreFpCost = nil }, -- Serpent Flame Surge
+    [6150] = { SpEffects =         nil, RestoreFpCost = nil }, -- Abyssal Flame Dance
+
+    -- Etc
+    [7000] = { SpEffects =         nil, RestoreFpCost = nil }, -- Dragonfire
+    [7001] = { SpEffects =         nil, RestoreFpCost = nil }, -- Agheel's Flame
+}
+
+__fundiSpells = {
+    -- Faint Rune
+    [6400] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rejection
+    [6610] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rune Shards
+    [6750] = { SpEffects =         nil, RestoreFpCost = nil }, -- Sacred Ground
+    [6790] = { {
+        1679000, -- Blessing of Grace
+        1679005, -- Blessing of Grace (Greater)
+    }, true  },
+    [6740] = { SpEffects = { 1674000 }, RestoreFpCost = nil }, -- Immutable Shield
+    -- Shimmering Rune
+    [6420] = { SpEffects =         nil, RestoreFpCost = nil }, -- Urgent Heal
+    [6700] = { SpEffects =         nil, RestoreFpCost = nil }, -- Discus of Light
+    [6770] = { SpEffects = { 1677000 }, RestoreFpCost = nil }, -- Order's Blade
+    [6730] = { SpEffects =         nil, RestoreFpCost = nil }, -- Law of Regression
+    [6791] = { {
+        1679100, -- Blessing of Protection
+        1679105, -- Blessing of Protection (Greater)
+    }, true  },
+    -- Glowing Rune
+    [6410] = { SpEffects =         nil, RestoreFpCost = nil }, -- Wrath of Gold
+    [6701] = { SpEffects =         nil, RestoreFpCost = nil }, -- Triple Rings of Light
+    [6641] = { SpEffects =         nil, RestoreFpCost = nil }, -- Morgott's Spear
+    [6422] = { SpEffects =         nil, RestoreFpCost = nil }, -- Great Heal
+    [6792] = { {
+        1679200, -- Blessing of Wisdom
+        1679205, -- Blessing of Wisdom (Greater)
+    }, true  },
+    -- Shining Rune
+    [6760] = { {
+        1676000, -- Law of Causality
+        1676005, -- Law of Causality (Chained)
+    }, false },
+    [6741] = { SpEffects =         nil, RestoreFpCost = nil }, -- Golden Displacement
+    [6710] = { SpEffects =         nil, RestoreFpCost = nil }, -- Radagon's Rings of Light
+    [6423] = { SpEffects =         nil, RestoreFpCost = nil }, -- Lord's Heal
+    [6793] = { {
+        1679300, -- Blessing of Power
+        1679305, -- Blessing of Power (Greater)
+    }, true  },
+    -- Radiant Rune
+    [6640] = { SpEffects =         nil, RestoreFpCost = nil }, -- Golden Spear
+    [6630] = { SpEffects =         nil, RestoreFpCost = nil }, -- Elden Blade
+    [6720] = { SpEffects =         nil, RestoreFpCost = nil }, -- Elden Stars
+    [6424] = { SpEffects =         nil, RestoreFpCost = nil }, -- Erdtree Heal
+    [6794] = { SpEffects = { 
+        1679405, -- Elden Benediction (No Blessing)
+        1679005, -- Blessing of Grace (Greater)
+        1679105, -- Blessing of Protection (Greater)
+        1679205, -- Blessing of Wisdom (Greater)
+        1679305, -- Blessing of Power (Greater)
+    }, RestoreFpCost = 30 },
+    -- Shadow Rune
+    [2006400] = { SpEffects =         nil, RestoreFpCost = nil }, -- Heal From Afar
+    [2006670] = { SpEffects =         nil, RestoreFpCost = nil }, -- Minor Erdtree
+    [2006690] = { SpEffects =         nil, RestoreFpCost = nil }, -- Wrath From Afar
+    [2006710] = { SpEffects =         nil, RestoreFpCost = nil }, -- Multilayered Ring of Light
+
+    -- Other
+    [2006700] = { SpEffects =         nil, RestoreFpCost = nil }, -- Light of Miquella
+}
+
+__bestialSpells = {
+    -- Faint Rune
+    [6821] = { SpEffects =         nil, RestoreFpCost = nil }, -- Beast Talons
+    [6800] = { SpEffects =         nil, RestoreFpCost = nil }, -- Gravel Sling
+    [6801] = { SpEffects =         nil, RestoreFpCost = nil }, -- Stone Throw
+    [7510] = { SpEffects =         nil, RestoreFpCost = nil }, -- Crucible Horn
+    [2007740] = { SpEffects =         nil, RestoreFpCost = nil }, -- Crucible Feathers
+    -- Shimmering Rune
+    [6822] = { SpEffects =         nil, RestoreFpCost = nil }, -- Savage Lunge
+    [6820] = { SpEffects =         nil, RestoreFpCost = nil }, -- Beast Claw
+    [6840] = { {
+        1684000, -- Crucible Vitality
+        1684050, -- Crucible Vitality (Greater)
+    }, false }, 
+    [6860] = { SpEffects =         nil, RestoreFpCost = nil }, -- Earthen Spikes
+    [2006650] = { SpEffects =         nil, RestoreFpCost = nil }, -- Crucible Quills
+    -- Glowing Rune
+    [6891] = { SpEffects =         nil, RestoreFpCost = nil }, -- Stone Spears
+    [6850] = { { 
+        1685000, -- Bestial Strength
+        1685050, -- Bestial Strength (Greater)
+    }, false }, -- Bestial Strength
+    [6871] = { SpEffects =         nil, RestoreFpCost = nil }, -- Seismic Instability
+    [7500] = { SpEffects =         nil, RestoreFpCost = nil }, -- Crucible Tail
+    [6842] = { {
+        1684200, -- Stone Skin
+        1684210, -- Stone Skin (Greater)
+        1684220, -- Stone Skin (Greater 1)
+    }, false },
+    -- Shining Rune
+    [6810] = { SpEffects =         nil, RestoreFpCost = nil }, -- Stone of Gurranq
+    [6890] = { SpEffects =         nil, RestoreFpCost = nil }, -- Crucible Spear
+    [6841] = { { 
+        1684100, -- Crucible Regeneration
+        1684150, -- Crucible Regeneration (Greater)
+    }, false }, 
+    [6861] = { SpEffects =         nil, RestoreFpCost = nil }, -- Landslide
+    [6830] = { SpEffects =         nil, RestoreFpCost = nil }, -- Gurranq's Beast Claw
+    -- Radiant Rune
+    [6870] = { SpEffects =         nil, RestoreFpCost = nil }, -- Earthquake
+    [6811] = { SpEffects =         nil, RestoreFpCost = nil }, -- Boulder Volley
+    [6851] = { SpEffects = { 1685100 }, RestoreFpCost = 24 }, -- Bestial Fervor
+    [6852] = { SpEffects = { 1685200 }, RestoreFpCost = 24 }, -- Source of Creation
+    [2006800] = { SpEffects =         nil, RestoreFpCost = nil }, -- Roar of Rugalea
+    -- Shadow Rune
+    [2007700] = { SpEffects =         nil, RestoreFpCost = nil }, -- Crucible Arcs
+    [2007750] = { SpEffects =         nil, RestoreFpCost = nil }, -- Horn Spike
+    [2007710] = { SpEffects =         nil, RestoreFpCost = nil }, -- Giant Crucible Arc
+    [2007720] = { SpEffects =         nil, RestoreFpCost = nil }, -- Spira
+    [2007760] = { SpEffects =         nil, RestoreFpCost = nil }, -- Immortal Coil
+
+    -- Etc
+    [7060] = { SpEffects =         nil, RestoreFpCost = nil }, -- Dragonclaw (unused)
+    [7080] = { SpEffects =         nil, RestoreFpCost = nil }, -- Dragonmaw
+    [7090] = { SpEffects =         nil, RestoreFpCost = nil }, -- Greyoll's Roar 
+}
+
+__cultSpells = {
+    -- Faint Rune
+    [6901] = { SpEffects =         nil, RestoreFpCost = nil }, -- Lightning Channel
+    [6930] = { SpEffects =         nil, RestoreFpCost = nil }, -- Honed Bolt
+    [6900] = { SpEffects =         nil, RestoreFpCost = nil }, -- Lightning Spear
+    [6960] = { SpEffects = { 1696000 }, RestoreFpCost = 15 }, -- Electrify Armament
+    [2006920] = { SpEffects = { 21692000 }, RestoreFpCost = 38 }, -- Electrocharge
+    -- Shimmering Rune
+    [6920] = { SpEffects =         nil, RestoreFpCost = nil }, -- Lightning Strike
+    [6971] = { SpEffects = { 1697105 }, RestoreFpCost = nil }, -- Dragonbolt Blessing
+    [6902] = { SpEffects =         nil, RestoreFpCost = nil }, -- Lightning Orb
+    [6991] = { SpEffects =         nil, RestoreFpCost = nil }, -- Gathering Current
+    [2006900] = { SpEffects =      nil, RestoreFpCost = nil }, -- Knight's Lightning Spear
+    -- Glowing Rune
+    [6931] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ancient Honed Bolt
+    [6940] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ancient Lightning Stake
+    [6932] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ancient Lightning Beacon
+    [6992] = { SpEffects =         nil, RestoreFpCost = nil }, -- Electrocution
+    -- Shining Rune
+    [6922] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ancient Lightning Strike
+    [6903] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ancient Lightning Spear
+    [6970] = { SpEffects = { 1697001 }, RestoreFpCost = nil }, -- Vyke's Dragonbolt
+    [6990] = { {
+        1699015, -- Time Warp 15 stacks
+        1699014, -- Time Warp 14 stacks
+        1699013, -- Time Warp 13 stacks
+        1699012, -- Time Warp 12 stacks
+        1699011, -- Time Warp 11 stacks
+        1699010, -- Time Warp 10 stacks
+        1699009, -- Time Warp 9 stacks
+        1699008, -- Time Warp 8 stacks
+        1699007, -- Time Warp 7 stacks
+        1699006, -- Time Warp 6 stacks
+        1699005, -- Time Warp 5 stacks
+        1699004, -- Time Warp 4 stacks
+        1699003, -- Time Warp 3 stacks
+        1699002, -- Time Warp 2 stacks
+        1699001, -- Time Warp 1 stacks 
+    }, false },
+    -- Radiant Rune
+    [6941] = { SpEffects =         nil, RestoreFpCost = nil }, -- Fortissax's Lightning Stake
+    [6910] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ancient Lightning Storm
+    [2006910] = { SpEffects =      nil, RestoreFpCost = nil }, -- Dragonbolt of Florissax (Bullet ?)
+    [6993] = { SpEffects = {
+        1699301, -- Ageless Innervation (2%)
+        1699302, -- Ageless Innervation (4%)
+        1699303, -- Ageless Innervation (6%)
+        1699304, -- Ageless Innervation (8%)
+        1699305, -- Ageless Innervation (10%)
+        1699306, -- Ageless Innervation (12%)
+        1699307, -- Ageless Innervation (14%)
+        1699308, -- Ageless Innervation (16%)
+        1699309, -- Ageless Innervation (18%)
+        1699310, -- Ageless Innervation (20%)
+        1699311, -- Ageless Innervation (22%)
+        1699312, -- Ageless Innervation (24%)
+        1699313, -- Ageless Innervation (26%)
+        1699314, -- Ageless Innervation (28%)
+        1699315, -- Ageless Innervation (30%)
+    }, RestoreFpCost = nil },
+    -- Shadow Rune
+    [5041] = { SpEffects =         nil, RestoreFpCost = nil }, -- Death Spark
+    [5042] = { SpEffects = { 1504200 }, RestoreFpCost = nil }, -- Death Knight's Supplication
+    [5043] = { SpEffects =         nil, RestoreFpCost = nil }, -- Death Lightning Stake
+    [5044] = { SpEffects =         nil, RestoreFpCost = nil }, -- Death Lightning Barrage
+
+    -- Other
+    [6981] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ire of the Dragon God
+    [6980] = { SpEffects =         nil, RestoreFpCost = nil }, -- Will of the Lichdragon
+    [5040] = { SpEffects =         nil, RestoreFpCost = nil }, -- Death Lightning Storm
+}
+
+__godskinSpells = {
+    -- Faint Rune
+    [6200] = { SpEffects =         nil, RestoreFpCost = nil }, -- Black Flame Dart
+    [6201] = { SpEffects =         nil, RestoreFpCost = nil }, -- Black Flame Burst
+    [6250] = { SpEffects = { 1625000 }, RestoreFpCost = nil }, -- Black Flame Blade
+    -- Shimmering Rune
+    [6210] = { SpEffects =         nil, RestoreFpCost = nil }, -- Black Flame Orb
+    [6230] = { SpEffects =         nil, RestoreFpCost = nil }, -- Scouring Black Flame
+    [6290] = { SpEffects =         nil, RestoreFpCost = nil }, -- Soul Sear
+    [6211] = { SpEffects =         nil, RestoreFpCost = nil }, -- Burrowing Black Flame
+    -- Glowing Rune
+    [6280] = { SpEffects =         nil, RestoreFpCost = nil }, -- Black Flame Mortar
+    [6260] = { SpEffects = { 1626000 }, RestoreFpCost = nil }, -- Blessing of Gloam
+    [6240] = { SpEffects =         nil, RestoreFpCost = nil }, -- Black Flame Ritual
+    [6270] = { SpEffects =         nil, RestoreFpCost = nil }, -- Noble Presence
+    -- Shining Rune
+    [6220] = { SpEffects =         nil, RestoreFpCost = nil }, -- Black Firestorm
+    [6231] = { SpEffects =         nil, RestoreFpCost = nil }, -- Black Flame Wave
+    [6202] = { SpEffects =         nil, RestoreFpCost = nil }, -- Godslayer Sickle
+    [6292] = { SpEffects =         nil, RestoreFpCost = nil }, -- Soul Annihilation
+    -- Radiant Rune
+    [6293] = { SpEffects =         nil, RestoreFpCost = nil }, -- Dusk Bolt
+    [6291] = { SpEffects =         nil, RestoreFpCost = nil }, -- Deicide
+    [6261] = { SpEffects = { 1626100 }, RestoreFpCost = 30 }, -- Godslayer's Devotion
+    [6262] = { SpEffects = { 1626200 }, RestoreFpCost = 22 }, -- Wrath of the Queen
+    -- Shadow Rune
+    [6221] = { SpEffects =         nil, RestoreFpCost = nil }, -- Twilight Wisp
+    [6224] = { SpEffects =         nil, RestoreFpCost = nil }, -- Soul Tether
+    [6222] = { SpEffects =         nil, RestoreFpCost = nil }, -- Entwined Flare
+    [6223] = { SpEffects =         nil, RestoreFpCost = nil }, -- Twilight Vortex
+    [6225] = { SpEffects =         nil, RestoreFpCost = nil }, -- Sever the Thread
+
+    -- Other
+    [7530] = { SpEffects =         nil, RestoreFpCost = nil }, -- Black Blade
+}
+
+__frenzySpells = {
+    -- Faint Rune
+    [7321] = { SpEffects =         nil, RestoreFpCost = nil }, -- Frenzied Flare
+    [7301] = { SpEffects =         nil, RestoreFpCost = nil }, -- Touch of Frenzy
+    [7310] = { SpEffects =         nil, RestoreFpCost = nil }, -- The Flame of Frenzy
+    [7322] = { SpEffects =         nil, RestoreFpCost = nil }, -- Mind Melt
+    -- Shimmering Rune
+    [7320] = { SpEffects =         nil, RestoreFpCost = nil }, -- Frenzied Burst
+    [7331] = { SpEffects =         nil, RestoreFpCost = nil }, -- Mark of Frenzy
+    [7350] = { SpEffects = { 1735000 }, RestoreFpCost = nil }, -- Deranged Fury
+    [7300] = { SpEffects =         nil, RestoreFpCost = nil }, -- Inescapable Frenzy
+    -- Glowing Rune
+    [7323] = { SpEffects =         nil, RestoreFpCost = nil }, -- Hyetta's Flare
+    [7330] = { SpEffects = { 1733010 }, RestoreFpCost = nil }, -- Howl of Shabriri
+    [7390] = { SpEffects = { 1739000 }, RestoreFpCost = nil }, -- Frenzied Flame Blade
+    [7332] = { SpEffects =         nil, RestoreFpCost = nil }, -- Tendrils of Shabriri
+    -- Shining Rune
+    [7341] = { SpEffects =         nil, RestoreFpCost = nil }, -- Three Finger Flare
+    [7311] = { SpEffects =         nil, RestoreFpCost = nil }, -- Unendurable Frenzy
+    [7360] = { SpEffects =         nil, RestoreFpCost = nil }, -- Eye of Frenzy
+    [7351] = { SpEffects =         nil, RestoreFpCost = nil }, -- Disintegration
+    -- Radiant Rune
+    [2007320] = { SpEffects =      nil, RestoreFpCost = nil }, -- Maddening Orb
+    [7361] = { SpEffects =         nil, RestoreFpCost = nil }, -- Eye of Chaos
+    [7380] = { SpEffects = { 1738000 }, RestoreFpCost = 24 }, -- Heart of Chaos
+    [7381] = { SpEffects = { 1738100 }, RestoreFpCost = 24 }, -- Three Finger's Embrace
+    -- Shadow Rune
+    [2007310] = { SpEffects =      nil, RestoreFpCost = nil }, -- Frenzied Lunge
+    [2007330] = { SpEffects =      nil, RestoreFpCost = nil }, -- Terrifying Presence
+    [7312] = { SpEffects =         nil, RestoreFpCost = nil }, -- Chaos Beam
+    [7370] = { SpEffects =         nil, RestoreFpCost = nil }, -- Apocalyptic Flames
+
+    -- Other
+    [2007300] = { SpEffects =      nil, RestoreFpCost = nil }, -- Midra's Exaltation
+}
+
+__bloodflameSpells = {
+    -- Faint Rune
+    [6301] = { SpEffects =         nil, RestoreFpCost = nil }, -- Blood Seeker
+    [6300] = { SpEffects =         nil, RestoreFpCost = nil }, -- Bloodflame Talons
+    [6322] = { SpEffects =         nil, RestoreFpCost = nil }, -- Siphon the Formless
+    [6320] = { SpEffects = { 1632000 }, RestoreFpCost = nil }, -- Bloodflame Blade
+    -- Shimmering Rune
+    [6311] = { SpEffects =         nil, RestoreFpCost = nil }, -- Bloodboon Spray
+    [6324] = { SpEffects = { 1632400 }, RestoreFpCost = nil }, -- Dynastic Replenishment
+    [6303] = { SpEffects =         nil, RestoreFpCost = nil }, -- Boiling Blood
+    [6325] = { SpEffects =         nil, RestoreFpCost = nil }, -- Purifying Cautery
+    -- Glowing Rune
+    [6312] = { SpEffects =         nil, RestoreFpCost = nil }, -- Bloodboon Slash
+    [6302] = { SpEffects =         nil, RestoreFpCost = nil }, -- Sanguine Pull
+    [6314] = { SpEffects =         nil, RestoreFpCost = nil }, -- Bloodflame Outburst
+    [6304] = { SpEffects = { 1630400 }, RestoreFpCost = nil }, -- Dynastic Sacrament
+    [2006300] = { SpEffects =      nil, RestoreFpCost = nil }, -- Bloodflame Scythe
+    -- Shining Rune
+    [6323] = { SpEffects = { 1632300 }, RestoreFpCost = nil }, -- Outer Realm's Gift
+    [6321] = { SpEffects =         nil, RestoreFpCost = nil }, -- Hex of Mohgwyn
+    [6313] = { SpEffects =         nil, RestoreFpCost = nil }, -- Bloodflame Missile
+    [6350] = { SpEffects =         nil, RestoreFpCost = nil }, -- Bloodflame Scatter
+    -- Radiant Rune
+    [6315] = { SpEffects =         nil, RestoreFpCost = nil }, -- Blood Rain
+    [6360] = { SpEffects =         nil, RestoreFpCost = nil }, -- Nihil
+    [6370] = { SpEffects = { 1637000 }, RestoreFpCost = 24 }, -- Blood Pact
+    [6371] = { SpEffects = { 1637100 }, RestoreFpCost = 24 }, -- Hidden Mother's Blessing
+    -- Shadow Rune
+    [2006310] = { SpEffects =      nil, RestoreFpCost = nil }, -- Bloodboon Quagmire
+    [2006320] = { SpEffects =      nil, RestoreFpCost = nil }, -- Seeker Swarm
+    [2006340] = { SpEffects =      nil, RestoreFpCost = nil }, -- Fiendish Ritual
+    [2006330] = { SpEffects =      nil, RestoreFpCost = nil }, -- Sanguine Traversal
+    [2006350] = { SpEffects =      nil, RestoreFpCost = nil }, -- Blood of the Maiden
+}
+
+__rotSpells = {
+    -- Faint Rune
+    [7220] = { SpEffects =         nil, RestoreFpCost = nil }, -- Poison Mist
+    [7211] = { SpEffects =         nil, RestoreFpCost = nil }, -- Poison Dart
+    [7210] = { SpEffects =         nil, RestoreFpCost = nil }, -- Swarm of Flies
+    [7230] = { SpEffects = { 1723000 }, RestoreFpCost = nil }, -- Poison Armament
+    -- Shimmering Rune
+    [7250] = { SpEffects = {
+        1725000, -- Chitinous Shell
+        1725010, -- Chitinous Shell (Aspect of the Scorpion)
+        1725020, -- Chitinous Shell (Blessing of the Sealed God)
+    }, RestoreFpCost = nil },
+    [7200] = { SpEffects =         nil, RestoreFpCost = nil }, -- Pest Threads
+    [7212] = { SpEffects =         nil, RestoreFpCost = nil }, -- Blighted Orb
+    [7222] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rotten Mist
+    [2006660] = { SpEffects =      nil, RestoreFpCost = nil }, -- Miranda Bloom
+    -- Glowing Rune
+    [7252] = { SpEffects =         nil, RestoreFpCost = nil }, -- Convert Corruption
+    [7271] = { SpEffects =         nil, RestoreFpCost = nil }, -- Blighted Contagion
+    [7251] = { SpEffects = {
+        1725100, -- Pest's Tenacity
+        1725110, -- Pest's Tenacity (Aspect of the Scorpion)
+        1725120, -- Pest's Tenacity (Blessing of the Sealed God)
+    }, RestoreFpCost = nil },
+    [7260] = { SpEffects =         nil, RestoreFpCost = nil }, -- Carrion Swarm
+    -- Shining Rune
+    [7292] = { SpEffects = { 1729200 }, RestoreFpCost = nil }, -- Gaze of the Basilisk
+    [7201] = { SpEffects =         nil, RestoreFpCost = nil }, -- Pest Darts
+    [7280] = { SpEffects =         nil, RestoreFpCost = nil }, -- Toxic Spear
+    [7241] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rotten Burst
+    -- Radiant Rune
+    [2007210] = { SpEffects =      nil, RestoreFpCost = nil }, -- Pest-Thread Spears
+    [7270] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rot Spray
+    [7290] = { SpEffects = { 1729000 }, RestoreFpCost = 24 }, -- Aspect of the Scorpion
+    [7291] = { SpEffects = { 1729100 }, RestoreFpCost = 24 }, -- Blessing of the Sealed God
+    -- Shadow Rune
+    [7282] = { SpEffects =         nil, RestoreFpCost = nil }, -- Toxic Rupture
+    [7283] = { SpEffects =         nil, RestoreFpCost = nil }, -- Orb of Pestilience
+    [7284] = { SpEffects =         nil, RestoreFpCost = nil }, -- Pest-Thread Storm
+    [7242] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rotten Cataclysm
+
+    -- Other
+    [7030] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rotten Breath
+    [7031] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ekzykes' Decay
+    [7240] = { SpEffects =         nil, RestoreFpCost = nil }, -- Scarlet Aeonia
+    [2007200] = { SpEffects =      nil, RestoreFpCost = nil }, -- Rotten Butterflies
+    [7281] = { SpEffects =         nil, RestoreFpCost = nil }, -- Scion's Reaping
+}
+
+__mysticSpells = {
+    -- Faint Rune
+    [7400] = { SpEffects =         nil, RestoreFpCost = nil }, -- Soporific Fume
+    [7401] = { SpEffects =         nil, RestoreFpCost = nil }, -- Dream Siphon
+    [7402] = { SpEffects =         nil, RestoreFpCost = nil }, -- Spirit Vapor
+    [7442] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ancestral Conduit
+    -- Shimmering Rune
+    [7410] = { SpEffects = { 1741000 }, RestoreFpCost = nil }, -- Dream Cloak
+    [7413] = { SpEffects = { 1741300 }, RestoreFpCost = 24 }, -- Spirit Link
+    [7450] = { SpEffects =         nil, RestoreFpCost = nil }, -- Spirit Seekers
+    [7421] = { SpEffects =         nil, RestoreFpCost = nil }, -- Blinding Veil
+    -- Glowing Rune
+    [7420] = { SpEffects =         nil, RestoreFpCost = nil }, -- Vapor Spray
+    [7482] = { SpEffects =         nil, RestoreFpCost = nil }, -- Spiritual Equilibrium (has SpEffect but is mutliplayer dependant which can cause weirdness)
+    [7470] = { SpEffects =         nil, RestoreFpCost = nil }, -- Fleeting Vapor-fly 
+    [7432] = { SpEffects =         nil, RestoreFpCost = nil }, -- Recurring Nightmare
+    [7431] = { SpEffects =         nil, RestoreFpCost = nil }, -- Psychic Corrosion
+    -- Shining Rune
+    [7422] = { SpEffects =         nil, RestoreFpCost = nil }, -- Call to Slumber
+    [7430] = { SpEffects =         nil, RestoreFpCost = nil }, -- Bewitch
+    [7414] = { SpEffects =         nil, RestoreFpCost = nil }, -- Psychic Agony
+    [7460] = { SpEffects =         nil, RestoreFpCost = nil }, -- Seeker Salvo
+    -- Radiant Rune
+    [7440] = { SpEffects =         nil, RestoreFpCost = nil }, -- Vapor Wave
+    [7441] = { SpEffects =         nil, RestoreFpCost = nil }, -- Spirit Siphon
+    [7480] = { SpEffects = { 1748000 }, RestoreFpCost = 24 }, -- Spirit Weaving
+    [7481] = { SpEffects = { 1748100 }, RestoreFpCost = 24 }, -- Dream Meld
+    -- Shadow Rune
+    [2007600] = { SpEffects =      nil, RestoreFpCost = nil }, -- Watchful Spirit
+    [7490] = { SpEffects =         nil, RestoreFpCost = nil }, -- Soothing Aura
+    [2007610] = { SpEffects =      nil, RestoreFpCost = nil }, -- Watchful Seekers
+    [7491] = { SpEffects =         nil, RestoreFpCost = nil }, -- Tranquility
+    [7492] = { SpEffects =         nil, RestoreFpCost = nil }, -- Invocation of Saint Trina
+
+    -- Other
+    [7471] = { SpEffects =         nil, RestoreFpCost = nil }, -- Lulling Dart-fly
+}

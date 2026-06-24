@@ -1,0 +1,75 @@
+-- Great Runes
+GREATRUNE_NONE = 0
+GREATRUNE_GODRICK = 191
+GREATRUNE_RADAHN = 192
+GREATRUNE_MORGOTT = 193
+GREATRUNE_RYKARD = 194
+GREATRUNE_MOHG = 195
+GREATRUNE_MALENIA = 196
+function GetGreatRune()
+    return GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_ITEM_DATA.EQUIPPED_GREATRUNE)
+end
+
+function NoGreatRuneDetector()
+    if GetGreatRune() == GREATRUNE_NONE then
+        act(AddSpEffect, 725)
+    end
+end
+
+local armor = {
+    CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.HELMET,
+    CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.ARMOR,
+    CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.GAUNTLETS,
+    CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.LEGGINGS
+}
+
+PHYSICAL_ABSORB_CONTAINER = 
+    { armorOffset = PARAM.EquipParamProtector.PHYSICAL_ABSORB, spEffectOffset1 = PARAM.SpEffectParam.ABSORPTION_STANDARD, spEffectOffset2 = PARAM.SpEffectParam.PVE_PHYSICAL_ABSORB }
+MAGIC_ABSORB_CONTAINER = 
+    { armorOffset = PARAM.EquipParamProtector.MAGIC_ABSORB, spEffectOffset1 = PARAM.SpEffectParam.ABSORPTION_MAGIC, spEffectOffset2 = PARAM.SpEffectParam.PVE_MAGIC_ABSORB }
+FIRE_ABSORB_CONTAINER = 
+    { armorOffset = PARAM.EquipParamProtector.FIRE_ABSORB, spEffectOffset1 = PARAM.SpEffectParam.ABSORPTION_FIRE, spEffectOffset2 = PARAM.SpEffectParam.PVE_FIRE_ABSORB }
+LIGHTNING_ABSORB_CONTAINER = 
+    { armorOffset = PARAM.EquipParamProtector.LIGHTNING_ABSORB, spEffectOffset1 = PARAM.SpEffectParam.ABSORPTION_LIGHTNING, spEffectOffset2 = PARAM.SpEffectParam.PVE_LIGHTNING_ABSORB }
+HOLY_ABSORB_CONTAINER = 
+    { armorOffset = PARAM.EquipParamProtector.HOLY_ABSORB, spEffectOffset1 = PARAM.SpEffectParam.ABSORPTION_HOLY, spEffectOffset2 = PARAM.SpEffectParam.PVE_HOLY_ABSORB }
+function GetTotalAbsorptionBy(container)
+    local damageTaken = 100
+
+    for i = 1, #armor, 1 do
+        local equipID = GetPointerValue(armor[i])
+        if tonumber(equipID) > 19999 then -- Not Naked
+            local physAbsorb = GetParamValue(container.armorOffset, equipID)
+            if physAbsorb ~= 1 then
+                damageTaken = damageTaken * physAbsorb
+            end
+        end
+    end
+
+    local spEffects = GetSpEffectsInfo()
+    for i = 1, #spEffects, 1 do
+        local physAbsorb = GetParamValue(container.spEffectOffset1, spEffects[i].ID)
+        if physAbsorb == nil or physAbsorb == 1 then
+            physAbsorb = GetParamValue(container.spEffectOffset2, spEffects[i].ID)
+        end
+        if physAbsorb ~= nil and physAbsorb ~= 1 then
+            damageTaken = damageTaken * physAbsorb
+        end
+    end
+    return string.format("%.3f", 100 - damageTaken)
+end
+
+function GetCurrentQuickItemId()
+    if not IsInventoryInitialized() then
+        return nil
+    end
+    local selectedIndex = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_ITEM_DATA.SELECTED_QUICKSLOT)
+    local gaItemHandle = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_ITEM_DATA.QUICKSLOTS.GA_ITEM_HANDLE(selectedIndex))
+
+    local isFound, item = TryGetItemByGaItemHandle(gaItemHandle)
+    if not isFound then
+        return nil
+    end
+    
+    return item.Id
+end

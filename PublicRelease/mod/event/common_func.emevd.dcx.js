@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    ""
 // @linked    []
-// @version    3.5
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(90005200, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4, X28_4, X32_4) {
@@ -4346,13 +4346,14 @@ $Event(90005637, Restart, function(X0_4, X4_4, X8_4) {
     RestartEvent();
 });
 
-// ? (DLC)
+// Toggleable Spiritsprings (DLC)
 $Event(90005638, Restart, function(X0_4, X4_4, X8_4) {
-    if (EventFlag(X0_4)) {
-        DisableAsset(X4_4);
-        DisableAsset(X8_4);
-        EndEvent();
-    }
+    SetEventFlagID(X0_4, ON);
+    //if (EventFlag(X0_4)) {
+    DisableAsset(X4_4);
+    DisableAsset(X8_4);
+    EndEvent();
+    //}
 L0:
     EnableAssetInvunerability(X4_4);
     EnableAssetInvunerability(X8_4);
@@ -4433,6 +4434,7 @@ L1:
 });
 
 $Event(90005646, Default, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_1, X21_1, X22_1, X23_1) {
+    DisableNetworkSync();
     EndIf(!PlayerIsInOwnWorld());
     WaitFor(PlayerIsInOwnWorld() && EventFlag(X0_4));
     if (!ThisEventSlot()) {
@@ -4456,7 +4458,12 @@ L1:
         WarpPlayer(X20_1, X21_1, X22_1, X23_1, X16_4, 0);
     }
     else {
-        WarpCharacterAndCopyFloorWithFadeout(10000, TargetEntityType.Area, X16_4, -1, X16_4, false, true);
+        FadeToBlack(1, 0.4, true, 2.4);
+        WaitFixedTimeSeconds(0.4);
+        WarpCharacterAndCopyFloor(10000, TargetEntityType.Area, X16_4, -1, X16_4);
+        WaitFixedTimeSeconds(2.5);
+        FadeToBlack(0, 1.2, false, 0);
+        
     }
     SetPlayerRespawnPoint(X16_4);
     SaveRequest();
@@ -7007,6 +7014,7 @@ $Event(90005799, Restart, function(X0_4, X4_4, X8_1, X12_4, X16_4, X20_4, X24_4)
     IssueEndOfPseudoMultiplayerNotification(true);
 });
 
+// Generic Boss Start Handler - Boss Defeat EventFlagID, Fogwall Entered EventFlagID, Boss Start Region EntityID, Fight Started EventFlagID, Boss EntityID, Fogwall Entry, ActionButtonParam, Fight Started EventFlagID*, Boss Start Region EntityID*
 $Event(9005800, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4, X28_4) {
     if (!EventFlag(X0_4)) {
         WaitFixedTimeFrames(1);
@@ -7066,6 +7074,7 @@ L10:
     RestartEvent();
 });
 
+// Coop Fogwall Entry Prompt - Boss Defeat EventFlagID, Fogwall Asset EntityID, Boss Start Region EntityID, Fight Started EventFlagID, Music Start EventFlagID,ActionButton Source (default 10000)
 $Event(9005801, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4) {
     DisableNetworkSync();
     EndIf(EventFlag(X0_4));
@@ -7098,6 +7107,7 @@ L0:
     RegisterBonfire(X4_4, X12_4, 5, 180, 0, X16_4);
 });
 
+// Fogwall SFX Handler - Boss Defeat EventFlagID, Fogwall Asset EntityID, Fogwall SFX ID (range 2-19), Fight Started EventFlagID*
 $Event(9005811, Restart, function(X0_4, X4_4, X8_4, X12_4) {
     DisableNetworkSync();
     DisableAsset(X4_4);
@@ -7138,6 +7148,7 @@ $Event(9005811, Restart, function(X0_4, X4_4, X8_4, X12_4) {
         && !EventFlag(X0_4);
     if (0 != X12_4) {
         flag2 &= EventFlag(X12_4);
+        SetSpEffect(10000, 2054); // Recall Ash Reset Request
     }
     flag2 &= !EventFlag(X0_4);
     WaitFor(
@@ -7333,6 +7344,7 @@ L1:
         WaitFor(EventFlag(X0_4));
     }
 L2:
+    SetSpEffect(10000, 3450); // Rune Arc 
     if (Signed(X32_4) != 1) {
         SetBossBGM(X4_4, BossBGMState.Stop2);
         EndEvent();
@@ -7376,6 +7388,7 @@ L1:
         WaitFor(EventFlag(X0_4));
     }
 L2:
+    SetSpEffect(10000, 3450); // Rune Arc 
     if (Signed(X32_4) != 1) {
         SetBossBGM(X4_4, BossBGMState.Stop2);
         EndEvent();
@@ -7530,6 +7543,58 @@ L1:
     WaitFixedTimeSeconds(X24_4);
 });
 
+//custom field boss death for music handler
+$Event(90005863, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4, X28_4) {
+    if (Signed(X16_4) != 0) {
+        Unknown200476(X0_4, X16_4);
+    }
+    if (EventFlag(X0_4)) {
+        DisableCharacter(X8_4);
+        DisableCharacterCollision(X8_4);
+        ForceCharacterDeath(X8_4, false);
+        EndIf(!PlayerIsInOwnWorld());
+        EndIf(Signed(X16_4) == 0);
+        WaitFixedTimeSeconds(1);
+        AwardItemsIncludingClients(X16_4);
+        EndEvent();
+    }
+L0:
+    WaitFor(CharacterHPValue(X8_4) <= 0);
+    WaitFixedTimeSeconds(2);
+    PlaySE(X8_4, SoundType.SFX, 888880000);
+    WaitFor(CharacterDead(X8_4));
+    GotoIf(S0, X12_4 == 3);
+    if (X12_4 != 2) {
+        if (X12_4 != 1) {
+            HandleBossDefeatAndDisplayBanner(X8_4, TextBannerType.EnemyFelled);
+            SetSpEffect(10000, 3450);
+            Goto(L1);
+        }
+        HandleBossDefeatAndDisplayBanner(X8_4, TextBannerType.GreatEnemyFelled);
+        SetSpEffect(10000, 3450);
+    }
+    Goto(L1);
+S0:
+    HandleBossDefeatAndDisplayBanner(X8_4, TextBannerType.DemigodFelled);
+    SetSpEffect(10000, 3450);
+    Goto(L1);
+    HandleBossDefeatAndDisplayBanner(X8_4, TextBannerType.LegendFelled);
+    SetSpEffect(10000, 3450);
+L1:
+    SetEventFlagID(X0_4, ON);
+    SetEventFlagID(X24_4, ON);
+    SetEventFlagID(X28_4, OFF);
+    if (X4_4 != 0) {
+        SetEventFlagID(X4_4, ON);
+    }
+    WaitFixedTimeSeconds(5);
+    SetEventFlagID(X24_4, OFF);
+    EndIf(!PlayerIsInOwnWorld());
+    EndIf(Signed(X16_4) == 0);
+    AwardItemsIncludingClients(X16_4);
+    EndEvent();
+});
+
 $Event(90005870, Default, function(X0_4, X4_4, X8_4) {
     DisableNetworkSync();
     WaitFor(
@@ -7670,6 +7735,69 @@ $Event(90005872, Default, function(X0_4, X4_4, X8_4) {
     RestartEvent();
 });
 
+//custom field boss encounter for music handler
+$Event(90005873, Default, function(X0_4, X4_4, X8_4) {
+    DisableNetworkSync();
+    WaitFor(
+        CharacterAIState(X0_4, AIStateType.Combat) && CharacterHPValue(X0_4) > 0 && !EventFlag(9000));
+    GotoIf(L0, !EventFlag(9290));
+    GotoIf(L1, !EventFlag(9291));
+    WaitFixedTimeSeconds(5);
+    RestartEvent();
+L0:
+    SetEventFlagID(9290, ON);
+    WaitFixedTimeSeconds(1);
+    SetEventFlagID(X8_4, ON);
+    DisplayBossHealthBar(Enabled, X0_4, 0, X4_4);
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Forced);
+        SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
+    }
+    WaitFor(
+        !(CharacterAIState(X0_4, AIStateType.Combat))
+            || CharacterDead(X0_4)
+            || EventFlag(9000));
+    if (CharacterDead(X0_4)) {
+        WaitFixedTimeSeconds(3);
+    } else if (!EventFlag(9000)) {
+        WaitFixedTimeSeconds(1);
+    }
+    SetEventFlagID(X8_4, OFF);
+    DisplayBossHealthBar(Disabled, X0_4, 0, X4_4);
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Normal);
+        SetNetworkUpdateRate(X0_4, false, CharacterUpdateFrequency.AtLeastEvery2Frames);
+    }
+    SetEventFlagID(9290, OFF);
+    RestartEvent();
+L1:
+    SetEventFlagID(9291, ON);
+    WaitFixedTimeSeconds(1);
+    SetEventFlagID(X8_4, ON);
+    DisplayBossHealthBar(Enabled, X0_4, 1, X4_4);
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Forced);
+        SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AtLeastEvery2Frames);
+    }
+    WaitFor(
+        !(CharacterAIState(X0_4, AIStateType.Combat))
+            || CharacterDead(X0_4)
+            || EventFlag(9000));
+    if (CharacterDead(X0_4)) {
+        WaitFixedTimeSeconds(3);
+    } else if (!EventFlag(9000)) {
+        WaitFixedTimeSeconds(1);
+    }
+    SetEventFlagID(X8_4, OFF);
+    DisplayBossHealthBar(Disabled, X0_4, 1, X4_4);
+    if (PlayerIsInOwnWorld()) {
+        SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Normal);
+        SetNetworkUpdateRate(X0_4, false, CharacterUpdateFrequency.AtLeastEvery2Frames);
+    }
+    SetEventFlagID(9291, OFF);
+    RestartEvent();
+});
+
 // Custom Boss Death Event
 $Event(90005875, Restart, function(X0_4, X4_4, X8_4) {
     EndIf(EventFlag(X0_4));
@@ -7713,6 +7841,118 @@ L0:
     SetBossBGM(X12_4, BossBGMState.Stop2);
     ResetCharacterPosition(X0_4);
     RestartEvent();
+});
+
+
+// Ambient Music Handler - Map, Map, Map, Map, Passive Music Flag, [Alert Music Flag], [Combat Music Flag]
+$Event(90005877, Default, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4) {
+    DisableNetworkSync();
+    WaitFor(PlayerInMap(X0_4, X4_4, X8_4, X12_4));
+    WaitFixedTimeFrames(2);
+    
+    
+    if (X24_4 > 0 && PlayerTargeted(1, 31, AIStateType.Combat)) {
+        SetEventFlagID(X24_4, ON);
+        WaitFor(!PlayerTargeted(1, 31, AIStateType.Combat));
+        SetEventFlagID(X24_4, OFF);
+        RestartEvent();
+    }
+    else if (X20_4 > 0 && !PlayerTargeted(1, 31, AIStateType.Normal)) {
+        SetEventFlagID(X20_4, ON);
+        WaitFor(PlayerTargeted(1, 31, AIStateType.Normal)
+                || (X24_4 > 0 && PlayerTargeted(1, 31, AIStateType.Combat)));
+        SetEventFlagID(X20_4, OFF);
+        RestartEvent();
+    }
+    else {
+        SetEventFlagID(X16_4, ON);
+        WaitFor((X24_4 > 0 && PlayerTargeted(1, 31, AIStateType.Combat)) ||
+                (X20_4 > 0 && !PlayerTargeted(1, 31, AIStateType.Combat) && !PlayerTargeted(1, 31, AIStateType.Normal))
+                || !PlayerInMap(X0_4, X4_4, X8_4, X12_4));
+        SetEventFlagID(X16_4, OFF);
+        RestartEvent();
+    }
+});
+
+// Ambient Music Handler - Region, Passive Music Flag, [Alert Music Flag], [Combat Music Flag], Boss Entity ID (No Custom Music/Fogwall), Boss Death Event Flag, Silent Music Track Flag (Always include)
+$Event(90005878, Default, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4) {
+    DisableNetworkSync();
+    SetEventFlagID(1099000200, OFF); // Boss Custom Music Active Flag
+    WaitFor(InArea(10000, X0_4));
+    SetEventFlagID(X24_4, OFF);
+    
+    if (X16_4 > 0 && CharacterAIState(X16_4, AIStateType.Combat, 0, 1)) {
+        SetEventFlagID(X24_4, ON);
+        WaitFor(EventFlag(X20_4)
+                || !InArea(10000, X0_4));
+        SetEventFlagID(X24_4, OFF);
+        if (!InArea(10000, X0_4)) {
+            SetEventFlagID(X24_4, ON);
+        }
+        RestartEvent();
+    }
+    else if (X12_4 > 0 && PlayerTargeted(1, 31, AIStateType.Combat)) {
+        SetEventFlagID(X12_4, ON);
+        WaitFor(!PlayerTargeted(1, 31, AIStateType.Combat)
+                || (X16_4 > 0 && CharacterAIState(X16_4, AIStateType.Combat, 0, 1))
+                || !InArea(10000, X0_4)
+                || EventFlag(1099000200));
+        SetEventFlagID(X12_4, OFF);
+        WaitFixedTimeSeconds(1.5); // Necessary delay for Boss Custom Music Active Flag to prioritize over Alert track
+        if (EventFlag(1099000200)) {
+            SetEventFlagID(X24_4, OFF);
+            SetEventFlagID(X8_4, OFF);
+            SetEventFlagID(X4_4, OFF);
+            WaitFor(!EventFlag(1099000200));
+            RestartEvent();
+        }
+        if (!InArea(10000, X0_4)) {
+            SetEventFlagID(X24_4, ON);
+        }
+        RestartEvent();
+    }
+    else if (X8_4 > 0 && !PlayerTargeted(1, 31, AIStateType.Normal)) {
+        SetEventFlagID(X8_4, ON);
+        WaitFor(PlayerTargeted(1, 31, AIStateType.Normal)
+                || (X12_4 > 0 && PlayerTargeted(1, 31, AIStateType.Combat))
+                || (X16_4 > 0 && CharacterAIState(X16_4, AIStateType.Combat, 0, 1))
+                || !InArea(10000, X0_4)
+                || EventFlag(1099000200));
+        SetEventFlagID(X8_4, OFF);
+        WaitFixedTimeSeconds(1.5); // Necessary delay for Boss Custom Music Active Flag to prioritize over Alert track
+        if (EventFlag(1099000200)) {
+            SetEventFlagID(X24_4, OFF);
+            SetEventFlagID(X12_4, OFF);
+            SetEventFlagID(X4_4, OFF);
+            WaitFor(!EventFlag(1099000200));
+            RestartEvent();
+        }
+        if (!InArea(10000, X0_4)) {
+            SetEventFlagID(X24_4, ON);
+        }
+        RestartEvent();
+    }
+    else {
+        SetEventFlagID(X4_4, ON);
+        WaitFor((X12_4 > 0 && PlayerTargeted(1, 31, AIStateType.Combat)) ||
+                (X8_4 > 0 && !PlayerTargeted(1, 31, AIStateType.Combat) && !PlayerTargeted(1, 31, AIStateType.Normal))
+                || (X16_4 > 0 && CharacterAIState(X16_4, AIStateType.Combat, 0, 1))
+                || !InArea(10000, X0_4)
+                || EventFlag(1099000200));
+        SetEventFlagID(X4_4, OFF);
+        WaitFixedTimeSeconds(1.5); // Necessary delay for Boss Custom Music Active Flag to prioritize over Alert track
+        if (EventFlag(1099000200)) {
+            SetEventFlagID(X24_4, OFF);
+            SetEventFlagID(X12_4, OFF);
+            SetEventFlagID(X8_4, OFF);
+            WaitFor(!EventFlag(1099000200));
+            RestartEvent();
+        }
+        if (!InArea(10000, X0_4)) {
+            SetEventFlagID(X24_4, ON);
+        }
+        RestartEvent();
+    }
 });
 
 $Event(90005880, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_1, X21_1, X22_1, X23_1, X24_4) {
@@ -7900,10 +8140,8 @@ $Event(90005890, Restart, function(X0_4, X4_4, X8_4) {
         SetEventFlagID(X4_4, OFF);
     WaitFor(EventFlag(1099000105) && InArea(10000, X8_4));
     SetEventFlagID(X4_4, ON);
-    SetSpEffect(10000, 190);
     WaitFor(EventFlag(X0_4) || !InArea(10000, X8_4));
     SetEventFlagID(X4_4, OFF);
-    ClearSpEffect(10000, 190);
 });
 
 //Erdtree Boss Wall Handler - Boss Defeat Flag, Zoning Event Flag, Wall Asset
@@ -7915,10 +8153,12 @@ $Event(90005891, Restart, function(X0_4, X4_4, X8_4) {
     WaitFor(EventFlag(X4_4));
     EnableAsset(X8_4);
     CreateAssetfollowingSFX(X8_4, 200, 806700);
+    SetSpEffect(10000, 190);
 
     WaitFor(EventFlag(X0_4));
     DisableAsset(X8_4);
     DeleteAssetfollowingSFX(X8_4, true);
+    ClearSpEffect(10000, 190);
 });
 
 //Erdtree Boss Multi-Wall Handler - Boss Defeat Flag, Zoning Event Flag, Wall Asset
@@ -8780,7 +9020,7 @@ $Event(98005309, Restart, function(X0_4, X4_4, X8_4) {
 });
 
 //Erdtree Warps - Enemy, Obj, Guardian
-$Event(9005995, Restart, function(X0_4, X4_4, X8_4) {
+$Event(9005995, Default, function(X0_4, X4_4, X8_4) {
     // - - - Unlocking Warp - - -
     if (!EventFlag(X8_4)) {
         DisableCharacter(X0_4);
@@ -8950,8 +9190,8 @@ $Event(9005995, Restart, function(X0_4, X4_4, X8_4) {
     else if (EventFlag(97016)) {
         SetEventFlagID(97016, OFF);
        if (EventFlag(12010805))
-            WarpPlayer(12, 1, 0, 0, 12010600, 60);
-       else WarpPlayer(12, 1, 0, 0, 12010601, 60);
+            WarpPlayer(12, 1, 0, 0, 12010650, 60);
+       else WarpPlayer(12, 1, 0, 0, 12010651, 60);
     }
     //Deeproot Depths
     else if (EventFlag(97018)) {
@@ -9079,7 +9319,7 @@ $Event(9006900, Default, function(X0_4, X4_4, X8_4) {
     }
     
     SetSpEffect(20000, 9000050); // Trigger WeaponID application to itemlots
-    WaitFixedTimeFrames(1);
+    WaitFor(CharacterHasSpEffect(20000, 9000050, Less, 1));
     ClearSpEffect(10000, 335);
     ClearSpEffect(10000, 336);
     
@@ -9236,21 +9476,142 @@ $Event(20000344, Default, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4,
     SetEventFlagID(X0_4, ON);
     EndIf(Signed(X20_4) <= 0);
     DisplayGenericDialog(X20_4, PromptType.YESNO, NumberofOptions.NoButtons, 10000, 1);
-})
+});
 
 // Enable Collision when not in Region - Collision EntityID, Region EntityID
 $Event(20000345, Restart, function(X0_4, X4_4) {
+    DisableNetworkSync();
     EnableHit(X0_4);
     WaitFor(InArea(10000, X4_4));
     DisableHit(X0_4);
     WaitFor(!InArea(10000, X4_4));
     RestartEvent();
-})
+});
 // Enable Collision when in Region - Collision EntityID, Region EntityID
 $Event(20000346, Restart, function(X0_4, X4_4) {
+    DisableNetworkSync();
     DisableHit(X0_4);
     WaitFor(InArea(10000, X4_4));
     EnableHit(X0_4);
     WaitFor(!InArea(10000, X4_4));
     RestartEvent();
-})
+});
+
+// Enable Asset when not in Region - Asset EntityID, Region EntityID
+$Event(20000347, Restart, function(X0_4, X4_4) {
+    DisableNetworkSync();
+    EnableAsset(X0_4);
+    WaitFor(InArea(10000, X4_4));
+    DisableAsset(X0_4);
+    WaitFor(!InArea(10000, X4_4));
+    RestartEvent();
+});
+// Enable Asset when in Region - Asset EntityID, Region EntityID
+$Event(20000348, Restart, function(X0_4, X4_4) {
+    DisableNetworkSync();
+    DisableAsset(X0_4);
+    WaitFor(InArea(10000, X4_4));
+    EnableAsset(X0_4);
+    WaitFor(!InArea(10000, X4_4));
+    RestartEvent();
+});
+
+// Enable Characters when in region, reset on bonfire
+$Event(20000349, Restart, function(enemyEntityId, regionEntityId) {
+    DisableCharacter(enemyEntityId);
+    WaitFor(InArea(20000, regionEntityId));
+    EnableCharacter(enemyEntityId);
+});
+
+// Jewel Altar Setup
+$Event(20000350, Restart, function(vfxEntityId, actionbuttonAsset, typeEventFlag, typeDefeatEventFlag, altarTalkDummy, altarVfx) {
+    if (EventFlag(typeDefeatEventFlag)) {
+        DeleteMapSFX(vfxEntityId, true);
+        EnableCharacter(altarTalkDummy);
+        SpawnMapSFX(altarVfx);
+        EndEvent();
+    }
+    else if (EventFlag(typeEventFlag) && EventFlag(2055550800)) {
+        SetNetworkconnectedEventFlagID(2055550800, OFF); // Respawn Boss for next time
+        SetNetworkconnectedEventFlagID(2055550100, OFF); // Fight no longer active
+        SetNetworkconnectedEventFlagID(typeDefeatEventFlag, ON); // You defeated this shrine
+        SetNetworkconnectedEventFlagID(typeEventFlag, OFF); // Remove mark of which type is active
+        RestartEvent();
+    }
+    
+    DisableCharacter(altarTalkDummy);
+    DisableCharacterDefaultBackread(altarTalkDummy);
+    if (ThisEventSlot() && !EventFlag(typeEventFlag) && AnyBatchEventFlags(2055550101, 2055550109)) { // A fight of a different element is active
+        DeleteMapSFX(vfxEntityId, false);
+        WaitFor(!EventFlag(2055550100) || ElapsedSeconds(3)); // Fight is no longer active
+        if (EventFlag(2055550100)) { // Every 5 seconds, ping the flag to see if it gets turned back on or not
+            SetNetworkconnectedEventFlagID(2055550100, OFF);
+            WaitFixedTimeSeconds(2);
+            RestartIf(EventFlag(2055550100));
+        }
+        SpawnMapSFX(vfxEntityId);
+    }
+    
+    WaitFor(ActionButtonInArea(209601, actionbuttonAsset));
+    SetNetworkconnectedEventFlagID(2055550100, OFF);
+    
+    RotateCharacter(10000, vfxEntityId, -1, true);
+    SetSpEffect(10000, 103011);
+    FadeToBlack(0, 0, true, -1); // Freeze player
+    WaitFixedTimeSeconds(0.5);
+    
+    if (EventFlag(2055550100) && !EventFlag(typeEventFlag) && AnyBatchEventFlags(2055550101, 2055550109)) {
+        SetThisEventSlot(ON);
+        WaitFixedTimeFrames(95);
+        DisplayBlinkingMessage(30023); // Held shut by a seal
+        SetSpEffect(10000, 103049);
+        WaitFixedTimeFrames(82);
+        FadeToBlack(0, 0, false, 0); // Unfreeze player
+        RestartEvent();
+    }
+    SpawnOneshotSFX(TargetEntityType.Area, vfxEntityId, -1, 675800);
+    WaitFixedTimeSeconds(5.6);
+    BatchSetNetworkconnectedEventFlags(2055550101, 2055550109, OFF); // Reset Marks
+    SetNetworkconnectedEventFlagID(typeEventFlag, ON); // Mark which element is active
+    
+    WarpPlayer(31, 81, 0, 0, 3181002001, 60);
+    SaveRequest();
+});
+
+// Jewel Altar Candles
+$Event(20000351, Default, function(shrineUnlockedEventFlag, jewelBoughtEventFlag, candleEntityId, flameSFX) {
+    DisableNetworkSync();
+    EndIf(EventFlag(jewelBoughtEventFlag));
+    WaitFor(EventFlag(shrineUnlockedEventFlag));
+    DeleteAssetfollowingSFX(candleEntityId, false);
+    CreateAssetfollowingSFX(candleEntityId, 200, flameSFX);
+    WaitFor(EventFlag(jewelBoughtEventFlag));
+    DeleteAssetfollowingSFX(candleEntityId, false);
+});
+
+//Mimics
+$Event(20000352, Restart, function(X0_4) {
+    WaitFor(
+        CharacterHasSpEffect(X0_4, 11706)
+        && ActionButtonInArea(8100, X0_4)
+            && !CharacterType(10000, TargetType.BlackPhantom));
+    WarpCharacterAndCopyFloor(10000, TargetEntityType.Character, X0_4, 100, 10000);
+    RotateCharacter(10000, X0_4, -1, false);
+    ForceAnimationPlayback(10000, 60080, false, false, false, 0, 1);
+    ForceAnimationPlayback(X0_4, 3000, false, false, false, 0, 1);
+    RestartEvent();
+});
+
+$Event(20000353, Restart, function(X0_4, X4_4, X8_4) {
+    if (EventFlag(X0_4)) {
+        DisableCharacter(X4_4);
+        if (!EventFlag(X8_4)) {
+            ForceCharacterTreasure(X4_4);
+        }
+        ForceCharacterDeath(X4_4, false);
+        EndEvent();
+    }
+L0:
+    WaitFor(CharacterDead(X4_4));
+    SetEventFlag(0, X0_4, ON);
+});

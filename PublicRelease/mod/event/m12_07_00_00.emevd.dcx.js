@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -20,7 +20,7 @@ $Event(0, Default, function() {
     //Erdtree Sentry - Mimic Tear
     InitializeEvent(0, 12078850, 12070805, 12070806, 904810662, 920900, 12070810);
     InitializeEvent(0, 12078860, 12070805);
-    InitializeEvent(0, 12072865, 12070810, 12070805, 63010);
+    //InitializeEvent(0, 12072865, 12070810, 12070805, 63010);
     InitializeCommonEvent(0, 90005875, 12070805, 30630, 920900);
     InitializeCommonEvent(0, 90005890, 12070805, 12070806, 12070806);
     InitializeCommonEvent(0, 90005891, 12070805, 12070806, 12070807);
@@ -123,13 +123,13 @@ $Event(12072055, Restart, function() {
 // Dragonkin spawn chest
 $Event(12078561, Default, function() {
     AttachAssetToAsset(12071560, 12071561, 151);
-    EndIf(EventFlag(12077540));
-    DisableAssetTreasure(12071561);
-    WaitFor(EventFlag(12078560));
-    EnableAssetTreasure(12071561);
+    //EndIf(EventFlag(12077540));
+    //DisableAssetTreasure(12071561);
+    //WaitFor(EventFlag(12078560));
+    //EnableAssetTreasure(12071561);
 });
 
-// Mimic Tear 
+// Mimic Tear (Contains Mimic Teleport scripting)
 $Event(12078850, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
     if (EventFlag(X0_4)) {
         DisableCharacter(X0_4);
@@ -146,26 +146,31 @@ L0:
     EnableCharacterInvincibility(X0_4);
     EnableCharacterInvincibility(X16_4);
     EnableCharacterImmortality(X16_4);
+    DisableCharacter(X0_4);
+    DisableCharacterCollision(X0_4);
+    DisableCharacterHPBarDisplay(X0_4);
     WaitFor(InArea(10000, X4_4));
-    //Mimic Tear Not Spawning Fix - Add wait time
-    WaitFixedTimeSeconds(3);
-    DisableCharacterInvincibility(X0_4);
-    DisableCharacterInvincibility(X16_4);
-    SetCharacterAIId(X0_4, 90603100);
-    EnableCharacterAI(X16_4); 
+    SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AlwaysUpdate);
     ForceAnimationPlayback(X16_4, 20010, false, false, false);
     if (PlayerIsInOwnWorld()) {
         CopyPlayerCharacterData(10000, X0_4);
     }
-    SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AlwaysUpdate);
-    SetCharacterHome(X0_4, 12072852);
-    WaitFixedTimeSeconds(8);
-    DisableCharacter(X16_4);
-    DisableCharacterAI(X16_4);
+    WaitFor(CharacterHasSpEffect(X16_4, 16307));
+    EnableCharacter(X0_4);
+    EnableCharacterCollision(X0_4);
+    DisableCharacterCollision(X16_4);
+    WaitFixedTimeSeconds(0.5);
+    WarpCharacterAndCopyFloor(X0_4, TargetEntityType.Character, X16_4, 900, X16_4);
+    ForceAnimationPlayback(X0_4, 63010, false, false, true);
+    WaitFixedTimeSeconds(4);
     EnableCharacterAI(X0_4);
-    SetBossBGM(X12_4, BossBGMState.Start);
+    EnableCharacterAI(X16_4);
+    DisableCharacterInvincibility(X0_4);
+    DisableCharacterInvincibility(X16_4);
+    SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetNetworkUpdateRate(X16_4, true, CharacterUpdateFrequency.AlwaysUpdate);
     DisplayBossHealthBar(Enabled, X0_4, 0, X8_4);
-    
+    SetBossBGM(X12_4, BossBGMState.Start);
     WaitFor(EventFlag(X0_4) || (!EntityInRadiusOfEntity(10000, X0_4, 100, 1) && !CharacterDead(X0_4)));
     EndIf(EventFlag(X0_4));
     DisplayBossHealthBar(Disabled, X0_4, 0, X8_4);
@@ -185,7 +190,7 @@ $Event(12078860, Restart, function(X0_4) {
     RestartEvent();
 });
 
-// Mimic Tear Teleport
+// Mimic Tear Teleport (Disabled and events moved to 12078850)
 $Event(12072865, Restart, function(X0_4, X4_4, X8_4) {
     if (ThisEventSlot() && !PlayerIsInOwnWorld()) {
         DisableCharacter(X0_4);

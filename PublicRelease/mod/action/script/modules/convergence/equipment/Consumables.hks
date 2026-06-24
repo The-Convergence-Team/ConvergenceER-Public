@@ -1,0 +1,85 @@
+function GauntletActivateDetection()
+    DisableSpellsOnMeleeAbility()
+    act(AddSpEffect, 195)
+end
+
+ItemWeaponEnchant_Upper_onUpdate = AttachBefore(ItemWeaponEnchant_Upper_onUpdate, GauntletActivateDetection)
+QuickItemEnchantNormal_Upper_onUpdate = AttachBefore(QuickItemEnchantNormal_Upper_onUpdate, GauntletActivateDetection)
+QuickItemEnchantDash_Upper_onUpdate = AttachBefore(QuickItemEnchantDash_Upper_onUpdate, GauntletActivateDetection)
+QuickItemEnchantStep_Upper_onUpdate = AttachBefore(QuickItemEnchantStep_Upper_onUpdate, GauntletActivateDetection)
+QuickItemEnchantAttackRight_Upper_onUpdate = AttachBefore(QuickItemEnchantAttackRight_Upper_onUpdate, GauntletActivateDetection)
+QuickItemEnchantAttackLeft_Upper_onUpdate = AttachBefore(QuickItemEnchantAttackLeft_Upper_onUpdate, GauntletActivateDetection)
+ItemRecover_Upper_onUpdate = AttachBefore(ItemRecover_Upper_onUpdate, GauntletActivateDetection)
+ItemEatJerky_Upper_onUpdate = AttachBefore(ItemEatJerky_Upper_onUpdate, GauntletActivateDetection)
+
+function ConsumeItemDetection()
+    if GetCurrentQuickItemId() == 1 then
+        act(AddSpEffect, 19)
+        return true
+    end
+    DisableSpellsOnMeleeAbility()
+    act(AddSpEffect, 195)
+    return false
+end
+
+function OnFlaskDrink()
+    if not IsLocalPlayer() then return end
+    DisableSpellsOnMeleeAbility()
+    GoldenExtract()
+end
+
+ItemDrinking_Upper_onUpdate = AttachBefore(ItemDrinking_Upper_onUpdate, OnFlaskDrink)
+ItemDrinkingMP_Upper_onUpdate = AttachBefore(ItemDrinkingMP_Upper_onUpdate, OnFlaskDrink)
+
+ItemLadderDrinkingRight_onUpdate = AttachBefore(ItemLadderDrinkingRight_onUpdate, OnFlaskDrink)
+ItemLadderDrinkingMPRight_onUpdate = AttachBefore(ItemLadderDrinkingMPRight_onUpdate, OnFlaskDrink)
+ItemLadderDrinkingLeft_onUpdate = AttachBefore(ItemLadderDrinkingLeft_onUpdate, OnFlaskDrink)
+ItemLadderDrinkingMPLeft_onUpdate = AttachBefore(ItemLadderDrinkingMPLeft_onUpdate, OnFlaskDrink)
+
+RideItemDrinking_onUpdate = AttachBefore(RideItemDrinking_onUpdate, OnFlaskDrink)
+StealthItemDrinking_Upper_onUpdate = AttachBefore(StealthItemDrinking_Upper_onUpdate, OnFlaskDrink)
+
+FULL_PHYSICK = 250
+EMPTY_PHYSICK = 251
+function GoldenExtract()
+    if env(GetSpEffectID, 196) == FALSE then
+        return
+    end
+    act(ClearSpEffect, 196)
+
+    act(ESD_ReplaceTool, EMPTY_PHYSICK, FULL_PHYSICK)
+    FullHeal()
+    SetFP(GetMaxFP())
+end
+
+function OnPhysicDrink()
+    if not IsLocalPlayer() then return end
+    DisableSpellsOnMeleeAbility()
+end
+ItemElixir_Upper_onUpdate = AttachBefore(ItemElixir_Upper_onUpdate, OnPhysicDrink)
+RideItemElixir_onUpdate = AttachBefore(RideItemElixir_onUpdate, OnPhysicDrink)
+
+function GlassShard()
+    if env(GetSpEffectID, 3205) == FALSE then
+        return
+    end
+    act(ClearSpEffect, 3205)
+
+    local hpRatio = GetHpRatio()
+    if hpRatio <= 0.18 then
+        return
+    end
+
+    act(AddSpEffect, 1762) -- Bleed Visual
+
+    local desiredHp = math.floor(env(GetMaxHP) * 0.18)
+    local hpToLose = env(GetHP) - desiredHp
+    
+    DealCalculatedDamage(hpToLose)
+end
+
+ItemRecover_Upper_onUpdate = AttachBefore(ItemRecover_Upper_onUpdate, GlassShard)
+ItemLadderRecoverLeft_onUpdate = AttachBefore(ItemLadderRecoverLeft_onUpdate, GlassShard)
+ItemLadderRecoverRight_onUpdate = AttachBefore(ItemLadderRecoverRight_onUpdate, GlassShard)
+StealthItemOneShot_Upper_onUpdate = AttachBefore(StealthItemOneShot_Upper_onUpdate, GlassShard)
+RideItemOneShot_onUpdate = AttachBefore(RideItemOneShot_onUpdate, GlassShard)

@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -124,7 +124,7 @@ $Event(1043522515, Restart, function() {
 
 // Honse Obtain
 $Event(1043522520, Restart, function() {
-    if (EventFlag(1043520520) || EventFlag(63202)) {
+    if (EventFlag(1043520520) || EventFlag(63102)) {
         DisableCharacter(1043520520);
         EndEvent();
     }

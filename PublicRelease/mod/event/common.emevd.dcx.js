@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    ""
 // @linked    []
-// @version    3.5
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -90,17 +90,17 @@ $Event(0, Default, function() {
     //Award Outer Order gesture
     InitializeEvent(0, 9006048, 0);
     
-    //Universal Summon Event
-    //InitializeEvent(0, 9006002, 0);
     InitializeEvent(0, 9006052, 0); //Tutorial Finished Flag
     InitializeEvent(0, 9006054, 0); //Visual clean-up for Celestial Blade
     
     // Always ON spEffects
     SetSpEffect(10000, 330); // Passive FP Regen
     SetSpEffect(10000, 9000030); // Master On-Hit Accumulator
+    SetSpEffect(10000, 3500000); // Master Hit-Taken Detection
+    SetSpEffect(10000, 20381005); // Dried Boquet player death detection
+    InitializeEvent(0, 9007055, 0); // Enemy hit-taken detection
     
-    for (let i = 0; i < 100; i++) // Player # Detector
-        SetSpEffect(10002 + i, 101500 + i);
+    $InitializeEvent(0, 9007124); // Dried Bouqet
     
     // Golden Extract
     InitializeEvent(0, 9007100, 0);
@@ -114,7 +114,7 @@ $Event(0, Default, function() {
     InitializeEvent(0, 9008002, 0); // Bosses
     InitializeEvent(0, 9008003, 0); // One Time Flags
     InitializeEvent(0, 9008004, 0); // Items Acquisition
-    //InitializeEvent(0, 9008005, 0); // UNUSED
+    InitializeEvent(0, 9008005, 0); // Shell
     InitializeEvent(0, 9008006, 0); // NPC DOT fixes
     InitializeEvent(0, 9008007, 0); // Completion Marks
     
@@ -133,7 +133,9 @@ $Event(0, Default, function() {
     InitializeEvent(0, 9007102, 0);
     // Caimar's Head Howl
     InitializeEvent(0, 9007140, 0);
-    
+    // Blightpole Deathblight
+    InitializeEvent(13, 9007010, 5031500, 523, 4000200);
+  
     InitializeEvent(0, 9007103, 0);
     
     // Mounts
@@ -319,6 +321,45 @@ $Event(0, Default, function() {
     InitializeEvent(15, 9007107, 63201, 187, 40000); // Funeral Steed - Mount OFF
     InitializeEvent(15, 9007108, 63201, 187, 40000); // Funeral Steed - Mount ON
     
+    // HKS inventory request updaters
+    InitializeEvent(0, 9006031, 101401, ItemType.Weapon, 18110000) // Guardian Swordspear (Sword)
+    InitializeEvent(1, 9006031, 101401, ItemType.Weapon, 8100000) // Morgoth's Cursed Sword (Great Curved Sword)
+    InitializeEvent(2, 9006031, 101401, ItemType.Weapon, 3250000) // Quality Greatsword (Greatsword)
+    InitializeEvent(3, 9006031, 101401, ItemType.Weapon, 12540000) // Egg Mace (beeg)
+    InitializeEvent(4, 9006031, 101401, ItemType.Weapon, 10200000) // Dragonkin Twinblade (Twinblade)
+    InitializeEvent(5, 9006031, 101401, ItemType.Weapon, 11190000) // Tricia's Pomander (Fire)
+    InitializeEvent(6, 9006031, 101401, ItemType.Weapon, 1200000) // Blades of the Prince (Daggers)
+    InitializeEvent(7, 9006031, 101401, ItemType.Weapon, 18200000) // Blightpole (Base)
+    InitializeEvent(8, 9006031, 101401, ItemType.Goods, 1) // Dev Tool: Map Reloader
+    
+    InitializeEvent(9, 9006031, 101402, ItemType.Goods, 1000) // Flask of Crimson Tears (Empty)
+    InitializeEvent(10, 9006031, 101402, ItemType.Goods, 1002) // Flask of Crimson Tears +1 (Empty)
+    InitializeEvent(11, 9006031, 101402, ItemType.Goods, 1004) // Flask of Crimson Tears +2 (Empty)
+    InitializeEvent(12, 9006031, 101402, ItemType.Goods, 1006) // Flask of Crimson Tears +3 (Empty)
+    InitializeEvent(13, 9006031, 101402, ItemType.Goods, 1008) // Flask of Crimson Tears +4 (Empty)
+    InitializeEvent(14, 9006031, 101402, ItemType.Goods, 1010) // Flask of Crimson Tears +5 (Empty)
+    InitializeEvent(15, 9006031, 101402, ItemType.Goods, 1012) // Flask of Crimson Tears +6 (Empty)
+    InitializeEvent(16, 9006031, 101402, ItemType.Goods, 1014) // Flask of Crimson Tears +7 (Empty)
+    InitializeEvent(17, 9006031, 101402, ItemType.Goods, 1016) // Flask of Crimson Tears +8 (Empty)
+    InitializeEvent(18, 9006031, 101402, ItemType.Goods, 1018) // Flask of Crimson Tears +9 (Empty)
+    InitializeEvent(19, 9006031, 101402, ItemType.Goods, 1020) // Flask of Crimson Tears +10 (Empty)
+    InitializeEvent(20, 9006031, 101402, ItemType.Goods, 1022) // Flask of Crimson Tears +11 (Empty)
+    InitializeEvent(21, 9006031, 101402, ItemType.Goods, 1024) // Flask of Crimson Tears +12 (Empty)
+    InitializeEvent(22, 9006031, 101402, ItemType.Goods, 1050) // Flask of Cerulean Tears (Empty)
+    InitializeEvent(23, 9006031, 101402, ItemType.Goods, 1052) // Flask of Cerulean Tears +1 (Empty)
+    InitializeEvent(24, 9006031, 101402, ItemType.Goods, 1054) // Flask of Cerulean Tears +2 (Empty)
+    InitializeEvent(25, 9006031, 101402, ItemType.Goods, 1056) // Flask of Cerulean Tears +3 (Empty)
+    InitializeEvent(26, 9006031, 101402, ItemType.Goods, 1058) // Flask of Cerulean Tears +4 (Empty)
+    InitializeEvent(27, 9006031, 101402, ItemType.Goods, 1060) // Flask of Cerulean Tears +5 (Empty)
+    InitializeEvent(28, 9006031, 101402, ItemType.Goods, 1062) // Flask of Cerulean Tears +6 (Empty)
+    InitializeEvent(29, 9006031, 101402, ItemType.Goods, 1064) // Flask of Cerulean Tears +7 (Empty)
+    InitializeEvent(30, 9006031, 101402, ItemType.Goods, 1066) // Flask of Cerulean Tears +8 (Empty)
+    InitializeEvent(31, 9006031, 101402, ItemType.Goods, 1068) // Flask of Cerulean Tears +9 (Empty)
+    InitializeEvent(32, 9006031, 101402, ItemType.Goods, 1070) // Flask of Cerulean Tears +10 (Empty)
+    InitializeEvent(33, 9006031, 101402, ItemType.Goods, 1072) // Flask of Cerulean Tears +11 (Empty)
+    InitializeEvent(34, 9006031, 101402, ItemType.Goods, 1074) // Flask of Cerulean Tears +12 (Empty)
+    InitializeEvent(35, 9006031, 101402, ItemType.Goods, 251) // Physick Flask (Empty)
+    
     // - - -
     EndIf(!PlayerIsInOwnWorld());
     EndIf(EventFlag(2052));
@@ -393,6 +434,7 @@ $Event(0, Default, function() {
     InitializeEvent(60, 9007120, 11102999, 2968, 3738); // Remembrance of Dyru, Scavenger King
     InitializeEvent(61, 9007120, 11102999, 2969, 3739); // Remembrance of Einar, Ice Guardian
     InitializeEvent(62, 9007120, 11102999, 2970, 3740); // Remembrance of Spiritshaper Caimar
+    InitializeEvent(63, 9007120, 11102999, 2971, 3741); // Remembrance of Daergraf
     
     //InitializeEvent(0, 945, 0);
     InitializeEvent(0, 920, 0);
@@ -562,7 +604,7 @@ $Event(0, Default, function() {
     InitializeEvent(3, 760, 1099004003, 3);
     InitializeEvent(4, 760, 1099004004, 4);
     
-    // DLC (Unknown)
+    // Items Acquisition (DLC Ashes of War)
     InitializeEvent(0, 65910, 65910, 2046477150, 0, 0, 0, 0);
     InitializeEvent(1, 65910, 65911, 530965, 0, 0, 0, 0);
     InitializeEvent(2, 65910, 65912, 290320, 0, 0, 0, 0);
@@ -605,6 +647,8 @@ $Event(0, Default, function() {
     //InitializeEvent(0, 1802, 0); //script test on flask drink
     //InitializeEvent(0, 9006001, 0); //Keystone Aquisition Flags
     
+    InitializeEvent(0, 9007141, 0); // Radahn Festival Weather Replication Initialization
+    
     // Developer Tool - Area Reloader
     InitializeEvent(0, 9006066, 0);
 });
@@ -645,7 +689,7 @@ $Event(50, Default, function() {
     InitializeEvent(0, 840, 0);
     InitializeEvent(0, 980, 0);
     SetEventFlagID(909, OFF);
-    InitializeEvent(0, 3040, 0);
+    InitializeEvent(0, 3040, 0); // Radahn Festival
     InitializeEvent(0, 9440, 0); // DLC
     InitializeEvent(0, 3041, 0);
     InitializeEvent(0, 3042, 0);
@@ -729,32 +773,32 @@ $Event(50, Default, function() {
     InitializeEvent(0, 3059, 0);
     InitializeEvent(0, 3089, 0);
     InitializeEvent(0, 4612, 0);
-    InitializeEvent(0, 60701, 11109751, 60701);
-    InitializeEvent(1, 60701, 11109752, 60702);
-    InitializeEvent(2, 60701, 11109753, 60703);
-    InitializeEvent(3, 60701, 11109754, 60704);
-    InitializeEvent(4, 60701, 11109755, 60705);
-    InitializeEvent(5, 60701, 11109756, 60706);
-    InitializeEvent(6, 60701, 11109757, 60707);
-    InitializeEvent(7, 60701, 11109758, 60708);
-    InitializeEvent(8, 60701, 11109759, 60709);
-    InitializeEvent(9, 60701, 11109760, 60710);
-    InitializeEvent(10, 60701, 11109761, 60711);
-    InitializeEvent(11, 60701, 11109762, 60712);
-    InitializeEvent(12, 60701, 11109763, 60713);
-    InitializeEvent(13, 60701, 11109764, 60714);
-    InitializeEvent(14, 60701, 11109765, 60715);
-    InitializeEvent(29, 60701, 11109745, 60730);
-    InitializeEvent(30, 60701, 11109746, 60731);
-    InitializeEvent(31, 60701, 11109747, 60732);
-    InitializeEvent(32, 60701, 11109748, 60733);
-    InitializeEvent(41, 60701, 11109792, 60742); // DLC
-    InitializeEvent(42, 60701, 11109793, 60743); // DLC
-    InitializeEvent(43, 60701, 11109794, 60744); // DLC
-    InitializeEvent(44, 60701, 11109795, 60745); // DLC
-    InitializeEvent(45, 60701, 11109796, 60746); // DLC
-    InitializeEvent(47, 60701, 11109798, 60748); // DLC
-    InitializeEvent(48, 60701, 11109799, 60749); // DLC
+    //InitializeEvent(0, 60701, 11109751, 60701);
+    //InitializeEvent(1, 60701, 11109752, 60702);
+    //InitializeEvent(2, 60701, 11109753, 60703);
+    //InitializeEvent(3, 60701, 11109754, 60704);
+    //InitializeEvent(4, 60701, 11109755, 60705);
+    //InitializeEvent(5, 60701, 11109756, 60706);
+    //InitializeEvent(6, 60701, 11109757, 60707);
+    //InitializeEvent(7, 60701, 11109758, 60708);
+    //InitializeEvent(8, 60701, 11109759, 60709);
+    //InitializeEvent(9, 60701, 11109760, 60710);
+    //InitializeEvent(10, 60701, 11109761, 60711);
+    //InitializeEvent(11, 60701, 11109762, 60712);
+    //InitializeEvent(12, 60701, 11109763, 60713);
+    //InitializeEvent(13, 60701, 11109764, 60714);
+    //InitializeEvent(14, 60701, 11109765, 60715);
+    //InitializeEvent(29, 60701, 11109745, 60730);
+    //InitializeEvent(30, 60701, 11109746, 60731);
+    //InitializeEvent(31, 60701, 11109747, 60732);
+    //InitializeEvent(32, 60701, 11109748, 60733);
+    //InitializeEvent(41, 60701, 11109792, 60742); // DLC
+    //InitializeEvent(42, 60701, 11109793, 60743); // DLC
+    //InitializeEvent(43, 60701, 11109794, 60744); // DLC
+    //InitializeEvent(44, 60701, 11109795, 60745); // DLC
+    //InitializeEvent(45, 60701, 11109796, 60746); // DLC
+    //InitializeEvent(47, 60701, 11109798, 60748); // DLC
+    //InitializeEvent(48, 60701, 11109799, 60749); // DLC
     InitializeEvent(0, 3081, 1037429202, 1038519202, 1038509202, 16009302, 16009312, 16009322, 16009313);
     InitializeEvent(0, 3082, 1042369202, 1035449202, 12059163);
     InitializeEvent(0, 3083, 16009202, 16009252);
@@ -886,12 +930,18 @@ $Event(9008000, Default, function() {
     // Molten stride scripts
     InitializeEvent(0, 9006067, 0);
     InitializeEvent(0, 9006068, 0);
-    //Night Permabuff Canceling
-    InitializeEvent(0, 9006003, 0);
     //Embrace the Devourer Buffs
     InitializeEvent(0, 9006004, 0);
-    //Embrace the Devourer Canceling
-    InitializeEvent(0, 9006005, 0);
+    InitializeEvent(20, 9007035, 1485210, 1485200);
+    InitializeEvent(21, 9007035, 1485210, 1485201);
+    InitializeEvent(22, 9007035, 1485210, 1485202);
+    InitializeEvent(23, 9007035, 1485210, 1485203);
+    InitializeEvent(24, 9007035, 1485210, 1485204);
+    InitializeEvent(25, 9007035, 1485210, 1485205);
+    InitializeEvent(26, 9007035, 1485210, 1485206);
+    InitializeEvent(27, 9007035, 1485210, 1485207);
+    InitializeEvent(28, 9007035, 1485210, 1485208);
+    InitializeEvent(29, 9007035, 1485210, 1485209);
     //InitializeEvent(0, 9006010, 97491);
     //InitializeEvent(1, 9006010, 97492);
     //InitializeEvent(2, 9006010, 97493);
@@ -910,25 +960,25 @@ $Event(9008000, Default, function() {
     InitializeEvent(0, 9006021, 0);
     //Anima Magica effects script
     InitializeEvent(0, 9006022, 0);
-    //Energy Shell effects script
-    //InitializeEvent(0, 9006023, 0);
-    //InitializeEvent(0, 9006026, 0);
     //Anima Magica Cleanup scripts
-    InitializeEvent(0, 9006024, 0);
+    InitializeEvent(8, 9007035, 1413010, 1413000);
+    InitializeEvent(9, 9007035, 1413010, 1413001);
+    InitializeEvent(10, 9007035, 1413010, 1413002);
+    InitializeEvent(11, 9007035, 1413010, 1413003);
+    InitializeEvent(12, 9007035, 1413010, 1413004);
+    InitializeEvent(13, 9007035, 1413010, 1413005);
+    InitializeEvent(14, 9007035, 1413010, 1413006);
+    InitializeEvent(15, 9007035, 1413010, 1413007);
+    InitializeEvent(16, 9007035, 1413010, 1413008);
+    InitializeEvent(17, 9007035, 1413010, 1413009);
     //Spirit Siphon setup
     InitializeEvent(0, 9006030, 0);
-    //Servants of Rot Permabuff Scripts
-    InitializeEvent(0, 9006031, 0);
-    InitializeEvent(0, 9006032, 0);
-    InitializeEvent(0, 9006033, 0);
-    InitializeEvent(0, 9006034, 0);
-    //Blood Pact Permabuff Scripts
-    InitializeEvent(0, 9006035, 0);
-    InitializeEvent(0, 9006036, 0);
+    
+    $InitializeEvent(4, 9007134, 1637000, 1637010); //Blood Pact Permabuff Scripts
     //Godslayer's Devotion Scripts
     InitializeEvent(0, 9006037, 0);
-    InitializeEvent(0, 9006038, 1626101);
-    InitializeEvent(0, 9006038, 1626105);
+    InitializeEvent(30, 9007035, 1626100, 1626101);
+    InitializeEvent(31, 9007035, 1626100, 1626105);
     //Wrath of the Queen Scripts
     InitializeEvent(0, 9006039, 0);
     //Change weather scripts for Whiteout spell
@@ -936,8 +986,10 @@ $Event(9008000, Default, function() {
     InitializeEvent(0, 9006041, 0);
     InitializeEvent(0, 9006042, 0);
     InitializeEvent(0, 9006044, 0);
-    InitializeEvent(0, 9006045, 0);
-    InitializeEvent(0, 9006046, 0);
+    InitializeEvent(0, 9006045, 1521100, 1521105);
+    InitializeEvent(1, 9006045, 1521500, 1521505);
+    InitializeEvent(0, 9006046, 1521100, 1521105);
+    InitializeEvent(1, 9006046, 1521500, 1521505);
     InitializeEvent(0, 9006047, 0);
     //Permabuff toggle scripts
     InitializeEvent(0, 9006050, 1414000, 1414010); //Starlight
@@ -969,13 +1021,13 @@ $Event(9008000, Default, function() {
     InitializeEvent(13, 9006050, 1499100, 1499110); //Blood Revelry
     InitializeEvent(13, 9006051, 1499100, 1499110);
     InitializeEvent(14, 9006050, 1496000, 1496010); //Blood Star
-    InitializeEvent(14, 9006051, 1496000, 1496010);
+    InitializeEvent(14, 9006051, 1496001, 1496010);
     InitializeEvent(15, 9006050, 1685100, 1685110); //Bestial Fervor
     InitializeEvent(15, 9006051, 1685100, 1685110);
     InitializeEvent(16, 9006050, 1685200, 1685210); //Source of Creation
     InitializeEvent(16, 9006051, 1685200, 1685210);
-    InitializeEvent(17, 9006050, 1607000, 1607010); //Cyclopean Prophecy
-    InitializeEvent(17, 9006051, 1607000, 1607010);
+    //InitializeEvent(17, 9006050, 1607000, 1607010); //Cyclopean Prophecy
+    //InitializeEvent(17, 9006051, 1607000, 1607010);
     InitializeEvent(18, 9006050, 1626100, 1626110); //Godslayer's Devotion
     InitializeEvent(18, 9006051, 1626100, 1626110);
     InitializeEvent(19, 9006050, 1626200, 1626210); //Wrath of the Queen
@@ -1002,6 +1054,14 @@ $Event(9008000, Default, function() {
     InitializeEvent(29, 9006051, 1679400, 1679410);
     InitializeEvent(30, 9006050, 1416000, 1416010); //Energy Shell
     InitializeEvent(30, 9006051, 1416000, 1416010);
+    InitializeEvent(31, 9006050, 1479100, 1479110); //Meteoric Alignment
+    InitializeEvent(31, 9006051, 1479100, 1479110);
+    InitializeEvent(32, 9006050, 1413110, 1413120); //Corpa Magica
+    InitializeEvent(32, 9006051, 1413110, 1413120);
+    InitializeEvent(33, 9006050, 1485400, 1485410); // Living Forge
+    InitializeEvent(33, 9006051, 1485400, 1485410);
+    InitializeEvent(34, 9006050, 1441500, 1441510); //Ice Guardian's Reckoning
+    InitializeEvent(34, 9006051, 1441500, 1441510);
     InitializeEvent(0, 9006080, 1508000, 1508010, 1508001); //Accursed Binding
     InitializeEvent(0, 9006081, 1508000, 1508010, 1508001);
     InitializeEvent(1, 9006080, 1741300, 1741310, 1741301); //Spirit Link
@@ -1014,18 +1074,18 @@ $Event(9008000, Default, function() {
     InitializeEvent(2, 9006059, 1679200, 1679210);
     InitializeEvent(3, 9006058, 1679300, 1679310, 1679305); //Blessing of Power
     InitializeEvent(3, 9006059, 1679300, 1679310);
-    InitializeEvent(0, 9006060, 1679405); //Elden Benediction Cleanup
-    InitializeEvent(1, 9006060, 1679005);
-    InitializeEvent(2, 9006060, 1679105);
-    InitializeEvent(3, 9006060, 1679205);
-    InitializeEvent(4, 9006060, 1679305);
+    InitializeEvent(33, 9007035, 1679400, 1679405); // Elden Benediction Cleanup
+    InitializeEvent(34, 9007035, 1679400, 1679005);
+    InitializeEvent(35, 9007035, 1679400, 1679105);
+    InitializeEvent(36, 9007035, 1679400, 1679205);
+    InitializeEvent(37, 9007035, 1679400, 1679305);
     InitializeEvent(0, 9006053, 1679000, 1679005); //Elden Benediction Greater Blessing Application
     InitializeEvent(1, 9006053, 1679100, 1679105);
     InitializeEvent(2, 9006053, 1679200, 1679205);
     InitializeEvent(3, 9006053, 1679300, 1679305);
     InitializeEvent(0, 9006055, 0); //Elden Benediction Stat Buff while no other blessing active
     InitializeEvent(0, 9006056, 0);
-    InitializeEvent(0, 9006057, 0);
+    InitializeEvent(32, 9007035, 1485000, 1485005); // Familial Comsumption Cleanup
     InitializeEvent(0, 9006062, 1513000); //First Bubble
     InitializeEvent(1, 9006062, 1513001); //second Bubble
     InitializeEvent(2, 9006062, 1513002); //Third Bubble
@@ -1040,6 +1100,7 @@ $Event(9008000, Default, function() {
     InitializeEvent(4, 9006069, 1684200, 1684260, 1685100); // ON Bestial Fervor + Stone Skin
     InitializeEvent(3, 9006070, 1685000, 1685050, 1685100); // OFF Bestial Fervor + Bestial Strength
     InitializeEvent(4, 9006070, 1684200, 1684260, 1685100); // OFF Bestial Fervor + Stone Skin
+    
     InitializeEvent(0, 9006071, 0); // Crucible Spell Heal Handler
     InitializeEvent(0, 9006072, 0); // Bestial Fervor Resource Restore - Rend
     InitializeEvent(0, 9006073, 0); // Bestial Fervor Resource Restore - Concussion
@@ -1047,6 +1108,210 @@ $Event(9008000, Default, function() {
     InitializeEvent(4, 9007035, 1504200, 1504211); // Death Knight's Supplication Cleanup
     InitializeEvent(5, 9007035, 1504200, 1504212);
     InitializeEvent(6, 9007035, 1504200, 1504213);
+    InitializeEvent(0, 9007010, 1477020, 3500002, 177); // Gravity Armor /w Meteoric Alignment guard counter logic
+    InitializeEvent(3, 9007010, 1477120, 3500002, 177); // Gravity Armor /w Meteoric Alignment guard counter logic (jewel)
+    
+    //Gravity armor toggle scripts
+    InitializeEvent(0, 9006075, 1477000, 1479000, 1477010);
+    InitializeEvent(0, 9006076, 1477000, 1479000, 1477010);
+    InitializeEvent(1, 9006075, 1477000, 1479100, 1477020);
+    InitializeEvent(1, 9006076, 1477000, 1479100, 1477020);
+    //Cosmic Surge toggle scripts - tier 1
+    InitializeEvent(2, 9006075, 21740000, 1479000, 21740030);
+    InitializeEvent(2, 9006076, 21740000, 1479000, 21740030);
+    InitializeEvent(3, 9006075, 21740000, 1479100, 21740060);
+    InitializeEvent(3, 9006076, 21740000, 1479100, 21740060);
+    //Cosmic Surge toggle scripts - tier 2
+    InitializeEvent(4, 9006075, 21740001, 1479000, 21740031);
+    InitializeEvent(4, 9006076, 21740001, 1479000, 21740031);
+    InitializeEvent(5, 9006075, 21740001, 1479100, 21740061);
+    InitializeEvent(5, 9006076, 21740001, 1479100, 21740061);
+    //Cosmic Surge toggle scripts - tier 3
+    InitializeEvent(6, 9006075, 21740002, 1479000, 21740032);
+    InitializeEvent(6, 9006076, 21740002, 1479000, 21740032);
+    InitializeEvent(7, 9006075, 21740002, 1479100, 21740062);
+    InitializeEvent(7, 9006076, 21740002, 1479100, 21740062);
+    //Cosmic Surge toggle scripts - tier 4
+    InitializeEvent(8, 9006075, 21740003, 1479000, 21740033);
+    InitializeEvent(8, 9006076, 21740003, 1479000, 21740033);
+    InitializeEvent(9, 9006075, 21740003, 1479100, 21740063);
+    InitializeEvent(9, 9006076, 21740003, 1479100, 21740063);
+    //Cosmic Surge toggle scripts - tier 5
+    InitializeEvent(10, 9006075, 21740004, 1479000, 21740034);
+    InitializeEvent(10, 9006076, 21740004, 1479000, 21740034);
+    InitializeEvent(11, 9006075, 21740004, 1479100, 21740064);
+    InitializeEvent(11, 9006076, 21740004, 1479100, 21740064);
+    //Cosmic Surge toggle scripts - tier 6
+    InitializeEvent(12, 9006075, 21740005, 1479000, 21740035);
+    InitializeEvent(12, 9006076, 21740005, 1479000, 21740035);
+    InitializeEvent(13, 9006075, 21740005, 1479100, 21740065);
+    InitializeEvent(13, 9006076, 21740005, 1479100, 21740065);
+    //Cosmic Surge toggle scripts - tier 7
+    InitializeEvent(14, 9006075, 21740006, 1479000, 21740036);
+    InitializeEvent(14, 9006076, 21740006, 1479000, 21740036);
+    InitializeEvent(15, 9006075, 21740006, 1479100, 21740066);
+    InitializeEvent(15, 9006076, 21740006, 1479100, 21740066);
+    //Cosmic Surge toggle scripts - tier 8
+    InitializeEvent(16, 9006075, 21740007, 1479000, 21740037);
+    InitializeEvent(16, 9006076, 21740007, 1479000, 21740037);
+    InitializeEvent(17, 9006075, 21740007, 1479100, 21740067);
+    InitializeEvent(17, 9006076, 21740007, 1479100, 21740067);
+    //Cosmic Surge toggle scripts - tier 9
+    InitializeEvent(18, 9006075, 21740008, 1479000, 21740038);
+    InitializeEvent(18, 9006076, 21740008, 1479000, 21740038);
+    InitializeEvent(19, 9006075, 21740008, 1479100, 21740068);
+    InitializeEvent(19, 9006076, 21740008, 1479100, 21740068);
+    //Cosmic Surge toggle scripts - tier 10
+    InitializeEvent(20, 9006075, 21740009, 1479000, 21740039);
+    InitializeEvent(20, 9006076, 21740009, 1479000, 21740039);
+    InitializeEvent(21, 9006075, 21740009, 1479100, 21740069);
+    InitializeEvent(21, 9006076, 21740009, 1479100, 21740069);
+    //Cosmic Surge toggle scripts - tier 11
+    InitializeEvent(22, 9006075, 21740010, 1479000, 21740040);
+    InitializeEvent(22, 9006076, 21740010, 1479000, 21740040);
+    InitializeEvent(23, 9006075, 21740010, 1479100, 21740070);
+    InitializeEvent(23, 9006076, 21740010, 1479100, 21740070);
+    //Cosmic Surge toggle scripts - tier 12
+    InitializeEvent(24, 9006075, 21740011, 1479000, 21740041);
+    InitializeEvent(24, 9006076, 21740011, 1479000, 21740041);
+    InitializeEvent(25, 9006075, 21740011, 1479100, 21740071);
+    InitializeEvent(25, 9006076, 21740011, 1479100, 21740071);
+    //Cosmic Surge toggle scripts - tier 13
+    InitializeEvent(26, 9006075, 21740012, 1479000, 21740042);
+    InitializeEvent(26, 9006076, 21740012, 1479000, 21740042);
+    InitializeEvent(27, 9006075, 21740012, 1479100, 21740072);
+    InitializeEvent(27, 9006076, 21740012, 1479100, 21740072);
+    //Cosmic Surge toggle scripts - tier 14
+    InitializeEvent(28, 9006075, 21740013, 1479000, 21740043);
+    InitializeEvent(28, 9006076, 21740013, 1479000, 21740043);
+    InitializeEvent(29, 9006075, 21740013, 1479100, 21740073);
+    InitializeEvent(29, 9006076, 21740013, 1479100, 21740073);
+    //Cosmic Surge toggle scripts - tier 15
+    InitializeEvent(30, 9006075, 21740014, 1479000, 21740044);
+    InitializeEvent(30, 9006076, 21740014, 1479000, 21740044);
+    InitializeEvent(31, 9006075, 21740014, 1479100, 21740074);
+    InitializeEvent(31, 9006076, 21740014, 1479100, 21740074);
+    //Cosmic Surge toggle scripts - tier 16
+    InitializeEvent(32, 9006075, 21740015, 1479000, 21740045);
+    InitializeEvent(32, 9006076, 21740015, 1479000, 21740045);
+    InitializeEvent(33, 9006075, 21740015, 1479100, 21740075);
+    InitializeEvent(33, 9006076, 21740015, 1479100, 21740075);
+    //Cosmic Surge toggle scripts - tier 17
+    InitializeEvent(34, 9006075, 21740016, 1479000, 21740046);
+    InitializeEvent(34, 9006076, 21740016, 1479000, 21740046);
+    InitializeEvent(35, 9006075, 21740016, 1479100, 21740076);
+    InitializeEvent(35, 9006076, 21740016, 1479100, 21740076);
+    //Cosmic Surge toggle scripts - tier 18
+    InitializeEvent(36, 9006075, 21740017, 1479000, 21740047);
+    InitializeEvent(36, 9006076, 21740017, 1479000, 21740047);
+    InitializeEvent(37, 9006075, 21740017, 1479100, 21740077);
+    InitializeEvent(37, 9006076, 21740017, 1479100, 21740077);
+    //Cosmic Surge toggle scripts - tier 19
+    InitializeEvent(38, 9006075, 21740018, 1479000, 21740048);
+    InitializeEvent(38, 9006076, 21740018, 1479000, 21740048);
+    InitializeEvent(39, 9006075, 21740018, 1479100, 21740078);
+    InitializeEvent(39, 9006076, 21740018, 1479100, 21740078);
+    //Cosmic Surge toggle scripts - tier 20
+    InitializeEvent(40, 9006075, 21740019, 1479000, 21740049);
+    InitializeEvent(40, 9006076, 21740019, 1479000, 21740049);
+    InitializeEvent(41, 9006075, 21740019, 1479100, 21740079);
+    InitializeEvent(41, 9006076, 21740019, 1479100, 21740079);
+    
+    $InitializeEvent(0, 9006100, 605, 1499006); //Aberrant Ascention buff triggers
+    $InitializeEvent(1, 9006100, 606, 1499005); //Aberrant Ascention buff triggers
+    
+    InitializeEvent(0, 9006077, 0); // Scadu Rebirth
+    InitializeEvent(0, 9006078, 0); // Shadow of Death
+    
+    InitializeEvent(0, 9006092, 0); // Corpa Magica
+    InitializeEvent(38, 9007035, 1413110, 1413100); // Cleanup
+    InitializeEvent(39, 9007035, 1413110, 1413101);
+    InitializeEvent(40, 9007035, 1413110, 1413102);
+    InitializeEvent(41, 9007035, 1413110, 1413103);
+    
+    InitializeEvent(0, 9006094, 1638160, 1638110); // Blood of the Miaden - BoilingBLood
+    InitializeEvent(1, 9006094, 1638170, 1638120); // Blood of the Miaden - Hex of Mohgwyn
+    InitializeEvent(2, 9006094, 1638140, 1638130); // Blood of the Maiden - Fiendish Ritual
+    
+    InitializeEvent(0,  9006095, 500009, floatArg(0.60 ), 0); // Bloodflame HP Threshold Detectors
+    InitializeEvent(1,  9006095, 500008, floatArg(0.40 ), 0);
+    InitializeEvent(2,  9006095, 500007, floatArg(0.30 ), 0);
+    InitializeEvent(3,  9006095, 500006, floatArg(0.20 ), 0);
+    InitializeEvent(4,  9006095, 500005, floatArg(0.15 ), 0);
+    InitializeEvent(5,  9006095, 500004, floatArg(0.10 ), 0);
+    InitializeEvent(6,  9006095, 500003, floatArg(0.05 ), 0);
+    InitializeEvent(7,  9006095, 500002, floatArg(0.03 ), 0);
+    InitializeEvent(8,  9006095, 500001, floatArg(0.02 ), 0);
+    InitializeEvent(9,  9006095, 500000, floatArg(0.01 ), 0);
+    InitializeEvent(10, 9006095, 500009, floatArg(0.30 ), 1); // With Jewel
+    InitializeEvent(11, 9006095, 500008, floatArg(0.20 ), 1);
+    InitializeEvent(12, 9006095, 500007, floatArg(0.15 ), 1);
+    InitializeEvent(13, 9006095, 500006, floatArg(0.10 ), 1);
+    InitializeEvent(14, 9006095, 500005, floatArg(0.075), 1);
+    InitializeEvent(15, 9006095, 500004, floatArg(0.05 ), 1);
+    InitializeEvent(16, 9006095, 500003, floatArg(0.025), 1);
+    InitializeEvent(17, 9006095, 500002, floatArg(0.015), 1);
+    InitializeEvent(18, 9006095, 500001, floatArg(0.01 ), 1);
+    InitializeEvent(19, 9006095, 500000, floatArg(0.005), 1);
+    
+    // Abberant Heretic 20% hp spell
+    InitializeEvent(0, 9006096, 500100, floatArg(0.020)); 
+    
+    // Spiritual Equiliburium
+    InitializeEvent(0, 9006097, 1748200, 1748212, 1748215); // Heal Caster if any Ally is damaged
+    InitializeEvent(1, 9006097, 1748210, 1748202, 1748205); // Heal Ally if caster is damaged
+    InitializeEvent(0, 9006098, 0); // Heal Spirit Summon if caster is damaged 
+    
+    InitializeEvent(5, 9007122, 1485300, 1485310); // Superheat enemy speffect application
+    
+    // Frozen Lightning Armament
+    InitializeEvent(0, 9006023, 0); // Flaming Armament
+    InitializeEvent(0, 9006025, 1459005, 1459010, 1459000); // Frozen Lightning Armament Refresh (Dummy, Primed, Un-primed)
+    InitializeEvent(1, 9006025, 1459007, 1459014, 1459004); // Frozen Lightning Armament Refresh w/ Jewel (Dummy, Primed, Un-primed)
+    InitializeEvent(0, 9006026, 1459000, 1459010, 1459006); // Frozen Lightning Armament Priming (Un-primed, Primed, Visual)
+    InitializeEvent(1, 9006026, 1459004, 1459014, 1459006); // Frozen Lightning Armament Priming w/ Jewel (Un-primed, Primed, Visual)
+    
+    // Underworld Frozen Lightning Weapon Buff (Right)
+    InitializeEvent(2, 9006025, 2083, 2085, 2081); // Underworld Frozen Lightning Weapon Refresh (Dummy, Primed, Un-primed)
+    InitializeEvent(3, 9006025, 2084, 2086, 2082); // Underworld Frozen Lightning Weapon Refresh w/ Jewel (Dummy, Primed, Un-primed)
+    InitializeEvent(2, 9006026, 2081, 2085, 2087); // Underworld Frozen Lightning Weapon Priming (Un-primed, Primed, Visual)
+    InitializeEvent(3, 9006026, 2082, 2086, 2087); // Underworld Frozen Lightning Weapon Priming w/ Jewel (Un-primed, Primed, Visual)
+    InitializeEvent(18, 9007035, 390900, 2084); // Underworld Frozen Lightning Weapon Jewel Buff Cleanup (Right Dummy w/ Jewel)
+    
+    // Underworld Frozen Lightning Weapon Buff (Left)
+    InitializeEvent(4, 9006025, 2093, 2095, 2091); // Underworld Frozen Lightning Weapon Refresh (Dummy, Primed, Un-primed)
+    InitializeEvent(5, 9006025, 2094, 2096, 2092); // Underworld Frozen Lightning Weapon Refresh w/ Jewel (Dummy, Primed, Un-primed)
+    InitializeEvent(4, 9006026, 2091, 2095, 2097); // Underworld Frozen Lightning Weapon Priming (Un-primed, Primed)
+    InitializeEvent(5, 9006026, 2092, 2096, 2097); // Underworld Frozen Lightning Weapon Priming w/ Jewel (Un-primed, Primed)
+    InitializeEvent(19, 9007035, 390900, 2094); // Underworld Frozen Lightning Weapon Jewel Buff Cleanup (Right Dummy w/ Jewel)
+    
+    InitializeEvent(0, 9007127, 0); // Pure Darkness
+    
+    // Rot buffs
+    InitializeEvent(5, 9006069, 1725000, 1725010, 1729000); // ON Aspect of the Scorpion + Chitinous Shell
+    InitializeEvent(6, 9006069, 1729200, 1729260, 1729000); // ON Aspect of the Scorpion + Gaze of the Basilisk
+    InitializeEvent(7, 9006069, 1725100, 1725110, 1729000); // ON Aspect of the Scorpion + Pest's Tenacity
+    InitializeEvent(5, 9006070, 1725000, 1725010, 1729000); // OFF Aspect of the Scorpion + Chitinous Shell
+    InitializeEvent(6, 9006070, 1729200, 1729260, 1729000); // OFF Aspect of the Scorpion + Gaze of the Basilisk
+    InitializeEvent(7, 9006070, 1725100, 1725110, 1729000); // OFF Aspect of the Scorpion + Pest's Tenacity
+    InitializeEvent(8 , 9006069, 1725000, 1725020, 1729100); // ON Blessing of the Sealed God + Chitinous Shell
+    InitializeEvent(9 , 9006069, 1729200, 1729250, 1729100); // ON Blessing of the Sealed God + Gaze of the Basilisk
+    InitializeEvent(10, 9006069, 1725100, 1725120, 1729100); // ON Blessing of the Sealed God + Pest's Tenacity
+    InitializeEvent(8 , 9006070, 1725000, 1725020, 1729100); // OFF Blessing of the Sealed God + Chitinous Shell
+    InitializeEvent(9 , 9006070, 1729200, 1729250, 1729100); // OFF Blessing of the Sealed God + Gaze of the Basilisk
+    InitializeEvent(10, 9006070, 1725100, 1725120, 1729100); // OFF Blessing of the Sealed God + Pest's Tenacity
+    
+    InitializeEvent(18, 9007010, 1729260, 523, 1729265); // Gaze of the Basilisk + Aspect of the Scorpion resource recovery on blight
+    InitializeEvent(19, 9007010, 1729260, 501, 1729265); // Gaze of the Basilisk + Aspect of the Scorpion resource recovery on bleed
+    $InitializeEvent(0, 9007133); // Aspect of the Scorpion - Protection buffs
+    $InitializeEvent(0, 9007134, 1729000, 1729005); // Aspect of the Scorpion - Status Listener Application
+    $InitializeEvent(1, 9007134, 1729000, 1729010);
+    $InitializeEvent(2, 9007134, 1729100, 1729105); // Blessing of the Sealed God - Status Listener application
+    $InitializeEvent(3, 9007134, 1729100, 1729110);
+    
+    $InitializeEvent(0, 9006005); // Mark Recall expired
+    InitializeEvent(2, 9007129, 295940, 1622401, 1622415) // Soul Tether Death/Expire Heal
+    $InitializeEvent(0, 9006002); // Soul Tether Cleanup
 });
 
 // Spirit Summons
@@ -1057,134 +1322,141 @@ $Event(9008001, Default, function() {
     for (let i = 0; i <= 10; i++) {
         // Summon spEffect, Summoning Sickness Debuff, Debuff Identifier, bool isPuppet
         // 3% Debuff
-        InitializeEvent(0   + i, 9006006, 218000 + i, 40002, 40300, 0); // Glintstone Sorcerer-1
-        InitializeEvent(11  + i, 9006006, 222000 + i, 40002, 40300, 0); // Clayman-2
-        InitializeEvent(22  + i, 9006006, 236000 + i, 40002, 40300, 0); // Spirit Jellyfish-1
-        InitializeEvent(33  + i, 9006006, 241000 + i, 40002, 40300, 0); // Noble Sorcerer-1
-        InitializeEvent(44  + i, 9006006, 213000 + i, 40002, 40300, 0); // Skeletal Bandit-1-Resurrect
-        InitializeEvent(55  + i, 9006006, 245000 + i, 40002, 40300, 0); // Miranda Sprout-5
-        InitializeEvent(66  + i, 9006006, 240000 + i, 40002, 40300, 0); // Wandering Noble-5
-        InitializeEvent(77  + i, 9006006, 244000 + i, 40002, 40300, 0); // Land Squirt-3
+        $InitializeEvent(0   + i, 9006006, 218000 + i, 40002, 40300, 0); // Glintstone Sorcerer-1
+        $InitializeEvent(11  + i, 9006006, 222000 + i, 40002, 40300, 0); // Clayman-2
+        $InitializeEvent(22  + i, 9006006, 236000 + i, 40002, 40300, 0); // Spirit Jellyfish-1
+        $InitializeEvent(33  + i, 9006006, 241000 + i, 40002, 40300, 0); // Noble Sorcerer-1
+        $InitializeEvent(44  + i, 9006006, 213000 + i, 40002, 40300, 0); // Skeletal Bandit-1-Resurrect
+        $InitializeEvent(55  + i, 9006006, 245000 + i, 40002, 40300, 0); // Miranda Sprout-5
+        $InitializeEvent(66  + i, 9006006, 240000 + i, 40002, 40300, 0); // Wandering Noble-5
+        $InitializeEvent(77  + i, 9006006, 244000 + i, 40002, 40300, 0); // Land Squirt-3
         
         // 6% Debuff
-        InitializeEvent(88  + i, 9006006, 215000 + i, 40012, 40301, 0); // Putrid Corpse-4
-        InitializeEvent(99  + i, 9006006, 220000 + i, 40012, 40301, 0); // Page-1
-        InitializeEvent(110 + i, 9006006, 246000 + i, 40012, 40301, 0); // Soldjars of Fortune-3
-        InitializeEvent(924 + i, 9006006, 20204000 + i, 40012, 40301, 0); // [dlc] Spider Scorpion
+        $InitializeEvent(88  + i, 9006006, 215000 + i, 40012, 40301, 0); // Putrid Corpse-4
+        $InitializeEvent(99  + i, 9006006, 220000 + i, 40012, 40301, 0); // Page-1
+        $InitializeEvent(110 + i, 9006006, 246000 + i, 40012, 40301, 0); // Soldjars of Fortune-3
+        $InitializeEvent(924 + i, 9006006, 20204000 + i, 40012, 40301, 0); // [dlc] Spider Scorpion
+        $InitializeEvent(1199 + i, 9006006, 421000 + i, 40012, 40301, 0); // [CER] Dragonfly
         
         // 9% Debuff
-        InitializeEvent(121 + i, 9006006, 242000 + i, 40022, 40302, 0); // Vulgar Militia-3
-        InitializeEvent(132 + i, 9006006, 225000 + i, 40022, 40302, 0); // Marionette Soldier-2
-        InitializeEvent(143 + i, 9006006, 212000 + i, 40022, 40302, 0); // Skeletal Militiaman-2-Resurrect
-        InitializeEvent(154 + i, 9006006, 249000 + i, 40022, 40302, 0); // Archer-3
-        InitializeEvent(165 + i, 9006006, 209000 + i, 40022, 40302, 0); // Ancestral Follower-1
-        InitializeEvent(176 + i, 9006006, 219000 + i, 40022, 40302, 0); // Twinsage Sorcerer-1
-        InitializeEvent(187 + i, 9006006, 250000 + i, 40022, 40302, 0); // Godrick Soldier-2
-        InitializeEvent(198 + i, 9006006, 251000 + i, 40022, 40302, 0); // Raya Lucaria Soldier-3
-        InitializeEvent(209 + i, 9006006, 252000 + i, 40022, 40302, 0); // Leyndell Soldier-2
-        InitializeEvent(220 + i, 9006006, 406000 + i, 40022, 40302, 0); // [CER] Rootmen-2
+        $InitializeEvent(121 + i, 9006006, 242000 + i, 40022, 40302, 0); // Vulgar Militia-3
+        $InitializeEvent(132 + i, 9006006, 225000 + i, 40022, 40302, 0); // Marionette Soldier-2
+        $InitializeEvent(143 + i, 9006006, 212000 + i, 40022, 40302, 0); // Skeletal Militiaman-2-Resurrect
+        $InitializeEvent(154 + i, 9006006, 249000 + i, 40022, 40302, 0); // Archer-3
+        $InitializeEvent(165 + i, 9006006, 209000 + i, 40022, 40302, 0); // Ancestral Follower-1
+        $InitializeEvent(176 + i, 9006006, 219000 + i, 40022, 40302, 0); // Twinsage Sorcerer-1
+        $InitializeEvent(187 + i, 9006006, 250000 + i, 40022, 40302, 0); // Godrick Soldier-2
+        $InitializeEvent(198 + i, 9006006, 251000 + i, 40022, 40302, 0); // Raya Lucaria Soldier-3
+        $InitializeEvent(209 + i, 9006006, 252000 + i, 40022, 40302, 0); // Leyndell Soldier-2
+        $InitializeEvent(220 + i, 9006006, 406000 + i, 40022, 40302, 0); // [CER] Rootmen-2
+        $InitializeEvent(1188 + i, 9006006, 424000 + i, 40022, 40302, 0); // [CER] Twin Jellyfish
         
         // 12% Debuff
-        InitializeEvent(231 + i, 9006006, 224000 + i, 40032, 40303, 0); // Kindred of Rot-1
-        InitializeEvent(242 + i, 9006006, 227000 + i, 40032, 40303, 0); // Fire Monk-1
-        InitializeEvent(253 + i, 9006006, 221000 + i, 40032, 40303, 0); // Battlemage Hugues-1
-        InitializeEvent(264 + i, 9006006, 414000 + i, 40032, 40303, 0); // [CER] Stone Cluster-4
-        InitializeEvent(275 + i, 9006006, 416000 + i, 40032, 40303, 0); // [CER] Red Bear-2
-        InitializeEvent(286 + i, 9006006, 417000 + i, 40032, 40303, 0); // [CER] Mystic Pigmen-4
-        InitializeEvent(935 + i, 9006006, 20211000 + i, 40032, 40303, 0); // [dlc] Man-Fly
+        $InitializeEvent(231 + i, 9006006, 224000 + i, 40032, 40303, 0); // Kindred of Rot-1
+        $InitializeEvent(242 + i, 9006006, 227000 + i, 40032, 40303, 0); // Fire Monk-1
+        $InitializeEvent(253 + i, 9006006, 221000 + i, 40032, 40303, 0); // Battlemage Hugues-1
+        $InitializeEvent(264 + i, 9006006, 414000 + i, 40032, 40303, 0); // [CER] Stone Cluster-4
+        $InitializeEvent(275 + i, 9006006, 416000 + i, 40032, 40303, 0); // [CER] Red Bear-2
+        $InitializeEvent(286 + i, 9006006, 417000 + i, 40032, 40303, 0); // [CER] Mystic Pigmen-4
+        $InitializeEvent(935 + i, 9006006, 20211000 + i, 40032, 40303, 0); // [dlc] Man-Fly
         
         // 15% Debuff
-        InitializeEvent(297 + i, 9006006, 243000 + i, 40042, 40304, 0); // Mad Pumpkinhead-1
-        InitializeEvent(308 + i, 9006006, 233000 + i, 40042, 40304, 0); // Giant Rats-3
-        InitializeEvent(319 + i, 9006006, 255000 + i, 40042, 40304, 0); // Haligtree Soldier-4
-        InitializeEvent(330 + i, 9006006, 263000 + i, 40042, 40304, 1); // Jarwright Puppet-1
-        InitializeEvent(341 + i, 9006006, 210000 + i, 40042, 40304, 0); // Winged Misbegotten-1
-        InitializeEvent(352 + i, 9006006, 409000 + i, 40042, 40304, 0); // [CER] Starcallers-2
-        InitializeEvent(363 + i, 9006006, 410000 + i, 40042, 40304, 0); // [CER] Bloodthorn Exiles-3
-        InitializeEvent(946 + i, 9006006, 20202000 + i, 40042, 40304, 0); // [dlc] Gravebird
-        InitializeEvent(957 + i, 9006006, 20217000 + i, 40042, 40304, 0); // [dlc] Fingercreeper
+        $InitializeEvent(297 + i, 9006006, 243000 + i, 40042, 40304, 0); // Mad Pumpkinhead-1
+        $InitializeEvent(308 + i, 9006006, 233000 + i, 40042, 40304, 0); // Giant Rats-3
+        $InitializeEvent(319 + i, 9006006, 255000 + i, 40042, 40304, 0); // Haligtree Soldier-4
+        $InitializeEvent(330 + i, 9006006, 263000 + i, 40042, 40304, 1); // Jarwright Puppet-1
+        $InitializeEvent(341 + i, 9006006, 210000 + i, 40042, 40304, 0); // Winged Misbegotten-1
+        $InitializeEvent(352 + i, 9006006, 409000 + i, 40042, 40304, 0); // [CER] Starcallers-2
+        $InitializeEvent(363 + i, 9006006, 410000 + i, 40042, 40304, 0); // [CER] Bloodthorn Exiles-3
+        $InitializeEvent(946 + i, 9006006, 20202000 + i, 40042, 40304, 0); // [dlc] Gravebird
+        $InitializeEvent(957 + i, 9006006, 20217000 + i, 40042, 40304, 0); // [dlc] Fingercreeper
+        $InitializeEvent(1210 + i, 9006006, 423000 + i, 40042, 40304, 0); // [CER] Turtle
         
         // 18% Debuff
-        InitializeEvent(374 + i, 9006006, 253000 + i, 40052, 40305, 0); // Radahn Soldier-2
-        InitializeEvent(385 + i, 9006006, 203000 + i, 40052, 40305, 0); // Fanged Imp-2
-        InitializeEvent(396 + i, 9006006, 232000 + i, 40052, 40305, 0); // Lone Wolf-3
-        InitializeEvent(407 + i, 9006006, 226000 + i, 40052, 40305, 0); // Avionette Soldier-2
-        InitializeEvent(418 + i, 9006006, 234000 + i, 40052, 40305, 0); // Demi-Human-5
-        InitializeEvent(429 + i, 9006006, 211000 + i, 40052, 40305, 0); // Albinauric-2
-        InitializeEvent(440 + i, 9006006, 257000 + i, 40052, 40305, 0); // Redmane Knight Ogha-1
-        InitializeEvent(451 + i, 9006006, 237000 + i, 40052, 40305, 0); // Warhawk-1
-        InitializeEvent(462 + i, 9006006, 231000 + i, 40052, 40305, 0); // Kaiden Sellsword-1
-        InitializeEvent(968 + i, 9006006, 20203000 + i, 40052, 40305, 0); // [dlc] Fire Knight Hilde
+        $InitializeEvent(374 + i, 9006006, 253000 + i, 40052, 40305, 0); // Radahn Soldier-2
+        $InitializeEvent(385 + i, 9006006, 203000 + i, 40052, 40305, 0); // Fanged Imp-2
+        $InitializeEvent(396 + i, 9006006, 232000 + i, 40052, 40305, 0); // Lone Wolf-3
+        $InitializeEvent(407 + i, 9006006, 226000 + i, 40052, 40305, 0); // Avionette Soldier-2
+        $InitializeEvent(418 + i, 9006006, 234000 + i, 40052, 40305, 0); // Demi-Human-5
+        $InitializeEvent(429 + i, 9006006, 211000 + i, 40052, 40305, 0); // Albinauric-2
+        $InitializeEvent(440 + i, 9006006, 257000 + i, 40052, 40305, 0); // Redmane Knight Ogha-1
+        $InitializeEvent(451 + i, 9006006, 237000 + i, 40052, 40305, 0); // Warhawk-1
+        $InitializeEvent(462 + i, 9006006, 231000 + i, 40052, 40305, 0); // Kaiden Sellsword-1
+        $InitializeEvent(968 + i, 9006006, 20203000 + i, 40052, 40305, 0); // [dlc] Fire Knight Hilde
         
         // 21% Debuff
-        InitializeEvent(473 + i, 9006006, 205000 + i, 40062, 40306, 0); // Nomad-1
-        InitializeEvent(484 + i, 9006006, 229000 + i, 40062, 40306, 0); // Man-Serpent-1
-        InitializeEvent(495 + i, 9006006, 208000 + i, 40062, 40306, 0); // Crystilian-1
-        InitializeEvent(506 + i, 9006006, 235000 + i, 40062, 40306, 0); // Rotten Stray-1
-        InitializeEvent(517 + i, 9006006, 405000 + i, 40062, 40306, 0); // [CER] Erdtree Guardians-2
-        InitializeEvent(979 + i, 9006006, 20209000 + i, 40062, 40306, 0); // [dlc] Black Knight Captain Huw
+        $InitializeEvent(473 + i, 9006006, 205000 + i, 40062, 40306, 0); // Nomad-1
+        $InitializeEvent(484 + i, 9006006, 229000 + i, 40062, 40306, 0); // Man-Serpent-1
+        $InitializeEvent(495 + i, 9006006, 208000 + i, 40062, 40306, 0); // Crystilian-1
+        $InitializeEvent(506 + i, 9006006, 235000 + i, 40062, 40306, 0); // Rotten Stray-1
+        $InitializeEvent(517 + i, 9006006, 405000 + i, 40062, 40306, 0); // [CER] Erdtree Guardians-2
+        $InitializeEvent(979 + i, 9006006, 20209000 + i, 40062, 40306, 0); // [dlc] Black Knight Captain Huw
+        $InitializeEvent(1177 + i, 9006006, 425000 + i, 40062, 40306, 0); // [CER] Goalers
         
         // 24% Debuff
-        InitializeEvent(528 + i, 9006006, 223000 + i, 40072, 40307, 0); // Cleanrot Knight Finlay-1
-        InitializeEvent(539 + i, 9006006, 247000 + i, 40072, 40307, 0); // Omenkiller Rollo-1
-        InitializeEvent(550 + i, 9006006, 239000 + i, 40072, 40307, 0); // Bloodhound Knight Fioh-1
-        InitializeEvent(561 + i, 9006006, 216000 + i, 40072, 40307, 0); // Depraved Perfumer Carmaan-1
-        InitializeEvent(990 + i, 9006006, 20210000 + i, 40072, 40307, 0); // [dlc] Bigmouth Imp
-        InitializeEvent(1001 + i, 9006006, 20200000 + i, 40072, 40307, 0); // [dlc] Curseblade Meera
-        InitializeEvent(1012 + i, 9006006, 20219000 + i, 40072, 40307, 0); // [dlc] Swordhand of Night Jolán
-        InitializeEvent(1023 + i, 9006006, 20218000 + i, 40072, 40307, 0); // [dlc] Fire Knight Queelign
+        $InitializeEvent(528 + i, 9006006, 223000 + i, 40072, 40307, 0); // Cleanrot Knight Finlay-1
+        $InitializeEvent(539 + i, 9006006, 247000 + i, 40072, 40307, 0); // Omenkiller Rollo-1
+        $InitializeEvent(550 + i, 9006006, 239000 + i, 40072, 40307, 0); // Bloodhound Knight Fioh-1
+        $InitializeEvent(561 + i, 9006006, 216000 + i, 40072, 40307, 0); // Depraved Perfumer Carmaan-1
+        $InitializeEvent(990 + i, 9006006, 20210000 + i, 40072, 40307, 0); // [dlc] Bigmouth Imp
+        $InitializeEvent(1001 + i, 9006006, 20200000 + i, 40072, 40307, 0); // [dlc] Curseblade Meera
+        $InitializeEvent(1012 + i, 9006006, 20219000 + i, 40072, 40307, 0); // [dlc] Swordhand of Night Jolán
+        $InitializeEvent(1023 + i, 9006006, 20218000 + i, 40072, 40307, 0); // [dlc] Fire Knight Queelign
         
         // 27% Debuff
-        InitializeEvent(572 + i, 9006006, 206000 + i, 40082, 40308, 1); // Nightmaiden and Swordstress Puppets-2
-        InitializeEvent(583 + i, 9006006, 230000 + i, 40082, 40308, 0); // Azula Beastman-2
-        InitializeEvent(594 + i, 9006006, 259000 + i, 40082, 40308, 1); // Nepheli Loux Puppet-1
-        InitializeEvent(605 + i, 9006006, 256000 + i, 40082, 40308, 0); // Ancient Dragon Knight Kristoff-1
-        InitializeEvent(616 + i, 9006006, 214000 + i, 40082, 40308, 0); // Oracle Envoy-4
-        InitializeEvent(627 + i, 9006006, 228000 + i, 40082, 40308, 0); // Blackflame Monk Amon-1
-        InitializeEvent(638 + i, 9006006, 408000 + i, 40082, 40308, 0); // [CER] Winged Dame-1
-        InitializeEvent(649 + i, 9006006, 419000 + i, 40082, 40308, 0); // [CER] Stone Sentry-1
-        InitializeEvent(1034 + i, 9006006, 20207000 + i, 40082, 40308, 0); // [dlc] Messmer Soldier
-        InitializeEvent(1045 + i, 9006006, 20208000 + i, 40082, 40308, 0); // [dlc] Black Knight Commander Andreas
-        InitializeEvent(1056 + i, 9006006, 20214000 + i, 40082, 40308, 0); // [dlc] Horned Warrior
+        $InitializeEvent(572 + i, 9006006, 206000 + i, 40082, 40308, 1); // Nightmaiden and Swordstress Puppets-2
+        $InitializeEvent(583 + i, 9006006, 230000 + i, 40082, 40308, 0); // Azula Beastman-2
+        $InitializeEvent(594 + i, 9006006, 259000 + i, 40082, 40308, 1); // Nepheli Loux Puppet-1
+        $InitializeEvent(605 + i, 9006006, 256000 + i, 40082, 40308, 0); // Ancient Dragon Knight Kristoff-1
+        $InitializeEvent(616 + i, 9006006, 214000 + i, 40082, 40308, 0); // Oracle Envoy-4
+        $InitializeEvent(627 + i, 9006006, 228000 + i, 40082, 40308, 0); // Blackflame Monk Amon-1
+        $InitializeEvent(638 + i, 9006006, 408000 + i, 40082, 40308, 0); // [CER] Winged Dame-1
+        $InitializeEvent(649 + i, 9006006, 419000 + i, 40082, 40308, 0); // [CER] Stone Sentry-1
+        $InitializeEvent(1034 + i, 9006006, 20207000 + i, 40082, 40308, 0); // [dlc] Messmer Soldier
+        $InitializeEvent(1045 + i, 9006006, 20208000 + i, 40082, 40308, 0); // [dlc] Black Knight Commander Andreas
+        $InitializeEvent(1056 + i, 9006006, 20214000 + i, 40082, 40308, 0); // [dlc] Horned Warrior
        
         // 30% Debuff                                                   
-        InitializeEvent(660 + i, 9006006, 248000 + i, 40092, 40309, 0); // Greatshield Soldier-5
-        InitializeEvent(671 + i, 9006006, 201000 + i, 40092, 40309, 0); // Banished Knight Oleg-1
-        InitializeEvent(682 + i, 9006006, 262000 + i, 40092, 40309, 1); // Dolores the Sleeping Arrow Puppet-1
-        InitializeEvent(693 + i, 9006006, 400000 + i, 40092, 40309, 0); // [CER] Cemetary Shade-1
-        InitializeEvent(704 + i, 9006006, 413000 + i, 40092, 40309, 0); // [CER] Putrescence Sorcerer-1
-        InitializeEvent(715 + i, 9006006, 412000 + i, 40092, 40309, 0); // [CER] Wormface-1
-        InitializeEvent(726 + i, 9006006, 420000 + i, 40092, 40309, 0); // [CER] Man-Serpent Caster-1
-        InitializeEvent(1067 + i, 9006006, 20201000 + i, 40092, 40309, 0); // [dlc] Bloodfiend Hexer's Ashes
-        InitializeEvent(1078 + i, 9006006, 20206000 + i, 40092, 40309, 0); // [dlc] Demi-Human Swordsman Yosh
-        InitializeEvent(1089 + i, 9006006, 20213000 + i, 40092, 40309, 0); // [dlc] Divine Bird Warrior Ornis
+        $InitializeEvent(660 + i, 9006006, 248000 + i, 40092, 40309, 0); // Greatshield Soldier-5
+        $InitializeEvent(671 + i, 9006006, 201000 + i, 40092, 40309, 0); // Banished Knight Oleg-1
+        $InitializeEvent(682 + i, 9006006, 262000 + i, 40092, 40309, 1); // Dolores the Sleeping Arrow Puppet-1
+        $InitializeEvent(693 + i, 9006006, 400000 + i, 40092, 40309, 0); // [CER] Cemetary Shade-1
+        $InitializeEvent(704 + i, 9006006, 413000 + i, 40092, 40309, 0); // [CER] Putrescence Sorcerer-1
+        $InitializeEvent(715 + i, 9006006, 412000 + i, 40092, 40309, 0); // [CER] Wormface-1
+        $InitializeEvent(726 + i, 9006006, 420000 + i, 40092, 40309, 0); // [CER] Man-Serpent Caster-1
+        $InitializeEvent(1067 + i, 9006006, 20201000 + i, 40092, 40309, 0); // [dlc] Bloodfiend Hexer's Ashes
+        $InitializeEvent(1078 + i, 9006006, 20206000 + i, 40092, 40309, 0); // [dlc] Demi-Human Swordsman Yosh
+        $InitializeEvent(1089 + i, 9006006, 20213000 + i, 40092, 40309, 0); // [dlc] Divine Bird Warrior Ornis
+        $InitializeEvent(1166 + i, 9006006, 426000 + i, 40092, 40309, 0); // [CER] Demidragons
         
         // 33% Debuff
-        InitializeEvent(737 + i, 9006006, 217000 + i, 40102, 40310, 0); // Perfumer Tricia-1
-        InitializeEvent(748 + i, 9006006, 202000 + i, 40102, 40310, 0); // Banished Knight Engvall-1
-        InitializeEvent(759 + i, 9006006, 254000 + i, 40102, 40310, 0); // Mausoleum Soldier-5
-        InitializeEvent(770 + i, 9006006, 403000 + i, 40102, 40310, 0); // [CER] Rotten Duelist-1
-        InitializeEvent(781 + i, 9006006, 407000 + i, 40102, 40310, 0); // [CER] Spiritcaller Snail-1+3
-        InitializeEvent(1100 + i, 9006006, 20215000 + i, 40102, 40310, 0); // [dlc] Ancient Dragon Florissax
-        InitializeEvent(1111 + i, 9006006, 20205000 + i, 40102, 40310, 0); // [dlc] Inquisitor
+        $InitializeEvent(737 + i, 9006006, 217000 + i, 40102, 40310, 0); // Perfumer Tricia-1
+        $InitializeEvent(748 + i, 9006006, 202000 + i, 40102, 40310, 0); // Banished Knight Engvall-1
+        $InitializeEvent(759 + i, 9006006, 254000 + i, 40102, 40310, 0); // Mausoleum Soldier-5
+        $InitializeEvent(770 + i, 9006006, 403000 + i, 40102, 40310, 0); // [CER] Rotten Duelist-1
+        $InitializeEvent(781 + i, 9006006, 407000 + i, 40102, 40310, 0); // [CER] Spiritcaller Snail-1+3
+        $InitializeEvent(1100 + i, 9006006, 20215000 + i, 40102, 40310, 0); // [dlc] Ancient Dragon Florissax
+        $InitializeEvent(1111 + i, 9006006, 20205000 + i, 40102, 40310, 0); // [dlc] Inquisitor
         
         // 36% Debuff                                                   
-        InitializeEvent(792 + i, 9006006, 238000 + i, 40112, 40311, 0); // Stormhawk Deenh-1
-        InitializeEvent(803 + i, 9006006, 258000 + i, 40112, 40311, 0); // Lhutel the Headless-1
-        InitializeEvent(814 + i, 9006006, 261000 + i, 40112, 40311, 1); // Finger Maiden Therolina Puppet-1
-        InitializeEvent(825 + i, 9006006, 401000 + i, 40112, 40311, 1); // [CER] Horned Omen-1
-        InitializeEvent(836 + i, 9006006, 418000 + i, 40112, 40311, 1); // [CER] Zamor Knight-1
-        InitializeEvent(1122 + i, 9006006, 20212000 + i, 40112, 40311, 1); // [dlc] Taylew the Golem Smith
+        $InitializeEvent(792 + i, 9006006, 238000 + i, 40112, 40311, 0); // Stormhawk Deenh-1
+        $InitializeEvent(803 + i, 9006006, 258000 + i, 40112, 40311, 0); // Lhutel the Headless-1
+        $InitializeEvent(814 + i, 9006006, 261000 + i, 40112, 40311, 1); // Finger Maiden Therolina Puppet-1
+        $InitializeEvent(825 + i, 9006006, 401000 + i, 40112, 40311, 1); // [CER] Horned Omen-1
+        $InitializeEvent(836 + i, 9006006, 418000 + i, 40112, 40311, 1); // [CER] Zamor Knight-1
+        $InitializeEvent(1122 + i, 9006006, 20212000 + i, 40112, 40311, 1); // [dlc] Taylew the Golem Smith
+        $InitializeEvent(1155 + i, 9006006, 427000 + i, 40112, 40311, 1); // [CER] Tempest Caller
         
         // 40% Debuff
-        InitializeEvent(847 + i, 9006006, 204000 + i, 40122, 40312, 0); // Latenna the Albinauric-1
-        InitializeEvent(858 + i, 9006006, 260000 + i, 40122, 40312, 1); // Dung Eater Puppet-1
-        InitializeEvent(869 + i, 9006006, 200000 + i, 40122, 40312, 0); // Black Knife Tiche-1
-        InitializeEvent(880 + i, 9006006, 402000 + i, 40122, 40312, 0); // [CER] Nox Ancerstor-1
-        InitializeEvent(891 + i, 9006006, 404000 + i, 40122, 40312, 0); // [CER] Sanguine Noble-1
-        InitializeEvent(902 + i, 9006006, 411000 + i, 40122, 40312, 0); // [CER] Warrior Jar Alexander-1
-        InitializeEvent(913 + i, 9006006, 419000 + i, 40122, 40312, 0); // [CER] Erdtree Sentry-1
-        InitializeEvent(1133 + i, 9006006, 20220000 + i, 40122, 40312, 0); // [dlc] Jolán and Anna
+        $InitializeEvent(847 + i, 9006006, 204000 + i, 40122, 40312, 0); // Latenna the Albinauric-1
+        $InitializeEvent(858 + i, 9006006, 260000 + i, 40122, 40312, 1); // Dung Eater Puppet-1
+        $InitializeEvent(869 + i, 9006006, 200000 + i, 40122, 40312, 0); // Black Knife Tiche-1
+        $InitializeEvent(880 + i, 9006006, 402000 + i, 40122, 40312, 0); // [CER] Nox Ancerstor-1
+        $InitializeEvent(891 + i, 9006006, 404000 + i, 40122, 40312, 0); // [CER] Sanguine Noble-1
+        $InitializeEvent(902 + i, 9006006, 411000 + i, 40122, 40312, 0); // [CER] Warrior Jar Alexander-1
+        $InitializeEvent(913 + i, 9006006, 419000 + i, 40122, 40312, 0); // [CER] Erdtree Sentry-1
+        $InitializeEvent(1133 + i, 9006006, 20220000 + i, 40122, 40312, 0); // [dlc] Jolán and Anna
+        $InitializeEvent(1144 + i, 9006006, 422000 + i, 40122, 40312, 0); // [CER] Blaidd
     }
     
     // - Summon Debuff Handling -
@@ -1197,7 +1469,7 @@ $Event(9008001, Default, function() {
     InitializeEvent(2, 9006061, 7009200, 751) // Friend of Death
     InitializeEvent(3, 9006061, 503370, 0)    // Baldachin's Blessin
     
-    // Custom Spirit Summon Visual Handlers
+    //Custom Spirit Summon Visual Handlers
     InitializeEvent(0, 9006088, 0);
     InitializeEvent(0, 9006089, 0);
     InitializeEvent(0, 9006091, 0);
@@ -1215,10 +1487,18 @@ $Event(9008001, Default, function() {
     InitializeEvent( 9, 9006090, 407009, 407109); // + 9
     InitializeEvent(10, 9006090, 407010, 407110); // +10
     
+    // Turtle handler
+    $InitializeEvent(0, 9006012);
+    $InitializeEvent(0, 9006013);
+    
     // Other
     InitializeEvent(0, 9006007, 0); // Sacrifice Setup
     InitializeEvent(0, 9006029, 0); // Spirit Caller Bell
-    InitializeEvent(0, 9006010, 0); // Seamless resummon allowance
+    
+    $InitializeEvent(0, 9006003, 1460411, 3000501, 62050); // Normal
+    $InitializeEvent(1, 9006003, 1460411, 3000500, 62055); // Normal L
+    $InitializeEvent(2, 9006003, 1460412, 3000501, 62060); // Big
+    $InitializeEvent(3, 9006003, 1460412, 3000500, 62065); // Big L
 });
 
 
@@ -1292,7 +1572,7 @@ $Event(9008002, Default, function() {
     InitializeEvent(82, 1100, 9182, 10820, 0, 510820); // elemer of the briar
     //InitializeEvent(83, 1100, 9183, 10830, 0, 510830); //redmane duo
     InitializeEvent(84, 1100, 9184, 10840, 0, 510840); // commander niall
-    InitializeEvent(84, 1100, 9184, 10840, 0, 510840); // commander niall
+    //InitializeEvent(84, 1100, 9184, 10840, 0, 510840); // commander niall (Why is this in here twice?)
     InitializeEvent(85, 1100, 9185, 10850, 0, 510850); // lansseax
     InitializeEvent(86, 1100, 9186, 10860, 0, 510860); // matriarch
     InitializeEvent(87, 1100, 9187, 10870, 0, 510870); // omenkiller placeholder boss (morne)
@@ -1300,6 +1580,9 @@ $Event(9008002, Default, function() {
     InitializeEvent(89, 1100, 9189, 10890, 0, 510890); // Einar
     InitializeEvent(90, 1100, 9190, 10900, 0, 510900); // ? (DLC)
     InitializeEvent(91, 1100, 9191, 12050900, 0, 12057900); // Blood KNight
+    InitializeEvent(92, 1100, 9193, 20780, 0, 520780); // Quicksilver Husk
+    InitializeEvent(93, 1100, 9192, 20790, 0, 520790); // Daergraf
+    InitializeEvent(94, 1100, 9194, 13000910, 0, 13007910); // Mystic Huntress (Lost Tribe)
     InitializeEvent(0, 1200, 9200, 20000, 0, 520000);
     InitializeEvent(1, 1200, 9201, 20010, 0, 520010);
     InitializeEvent(2, 1200, 9202, 20020, 0, 520020);
@@ -1467,9 +1750,9 @@ $Event(9008002, Default, function() {
 // One Time Flags
 $Event(9008003, Default, function() {
     // Version Fixers
-    InitializeEvent(0, 9008010, 0); // 2.0.1 -> 2.0.2
+    //InitializeEvent(0, 9008010, 0); // 2.0.1 -> 2.0.2
     
-    EndIf(EventFlag(82001));
+    EndIf(EventFlag(60120));
    
     // Map Reveal Flags
     SetEventFlagID(82001, ON);
@@ -1527,9 +1810,13 @@ $Event(9008003, Default, function() {
     SetEventFlagID(11009260, ON);
     SetEventFlagID(1037519201, ON);
     SetEventFlagID(60100, ON);
-
-    //Crafting Flags
+    
+    // Crafting Menu unlock
     SetEventFlagID(60120, ON);
+
+    // Moved everything below to use EventFlag 0 in regbin
+    
+    //Crafting Flags
     //SetEventFlagID(66000, ON);
     //SetEventFlagID(66010, ON);
     //SetEventFlagID(66020, ON);
@@ -1580,181 +1867,183 @@ $Event(9008003, Default, function() {
     //SetEventFlagID(66570, ON);
     //SetEventFlagID(66580, ON);
     //SetEventFlagID(66590, ON);
-    SetEventFlagID(67000, ON);
-    SetEventFlagID(67010, ON);
-    SetEventFlagID(67020, ON);
-    SetEventFlagID(67030, ON);
-    SetEventFlagID(67040, ON);
-    SetEventFlagID(67050, ON);
-    SetEventFlagID(67060, ON);
-    SetEventFlagID(67070, ON);
-    SetEventFlagID(67080, ON);
-    SetEventFlagID(67090, ON);
-    SetEventFlagID(67100, ON);
-    SetEventFlagID(67110, ON);
-    SetEventFlagID(67120, ON);
-    SetEventFlagID(67130, ON);
-    SetEventFlagID(67140, ON);
-    SetEventFlagID(67150, ON);
-    SetEventFlagID(67160, ON);
-    SetEventFlagID(67170, ON);
-    SetEventFlagID(67180, ON);
-    SetEventFlagID(67190, ON);
-    SetEventFlagID(67200, ON);
-    SetEventFlagID(67210, ON);
-    SetEventFlagID(67220, ON);
-    SetEventFlagID(67230, ON);
-    SetEventFlagID(67240, ON);
-    SetEventFlagID(67250, ON);
-    SetEventFlagID(67260, ON);
-    SetEventFlagID(67270, ON);
-    SetEventFlagID(67280, ON);
-    SetEventFlagID(67290, ON);
-    SetEventFlagID(67300, ON);
-    SetEventFlagID(67310, ON);
-    SetEventFlagID(67320, ON);
-    SetEventFlagID(67330, ON);
-    SetEventFlagID(67340, ON);
-    SetEventFlagID(67350, ON);
-    SetEventFlagID(67360, ON);
-    SetEventFlagID(67370, ON);
-    SetEventFlagID(67380, ON);
-    SetEventFlagID(67390, ON);
-    SetEventFlagID(67400, ON);
-    SetEventFlagID(67410, ON);
-    SetEventFlagID(67420, ON);
-    SetEventFlagID(67430, ON);
-    SetEventFlagID(67440, ON);
-    SetEventFlagID(67450, ON);
-    SetEventFlagID(67460, ON);
-    SetEventFlagID(67470, ON);
-    SetEventFlagID(67480, ON);
-    SetEventFlagID(67490, ON);
-    SetEventFlagID(67500, ON);
-    SetEventFlagID(67510, ON);
-    SetEventFlagID(67520, ON);
-    SetEventFlagID(67530, ON);
-    SetEventFlagID(67540, ON);
-    SetEventFlagID(67550, ON);
-    SetEventFlagID(67560, ON);
-    SetEventFlagID(67570, ON);
-    SetEventFlagID(67580, ON);
-    SetEventFlagID(67590, ON);
-    SetEventFlagID(67600, ON);
-    SetEventFlagID(67610, ON);
-    SetEventFlagID(67620, ON);
-    SetEventFlagID(67630, ON);
-    SetEventFlagID(67640, ON);
-    SetEventFlagID(67650, ON);
-    SetEventFlagID(67660, ON);
-    SetEventFlagID(67670, ON);
-    SetEventFlagID(67680, ON);
-    SetEventFlagID(67690, ON);
-    SetEventFlagID(67700, ON);
-    SetEventFlagID(67800, ON);
-    SetEventFlagID(67810, ON);
-    SetEventFlagID(67820, ON);
-    SetEventFlagID(67830, ON);
-    SetEventFlagID(67840, ON);
-    SetEventFlagID(67850, ON);
-    SetEventFlagID(67860, ON);
-    SetEventFlagID(67870, ON);
-    SetEventFlagID(67880, ON);
-    SetEventFlagID(67890, ON);
-    SetEventFlagID(67900, ON);
-    SetEventFlagID(67910, ON);
-    SetEventFlagID(67920, ON);
-    SetEventFlagID(67930, ON);
-    SetEventFlagID(67940, ON);
-    SetEventFlagID(67950, ON);
-    SetEventFlagID(67960, ON);
-    SetEventFlagID(67970, ON);
-    SetEventFlagID(67980, ON);
-    SetEventFlagID(67990, ON);
-    SetEventFlagID(68000, ON);
-    SetEventFlagID(68010, ON);
-    SetEventFlagID(68020, ON);
-    SetEventFlagID(68030, ON);
-    SetEventFlagID(68040, ON);
-    SetEventFlagID(68050, ON);
-    SetEventFlagID(68060, ON);
-    SetEventFlagID(68070, ON);
-    SetEventFlagID(68080, ON);
-    SetEventFlagID(68090, ON);
-    SetEventFlagID(68100, ON);
-    SetEventFlagID(68200, ON);
-    SetEventFlagID(68210, ON);
-    SetEventFlagID(68220, ON);
-    SetEventFlagID(68230, ON);
-    SetEventFlagID(68240, ON);
-    SetEventFlagID(68250, ON);
-    SetEventFlagID(68260, ON);
-    SetEventFlagID(68270, ON);
-    SetEventFlagID(68280, ON);
-    SetEventFlagID(68290, ON);
-    SetEventFlagID(68300, ON);
-    SetEventFlagID(68400, ON);
-    SetEventFlagID(68410, ON);
-    SetEventFlagID(68420, ON);
-    SetEventFlagID(68430, ON);
-    SetEventFlagID(68440, ON);
-    SetEventFlagID(68450, ON);
-    SetEventFlagID(68460, ON);
-    SetEventFlagID(68470, ON);
-    SetEventFlagID(68480, ON);
-    SetEventFlagID(68490, ON);
-    SetEventFlagID(68500, ON);
+    //SetEventFlagID(67000, ON);
+    //SetEventFlagID(67010, ON);
+    //SetEventFlagID(67020, ON);
+    //SetEventFlagID(67030, ON);
+    //SetEventFlagID(67040, ON);
+    //SetEventFlagID(67050, ON);
+    //SetEventFlagID(67060, ON);
+    //SetEventFlagID(67070, ON);
+    //SetEventFlagID(67080, ON);
+    //SetEventFlagID(67090, ON);
+    //SetEventFlagID(67100, ON);
+    //SetEventFlagID(67110, ON);
+    //SetEventFlagID(67120, ON);
+    //SetEventFlagID(67130, ON);
+    //SetEventFlagID(67140, ON);
+    //SetEventFlagID(67150, ON);
+    //SetEventFlagID(67160, ON);
+    //SetEventFlagID(67170, ON);
+    //SetEventFlagID(67180, ON);
+    //SetEventFlagID(67190, ON);
+    //SetEventFlagID(67200, ON);
+    //SetEventFlagID(67210, ON);
+    //SetEventFlagID(67220, ON);
+    //SetEventFlagID(67230, ON);
+    //SetEventFlagID(67240, ON);
+    //SetEventFlagID(67250, ON);
+    //SetEventFlagID(67260, ON);
+    //SetEventFlagID(67270, ON);
+    //SetEventFlagID(67280, ON);
+    //SetEventFlagID(67290, ON);
+    //SetEventFlagID(67300, ON);
+    //SetEventFlagID(67310, ON);
+    //SetEventFlagID(67320, ON);
+    //SetEventFlagID(67330, ON);
+    //SetEventFlagID(67340, ON);
+    //SetEventFlagID(67350, ON);
+    //SetEventFlagID(67360, ON);
+    //SetEventFlagID(67370, ON);
+    //SetEventFlagID(67380, ON);
+    //SetEventFlagID(67390, ON);
+    //SetEventFlagID(67400, ON);
+    //SetEventFlagID(67410, ON);
+    //SetEventFlagID(67420, ON);
+    //SetEventFlagID(67430, ON);
+    //SetEventFlagID(67440, ON);
+    //SetEventFlagID(67450, ON);
+    //SetEventFlagID(67460, ON);
+    //SetEventFlagID(67470, ON);
+    //SetEventFlagID(67480, ON);
+    //SetEventFlagID(67490, ON);
+    //SetEventFlagID(67500, ON);
+    //SetEventFlagID(67510, ON);
+    //SetEventFlagID(67520, ON);
+    //SetEventFlagID(67530, ON);
+    //SetEventFlagID(67540, ON);
+    //SetEventFlagID(67550, ON);
+    //SetEventFlagID(67560, ON);
+    //SetEventFlagID(67570, ON);
+    //SetEventFlagID(67580, ON);
+    //SetEventFlagID(67590, ON);
+    //SetEventFlagID(67600, ON);
+    //SetEventFlagID(67610, ON);
+    //SetEventFlagID(67620, ON);
+    //SetEventFlagID(67630, ON);
+    //SetEventFlagID(67640, ON);
+    //SetEventFlagID(67650, ON);
+    //SetEventFlagID(67660, ON);
+    //SetEventFlagID(67670, ON);
+    //SetEventFlagID(67680, ON);
+    //SetEventFlagID(67690, ON);
+    //SetEventFlagID(67700, ON);
+    //SetEventFlagID(67800, ON);
+    //SetEventFlagID(67810, ON);
+    //SetEventFlagID(67820, ON);
+    //SetEventFlagID(67830, ON);
+    //SetEventFlagID(67840, ON);
+    //SetEventFlagID(67850, ON);
+    //SetEventFlagID(67860, ON);
+    //SetEventFlagID(67870, ON);
+    //SetEventFlagID(67880, ON);
+    //SetEventFlagID(67890, ON);
+    //SetEventFlagID(67900, ON);
+    //SetEventFlagID(67910, ON);
+    //SetEventFlagID(67920, ON);
+    //SetEventFlagID(67930, ON);
+    //SetEventFlagID(67940, ON);
+    //SetEventFlagID(67950, ON);
+    //SetEventFlagID(67960, ON);
+    //SetEventFlagID(67970, ON);
+    //SetEventFlagID(67980, ON);
+    //SetEventFlagID(67990, ON);
+    //SetEventFlagID(68000, ON);
+    //SetEventFlagID(68010, ON);
+    //SetEventFlagID(68020, ON);
+    //SetEventFlagID(68030, ON);
+    //SetEventFlagID(68040, ON);
+    //SetEventFlagID(68050, ON);
+    //SetEventFlagID(68060, ON);
+    //SetEventFlagID(68070, ON);
+    //SetEventFlagID(68080, ON);
+    //SetEventFlagID(68090, ON);
+    //SetEventFlagID(68100, ON);
+    //SetEventFlagID(68200, ON);
+    //SetEventFlagID(68210, ON);
+    //SetEventFlagID(68220, ON);
+    //SetEventFlagID(68230, ON);
+    //SetEventFlagID(68240, ON);
+    //SetEventFlagID(68250, ON);
+    //SetEventFlagID(68260, ON);
+    //SetEventFlagID(68270, ON);
+    //SetEventFlagID(68280, ON);
+    //SetEventFlagID(68290, ON);
+    //SetEventFlagID(68300, ON);
+    //SetEventFlagID(68400, ON);
+    //SetEventFlagID(68410, ON);
+    //SetEventFlagID(68420, ON);
+    //SetEventFlagID(68430, ON);
+    //SetEventFlagID(68440, ON);
+    //SetEventFlagID(68450, ON);
+    //SetEventFlagID(68460, ON);
+    //SetEventFlagID(68470, ON);
+    //SetEventFlagID(68480, ON);
+    //SetEventFlagID(68490, ON);
+    //SetEventFlagID(68500, ON);
     //DLC Cookbooks
-    SetEventFlagID(68510, ON);
-    SetEventFlagID(68520, ON);
-    SetEventFlagID(68530, ON);
-    SetEventFlagID(68540, ON);
-    SetEventFlagID(68550, ON);
-    SetEventFlagID(68560, ON);
-    SetEventFlagID(68570, ON);
-    SetEventFlagID(68580, ON);
-    SetEventFlagID(68590, ON);
-    SetEventFlagID(68600, ON);
-    SetEventFlagID(68610, ON);
-    SetEventFlagID(68620, ON);
-    SetEventFlagID(68630, ON);
-    SetEventFlagID(68640, ON);
-    SetEventFlagID(68650, ON);
-    SetEventFlagID(68660, ON);
-    SetEventFlagID(68670, ON);
-    SetEventFlagID(68680, ON);
-    SetEventFlagID(68690, ON);
-    SetEventFlagID(68700, ON);
-    SetEventFlagID(68710, ON);
-    SetEventFlagID(68720, ON);
-    SetEventFlagID(68730, ON);
-    SetEventFlagID(68740, ON);
-    SetEventFlagID(68750, ON);
-    SetEventFlagID(68760, ON);
-    SetEventFlagID(68770, ON);
-    SetEventFlagID(68780, ON);
-    SetEventFlagID(68790, ON);
-    SetEventFlagID(68800, ON);
-    SetEventFlagID(68810, ON);
-    SetEventFlagID(68820, ON);
-    SetEventFlagID(68830, ON);
-    SetEventFlagID(68840, ON);
-    SetEventFlagID(68850, ON);
-    SetEventFlagID(68860, ON);
-    SetEventFlagID(68870, ON);
-    SetEventFlagID(68880, ON);
-    SetEventFlagID(68890, ON);
-    SetEventFlagID(68900, ON);
-    SetEventFlagID(68910, ON);
-    SetEventFlagID(68920, ON);
-    SetEventFlagID(68930, ON);
-    SetEventFlagID(68940, ON);
-    SetEventFlagID(68950, ON);
+    //SetEventFlagID(68510, ON);
+    //SetEventFlagID(68520, ON);
+    //SetEventFlagID(68530, ON);
+    //SetEventFlagID(68540, ON);
+    //SetEventFlagID(68550, ON);
+    //SetEventFlagID(68560, ON);
+    //SetEventFlagID(68570, ON);
+    //SetEventFlagID(68580, ON);
+    //SetEventFlagID(68590, ON);
+    //SetEventFlagID(68600, ON);
+    //SetEventFlagID(68610, ON);
+    //SetEventFlagID(68620, ON);
+    //SetEventFlagID(68630, ON);
+    //SetEventFlagID(68640, ON);
+    //SetEventFlagID(68650, ON);
+    //SetEventFlagID(68660, ON);
+    //SetEventFlagID(68670, ON);
+    //SetEventFlagID(68680, ON);
+    //SetEventFlagID(68690, ON);
+    //SetEventFlagID(68700, ON);
+    //SetEventFlagID(68710, ON);
+    //SetEventFlagID(68720, ON);
+    //SetEventFlagID(68730, ON);
+    //SetEventFlagID(68740, ON);
+    //SetEventFlagID(68750, ON);
+    //SetEventFlagID(68760, ON);
+    //SetEventFlagID(68770, ON);
+    //SetEventFlagID(68780, ON);
+    //SetEventFlagID(68790, ON);
+    //SetEventFlagID(68800, ON);
+    //SetEventFlagID(68810, ON);
+    //SetEventFlagID(68820, ON);
+    //SetEventFlagID(68830, ON);
+    //SetEventFlagID(68840, ON);
+    //SetEventFlagID(68850, ON);
+    //SetEventFlagID(68860, ON);
+    //SetEventFlagID(68870, ON);
+    //SetEventFlagID(68880, ON);
+    //SetEventFlagID(68890, ON);
+    //SetEventFlagID(68900, ON);
+    //SetEventFlagID(68910, ON);
+    //SetEventFlagID(68920, ON);
+    //SetEventFlagID(68930, ON);
+    //SetEventFlagID(68940, ON);
+    //SetEventFlagID(68950, ON);
 });
 
 // Items Acquisition
 $Event(9008004, Default, function() {
-    InitializeEvent(0, 65810, 65810, 100750, 0, 0, 0, 0); //Ash of War: Impaling Thrust
+    InitializeEvent(0, 9006024, ItemType.Goods, 1290, ItemType.Goods, 1291); // Replace starlight shard pickup with consumable
+    
+    InitializeEvent(0, 65810, 65817, 100750, 0, 0, 0, 0); //Ash of War: Impaling Thrust
     InitializeEvent(1, 65810, 65811, 400163, 0, 0, 0, 0); //Ash of War: Piercing Fang
     InitializeEvent(2, 65810, 65812, 540630, 0, 0, 0, 0); //Ash of War: Spinning Slash
     InitializeEvent(3, 65810, 65813, 1043377400, 0, 0, 0, 0); //Ash of War: Repeating Thrust
@@ -1845,120 +2134,275 @@ $Event(9008004, Default, function() {
     InitializeEvent(89, 65810, 65899, 540334, 0, 0, 0, 0); //Ash of War: Through and Through
     InitializeEvent(90, 65810, 65900, 540646, 0, 0, 0, 0); //Ash of War: Enchanted Shot
     InitializeEvent(91, 65810, 65901, 580360, 0, 0, 0, 0); //Ash of War: Rain of Arrows
+    InitializeEvent(92, 65810, 65902, 112092, 0, 0, 0, 0); //Ash of War: Assassin's Feint
+    InitializeEvent(93, 65810, 65903, 112093, 0, 0, 0, 0); //Ash of War: Flame Arc
+    InitializeEvent(94, 65810, 65904, 112094, 0, 0, 0, 0); //Ash of War: Dragon Lord's Recall
+    InitializeEvent(95, 65810, 65905, 112096, 0, 0, 0, 0); //Ash of War: Deflecting Ash
     
     //Spell Runes - Incantations
-    InitializeEvent(0, 1500, 9000, 7000, 1);  //Bestial 1
-    InitializeEvent(1, 1500, 9001, 7010, 1);  //Bestial 2
-    InitializeEvent(2, 1500, 9002, 7020, 1);  //Bestial 3
-    InitializeEvent(3, 1500, 9003, 7030, 1);  //Bestial 4
-    InitializeEvent(4, 1500, 9004, 7040, 1);  //Bestial 5
-    InitializeEvent(5, 1500, 9005, 7050, 1);  //Golden Order 1
-    InitializeEvent(6, 1500, 9006, 7060, 1);  //Golden Order 2
-    InitializeEvent(7, 1500, 9007, 7070, 1);  //Golden Order 3
-    InitializeEvent(8, 1500, 9008, 7080, 1);  //Golden Order 4
-    InitializeEvent(9, 1500, 9009, 7090, 1);  //Golden Order 5
-    InitializeEvent(10, 1500, 9010, 7100, 1); //Giantsflame 1
-    InitializeEvent(11, 1500, 9011, 7110, 1); //Giantsflame 2
-    InitializeEvent(12, 1500, 9012, 7120, 1); //Giantsflame 3
-    InitializeEvent(13, 1500, 9013, 7130, 1); //Giantsflame 4
-    InitializeEvent(14, 1500, 9014, 7140, 1); //Giantsflame 5
-    InitializeEvent(15, 1500, 9015, 7150, 1); //Dragon Cult 1
-    InitializeEvent(16, 1500, 9016, 7160, 1); //Dragon Cult 2
-    InitializeEvent(17, 1500, 9017, 7170, 1); //Dragon Cult 3
-    InitializeEvent(18, 1500, 9018, 7180, 1); //Dragon Cult 4
-    InitializeEvent(19, 1500, 9019, 7190, 1); //Dragon Cult 5
-    InitializeEvent(20, 1500, 9020, 7200, 1); //Godslayer 1
-    InitializeEvent(21, 1500, 9021, 7210, 1); //Godslayer 2
-    InitializeEvent(22, 1500, 9022, 7220, 1); //Godslayer 3
-    InitializeEvent(23, 1500, 9023, 7230, 1); //Godslayer 4
-    InitializeEvent(24, 1500, 9024, 7240, 1); //Godslayer 5
-    InitializeEvent(25, 1500, 9025, 7250, 1); //Frenzy 1
-    InitializeEvent(26, 1500, 9026, 7260, 1); //Frenzy 2
-    InitializeEvent(27, 1500, 9027, 7270, 1); //Frenzy 3
-    InitializeEvent(28, 1500, 9028, 7280, 1); //Frenzy 4
-    InitializeEvent(29, 1500, 9029, 7290, 1); //Frenzy 5
-    InitializeEvent(30, 1500, 9030, 7300, 1); //Bloodflame 1
-    InitializeEvent(31, 1500, 9031, 7310, 1); //Bloodflame 2
-    InitializeEvent(32, 1500, 9032, 7320, 1); //Bloodflame 3
-    InitializeEvent(33, 1500, 9033, 7330, 1); //Bloodflame 4
-    InitializeEvent(34, 1500, 9034, 7340, 1); //Bloodflame 5
-    InitializeEvent(35, 1500, 9035, 7350, 1); //Servants of Rot 1
-    InitializeEvent(36, 1500, 9036, 7360, 1); //Servants of Rot 2
-    InitializeEvent(37, 1500, 9037, 7370, 1); //Servants of Rot 3
-    InitializeEvent(38, 1500, 9038, 7380, 1); //Servants of Rot 4
-    InitializeEvent(39, 1500, 9039, 7390, 1); //Servants of Rot 5
-    InitializeEvent(40, 1500, 9040, 7400, 1); //Mystic 1
-    InitializeEvent(41, 1500, 9041, 7410, 1); //Mystic 2
-    InitializeEvent(42, 1500, 9042, 7420, 1); //Mystic 3
-    InitializeEvent(43, 1500, 9043, 7430, 1); //Mystic 4
-    InitializeEvent(44, 1500, 9044, 7440, 1); //Mystic 5
+    InitializeEvent(0, 1500, 9000, 7000);  //Bestial 1
+    InitializeEvent(1, 1500, 9001, 7010);  //Bestial 2
+    InitializeEvent(2, 1500, 9002, 7020);  //Bestial 3
+    InitializeEvent(3, 1500, 9003, 7030);  //Bestial 4
+    InitializeEvent(4, 1500, 9004, 7040);  //Bestial 5
+    InitializeEvent(5, 1500, 9005, 7050);  //Golden Order 1
+    InitializeEvent(6, 1500, 9006, 7060);  //Golden Order 2
+    InitializeEvent(7, 1500, 9007, 7070);  //Golden Order 3
+    InitializeEvent(8, 1500, 9008, 7080);  //Golden Order 4
+    InitializeEvent(9, 1500, 9009, 7090);  //Golden Order 5
+    InitializeEvent(10, 1500, 9010, 7100); //Giantsflame 1
+    InitializeEvent(11, 1500, 9011, 7110); //Giantsflame 2
+    InitializeEvent(12, 1500, 9012, 7120); //Giantsflame 3
+    InitializeEvent(13, 1500, 9013, 7130); //Giantsflame 4
+    InitializeEvent(14, 1500, 9014, 7140); //Giantsflame 5
+    InitializeEvent(15, 1500, 9015, 7150); //Dragon Cult 1
+    InitializeEvent(16, 1500, 9016, 7160); //Dragon Cult 2
+    InitializeEvent(17, 1500, 9017, 7170); //Dragon Cult 3
+    InitializeEvent(18, 1500, 9018, 7180); //Dragon Cult 4
+    InitializeEvent(19, 1500, 9019, 7190); //Dragon Cult 5
+    InitializeEvent(20, 1500, 9020, 7200); //Godslayer 1
+    InitializeEvent(21, 1500, 9021, 7210); //Godslayer 2
+    InitializeEvent(22, 1500, 9022, 7220); //Godslayer 3
+    InitializeEvent(23, 1500, 9023, 7230); //Godslayer 4
+    InitializeEvent(24, 1500, 9024, 7240); //Godslayer 5
+    InitializeEvent(25, 1500, 9025, 7250); //Frenzy 1
+    InitializeEvent(26, 1500, 9026, 7260); //Frenzy 2
+    InitializeEvent(27, 1500, 9027, 7270); //Frenzy 3
+    InitializeEvent(28, 1500, 9028, 7280); //Frenzy 4
+    InitializeEvent(29, 1500, 9029, 7290); //Frenzy 5
+    InitializeEvent(30, 1500, 9030, 7300); //Bloodflame 1
+    InitializeEvent(31, 1500, 9031, 7310); //Bloodflame 2
+    InitializeEvent(32, 1500, 9032, 7320); //Bloodflame 3
+    InitializeEvent(33, 1500, 9033, 7330); //Bloodflame 4
+    InitializeEvent(34, 1500, 9034, 7340); //Bloodflame 5
+    InitializeEvent(35, 1500, 9035, 7350); //Servants of Rot 1
+    InitializeEvent(36, 1500, 9036, 7360); //Servants of Rot 2
+    InitializeEvent(37, 1500, 9037, 7370); //Servants of Rot 3
+    InitializeEvent(38, 1500, 9038, 7380); //Servants of Rot 4
+    InitializeEvent(39, 1500, 9039, 7390); //Servants of Rot 5
+    InitializeEvent(40, 1500, 9040, 7400); //Mystic 1
+    InitializeEvent(41, 1500, 9041, 7410); //Mystic 2
+    InitializeEvent(42, 1500, 9042, 7420); //Mystic 3
+    InitializeEvent(43, 1500, 9043, 7430); //Mystic 4
+    InitializeEvent(44, 1500, 9044, 7440); //Mystic 5
     //Spell Runes - Sorceries
-    InitializeEvent(45, 1500, 9045, 7450, 1); //Glint 1
-    InitializeEvent(46, 1500, 9046, 7460, 1); //Glint 2
-    InitializeEvent(47, 1500, 9047, 7470, 1); //Glint 3
-    InitializeEvent(48, 1500, 9048, 7480, 1); //Glint 4
-    InitializeEvent(49, 1500, 9049, 7490, 1); //Glint 5
-    InitializeEvent(50, 1500, 9050, 7500, 1); //Gravity 1
-    InitializeEvent(51, 1500, 9051, 7510, 1); //Gravity 2
-    InitializeEvent(52, 1500, 9052, 7520, 1); //Gravity 3
-    InitializeEvent(53, 1500, 9053, 7530, 1); //Gravity 4
-    InitializeEvent(54, 1500, 9054, 7540, 1); //Gravity 5
-    InitializeEvent(55, 1500, 9055, 7550, 1); //Dragonkin 1
-    InitializeEvent(56, 1500, 9056, 7560, 1); //Dragonkin 2
-    InitializeEvent(57, 1500, 9057, 7570, 1); //Dragonkin 3
-    InitializeEvent(58, 1500, 9058, 7580, 1); //Dragonkin 4
-    InitializeEvent(59, 1500, 9059, 7590, 1); //Dragonkin 5
-    InitializeEvent(60, 1500, 9060, 7600, 1); //Lava 1
-    InitializeEvent(61, 1500, 9061, 7610, 1); //Lava 2
-    InitializeEvent(62, 1500, 9062, 7620, 1); //Lava 3
-    InitializeEvent(63, 1500, 9063, 7630, 1); //Lava 4
-    InitializeEvent(64, 1500, 9064, 7640, 1); //Lava 5
-    InitializeEvent(65, 1500, 9065, 7650, 1); //Night 1
-    InitializeEvent(66, 1500, 9066, 7660, 1); //Night 2
-    InitializeEvent(67, 1500, 9067, 7670, 1); //Night 3
-    InitializeEvent(68, 1500, 9068, 7680, 1); //Night 4
-    InitializeEvent(69, 1500, 9069, 7690, 1); //Night 5
-    InitializeEvent(70, 1500, 9070, 7700, 1); //Death 1
-    InitializeEvent(71, 1500, 9071, 7710, 1); //Death 2
-    InitializeEvent(72, 1500, 9072, 7720, 1); //Death 3
-    InitializeEvent(73, 1500, 9073, 7730, 1); //Death 4
-    InitializeEvent(74, 1500, 9074, 7740, 1); //Death 5
-    InitializeEvent(75, 1500, 9075, 7750, 1); //Storm 1
-    InitializeEvent(76, 1500, 9076, 7760, 1); //Storm 2
-    InitializeEvent(77, 1500, 9077, 7770, 1); //Storm 3
-    InitializeEvent(78, 1500, 9078, 7780, 1); //Storm 4
-    InitializeEvent(79, 1500, 9079, 7790, 1); //Storm 5
-    InitializeEvent(80, 1500, 9080, 7800, 1); //Frost 1
-    InitializeEvent(81, 1500, 9081, 7810, 1); //Frost 2
-    InitializeEvent(82, 1500, 9082, 7820, 1); //Frost 3
-    InitializeEvent(83, 1500, 9083, 7830, 1); //Frost 4
-    InitializeEvent(84, 1500, 9084, 7840, 1); //Frost 5
-    InitializeEvent(85, 1500, 9085, 7850, 1); //Aberrant 1
-    InitializeEvent(86, 1500, 9086, 7860, 1); //Aberrant 2
-    InitializeEvent(87, 1500, 9087, 7870, 1); //Aberrant 3
-    InitializeEvent(88, 1500, 9088, 7880, 1); //Aberrant 4
-    InitializeEvent(89, 1500, 9089, 7890, 1); //Aberrant 5
+    InitializeEvent(45, 1500, 9045, 7450); //Glint 1
+    InitializeEvent(46, 1500, 9046, 7460); //Glint 2
+    InitializeEvent(47, 1500, 9047, 7470); //Glint 3
+    InitializeEvent(48, 1500, 9048, 7480); //Glint 4
+    InitializeEvent(49, 1500, 9049, 7490); //Glint 5
+    InitializeEvent(50, 1500, 9050, 7500); //Gravity 1
+    InitializeEvent(51, 1500, 9051, 7510); //Gravity 2
+    InitializeEvent(52, 1500, 9052, 7520); //Gravity 3
+    InitializeEvent(53, 1500, 9053, 7530); //Gravity 4
+    InitializeEvent(54, 1500, 9054, 7540); //Gravity 5
+    InitializeEvent(55, 1500, 9055, 7550); //Dragonkin 1
+    InitializeEvent(56, 1500, 9056, 7560); //Dragonkin 2
+    InitializeEvent(57, 1500, 9057, 7570); //Dragonkin 3
+    InitializeEvent(58, 1500, 9058, 7580); //Dragonkin 4
+    InitializeEvent(59, 1500, 9059, 7590); //Dragonkin 5
+    InitializeEvent(60, 1500, 9060, 7600); //Lava 1
+    InitializeEvent(61, 1500, 9061, 7610); //Lava 2
+    InitializeEvent(62, 1500, 9062, 7620); //Lava 3
+    InitializeEvent(63, 1500, 9063, 7630); //Lava 4
+    InitializeEvent(64, 1500, 9064, 7640); //Lava 5
+    InitializeEvent(65, 1500, 9065, 7650); //Night 1
+    InitializeEvent(66, 1500, 9066, 7660); //Night 2
+    InitializeEvent(67, 1500, 9067, 7670); //Night 3
+    InitializeEvent(68, 1500, 9068, 7680); //Night 4
+    InitializeEvent(69, 1500, 9069, 7690); //Night 5
+    InitializeEvent(70, 1500, 9070, 7700); //Death 1
+    InitializeEvent(71, 1500, 9071, 7710); //Death 2
+    InitializeEvent(72, 1500, 9072, 7720); //Death 3
+    InitializeEvent(73, 1500, 9073, 7730); //Death 4
+    InitializeEvent(74, 1500, 9074, 7740); //Death 5
+    InitializeEvent(75, 1500, 9075, 7750); //Storm 1
+    InitializeEvent(76, 1500, 9076, 7760); //Storm 2
+    InitializeEvent(77, 1500, 9077, 7770); //Storm 3
+    InitializeEvent(78, 1500, 9078, 7780); //Storm 4
+    InitializeEvent(79, 1500, 9079, 7790); //Storm 5
+    InitializeEvent(80, 1500, 9080, 7800); //Frost 1
+    InitializeEvent(81, 1500, 9081, 7810); //Frost 2
+    InitializeEvent(82, 1500, 9082, 7820); //Frost 3
+    InitializeEvent(83, 1500, 9083, 7830); //Frost 4
+    InitializeEvent(84, 1500, 9084, 7840); //Frost 5
+    InitializeEvent(85, 1500, 9085, 7850); //Aberrant 1
+    InitializeEvent(86, 1500, 9086, 7860); //Aberrant 2
+    InitializeEvent(87, 1500, 9087, 7870); //Aberrant 3
+    InitializeEvent(88, 1500, 9088, 7880); //Aberrant 4
+    InitializeEvent(89, 1500, 9089, 7890); //Aberrant 5
     //Shadow Spell Runes                
-    InitializeEvent(90, 1500, 9118, 8090, 1); //Bestial 6
-    InitializeEvent(91, 1500, 9101, 8100, 1); //Golden Order 6
-    InitializeEvent(92, 1500, 9102, 8110, 1); //Giantsflame 6
-    InitializeEvent(93, 1500, 9103, 8120, 1); //Dragon Cult 6
-    InitializeEvent(94, 1500, 9104, 8130, 0); //Godslayer 6
-    InitializeEvent(95, 1500, 9105, 8140, 0); //Frenzy 6
-    InitializeEvent(96, 1500, 9106, 8150, 0); //Bloodflame 6
-    InitializeEvent(97, 1500, 9107, 8160, 0); //Rot 6
-    InitializeEvent(98, 1500, 9108, 8170, 1); //Mystic 6
-    InitializeEvent(99, 1500, 9109, 8000, 1); //Glint 6
-    InitializeEvent(100, 1500, 9110, 8010, 1); //Gravity 6
-    InitializeEvent(101, 1500, 9111, 8040, 0); //Dragonkin 6
-    InitializeEvent(102, 1500, 9112, 8050, 0); //Lava 6
-    InitializeEvent(103, 1500, 9113, 8060, 0); //Night 6
-    InitializeEvent(104, 1500, 9114, 8020, 1); //Death 6
-    InitializeEvent(105, 1500, 9115, 8070, 0); //Storm 6
-    InitializeEvent(106, 1500, 9116, 8080, 0); //Frost 6
-    InitializeEvent(107, 1500, 9117, 8030, 1); //Aberrant 6
+    InitializeEvent(90, 1500, 9118, 8090); //Bestial 6
+    InitializeEvent(91, 1500, 9101, 8100); //Golden Order 6
+    InitializeEvent(92, 1500, 9102, 8110); //Giantsflame 6
+    InitializeEvent(93, 1500, 9103, 8120); //Dragon Cult 6
+    InitializeEvent(94, 1500, 9104, 8130); //Godslayer 6
+    InitializeEvent(95, 1500, 9105, 8140); //Frenzy 6
+    InitializeEvent(96, 1500, 9106, 8150); //Bloodflame 6
+    InitializeEvent(97, 1500, 9107, 8160); //Rot 6
+    InitializeEvent(98, 1500, 9108, 8170); //Mystic 6
+    InitializeEvent(99, 1500, 9109, 8000); //Glint 6
+    InitializeEvent(100, 1500, 9110, 8010); //Gravity 6
+    InitializeEvent(101, 1500, 9111, 8040); //Dragonkin 6
+    InitializeEvent(102, 1500, 9112, 8050); //Lava 6
+    InitializeEvent(103, 1500, 9113, 8060); //Night 6
+    InitializeEvent(104, 1500, 9114, 8020); //Death 6
+    InitializeEvent(105, 1500, 9115, 8070); //Storm 6
+    InitializeEvent(106, 1500, 9116, 8080); //Frost 6
+    InitializeEvent(107, 1500, 9117, 8030); //Aberrant 6
     
     InitializeEvent(1, 4858, 400704, 2049399738, 6000, 107030); // Ancient Dragon Florissax
+});
+
+const Consumable = {
+    Crimson_Flask: 0,
+    Blue_Flask: 1,
+    Bombs: 2,
+    Weapon_Greases: 3,
+    Perfumes: 4,
+    Throwing_Knives: 5,
+    Throwing_Stones: 6,
+}
+
+// Shells
+$Event(9008005, Default, function() {
+    InitializeEvent(0, 9007112, 0); // Relentless Mimic Veil
+    
+    InitializeEvent(0, 9007113, 0); // Jewel of the Resolute
+    InitializeEvent(0, 9006034, 0); // HP recovery on hit
+    
+    InitializeEvent(0, 9007114, 0); // Jewel of the Valorous on hit enemy
+    InitializeEvent(0, 9007115, 0); // Jewel of the Valorous on getting damaged
+    
+    InitializeEvent(0, 9007116, 100550, 8000810); // Jewel of the Ancients on hit enemy Light Attack
+    InitializeEvent(1, 9007116, 100551, 8000800); // Jewel of the Ancients on hit enemy Heavy Attack
+    
+    InitializeEvent(5, 9007004, 392600, 392610); // Prisoner - Physic Restore
+    InitializeEvent(7, 9007005, 392600, Consumable.Crimson_Flask, 392620); // Prisoner - Red Restore
+    InitializeEvent(8, 9007005, 392600, Consumable.Blue_Flask, 392630); // Prisoner - Blue Restore
+    
+    InitializeEvent(0, 9007117, 0); // Jewel of the Forge - Cast Cycl. Proph
+    InitializeEvent(0, 9007118, 0); // Jewel of the Forge - Equip Talisman
+    InitializeEvent(0, 9007119, 0); // Jewel of the Forge - Unequip Talisman
+    InitializeEvent(0, 9007122, 391600, 391605); // Jewel of the Forge - Enemy Jewel Detection
+    
+    InitializeEvent(0, 9007121, 0); // Jewel of the Prince - Accursed Binding
+    InitializeEvent(1, 9007122, 391300, 391320); // Jewel of the Prince - Enemy Jewel Detection
+    
+    InitializeEvent(0, 9007123, 0); // Jewel of the Ancestors - Spirit 
+    InitializeEvent(2, 9007122, 392400, 392410); // Jewel of the Ancestors - Enemy Jewel Detection
+    InitializeEvent(0, 9006011, 392400, 501000, 392450, false); // Jewel of the Ancestors - Flask Heal
+    InitializeEvent(1, 9006011, 392400, 501001, 392451, false); // Jewel of the Ancestors - Flask Heal
+    InitializeEvent(2, 9006011, 392400, 501002, 392452, false); // Jewel of the Ancestors - Flask Heal
+    InitializeEvent(3, 9006011, 392400, 501003, 392453, false); // Jewel of the Ancestors - Flask Heal
+    InitializeEvent(4, 9006011, 392400, 501004, 392454, false); // Jewel of the Ancestors - Flask Heal
+    InitializeEvent(5, 9006011, 392400, 501005, 392455, false); // Jewel of the Ancestors - Flask Heal
+    InitializeEvent(6, 9006011, 392400, 501006, 392456, false); // Jewel of the Ancestors - Flask Heal
+    InitializeEvent(7, 9006011, 392400, 501007, 392457, false); // Jewel of the Ancestors - Flask Heal
+    InitializeEvent(8, 9006011, 392400, 501008, 392458, false); // Jewel of the Ancestors - Flask Heal
+    InitializeEvent(9, 9006011, 392400, 501009, 392459, false); // Jewel of the Ancestors - Flask Heal
+    InitializeEvent(10, 9006011, 392400, 501010, 392460, false); // Jewel of the Ancestors - Flask Heal
+    InitializeEvent(11, 9006011, 392400, 501011, 392461, false); // Jewel of the Ancestors - Flask Heal
+    InitializeEvent(12, 9006011, 392400, 501012, 392462, false); // Jewel of the Ancestors - Flask Heal
+    
+    InitializeEvent(3, 9007122, 391500, 391510); // Jewel of the Sinner - Enemy Jewel Detection
+    
+    
+    //InitializeEvent(0, 9007125, 390300, 3500002, 0, 0, 390310, 1, 660); // Jewel of the Reckless - Tier 1 on taking dmg
+    //InitializeEvent(1, 9007125, 390300, 9000031, 0, 0, 390310, 1, 660); // Jewel of the Reckless - Tier 1 on dealing dmg
+    //InitializeEvent(2, 9007125, 390300, 3500002, 1, 390310, 390311, 0, 0); // Jewel of the Reckless - Tier 2 on taking dmg
+    //InitializeEvent(3, 9007125, 390300, 9000031, 1, 390310, 390311, 0, 0); // Jewel of the Reckless - Tier 2 on dealing dmg
+    //InitializeEvent(4, 9007125, 390300, 3500002, 1, 390311, 390312, 0, 0); // Jewel of the Reckless - Tier 3 on taking dmg
+    //InitializeEvent(5, 9007125, 390300, 9000031, 1, 390311, 390312, 0, 0); // Jewel of the Reckless - Tier 3 on dealing dmg
+    //InitializeEvent(6, 9007125, 390300, 3500002, 1, 390312, 390313, 0, 0); // Jewel of the Reckless - Tier 4 on taking dmg
+    //InitializeEvent(7, 9007125, 390300, 9000031, 1, 390312, 390313, 0, 0); // Jewel of the Reckless - Tier 4 on dealing dmg
+    //InitializeEvent(8, 9007125, 390300, 3500002, 1, 390313, 390314, 0, 0); // Jewel of the Reckless - Tier 5 on taking dmg
+    //InitializeEvent(9, 9007125, 390300, 9000031, 1, 390313, 390314, 0, 0); // Jewel of the Reckless - Tier 5 on dealing dmg
+    //InitializeEvent(10, 9007125, 390300, 3500002, 1, 390314, 390315, 0, 0); // Jewel of the Reckless - Tier 6 on taking dmg
+    //InitializeEvent(11, 9007125, 390300, 9000031, 1, 390314, 390315, 0, 0); // Jewel of the Reckless - Tier 6 on dealing dmg
+    //InitializeEvent(12, 9007125, 390300, 3500002, 1, 390315, 390316, 0, 0); // Jewel of the Reckless - Tier 7 on taking dmg
+    //InitializeEvent(13, 9007125, 390300, 9000031, 1, 390315, 390316, 0, 0); // Jewel of the Reckless - Tier 7 on dealing dmg
+    //InitializeEvent(14, 9007125, 390300, 3500002, 1, 390316, 390317, 0, 0); // Jewel of the Reckless - Tier 8 on taking dmg
+    //InitializeEvent(15, 9007125, 390300, 9000031, 1, 390316, 390317, 0, 0); // Jewel of the Reckless - Tier 8 on dealing dmg
+    //InitializeEvent(16, 9007125, 390300, 3500002, 1, 390317, 390318, 0, 0); // Jewel of the Reckless - Tier 9 on taking dmg
+    //InitializeEvent(17, 9007125, 390300, 9000031, 1, 390317, 390318, 0, 0); // Jewel of the Reckless - Tier 9 on dealing dmg
+    //InitializeEvent(18, 9007125, 390300, 3500002, 1, 390318, 390319, 0, 0); // Jewel of the Reckless - Tier 10 on taking dmg
+    //InitializeEvent(19, 9007125, 390300, 9000031, 1, 390318, 390319, 0, 0); // Jewel of the Reckless - Tier 10 on dealing dmg
+    //InitializeEvent(0, 9007126, 390310, 0); // Jewel of the Reckless Cleanup T1
+    //InitializeEvent(1, 9007126, 390311, 0);
+    //InitializeEvent(2, 9007126, 390312, 0);
+    //InitializeEvent(3, 9007126, 390313, 390310);
+    //InitializeEvent(4, 9007126, 390314, 390311);
+    //InitializeEvent(5, 9007126, 390315, 390312);
+    //InitializeEvent(6, 9007126, 390316, 390313);
+    //InitializeEvent(7, 9007126, 390317, 390314);
+    //InitializeEvent(8, 9007126, 390318, 390315);
+    //InitializeEvent(9, 9007126, 390319, 390316);
+    // Jewel of the Reckless v2
+    InitializeEvent(0, 9006032, 0); // Absorb on hit
+    InitializeEvent(0, 9006033, 0); // Damage on hit
+    InitializeEvent(7, 9007035, 390300, 390320); // Cleanup Absorb
+    
+    InitializeEvent(4, 9007122, 391400, 391410); // Jewel of the Dark Moon - Enemy Jewel detection
+    InitializeEvent(1, 9007010, 1441300, 391400, 391420); // Armor of Rime interaction
+    InitializeEvent(1, 9007031, 1441300, 391400, 391420);
+    InitializeEvent(2, 9007010, 1441600, 391400, 391421); // Armor of Ice interaction
+    InitializeEvent(2, 9007031, 1441600, 391400, 391421);
+    
+    // Jewel of the Storm
+    InitializeEvent(0, 9007129, 391100, 391110, 391120); // Resource on Poise Break
+    InitializeEvent(3, 9007129, 391100, 391110, 391140); // Spell Dmg on Poise Break
+    InitializeEvent(42, 9007035, 391100, 391140); // Spell Dmg cleanup
+    
+    //InitializeEvent(3, 9007010, 390800, 1479000, 390850); // Jewel of the Cosmos - Primeval Alignemnt Bullets
+    //InitializeEvent(3, 9007031, 390800, 1479000, 390850);
+    //InitializeEvent(4, 9007010, 390800, 1479100, 390860); // Jewel of the Cosmos - Meteoric Alignemnt Bullets
+    //InitializeEvent(4, 9007031, 390800, 1479100, 390860);
+    
+    InitializeEvent(1, 9007129, 391000, 1485301, 391010); // Jewel of the Devourer - Lava Hit Recovery
+    
+    InitializeEvent(0, 9007131, 0); // Jewel of the Darkness - Out of Combat Damage
+    InitializeEvent(5, 9007010, 391200, 1467200, 391250); // Jewel of the Darkness - Attune to the black moon state info
+    InitializeEvent(5, 9007031, 391200, 1467200, 391250);
+    InitializeEvent(6, 9007010, 391200, 1467100, 391260); // Jewel of the Darkness - Oath of Darkness Quicksilver R
+    InitializeEvent(6, 9007031, 391200, 1467100, 391260);
+    InitializeEvent(7, 9007010, 391200, 1467100, 391265); // Jewel of the Darkness - Oath of Darkness Quicksilver L
+    InitializeEvent(7, 9007031, 391200, 1467100, 391265);
+    
+    InitializeEvent(6, 9007122, 392300, 392320); // Jewel of the Sealed - Enemy Jewel detection
+    InitializeEvent(14, 9007010, 392300, 521, 392330); // Jewel of the Sealed - Poison Exultation
+    InitializeEvent(15, 9007010, 392300, 506, 392340); // Jewel of the Sealed - Rot Exultation
+    InitializeEvent(16, 9007010, 392300, 501, 392360); // Jewel of the Sealed - Bleed Exultation
+    InitializeEvent(17, 9007010, 392300, 523, 392350); // Jewel of the Sealed - Blight Exultation
+
+    InitializeEvent(7, 9007122, 392100, 392110); // Jewel of the Mindless - Enemy Jewel Detection
+    
+    InitializeEvent(0, 9007132, 1492000); // Jewel of the Sinner - Refresh active buffs on ash
+    InitializeEvent(1, 9007132, 1498000);
+    InitializeEvent(2, 9007132, 1497100);
+    InitializeEvent(3, 9007132, 1497200);
+    InitializeEvent(4, 9007132, 1495000);
+    InitializeEvent(5, 9007132, 21490000);
+    
+    InitializeEvent(20, 9007010, 1413010, 390700, 390710); // Jewel of the Primeval - Anima Magica
+    InitializeEvent(20, 9007031, 1413010, 390700, 390710);
+    InitializeEvent(21, 9007010, 1413110, 390700, 390720); // Jewel of the Primeval - Corpa Magica
+    InitializeEvent(21, 9007031, 1413110, 390700, 390720);
+    InitializeEvent(5, 9007134, 390720, 390723);
+    InitializeEvent(22, 9007031, 390700, 1413110, 1417010); // Carian Acuity cleanup
+    InitializeEvent(23, 9007031, 390700, 1413110, 1446010); // Scholar's Armament cleanup
+    InitializeEvent(24, 9007031, 390700, 1413110, 1447010); // Scholar's Shield cleanup
+    InitializeEvent(25, 9007031, 390700, 1413110, 1448020); // Sorcerer's Lucidity cleanup
+    
+    // Jewel of the Cruicible
+    InitializeEvent(8, 9007122, 391800, 391810); // Enemy Jewel Detection
+    
+    // Jewel of the Flayer 
+    InitializeEvent(9, 9007122, 392000, 392010); // Enemy Jewel Detection
+    $InitializeEvent(0, 9007135, 1626000); // Better blessing of gloam (og upgrade)
+    for (let i = 0; i <= 12; i++)
+        $InitializeEvent(1 + i, 9007135, 501000 + i); // (flask trigger)
+    $InitializeEvent(0, 9007136); // Cleanup
 });
 
 // Physic-Restore
@@ -2125,246 +2569,253 @@ $Event(9008006, Default, function() {
     InitializeEvent(156, 9005010, 11000725);
     InitializeEvent(157, 9005010, 1051560720); 
     InitializeEvent(158, 9005010, 11050710);
-    InitializeEvent(159, 9005010, 1040540705); 
+    InitializeEvent(159, 9005010, 1040540705);
+    InitializeEvent(0, 9007150, 42007000);
+    InitializeEvent(1, 9007150, 42037000);
+    InitializeEvent(2, 9007150, 42027000);
+    InitializeEvent(0, 9007151, 0);
 });
 
 // Completion Marks
 $Event(9008007, Default, function() {
-    InitializeEvent(0 , 9006084, 10000800, 10000800, 10009800, 71000, 10009801, 10009802, 1099000400, 10009800, 0); // Stormveil Castle - Godrick the Grafted
-    InitializeEvent(1 , 9006084, 10000850, 10000850, 10009850, 71001, 10009851, 10009852, 1099000400, 10009850, 0); // Stormveil Castle - Margit, the Fell Omen
-    InitializeEvent(2 , 9006084, 10010800, 10010800, 10019800, 0, 0, 0, 1099000400, 0, 0);                // Chapel of Anticipation - Grafted Scion
-    InitializeEvent(3 , 9006084, 11000800, 11000800, 11009800, 71100, 11009801, 11009802, 1099000403, 11009800, 1); // Elden Throne - Morgott, the Omen King
-    InitializeEvent(4 , 9006084, 11000850, 11000850, 11009850, 71101, 11009851, 11009852, 1099000403, 11009850, 1); // Erdtree Sanctuary - Sigur, Night's Captain
-    InitializeEvent(5 , 9006084, 11000870, 11000870, 11009870, 0, 0, 0, 1099000403, 0, 0);                // Leyndell Capital - Twisted Abductor
-    InitializeEvent(6 , 9006084, 11050800, 11050800, 11059800, 71120, 11059801, 11059802, 1099000403, 11059800, 0); // Ashen Capital - Hoarah Loux, Warrior
-    InitializeEvent(7 , 9006084, 11050850, 11050850, 11059850, 71121, 11059851, 11059852, 1099000403, 11059850, 0); // Ashen Capital - Skarde, Crucible's Betrayer
-    InitializeEvent(8 , 9006084, 12010800, 12010800, 12019800, 71210, 12019801, 12019802, 1099000407, 12019800, 0); // Ainsel Throne - Dragonkin Soldier of Nokstella
-    InitializeEvent(9 , 9006084, 12010805, 12010805, 12019805, 71200, 12019806, 12019807, 1099000407, 12019805, 0); // Minor Erdtree - Nox Insect Cavalry
-    InitializeEvent(10, 9006084, 12010810, 12010811, 12019810, 0, 0, 0, 1099000407, 0, 0);                // Grand Cloister - Scion of the Sealed God
-    InitializeEvent(11, 9006084, 12010850, 12010850, 12019850, 0, 0, 0, 1099000407, 0, 0);                // Lake of Rot - Dragonkin Soldier
-    InitializeEvent(12, 9006084, 12020800, 12020800, 12029800, 71220, 12029801, 12029802, 1099000407, 12029800, 0); // Siofra Aqueduct - Spiritshaper Caimar
-    InitializeEvent(13, 9006084, 12020830, 12020830, 12029830, 0, 0, 0, 1099000407, 0, 0);                // Soifra River Waterfall - Dragonkin Soldier
-    InitializeEvent(14, 9006084, 12020850, 12020850, 12029850, 71221, 12029851, 12029852, 1099000407, 12029850, 0); // Nokron, Eternal City - Goras, Scourge of Dreams
-    InitializeEvent(15, 9006084, 12020870, 12020870, 12029870, 0, 0, 0, 1099000407, 0, 0);                // Nokron, Eternal City - Tearna, Night Mistress
-    InitializeEvent(16, 9006084, 12030390, 12030390, 12039390, 0, 0, 0, 1099000407, 0, 0);                // Deeproot Depths - Crucible Knight Siluria
-    InitializeEvent(17, 9006084, 12030392, 12030392, 12039392, 0, 0, 0, 1099000407, 0, 0);                // Deeproot Depths - Blighted Nox Ancestor
-    InitializeEvent(18, 9006084, 12030393, 12030393, 12039393, 0, 0, 0, 1099000407, 0, 0);                // Deeproot Depths - Aled, Knight of Godwyn
-    InitializeEvent(19, 9006084, 12030850, 12030850, 12039850, 71230, 12039851, 12039852, 1099000407, 12039850, 0); // Prince of Death's Throne - Lichdragon Fortissax
-    InitializeEvent(20, 9006084, 12030860, 12030860, 12039860, 71236, 12039861, 12039862, 1099000407, 12039860, 0); // Minor Erdtree - Ulcerated Tree Spirit
-    InitializeEvent(21, 9006084, 12040800, 12040800, 12049800, 0, 0, 0, 1099000402, 0, 0);                // Ainsel River - Astel, Naturalborn of the Void
-    InitializeEvent(22, 9006084, 12050800, 12050800, 12059800, 71250, 12059801, 12059802, 1099000407, 12059800, 0); // Mohgwyn Dynasty Mausoleum - Mohg, Lord of Blood
-    InitializeEvent(23, 9006084, 12050810, 12050810, 12059810, 0, 0, 0, 1099000407, 0, 0);                // Mohgwyn Palace - Bloodflame Dragon Sanguivaros
-    InitializeEvent(24, 9006084, 12050850, 12050850, 12059850, 71254, 12059851, 12059852, 1099000407, 12059850, 0); // Mohgwyn Palace - Konrad, Pureblood Knight
-    InitializeEvent(25, 9006084, 12070805, 12070805, 12079805, 71271, 12079806, 12079807, 1099000407, 12079805, 0); // Nokron, Eternal City - Mimic Tear
-    InitializeEvent(26, 9006084, 12090800, 12090800, 12099800, 0, 0, 0, 1099000407, 62633, 0);                // Hallowhorn Grounds - Regal Ancestor Spirit
-    InitializeEvent(27, 9006084, 13000800, 13000800, 13009800, 71300, 13009801, 13009802, 1099000406, 13009800, 0); // Great Bridge - Maliketh, the Black Blade
-    InitializeEvent(28, 9006084, 13000830, 13000830, 13009830, 71301, 13009831, 13009832, 1099000406, 13009830, 0); // Secret Area - Dragonlord Placidusax
-    InitializeEvent(29, 9006084, 13000850, 13000850, 13009850, 71302, 13009851, 13009852, 1099000406, 13009850, 0); // Dragon Temple - Seera, Blade of the Ancients
-    InitializeEvent(30, 9006084, 13000860, 13000860, 13009860, 71313, 13009861, 13009862, 1099000406, 13009860, 0); // Dragon Lord's Annex - Ancient Dragon Lansseax
-    InitializeEvent(31, 9006084, 14000800, 14000801, 14009800, 0, 0, 0, 1099000401, 0, 0);                // Raya Lucaria Academy - Rennala, Queen of the Full Moon
-    InitializeEvent(32, 9006084, 14000850, 14000850, 14009850, 71401, 14009851, 14009852, 1099000401, 14009850, 0); // Raya Lucaria Academy - Bols, Carian Knight
-    InitializeEvent(33, 9006084, 15000800, 15000800, 15009800, 71500, 15009801, 15009802, 1099000405, 15009800, 0); // Haligtree Roots - Malenia, Blade of Miquella
-    InitializeEvent(34, 9006084, 15000850, 15000850, 15009850, 71505, 15009851, 15009852, 1099000405, 15009850, 0); // Miquella's Haligtree - Loretta, Knight of the Haligtree
-    InitializeEvent(35, 9006084, 16000800, 16000800, 16009800, 71600, 16009801, 16009802, 1099000403, 16009800, 0); // Volcano Manor - Rykard, Lord of Blasphemy
-    InitializeEvent(36, 9006084, 16000850, 16000850, 16009850, 71601, 16009851, 16009852, 1099000403, 16009850, 0); // Volcano Manor - Godskin Noble
-    InitializeEvent(37, 9006084, 16000860, 16000860, 16009860, 0, 0, 0, 1099000403, 0, 0);                // Subterranean Inquisition Chamber - Abductor Virgin (Swinging Sickle)
-    InitializeEvent(38, 9006084, 18000800, 18000800, 18009800, 71801, 18009801, 18009802, 1099000400, 62102, 0); // Fringefolk Hero's Grave - Ulcerated Tree Spirit
-    InitializeEvent(39, 9006084, 18000850, 18000850, 18009850, 71800, 18009851, 18009852, 1099000400, 62101, 0); // Stranded Graveyard - Bloodhound Knight Gethin
-    InitializeEvent(40, 9006084, 19000800, 19000800, 19009800, 71900, 19009801, 19009802, 1099000403, 19009800, 0); // Elden Throne - Radagon of the Golden Order & Elden Beast
-    InitializeEvent(41, 9006084, 20000800, 20000800, 20009800, 72000, 20009801, 20009802, 1099000408, 20009800, 0); // Belurat Tower Settlement - Divine Beast Dancing Lion
-    InitializeEvent(42, 9006084, 20010800, 20010800, 20019800, 72010, 20019801, 20019802, 1099000408, 20019800, 0); // Enir-Ilim - Promised Consort Radahn
-    InitializeEvent(43, 9006084, 21000850, 21000850, 21009850, 72101, 21009851, 21009852, 1099000408, 21009850, 0); // Shadow Keep - Golden Hippopotamus
-    InitializeEvent(44, 9006084, 21010800, 21010800, 21019800, 72110, 21019801, 21019802, 1099000408, 21019800, 0); // Shadow Keep - Messmer the Impaler
-    InitializeEvent(45, 9006084, 22000800, 22000800, 22009800, 72200, 22009801, 22009802, 1099000408, 22009800, 0); // Stone Coffin Fissure - Putrescent Knight
-    InitializeEvent(46, 9006084, 25000800, 25000800, 25009800, 0, 0, 0, 1099000408, 62912, 0);                // Finger Ruins of Miyr - Metyr, Mother of Fingers
-    InitializeEvent(47, 9006084, 28000800, 28000800, 28009800, 72800, 28009801, 28009802, 1099000408, 28009800, 0); // Midra's Manse - Midra, Lord of Frenzied Flame
-    InitializeEvent(48, 9006084, 30000800, 30000800, 30009800, 73000, 30009801, 30009802, 1099000400, 62150, 0); // Tombsward Catacombs - Cemetery Shade
-    InitializeEvent(49, 9006084, 30010800, 30010800, 30019800, 73001, 30019801, 30019802, 1099000400, 62151, 0); // Impaler's Catacombs - Frenzied Burial Watchdog
-    InitializeEvent(50, 9006084, 30020800, 30020800, 30029800, 73002, 30029801, 30029802, 1099000400, 62103, 0); // Stormfoot Catacombs - Erdtree Burial Watchdog
-    InitializeEvent(51, 9006084, 30030800, 30030800, 30039800, 73003, 30039801, 30039802, 1099000401, 62202, 0); // Road's End Catacombs - Spiritcaller Snail
-    InitializeEvent(52, 9006084, 30040800, 30040800, 30049800, 73004, 30049801, 30049802, 1099000400, 62105, 0); // Murkwater Catacombs - Grave Warden Duelist
-    InitializeEvent(53, 9006084, 30050800, 30050800, 30059800, 73005, 30059801, 30059802, 1099000401, 62201, 0); // Black Knife Catacombs - Cemetery Shade
-    InitializeEvent(54, 9006084, 30050850, 30050850, 30059850, 73005, 30059851, 30059852, 1099000401, 62201, 0); // Black Knife Catacombs - Black Knife Assassin
-    InitializeEvent(55, 9006084, 30060800, 30060800, 30069800, 73006, 30069801, 30069802, 1099000401, 62203, 0); // Cliffbottom Catacombs - Erdtree Burial Watchdog
-    InitializeEvent(56, 9006084, 30070800, 30070800, 30079800, 73007, 30079801, 30079802, 1099000403, 62314, 0); // Wyndham Catacombs - Erdtree Burial Watchdog
-    InitializeEvent(57, 9006084, 30080800, 30080800, 30089800, 73008, 30089801, 30089802, 1099000403, 62310, 0); // Sainted Hero's Grave - Ancient Hero of Zamor
-    InitializeEvent(58, 9006084, 30090800, 30090800, 30099800, 73009, 30099801, 30099802, 1099000403, 62311, 0); // Gelmir Hero's Grave - Red Wolf of the Champion
-    InitializeEvent(59, 9006084, 30100800, 30100800, 30109800, 73010, 30109801, 30109802, 1099000403, 62312, 0); // Auriza's Hero Grave - Crucible Knight Ordovis
-    InitializeEvent(60, 9006084, 30110800, 30110800, 30119800, 73011, 30119801, 30119802, 1099000400, 62104, 0); // Deathtouched Catacombs - Black Knife Assassin
-    InitializeEvent(61, 9006084, 30120800, 30120800, 30129800, 73012, 30129801, 30129802, 1099000403, 62313, 0); // Unsightly Catacombs - Perfumer Tricia & Misbegotten Warrior
-    InitializeEvent(62, 9006084, 30130800, 30130800, 30139800, 73013, 30139801, 30139802, 1099000403, 62315, 0); // Auriza Side Tomb - Grave Warden Duelist
-    InitializeEvent(63, 9006084, 30140800, 30140800, 30149800, 73014, 30149801, 30149802, 1099000402, 62410, 0); // Minor Erdtree Catacombs - Erdtree Burial Watchdog (Sword) & Erdtree Burial Watchdog (Scepter)
-    InitializeEvent(64, 9006084, 30150800, 30150800, 30159800, 73015, 30159801, 30159802, 1099000402, 62411, 0); // Caelid Catacombs - Cemetery Shade
-    InitializeEvent(65, 9006084, 30160800, 30160800, 30169800, 73016, 30169801, 30169802, 1099000402, 62412, 0); // War-Dead Catacombs - Putrid Tree Spirit
-    InitializeEvent(66, 9006084, 30170800, 30170800, 30179800, 73017, 30179801, 30179802, 1099000404, 62510, 0); // Giant-Conquering Hero's Grave - Ancient Hero of Zamor
-    InitializeEvent(67, 9006084, 30180800, 30180800, 30189800, 73018, 30189801, 30189802, 1099000404, 62511, 0); // Giants' Mountaintops Catacombs - Ulcerated Tree Spirit
-    InitializeEvent(68, 9006084, 30190800, 30190800, 30199800, 73019, 30199801, 30199802, 1099000405, 62512, 0); // Consecrated Snowfield Catacombs - Putrid Grave Warden Duelist
-    InitializeEvent(69, 9006084, 30200800, 30200800, 30209800, 73020, 30209801, 30209802, 1099000405, 62560, 0); // Hidden Path to the Haligtree - Stray Mimic Tear
-    InitializeEvent(70, 9006084, 31000800, 31000800, 31009800, 73100, 31009801, 31009802, 1099000400, 62152, 0); // Murkwater Cave - Patches
-    InitializeEvent(71, 9006084, 31010800, 31010800, 31019800, 73101, 31019801, 31019802, 1099000400, 62153, 0); // Earthbore Cave - Chanting Winged Dame
-    InitializeEvent(72, 9006084, 31020800, 31020800, 31029800, 73102, 31029801, 31029802, 1099000400, 62106, 0); // Tombsward Cave - Miranda Blossom
-    InitializeEvent(73, 9006084, 31040800, 31040800, 31049800, 73104, 31049801, 31049802, 1099000401, 62204, 0); // Stillwater Cave - Cleanrot Knight
-    InitializeEvent(74, 9006084, 31050800, 31050800, 31059800, 73105, 31059801, 31059802, 1099000401, 62205, 0); // Lakeside Crystal Cave - Battlemage Duncan
-    InitializeEvent(75, 9006084, 31060800, 31060800, 31069800, 73106, 31069801, 31069802, 1099000401, 62206, 0); // Academy Crystal Cave - Crystalian (Staff) & Crystalian (Spear)
-    InitializeEvent(76, 9006084, 31070800, 31070800, 31079800, 73107, 31079801, 31079802, 1099000403, 62316, 0); // Seethewater Cave - Kindred of Rot
-    InitializeEvent(77, 9006084, 31090800, 31090800, 31099800, 73109, 31099801, 31099802, 1099000403, 62317, 0); // Volcano Cave - Demi-Human Queen Margot
-    InitializeEvent(78, 9006084, 31100800, 31100800, 31109800, 73110, 31109801, 31109802, 1099000402, 62413, 0); // Dragonbarrow Cave - Beastman of Farum Azula
-    InitializeEvent(79, 9006084, 31110800, 31110800, 31119800, 73111, 31119801, 31119802, 1099000402, 62460, 0); // Sellia Hideaway - Putrid Crystalian (Ringblade) & Putrid Crystalian (Spear) & Putrid Crystalian (Staff)
-    InitializeEvent(80, 9006084, 31120800, 31120800, 31129800, 73112, 31129801, 31129802, 1099000405, 62513, 0); // Cave of the Forlorn - Misbegotten Crusader
-    InitializeEvent(81, 9006084, 31150800, 31150800, 31159800, 73115, 31159801, 31159802, 1099000400, 62108, 0); // Coastal Cave - Demi-Human Chief & Demi-Human Chief
-    InitializeEvent(82, 9006084, 31170800, 31170800, 31179800, 73117, 31179801, 31179802, 1099000400, 62109, 0); // High Road Cave - Guardian Golem
-    InitializeEvent(83, 9006084, 31180800, 31180800, 31189800, 73118, 31189801, 31189802, 1099000403, 62318, 0); // Perfumer's Grotto - Miranda the Blighted Bloom & Omenkiller
-    InitializeEvent(84, 9006084, 31190800, 31190800, 31199800, 73119, 31199801, 31199802, 1099000403, 62319, 0); // Sage's Cave - Black Knife Assassin
-    InitializeEvent(85, 9006084, 31190850, 31190850, 31199850, 73119, 31199851, 31199852, 1099000403, 62319, 0); // Sage's Cave - Necromancer Garris
-    InitializeEvent(86, 9006084, 31200800, 31200800, 31209800, 73120, 31209801, 31209802, 1099000402, 62414, 0); // Abandoned Cave - Cleanrot Knight
-    InitializeEvent(87, 9006084, 31210800, 31210800, 31219800, 73121, 31219801, 31219802, 1099000402, 62415, 0); // Goal Cave - Frenzied Troll
-    InitializeEvent(88, 9006084, 31220800, 31220800, 31229800, 73122, 31229801, 31229802, 1099000404, 62514, 0); // Spiritcallers Cave - Spiritcaller Snail & Godskin Apostle & Godskin Noble
-    InitializeEvent(89, 9006084, 32000800, 32000800, 32009800, 73200, 32009801, 32009802, 1099000400, 62154, 0); // Morne Tunnel - Scaly Misbegotten
-    InitializeEvent(90, 9006084, 32010800, 32010800, 32019800, 73201, 32019801, 32019802, 1099000400, 62110, 0); // Limgrave Tunnels - Stonedigger Troll
-    InitializeEvent(91, 9006084, 32020800, 32020800, 32029800, 73202, 32029801, 32029802, 1099000401, 62207, 0); // Raya Lucaria Crystal Tunnel - Crystalian
-    InitializeEvent(92, 9006084, 32040800, 32040800, 32049800, 73204, 32049801, 32049802, 1099000403, 62320, 0); // Old Altus Tunnel - Stonedigger Troll
-    InitializeEvent(93, 9006084, 32050800, 32050800, 32059800, 73205, 32059801, 32059802, 1099000403, 62322, 0); // Altus Tunnel - Crystalian (Ringblade) & Crystalian (Spear)
-    InitializeEvent(94, 9006084, 32070800, 32070800, 32079800, 73207, 32079801, 32079802, 1099000402, 62416, 0); // Gael Tunnel - Magma Wyrm
-    InitializeEvent(95, 9006084, 32080800, 32080800, 32089800, 73208, 32089801, 32089802, 1099000402, 62417, 0); // Sellia Crystal Tunnel - Fallingstar Beast
-    InitializeEvent(96, 9006084, 32110800, 32110800, 32119800, 73211, 32119801, 32119802, 1099000405, 62515, 0); // Yelough Anix Tunnel - Astel, Stars of Darkness
-    InitializeEvent(97, 9006084, 34110800, 34110800, 34119800, 73422, 34119801, 34119802, 1099000401, 34119800, 0); // Carian Study Hall - Godskin Matriarch
-    InitializeEvent(98, 9006084, 34120800, 34120800, 34129800, 73431, 34129801, 34129802, 1099000403, 34129800, 0); // Sealed Tunnel - Onyx Lord
-    InitializeEvent(99, 9006084, 34130800, 34130800, 34139800, 73440, 34139801, 34139802, 1099000402, 34139800, 0); // Caelid Divine Tower - Godskin Apostle
-    InitializeEvent(100, 9006084, 34140850, 34140850, 34149850, 0, 0, 0, 1099000403, 0, 0);               // Divine Tower of East Altus - Fell Twin & Fell Twin
-    InitializeEvent(101, 9006084, 35000800, 35000800, 35009800, 73500, 35009801, 35009802, 1099000403, 35009800, 0); // Subterranean Shunning Grounds - Mohg, the Omen
-    InitializeEvent(102, 9006084, 35000850, 35000850, 35009850, 73503, 35009851, 35009852, 1099000403, 35009850, 0); // Leyndell Catacombs - Esgar, Priest of Blood
-    InitializeEvent(103, 9006084, 39200800, 39200800, 39209800, 73902, 39209801, 39209802, 1099000401, 39209800, 0); // Ruin Strewn Precipice - Magma Wyrm Makar
-    InitializeEvent(104, 9006084, 40000800, 40000800, 40009800, 74000, 40009801, 40009802, 1099000408, 62823, 0); // Fog Rift Catacombs - Death Knight
-    InitializeEvent(105, 9006084, 40010800, 40010800, 40019800, 74001, 40019801, 40019802, 1099000408, 62915, 0); // Scorpion River Catacombs - Death Knight
-    InitializeEvent(106, 9006084, 41000800, 41000800, 41009800, 74100, 41009801, 41009802, 1099000408, 62800, 0); // Belurat Gaol - Demi-Human Swordmaster Onze
-    InitializeEvent(107, 9006084, 41010800, 41010800, 41019800, 74101, 41019801, 41019802, 1099000408, 62916, 0); // Bonny Gaol - Curseblade Labirith
-    InitializeEvent(108, 9006084, 41020800, 41020800, 41029800, 74102, 41029801, 41029802, 1099000408, 62850, 0); // Lamenter's Gaol - Lamenter
-    InitializeEvent(109, 9006084, 43000800, 43000800, 43009800, 74300, 43009801, 43009802, 1099000408, 62919, 0); // Rivermouth Cave - Chief Bloodfiend
-    InitializeEvent(110, 9006084, 43010800, 43010800, 43019800, 74301, 43019801, 43019802, 1099000408, 43019800, 0); // Dragon's Pit - Ancient Dragon-Man
-    InitializeEvent(111, 9006084, 1033420800, 1033420800, 1033429800, 0, 0, 0, 1099000401, 62281, 0);                 // Ringleader's Evergaol - Alecto, Black Knife Ringleader
-    InitializeEvent(112, 9006084, 1033430800, 1033430800, 1033439800, 76299, 1033439801, 1033439802, 1099000401, 1033439800, 0); // Southwest Minor Erdtree - Carian Golem
-    InitializeEvent(113, 9006084, 1033450800, 1033450800, 1033459800, 0, 0, 0, 1099000401, 62238, 0);                 // Cuckoo's Evergaol - Red Wolf of Radagon
-    InitializeEvent(114, 9006084, 1034420800, 1034420800, 1034429800, 0, 0, 0, 1099000401, 0, 0);                 // Cathedral of Manus Celes - Glintstone Dragon Adula
-    InitializeEvent(115, 9006084, 1034450800, 1034450800, 1034459800, 0, 0, 0, 1099000401, 0, 0);                 // Lake of Liurnia - Glintstone Dragon Smarag
-    InitializeEvent(116, 9006084, 1034480800, 1034480800, 1034489800, 0, 0, 0, 1099000401, 62226, 0);                 // Kingsrealm Ruins - Royal Revenant
-    InitializeEvent(117, 9006084, 1035420800, 1035420800, 1035429800, 0, 0, 0, 1099000401, 62232, 0);                 // Village of the Albinaurics - Omenkiller
-    InitializeEvent(118, 9006084, 1035500800, 1035500800, 1035509800, 76232, 1035509801, 1035509802, 1099000401, 1035509800, 0); // Caria Manor - Rhys, Carian Paragon
-    InitializeEvent(119, 9006084, 1035500850, 1035500850, 1035509850, 76261, 1035509851, 1035509852, 1099000401, 1035509850, 0); // Caria Manor - Einar, Ice Guardian
-    InitializeEvent(120, 9006084, 1035530800, 1035530800, 1035539800, 0, 0, 0, 1099000403, 0, 0);                 // Mt. Gelmir Lava Pool - Magma Wyrm
-    InitializeEvent(121, 9006084, 1036450800, 1036450340, 1036459800, 0, 0, 0, 1099000401, 0, 0);                 // Central Liurnia - Death Rite Bird
-    InitializeEvent(122, 9006084, 1036480800, 1036480340, 1036489800, 0, 0, 0, 1099000401, 0, 0);                 // Gate Town Bridge - Night's Cavalry
-    InitializeEvent(123, 9006084, 1036500800, 1036500800, 1036509800, 0, 0, 0, 1099000401, 62239, 0);                 // Royal Grave Evergaol - Onyx Lord
-    InitializeEvent(124, 9006084, 1036520800, 1036520800, 1036529800, 76399, 1036529801, 1036529802, 1099000403, 1036529800, 0); // Minor Erdtree - Demi-Human Chief
-    InitializeEvent(125, 9006084, 1036540800, 1036540800, 1036549800, 0, 0, 0, 1099000403, 0, 0);                 // Mt. Gelmir - Full-Grown Fallingstar Beast
-    InitializeEvent(126, 9006084, 1037420800, 1037420340, 1037429800, 0, 0, 0, 1099000401, 0, 0);                 // Liurnia South - Deathbird
-    InitializeEvent(127, 9006084, 1037460800, 1037460800, 1037469800, 0, 0, 0, 1099000401, 62221, 0);                 // Church of Vows - Bell Bearing Hunter
-    InitializeEvent(128, 9006084, 1037530800, 1037530800, 1037539800, 0, 0, 0, 1099000403, 62382, 0);                 // Hermit Village - Demi-Human Queen Maggie
-    InitializeEvent(129, 9006084, 1037540810, 1037540810, 1037549810, 76398, 1037549811, 1037549812, 1099000403, 1037549810, 0); // Minor Erdtree - Charred Banished Knight
-    InitializeEvent(130, 9006084, 1038410800, 1038410800, 1038419800, 0, 0, 0, 1099000401, 62237, 0);                 // Malefactor's Evergaol - Adan, Thief of Fire
-    InitializeEvent(131, 9006084, 1038480800, 1038480800, 1038489800, 76298, 1038489801, 1038489802, 1099000401, 1038489800, 0); // Northeast Minor Erdtree - Ancestral Shaman
-    InitializeEvent(132, 9006084, 1038510800, 1038510800, 1038519800, 0, 0, 0, 1099000403, 62335, 0);                 // Lux Ruins - Demi-Human Queen Gilika
-    InitializeEvent(133, 9006084, 1038520800, 1038520800, 1038529800, 0, 0, 0, 1099000403, 62385, 0);                 // Wyndham Ruins - Tibia Mariner
-    InitializeEvent(134, 9006084, 1039420800, 1039420800, 1039429800, 76221, 1039429801, 1039429802, 1099000401, 1039429800, 0); // Southeast Minor Erdtree - Giant Crystal Crab
-    InitializeEvent(135, 9006084, 1039430800, 1039430340, 1039439800, 0, 0, 0, 1099000401, 0, 0);                 // Bellum Highway - Night's Cavalry
-    InitializeEvent(136, 9006084, 1039440800, 1039440800, 1039449800, 0, 0, 0, 1099000401, 0, 0);                 // Liurnia - Tibia Mariner
-    InitializeEvent(137, 9006084, 1039500800, 1039500800, 1039509800, 0, 0, 0, 1099000403, 62344, 0);                 // Golden Lineage Evergaol - Banished Knight Oleg
-    InitializeEvent(138, 9006084, 1039510800, 1039510800, 1039519800, 0, 0, 0, 1099000403, 0, 0);                 // Altus Plateau - Night's Cavalry
-    InitializeEvent(139, 9006084, 1039540800, 1039540800, 1039549800, 76322, 1039549801, 1039549802, 1099000403, 1039549800, 0); // Shaded Castle - Elemer of the Briar
-    InitializeEvent(140, 9006084, 1040520800, 1040520800, 1040529800, 0, 0, 0, 1099000403, 0, 0);                 // Sainted Hero's Grave - Black Knife Assassin
-    InitializeEvent(141, 9006084, 1040530800, 1040530800, 1040539800, 0, 0, 0, 1099000403, 62380, 0);                 // Writheblood Ruins - Sanguine Noble
-    InitializeEvent(142, 9006084, 1041370800, 1041370800, 1041379800, 76199, 1041379801, 1041379802, 1099000400, 1041379800, 0); // Stormhill - Grafted Scion
-    InitializeEvent(143, 9006084, 1041500800, 1041500800, 1041509800, 0, 0, 0, 1099000403, 0, 0);                 // Leyndell Western Gate - Fallingstar Beast
-    InitializeEvent(144, 9006084, 1041510800, 1041510800, 1041519800, 0, 0, 0, 1099000403, 0, 0);                 // Leyndell Western Gate - Tree Sentinel & Tree Sentinel
-    InitializeEvent(145, 9006084, 1041530800, 1041530800, 1041539800, 76397, 1041539801, 1041539802, 1099000403, 1041539800, 0); // Central Minor Erdtree - Wormface
-    InitializeEvent(146, 9006084, 1042330800, 1042330800, 1042339800, 0, 0, 0, 1099000400, 62178, 0);                 // Weeping Evergaol - Ancient Hero of Zamor
-    InitializeEvent(147, 9006084, 1042360800, 1042360800, 1042369800, 0, 0, 0, 1099000400, 0, 0);                 // First Step - Tree Sentinel
-    InitializeEvent(148, 9006084, 1042370800, 1042370800, 1042379800, 0, 0, 0, 1099000400, 62132, 0);                 // Stormhil Evergaol - Crucible Knight
-    InitializeEvent(149, 9006084, 1042380800, 1042380800, 1042389800, 0, 0, 0, 1099000400, 0, 0);                 // North Limgrave - Deathbird
-    InitializeEvent(150, 9006084, 1042380850, 1042380850, 1042389850, 76118, 1042389851, 1042389852, 1099000400, 62129, 0); // Warmaster Shack - Bell Bearing Hunter
-    InitializeEvent(151, 9006084, 1042550800, 1042550800, 1042559800, 76313, 1042559801, 1042559802, 1099000403, 1042559800, 0); // Windmill Heights - Godskin Apostle
-    InitializeEvent(152, 9006084, 1043300800, 1043300800, 1043309800, 0, 0, 0, 1099000400, 0, 0);                 // Castle Morne - Dyru, Scavenger King
-    InitializeEvent(153, 9006084, 1043300820, 1043300820, 1043309820, 76159, 1043309821, 1043309822, 1099000400, 1043309820, 0); // Castle Morne - Leonine Misbegotten
-    InitializeEvent(154, 9006084, 1043310920, 1043310920, 1043319920, 0, 0, 0, 1099000400, 0, 0);                 // Castle Morne Town - Shabriri's Chosen
-    InitializeEvent(155, 9006084, 1043330800, 1043330800, 1043339800, 76198, 1043339801, 1043339802, 1099000400, 1043339800, 0); // Weeping Erdtree - Erdtree Avatar
-    InitializeEvent(156, 9006084, 1043360800, 1043360800, 1043369800, 0, 0, 0, 1099000400, 0, 0);                 // Agheel Lake - Flying Dragon Agheel
-    InitializeEvent(157, 9006084, 1043370800, 1043370340, 1043379800, 0, 0, 0, 1099000400, 0, 0);                 // Agheel Lake North - Night's Cavalry
-    InitializeEvent(158, 9006084, 1043500800, 1043500800, 1043509800, 76310, 1043509801, 1043509802, 1099000403, 1043509800, 0); // Minor Erdtree Church - Erdtree Sentry
-    InitializeEvent(159, 9006084, 1043530800, 1043530800, 1043539800, 76311, 1043539801, 1043539802, 1099000403, 62337, 0); // Hermit Merchant's Shack - Bell Bearing Hunter
-    InitializeEvent(160, 9006084, 1044320800, 1044320340, 1044329800, 0, 0, 0, 1099000400, 0, 0);                 // Weeping Peninsula - Deathbird
-    InitializeEvent(161, 9006084, 1044320850, 1044320342, 1044329850, 0, 0, 0, 1099000400, 0, 0);                 // Weeping Peninsula - Night's Cavalry
-    InitializeEvent(162, 9006084, 1044350800, 1044350800, 1044359800, 0, 0, 0, 1099000400, 62131, 0);                 // Forlorn Hound Evergoal - Bloodhound Knight Darriwil
-    InitializeEvent(163, 9006084, 1044360800, 1044360800, 1044369800, 76120, 1044369801, 1044369802, 1099000400, 1044369800, 0); // Waypoint Ruins - Mad Pumpkin Head
-    InitializeEvent(164, 9006084, 1044530800, 1044530800, 1044539800, 0, 0, 0, 1099000403, 0, 0);                 // Hermit Merchant's Shack - Deathbird
-    InitializeEvent(165, 9006084, 1044530810, 1044530810, 1044539810, 76396, 1044539811, 1044539812, 1099000403, 1044539810, 1); // Northeast Minor Erdtree - Blighted Omen
-    InitializeEvent(166, 9006084, 1045370800, 1045370800, 1045379800, 76197, 1045379801, 1045379802, 1099000400, 1045379800, 0); // Mistwood Erdtree - Erdtree Guardian
-    InitializeEvent(167, 9006084, 1045390800, 1045390800, 1045399800, 0, 0, 0, 1099000400, 62127, 0);                 // Summonwater Village - Tibia Mariner
-    InitializeEvent(168, 9006084, 1045520800, 1045520800, 1045529800, 0, 0, 0, 1099000403, 0, 0);                 // Capital Entrance - Draconic Tree Sentinel
-    InitializeEvent(169, 9006084, 1047400800, 1047400800, 1047409800, 76499, 1047409801, 1047409802, 1099000402, 1047409800, 0); // West Caelid Minor Erdtree - Jar Warrior Champion
-    InitializeEvent(170, 9006084, 1048370800, 1048370800, 1048379800, 0, 0, 0, 1099000402, 0, 0);                 // Caelid Highway South - Decaying Ekzykes
-    InitializeEvent(171, 9006084, 1048370810, 1048370810, 1048379810, 76405, 1048379811, 1048379812, 1099000402, 1048379810, 0); // South Caelid Minor Erdtree - Rotten Monk
-    InitializeEvent(172, 9006084, 1048400800, 1048400800, 1048409800, 0, 0, 0, 1099000402, 62426, 0);                 // Caelem Ruins - Mad Pumpkin Head
-    InitializeEvent(173, 9006084, 1048410800, 1048410800, 1048419800, 76451, 1048419801, 1048419802, 1099000402, 62470, 0); // Isolated Merchant Shack (Dragonbarrow) - Bell Bearing Hunter
-    InitializeEvent(174, 9006084, 1048510800, 1048510800, 1048519800, 0, 0, 0, 1099000404, 0, 0);                 // Forbidden Lands - Night's Cavalry
-    InitializeEvent(175, 9006084, 1048570800, 1048570800, 1048579800, 0, 0, 0, 1099000405, 0, 0);                 // West Mountaintops - Death Rite Bird
-    InitializeEvent(176, 9006084, 1049370800, 1049370800, 1049379800, 0, 0, 0, 1099000402, 0, 0);                 // Caelid Highway South - Night's Cavalry
-    InitializeEvent(177, 9006084, 1049370850, 1049370850, 1049379850, 0, 0, 0, 1099000402, 0, 0);                 // Caelid Highway East - Death Rite Bird
-    InitializeEvent(178, 9006084, 1049380800, 1049380800, 1049389800, 76412, 1049389801, 1049389802, 1099000402, 1049389800, 0); // Aeonia Swamp - Commander O'Neil
-    InitializeEvent(179, 9006084, 1049390800, 1049390800, 1049399800, 76415, 1049399801, 1049399802, 1099000402, 1049399800, 0); // Sellia Town of Sorcery - Nox Swordstress & Nox Monk
-    InitializeEvent(180, 9006084, 1049390850, 1049390850, 1049399850, 0, 0, 0, 1099000402, 62471, 0);                 // Sellia Evergaol - Battlemage Hugues
-    InitializeEvent(181, 9006084, 1049520800, 1049520800, 1049529800, 0, 0, 0, 1099000404, 0, 0);                 // Forbidden Lands - Black Blade Kindred
-    InitializeEvent(182, 9006084, 1049520850, 1049520850, 1049529850, 76590, 1049529851, 1049529852, 1099000404, 1049529850, 0); // Forbidden Lands - Death Rite Bird
-    InitializeEvent(183, 9006084, 1049570800, 1049570800, 1049579800, 76599, 1049579801, 1049579802, 1099000405, 1049579800, 0); // Minor Erdtree - Albinauric Wolf Rider
-    InitializeEvent(184, 9006084, 1050400800, 1050400800, 1050409800, 0, 0, 0, 1099000402, 0, 0);                 // Dragonbarrow - Elder Dragon Greyoll
-    InitializeEvent(185, 9006084, 1050560800, 1050560800, 1050569800, 0, 0, 0, 1099000405, 0, 0);                 // Outside Cave of the Forlorn - Great Wyrm Theodorix
-    InitializeEvent(186, 9006084, 1050570800, 1050570800, 1050579800, 0, 0, 0, 1099000404, 0, 0);                 // Snow Valley - Death Rite Bird
-    InitializeEvent(187, 9006084, 1051360800, 1051360800, 1051369800, 76419, 1051369801, 1051369802, 1099000402, 1051369800, 0); // Redmane Castle - Dakk, Starcaller Lord
-    InitializeEvent(188, 9006084, 1051400800, 1051400800, 1051409800, 76497, 1051409801, 1051409802, 1099000402, 1051409800, 0); // East Caelid Minor Erdtree - Putrid Avatar
-    InitializeEvent(189, 9006084, 1051430800, 1051430800, 1051439800, 0, 0, 0, 1099000402, 0, 0);                 // Bestial Undercroft - Black Blade Kindred
-    InitializeEvent(190, 9006084, 1051530800, 1051530800, 1051539800, 76598, 1051539801, 1051539802, 1099000404, 1051539800, 0); // Minor Erdtree - Mountain Troll
-    InitializeEvent(191, 9006084, 1051570800, 1051570800, 1051579800, 76524, 1051579801, 1051579802, 1099000404, 1051579800, 0); // Castle Sol - Commander Niall
-    InitializeEvent(192, 9006084, 1052410800, 1052410800, 1052419800, 0, 0, 0, 1099000402, 0, 0);                 // North Dragonbarrow - Flying Dragon Greyll
-    InitializeEvent(193, 9006084, 1052410850, 1052410850, 1052419850, 0, 0, 0, 1099000402, 0, 0);                 // North Dragonbarrow - Night's Cavalry
-    InitializeEvent(194, 9006084, 1052520800, 1052520800, 1052529800, 76509, 1052529801, 1052529802, 1099000404, 1052529800, 0); // Flame Peak - Fire Giant
-    InitializeEvent(195, 9006084, 1052560800, 1052560800, 1052569800, 76597, 1052569801, 1052569802, 1099000404, 1052569800, 0); // Minor Erdtree - Grand Flame Prelate
-    InitializeEvent(196, 9006084, 1053560800, 1053560800, 1053569800, 0, 0, 0, 1099000404, 62525, 0);                 // Lord Contender's Evergaol - Roundtable Knight Vyke
-    InitializeEvent(197, 9006084, 1248550800, 1248550800, 1248559800, 0, 0, 0, 1099000405, 0, 0);                 // Inner Consecrated Snowfields - Night's Cavalry (Glaive) & Night's Cavalry (Flail)
-    InitializeEvent(198, 9006084, 1252380800, 1252380800, 1252389800, 76422, 1252389801, 1252389802, 1099000402, 1252389800, 0); // Redmane Castle - Starscourge Radahn
-    InitializeEvent(199, 9006084, 1254560800, 1254560800, 1254569800, 0, 0, 0, 1099000404, 0, 0);                 // Freezing Lake - Borealis the Freezing Fog
-    InitializeEvent(200, 9006084, 2044450800, 2044450800, 2044459800, 76945, 2044459801, 2044459802, 1099000408, 2044459800, 0); // Church of the Bud - Romina, Saint of the Bud
-    InitializeEvent(201, 9006084, 2044470800, 2044470800, 2044479800, 0, 0, 0, 1099000408, 0, 0);                 // Red Bear Ravine North - Rugalea the Great Red Bear
-    InitializeEvent(202, 9006084, 2045440800, 2045440800, 2045449800, 0, 0, 0, 1099000408, 0, 0);                 // Abandoned Ailing Village - Ghostflame Dragon
-    InitializeEvent(203, 9006084, 2046380800, 2046380800, 2046389800, 0, 0, 0, 1099000408, 62843, 0);                 // Southern Nameless Mausoleum - Dancer of Ranah
-    InitializeEvent(204, 9006084, 2046400800, 2046400800, 2046409800, 0, 0, 0, 1099000408, 0, 0);                 // Cerulean Coast West - Demi-Human Queen Marigga
-    InitializeEvent(205, 9006084, 2046410800, 2046410800, 2046419800, 0, 0, 0, 1099000408, 62812, 0);                 // Western Nameless Mausoleum - Knight of the Solitary Gaol
-    InitializeEvent(206, 9006084, 2046450800, 2046450800, 2046459800, 0, 0, 0, 1099000408, 62921, 0);                 // Northern Nameless Mausoleum - Red Bear
-    InitializeEvent(207, 9006084, 2046460800, 2046460800, 2046469800, 0, 0, 0, 1099000408, 0, 0);                 // Ancient Ruins, Grand Stairway - Divine Beast Dancing Lion
-    InitializeEvent(208, 9006084, 2047390800, 2047390800, 2047399800, 0, 0, 0, 1099000408, 0, 0);                 // Charo's Hidden Grave - Death Rite Bird
-    InitializeEvent(209, 9006084, 2047400800, 2047400800, 2047409800, 76961, 2047409801, 2047409802, 1099000408, 2047409800, 0); // Gravesite Woodland - Monstrous Spider Scorpion
-    InitializeEvent(210, 9006084, 2047450800, 2047450800, 2047459800, 0, 0, 0, 1099000408, 62904, 0);                 // Fog Rift Fort - Black Knight Garrew
-    InitializeEvent(211, 9006084, 2047470800, 2047470800, 2047479800, 76965, 2047479801, 2047479802, 1099000408, 2047479800, 0); // Rauh Steppe - Divine Bird Warrior
-    InitializeEvent(212, 9006084, 2048380800, 2048380800, 2048389800, 0, 0, 0, 1099000408, 0, 0);                 // Charo's Hidden Grave - Tibia Mariner
-    InitializeEvent(213, 9006084, 2048380850, 2048380850, 2048389850, 0, 0, 0, 1099000408, 0, 0);                 // Cerulean Coast - Ghostflame Dragon
-    InitializeEvent(214, 9006084, 2048380860, 2048380860, 2048389860, 76962, 2048389861, 2048389862, 1099000408, 2048389860, 0); // Cerulean Bluffs - Bloodfiend Mystic
-    InitializeEvent(215, 9006084, 2048440800, 2048440800, 2048449800, 76823, 2048449801, 2048449802, 1099000408, 2048449800, 0); // Castle Ensis - Rellana, Twin Moon Knight
-    InitializeEvent(216, 9006084, 2049410850, 2049410850, 2049419850, 76966, 2049419851, 2049419852, 1099000408, 2049419850, 0); // Dragon Resting Grounds - Grave Bird Raptor
-    InitializeEvent(217, 9006084, 2049430800, 2049430800, 2049439800, 0, 0, 0, 1099000408, 0, 0);                 // Moorth Highway - Ghostflame Dragon
-    InitializeEvent(218, 9006084, 2049430850, 2049430850, 2049439850, 0, 0, 0, 1099000408, 62902, 0);                 // Fort of Reprimand - Black Knight Edredd
-    InitializeEvent(219, 9006084, 2049440800, 2049440800, 2049449800, 76902, 2049449801, 2049449802, 1099000408, 2049449800, 0); // Moorth Ruins - Dryleaf Dane
-    InitializeEvent(220, 9006084, 2049450800, 2049450800, 2049459800, 0, 0, 0, 1099000408, 0, 0);                 // Scadu Altus Red Bear Pond - Ralva the Great Red Bear
-    InitializeEvent(221, 9006084, 2049450850, 2049450850, 2049459850, 76964, 2049459851, 2049459852, 1099000408, 2049459850, 0); // Minor Erdtree Cave - Fire Knight Crusader
-    InitializeEvent(222, 9006084, 2049480800, 2049480800, 2049489800, 76930, 2049489801, 2049489802, 1099000408, 2049489800, 0); // Scaduview - Commander Gaius
-    InitializeEvent(223, 9006084, 2050470800, 2050470800, 2050479800, 0, 0, 0, 1099000408, 0, 0);                 // Scaduview - Tree Sentinel
-    InitializeEvent(224, 9006084, 2050480800, 2050480800, 2050489800, 76960, 2050489801, 2050489802, 1099000408, 2050489800, 0); // Scadutree Base - Scadutree Avatar
-    InitializeEvent(225, 9006084, 2050480860, 2050480860, 2050489860, 0, 0, 0, 1099000408, 0, 0);                 // Scaduview - Tree Sentinel
-    InitializeEvent(226, 9006084, 2051440800, 2051440800, 2051449800, 0, 0, 0, 1099000408, 62961, 0);                 // Eastern Nameless Mausoleum - Rakshasa
-    InitializeEvent(227, 9006084, 2051440850, 2051440850, 2051449850, 76967, 2051449851, 2051449852, 1099000408, 2051449850, 0); // Abyssal Overlook - Maddened Hippopotamus
-    InitializeEvent(228, 9006084, 2051450800, 2051450720, 2051459800, 0, 0, 0, 1099000408, 62906, 0);                 // Cathedral of Manus Metyr - Count Ymir, Mother of Fingers
-    InitializeEvent(229, 9006084, 2051470800, 2051470800, 2051479800, 76963, 2051479801, 2051479802, 1099000408, 2051479800, 0); // Shaman Village - Black Knight Captain
-    InitializeEvent(230, 9006084, 2052400800, 2052400800, 2052409800, 0, 0, 0, 1099000408, 0, 0);                 // Jagged Peak - Jagged Peak Drake
-    InitializeEvent(231, 9006084, 2052430800, 2052430800, 2052439800, 76862, 2052439801, 2052439802, 1099000408, 2052439800, 0); // Forsaken Graveyard - Jori, Elder Inquisitor
-    InitializeEvent(232, 9006084, 2052480800, 2052480800, 2052489800, 0, 0, 0, 1099000408, 0, 0);                 // Scaduview - Fallingstar Beast
-    InitializeEvent(233, 9006084, 2054390800, 2054390800, 2054399800, 76853, 2054399801, 2054399802, 1099000408, 2054399800, 0); // Jagged Peak - Bayle the Dread
-    InitializeEvent(234, 9006084, 2054390850, 2054390850, 2054399850, 0, 0, 0, 1099000408, 0, 0);                 // Jagged Peak - Ancient Dragon Senessax
+    InitializeEvent(  0, 9006084,   10000800,   10000800,   10009800,      71000,   10009801,   10009802, 1099000400,   10009800, 0); // Stormveil Castle - Godrick the Grafted
+    InitializeEvent(  1, 9006084,   10000850,   10000850,   10009850,      71001,   10009851,   10009852, 1099000400,   10009850, 0); // Stormveil Castle - Margit, the Fell Omen
+    InitializeEvent(  2, 9006084,   10010800,   10010800,   10019800,          0,          0,          0, 1099000400,          0, 0); // Chapel of Anticipation - Grafted Scion
+    InitializeEvent(  3, 9006084,   11000800,   11000800,   11009800,      71100,   11009801,   11009802, 1099000403,   11009800, 1); // Elden Throne - Morgott, the Omen King
+    InitializeEvent(  4, 9006084,   11000850,   11000850,   11009850,      71101,   11009851,   11009852, 1099000403,   11009850, 1); // Erdtree Sanctuary - Sigur, Night's Captain
+    InitializeEvent(  5, 9006084,   11000870,   11000870,   11009870,          0,          0,          0, 1099000403,          0, 0); // Leyndell Capital - Twisted Abductor
+    InitializeEvent(  6, 9006084,   11050800,   11050800,   11059800,      71120,   11059801,   11059802, 1099000403,   11059800, 1); // Ashen Capital - Hoarah Loux, Warrior
+    InitializeEvent(  7, 9006084,   11050850,   11050850,   11059850,      71121,   11059851,   11059852, 1099000403,   11059850, 1); // Ashen Capital - Skarde, Crucible's Betrayer
+    InitializeEvent(  8, 9006084,   12010800,   12010800,   12019800,      71210,   12019801,   12019802, 1099000407,   12019800, 0); // Ainsel Throne - Dragonkin Soldier of Nokstella
+    InitializeEvent(  9, 9006084,   12010805,   12010805,   12019805,      71200,   12019806,   12019807, 1099000407,   12019805, 0); // Minor Erdtree - Nox Insect Cavalry
+    InitializeEvent( 10, 9006084,   12010810,   12010811,   12019810,          0,          0,          0, 1099000407,          0, 0); // Grand Cloister - Scion of the Sealed God
+    InitializeEvent( 11, 9006084,   12010850,   12010850,   12019850,          0,          0,          0, 1099000407,          0, 0); // Lake of Rot - Dragonkin Soldier
+    InitializeEvent( 12, 9006084,   12020800,   12020800,   12029800,      71220,   12029801,   12029802, 1099000407,   12029800, 0); // Siofra Aqueduct - Spiritshaper Caimar
+    InitializeEvent( 13, 9006084,   12020830,   12020830,   12029830,          0,          0,          0, 1099000407,          0, 0); // Soifra River Waterfall - Dragonkin Soldier
+    InitializeEvent( 14, 9006084,   12020850,   12020850,   12029850,      71221,   12029851,   12029852, 1099000407,   12029850, 0); // Nokron, Eternal City - Goras, Scourge of Dreams
+    InitializeEvent( 15, 9006084,   12020870,   12020870,   12029870,          0,          0,          0, 1099000407,          0, 0); // Nokron, Eternal City - Tearna, Night Mistress
+    InitializeEvent( 16, 9006084,   12030390,   12030390,   12039390,          0,          0,          0, 1099000407,          0, 0); // Deeproot Depths - Crucible Knight Siluria
+    InitializeEvent( 17, 9006084,   12030392,   12030392,   12039392,          0,          0,          0, 1099000407,          0, 0); // Deeproot Depths - Blighted Nox Ancestor
+    InitializeEvent( 18, 9006084,   12030393,   12030393,   12039393,          0,          0,          0, 1099000407,          0, 0); // Deeproot Depths - Aled, Knight of Godwyn
+    InitializeEvent( 19, 9006084,   12030850,   12030850,   12039850,      71230,   12039851,   12039852, 1099000407,   12039850, 0); // Prince of Death's Throne - Lichdragon Fortissax
+    InitializeEvent( 20, 9006084,   12030860,   12030860,   12039860,      71236,   12039861,   12039862, 1099000407,   12039860, 0); // Minor Erdtree - Ulcerated Tree Spirit
+    InitializeEvent( 21, 9006084,   12040800,   12040800,   12049800,          0,          0,          0, 1099000402,          0, 0); // Ainsel River - Astel, Naturalborn of the Void
+    InitializeEvent( 22, 9006084,   12050800,   12050800,   12059800,      71250,   12059801,   12059802, 1099000407,   12059800, 0); // Mohgwyn Dynasty Mausoleum - Mohg, Lord of Blood
+    InitializeEvent( 23, 9006084,   12050810,   12050810,   12059810,          0,          0,          0, 1099000407,          0, 0); // Mohgwyn Palace - Bloodflame Dragon Sanguivaros
+    InitializeEvent( 24, 9006084,   12050850,   12050850,   12059850,      71254,   12059851,   12059852, 1099000407,   12059850, 0); // Mohgwyn Palace - Konrad, Pureblood Knight
+    InitializeEvent( 25, 9006084,   12070805,   12070805,   12079805,      71271,   12079806,   12079807, 1099000407,   12079805, 0); // Nokron, Eternal City - Mimic Tear
+    InitializeEvent( 26, 9006084,   12090800,   12090800,   12099800,          0,          0,          0, 1099000407,      62633, 0); // Hallowhorn Grounds - Regal Ancestor Spirit
+    InitializeEvent( 27, 9006084,   13000800,   13000800,   13009800,      71300,   13009801,   13009802, 1099000406,   13009800, 0); // Great Bridge - Maliketh, the Black Blade
+    InitializeEvent( 28, 9006084,   13000830,   13000830,   13009830,      71301,   13009831,   13009832, 1099000406,   13009830, 0); // Secret Area - Dragonlord Placidusax
+    InitializeEvent( 29, 9006084,   13000850,   13000850,   13009850,      71302,   13009851,   13009852, 1099000406,   13009850, 0); // Dragon Temple - Seera, Blade of the Ancients
+    InitializeEvent( 30, 9006084,   13000860,   13000860,   13009860,      71313,   13009861,   13009862, 1099000406,   13009860, 0); // Dragon Lord's Annex - Ancient Dragon Lansseax
+    InitializeEvent( 31, 9006084,   13000870,   13000870,   13009870,          0,          0,          0, 1099000406,          0, 0); // Mystic Area - Mystic Huntress of the Lost Tribe
+    InitializeEvent( 32, 9006084,   14000800,   14000801,   14009800,          0,          0,          0, 1099000401,          0, 0); // Raya Lucaria Academy - Rennala, Queen of the Full Moon
+    InitializeEvent( 33, 9006084,   14000850,   14000850,   14009850,      71401,   14009851,   14009852, 1099000401,   14009850, 0); // Raya Lucaria Academy - Bols, Carian Knight
+    InitializeEvent( 34, 9006084,   15000800,   15000800,   15009800,      71500,   15009801,   15009802, 1099000405,   15009800, 0); // Haligtree Roots - Malenia, Blade of Miquella
+    InitializeEvent( 35, 9006084,   15000850,   15000850,   15009850,      71505,   15009851,   15009852, 1099000405,   15009850, 0); // Miquella's Haligtree - Loretta, Knight of the Haligtree
+    InitializeEvent( 36, 9006084,   16000800,   16000800,   16009800,      71600,   16009801,   16009802, 1099000403,   16009800, 0); // Volcano Manor - Rykard, Lord of Blasphemy
+    InitializeEvent( 37, 9006084,   16000850,   16000850,   16009850,      71601,   16009851,   16009852, 1099000403,   16009850, 0); // Volcano Manor - Godskin Noble
+    InitializeEvent( 38, 9006084,   16000860,   16000860,   16009860,          0,          0,          0, 1099000403,          0, 0); // Subterranean Inquisition Chamber - Abductor Virgin (Swinging Sickle)
+    InitializeEvent( 39, 9006084,   17000800,   17000800,   17009800,      71702,   17009801,   17009802, 1099000408,   17009800, 0); // Noxumbra, Forsaken City - Daergraf, Underworld Archmage
+    InitializeEvent( 40, 9006084,   17000850,   17000850,   17009850,      71701,   17009851,   17009852, 1099000408,   17009850, 0); // Noxumbra, Forsaken City - Quicksilver Husk
+    InitializeEvent( 41, 9006084,   18000800,   18000800,   18009800,      71801,   18009801,   18009802, 1099000400,      62102, 0); // Fringefolk Hero's Grave - Ulcerated Tree Spirit
+    InitializeEvent( 42, 9006084,   18000850,   18000850,   18009850,      71800,   18009851,   18009852, 1099000400,      62101, 0); // Stranded Graveyard - Bloodhound Knight Gethin
+    InitializeEvent( 43, 9006084,   19000800,   19000800,   19009800,      71900,   19009801,   19009802, 1099000403,   19009800, 0); // Elden Throne - Radagon of the Golden Order & Elden Beast
+    InitializeEvent( 44, 9006084,   20000800,   20000800,   20009800,      72000,   20009801,   20009802, 1099000408,   20009800, 0); // Belurat Tower Settlement - Divine Beast Dancing Lion
+    InitializeEvent( 45, 9006084,   20010800,   20010800,   20019800,      72010,   20019801,   20019802, 1099000408,   20019800, 0); // Enir-Ilim - Promised Consort Radahn
+    InitializeEvent( 46, 9006084,   21000850,   21000850,   21009850,      72101,   21009851,   21009852, 1099000408,   21009850, 0); // Shadow Keep - Golden Hippopotamus
+    InitializeEvent( 47, 9006084,   21010800,   21010800,   21019800,      72110,   21019801,   21019802, 1099000408,   21019800, 0); // Shadow Keep - Messmer the Impaler
+    InitializeEvent( 48, 9006084,   22000800,   22000800,   22009800,      72200,   22009801,   22009802, 1099000408,   22009800, 0); // Stone Coffin Fissure - Putrescent Knight
+    InitializeEvent( 49, 9006084,   25000800,   25000800,   25009800,          0,          0,          0, 1099000408,      62912, 0); // Finger Ruins of Miyr - Metyr, Mother of Fingers
+    InitializeEvent( 50, 9006084,   28000800,   28000800,   28009800,      72800,   28009801,   28009802, 1099000408,   28009800, 0); // Midra's Manse - Midra, Lord of Frenzied Flame
+    InitializeEvent( 51, 9006084,   30000800,   30000800,   30009800,      73000,   30009801,   30009802, 1099000400,      62150, 0); // Tombsward Catacombs - Cemetery Shade
+    InitializeEvent( 52, 9006084,   30010800,   30010800,   30019800,      73001,   30019801,   30019802, 1099000400,      62151, 0); // Impaler's Catacombs - Frenzied Burial Watchdog
+    InitializeEvent( 53, 9006084,   30020800,   30020800,   30029800,      73002,   30029801,   30029802, 1099000400,      62103, 0); // Stormfoot Catacombs - Erdtree Burial Watchdog
+    InitializeEvent( 54, 9006084,   30030800,   30030800,   30039800,      73003,   30039801,   30039802, 1099000401,      62202, 0); // Road's End Catacombs - Spiritcaller Snail
+    InitializeEvent( 55, 9006084,   30040800,   30040800,   30049800,      73004,   30049801,   30049802, 1099000400,      62105, 0); // Murkwater Catacombs - Grave Warden Duelist
+    InitializeEvent( 56, 9006084,   30050800,   30050800,   30059800,      73005,   30059801,   30059802, 1099000401,      62201, 0); // Black Knife Catacombs - Cemetery Shade
+    InitializeEvent( 57, 9006084,   30050850,   30050850,   30059850,      73005,   30059851,   30059852, 1099000401,      62201, 0); // Black Knife Catacombs - Black Knife Assassin
+    InitializeEvent( 58, 9006084,   30060800,   30060800,   30069800,      73006,   30069801,   30069802, 1099000401,      62203, 0); // Cliffbottom Catacombs - Stormcaller Taran
+    InitializeEvent( 59, 9006084,   30070800,   30070800,   30079800,      73007,   30079801,   30079802, 1099000403,      62314, 0); // Wyndham Catacombs - Erdtree Burial Watchdog
+    InitializeEvent( 60, 9006084,   30080800,   30080800,   30089800,      73008,   30089801,   30089802, 1099000403,      62310, 0); // Sainted Hero's Grave - Tempestcaller Corwynt
+    InitializeEvent( 61, 9006084,   30090800,   30090800,   30099800,      73009,   30099801,   30099802, 1099000403,      62311, 0); // Gelmir Hero's Grave - Red Wolf of the Champion
+    InitializeEvent( 62, 9006084,   30100800,   30100800,   30109800,      73010,   30109801,   30109802, 1099000403,      62312, 0); // Auriza's Hero Grave - Crucible Knight Ordovis
+    InitializeEvent( 63, 9006084,   30110800,   30110800,   30119800,      73011,   30119801,   30119802, 1099000400,      62104, 0); // Deathtouched Catacombs - Black Knife Assassin
+    InitializeEvent( 64, 9006084,   30120800,   30120800,   30129800,      73012,   30129801,   30129802, 1099000403,      62313, 0); // Unsightly Catacombs - Perfumer Tricia & Misbegotten Warrior
+    InitializeEvent( 65, 9006084,   30130800,   30130800,   30139800,      73013,   30139801,   30139802, 1099000403,      62315, 0); // Auriza Side Tomb - Grave Warden Duelist
+    InitializeEvent( 66, 9006084,   30140800,   30140800,   30149800,      73014,   30149801,   30149802, 1099000402,      62410, 0); // Minor Erdtree Catacombs - Erdtree Burial Watchdog (Sword) & Erdtree Burial Watchdog (Scepter)
+    InitializeEvent( 67, 9006084,   30150800,   30150800,   30159800,      73015,   30159801,   30159802, 1099000402,      62411, 0); // Caelid Catacombs - Cemetery Shade
+    InitializeEvent( 68, 9006084,   30160800,   30160800,   30169800,      73016,   30169801,   30169802, 1099000402,      62412, 0); // War-Dead Catacombs - Putrid Tree Spirit
+    InitializeEvent( 69, 9006084,   30170800,   30170800,   30179800,      73017,   30179801,   30179802, 1099000404,      62510, 0); // Giant-Conquering Hero's Grave - Ancient Hero of Zamor
+    InitializeEvent( 70, 9006084,   30180800,   30180800,   30189800,      73018,   30189801,   30189802, 1099000404,      62511, 0); // Giants' Mountaintops Catacombs - Ulcerated Tree Spirit
+    InitializeEvent( 71, 9006084,   30190800,   30190800,   30199800,      73019,   30199801,   30199802, 1099000405,      62512, 0); // Consecrated Snowfield Catacombs - Vigo, High Priest of Eiglay
+    InitializeEvent( 72, 9006084,   30200800,   30200800,   30209800,      73020,   30209801,   30209802, 1099000405,      62560, 0); // Hidden Path to the Haligtree - Vulgar Militia Chief
+    InitializeEvent( 73, 9006084,   31000800,   31000800,   31009800,      73100,   31009801,   31009802, 1099000400,      62152, 0); // Murkwater Cave - Patches
+    InitializeEvent( 74, 9006084,   31010800,   31010800,   31019800,      73101,   31019801,   31019802, 1099000400,      62153, 0); // Earthbore Cave - Chanting Winged Dame
+    InitializeEvent( 75, 9006084,   31020800,   31020800,   31029800,      73102,   31029801,   31029802, 1099000400,      62106, 0); // Tombsward Cave - Miranda Blossom
+    InitializeEvent( 76, 9006084,   31040800,   31040800,   31049800,      73104,   31049801,   31049802, 1099000401,      62204, 0); // Stillwater Cave - Cleanrot Knight
+    InitializeEvent( 77, 9006084,   31050800,   31050800,   31059800,      73105,   31059801,   31059802, 1099000401,      62205, 0); // Lakeside Crystal Cave - Battlemage Duncan
+    InitializeEvent( 78, 9006084,   31060800,   31060800,   31069800,      73106,   31069801,   31069802, 1099000401,      62206, 0); // Academy Crystal Cave - Crystalian (Staff) & Crystalian (Spear)
+    InitializeEvent( 79, 9006084,   31070800,   31070800,   31079800,      73107,   31079801,   31079802, 1099000403,      62316, 0); // Seethewater Cave - Kindred of Rot
+    InitializeEvent( 80, 9006084,   31090800,   31090800,   31099800,      73109,   31099801,   31099802, 1099000403,      62317, 0); // Volcano Cave - Ancestral Shaman
+    InitializeEvent( 81, 9006084,   31100800,   31100800,   31109800,      73110,   31109801,   31109802, 1099000402,      62413, 0); // Dragonbarrow Cave - Beastman of Farum Azula
+    InitializeEvent( 82, 9006084,   31110800,   31110800,   31119800,      73111,   31119801,   31119802, 1099000402,      62460, 0); // Sellia Hideaway - Putrid Crystalian (Ringblade) & Putrid Crystalian (Spear) & Putrid Crystalian (Staff)
+    InitializeEvent( 83, 9006084,   31120800,   31120800,   31129800,      73112,   31129801,   31129802, 1099000405,      62513, 0); // Cave of the Forlorn - Misbegotten Crusader
+    InitializeEvent( 84, 9006084,   31150800,   31150800,   31159800,      73115,   31159801,   31159802, 1099000400,      62108, 0); // Coastal Cave - Demi-Human Chief & Demi-Human Chief
+    InitializeEvent( 85, 9006084,   31170800,   31170800,   31179800,      73117,   31179801,   31179802, 1099000400,      62109, 0); // High Road Cave - Guardian Golem
+    InitializeEvent( 86, 9006084,   31180800,   31180800,   31189800,      73118,   31189801,   31189802, 1099000403,      62318, 0); // Perfumer's Grotto - Miranda the Blighted Bloom & Omenkiller
+    InitializeEvent( 87, 9006084,   31190800,   31190800,   31199800,      73119,   31199801,   31199802, 1099000403,      62319, 0); // Sage's Cave - Black Knife Assassin
+    InitializeEvent( 88, 9006084,   31190850,   31190850,   31199850,      73119,   31199851,   31199852, 1099000403,      62319, 0); // Sage's Cave - Necromancer Garris
+    InitializeEvent( 89, 9006084,   31200800,   31200800,   31209800,      73120,   31209801,   31209802, 1099000402,      62414, 0); // Abandoned Cave - Cleanrot Knight
+    InitializeEvent( 90, 9006084,   31210800,   31210800,   31219800,      73121,   31219801,   31219802, 1099000402,      62415, 0); // Goal Cave - Frenzied Troll
+    InitializeEvent( 91, 9006084,   31220800,   31220800,   31229800,      73122,   31229801,   31229802, 1099000404,      62514, 0); // Spiritcallers Cave - Spiritcaller Snail & Godskin Apostle & Godskin Noble
+    InitializeEvent( 92, 9006084,   32000800,   32000800,   32009800,      73200,   32009801,   32009802, 1099000400,      62154, 0); // Morne Tunnel - Scaly Misbegotten
+    InitializeEvent( 93, 9006084,   32010800,   32010800,   32019800,      73201,   32019801,   32019802, 1099000400,      62110, 0); // Limgrave Tunnels - Stonedigger Troll
+    InitializeEvent( 94, 9006084,   32020800,   32020800,   32029800,      73202,   32029801,   32029802, 1099000401,      62207, 0); // Raya Lucaria Crystal Tunnel - Crystalian
+    InitializeEvent( 95, 9006084,   32040800,   32040800,   32049800,      73204,   32049801,   32049802, 1099000403,      62320, 0); // Old Altus Tunnel - Stonedigger Troll
+    InitializeEvent( 96, 9006084,   32050800,   32050800,   32059800,      73205,   32059801,   32059802, 1099000403,      62322, 0); // Altus Tunnel - Crystalian (Ringblade) & Crystalian (Spear)
+    InitializeEvent( 97, 9006084,   32070800,   32070800,   32079800,      73207,   32079801,   32079802, 1099000402,      62416, 0); // Gael Tunnel - Magma Wyrm
+    InitializeEvent( 98, 9006084,   32080800,   32080800,   32089800,      73208,   32089801,   32089802, 1099000402,      62417, 0); // Sellia Crystal Tunnel - Fallingstar Beast
+    InitializeEvent( 99, 9006084,   32110800,   32110800,   32119800,      73211,   32119801,   32119802, 1099000405,      62515, 0); // Yelough Anix Tunnel - Astel, Stars of Darkness
+    InitializeEvent(100, 9006084,   34110800,   34110800,   34119800,      73422,   34119801,   34119802, 1099000401,   34119800, 0); // Carian Study Hall - Godskin Matriarch
+    InitializeEvent(101, 9006084,   34120800,   34120800,   34129800,      73431,   34129801,   34129802, 1099000403,   34129800, 0); // Sealed Tunnel - Onyx Lord
+    InitializeEvent(102, 9006084,   34130800,   34130800,   34139800,      73440,   34139801,   34139802, 1099000402,   34139800, 0); // Caelid Divine Tower - Godskin Apostle
+    InitializeEvent(103, 9006084,   34140850,   34140850,   34149850,          0,          0,          0, 1099000403,          0, 0); // Divine Tower of East Altus - Fell Twin & Fell Twin
+    InitializeEvent(104, 9006084,   35000800,   35000800,   35009800,      73500,   35009801,   35009802, 1099000403,   35009800, 0); // Subterranean Shunning Grounds - Mohg, the Omen
+    InitializeEvent(105, 9006084,   35000850,   35000850,   35009850,      73503,   35009851,   35009852, 1099000403,   35009850, 0); // Leyndell Catacombs - Esgar, Priest of Blood
+    InitializeEvent(106, 9006084,   39200800,   39200800,   39209800,      73902,   39209801,   39209802, 1099000401,   39209800, 0); // Ruin Strewn Precipice - Magma Wyrm Makar
+    InitializeEvent(107, 9006084,   40000800,   40000800,   40009800,      74000,   40009801,   40009802, 1099000408,      62823, 0); // Fog Rift Catacombs - Idris, Godskin Deceiver
+    InitializeEvent(108, 9006084,   40010800,   40010800,   40019800,      74001,   40019801,   40019802, 1099000408,      62915, 0); // Scorpion River Catacombs - Death Knight
+    InitializeEvent(109, 9006084,   41000800,   41000800,   41009800,      74100,   41009801,   41009802, 1099000408,      62800, 0); // Belurat Gaol - Demi-Human Swordmaster Onze
+    InitializeEvent(110, 9006084,   41010800,   41010800,   41019800,      74101,   41019801,   41019802, 1099000408,      62916, 0); // Bonny Gaol - Curseblade Labirith
+    InitializeEvent(111, 9006084,   41020800,   41020800,   41029800,      74102,   41029801,   41029802, 1099000408,      62850, 0); // Lamenter's Gaol - Lamenter
+    InitializeEvent(112, 9006084,   43000800,   43000800,   43009800,      74300,   43009801,   43009802, 1099000408,      62919, 0); // Rivermouth Cave - Chief Bloodfiend
+    InitializeEvent(113, 9006084,   43010800,   43010800,   43019800,      74301,   43019801,   43019802, 1099000408,   43019800, 0); // Dragon's Pit - Ancient Dragon-Man
+    InitializeEvent(114, 9006084, 1033420800, 1033420800, 1033429800,          0,          0,          0, 1099000401,      62281, 0); // Ringleader's Evergaol - Alecto, Black Knife Ringleader
+    InitializeEvent(115, 9006084, 1033430800, 1033430800, 1033439800,      76299, 1033439801, 1033439802, 1099000401, 1033439800, 0); // Southwest Minor Erdtree - Carian Golem
+    InitializeEvent(116, 9006084, 1033450800, 1033450800, 1033459800,          0,          0,          0, 1099000401,      62238, 0); // Cuckoo's Evergaol - Red Wolf of Radagon
+    InitializeEvent(117, 9006084, 1034420800, 1034420800, 1034429800,          0,          0,          0, 1099000401,          0, 0); // Cathedral of Manus Celes - Glintstone Dragon Adula
+    InitializeEvent(118, 9006084, 1034450800, 1034450800, 1034459800,          0,          0,          0, 1099000401,          0, 0); // Lake of Liurnia - Glintstone Dragon Smarag
+    InitializeEvent(119, 9006084, 1034480800, 1034480800, 1034489800,          0,          0,          0, 1099000401,      62226, 0); // Kingsrealm Ruins - Royal Revenant
+    InitializeEvent(120, 9006084, 1035420800, 1035420800, 1035429800,          0,          0,          0, 1099000401,      62232, 0); // Village of the Albinaurics - Omenkiller
+    InitializeEvent(121, 9006084, 1035500800, 1035500800, 1035509800,      76232, 1035509801, 1035509802, 1099000401, 1035509800, 0); // Caria Manor - Rhys, Carian Paragon
+    InitializeEvent(122, 9006084, 1035500850, 1035500850, 1035509850,      76261, 1035509851, 1035509852, 1099000401, 1035509850, 0); // Caria Manor - Einar, Ice Guardian
+    InitializeEvent(123, 9006084, 1035530800, 1035530800, 1035539800,          0,          0,          0, 1099000403,          0, 0); // Mt. Gelmir Lava Pool - Magma Wyrm
+    InitializeEvent(124, 9006084, 1036450800, 1036450340, 1036459800,          0,          0,          0, 1099000401,          0, 0); // Central Liurnia - Death Rite Bird
+    InitializeEvent(125, 9006084, 1036480800, 1036480340, 1036489800,          0,          0,          0, 1099000401,          0, 0); // Gate Town Bridge - Night's Cavalry
+    InitializeEvent(126, 9006084, 1036500800, 1036500800, 1036509800,          0,          0,          0, 1099000401,      62239, 0); // Royal Grave Evergaol - Onyx Lord
+    InitializeEvent(127, 9006084, 1036520800, 1036520800, 1036529800,      76399, 1036529801, 1036529802, 1099000403, 1036529800, 0); // Minor Erdtree - Demi-Human Chief
+    InitializeEvent(128, 9006084, 1036540800, 1036540800, 1036549800,          0,          0,          0, 1099000403,          0, 0); // Mt. Gelmir - Full-Grown Fallingstar Beast
+    InitializeEvent(129, 9006084, 1037420800, 1037420340, 1037429800,          0,          0,          0, 1099000401,          0, 0); // Liurnia South - Deathbird
+    InitializeEvent(130, 9006084, 1037460800, 1037460800, 1037469800,          0,          0,          0, 1099000401,      62221, 0); // Church of Vows - Bell Bearing Hunter
+    InitializeEvent(131, 9006084, 1037530800, 1037530800, 1037539800,          0,          0,          0, 1099000403,      62382, 0); // Hermit Village - Demi-Human Queen Maggie
+    InitializeEvent(132, 9006084, 1037540810, 1037540810, 1037549810,      76398, 1037549811, 1037549812, 1099000403, 1037549810, 0); // Minor Erdtree - Charred Banished Knight
+    InitializeEvent(133, 9006084, 1038410800, 1038410800, 1038419800,          0,          0,          0, 1099000401,      62237, 0); // Malefactor's Evergaol - Adan, Thief of Fire
+    InitializeEvent(134, 9006084, 1038480800, 1038480800, 1038489800,      76298, 1038489801, 1038489802, 1099000401, 1038489800, 0); // Northeast Minor Erdtree - Mystic Huntress
+    InitializeEvent(135, 9006084, 1038510800, 1038510800, 1038519800,          0,          0,          0, 1099000403,      62335, 0); // Lux Ruins - Demi-Human Queen Gilika
+    InitializeEvent(136, 9006084, 1038520800, 1038520800, 1038529800,          0,          0,          0, 1099000403,      62385, 0); // Wyndham Ruins - Tibia Mariner
+    InitializeEvent(137, 9006084, 1039420800, 1039420800, 1039429800,      76221, 1039429801, 1039429802, 1099000401, 1039429800, 0); // Southeast Minor Erdtree - Giant Crystal Crab
+    InitializeEvent(138, 9006084, 1039430800, 1039430340, 1039439800,          0,          0,          0, 1099000401,          0, 0); // Bellum Highway - Night's Cavalry
+    InitializeEvent(139, 9006084, 1039440800, 1039440800, 1039449800,          0,          0,          0, 1099000401,          0, 0); // Liurnia - Tibia Mariner
+    InitializeEvent(140, 9006084, 1039500800, 1039500800, 1039509800,          0,          0,          0, 1099000403,      62344, 0); // Golden Lineage Evergaol - Banished Knight Oleg
+    InitializeEvent(141, 9006084, 1039510800, 1039510800, 1039519800,          0,          0,          0, 1099000403,          0, 0); // Altus Plateau - Night's Cavalry
+    InitializeEvent(142, 9006084, 1039540800, 1039540800, 1039549800,      76322, 1039549801, 1039549802, 1099000403, 1039549800, 0); // Shaded Castle - Elemer of the Briar
+    InitializeEvent(143, 9006084, 1040520800, 1040520800, 1040529800,          0,          0,          0, 1099000403,          0, 0); // Sainted Hero's Grave - Black Knife Assassin
+    InitializeEvent(144, 9006084, 1040530800, 1040530800, 1040539800,          0,          0,          0, 1099000403,      62380, 0); // Writheblood Ruins - Sanguine Noble
+    InitializeEvent(145, 9006084, 1041370800, 1041370800, 1041379800,      76199, 1041379801, 1041379802, 1099000400, 1041379800, 0); // Stormhill - Grafted Scion
+    InitializeEvent(146, 9006084, 1041500800, 1041500800, 1041509800,          0,          0,          0, 1099000403,          0, 0); // Leyndell Western Gate - Fallingstar Beast
+    InitializeEvent(147, 9006084, 1041510800, 1041510800, 1041519800,          0,          0,          0, 1099000403,          0, 0); // Leyndell Western Gate - Tree Sentinel & Tree Sentinel
+    InitializeEvent(148, 9006084, 1041530800, 1041530800, 1041539800,      76397, 1041539801, 1041539802, 1099000403, 1041539800, 0); // Central Minor Erdtree - Wormface
+    InitializeEvent(149, 9006084, 1042330800, 1042330800, 1042339800,          0,          0,          0, 1099000400,      62178, 0); // Weeping Evergaol - Ancient Hero of Zamor
+    InitializeEvent(150, 9006084, 1042360800, 1042360800, 1042369800,          0,          0,          0, 1099000400,          0, 0); // First Step - Tree Sentinel
+    InitializeEvent(151, 9006084, 1042370800, 1042370800, 1042379800,          0,          0,          0, 1099000400,      62132, 0); // Stormhil Evergaol - Crucible Knight
+    InitializeEvent(152, 9006084, 1042380800, 1042380800, 1042389800,          0,          0,          0, 1099000400,          0, 0); // North Limgrave - Deathbird
+    InitializeEvent(153, 9006084, 1042380850, 1042380850, 1042389850,      76118, 1042389851, 1042389852, 1099000400,      62129, 0); // Warmaster Shack - Bell Bearing Hunter
+    InitializeEvent(154, 9006084, 1042550800, 1042550800, 1042559800,      76313, 1042559801, 1042559802, 1099000403, 1042559800, 0); // Windmill Heights - Godskin Apostle
+    InitializeEvent(155, 9006084, 1043300800, 1043300800, 1043309800,          0,          0,          0, 1099000400,          0, 0); // Castle Morne - Dyru, Scavenger King
+    InitializeEvent(156, 9006084, 1043300820, 1043300820, 1043309820,      76159, 1043309821, 1043309822, 1099000400, 1043309820, 0); // Castle Morne - Leonine Misbegotten
+    InitializeEvent(157, 9006084, 1043330800, 1043330800, 1043339800,      76198, 1043339801, 1043339802, 1099000400, 1043339800, 0); // Weeping Erdtree - Erdtree Avatar
+    InitializeEvent(158, 9006084, 1043360800, 1043360800, 1043369800,          0,          0,          0, 1099000400,          0, 0); // Agheel Lake - Flying Dragon Agheel
+    InitializeEvent(159, 9006084, 1043370800, 1043370340, 1043379800,          0,          0,          0, 1099000400,          0, 0); // Agheel Lake North - Night's Cavalry
+    InitializeEvent(160, 9006084, 1043500800, 1043500800, 1043509800,      76310, 1043509801, 1043509802, 1099000403, 1043509800, 0); // Minor Erdtree Church - Erdtree Sentry
+    InitializeEvent(161, 9006084, 1043530800, 1043530800, 1043539800,      76311, 1043539801, 1043539802, 1099000403,      62337, 0); // Hermit Merchant's Shack - Bell Bearing Hunter
+    InitializeEvent(162, 9006084, 1044320800, 1044320340, 1044329800,          0,          0,          0, 1099000400,          0, 0); // Weeping Peninsula - Deathbird
+    InitializeEvent(163, 9006084, 1044320850, 1044320342, 1044329850,          0,          0,          0, 1099000400,          0, 0); // Weeping Peninsula - Night's Cavalry
+    InitializeEvent(164, 9006084, 1044350800, 1044350800, 1044359800,          0,          0,          0, 1099000400,      62131, 0); // Forlorn Hound Evergoal - Bloodhound Knight Darriwil
+    InitializeEvent(165, 9006084, 1044360800, 1044360800, 1044369800,      76120, 1044369801, 1044369802, 1099000400, 1044369800, 0); // Waypoint Ruins - Mad Pumpkin Head
+    InitializeEvent(166, 9006084, 1044530800, 1044530800, 1044539800,          0,          0,          0, 1099000403,          0, 0); // Hermit Merchant's Shack - Deathbird
+    InitializeEvent(167, 9006084, 1044530810, 1044530810, 1044539810,      76396, 1044539811, 1044539812, 1099000403, 1044539810, 1); // Northeast Minor Erdtree - Blighted Omen
+    InitializeEvent(168, 9006084, 1045370800, 1045370800, 1045379800,      76197, 1045379801, 1045379802, 1099000400, 1045379800, 0); // Mistwood Erdtree - Erdtree Guardian
+    InitializeEvent(169, 9006084, 1045390800, 1045390800, 1045399800,          0,          0,          0, 1099000400,      62127, 0); // Summonwater Village - Tibia Mariner
+    InitializeEvent(170, 9006084, 1045520800, 1045520800, 1045529800,          0,          0,          0, 1099000403,          0, 0); // Capital Entrance - Draconic Tree Sentinel
+    InitializeEvent(171, 9006084, 1047400800, 1047400800, 1047409800,      76499, 1047409801, 1047409802, 1099000402, 1047409800, 0); // West Caelid Minor Erdtree - Jar Warrior Champion
+    InitializeEvent(172, 9006084, 1048370800, 1048370800, 1048379800,          0,          0,          0, 1099000402,          0, 0); // Caelid Highway South - Decaying Ekzykes
+    InitializeEvent(173, 9006084, 1048370810, 1048370810, 1048379810,      76405, 1048379811, 1048379812, 1099000402, 1048379810, 0); // South Caelid Minor Erdtree - Rotten Monk
+    InitializeEvent(174, 9006084, 1048400800, 1048400800, 1048409800,          0,          0,          0, 1099000402,      62426, 0); // Caelem Ruins - Mad Pumpkin Head
+    InitializeEvent(175, 9006084, 1048410800, 1048410800, 1048419800,      76451, 1048419801, 1048419802, 1099000402,      62470, 0); // Isolated Merchant Shack (Dragonbarrow) - Bell Bearing Hunter
+    InitializeEvent(176, 9006084, 1048510800, 1048510800, 1048519800,          0,          0,          0, 1099000404,          0, 0); // Forbidden Lands - Night's Cavalry
+    InitializeEvent(177, 9006084, 1048570800, 1048570800, 1048579800,          0,          0,          0, 1099000405,          0, 0); // West Mountaintops - Death Rite Bird
+    InitializeEvent(178, 9006084, 1049370800, 1049370800, 1049379800,          0,          0,          0, 1099000402,          0, 0); // Caelid Highway South - Night's Cavalry
+    InitializeEvent(179, 9006084, 1049370850, 1049370850, 1049379850,          0,          0,          0, 1099000402,          0, 0); // Caelid Highway East - Death Rite Bird
+    InitializeEvent(180, 9006084, 1049380800, 1049380800, 1049389800,      76412, 1049389801, 1049389802, 1099000402, 1049389800, 0); // Aeonia Swamp - Commander O'Neil
+    InitializeEvent(181, 9006084, 1049390800, 1049390800, 1049399800,      76415, 1049399801, 1049399802, 1099000402, 1049399800, 0); // Sellia Town of Sorcery - Nox Swordstress & Nox Monk
+    InitializeEvent(182, 9006084, 1049390850, 1049390850, 1049399850,          0,          0,          0, 1099000402,      62471, 0); // Sellia Evergaol - Battlemage Hugues
+    InitializeEvent(183, 9006084, 1049520800, 1049520800, 1049529800,          0,          0,          0, 1099000404,          0, 0); // Forbidden Lands - Black Blade Kindred
+    InitializeEvent(184, 9006084, 1049520850, 1049520850, 1049529850,      76590, 1049529851, 1049529852, 1099000404, 1049529850, 0); // Forbidden Lands - Death Rite Bird
+    InitializeEvent(185, 9006084, 1049570800, 1049570800, 1049579800,      76599, 1049579801, 1049579802, 1099000405, 1049579800, 0); // Minor Erdtree - Albinauric Wolf Rider
+    InitializeEvent(186, 9006084, 1050400800, 1050400800, 1050409800,          0,          0,          0, 1099000402,          0, 0); // Dragonbarrow - Elder Dragon Greyoll
+    InitializeEvent(187, 9006084, 1050560800, 1050560800, 1050569800,          0,          0,          0, 1099000405,          0, 0); // Outside Cave of the Forlorn - Great Wyrm Theodorix
+    InitializeEvent(188, 9006084, 1050570800, 1050570800, 1050579800,          0,          0,          0, 1099000404,          0, 0); // Snow Valley - Death Rite Bird
+    InitializeEvent(189, 9006084, 1051360800, 1051360800, 1051369800,      76419, 1051369801, 1051369802, 1099000402, 1051369800, 0); // Redmane Castle - Dakk, Starcaller Lord
+    InitializeEvent(190, 9006084, 1051400800, 1051400800, 1051409800,      76497, 1051409801, 1051409802, 1099000402, 1051409800, 0); // East Caelid Minor Erdtree - Putrid Avatar
+    InitializeEvent(191, 9006084, 1051430800, 1051430800, 1051439800,          0,          0,          0, 1099000402,          0, 0); // Bestial Undercroft - Black Blade Kindred
+    InitializeEvent(192, 9006084, 1051530800, 1051530800, 1051539800,      76598, 1051539801, 1051539802, 1099000404, 1051539800, 0); // Minor Erdtree - Mountain Troll
+    InitializeEvent(193, 9006084, 1051570800, 1051570800, 1051579800,      76524, 1051579801, 1051579802, 1099000404, 1051579800, 0); // Castle Sol - Commander Niall
+    InitializeEvent(194, 9006084, 1052410800, 1052410800, 1052419800,          0,          0,          0, 1099000402,          0, 0); // North Dragonbarrow - Flying Dragon Greyll
+    InitializeEvent(195, 9006084, 1052410850, 1052410850, 1052419850,          0,          0,          0, 1099000402,          0, 0); // North Dragonbarrow - Night's Cavalry
+    InitializeEvent(196, 9006084, 1052520800, 1052520800, 1052529800,      76509, 1052529801, 1052529802, 1099000404, 1052529800, 0); // Flame Peak - Fire Giant
+    InitializeEvent(197, 9006084, 1052560800, 1052560800, 1052569800,      76597, 1052569801, 1052569802, 1099000404, 1052569800, 0); // Minor Erdtree - Grand Flame Prelate
+    InitializeEvent(198, 9006084, 1053560800, 1053560800, 1053569800,          0,          0,          0, 1099000404,      62525, 0); // Lord Contender's Evergaol - Roundtable Knight Vyke
+    InitializeEvent(199, 9006084, 1248550800, 1248550800, 1248559800,          0,          0,          0, 1099000405,          0, 0); // Inner Consecrated Snowfields - Night's Cavalry (Glaive) & Night's Cavalry (Flail)
+    InitializeEvent(200, 9006084, 1252380800, 1252380800, 1252389800,      76422, 1252389801, 1252389802, 1099000402, 1252389800, 0); // Redmane Castle - Starscourge Radahn
+    InitializeEvent(201, 9006084, 1254560800, 1254560800, 1254569800,          0,          0,          0, 1099000404,          0, 0); // Freezing Lake - Borealis the Freezing Fog
+    InitializeEvent(202, 9006084, 2044440800,   31820800, 2044440801,          0,          0,          0, 1099000400,          0, 0); // Castle Morne Town - Shabriri's Chosen
+    InitializeEvent(203, 9006084, 2044450800, 2044450800, 2044459800,      76945, 2044459801, 2044459802, 1099000408, 2044459800, 0); // Church of the Bud - Romina, Saint of the Bud
+    InitializeEvent(204, 9006084, 2044470800, 2044470800, 2044479800,          0,          0,          0, 1099000408,          0, 0); // Red Bear Ravine North - Rugalea the Great Red Bear
+    InitializeEvent(205, 9006084, 2045440800, 2045440800, 2045449800,          0,          0,          0, 1099000408,          0, 0); // Abandoned Ailing Village - Ghostflame Dragon
+    InitializeEvent(206, 9006084, 2046380800, 2046380800, 2046389800,          0,          0,          0, 1099000408,      62843, 0); // Southern Nameless Mausoleum - Dancer of Ranah
+    InitializeEvent(207, 9006084, 2046400800, 2046400800, 2046409800,          0,          0,          0, 1099000408,          0, 0); // Cerulean Coast West - Demi-Human Queen Marigga
+    InitializeEvent(208, 9006084, 2046410800, 2046410800, 2046419800,          0,          0,          0, 1099000408,      62812, 0); // Western Nameless Mausoleum - Knight of the Solitary Gaol
+    InitializeEvent(209, 9006084, 2046450800, 2046450800, 2046459800,          0,          0,          0, 1099000408,      62921, 0); // Northern Nameless Mausoleum - Red Bear
+    InitializeEvent(210, 9006084, 2046460800, 2046460800, 2046469800,          0,          0,          0, 1099000408,          0, 0); // Ancient Ruins, Grand Stairway - Divine Beast Dancing Lion
+    InitializeEvent(211, 9006084, 2047390800, 2047390800, 2047399800,          0,          0,          0, 1099000408,          0, 0); // Charo's Hidden Grave - Death Rite Bird
+    InitializeEvent(212, 9006084, 2047400800, 2047400800, 2047409800,      76961, 2047409801, 2047409802, 1099000408, 2047409800, 0); // Gravesite Woodland - Monstrous Spider Scorpion
+    InitializeEvent(213, 9006084, 2047450800, 2047450800, 2047459800,          0,          0,          0, 1099000408,      62904, 0); // Fog Rift Fort - Black Knight Garrew
+    InitializeEvent(214, 9006084, 2047470800, 2047470800, 2047479800,      76965, 2047479801, 2047479802, 1099000408, 2047479800, 0); // Rauh Steppe - Divine Bird Warrior
+    InitializeEvent(215, 9006084, 2048380800, 2048380800, 2048389800,          0,          0,          0, 1099000408,          0, 0); // Charo's Hidden Grave - Tibia Mariner
+    InitializeEvent(216, 9006084, 2048380850, 2048380850, 2048389850,          0,          0,          0, 1099000408,          0, 0); // Cerulean Coast - Ghostflame Dragon
+    InitializeEvent(217, 9006084, 2048380860, 2048380860, 2048389860,      76962, 2048389861, 2048389862, 1099000408, 2048389860, 0); // Cerulean Bluffs - Bloodfiend Mystic
+    InitializeEvent(218, 9006084, 2048440800, 2048440800, 2048449800,      76823, 2048449801, 2048449802, 1099000408, 2048449800, 0); // Castle Ensis - Rellana, Twin Moon Knight
+    InitializeEvent(219, 9006084, 2049410850, 2049410850, 2049419850,      76966, 2049419851, 2049419852, 1099000408, 2049419850, 0); // Dragon Resting Grounds - Grave Bird Raptor
+    InitializeEvent(220, 9006084, 2049430800, 2049430800, 2049439800,          0,          0,          0, 1099000408,          0, 0); // Moorth Highway - Ghostflame Dragon
+    InitializeEvent(221, 9006084, 2049430850, 2049430850, 2049439850,          0,          0,          0, 1099000408,      62902, 0); // Fort of Reprimand - Black Knight Edredd
+    InitializeEvent(222, 9006084, 2049440800, 2049440800, 2049449800,      76902, 2049449801, 2049449802, 1099000408, 2049449800, 0); // Moorth Ruins - Dryleaf Dane
+    InitializeEvent(223, 9006084, 2049450800, 2049450800, 2049459800,          0,          0,          0, 1099000408,          0, 0); // Scadu Altus Red Bear Pond - Ralva the Great Red Bear
+    InitializeEvent(224, 9006084, 2049450850, 2049450850, 2049459850,      76964, 2049459851, 2049459852, 1099000408, 2049459850, 0); // Minor Erdtree Cave - Fire Knight Crusader
+    InitializeEvent(225, 9006084, 2049480800, 2049480800, 2049489800,      76930, 2049489801, 2049489802, 1099000408, 2049489800, 0); // Scaduview - Commander Gaius
+    InitializeEvent(226, 9006084, 2050470800, 2050470800, 2050479800,          0,          0,          0, 1099000408,          0, 0); // Scaduview - Tree Sentinel
+    InitializeEvent(227, 9006084, 2050480800, 2050480800, 2050489800,      76960, 2050489801, 2050489802, 1099000408, 2050489800, 0); // Scadutree Base - Scadutree Avatar
+    InitializeEvent(228, 9006084, 2050480860, 2050480860, 2050489860,          0,          0,          0, 1099000408,          0, 0); // Scaduview - Tree Sentinel
+    InitializeEvent(229, 9006084, 2051440800, 2051440800, 2051449800,          0,          0,          0, 1099000408,      62961, 0); // Eastern Nameless Mausoleum - Rakshasa
+    InitializeEvent(230, 9006084, 2051440850, 2051440850, 2051449850,      76967, 2051449851, 2051449852, 1099000408, 2051449850, 0); // Abyssal Overlook - Maddened Hippopotamus
+    InitializeEvent(231, 9006084, 2051450800, 2051450720, 2051459800,          0,          0,          0, 1099000408,      62906, 0); // Cathedral of Manus Metyr - Count Ymir, Mother of Fingers
+    InitializeEvent(232, 9006084, 2051470800, 2051470800, 2051479800,      76963, 2051479801, 2051479802, 1099000408, 2051479800, 0); // Shaman Village - Black Knight Captain
+    InitializeEvent(233, 9006084, 2052400800, 2052400800, 2052409800,          0,          0,          0, 1099000408,          0, 0); // Jagged Peak - Jagged Peak Drake
+    InitializeEvent(234, 9006084, 2052430800, 2052430800, 2052439800,      76862, 2052439801, 2052439802, 1099000408, 2052439800, 0); // Forsaken Graveyard - Jori, Elder Inquisitor
+    InitializeEvent(235, 9006084, 2052480800, 2052480800, 2052489800,          0,          0,          0, 1099000408,          0, 0); // Scaduview - Fallingstar Beast
+    InitializeEvent(236, 9006084, 2054390800, 2054390800, 2054399800,      76853, 2054399801, 2054399802, 1099000408, 2054399800, 0); // Jagged Peak - Bayle the Dread
+
 });
 
 // Save Fixer X.X.X -> X.X.X
@@ -3846,6 +4297,7 @@ L0:
     RestartEvent();
 });
 
+//Boss Item Award Handler (Death Flag, ItemLotParamMap1, ItemLotParam2Map, ItemAcquisitionFlag)
 $Event(1100, Default, function(X0_4, X4_4, X8_4, X12_4) {
     Unknown200476(X0_4, X4_4);
     EndIf(EventFlag(X12_4));
@@ -4162,10 +4614,7 @@ L10:
 $Event(1500, Restart, function(X0_4, X4_4, X8_4) {
     DisableNetworkSync();
     WaitFor(CharacterHasSpEffect(10000, X0_4));
-    if (X8_4 == 1)
-        AwardItemsIncludingClients(X4_4);
-    else
-        DisplayBlinkingMessage(4022);
+    AwardItemsIncludingClients(X4_4);
     WaitFixedTimeSeconds(1.5);
     RestartEvent();
 });
@@ -5573,7 +6022,7 @@ L15:
     WaitFixedTimeSeconds(1);
 });
 
-// ? (DLC)
+// Items Acquisition (DLC Ashes of War)
 $Event(65910, Default, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4) {
     if (PlayerIsInOwnWorld()) {
         EndIf(EventFlag(X0_4));
@@ -5637,16 +6086,16 @@ $Event(9910, Restart, function(X0_4) {
     RestartEvent();
 });
 
-$Event(3040, Default, function() {
+$Event(3040, Default, function() { //Radahn Festival Transition
     EndIf(!PlayerIsInOwnWorld());
-    EndIf(EventFlag(9413));
-    if (!EventFlag(9412)) {
+    EndIf(EventFlag(9413)); //End if Radahn is dead
+    if (!EventFlag(9412)) { //9412 Turned on when Radahn is dead
         if (EventFlag(9411)) {
-            if (!EventFlag(9130)) {
+            if (!EventFlag(9130)) { //9130 Turned on when Radahn is dead
                 if (!InArea(10000, 1051362220)) {
                     SetNetworkconnectedEventFlagID(9411, OFF);
                     FreezeTime(false);
-                    SetNetworkconnectedEventFlagID(1051362702, OFF);
+                    SetNetworkconnectedEventFlagID(1051362702, OFF); //Reset Jerren's Dialogue: "Are you good and prepared, young chum?"
                     SetEventFlagID(3618, ON);
                 }
             }
@@ -5654,8 +6103,8 @@ $Event(3040, Default, function() {
 L20:
         if (!EventFlag(9411)) {
             if (!EventFlag(9410)) {
-                WaitFor(PlayerIsInOwnWorld() && EventFlag(1051360800));
-                // && (EventFlag(1044369223) || EventFlag(1034499224) || EventFlag(3063))); // Festival
+                WaitFor(PlayerIsInOwnWorld() && EventFlag(1051360800)); //1051360800 - Dakk is Defeated Flag
+                // && (EventFlag(1044369223) || EventFlag(1034499224) || EventFlag(3063))); // (Sellen Dialogue || Iji Dialogue || Altus Plateau Flag)
                 if (PlayerIsInOwnWorld()) {
                     SetNetworkconnectedEventFlagID(9410, ON);
                 }
@@ -5663,21 +6112,21 @@ L20:
 L0:
             WaitFor(PlayerIsInOwnWorld() && EventFlag(1051362702));
             if (PlayerIsInOwnWorld()) {
-                SetNetworkconnectedEventFlagID(9411, ON);
-                SetEventFlagID(3618, ON);
+                SetNetworkconnectedEventFlagID(9411, ON); //Radahn Activated (Spoke to Jerren at Festival)
+                SetEventFlagID(3618, ON); //3618 - Blaidd Dialogue?
             }
         }
 L1:
         FreezeTime(true);
-        WaitFor(PlayerIsInOwnWorld() && EventFlag(310));
+        WaitFor(PlayerIsInOwnWorld() && EventFlag(310)); //Wait for Radahn Death Cutscene to pass
         FreezeTime(false);
         if (PlayerIsInOwnWorld()) {
             SetNetworkconnectedEventFlagID(9411, ON);
         }
     }
 L2:
-    flagOnline = EventFlag(9130) && !EventFlag(1051369360) && PlayerIsInOwnWorld();
-    area = InArea(10000, 1051362220);
+    flagOnline = EventFlag(9130) && !EventFlag(1051369360) && PlayerIsInOwnWorld(); //1051369360 - Jerren Dialogue Related?
+    area = InArea(10000, 1051362220); //Redmane Castle End and Beach
     WaitFor(flagOnline || area);
     EndIf(area.Passed);
     SetNetworkconnectedEventFlagID(9413, ON);
@@ -10696,10 +11145,10 @@ $Event(60701, Default, function(X0_4, X4_4) {
         SetEventFlagID(X4_4, ON);
         EndEvent();
     }
-L15:
-    WaitFor(EventFlag(6000) && !EventFlag(6000));
-    WaitFixedTimeSeconds(1);
-    RequestCharacterAIReplan(0);
+//L15:
+//    WaitFor(EventFlag(6000) && !EventFlag(6000));
+//    WaitFixedTimeSeconds(1);
+//    RequestCharacterAIReplan(0);
 });
 
 $Event(9930, Default, function(X0_4, X4_4, X8_4) {
@@ -11060,118 +11509,108 @@ $Event(9006001, Restart, function() {
     }
 });
  
- //Universal Summon Test
+// Soul Tether cleanup
 $Event(9006002, Restart, function() {
     DisableNetworkSync();
-    //SetSpEffect(10000, 9530);
-    SetSpEffect(10000, 84);
+    WaitFor(CharacterHasSpEffect(10000, 1622410) && CharacterHasSpEffect(1099995000, 1622400, Less, 1) && ElapsedFrames(1) && CharacterHasSpEffect(1099995000, 1622500, Less, 1));
+    ClearSpEffect(10000, 1622410);
     RestartEvent();
 });
 
-//Canceling Night Permabuffs Script
-$Event(9006003, Restart, function() {
+// Curse of Shadow player animation trigger
+$Event(9006003, Restart, function(spEffect, spellHandSpEffect, animation) {
     DisableNetworkSync();
-    IfCharacterHasSpEffect(MAIN, 10000, 501400, true, Equal, 1);
-    ClearSpEffect(10000, 1467100);
-    ClearSpEffect(10000, 1467200);    
+    WaitFor(CharacterHasSpEffect(10000, 1460405) && CharacterHasSpEffect(10000, spellHandSpEffect) && CharacterHasSpEffect(1099995000, spEffect));
+    ForceAnimationPlayback(10000, animation, false, false, true);
+    WaitFor(CharacterHasSpEffect(1099995000, spEffect, Less, 1));
     RestartEvent();
 });
 
-//Embrace the Devourer Speffects
+// Embrace the Devourer Speffects
 $Event(9006004, Restart, function() {
     DisableNetworkSync();
-    IfCharacterHasSpEffect(MAIN, 10000, 1485211, true, Equal, 1);
-         if (CharacterHasSpEffect(10000, 1485210) && CharacterHasSpEffect(10000, 1485211) && CharacterHasSpEffect(10000, 1485208)) {
-            SetSpEffect(10000, 1485209);
-            ClearSpEffect(10000, 1485208);
-            ClearSpEffect(10000, 1485210);
-            RestartEvent();
-        }
-        if (CharacterHasSpEffect(10000, 1485210) && CharacterHasSpEffect(10000, 1485211) && CharacterHasSpEffect(10000, 1485207)) {
-            SetSpEffect(10000, 1485208);
-            ClearSpEffect(10000, 1485207);
-            RestartEvent();
-        }
-        if (CharacterHasSpEffect(10000, 1485210) && CharacterHasSpEffect(10000, 1485211) && CharacterHasSpEffect(10000, 1485206)) {
-            SetSpEffect(10000, 1485207);
-            ClearSpEffect(10000, 1485206);
-            RestartEvent();
-        }
-        if (CharacterHasSpEffect(10000, 1485210) && CharacterHasSpEffect(10000, 1485211) && CharacterHasSpEffect(10000, 1485205)) {
-            SetSpEffect(10000, 1485206);
-            ClearSpEffect(10000, 1485205);
-            RestartEvent();
-        }
-        if (CharacterHasSpEffect(10000, 1485210) && CharacterHasSpEffect(10000, 1485211) && CharacterHasSpEffect(10000, 1485204)) {
-            SetSpEffect(10000, 1485205);
-            ClearSpEffect(10000, 1485204);
-            RestartEvent();
-        }
-        if (CharacterHasSpEffect(10000, 1485210) && CharacterHasSpEffect(10000, 1485211) && CharacterHasSpEffect(10000, 1485203)) {
-            SetSpEffect(10000, 1485204);
-            ClearSpEffect(10000, 1485203);
-            RestartEvent();
-        }
-        if (CharacterHasSpEffect(10000, 1485210) && CharacterHasSpEffect(10000, 1485211) && CharacterHasSpEffect(10000, 1485202)) {
-            SetSpEffect(10000, 1485203);
-            ClearSpEffect(10000, 1485202);
-            RestartEvent();
-        }
-        if (CharacterHasSpEffect(10000, 1485210) && CharacterHasSpEffect(10000, 1485211) && CharacterHasSpEffect(10000, 1485201)) {
-            SetSpEffect(10000, 1485202);
-            ClearSpEffect(10000, 1485201);
-            RestartEvent();
-        }
-        if (CharacterHasSpEffect(10000, 1485210) && CharacterHasSpEffect(10000, 1485211) && CharacterHasSpEffect(10000, 1485200)) {
-            SetSpEffect(10000, 1485201);
-            ClearSpEffect(10000, 1485200);
-            RestartEvent();
-        }
-        if (CharacterHasSpEffect(10000, 1485210) && CharacterHasSpEffect(10000, 1485211) && !CharacterHasSpEffect(10000, 1485200) && !CharacterHasSpEffect(10000, 1485201) && !CharacterHasSpEffect(10000, 1485202) && !CharacterHasSpEffect(10000, 1485203) && !CharacterHasSpEffect(10000, 1485204) && !CharacterHasSpEffect(10000, 1485205) && !CharacterHasSpEffect(10000, 1485206) && !CharacterHasSpEffect(10000, 1485207) && !CharacterHasSpEffect(10000, 1485208) && !CharacterHasSpEffect(10000, 1485209)) {
-            SetSpEffect(10000, 1485200);
-            RestartEvent();
-        }
+    WaitFor(CharacterHasSpEffect(10000, 1485210) && CharacterHasSpEffect(10000, 1485211));
+    GotoIf(L0, CharacterHasSpEffect(10000, 1485209));
+    
+    if (CharacterHasSpEffect(10000, 1485208)) {
+        SetSpEffect(10000, 1485209);
+        ClearSpEffect(10000, 1485208);
+    }
+    else if (CharacterHasSpEffect(10000, 1485207)) {
+        SetSpEffect(10000, 1485208);
+        ClearSpEffect(10000, 1485207);
+    }
+    else if (CharacterHasSpEffect(10000, 1485206)) {
+        SetSpEffect(10000, 1485207);
+        ClearSpEffect(10000, 1485206);
+    }
+    else if (CharacterHasSpEffect(10000, 1485205)) {
+        SetSpEffect(10000, 1485206);
+        ClearSpEffect(10000, 1485205);
+    }
+    else if (CharacterHasSpEffect(10000, 1485204)) {
+        SetSpEffect(10000, 1485205);
+        ClearSpEffect(10000, 1485204);
+    }
+    else if (CharacterHasSpEffect(10000, 1485203)) {
+        SetSpEffect(10000, 1485204);
+        ClearSpEffect(10000, 1485203);
+    }
+    else if (CharacterHasSpEffect(10000, 1485202)) {
+        SetSpEffect(10000, 1485203);
+        ClearSpEffect(10000, 1485202);
+    }
+    else if (CharacterHasSpEffect(10000, 1485201)) {
+        SetSpEffect(10000, 1485202);
+        ClearSpEffect(10000, 1485201);
+    }
+    else if (CharacterHasSpEffect(10000, 1485200)) {
+        SetSpEffect(10000, 1485201);
+        ClearSpEffect(10000, 1485200);
+    }
+    else {
+        SetSpEffect(10000, 1485200);
+    }
+
+L0:
+    WaitFor(!CharacterHasSpEffect(10000, 1485211));
+    RestartEvent();
 });
 
-//Clear All Embrace the Devourer Special Effects When Using Canceling Item
+// Mark Recall Expired
 $Event(9006005, Restart, function() {
-    DisableNetworkSync();
-    IfCharacterHasSpEffect(MAIN, 10000, 501401, true, Equal, 1);
-    ClearSpEffect(10000, 1485200);
-    ClearSpEffect(10000, 1485201);
-    ClearSpEffect(10000, 1485202);
-    ClearSpEffect(10000, 1485203);
-    ClearSpEffect(10000, 1485204);
-    ClearSpEffect(10000, 1485205);
-    ClearSpEffect(10000, 1485206);
-    ClearSpEffect(10000, 1485207);
-    ClearSpEffect(10000, 1485208);
-    ClearSpEffect(10000, 1485209);
-    ClearSpEffect(10000, 1485210);   
+    WaitFor(CharacterHasSpEffect(10000, 1654010));
+    DisplayBlinkingMessage(4110);
+    WaitFor(!CharacterHasSpEffect(10000, 1654010));
     RestartEvent();
 });
 
 // Set Summon Debuffs Depending on Which Summon if not Immune and Set Summon Active Flag On
-$Event(9006006, Restart, function(X0_4, X4_4, X8_4, X12_4) { // Summon spEffect, Summoning Sickness Debuff, Sickness Identifier, bool isPuppet
+$Event(9006006, Restart, function(summoningSpEffect, summoningSicknessDebuff, siknessIdentifierSpEffect, isPuppet) {
     DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, X0_4));
+    WaitFor(CharacterHasSpEffect(10000, summoningSpEffect));
     WaitFor(CharacterHasSpEffect(10000, 100875)); // Wait for spirit summon active
     
     WaitFixedTimeFrames(1);
-    if (HasMultiplayerState(MultiplayerState.Invasion))
+    
+    SetSpEffect(35000, 9000030); // Master On-Hit Accumulator
+    SetSpEffect(35000, 3500000); // Master Hit-Taken Detection
+    
+    if (CharacterHasSpEffect(10000, 4700))
         SetSpEffect(35000, 755); // TeamType fix for invasions
     
     if (!CharacterHasSpEffect(10000, 1508000) && // Accursed Blessing
         !CharacterHasSpEffect(10000, 7009200) && // Friend of Death (Lionel's Gauntlets)
         !CharacterHasSpEffect(10000, 1741300) && // Spirit Link
         !CharacterHasSpEffect(10000, 503370))    // Baldachin's Blessing
-        SetSpEffect(10000, X4_4); // If you were not immune, apply sickness
+        SetSpEffect(10000, summoningSicknessDebuff); // If you were not immune, apply sickness
     
         
-    if (Signed(X12_4) != 0)
+    if (Signed(isPuppet) != 0)
         SetSpEffect(10000, 40320);
-    SetSpEffect(10000, X8_4); // Disregarding, apply sickness identifier for expire purposes
+    SetSpEffect(10000, siknessIdentifierSpEffect); // Disregarding, apply sickness identifier for expire purposes
     WaitFor(!CharacterHasSpEffect(10000, 100875)); // Preventing loops
+    ClearSpEffect(10000, summoningSicknessDebuff);
     RestartEvent();
 });
 
@@ -11183,6 +11622,7 @@ $Event(9006007, Restart, function() {
     if (CharacterHasSpEffect(35000, 5832))
         ClearSpEffect(35000, 5832);
     SetSpEffect(35000, 1506004);
+    WaitFor(!CharacterHasSpEffect(10000, 100875) && ElapsedFrames(1))
     SetSpEffect(10000, 1505002);
     
     WaitFor(!CharacterHasSpEffect(10000, 1505000));
@@ -11247,23 +11687,51 @@ $Event(9006008, Restart, function() { // Debuff, Debuff Identifier
 // Remove Summon Debuff and Set Summon Active Flag Off When Using Unsummon Item or the summons die
 $Event(9006009, Restart, function() {
     DisableNetworkSync();
-    WaitFor(CharacterHasStateInfo(10000, 357) && CharacterHasSpEffect(10000, 100875));
+    WaitFor(CharacterHasSpEffect(10000, 100875));
+    WaitFor(!CharacterHasSpEffect(10000, 100875));
     WaitFixedTimeFrames(1);
     for (let i = 0; i < SummoningSicknessDebuffs.length; i++) {
         ClearSpEffect(10000, SummoningSicknessDebuffs[i]); // Remove every summoning sickness debuff
         ClearSpEffect(10000, SummoningSicknessIdentifiers[i]); // They will always have the same count, so using the same loop works fine
     }
     ClearSpEffect(10000, 40320); // Puppet Check
+    ClearSpEffect(10000, 295921); // Custom summon logic
+    WaitFixedTimeFrames(14);
+    SetSpEffect(10000, 2147300000); // SpEffect from Seamless that allows the re-enabling of spirit summons
     RestartEvent();
 });
 
-// Seamless Spirit Summon Re-enabling
+// Spirit summon - UNUSED
 $Event(9006010, Restart, function() {
+});
+
+// Spiritsummon - SpEffect Share | SpEffect Player, SpEffect Summon, Should Cleanup
+$Event(9006011, Restart, function(conditionalSpEffect, playerSpEffect, summonSpEffect, shouldCleanup) {
     DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, 100875));
-    WaitFor(!CharacterHasSpEffect(10000, 100875));
-    WaitFixedTimeFrames(15);
-    SetSpEffect(10000, 2147300000); // SpEffect from Seamless that allows the re-enabling of spirit summons
+    WaitFor(CharacterHasSpEffect(10000, playerSpEffect) && CharacterHasSpEffect(10000, conditionalSpEffect));
+    SetSpEffect(35000, summonSpEffect);
+    WaitFor(!CharacterHasSpEffect(10000, playerSpEffect));
+    if (shouldCleanup == true)
+        ClearSpEffect(35000, summonSpEffect);
+    RestartEvent();
+});
+
+// Turtle Spirit summon mechanic - Passive
+$Event(9006012, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 100875) && CharacterHasSpEffect(35000, 20298330));
+    SetSpEffect(10000, 20298331);
+    WaitFor(!CharacterHasSpEffect(10000, 100875) || !CharacterHasSpEffect(35000, 20298330));
+    ClearSpEffect(10000, 20298331);
+    RestartEvent();
+});
+
+// Turtle Spirit summon mechanic - Active
+$Event(9006013, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 100875) && CharacterHasSpEffect(35000, 20298333));
+    SetSpEffect(10000, 20298332);
+    WaitFor(!CharacterHasSpEffect(10000, 100875) || !CharacterHasSpEffect(35000, 20298333));
     RestartEvent();
 });
 
@@ -11362,12 +11830,13 @@ $Event(9006018, Restart, function() {
 $Event(9006019, Restart, function() { 
     DisableNetworkSync();
     
-    WaitFor(CharacterHasSpEffect(10000, 1509101) && CharacterHPValue(10000) == 1);
+    WaitFor(CharacterHasSpEffect(10000, 1509101) && CharacterHPValue(10000) == 1 && !(InArea(10000, 1099009105) && EventFlag(1099009130)));
     
     SetCharacterInvincibility(10000, Enabled);
     
     WaitFor(ElapsedFrames(1) && !CharacterHasSpEffect(10000, 148));
     SetSpEffect(10000, 1509105);
+    SetSpEffect(10000, 1509106);
     WaitFixedTimeSeconds(2);
     ClearSpEffect(10000, 260); // Alt - Sacred Protection
     ClearSpEffect(10000, 1509101);
@@ -11412,6 +11881,8 @@ $Event(9006022, Restart, function() {
     if (CharacterHasSpEffect(10000, 1413008)) {
         ClearSpEffect(10000, 1413008);
         SetSpEffect(10000, 1413009);
+        if (CharacterHasSpEffect(10000, 390700)) // Jewel
+            SetSpEffect(10000, 390711); 
         WaitFixedTimeSeconds(29.8); 
     }
     else if (CharacterHasSpEffect(10000, 1413007)) {
@@ -11453,33 +11924,80 @@ $Event(9006022, Restart, function() {
     RestartEvent();
 });
 
-// UNUSED
+// Flaming Armament Buff Type Cycle
 $Event(9006023, Restart, function() {
-});
-
-$Event(9006024, Restart, function() {
     DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, 1413010));
-    WaitFor(!CharacterHasSpEffect(10000, 1413010));
-    ClearSpEffect(10000, 1413000);
-    ClearSpEffect(10000, 1413001);
-    ClearSpEffect(10000, 1413002);
-    ClearSpEffect(10000, 1413003);
-    ClearSpEffect(10000, 1413004);
-    ClearSpEffect(10000, 1413005);
-    ClearSpEffect(10000, 1413006);
-    ClearSpEffect(10000, 1413007);
-    ClearSpEffect(10000, 1413008);
-    ClearSpEffect(10000, 1413009);
+    WaitFor(CharacterHasSpEffect(10000, 1608005));
+    
+    if (CharacterHasSpEffect(10000, 1608002)) { // 60 < FTH
+        ClearSpEffect(10000, 1608000);
+        ClearSpEffect(10000, 1608003);
+        SetSpEffect(10000, 1608004); // Messmerflame
+    }
+    else if (CharacterHasSpEffect(10000, 1608001)) { // 40-59 FTH
+        ClearSpEffect(10000, 1608000);
+        ClearSpEffect(10000, 1608004);
+        SetSpEffect(10000, 1608003); // Giantsflame
+    }
+    else { // < 40 FTH
+        ClearSpEffect(10000, 1608003);
+        ClearSpEffect(10000, 1608004);
+        SetSpEffect(10000, 1608000); // Normal flame
+    }
+    
+    WaitFixedTimeSeconds(0.2);
     RestartEvent();
 });
 
-// UNUSED
-$Event(9006025, Restart, function() {
+// Auto replace any item
+$Event(9006024, Restart, function(foundItemType, foundItem, replacingItemType, replacingItem) {
+    DisableNetworkSync();
+    WaitFor(PlayerHasItem(foundItemType, foundItem));
+    RemoveItemFromPlayer(foundItemType, foundItem, 1);
+    DirectlyGivePlayerItem(replacingItemType, replacingItem, 6001, 1);
+    RestartEvent();
 });
 
-// UNUSED
-$Event(9006026, Restart, function() {
+// Frozen Lightning Armament/Frozen Lightning Weapon Buff Duration Refresher
+$Event(9006025, Restart, function(X0_4, X4_4, X8_4) {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, X0_4)); // Dummy
+    
+    if (CharacterHasSpEffect(10000, X4_4)) // Primed
+        SetSpEffect(10000, X4_4); // Primed
+    else
+        SetSpEffect(10000, X8_4); // Un-primed
+    
+    WaitFixedTimeSeconds(0.2);
+    RestartEvent();
+});
+
+// Frozen Lightning Armament Priming
+$Event(9006026, Restart, function(X0_4, X4_4, X8_4) {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, X0_4)); // Un-primed
+    if (CharacterHasSpEffect(10000, 390900)) {
+        timer |= ElapsedSeconds(2);
+    }
+    else {
+        timer |= ElapsedSeconds(5);
+    }
+    WaitFor(!CharacterHasSpEffect(10000, X0_4) || timer);
+    RestartIf(!timer.Passed);
+    
+    ClearSpEffect(10000, X0_4); // Un-primed
+    SetSpEffect(10000, X8_4); // Visual
+    SetSpEffect(10000, X4_4); // Primed
+    
+    buffGone |= !CharacterHasSpEffect(10000, X4_4); // Primed
+    WaitFor(buffGone || CharacterHasSpEffect(10000, 9000031));
+    RestartIf(buffGone.Passed);
+    
+    WaitFixedTimeFrames(4);
+    ClearSpEffect(10000, X4_4); // Primed
+    SetSpEffect(10000, X0_4); // Un-primed
+    
+    RestartEvent();
 });
 
 //Set eventflag for Enia (2 Runes)
@@ -11520,48 +12038,54 @@ $Event(9006030, Restart, function() {
     RestartEvent();
 });
 
-//Servants of Rot Permabuff Scripts
-$Event(9006031, Restart, function() {
+// HKS Inventory update requester
+$Event(9006031, Default, function(spEffect, itemCategory, weaponId) {
     DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, 1729000) && !CharacterHasSpEffect(10000, 1729010));
-    SetSpEffect(10000, 1729010);
+    WaitFor(!PlayerHasItem(itemCategory, weaponId));
+    WaitFor(PlayerHasItem(itemCategory, weaponId));
+    SetSpEffect(10000, spEffect);
     RestartEvent();
 });
 
+// Jewel of the Reckless v2 - absorb on weapon attack
 $Event(9006032, Restart, function() {
     DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, 1729010) && !CharacterHasSpEffect(10000, 1729000));
-    ClearSpEffect(10000, 1729010);
+    WaitFor(CharacterHasSpEffect(10000, 390300) && CharacterHasSpEffect(10000, 9000031));
+    SetSpEffect(10000, 390320);
+    
+    WaitFixedTimeSeconds(7);
     RestartEvent();
 });
 
+// Jewel of the Reckless v2 - damage on weapon attack
 $Event(9006033, Restart, function() {
     DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, 1729100) && !CharacterHasSpEffect(10000, 1729110));
-    SetSpEffect(10000, 1729110);
+    WaitFor(CharacterHasSpEffect(10000, 390320) && !CharacterHasSpEffect(10000, 3500002));
+    WaitFor(!CharacterHasSpEffect(10000, 390320) || CharacterHasSpEffect(10000, 3500002));
+    RestartIf(!CharacterHasSpEffect(10000, 390320));
+    ClearSpEffect(10000, 390320);
+    SetSpEffect(10000, 390330);
+    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    WaitFor(!CharacterHasSpEffect(10000, 390300) || CharacterHasSpEffect(10000, 9000031));
+    ClearSpEffect(10000, 390330);
     RestartEvent();
 });
 
+// Jewel of the Resolute - One handed attack hp regen buff
 $Event(9006034, Restart, function() {
     DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, 1729110) && !CharacterHasSpEffect(10000, 1729100));
-    ClearSpEffect(10000, 1729110);
+    WaitFor(CharacterHasSpEffect(10000, 390000) && CharacterHasSpEffect(10000, 9000031) && !CharacterHasSpEffect(10000, 100626) && !CharacterHasSpEffect(10000, 100627));
+    SetSpEffect(10000, 390010);
+    WaitFor(!CharacterHasSpEffect(10000, 9000031));
     RestartEvent();
 });
 
-//Blood Pact Permabuff Scripts
+// UNUSED
 $Event(9006035, Restart, function() {
-    DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, 1637000) && !CharacterHasSpEffect(10000, 1637010));
-    SetSpEffect(10000, 1637010);
-    RestartEvent();
 });
 
+// UNUSED
 $Event(9006036, Restart, function() {
-    DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, 1637010) && !CharacterHasSpEffect(10000, 1637000));
-    ClearSpEffect(10000, 1637010);
-    RestartEvent();
 });
 
 //Godslayer's Devotion Scripts
@@ -11575,11 +12099,8 @@ $Event(9006037, Restart, function() {
     RestartEvent();
 });
 
-$Event(9006038, Restart, function(X0_4) {
-    DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, X0_4) && !CharacterHasSpEffect(10000, 1626100));
-    ClearSpEffect(10000, X0_4);
-    RestartEvent();
+// UNUSED
+$Event(9006038, Restart, function() {
 });
 
 //Wrath of the Queen Scripts
@@ -11606,7 +12127,7 @@ $Event(9006040, Restart, function() {
 $Event(9006041, Restart, function() {
     DisableNetworkSync();
     WaitFor(CharacterHasSpEffect(10000, 1449100));
-    ChangeWeather(Weather.HeavySnow, 30, true);
+    //ChangeWeather(Weather.HeavySnow, 30, true);
     WaitFixedTimeSeconds(32);
     RestartEvent();
 });
@@ -11644,18 +12165,18 @@ $Event(9006044, Restart, function() {
 });
 
 //Gathering Storm stacking effect
-$Event(9006045, Restart, function() {
+$Event(9006045, Restart, function(X0_4, X4_4) {
     DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, 1521100) && CharacterHasSpEffect(10000, 1521101));
-    SetSpEffect(10000, 1521105);
+    WaitFor(CharacterHasSpEffect(10000, X0_4) && CharacterHasSpEffect(10000, 1521101));
+    SetSpEffect(10000, X4_4);
     RestartEvent();
 });
 
 //Gathering Storm stack clean up after main effect ends
-$Event(9006046, Restart, function() {
+$Event(9006046, Restart, function(X0_4, X4_4) {
     DisableNetworkSync();
-    WaitFor(!CharacterHasSpEffect(10000, 1521100) && CharacterHasSpEffect(10000, 1521105));
-    ClearSpEffect(10000, 1521105);
+    WaitFor(!CharacterHasSpEffect(10000, X0_4) && CharacterHasSpEffect(10000, X4_4));
+    ClearSpEffect(10000, X4_4);
     RestartEvent();
 });
 
@@ -11706,7 +12227,7 @@ $Event(9006052, Restart, function() {
     SetEventFlagID(101, ON);
     SetEventFlagID(102, ON);
     SetEventFlagID(10010801, ON);
-    RestartEvent();
+    EndEvent();
 });
 
 //Elden Benediction Greater Blessing Application 
@@ -11754,13 +12275,8 @@ $Event(9006056, Restart, function() {
     RestartEvent();
 });
 
-//Familial Comsumption Cleanup
+// UNUSED
 $Event(9006057, Restart, function() {
-    DisableNetworkSync();
-    WaitFor(!CharacterHasSpEffect(10000, 1485000));
-    EndIf(!CharacterHasSpEffect(10000, 1485005));
-    ClearSpEffect(10000, 1485005);
-    RestartEvent();
 });
 
 //Blessing Toggle On
@@ -11782,12 +12298,8 @@ $Event(9006059, Restart, function(X0_4, X4_4) {
     RestartEvent();
 });
 
-//Elden Benediction Cleanup
-$Event(9006060, Restart, function(X0_4) {
-    DisableNetworkSync();
-    WaitFor(!CharacterHasSpEffect(10000, 1679400) && CharacterHasSpEffect(10000, X0_4));
-    ClearSpEffect(10000, X0_4);
-    RestartEvent();
+// UNUSED
+$Event(9006060, Restart, function() {
 });
 
 //Remove summon debuffs when you cast Debuff immunity spell
@@ -11840,7 +12352,7 @@ $Event(9006063, Default, function() {
         }
     }
     ClearEventValue(1099000120, 5);
-    WaitFor(HPRatio(10000) <= 0 && !CharacterHasSpEffect(10000, 1509101)); // Immidiatly upon player death
+    WaitFor((HPRatio(10000) <= 0 && !CharacterHasSpEffect(10000, 1509101)) || CharacterHasSpEffect(10000, 3227)); // Immediately upon player death or using Memory of Grace
     
     if (EventFlag(532)) { // Check if it is night
         // Store hour number
@@ -11913,10 +12425,18 @@ $Event(9006070, Restart, function(X0_4, X4_4, X8_4) {
 $Event(9006071, Restart, function() {
     DisableNetworkSync();
     WaitFor(CharacterHasSpEffect(10000, 550010));
+    
     if (CharacterHasSpEffect(10000, 1685200))
         SetSpEffect(10000, 550005);
     else SetSpEffect(10000, 550000);
+    
+    if (CharacterHasSpEffect(10000, 391800)) {
+        SetSpEffect(10000, 391810);
+        SetSpEffect(10000, 391811);
+    }
+    
     InitializeEvent(0, 9007032, 550010);
+    
     WaitFor(!CharacterHasSpEffect(10000, 550010));
     WaitFixedTimeFrames(20);
     RestartEvent();
@@ -11956,12 +12476,48 @@ $Event(9006074, Restart, function() {
     RestartEvent();
 });
 
-// UNUSED
-$Event(9006075, Restart, function() {
+// Gravity Spell toggles - use upgraded buff (offensive/defensive buff, permabuff, upgraded buff)
+$Event(9006075, Restart, function(X0_4, X4_4, X8_4) {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, X0_4) && CharacterHasSpEffect(10000, X4_4));
+    SetSpEffect(10000, X8_4);
+    RestartEvent();
 });
 
-// UNUSED 
-$Event(9006076, Restart, function() {
+// Gravity Spell toggles - use base buff (offensive/defensive buff, permabuff, upgraded buff)
+$Event(9006076, Restart, function(X0_4, X4_4, X8_4) {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, X8_4) && !CharacterHasSpEffect(10000, X4_4));
+    SetSpEffect(10000, X0_4);
+    RestartEvent();
+});
+
+// Scadu Rebirth
+$Event(9006077, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterRatioHasSpEffect(35000, 21625000, GreaterOrEqual, 1) && !CharacterHasSpEffect(10000, 21625010));
+    SetSpEffect(10000, 21625010);
+    WaitFor(CharacterRatioHasSpEffect(35000, 21625000, Equal, 0) || !CharacterHasSpEffect(10000, 21625010));
+    ClearSpEffect(10000, 21625010);
+    RestartEvent();
+});
+
+// Shadow of Death
+$Event(9006078, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 21626000));
+    
+    if (!CharacterHasSpEffect(10000, 100875)) { // Summon Active
+        SetSpEffect(10000, 21626010);
+        WaitFor(CharacterHasSpEffect(10000, 100875) || !CharacterHasSpEffect(10000, 21626000));
+        ClearSpEffect(10000, 21626010);
+    }
+    else {
+        SetSpEffect(10000, 21626020);
+        WaitFor(!CharacterHasSpEffect(10000, 100875) || !CharacterHasSpEffect(10000, 21626000));
+        ClearSpEffect(10000, 21626020);
+    }
+    RestartEvent();
 });
 
 //Spirit Link/Accursed Toggle On
@@ -11989,13 +12545,16 @@ $Event(9006082, Restart, function() {
     WaitFor(CharacterHasSpEffect(10000, 250));
     if (MapLoaded(11, 10, 0, 0) && InArea(10000, 11102700))
         WarpPlayer(31, 80, 0, 0, 1099003000, 60);
+    else if (MapLoaded(11, 10, 0, 0) && InArea(10000, 11102620)) {
+        BatchSetNetworkconnectedEventFlags(2055550101, 2055550108, OFF); // Reset Marks
+        SetNetworkconnectedEventFlagID(2055550109, ON); // Mark which element is active
+        WarpPlayer(31, 81, 0, 0, 3181002001, 19000);
+    }
     else if (MapLoaded(31, 80, 0, 0)) {
         if (InArea(10000, 11102701)) {
             IssueShortWarpRequest(10000, TargetEntityType.Area, 11102702, -1);
             SetCameraAngle(5, 45);
         }
-        else
-            WarpPlayer(11, 10, 0, 0, 11102020, 60);
     }
     WaitFor(!CharacterHasSpEffect(10000, 250));
     RestartEvent();
@@ -12003,10 +12562,13 @@ $Event(9006082, Restart, function() {
 
 // Dev tool - Testing tool
 $Event(9006083, Restart, function() {
-    WaitFor(CharacterHasSpEffect(10000, 250) && !MapLoaded(31, 80, 0, 0) && !InArea(10000, 11102700));
+    WaitFor(CharacterHasSpEffect(10000, 250) && !MapLoaded(31, 80, 0, 0) && !InArea(10000, 11102700) && !InArea(10000, 11102620));
     // Your Code Below
+
     
-    PlaySE(10000, SoundType.CharacterMotion, 407008100);
+    SetSpEffect(10000, 1622410);
+    SaveRequest();
+    //AwardItemLot(998100);
     
     // Your Code Above
     WaitFor(!CharacterHasSpEffect(10000, 250));
@@ -12041,13 +12603,11 @@ $Event(9006084, Default, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4, 
     
     EndIf(Signed(X12_4) == 0);
     EndIf(Signed(X16_4) == 0);
-    //AwardItemLot(998110);
     WaitFor(EventFlag(X12_4) || EventFlag(X0_4)); // Wait for Grace to be actived or boss to be defeated
     SetNetworkconnectedEventFlagID(X16_4, ON); // Force off mappoint alive text
     EndIf(Signed(X20_4) == 0 || EventFlag(X12_4)); // End if Grace was activated
     SetNetworkconnectedEventFlagID(X20_4, ON); // Map Point Clear Flag on
     WaitFor(EventFlag(X12_4));
-    //AwardItemLot(998120);
     SetNetworkconnectedEventFlagID(X20_4, OFF); // Map Point Clear Flag on
 });
 
@@ -12079,23 +12639,23 @@ $Event(9006087, Restart, function(X0_4, X4_4) {
 $Event(9006088, Restart, function() {
     DisableNetworkSync();
     WaitFor(!CharacterHasSpEffect(10000, 100875)); // Ensure you dont have a summon
-    WaitFor(CharacterHasStateInfo(10000, 357) && CharacterHasSpEffect(10000, 100875)); // When you summon
+    WaitFor(CharacterHasStateInfo(10000, 357)); // When you summon
     
     WaitFixedTimeRealFrames(5);
+    RestartIf(CharacterHasSpEffect(35000, 295920, Less, 1) || CharacterHasSpEffect(10000, 295921)); // Ensure that you are summoning a custom spirit and you're not desummoning
     DisableCharacterAI(35000);
     EnableCharacterInvincibility(35000);
     
     WaitFixedTimeRealFrames(18);
-    GotoIf(L0, CharacterRatioHasSpEffect(35000, 295920, Equal, 0) || CharacterRatioHasSpEffect(35000, 295921, Greater, 0)); // Ensure that you are summoning a custom spirit and you're not desummoning
     
     PlaySE(35000, SoundType.CharacterMotion, 999997800); // Summoning Sound
     SpawnOneshotSFX(TargetEntityType.Character, 35000, 905, 662); // Visual 1
     SpawnOneshotSFX(TargetEntityType.Character, 35000, 960, 652); // Visual 2
     
-    WaitFor(!CharacterHasStateInfo(10000, 357) || ElapsedSeconds(2));
-    SetSpEffect(35000, 295921); // Effect for the desummon handler to know it can do it's thing
     
-L0:
+    WaitFor(!CharacterHasStateInfo(10000, 357) || ElapsedSeconds(2));
+    SetSpEffect(10000, 295921); // Effect for the desummon handler to know it can do it's thing
+    
     EnableCharacterAI(35000);
     DisableCharacterInvincibility(35000);
     RestartEvent();
@@ -12104,9 +12664,10 @@ L0:
 // Custom Spirit Summon Visual Handler - Desummoning
 $Event(9006089, Restart, function() {
     DisableNetworkSync();
-    WaitFor(CharacterHasStateInfo(10000, 357) && CharacterRatioHasSpEffect(35000, 295921, Greater, 0)); // When you summon and it's a desummon of a custom spirit
+    WaitFor(CharacterHasStateInfo(10000, 357) && CharacterHasSpEffect(10000, 295921)); // When you summon and it's a desummon of a custom spirit
     
     DisableCharacterAI(35000);
+    EnableCharacterInvincibility(35000);
     ForceAnimationPlayback(35000, 0, false, false, true);
     PlaySE(35000, SoundType.CharacterMotion, 999997801); // Desummon Sound
     SpawnOneshotSFX(TargetEntityType.Character, 35000, 905, 662); // Visual 1
@@ -12120,10 +12681,11 @@ $Event(9006089, Restart, function() {
     
     SetSpEffect(35000, 10124); // Fade Out
     WaitFixedTimeFrames(35);
-    //ClearSpEffect(35000, 295921);
+    ClearSpEffect(10000, 295921);
     DisableCharacter(35000);
     
     WaitFor(!CharacterHasStateInfo(10000, 357));
+    DisableCharacterInvincibility(35000);
     RestartEvent();
 });
 
@@ -12157,18 +12719,112 @@ $Event(9006091, Restart, function() {
     RestartEvent();
 });
 
+// Glint: Corpa Magica Stacks
+$Event(9006092, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 1413110) && CharacterHasSpEffect(10000, 9000031) && !CharacterHasSpEffect(10000, 1413103));
+    
+    if (CharacterHasSpEffect(10000, 1413102)) {
+        ClearSpEffect(10000, 1413102);
+        SetSpEffect(10000, 1413103);
+    }
+    else if (CharacterHasSpEffect(10000, 1413101)) {
+        ClearSpEffect(10000, 1413101);
+        SetSpEffect(10000, 1413102);
+    }
+    else if (CharacterHasSpEffect(10000, 1413100)) {
+        ClearSpEffect(10000, 1413100);
+        SetSpEffect(10000, 1413101);
+    }
+    else {
+        SetSpEffect(10000, 1413100);
+    }
+    
+    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    RestartEvent();
+});
+
+// UNUSED
+$Event(9006093, Restart, function() {
+});
+
+// Bloodflame: Blood of the Maiden
+$Event(9006094, Restart, function(X0_4, X4_4) {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 1638150) && CharacterHasSpEffect(1099995000, X0_4));
+    SetSpEffect(10000, X4_4);
+    WaitFor(!CharacterHasSpEffect(10000, 1638150));
+    RestartEvent();
+});
+
+// Bloodflame HP Regulator
+$Event(9006095, Restart, function(spEffectToApply, belowHpThreshold, withJewel) {
+    DisableNetworkSync();
+    
+    if (withJewel == 1)
+        jewelCheck1 |= CharacterHasSpEffect(10000, 392200)
+    else
+        jewelCheck1 |= !CharacterHasSpEffect(10000, 392200)
+    WaitFor(jewelCheck1 && HPRatio(10000) <= belowHpThreshold && !CharacterHasSpEffect(10000, 392201) && !CharacterHasSpEffect(10000, 1638120));
+    
+    WaitFixedTimeFrames(1);
+    SetSpEffect(10000, spEffectToApply);
+    
+    if (withJewel == 1)
+        jewelCheck2 |= !CharacterHasSpEffect(10000, 392200)
+    else
+        jewelCheck2 |= CharacterHasSpEffect(10000, 392200)
+    WaitFor(jewelCheck2 || HPRatio(10000) > belowHpThreshold || CharacterHasSpEffect(10000, 392201) || CharacterHasSpEffect(10000, 1638120));
+    
+    ClearSpEffect(10000, spEffectToApply);
+    RestartEvent();
+});
+
+// Aberrant HP Regulator
+$Event(9006096, Restart, function(spEffectToApply, belowHpThreshold) {
+    DisableNetworkSync();
+    
+    WaitFor(HPRatio(10000) <= belowHpThreshold && !CharacterHasSpEffect(10000, 1638120));
+    
+    WaitFixedTimeFrames(1);
+    SetSpEffect(10000, spEffectToApply);
+    
+    WaitFor(HPRatio(10000) > belowHpThreshold || CharacterHasSpEffect(10000, 1638120));
+    ClearSpEffect(10000, spEffectToApply);
+    RestartEvent();
+});
+
+// Spiritual Equilibrium
+$Event(9006097, Restart, function(mainSpEffect, listeningSpEffect, grantedSpEffect) {
+    DisableNetworkSync();
+    
+    WaitFor(CharacterHasSpEffect(10000, mainSpEffect) && (CharacterHasSpEffect(20000, listeningSpEffect) || CharacterHasSpEffect(35000, listeningSpEffect)));
+    SetSpEffect(10000, grantedSpEffect);
+    
+    WaitFixedTimeFrames(1);
+    RestartEvent();
+});
+
+// Spiritual Equilibrium - Heal Summons
+$Event(9006098, Restart, function() {
+    DisableNetworkSync();
+    
+    WaitFor(CharacterHasSpEffect(35000, 1748210, GreaterOrEqual) && CharacterHasSpEffect(20000, 1748202));
+    SetSpEffect(35000, 1748205);
+    
+    WaitFixedTimeFrames(1);
+    RestartEvent();
+});
+
+// Aberrant Ascention buff triggers
+$Event(9006100, Restart, function(stateInfoRequirement, spEffect) {
+    WaitFor(CharacterHasSpEffect(10000, 1499000) && (CharacterHasStateInfo(10000, stateInfoRequirement) || CharacterHasStateInfo(10000, 607)));
+    SetSpEffect(10000, spEffect);
+    WaitFor(!CharacterHasSpEffect(10000, 1499000) || (!CharacterHasStateInfo(10000, stateInfoRequirement) && !CharacterHasStateInfo(10000, 607)));
+    RestartEvent();
+});
+
 // - - - Armor Active Abilities Region - - -
-
-const Consumable = {
-    Crimson_Flask: 0,
-    Blue_Flask: 1,
-    Bombs: 2,
-    Weapon_Greases: 3,
-    Perfumes: 4,
-    Throwing_Knives: 5,
-    Throwing_Stones: 6,
-}
-
 const crimsonFlaskSpEffects = [ 501000, 501001, 501002, 501003, 501004, 501005, 501006, 501007, 501008, 501009, 501010, 501011, 501012 ];  // Normal chug
 const blueFlaskSpEffects = [ 501050, 501051, 501052, 501053, 501054, 501055, 501056, 501057, 501058, 501059, 501060, 501061, 501062 ];
 const bombThrowSpEffects = [ 4500000, 4500001, 4500002, 4500003, 4500004, 4500005, 4500006, 4500007, 4500008, 4500009, 
@@ -12319,7 +12975,7 @@ $Event(9007000, Default, function() {
     InitializeEvent(37, 9007002, 6022030, Consumable.Blue_Flask, 7005300, 2); // Legs
     
     InitializeEvent(10, 9007003, 7005100, 8000010, 7005101, 2); // Armor - Resource Recovery on Trigger
-    InitializeEvent(0, 9007045, 0); // Arms - Charge Attack
+    InitializeEvent(0, 9007056, 6022020, 7005200, 7005201); // Arms - Debuff Application
     
     InitializeEvent(113, 9007030, 6022000, 7005000, 2); // Head
     InitializeEvent(114, 9007030, 6022010, 7005100, 2); // Armor AND Altar Armor
@@ -12336,8 +12992,11 @@ $Event(9007000, Default, function() {
     InitializeEvent(0, 9007054, 0); // Head - Buffs
     InitializeEvent(8, 9007003, 7006100, 8000010, 7006101, 2); // Armor - Resource Recovery on Trigger
     InitializeEvent(9, 9007003, 7006300, 8000010, 7006301, 2); // Legs - Resource Recovery on Trigger
-    InitializeEvent(0, 9007055, 0); // Arms - Resources
-    InitializeEvent(0, 9007056, 0); // Arms - Sprint
+    InitializeEvent(1, 9007056, 6199020, 7006200, 7006201); // Arms - Debuff Application
+    InitializeEvent(0, 9007057, 7006211, 9000031, 7006220); // Arms - Melee Hit
+    InitializeEvent(1, 9007057, 7006211, 8000010, 7006220); // Arms - Ammo Hit
+    InitializeEvent(2, 9007057, 7006211, 8000090, 7006220); // Arms - Sorcery Hit
+    InitializeEvent(3, 9007057, 7006211, 8000095, 7006220); // Arms - Incantation Hit
     
     InitializeEvent(112, 9007030, 6199000, 7006000, 2); // Head
     InitializeEvent(111, 9007030, 6199010, 7006100, 2); // Armor AND Altar Armor
@@ -12365,7 +13024,11 @@ $Event(9007000, Default, function() {
     InitializeEvent(60, 9007002, 6602300, Consumable.Blue_Flask, 7019300, 2); // Legs
     InitializeEvent(61, 9007002, 7019300, Consumable.Throwing_Knives, 7019301, 2); // Legs - Throwing Knives
     InitializeEvent(21, 9007003, 7019300, 8000030, 7019301, 2); // Legs - Arrow/Bolt
-    InitializeEvent(0, 9007057, 0); // Arms - HP
+    InitializeEvent(2, 9007056, 6602200, 7019200, 7019201); // Arms - Debuff Application
+    InitializeEvent(4, 9007057, 7019211, 9000031, 7019220); // Arms - Melee Hit
+    InitializeEvent(5, 9007057, 7019211, 8000010, 7019221); // Arms - Ammo Hit
+    InitializeEvent(6, 9007057, 7019211, 8000090, 7019222); // Arms - Sorcery Hit
+    InitializeEvent(7, 9007057, 7019211, 8000095, 7019222); // Arms - Incantation Hit
     
     InitializeEvent(153, 9007030, 6602000, 7019000, 2); // Head
     InitializeEvent(154, 9007030, 7019000, 7019001, 2); 
@@ -12493,6 +13156,7 @@ $Event(9007000, Default, function() {
     InitializeEvent(14, 9007001, 6005000, 7011001, false); // Head
     InitializeEvent(27, 9007002, 6005010, Consumable.Crimson_Flask, 7011100, false); // Armor
     InitializeEvent(28, 9007002, 6005020, Consumable.Weapon_Greases, 7011200, false); // Arms
+    InitializeEvent(0, 9007046, 0);
     InitializeEvent(29, 9007002, 6005030, Consumable.Blue_Flask, 7011300, false); // Legs
     InitializeEvent(0, 9007041, 0); // Legs - Damage Stack
     
@@ -12557,6 +13221,7 @@ $Event(9007000, Default, function() {
     InitializeEvent(41, 9007002, 6606100, Consumable.Crimson_Flask, 7023100, false); // Armor
     InitializeEvent(42, 9007002, 6606200, Consumable.Weapon_Greases, 7023200, false); // Arms
     InitializeEvent(43, 9007002, 6606300, Consumable.Blue_Flask, 7023300, false); // Legs
+    InitializeEvent(0, 9007078, 0); // Armor HP Loss
     
     InitializeEvent(120, 9007030, 6606000, 7023000, false); // Head
     InitializeEvent(171, 9007030, 7023000, 102000, false); // Head - Hardtear
@@ -12801,23 +13466,26 @@ $Event(9007000, Default, function() {
     InitializeEvent(40, 9007002, 6192000, Consumable.Blue_Flask, 7099000, true);
     InitializeEvent(119, 9007030, 6192000, 7099000, true);
     
-    // Omen Set
-    
-    // Imp Heads (?)
-    
-    // Blue Cloth Set
-    
-    
-    
     // - - - Magic Sets - - -
-    InitializeEvent(0, 9007012, 19980, 6639000); // Rock Heart
-    InitializeEvent(0, 9007035, 19980, 6639000);
-    InitializeEvent(1, 9007012, 19981, 6630000); // Dragon Priestess
-    InitializeEvent(1, 9007035, 19981, 6630000);
-    InitializeEvent(2, 9007012, 19981, 6630100);
-    InitializeEvent(2, 9007035, 19981, 6630100);
-    InitializeEvent(3, 9007012, 19982, 6636000); // Lamenters Mask
-    InitializeEvent(3, 9007035, 19982, 6636000);
+    //InitializeEvent(0, 9007012, 19980, 6639000); // Rock Heart
+    //InitializeEvent(0, 9007035, 19980, 6639000);
+    //InitializeEvent(1, 9007012, 19981, 6630000); // Dragon Priestess
+    //InitializeEvent(1, 9007035, 19981, 6630000);
+    //InitializeEvent(2, 9007012, 19981, 6630100);
+    //InitializeEvent(2, 9007035, 19981, 6630100);
+    //InitializeEvent(3, 9007012, 19982, 6636000); // Lamenters Mask
+    //InitializeEvent(3, 9007035, 19982, 6636000);
+    
+    $InitializeEvent(0, 9007045); // Daefgraff no armor detector
+    
+    InitializeEvent(35, 9006050, 35000, 35005); // Rock Heart Transformation
+    InitializeEvent(35, 9006051, 35000, 35005);
+    InitializeEvent(36, 9006050, 35010, 35015); // Priestess Heart Transformation
+    InitializeEvent(36, 9006051, 35010, 35015);
+    InitializeEvent(37, 9006050, 35020, 35025); // Lamenters Mask Transformation
+    InitializeEvent(37, 9006051, 35020, 35025);
+    InitializeEvent(38, 9006050, 35030, 35035); // Daergraf's Heart Transformation
+    InitializeEvent(38, 9006051, 35030, 35035);
     
 });
 
@@ -13261,115 +13929,75 @@ L0:
 // Kaiden Trousers - Duelist's Curescendo Handler
 $Event(9007041, Restart, function() {
     DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, 7011300) && CharacterHasSpEffect(10000, 7011301));
+    WaitFor(CharacterHasSpEffect(10000, 7011300) && (CharacterHasSpEffect(10000, 9000031) || 
+    (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390)))));
+        
     GotoIf(L0, CharacterHasSpEffect(10000, 7011324));
-           
     if (CharacterHasSpEffect(10000, 7011323)) {
         ClearSpEffect(10000, 7011323);
         SetSpEffect(10000, 7011324);
-        InitializeEvent(0, 9007032, 7011301);
-        WaitFixedTimeFrames(2);
-        RestartEvent();
     }      
     else if (CharacterHasSpEffect(10000, 7011322)) {
         ClearSpEffect(10000, 7011322);
         SetSpEffect(10000, 7011323);
-        InitializeEvent(0, 9007032, 7011301);
-        WaitFixedTimeFrames(2);
-        RestartEvent();
     }   
     else if (CharacterHasSpEffect(10000, 7011321)) {
         ClearSpEffect(10000, 7011321);
         SetSpEffect(10000, 7011322);
-        InitializeEvent(0, 9007032, 7011301);
-        WaitFixedTimeFrames(2);
-        RestartEvent();
     }    
     else if (CharacterHasSpEffect(10000, 7011320)) {
         ClearSpEffect(10000, 7011320);
         SetSpEffect(10000, 7011321);
-        InitializeEvent(0, 9007032, 7011301);
-        WaitFixedTimeFrames(2);
-        RestartEvent();
     }    
     else if (CharacterHasSpEffect(10000, 7011319)) {
         ClearSpEffect(10000, 7011319);
         SetSpEffect(10000, 7011320);
-        InitializeEvent(0, 9007032, 7011301);
-        WaitFixedTimeFrames(2);
-        RestartEvent();
     }
     else if (CharacterHasSpEffect(10000, 7011318)) {
         ClearSpEffect(10000, 7011318);
         SetSpEffect(10000, 7011319);
-        InitializeEvent(0, 9007032, 7011301);
-        WaitFixedTimeFrames(2);
-        RestartEvent();
     }
     else if (CharacterHasSpEffect(10000, 7011317)) {
         ClearSpEffect(10000, 7011317);
         SetSpEffect(10000, 7011318);
-        InitializeEvent(0, 9007032, 7011301);
-        WaitFixedTimeFrames(2);
-        RestartEvent();
     }
     else if (CharacterHasSpEffect(10000, 7011316)) {
         ClearSpEffect(10000, 7011316);
         SetSpEffect(10000, 7011317);
-        InitializeEvent(0, 9007032, 7011301);
-        WaitFixedTimeFrames(2);
-        RestartEvent();
     }
     else if (CharacterHasSpEffect(10000, 7011315)) {
         ClearSpEffect(10000, 7011315);
         SetSpEffect(10000, 7011316);
-        InitializeEvent(0, 9007032, 7011301);
-        WaitFixedTimeFrames(2);
-        RestartEvent();
     }
     else if (CharacterHasSpEffect(10000, 7011314)) {
         ClearSpEffect(10000, 7011314);
         SetSpEffect(10000, 7011315);
-        InitializeEvent(0, 9007032, 7011301);
-        WaitFixedTimeFrames(2);
-        RestartEvent();
     }
     else if (CharacterHasSpEffect(10000, 7011313)) {
         ClearSpEffect(10000, 7011313);
         SetSpEffect(10000, 7011314);
-        InitializeEvent(0, 9007032, 7011301);
-        WaitFixedTimeFrames(2);
-        RestartEvent();
     }
     else if (CharacterHasSpEffect(10000, 7011312)) {
         ClearSpEffect(10000, 7011312);
         SetSpEffect(10000, 7011313);
-        InitializeEvent(0, 9007032, 7011301);
-        WaitFixedTimeFrames(2);
-        RestartEvent();
     }
     else if (CharacterHasSpEffect(10000, 7011311)) {
         ClearSpEffect(10000, 7011311);
         SetSpEffect(10000, 7011312);
-        InitializeEvent(0, 9007032, 7011301);
-        WaitFixedTimeFrames(2);
-        RestartEvent();
     }
     else if (CharacterHasSpEffect(10000, 7011310)) {
         ClearSpEffect(10000, 7011310);
         SetSpEffect(10000, 7011311);
-        InitializeEvent(0, 9007032, 7011301);
-        WaitFixedTimeFrames(2);
-        RestartEvent();
     }
     else {
         SetSpEffect(10000, 7011310);
-        WaitFixedTimeFrames(2);
-        RestartEvent();
     }
 
 L0:   
     InitializeEvent(0, 9007032, 7011301);
+    WaitFor(!CharacterHasSpEffect(10000, 7011300) ||
+        (!CharacterHasSpEffect(10000, 9000031) &&
+        (!CharacterHasSpEffect(10000, 390500) || (!CharacterHasSpEffect(10000, 140) && !CharacterHasSpEffect(10000, 8000050) && !CharacterHasSpEffect(10000, 100390)))));
     RestartEvent();
 });
 
@@ -13400,38 +14028,38 @@ $Event(9007044, Restart, function() {
     RestartEvent();
 });
 
-// Page Gloves - Deadeye
+// Daergraf's Heart - No Armor equipped detection
 $Event(9007045, Restart, function() {
     DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, 8000000) && CharacterHasSpEffect(10000, 6022020) && !CharacterHasSpEffect(10000, 109000));
-    WaitFor(ElapsedSeconds(1) || !CharacterHasSpEffect(10000, 8000000));
-    
-    GotoIf(L0, !CharacterHasSpEffect(10000, 8000000));
-    SetSpEffect(10000, 7005200);
-    WaitFor(ElapsedSeconds(1) || !CharacterHasSpEffect(10000, 8000000));
-    
-    GotoIf(L0, !CharacterHasSpEffect(10000, 8000000));
-    ClearSpEffect(10000, 7005200);
-    SetSpEffect(10000, 7005201);
-    WaitFor(ElapsedSeconds(1) || !CharacterHasSpEffect(10000, 8000000));
-    
-    GotoIf(L0, !CharacterHasSpEffect(10000, 8000000));
-    ClearSpEffect(10000, 7005201);
-    SetSpEffect(10000, 7005202);
-    WaitFor(!CharacterHasSpEffect(10000, 8000000));
-L0:
-    ClearSpEffect(10000, 7005200);
-    ClearSpEffect(10000, 7005202);
-    ClearSpEffect(10000, 7005201);
+    WaitFor(
+        PlayerHasArmorEquipped(ArmorType.Head, 10000, -1)
+        && PlayerHasArmorEquipped(ArmorType.Body, 10100, -1)
+        && PlayerHasArmorEquipped(ArmorType.Arms, 10200, -1)
+        && PlayerHasArmorEquipped(ArmorType.Legs, 10300, -1));
+    SetSpEffect(10000, 35039);
+    WaitFor(
+        !PlayerHasArmorEquipped(ArmorType.Head, 10000, -1)
+        || !PlayerHasArmorEquipped(ArmorType.Body, 10100, -1)
+        || !PlayerHasArmorEquipped(ArmorType.Arms, 10200, -1)
+        || !PlayerHasArmorEquipped(ArmorType.Legs, 10300, -1));
+    ClearSpEffect(10000, 35039);
+    RestartEvent();
+});
+
+// Kaiden Gloves - Tactical Efficiency
+$Event(9007046, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 7011200) && (CharacterHasSpEffect(10000, 9000031) || 
+        (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390)))));
+    SetSpEffect(10000, 7011201);
+    WaitFor(!CharacterHasSpEffect(10000, 7011200) || !(CharacterHasSpEffect(10000, 9000031) || 
+        (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390)))));
     RestartEvent();
 });
 
 // UNUSED
-$Event(9007046, Restart, function() {
-});
-
-// UNUSED
 $Event(9007047, Restart, function() {
+    
 });
 
 // Raptop's Boots - Assassin's Preperation 
@@ -13723,36 +14351,43 @@ $Event(9007054, Restart, function() {
     }
 });
 
-// High Page Gloves - Nimble Skirmisher Resource Recovery
+// Enemy master accum application
 $Event(9007055, Restart, function() {
-    DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, 8000000) && CharacterHasSpEffect(10000, 6199020) && !CharacterHasSpEffect(10000, 109000));
-    WaitFor(ElapsedSeconds(1) || !CharacterHasSpEffect(10000, 8000000));
-    RestartIf(!CharacterHasSpEffect(10000, 8000000));
-    
-    SetSpEffect(10000, 7006200);
+    SetSpEffect(1099995000, 3500000); // Master hit-taken accumilator
+    WaitFixedTimeSeconds(5);
     RestartEvent();
 });
 
-// High Page Gloves - Nimble Skirmisher Sprint
-$Event(9007056, Restart, function() {
+// Marksman Gloves - Weaponbuff /w Debuff application
+$Event(9007056, Restart, function(gloveSpEffect, weaponBuffSpEffectR, weaponBuffSpEffectL) {
     DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, 8000000) && CharacterHasSpEffect(10000, 6199020) && !CharacterHasSpEffect(10000, 109000));
-    WaitFor(ElapsedSeconds(3) || !CharacterHasSpEffect(10000, 8000000));
-    RestartIf(!CharacterHasSpEffect(10000, 8000000));
     
-    SetSpEffect(10000, 7006201);
+    WaitFor(CharacterHasSpEffect(10000, 8000000) && CharacterHasSpEffect(10000, gloveSpEffect) && !CharacterHasSpEffect(10000, 109000));
+    WaitFor(ElapsedSeconds(1) || !CharacterHasSpEffect(10000, 8000000));
+    RestartIf(!CharacterHasSpEffect(10000, 8000000));
+    SetSpEffect(10000, weaponBuffSpEffectR);
+    SetSpEffect(10000, weaponBuffSpEffectL);
+    
+    WaitFor(!CharacterHasSpEffect(10000, 8000000));
+    WaitFor(ElapsedSeconds(3) || CharacterHasSpEffect(10000, 8000010));
+
+    WaitFixedTimeFrames(3);
+    ClearSpEffect(10000, weaponBuffSpEffectR);
+    ClearSpEffect(10000, weaponBuffSpEffectL);
     RestartEvent();
 });
 
-// Ragged Gloves - Survivalist's Recuperation
-$Event(9007057, Restart, function() {
+// Marksman Gloves - Has hit debuffed enemy detector
+$Event(9007057, Restart, function(debuffSpEffect, triggerSpEffect, appliedSpEffect) {
     DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, 8000000) && CharacterHasSpEffect(10000, 6602200) && !CharacterHasSpEffect(10000, 109000));
-    WaitFor(ElapsedSeconds(1) || !CharacterHasSpEffect(10000, 8000000));
-    RestartIf(!CharacterHasSpEffect(10000, 8000000));
-    
-    SetSpEffect(10000, 7019200);
+    WaitFor(CharacterHasSpEffect(10000, triggerSpEffect));
+    WaitFor(CharacterHasSpEffect(1099995000, debuffSpEffect) || ElapsedFrames(3));
+    if (!CharacterHasSpEffect(1099995000, debuffSpEffect)) {
+        RestartEvent();
+    }
+
+    SetSpEffect(10000, appliedSpEffect);
+    WaitFor(!CharacterHasSpEffect(10000, triggerSpEffect) && ElapsedSeconds(0.75));
     RestartEvent();
 });
 
@@ -14276,21 +14911,22 @@ $Event(9007072, Restart, function() {
     }
     
     if (CharacterHasSpEffect(10000, 7022213)) { // Keep refeshing first stack on attack
-        WaitFor(CharacterHasSpEffect(10000, 9000031));
+        WaitFor(CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
         WaitFixedTimeFrames(1);
         RestartIf(CharacterHasSpEffect(10000, 7022214) || !CharacterHasSpEffect(10000, 7022213));
         SetSpEffect(10000, 7022213);
-        WaitFor(!CharacterHasSpEffect(10000, 9000031));
+        WaitFor(!CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
         RestartEvent();
     }    
     
-    WaitFor(CharacterHasSpEffect(10000, 9000031));
-    WaitFor(!CharacterHasSpEffect(10000, 9000031));
-    WaitFor(ElapsedSeconds(4) || CharacterHasSpEffect(10000, 9000031));
-    RestartIf(!CharacterHasSpEffect(10000, 9000031));
+    WaitFor(CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
+    WaitFor(!CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
+    timer |= ElapsedSeconds(4);
+    WaitFor(timer || CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
+    RestartIf(timer.Passed);
     
     SetSpEffect(10000, 7022213); // Apply First Stack
-    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    WaitFor(!CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
     RestartEvent();
 });
 
@@ -14306,34 +14942,38 @@ $Event(9007073, Restart, function() {
     }
     
     if (CharacterHasSpEffect(10000, 7022214)) { // Keep refeshing second stack on attack
-        WaitFor(CharacterHasSpEffect(10000, 9000031));
+        WaitFor(CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
         WaitFixedTimeFrames(1);
         RestartIf(CharacterHasSpEffect(10000, 7022215) || !CharacterHasSpEffect(10000, 7022214));
         SetSpEffect(10000, 7022214);
-        WaitFor(!CharacterHasSpEffect(10000, 9000031));
+        WaitFor(!CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
         RestartEvent();
     }
     
     // Handle Application of second stack whilst first stack is active
-    WaitFor(CharacterHasSpEffect(10000, 7022213) && !CharacterHasSpEffect(10000, 9000031));
+    WaitFor(CharacterHasSpEffect(10000, 7022213) && !CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
     // 1/4
-    WaitFor(ElapsedSeconds(4) || CharacterHasSpEffect(10000, 9000031));
-    RestartIf(!CharacterHasSpEffect(10000, 9000031));
-    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    timer1 |= ElapsedSeconds(4);
+    WaitFor(timer1 || CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
+    RestartIf(timer1.Passed);
+    WaitFor(!CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
     // 2/4
-    WaitFor(ElapsedSeconds(4) || CharacterHasSpEffect(10000, 9000031));
-    RestartIf(!CharacterHasSpEffect(10000, 9000031));
-    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    timer2 |= ElapsedSeconds(4);
+    WaitFor(timer2 || CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
+    RestartIf(timer2.Passed);
+    WaitFor(!CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
     // 3/4
-    WaitFor(ElapsedSeconds(4) || CharacterHasSpEffect(10000, 9000031));
-    RestartIf(!CharacterHasSpEffect(10000, 9000031));
-    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    timer3 |= ElapsedSeconds(4);
+    WaitFor(timer3 || CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
+    RestartIf(timer3.Passed);
+    WaitFor(!CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
     // 4/4
-    WaitFor(ElapsedSeconds(4) || CharacterHasSpEffect(10000, 9000031));
-    RestartIf(!CharacterHasSpEffect(10000, 9000031));
+    timer4 |= ElapsedSeconds(4);
+    WaitFor(timer4 || CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
+    RestartIf(timer4.Passed);
     
     SetSpEffect(10000, 7022214); // Apply Second Stack
-    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    WaitFor(!CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
     RestartEvent();
 });
 
@@ -14343,47 +14983,54 @@ $Event(9007074, Restart, function() {
     WaitFor(CharacterHasSpEffect(10000, 7022200));
     
     if (CharacterHasSpEffect(10000, 7022215)) { // Clean up third stack if no attacks are hit
-        WaitFor(ElapsedSeconds(4) || CharacterHasSpEffect(10000, 9000031));
-        RestartIf(CharacterHasSpEffect(10000, 9000031))
+        timer |= ElapsedSeconds(4);
+        WaitFor(timer || CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
+        RestartIf(!timer.Passed)
         ClearSpEffect(10000, 7022215);
         RestartEvent();
     }
         
     // Handle Application of third stack whilst second stack is active
-    WaitFor(CharacterHasSpEffect(10000, 7022214) && !CharacterHasSpEffect(10000, 9000031));
+    WaitFor(CharacterHasSpEffect(10000, 7022214) && !CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
     // 1/6
-    WaitFor(ElapsedSeconds(4) || CharacterHasSpEffect(10000, 9000031));
-    RestartIf(!CharacterHasSpEffect(10000, 9000031));
-    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    timer1 |= ElapsedSeconds(4);
+    WaitFor(timer1 || CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
+    RestartIf(timer1.Passed);
+    WaitFor(!CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
     // 2/6
-    WaitFor(ElapsedSeconds(4) || CharacterHasSpEffect(10000, 9000031));
-    RestartIf(!CharacterHasSpEffect(10000, 9000031));
-    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    timer2 |= ElapsedSeconds(4);
+    WaitFor(timer2 || CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
+    RestartIf(timer2.Passed);
+    WaitFor(!CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
     // 3/6
-    WaitFor(ElapsedSeconds(4) || CharacterHasSpEffect(10000, 9000031));
-    RestartIf(!CharacterHasSpEffect(10000, 9000031));
-    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    timer3 |= ElapsedSeconds(4);
+    WaitFor(timer3 || CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
+    RestartIf(timer3.Passed);
+    WaitFor(!CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
     // 4/6
-    WaitFor(ElapsedSeconds(4) || CharacterHasSpEffect(10000, 9000031));
-    RestartIf(!CharacterHasSpEffect(10000, 9000031));
-    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    timer4 |= ElapsedSeconds(4);
+    WaitFor(timer4 || CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
+    RestartIf(timer4.Passed);
+    WaitFor(!CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
     // 5/6
-    WaitFor(ElapsedSeconds(4) || CharacterHasSpEffect(10000, 9000031));
-    RestartIf(!CharacterHasSpEffect(10000, 9000031));
-    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    timer5 |= ElapsedSeconds(4);
+    WaitFor(timer5 || CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
+    RestartIf(timer5.Passed);
+    WaitFor(!CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
     // 6/6
-    WaitFor(ElapsedSeconds(4) || CharacterHasSpEffect(10000, 9000031));
-    RestartIf(!CharacterHasSpEffect(10000, 9000031));
+    timer6 |= ElapsedSeconds(4);
+    WaitFor(timer6 || CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
+    RestartIf(timer6.Passed);
     
     SetSpEffect(10000, 7022215); // Apply Third Stack
-    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    WaitFor(!CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
     RestartEvent();
 });
  
 // Dancer's Dress - Heal Handler
 $Event(9007077, Restart, function() {
     DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, 7022100) && CharacterHasSpEffect(10000, 9000031));
+    WaitFor(CharacterHasSpEffect(10000, 7022100) && (CharacterHasSpEffect(10000, 9000031) || (CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390)))));
     
     if (CharacterHasSpEffect(10000, 7022215))
         SetSpEffect(10000, 7022103);
@@ -14392,7 +15039,19 @@ $Event(9007077, Restart, function() {
     else if (CharacterHasSpEffect(10000, 7022213))
         SetSpEffect(10000, 7022101);
 
-    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    WaitFor(!CharacterHasSpEffect(10000, 9000031) && !(CharacterHasSpEffect(10000, 390500) && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390))));
+    RestartEvent();
+});
+
+// Ascetic's Loincloth - Curseblood Syphon HP Loss
+$Event(9007078, Restart, function() {
+    DisableNetworkSync();
+    
+    WaitFor(CharacterHasSpEffect(10000, 7023100) && !CharacterHasSpEffect(10000, 390500));
+    SetSpEffect(10000, 7023101);
+    WaitFor(!CharacterHasSpEffect(10000, 7023100) || CharacterHasSpEffect(10000, 390500));
+    ClearSpEffect(10000, 7023101);
+    
     RestartEvent();
 });
 
@@ -14429,7 +15088,7 @@ $Event(9007102, Restart, function() {
 
 $Event(9007103, Restart, function() {
     DisableNetworkSync();
-    WaitFor(!EventFlag(6951));
+    EndIf(EventFlag(6951));
     DisplayFullScreenMessage(4019);
     RestartEvent();
 });
@@ -14520,6 +15179,105 @@ $Event(9007111, Restart, function(X0_4, X4_4, X8_4) {
     RestartEvent();
 });
 
+// Jewel of the Devious Mimicry
+$Event(9007112, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 390600) && CharacterHasStateInfo(10000, 466) && !CharacterHasSpEffect(10000, 100001) && !CharacterHasSpEffect(10000, 100002) && !CharacterHasSpEffect(10000, 390620));
+    time = ElapsedSeconds(1);
+    WaitFor(time || !CharacterHasSpEffect(10000, 390600) || !CharacterHasStateInfo(10000, 466) || CharacterHasSpEffect(10000, 100001) || CharacterHasSpEffect(10000, 100002))
+    RestartIf(!time.Passed);
+    SetSpEffect(10000, 390620);
+    RestartEvent();
+});
+
+// Jewel of the Resolute Buffs
+$Event(9007113, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(
+        CharacterHasSpEffect(10000, 390000) && !CharacterHasSpEffect(10000, 100626) && !CharacterHasSpEffect(10000, 100627)
+            && (CharacterHasSpEffect(10000, 140) || CharacterHasSpEffect(10000, 8000050) || CharacterHasSpEffect(10000, 100390)));
+    SetSpEffect(10000, 390005);
+    WaitFor(!CharacterHasSpEffect(10000, 140) && !CharacterHasSpEffect(10000, 8000050) && !CharacterHasSpEffect(10000, 100390));
+    RestartEvent();
+});
+
+// Jewel of the Valorous - On Hitting Enemy
+$Event(9007114, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 390100) && (CharacterHasSpEffect(10000, 100626) || CharacterHasSpEffect(10000, 100627)) && CharacterHasSpEffect(10000, 9000031));
+    SetSpEffect(10000, 390110);
+    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    RestartEvent();
+});
+
+// Jewel of the Valorous - On getting damaged
+$Event(9007115, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 390100) && (CharacterHasSpEffect(10000, 100626) || CharacterHasSpEffect(10000, 100627)) && CharacterHasSpEffect(10000, 3500002));
+    SetSpEffect(10000, 390120);
+    WaitFor(!CharacterHasSpEffect(10000, 3500002));
+    RestartEvent();
+});
+
+// Jewel of the Ancients - On hitting melee
+$Event(9007116, Restart, function(attackIdentifierSpEffect, currentSpEffect) {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 391900) && CharacterHasSpEffect(10000, 9000031) && CharacterHasSpEffect(10000, 391905) && CharacterHasSpEffect(10000, attackIdentifierSpEffect));
+    SetSpEffect(10000, currentSpEffect);
+    WaitFor(!CharacterHasSpEffect(10000, 9000031));
+    RestartEvent();
+});
+
+// Jewel of the Forge - Cyclopean Prophesy Handler (Spell is Cast)
+$Event(9007117, Restart, function() {
+    DisableNetworkSync();
+    if (CharacterHasSpEffect(10000, 1607000)) {
+        if (CharacterHasSpEffect(10000, 391600)) 
+            SetSpEffect(10000, 1607020);
+        else 
+            SetSpEffect(10000, 1607001);
+        WaitFor(CharacterHasSpEffect(10000, 1607010) || !CharacterHasSpEffect(10000, 1607000));
+        ClearSpEffect(10000, 1607000);
+        ClearSpEffect(10000, 1607001);
+        ClearSpEffect(10000, 1607020);
+    }
+    else {
+        WaitFor(CharacterHasSpEffect(10000, 1607010));
+        if (!CharacterHasSpEffect(10000, 1607000)) {
+            SetSpEffect(10000, 1607000);
+        }
+        else {
+            ClearSpEffect(10000, 1607000);
+            ClearSpEffect(10000, 1607001);
+            ClearSpEffect(10000, 1607020);
+        }
+    }
+    ClearSpEffect(10000, 1607010);
+    RestartEvent();
+});
+
+// Jewel of the Forge - Cyclopean Prophesy Handler (Jewel is equipped)
+$Event(9007118, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 391600));
+    WaitFor(CharacterHasSpEffect(10000, 1607001) || !CharacterHasSpEffect(10000, 391600));
+    RestartIf(!CharacterHasSpEffect(10000, 391600));
+    ClearSpEffect(10000, 1607001);
+    SetSpEffect(10000, 1607020);
+    RestartEvent();
+});
+
+// Jewel of the Forge - Cyclopean Prophesy Handler (Jewel is unequipped)
+$Event(9007119, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(!CharacterHasSpEffect(10000, 391600));
+    WaitFor(CharacterHasSpEffect(10000, 1607020) || CharacterHasSpEffect(10000, 391600));
+    RestartIf(CharacterHasSpEffect(10000, 391600));
+    ClearSpEffect(10000, 1607020);
+    SetSpEffect(10000, 1607001);
+    RestartEvent();
+});
+
 // Mass Consume Runes - eventFlag, Goods, spEffect
 $Event(9007120, Restart, function(X0_4, X4_4, X8_4) {
     DisableNetworkSync();
@@ -14535,22 +15293,205 @@ $Event(9007120, Restart, function(X0_4, X4_4, X8_4) {
     RestartEvent();
 });
 
+// Jewel of the Prince - Permanent Accursed Binding
+$Event(9007121, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 391300) && !CharacterHasSpEffect(10000, 1508000));
+    SetSpEffect(10000, 1508000);
+    WaitFor(!CharacterHasSpEffect(10000, 391300));
+    ClearSpEffect(10000, 1508000);
+    RestartEvent();
+});
+
+// Jewels - Enemy SpEffect Application
+$Event(9007122, Restart, function(jewelSpEffect, enemySpEffect) {
+    WaitFor(CharacterHasSpEffect(20000, jewelSpEffect));
+    SetSpEffect(1099995000, enemySpEffect);
+    WaitFor(!CharacterHasSpEffect(20000, jewelSpEffect));
+    ClearSpEffect(1099995000, enemySpEffect);
+    RestartEvent();
+});
+
+// Jewel of the Ancestors - Permanent Spirit Link
+$Event(9007123, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 392400) && !CharacterHasSpEffect(10000, 1741300));
+    SetSpEffect(10000, 1741300);
+    WaitFor(!CharacterHasSpEffect(10000, 392400));
+    ClearSpEffect(10000, 1741300);
+    RestartEvent();
+});
+
+// Dried Bouqet Player Ally Death Detection - Player Count
+$Event(9007124, Restart, function() {
+    WaitFor(CharacterHasSpEffect(10000, 20381000) && CharacterHasSpEffect(20000, 20381006) && !CharacterHasSpEffect(10000, 20381006));
+    SetSpEffect(10000, 20381001);
+    WaitFor(!CharacterHasSpEffect(20000, 20381006));
+    RestartEvent();
+});
+
+// Stacking spEffect Handler 
+$Event(9007125, Restart, function(mainSpEffect, triggeringSpEffect, hasCurrentSpEffect, currentTierSpEffect, nextTierSpEffect, hasDisallowStateInfo, disallowedStateInfo) {
+    DisableNetworkSync();
+    
+    WaitFor(CharacterHasSpEffect(10000, mainSpEffect)
+        && (hasCurrentSpEffect == 0 || CharacterHasSpEffect(10000, currentTierSpEffect))
+        && !CharacterHasSpEffect(10000, triggeringSpEffect)
+        && (hasDisallowStateInfo == 0 || !CharacterHasStateInfo(10000, disallowedStateInfo)));
+        
+    triggered |= CharacterHasSpEffect(10000, triggeringSpEffect);
+    WaitFor(triggered || !CharacterHasSpEffect(10000, mainSpEffect) 
+        || (hasCurrentSpEffect != 0 && !CharacterHasSpEffect(10000, currentTierSpEffect)) 
+        || (hasDisallowStateInfo != 0 && CharacterHasStateInfo(10000, disallowedStateInfo)));
+    RestartIf(!triggered.Passed);
+    
+    if (hasCurrentSpEffect != 0) {
+        ClearSpEffect(10000, currentTierSpEffect);
+    }
+    SetSpEffect(10000, nextTierSpEffect);
+    
+    WaitFor(!CharacterHasSpEffect(10000, triggeringSpEffect) && !CharacterHasSpEffect(10000, nextTierSpEffect));
+    RestartEvent();
+});
+
+// Jewel of the Reckless Cleanup - Current Tier SpEffect, -3 Tier SpEffect
+$Event(9007126, Restart, function(X0_4, X4_4) {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, X0_4) && !CharacterHasSpEffect(10000, 100390) && !CharacterHasSpEffect(10000, 8000050));
+    WaitFor(!CharacterHasSpEffect(10000, X0_4) || !CharacterHasSpEffect(10000, 390300) || ((CharacterHasSpEffect(10000, 100390) || CharacterHasSpEffect(10000, 8000050))));
+    RestartIf(!CharacterHasSpEffect(10000, X0_4));
+    
+    ClearSpEffect(10000, X0_4);
+    if (X4_4 != 0)
+        SetSpEffect(10000, X4_4);
+    
+    WaitFor(!CharacterHasSpEffect(10000, 100390) && !CharacterHasSpEffect(10000, 8000050));
+    RestartEvent();
+});
+
+
+// Pure Darkness Handler
+$Event(9007127, Restart, function() {
+    WaitFor(CharacterHasSpEffect(20000, 1465201));
+    FadeToBlack(1, 0.25, false, 0);
+    WaitFixedTimeSeconds(0.25);
+    
+    ActivateGparamOverride(3, 0);
+    SetSpEffect(1099995000, 1465220);
+    SetSpEffect(20000, 1465205);
+    
+    WaitFixedTimeFrames(1);
+    FadeToBlack(0.25, 0.6, false, 0);
+    
+    WaitFor(!CharacterHasSpEffect(20000, 1465201));
+    DeactivateGparamOverride(0.4);
+    FadeToBlack(0, 0.4, false, 0);
+    ClearSpEffect(1099995000, 1465220);
+    ClearSpEffect(20000, 1465205);
+    
+    RestartEvent();
+});
+
+// StateInfo Exultation - SpEffect Requirement, Enemy SpEffect Requiredment, Applied SpEffect
+$Event(9007128, Restart, function(X0_4, X4_4, X8_4) {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, X0_4) && CharacterHasStateInfo(1099995000, X4_4));
+    SetSpEffect(10000, X8_4);
+    WaitFor(CharacterHasSpEffect(1099995000, X4_4, Less, 1));
+    RestartEvent();
+});
+
+// SpEffect Exultation - SpEffect Requirement, Enemy SpEffect Requiredment, Applied SpEffect
+$Event(9007129, Restart, function(X0_4, X4_4, X8_4) {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, X0_4) && CharacterHasSpEffect(1099995000, X4_4));
+    SetSpEffect(10000, X8_4);
+    WaitFor(CharacterHasSpEffect(1099995000, X4_4, Less, 1));
+    RestartEvent();
+});
+
 // Outdated Save Detector
-$Event(9007130, Restart, function() {
+$Event(9007130, Default, function() {
     DisableNetworkSync(); // Seamless shenanigans 1
     WaitFixedTimeFrames(1);
     EndIf(!PlayerIsInOwnWorld()); // Seamless 2 
     EndIf(!HasMultiplayerState(MultiplayerState.Singleplayer)); // Seamless 3
     EndIf(!EventFlag(6951)); // Dont conflict with no-dlc msg
 
-    EndIf(EventFlag(10010600)); // Show Message only once
-    SetEventFlagID(10010600, ON); // 2.1
+    EndIf(EventFlag(10010601)); // Show Message only once
+    SetEventFlagID(10010601, ON); // 2.3
     
     EndIf(InArea(10000, 10012680) && !EventFlag(60210)); // End if in Chapel of the Anticiaption start room and didnt pickup finger yet
     if (AnyBatchEventFlags(60900, 60926)) // Outdated Save
         DisplayFullScreenMessage(4021);
     else // Vanilla Save
         DisplayFullScreenMessage(4020);
+});
+
+// Jewel of the Darkness - Increased out of combat damage
+$Event(9007131, Default, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 391200) && !PlayerTargeted(1, 31, AIStateType.Combat));
+    SetSpEffect(10000, 391220);
+    WaitFor(!CharacterHasSpEffect(10000, 391200) || PlayerTargeted(1, 31, AIStateType.Combat));
+    ClearSpEffect(10000, 391220);
+    RestartEvent();
+});
+
+// Jewel of the Sinner - Refresh duration buffs
+$Event(9007132, Default, function(buffSpEffect) {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 391500) && CharacterHasSpEffect(10000, buffSpEffect) && CharacterHasSpEffect(10000, 391530));
+    SetSpEffect(10000, buffSpEffect);
+    WaitFor(!CharacterHasSpEffect(10000, 391530));
+    SetSpEffect(10000, buffSpEffect);
+    RestartEvent();
+});
+
+// Aspect of the Scoropion - Damage Reduct Handler
+$Event(9007133, Default, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 1729000) && CharacterHasSpEffect(10000, 1729011));
+    
+    if (!CharacterHasSpEffect(10000, 1729035)) {
+        if (CharacterHasSpEffect(10000, 1729030)) {
+            ClearSpEffect(10000, 1729030);
+            SetSpEffect(10000, 1729035);
+        }
+        else {
+            SetSpEffect(10000, 1729030);
+        }
+    }
+    
+    WaitFor(!CharacterHasSpEffect(10000, 1729000) || !CharacterHasSpEffect(10000, 1729011));
+    RestartEvent();
+});
+
+// SpEffect Coupling
+$Event(9007134, Default, function(requiredSpEffect, obtainedSpEffect) {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, requiredSpEffect) && !CharacterHasSpEffect(10000, obtainedSpEffect));
+    SetSpEffect(10000, obtainedSpEffect);
+    WaitFor(!CharacterHasSpEffect(10000, requiredSpEffect) || !CharacterHasSpEffect(10000, obtainedSpEffect));
+    ClearSpEffect(10000, obtainedSpEffect);
+    RestartEvent();
+});
+
+// Jewel of the Flayed - Blessing of Gloam interaction
+$Event(9007135, Restart, function(SpEffect) {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 392000) && CharacterHasSpEffect(10000, 1626200) && CharacterHasSpEffect(10000, SpEffect));
+    SetSpEffect(10000, 1626050);
+    WaitFor(!CharacterHasSpEffect(10000, SpEffect));
+    RestartEvent();
+});
+
+// Jewel of the Flayed - Blessing of Gloam interaction cleanup
+$Event(9007136, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 1626050) && (!CharacterHasSpEffect(10000, 392000) || !CharacterHasSpEffect(10000, 1626200)));
+    ClearSpEffect(10000, 1626050);
+    RestartEvent();
 });
 
 // Caimar Headpiece Secret
@@ -14560,4 +15501,43 @@ $Event(9007140, Restart, function() {
     WaitFixedTimeFrames(8);
     PlaySE(10000, SoundType.CharacterMotion, 407008100);
     WaitFor(!CharacterHasSpEffect(10000, 100750));
+    RestartEvent();
+});
+
+// Radahn Festival Weather Replication
+$Event(9007141, Restart, function() {
+    EndIf(EventFlag(1252380800)); //Radahn Defeated
+    if (!EventFlag(9411) && EventFlag(1052380806)) { //If Festival is inactive and Time is frozen from this event
+        FreezeTime(false);
+        SetEventFlagID(1052380806, OFF); //Time is no longer frozen
+    }
+    if (InArea(10000, 1051362221, 1) && !EventFlag(9411)) { //Past Jerren's Door not during the Festival
+        FreezeTime(true);
+        SetCurrentTime(3, 30, 0, false, false, false, 0, 0, 0);
+        ChangeWeather(Weather.Default, -1, false);
+        SetEventFlagID(1052380806, ON); //Time is frozen from this event
+        EndEvent();
+    }
+    if (!EventFlag(3366) && !EventFlag(3367)) { //If Jerren is gone from the Festival
+        WaitFor(EventFlag(1052382610)); //Wait for the waygate teleport to Radahn's Arena
+        FreezeTime(true);
+        SetCurrentTime(3, 30, 0, false, false, false, 0, 0, 0);
+        ChangeWeather(Weather.Default, -1, false);
+        SetEventFlagID(1052380806, ON); //Time is frozen from this event
+    }
+    EndEvent();
+});
+
+//DLC - Forge Magma Rune Rewards
+$Event(9007150, Restart, function(ForgeFlag){
+    EndIf(PlayerHasItem(ItemType.Goods, 8550) || PlayerHasItem(ItemType.Goods, 8460));
+    WaitFor(EventFlag(ForgeFlag));
+    AwardItemLot(106800);
+});
+
+$Event(9007151, Restart, function(){
+    EndIf(PlayerHasItem(ItemType.Goods, 8460) || PlayerHasDoesntHaveItem(ItemType.Goods, 8550, 0));
+    WaitFor((EventFlag(42007000) && EventFlag(42037000)) || (EventFlag(42037000) && EventFlag(42027000)) || (EventFlag(42007000) && EventFlag(42027000)));
+    RemoveItemFromPlayer(ItemType.Goods, 8550, 1);
+    AwardItemLot(106810);
 });

@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -110,6 +110,12 @@ L0:
     InitializeEvent(0, 18002210, 0);
     //Warp to Shaded Castle Inner Gate
     InitializeEvent(0, 18002870, 0);
+    //Collisions
+    InitializeEvent(0, 18000023, 0);
+    //Cave of Knowledge -- enemies
+    InitializeCommonEvent(0, 90005250, 18000345, 18002220, 0, -1);
+    InitializeCommonEvent(1, 90005250, 18000346, 18002220, 0, -1);
+    InitializeCommonEvent(2, 90005250, 18000347, 18002220, 0, -1);
 });
 
 $Event(50, Default, function() {
@@ -200,6 +206,37 @@ $Event(18000022, Restart, function() {
     EndIf(EventFlag(2002));
     WaitFor(InArea(10000, 18002022));
     SetCurrentTime(10, 30, 0, false, false, false, 0, 0, 0);
+});
+
+$Event(18000023, Restart, function() {
+    EnableAssetInvunerability(18001254);
+    DisableMapPart(18001251);
+    DisableMapPart(18001252);
+    DisableHit(18001253);
+    DisableMapPart(18001255);
+    DisableMapPart(18001256);
+    DisableMapPart(18001257);
+    DisableMapPart(18001258);
+    DisableMapPart(18001259);
+    DisableMapPart(18001260);
+    DisableMapPart(18001261);
+    DisableMapPart(18001262);
+    DisableMapPart(18001263);
+    RegisterLadder(18000264, 18000265, 18001264);
+    DisableMapPart(18001265);
+    DisableHit(18001266);
+    DisableMapPart(18001267);
+    DisableMapPart(18001268);
+    EnableAssetInvunerability(18001270);
+    DisableHit(18001271);
+    DisableMapPart(18001273);
+    DisableMapPart(18001274);
+    DisableMapPart(18001275);
+    DisableMapPart(18001276);
+    DisableMapPart(18001277);
+    DisableMapPart(18001278);
+    DisableMapPart(18001279);
+    DisableMapPart(18001280);
 });
 
 $Event(18002023, Restart, function() {

@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000N:\\GR\\data\\Param\\event\\m60.emevd\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82,166]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -53,8 +53,8 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005891, 1045370800, 1045370801, 1045370802);
     //InitializeCommonEvent(0, 90005251, 1045370800, 1101004800, 0, 0);
     //InitializeEvent(0, 1045372231, 0);
-    InitializeEvent(0, 98005303, 1045370801, 1045370803);
-    InitializeEvent(0, 98005304, 1045370801, 1045370803);
+    InitializeCommonEvent(0, 98005303, 1045370801, 1045370803); //Stake of Marika Invert
+    InitializeCommonEvent(0, 98005304, 1045370801, 1045370803); //Stake of Marika Invert
 });
 
 $Event(50, Default, function() {

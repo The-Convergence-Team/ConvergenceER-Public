@@ -1,0 +1,30 @@
+profileVersion = "v1"
+savefile = "ER0000.cnv.co2"
+
+[[supports]]
+game = "eldenring"
+
+[[package]]
+id = "convergence-er"
+path = "./../mod"
+
+[[natives]]
+path = './../SeamlessCoop/ersc.dll'
+
+[[natives]]
+path = './../mod/dll/eldenring_alt_saves.dll'
+
+[[natives]]
+path = './../mod/dll/ErdTools.dll'
+
+[[natives]]
+path = './../mod/dll/erdyes.dll'
+
+[[natives]]
+path = './../mod/dll/ertransmogrify.dll'
+
+[[natives]]
+path = './../mod/dll/Scripts-Data-Exposer-FS.dll'
+
+[[natives]]
+path = './../mod/dll/unlock_wwise_states_er.dll'

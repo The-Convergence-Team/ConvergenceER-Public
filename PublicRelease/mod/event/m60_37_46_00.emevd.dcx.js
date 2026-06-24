@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common.emevd\u0000N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\m60.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000"
 // @linked    [0,72,154,220]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -42,8 +42,8 @@ L10:
     if (!EventFlag(1037462717)) {
         SetNetworkconnectedEventFlagID(1037462716, OFF);
         if (TimeOfDayInRange(20, 0, 0, 5, 30, 0)
-            && !EventFlag(1037460800)
-            && (EventFlag(1037460701) || EventFlag(3723))) {
+            && !EventFlag(1037460800)) {
+            //&& (EventFlag(1037460701) || EventFlag(3723))) { //Event flags associated with Miriel talk script states
             SetNetworkconnectedEventFlagID(1037462716, ON);
         }
     }

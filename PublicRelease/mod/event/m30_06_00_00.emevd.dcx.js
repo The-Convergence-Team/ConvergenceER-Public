@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -484,7 +484,7 @@ L0:
     EnableCharacterAI(30060800);
     DisableCharacterInvincibility(30060800);
     SetNetworkUpdateRate(30060800, true, CharacterUpdateFrequency.AlwaysUpdate);
-    DisplayBossHealthBar(Enabled, 30060800, 0, 904260302);
+    DisplayBossHealthBar(Enabled, 30060800, 0, 903310000); //Updated to Stormhawk Tamer
 });
 
 $Event(30062811, Restart, function() {

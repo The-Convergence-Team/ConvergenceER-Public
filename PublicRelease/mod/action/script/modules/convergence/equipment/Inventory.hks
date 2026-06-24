@@ -1,0 +1,300 @@
+ITEMCATEGORY_ID = {
+    Weapon =     0,
+    Armor =      1,
+    Talisman =   2,
+    Goods =      4,
+    AshOfWar =   8, 
+}
+
+local trackedGoods = {
+    [1] = true, -- Dev Tool: Map Reloader
+    [EMPTY_PHYSICK] = true, -- Physick Flask (Empty)
+    [FULL_PHYSICK] = 392610, -- Physick Flask (Full)
+    [1000] = true, -- Flask of Crimson Tears (Empty)
+    [1001] = 392620, -- Flask of Crimson Tears +0 (Full)
+    [1002] = true, -- Flask of Crimson Tears +1 (Empty)
+    [1003] = 392620, -- Flask of Crimson Tears +1 (Full)
+    [1004] = true, -- Flask of Crimson Tears +2 (Empty)
+    [1005] = 392620, -- Flask of Crimson Tears +2 (Full)
+    [1006] = true, -- Flask of Crimson Tears +3 (Empty)
+    [1007] = 392620, -- Flask of Crimson Tears +3 (Full)
+    [1008] = true, -- Flask of Crimson Tears +4 (Empty)
+    [1009] = 392620, -- Flask of Crimson Tears +4 (Full)
+    [1010] = true, -- Flask of Crimson Tears +5 (Empty)
+    [1011] = 392620, -- Flask of Crimson Tears +5 (Full)
+    [1012] = true, -- Flask of Crimson Tears +6 (Empty)
+    [1013] = 392620, -- Flask of Crimson Tears +6 (Full)
+    [1014] = true, -- Flask of Crimson Tears +7 (Empty)
+    [1015] = 392620, -- Flask of Crimson Tears +7 (Full)
+    [1016] = true, -- Flask of Crimson Tears +8 (Empty)
+    [1017] = 392620, -- Flask of Crimson Tears +8 (Full)
+    [1018] = true, -- Flask of Crimson Tears +9 (Empty)
+    [1019] = 392620, -- Flask of Crimson Tears +9 (Full)
+    [1020] = true, -- Flask of Crimson Tears +10 (Empty)
+    [1021] = 392620, -- Flask of Crimson Tears +10 (Full)
+    [1022] = true, -- Flask of Crimson Tears +11 (Empty)
+    [1023] = 392620, -- Flask of Crimson Tears +11 (Full)
+    [1024] = true, -- Flask of Crimson Tears +12 (Empty)
+    [1025] = 392620, -- Flask of Crimson Tears +12 (Full)
+    [1050] = true, -- Flask of Cerulean Tears (Empty)
+    [1051] = 392630, -- Flask of Cerulean Tears (Full)
+    [1052] = true, -- Flask of Cerulean Tears +1 (Empty)
+    [1053] = 392630, -- Flask of Cerulean Tears +1 (Full)
+    [1054] = true, -- Flask of Cerulean Tears +2 (Empty)
+    [1055] = 392630, -- Flask of Cerulean Tears +2 (Full)
+    [1056] = true, -- Flask of Cerulean Tears +3 (Empty)
+    [1057] = 392630, -- Flask of Cerulean Tears +3 (Full)
+    [1058] = true, -- Flask of Cerulean Tears +4 (Empty)
+    [1059] = 392630, -- Flask of Cerulean Tears +4 (Full)
+    [1060] = true, -- Flask of Cerulean Tears +5 (Empty)
+    [1061] = 392630, -- Flask of Cerulean Tears +5 (Full)
+    [1062] = true, -- Flask of Cerulean Tears +6 (Empty)
+    [1063] = 392630, -- Flask of Cerulean Tears +6 (Full)
+    [1064] = true, -- Flask of Cerulean Tears +7 (Empty)
+    [1065] = 392630, -- Flask of Cerulean Tears +7 (Full)
+    [1066] = true, -- Flask of Cerulean Tears +8 (Empty)
+    [1067] = 392630, -- Flask of Cerulean Tears +8 (Full)
+    [1068] = true, -- Flask of Cerulean Tears +9 (Empty)
+    [1069] = 392630, -- Flask of Cerulean Tears +9 (Full)
+    [1070] = true, -- Flask of Cerulean Tears +10 (Empty)
+    [1071] = 392630, -- Flask of Cerulean Tears +10 (Full)
+    [1072] = true, -- Flask of Cerulean Tears +11 (Empty)
+    [1073] = 392630, -- Flask of Cerulean Tears +11 (Full)
+    [1074] = true, -- Flask of Cerulean Tears +12 (Empty)
+    [1075] = 392630, -- Flask of Cerulean Tears +12 (Full)
+}
+local trackedWeapons = {
+    [18110000] = true, -- Guardian Swordspear (Sword)
+    [18115000] = true, -- Guardian Swordspear (Spear)
+    [8100000] = true, -- Morgoth's Cursed Sword (Great Curved Sword)
+    [8105000] = true, -- Morgoth's Cursed Sword (Light Greatsword)
+    [3250000] = true, -- Quality Greatsword (Greatsword)
+    [3255000] = true, -- Quality Greatsword (Light Greatsword)
+    [12540000] = true, -- Egg Mace (beeg)
+    [12545000] = true, -- Egg Mace (small)
+    [10200000] = true, -- Dragonkin Twinblade (Twinblade)
+    [10205000] = true, -- Dragonkin Twinblade (Twin Swords)
+    [11190000] = true, -- Tricia's Pomander (Fire)
+    [11191000] = true, -- Tricia's Pomander (Lightning)
+    [11192000] = true, -- Tricia's Pomander (Madness)
+    [11193000] = true, -- Tricia's Pomander (Madness)
+    [1200000] = true, -- Blades of the Prince (Daggers)
+    [1205000] = true, -- Blades of the Prince (Throwing Daggers)
+    [18200000] = true, -- Blightpole (Base)
+    [18205000] = true, -- Blightpole (Catalyst)
+}
+
+local _items = {}
+local _inventoryItialized = false
+local _highestIndexFound = 0
+function InventoryManagerInit()
+    GetInventoryItems(GAME_BASE.GAME_DATA_MAN.PLAYER_GAME_INFO.STORAGE_INVENTORY)
+    _inventoryItialized = true
+end
+
+function IsInventoryInitialized()
+    return _inventoryItialized
+end
+
+local _index = 0
+local _isInCycle = false
+function CycleGetInventoryItems(storageType)
+    if not _inventoryItialized or _isInCycle then
+        return
+    end
+
+    _isInCycle = true
+    local tempIndex = _index
+
+    while true do
+        if tempIndex > _index + 1 then
+            break
+        elseif tempIndex > 2566 then
+            tempIndex = 0
+            break
+        end
+
+        local item = GetInventoryItem(storageType, tempIndex)
+        if item == nil then
+            tempIndex = 0
+            break
+        end
+        
+        tempIndex = tempIndex + 1
+        -- We only care about saving weapons for now so we don't bloat the array with other items
+        -- Hopefully increases performance by having a smaller array
+        if item.GaItemHandle ~= nil then
+            _items[item.GaItemHandle] = item
+        end
+    end
+    _index = tempIndex
+    _isInCycle = false
+end
+
+function TryGetAnyItem(category, idMap)
+    if not _inventoryItialized then
+        return false, nil
+    end
+
+    for _, item in pairs(_items) do
+        if item.Category == category and idMap[item.Id] then
+            return true, item
+        end
+    end
+    return false, nil
+end
+
+function TryGetItemByGaItemHandle(handle)
+    if not _inventoryItialized then
+        return false, nil
+    end
+
+    local item = _items[handle]
+    if item ~= nil and item.GaItemHandle == handle then
+        return true, item
+    end
+
+    return false, nil
+end
+
+function GetInventoryItems(storageType, isKey)
+    if #_items > 0 or _inventoryItialized then
+        return _items
+    end
+
+    local items = {}
+    local index = 0
+    local size = storageType.MAX_SIZE(isKey)
+
+    while true do
+        if index > size then
+            break
+        end
+
+        local item = GetInventoryItem(storageType, index, isKey)
+        if item == nil then
+            break
+        end
+
+        -- We only care about saving weapons for now so we don't bloat the array with other items
+        -- Hopefully increases performance by having a smaller array
+        if item.GaItemHandle ~= nil then
+            items[item.GaItemHandle] = item
+        end
+        index = index + 1
+    end
+    _items = items
+    return items
+end
+
+function GetInventoryItem(storageType, index, isKey)
+    local fullItemId = GetPointerValue(storageType.FULL_ITEM_ID(index, isKey))
+    if tonumber(fullItemId) == 4294967295 then -- int max which is the default if the item slot is empty
+        return nil
+    end
+    
+    _highestIndexFound = math.max(_highestIndexFound, index)
+
+    local itemCategory, itemId = extractBits32String(fullItemId)
+    if not (itemCategory == ITEMCATEGORY_ID.Goods and trackedGoods[itemId] ~= nil)
+    and not (itemCategory == ITEMCATEGORY_ID.Weapon and trackedWeapons[itemId - (itemId % 100)]) then
+        return { }
+    end
+
+    --local quantity = GetPointerValue(storageType.QUANTITY(index, isKey))
+    local gaItemHandle = GetPointerValue(storageType.GA_ITEM_HANDLE(index, isKey))
+
+    return {
+        Id = itemId,
+        Category = tonumber(itemCategory),
+        --Quantity = tonumber(quantity),
+        Index = index,
+        GaItemHandle = gaItemHandle,
+    }
+end
+
+function UpdateSingleItem(item)
+    _items[item.GaItemHandle] = item
+end
+
+function ParseGaItemHandle(handle)
+    local bin = decToBinaryString(handle)
+    local category = tonumber(bin:sub(1, 4), 2) % 8
+    local selector = tonumber(bin:sub(5, 28), 2)
+    local index = tonumber(bin:sub(17, 32), 2)
+    return selector, index, category
+end
+
+function ParseGaItemItemId(itemId)
+    -- itemId is a 32-bit int: bits 0-27 = item id, bits 28-31 = category
+    local bin = decToBinaryString(itemId)
+    local id = tonumber(bin:sub(5, 32), 2) -- bits 5-32 (0-based: 4-31) = 28 bits
+    local category = tonumber(bin:sub(1, 4), 2) -- bits 1-4 (0-based: 0-3) = 4 bits
+    return id, category
+end
+
+function GetGaItemByHandle(handle)
+    local _, index, category = ParseGaItemHandle(handle)
+    if category ~= 0 and category ~= 4 then
+        return nil
+    end
+
+    local itemId = GetPointerValue(GAME_BASE.CS_GA_ITEM.GA_ITEMS.ITEM_ID(index))
+    if itemId == nil then
+        return nil
+    end
+    local id, _ = ParseGaItemItemId(itemId)
+
+    local gemGaItemHandle = nil
+    if category == ITEMCATEGORY_ID.Weapon then
+        gemGaItemHandle = GetPointerValue(GAME_BASE.CS_GA_ITEM.GA_ITEMS.GEM_GA_ITEM_HANDLE(index))
+    end
+
+    return {
+        Id = id,
+        Category = category,
+        GemGaItemHandle = gemGaItemHandle,
+    }
+end
+
+function InventoryUpdateRequested()
+    if env(GetSpEffectID, 101401) == FALSE then
+        return
+    end
+    act(ClearSpEffect, 101401)
+
+    if not _inventoryItialized then
+        return
+    end
+
+    local index = _highestIndexFound + 1
+
+    while true do
+        local newItem = GetInventoryItem(GAME_BASE.GAME_DATA_MAN.PLAYER_GAME_INFO.STORAGE_INVENTORY, index)
+        if newItem == nil then break end
+
+        if newItem.GaItemHandle ~= nil then
+            _items[newItem.GaItemHandle] = newItem
+        end
+        index = index + 1
+    end
+end
+
+function InventoryUpdateRequestedExistingItem()
+    if env(GetSpEffectID, 101402) == FALSE then
+        return
+    end
+    act(ClearSpEffect, 101402)
+
+    if not _inventoryItialized then
+        return
+    end
+
+    for _, item in pairs(_items) do
+        local goodsSpEffect = trackedGoods[item.Id] -- Mainly useful for prisoner jewel
+        if goodsSpEffect ~= nil and goodsSpEffect ~= true and env(GetSpEffectID, goodsSpEffect) == TRUE then
+            local updatedItem = GetInventoryItem(GAME_BASE.GAME_DATA_MAN.PLAYER_GAME_INFO.STORAGE_INVENTORY, item.Index)
+            _items[item.GaItemHandle] = updatedItem
+        end
+    end
+end

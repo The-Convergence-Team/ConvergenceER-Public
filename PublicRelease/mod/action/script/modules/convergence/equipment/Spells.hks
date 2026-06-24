@@ -1,0 +1,282 @@
+LastHeldMagicButton = -1
+LastCastMagicID = -1
+
+-- Getters
+function GetSelectedEquipMagicData()
+    local selectedIndex = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.SELECTED_MAGIC_SLOT_INDEX)
+    return GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(selectedIndex))
+end
+
+-- Logic
+function TriggerBeforeSpellcast()
+    CultSpellStack_ApplyLib()
+end
+
+function IsCastingSpell()
+    return LastHeldMagicButton ~= -1 and IsNodeActive("Magic_Upper_SM") == TRUE
+end
+
+-- Spell Losses
+local __buffSpells = {}
+local __isBuffSpellInitialized = false
+function DisableSpellsOnStatLoss()
+    if not __isBuffSpellInitialized then
+        for classIndex = 1, #__allSpells, 1 do
+            for spellId, spellData in pairs(__allSpells[classIndex]) do
+                if spellData.SpEffects ~= nil then
+                    __buffSpells[spellId] = spellData
+                end
+            end
+        end
+        __isBuffSpellInitialized = true
+    end
+
+    for spellId, spellData in pairs(__buffSpells) do
+        if not IsJewelGrantedSpell(spellId) then
+            for _, spEffect in pairs(spellData.SpEffects) do
+                if env(GetSpEffectID, spEffect) == TRUE then
+                    local reqInt = GetParamValue(PARAM.Magic.REQUIREMENT_INT, spellId)
+                    local reqFth = GetParamValue(PARAM.Magic.REQUIREMENT_FTH, spellId)
+                    local reqArc = GetParamValue(PARAM.Magic.REQUIREMENT_ARC, spellId)
+
+                    if reqInt > GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.INTELLIGENCE)
+                    or reqFth > GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.FAITH)
+                    or reqArc > GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.ARCANE) then
+                        act(ClearSpEffect, spEffect)
+                        Log("Cleared Spell", spellId, "due to stat loss SpEffect", spEffect)
+                    end
+                end
+            end
+        end
+    end
+end
+
+function DisableSpellsOnMeleeAbility()
+    if env(GetSpEffectID, 197) == FALSE then
+        return
+    end
+    act(ClearSpEffect, 197)
+
+    for i = 1, #__buffSpells, 1 do
+        act(ClearSpEffect, __buffSpells[i][2])
+    end
+end
+
+local __infiniteSpells = {}
+local __infiniteSpellsInitialized = false
+function DisableSpellOnUnequip()
+    if not __infiniteSpellsInitialized then
+        for classIndex = 1, #__allSpells, 1 do
+            for spellId, spellData in pairs(__allSpells[classIndex]) do
+                if spellData.SpEffects ~= nil then
+                    for _, spEffect in pairs(spellData.SpEffects) do
+                        local spEffectCategory  = GetParamValue(PARAM.SpEffectParam.EFFECT_CATEGORY, spEffect)
+                        if spEffectCategory == 155 -- 155 = Legendary Enchantment
+                        or spEffectCategory == 165 then -- 165 = Perpetual Enchantment
+                            __infiniteSpells[spellId] = spellData
+                            break
+                        end
+                    end
+                end
+            end
+        end
+        __infiniteSpellsInitialized = true
+    end
+
+    for spellId, spellData in pairs(__infiniteSpells) do
+        if not IsJewelGrantedSpell(spellId) then
+            for _, spEffect in pairs(spellData.SpEffects) do
+                if env(GetSpEffectID, spEffect) == TRUE then
+                    local spellIsEquipped = false
+                    for j = 0, 11, 1 do
+                        local equipMagicData = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(j))
+                        if equipMagicData == spellId then
+                            spellIsEquipped = true
+                            break
+                        end
+                    end
+
+                    if not spellIsEquipped then
+                        act(ClearSpEffect, spEffect)
+                        Log("Cleared Spell", spellId, "due to unequip SpEffect", spEffect)
+                    end
+                end
+            end
+        end
+    end
+end
+
+local jewelGrantedSpells = {
+    [7413] = 392400, -- Spirit Link + Jewel of the Ancestors
+    [5080] = 391300, -- Accursed Binding + Jewel of the Prince
+}
+function IsJewelGrantedSpell(spellId)
+    local jewelSpEffect = jewelGrantedSpells[spellId]
+    return jewelSpEffect ~= nil and env(GetSpEffectID, jewelSpEffect) == TRUE
+end
+
+
+-- Specific Spells
+local __hpLastTick = -1
+local __manaShieldFullHP = FALSE
+function ManaShield()
+    if env(GetSpEffectID, 1416000) == FALSE or env(GetSpEffectID, 148) == TRUE then
+        __hpLastTick = -1
+        __manaShieldFullHP = FALSE
+        return
+    end
+
+    if env(GetFP) == 0 then
+        act(ClearSpEffect, 1416000)
+        act(AddSpEffect, 1416005)
+        SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_HIT, FALSE)
+        return
+    end
+
+    local hp = env(GetHP)
+    if __hpLastTick == -1 then
+        __hpLastTick = hp
+        return
+    end
+
+    if __manaShieldFullHP == FALSE and hp == env(GetMaxHP) then
+        __manaShieldFullHP = TRUE
+    end
+
+    local hpLastTick = __hpLastTick
+    __hpLastTick = hp
+    if hp >= hpLastTick then
+        return
+    end
+
+    local healthLost = math.abs(hp - hpLastTick)
+    local ratio = 3.5
+    local fpCostInit = math.ceil(healthLost / ratio)
+    local fpCost = fpCostInit + 3
+    
+    if hp <= 1 then
+        fpCost = fpCost + (env(GetMaxFP) / 3)
+    end
+
+    if fpCost >= env(GetFP) then
+        act(ClearSpEffect, 1416000)
+        act(AddSpEffect, 1416005)
+        SetFP(0)
+
+        DealCalculatedDamage(-(env(GetHP) - (hpLastTick - (healthLost - (fpCost * ratio)))))
+    else
+        if __manaShieldFullHP == TRUE then -- Destined Death
+            if env(GetSpEffectID, 6860) == TRUE or env(GetSpEffectID, 6865) == TRUE then
+                DealCalculatedDamage(-(env(GetMaxHP) * 0.9) - env(GetHP))
+            else
+                FullHeal()
+            end
+        else
+            DealCalculatedDamage(-(hpLastTick - env(GetHP)))
+        end
+        SetFP(env(GetFP) - fpCost)
+    end
+end
+
+local __toggleSpells = {}
+local __toggledSpells = {}
+local __toggleSpellsInitialized = false
+local fpCost = PARAM.Magic.FP_CONSUMPTION
+function ToggleSpellFPCostManager()
+    if not __toggleSpellsInitialized then
+        for classIndex = 1, #__allSpells, 1 do
+            for spellId, spellData in pairs(__allSpells[classIndex]) do
+                if spellData.RestoreFpCost ~= nil then
+                    __toggleSpells[spellId] = spellData
+                end
+            end
+        end
+        __toggleSpellsInitialized = true
+    end
+
+    for spellId, spellData in pairs(__toggleSpells) do
+        for _, spEffect in pairs(spellData.SpEffects) do
+            -- Set FP cost to 0 if spell is active
+            if env(GetSpEffectID, spEffect) == TRUE then
+                local fpCostValue = GetParamValue(fpCost, spellId)
+                if fpCostValue > 0 then
+                    __toggledSpells[spellId] = fpCostValue
+                    SetParamValue(fpCost, spellId, 0)
+                end
+            -- Restore original FP cost if spell is inactive
+            elseif __toggledSpells[spellId] ~= nil then
+                Log(__toggledSpells[spellId])
+                SetParamValue(fpCost, spellId, __toggledSpells[spellId])
+                __toggledSpells[spellId] = nil
+            end
+        end
+    end
+end
+
+-- Other
+function CastingToolAshes(wep_hand, weaponID, neededSpEffect, grantedSpEffect)
+    if GetWeaponID(wep_hand) ~= tostring(weaponID) then
+        return
+    end
+
+    if wep_hand == HAND_RIGHT then
+        neededSpEffect = neededSpEffect + 1
+        grantedSpEffect = grantedSpEffect + 1
+    end
+
+    if env(GetSpEffectID, neededSpEffect) == TRUE then
+        act(AddSpEffect, grantedSpEffect)
+    end
+end
+
+hasLanded = false
+function IsCasterAsh()
+    if c_SwordArtsID == 109 and c_SwordArtsHand == HAND_RIGHT then
+        act(UpdateMagicIdToActive)
+        return TRUE
+    end
+    return FALSE
+end
+
+function SetMagicParam(originalMagicParam, newMagicParam)
+    if originalMagicParam == nil or newMagicParam == nil or originalMagicParam == newMagicParam then
+        return
+    end
+    
+    local currentSlot = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.SELECTED_MAGIC_SLOT_INDEX)
+    local currentMagicId = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(currentSlot))
+    if currentMagicId == originalMagicParam then
+        SetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(currentSlot), newMagicParam)
+        return
+    end
+
+    for i = 0, 11, 1 do
+        local magicId = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(i))
+        if magicId == originalMagicParam then
+            SetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(i), newMagicParam)
+            return
+        end
+    end
+end
+
+--  Dictionary
+__allSpells = {
+    __glintSpells,
+    __gravitySpells,
+    __dragonkinSpells,
+    __magmaSpells,
+    __stormSpells,
+    __nightSpells,
+    __necroSpells,
+    __frostSpells,
+    __aberrantSpells,
+    __giantsflameSpells,
+    __fundiSpells,
+    __bestialSpells,
+    __cultSpells,
+    __godskinSpells,
+    __frenzySpells,
+    __bloodflameSpells,
+    __rotSpells,
+    __mysticSpells,
+}

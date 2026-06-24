@@ -78,8 +78,21 @@ $Event(0, Default, function() {
     InitializeEvent(2, 28000702, 28000800, 28009212, 28002702, 28002704);
     InitializeCommonEvent(0, 90005706, 28000700, 30020, 0);
     InitializeCommonEvent(0, 90005706, 28000701, 30021, 0);
+    $InitializeEvent(0, 28008000); // region door 1
+    InitializeCommonEvent(0, 20000348, 28005010, 28002001); // connect collision break
+    InitializeCommonEvent(0, 90005250, 28000230, 28002230, 0, -1); //ambush_01
 });
 
+$Event(28008000, Default, function() {
+    if (EventFlag(28008001)) {        
+        ReproduceAssetAnimation(28001000, 1);
+        EndEvent();
+    }
+
+    WaitFor(InArea(20000, 28002000));    
+    ForceAnimationPlayback(28001000, 1, false, false, false);
+    SetEventFlagID(28008001, ON); //Movable door
+ });   
 $Event(28002580, Default, function() {
     RegisterLadder(28000580, 28000581, 28001580);
     RegisterLadder(28000582, 28000583, 28001582);
