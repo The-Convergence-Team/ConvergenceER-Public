@@ -1,6 +1,0 @@
-ROLLING_CMSGS = {
-    "Stealth_RollingSelftrans_CMSG",
-    "Stealth_Rolling_CMSG",
-    "Rolling_CMSG",
-    "Rolling_SelfTrans_CMSG"
-}
