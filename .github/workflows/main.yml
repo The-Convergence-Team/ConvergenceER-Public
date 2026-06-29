@@ -43,7 +43,7 @@ jobs:
 
         echo "Last successful SHA: ${LAST_SHA:-none}"
         echo "sha=${LAST_SHA}" >> "$GITHUB_OUTPUT"
-        echo "✓ Last run SHA resolved"
+        echo "[OK] Last run SHA resolved"
 
     # -----------------------------------------------------------------------
     # Build the list of files that changed since the last run and write it to
@@ -65,7 +65,28 @@ jobs:
         else
           echo "MODE=full" > /tmp/manifest_ctx.env
           > /tmp/changed_files.txt
-          echo "No valid prior SHA found â€” performing full scan."
+          echo "No valid prior SHA found - performing full scan."
+        fi
+
+    # -----------------------------------------------------------------------
+    # Check if manifest exists. If missing (deleted from repo), force FULL mode
+    # even if we have a prior SHA. This ensures we pull all LFS content when
+    # regenerating from scratch.
+    # -----------------------------------------------------------------------
+    - name: Check manifest existence
+      run: |
+        set -e
+        echo "[Check manifest existence]"
+        CURRENT_MODE=$(grep '^MODE=' /tmp/manifest_ctx.env | cut -d= -f2)
+
+        if [ ! -f "DownloaderContent/manifest_v2.json" ]; then
+          echo "Manifest not found: DownloaderContent/manifest_v2.json"
+          echo "Switching to FULL mode to regenerate from scratch."
+          echo "MODE=full" > /tmp/manifest_ctx.env
+          echo "[OK] Mode updated to: full"
+        else
+          echo "Manifest exists; keeping mode: $CURRENT_MODE"
+          echo "[OK] Mode confirmed: $CURRENT_MODE"
         fi
 
     # -----------------------------------------------------------------------
@@ -84,7 +105,7 @@ jobs:
         if [ "$MODE" = "full" ]; then
           echo "Full generation: pulling all LFS content from PublicRelease/..."
           git lfs pull --include="PublicRelease/"
-          echo "✓ Full LFS pull complete"
+          echo "[OK] Full LFS pull complete"
         else
           # INCREMENTAL mode: only pull changed files
           echo "Incremental mode: pulling only changed files..."
@@ -96,7 +117,7 @@ jobs:
             if [ -n "$changed_paths" ]; then
               echo "Pulling changed files: $changed_paths"
               git lfs pull --include="$changed_paths"
-              echo "✓ Incremental LFS pull complete"
+              echo "[OK] Incremental LFS pull complete"
             fi
           else
             echo "No files changed; skipping LFS pull."
@@ -252,7 +273,7 @@ jobs:
                         elif st in ("A", "M", "D") and len(cols) >= 2:
                             changes[st].append(cols[1])
                         elif st == "T" and len(cols) >= 2:
-                            # Type change (e.g. regular â†’ symlink): treat as modification
+                            # Type change (e.g. regular -> symlink): treat as modification
                             changes["M"].append(cols[1])
             except FileNotFoundError:
                 mode = "full"
@@ -281,9 +302,6 @@ jobs:
                         manifest = loaded.get("files", {}) if isinstance(loaded, dict) else {}
                     except Exception:
                         manifest = {}
-                if not manifest:
-                    effective_mode = "full"
-                    print("  No usable existing manifest â€” falling back to full scan.")
 
             print(f"\n[{root_dir}] mode={effective_mode}, existing entries={len(manifest)}")
 
@@ -353,16 +371,17 @@ jobs:
           echo "Pushing PublicRelease content..."
           git push
           CONTENT_SHA=$(git rev-parse HEAD)
-          echo "✓ Content commit: $CONTENT_SHA"
+          echo "[OK] Content commit: $CONTENT_SHA"
         else
-          echo "No changes to PublicRelease/ — skipping content commit."
+          echo "No changes to PublicRelease/ - skipping content commit."
           CONTENT_SHA=$(git rev-parse HEAD)
           echo "Current HEAD: $CONTENT_SHA"
         fi
 
         # Capture the SHA of the last content commit, inject it into the
         # manifest, then commit the manifest on its own as the final step.
-        echo "\nProcessing manifest..."
+        echo ""
+        echo "Processing manifest..."
         if [ -f "DownloaderContent/manifest_v2.json" ]; then
           echo "Manifest file found: DownloaderContent/manifest_v2.json"
           echo "Injecting commitHash: ${CONTENT_SHA}..."
@@ -376,7 +395,7 @@ jobs:
         d["commitHash"] = os.environ["CONTENT_SHA"]
         with open(path, "w") as f:
             json.dump(d, f, indent=2, sort_keys=True)
-        print(f"✓ Injected commitHash: {os.environ['CONTENT_SHA'][:8]}...")
+        print(f"[OK] Injected commitHash: {os.environ['CONTENT_SHA'][:8]}...")
         PYEOF
 
           git add "DownloaderContent/manifest_v2.json"
@@ -388,12 +407,12 @@ jobs:
             git commit -m "Auto-update manifest_v2.json"
             echo "Pushing manifest..."
             git push
-            echo "✓ Manifest committed and pushed"
+            echo "[OK] Manifest committed and pushed"
           fi
         else
           echo "ERROR: manifest_v2.json not found!"
           exit 1
         fi
-        echo "✓ All commits and pushes completed"
+        echo "[OK] All commits and pushes completed"
 
 
