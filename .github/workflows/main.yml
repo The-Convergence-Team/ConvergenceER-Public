@@ -52,6 +52,8 @@ jobs:
     # -----------------------------------------------------------------------
     - name: Compute changed files
       run: |
+        set -e
+        echo "[Compute changed files]"
         LAST_SHA="${{ steps.last_run.outputs.sha }}"
 
         if [ -n "$LAST_SHA" ] && git cat-file -e "${LAST_SHA}^{commit}" 2>/dev/null; then
@@ -67,37 +69,40 @@ jobs:
         fi
 
     # -----------------------------------------------------------------------
-    # Pull LFS content: only changed files in incremental mode, everything
-    # in full mode. This avoids downloading all LFS objects on every run.
+    # Pull LFS content strategically:
+    # - FULL mode: pull all LFS files in PublicRelease/
+    # - INCREMENTAL: pull only changed files
+    # This minimizes unnecessary downloads while ensuring correctness.
     # -----------------------------------------------------------------------
     - name: Pull LFS files
       run: |
+        set -e
+        echo "[Pull LFS files]"
         MODE=$(grep '^MODE=' /tmp/manifest_ctx.env | cut -d= -f2)
+        echo "LFS pull mode: $MODE"
 
-        if [ "$MODE" = "incremental" ]; then
-          # Collect paths for all additions, modifications and type-changes,
-          # plus destination paths from renames (R) and copies (C).
-          includes=$(awk -F'\t' '$1 ~ /^[AMT]$/{print $2}' /tmp/changed_files.txt | paste -sd ',' -)
-          dest=$(awk -F'\t' 'substr($1,1,1)=="R" || substr($1,1,1)=="C" {print $3}' /tmp/changed_files.txt | paste -sd ',' -)
-
-          all=""
-          [ -n "$includes" ] && all="$includes"
-          [ -n "$dest"     ] && { [ -n "$all" ] && all="$all,$dest" || all="$dest"; }
-
-          if [ -n "$all" ]; then
-            echo "Pulling LFS content for: $all"
-            git lfs pull --include="$all"
-          else
-            echo "No additions or modifications â€” skipping LFS pull."
-          fi
+        if [ "$MODE" = "full" ]; then
+          echo "Full generation: pulling all LFS content from PublicRelease/..."
+          git lfs pull --include="PublicRelease/"
+          echo "✓ Full LFS pull complete"
         else
-          echo "Full scan â€” pulling all LFS content."
-          git lfs pull
+          # INCREMENTAL mode: only pull changed files
+          echo "Incremental mode: pulling only changed files..."
+
+          if [ -s /tmp/changed_files.txt ]; then
+            # Build include pattern from all changed file paths
+            # This covers additions, modifications, renames, and copies
+            changed_paths=$(cat /tmp/changed_files.txt | awk '{print $NF}' | paste -sd ',' -)
+            if [ -n "$changed_paths" ]; then
+              echo "Pulling changed files: $changed_paths"
+              git lfs pull --include="$changed_paths"
+              echo "✓ Incremental LFS pull complete"
+            fi
+          else
+            echo "No files changed; skipping LFS pull."
+          fi
         fi
 
-    # -----------------------------------------------------------------------
-    # Incrementally update (or fully rebuild) each manifest_v2.json.
-    # manifest_v2.json itself is never included as a manifest entry.
     # -----------------------------------------------------------------------
     - name: Update manifests
       shell: python
@@ -180,6 +185,15 @@ jobs:
             """Match the .p{nn}.part naming convention precisely."""
             return bool(_PART_RE.search(os.path.basename(name)))
 
+        def is_lfs_pointer(path):
+            """Check if file is an LFS pointer file (not the actual content)."""
+            try:
+                with open(path, 'rb') as f:
+                    header = f.read(50)
+                    return header.startswith(b'version https://git-lfs.github.com/spec')
+            except Exception:
+                return False
+
         def upsert(path, root_dir, manifest):
             """Add or update the manifest entry for path (repo-root-relative)."""
             rel = os.path.relpath(path, root_dir).replace("\\", "/")
@@ -187,6 +201,12 @@ jobs:
                 return
             if not os.path.isfile(path):
                 return
+
+            # Skip LFS pointer files - they indicate the actual content wasn't pulled
+            if is_lfs_pointer(path):
+                print(f"  WARN    {rel} (LFS pointer, not actual content - you may need to run 'git lfs pull')")
+                return
+
             try:
                 size = os.path.getsize(path)
             except OSError:
@@ -375,3 +395,5 @@ jobs:
           exit 1
         fi
         echo "✓ All commits and pushes completed"
+
+
