@@ -218,7 +218,7 @@ jobs:
         def upsert(path, root_dir, manifest):
             """Add or update the manifest entry for path (repo-root-relative)."""
             rel = os.path.relpath(path, root_dir).replace("\\", "/")
-            if rel == "manifest_v2.json" or is_part_file(rel):
+            if rel == "manifest_v2.json" or rel == "manifest.json" or is_part_file(rel):
                 return
             if not os.path.isfile(path):
                 return
