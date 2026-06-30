@@ -1,0 +1,160 @@
+name: Update Discord avatars in credits
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 5 * * 1"
+  push:
+    paths:
+      - DownloaderContent/credits.json
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-avatars:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    env:
+      CREDITS_FILE: DownloaderContent/credits.json
+      DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate required secret
+        run: |
+          if [ -z "${DISCORD_BOT_TOKEN}" ]; then
+            echo "Missing required repository secret: DISCORD_BOT_TOKEN"
+            exit 1
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Update avatar URLs from Discord API
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import random
+          import time
+          import urllib.request
+          import urllib.error
+
+          credits_file = os.environ["CREDITS_FILE"]
+          bot_token = os.environ["DISCORD_BOT_TOKEN"]
+
+          with open(credits_file, "r", encoding="utf-8") as f:
+              data = json.load(f)
+
+          if not isinstance(data, list):
+              raise RuntimeError(f"Expected a JSON array in {credits_file}")
+
+          headers = {
+              "Authorization": f"Bot {bot_token}",
+              "User-Agent": "ConvergenceLauncher-CreditsUpdater/1.0"
+          }
+
+          changed = 0
+          processed = 0
+          max_attempts = 3
+          base_backoff_seconds = 0.25
+          per_request_delay_seconds = 0.20
+
+          for entry in data:
+              if not isinstance(entry, dict):
+                  continue
+
+              user_id = str(entry.get("DiscordUserId", "")).strip()
+              if not user_id or user_id.lower() == "none":
+                  continue
+
+              processed += 1
+              avatar_url = None
+
+              for attempt in range(1, max_attempts + 1):
+                  req = urllib.request.Request(
+                      url=f"https://discord.com/api/v10/users/{user_id}",
+                      headers=headers,
+                      method="GET"
+                  )
+
+                  try:
+                      with urllib.request.urlopen(req, timeout=20) as resp:
+                          payload = json.loads(resp.read().decode("utf-8"))
+
+                      avatar_hash = payload.get("avatar")
+                      if avatar_hash:
+                          avatar_url = f"https://cdn.discordapp.com/avatars/{user_id}/{avatar_hash}.png"
+                      else:
+                          discriminator = payload.get("discriminator")
+                          try:
+                              disc_int = int(discriminator) if discriminator is not None else 0
+                          except ValueError:
+                              disc_int = 0
+                          avatar_url = f"https://cdn.discordapp.com/embed/avatars/{disc_int % 5}.png"
+
+                      break
+                  except urllib.error.HTTPError as ex:
+                      retry_after_header = ex.headers.get("Retry-After") if ex.headers else None
+                      retry_after_seconds = None
+
+                      if retry_after_header:
+                          try:
+                              retry_after_seconds = float(retry_after_header)
+                          except ValueError:
+                              retry_after_seconds = None
+
+                      if ex.code == 429 and retry_after_seconds is not None and attempt < max_attempts:
+                          sleep_seconds = max(retry_after_seconds, per_request_delay_seconds)
+                          print(f"Rate limited for {user_id}; waiting {sleep_seconds:.2f}s before retry")
+                          time.sleep(sleep_seconds)
+                          continue
+
+                      if attempt >= max_attempts:
+                          print(f"Skipping {user_id}: HTTP {ex.code}")
+                          break
+
+                      backoff_seconds = base_backoff_seconds * (2 ** (attempt - 1)) + random.uniform(0.0, 0.1)
+                      time.sleep(backoff_seconds)
+                  except Exception as ex:
+                      if attempt >= max_attempts:
+                          print(f"Skipping {user_id}: {type(ex).__name__}")
+                          break
+
+                      backoff_seconds = base_backoff_seconds * (2 ** (attempt - 1)) + random.uniform(0.0, 0.1)
+                      time.sleep(backoff_seconds)
+
+              if avatar_url and entry.get("AvatarUrl") != avatar_url:
+                  entry["AvatarUrl"] = avatar_url
+                  changed += 1
+
+              # Keep requests gentle to avoid hitting API limits.
+              time.sleep(per_request_delay_seconds)
+
+          with open(credits_file, "w", encoding="utf-8", newline="\n") as f:
+              json.dump(data, f, ensure_ascii=False, indent=2)
+              f.write("\n")
+
+          print(f"Processed Discord users: {processed}")
+          print(f"Entries changed: {changed}")
+          PY
+
+      - name: Commit and push changes to main
+        run: |
+          if git diff --quiet -- "${CREDITS_FILE}"; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add "${CREDITS_FILE}"
+          git commit -m "chore(credits): refresh Discord avatar URLs"
+          git push origin HEAD:main
