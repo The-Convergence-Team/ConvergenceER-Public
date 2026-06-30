@@ -11,7 +11,8 @@
     "Name": "TigerG92",
     "InternalName": "Tiger",
     "Title": "Database Lead, Systems- and Gameplay Designer ",
-    "Type": "Developer"
+    "Type": "Developer",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/318845477124833290/b4f0dc81448431b1c0b98eb1af7888f1.png"
   },
   {
     "DiscordUserId": "305479324872474624",
@@ -25,7 +26,8 @@
     "Name": "Lord Exelot",
     "InternalName": "Exelot",
     "Title": "Lead Programmer, Level- and Systems Designer",
-    "Type": "Developer"
+    "Type": "Developer",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/1090679546547798048/f5685989069f063f41957f664c178113.png"
   },
   {
     "DiscordUserId": "241375390545870848",
@@ -39,126 +41,137 @@
     "Name": "Zeno",
     "InternalName": "Zeno",
     "Title": "Lead Level Designer",
-    "Type": "Developer"
+    "Type": "Developer",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/319188274591563779/edd0e84b5f6564b1fa960d36d93227e1.png"
   },
   {
     "DiscordUserId": "187000689644404739",
     "Name": "Solemn",
     "InternalName": "Solemn",
     "Title": "Quality Assurance Lead and Wiki Management",
-    "Type": "Developer"
+    "Type": "Developer",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/187000689644404739/7af1e3c29c2d1ae03bcb6607047e8aa7.png"
   },
   {
     "DiscordUserId": "101746181775843328",
     "Name": "Sinlore Kain",
     "InternalName": "Kain",
     "Title": "Enemy Behavior & Programming",
-    "Type": "Developer"
+    "Type": "Developer",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/101746181775843328/ed862c1b5638e4a855e3660799c4b34d.png"
   },
   {
     "DiscordUserId": "214535667227557888",
     "Name": "Tessa_Kitt",
     "InternalName": "Tessa",
     "Title": "Level Designer",
-    "Type": "Developer"
+    "Type": "Developer",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/214535667227557888/960ecae17ff3fad11ea74f415e1152ed.png"
   },
   {
     "DiscordUserId": "696647146975264790",
     "Name": "Time",
     "InternalName": "Time",
     "Title": "Level Designer and Wiki Editor",
-    "Type": "Developer"
+    "Type": "Developer",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/696647146975264790/a_5105d887e1b0a45b7fb58ae29867bdb3.png"
   },
   {
     "DiscordUserId": "386206896391979030",
     "Name": "Kmstr",
     "InternalName": "Kmstr",
     "Title": "Animator",
-    "Type": "Developer"
+    "Type": "Developer",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/386206896391979030/5a77c6aeafcf168fd423eb8aa58f2150.png"
   },
   {
     "DiscordUserId": "320155120534945802",
     "Name": "Vargram",
     "InternalName": "Vargram",
     "Title": "Level Designer and Quality Assurance",
-    "Type": "Developer"
+    "Type": "Developer",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/320155120534945802/dfceb578a195b1b58a7766970d106641.png"
   },
-
-  
-
   {
     "DiscordUserId": "710688030318657608",
     "Name": "NickPotterMusic",
     "InternalName": "Nick",
     "Title": "Composer",
-    "Type": "Contributor"
+    "Type": "Contributor",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/710688030318657608/97dfd5544832f537b3fce571bf569a20.png"
   },
   {
     "DiscordUserId": "130420235835670528",
     "Name": "Kidius Shredius",
     "InternalName": "Kidius",
     "Title": "Composer",
-    "Type": "Contributor"
+    "Type": "Contributor",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/130420235835670528/1fe3a7be984b83a54df3bd106b53758e.png"
   },
   {
     "DiscordUserId": "338542366983979010",
     "Name": "Sil",
     "InternalName": "Sil",
     "Title": "Cutscene Designer and Video Editor",
-    "Type": "Contributor"
+    "Type": "Contributor",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/338542366983979010/27f9065e53e566f74790d68930c6d06f.png"
   },
   {
     "DiscordUserId": "501046210099150860",
     "Name": "Mihai",
     "InternalName": "Mihai",
     "Title": "Enemy- Design and Behavior",
-    "Type": "Contributor"
+    "Type": "Contributor",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/501046210099150860/cbf4114ee051fe065ea1ea4262092e12.png"
   },
   {
     "DiscordUserId": "277133065569042444",
     "Name": "Sunflower",
     "InternalName": "Sunflower",
     "Title": "Artist and Wiki Editor",
-    "Type": "Contributor"
+    "Type": "Contributor",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/277133065569042444/006ad21c4e1464533e567eb760ad929a.png"
   },
   {
     "DiscordUserId": "251425451950604288",
     "Name": "Tom Clark",
     "InternalName": "Tom",
     "Title": "Reverse Engineering Support, Transmogrify Armor and ER-Dyes",
-    "Type": "Contributor"
+    "Type": "Contributor",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/251425451950604288/44cc58b923689058abcfff3a1e27a107.png"
   },
   {
     "DiscordUserId": "485884731116748805",
     "Name": "Joshy",
     "InternalName": "Joshy",
     "Title": "Interactive Map Creator",
-    "Type": "Contributor"
+    "Type": "Contributor",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/485884731116748805/249a288ac3bee6c34cc4d409c200e2ee.png"
   },
   {
     "DiscordUserId": "781743199722274828",
     "Name": "Vahar",
     "InternalName": "Vahar",
     "Title": "Tester and Wiki Editor",
-    "Type": "Contributor"
+    "Type": "Contributor",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/781743199722274828/9c078efdae9257db118f16925294a8f7.png"
   },
   {
     "DiscordUserId": "1349589907693109293",
     "Name": "Shmaxx",
     "InternalName": "Shmaxx",
     "Title": "VFX Artist",
-    "Type": "Contributor"
+    "Type": "Contributor",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/1349589907693109293/10acae1b32b5d2c6331a7a20b5ef1f8e.png"
   },
   {
     "DiscordUserId": "633684386973220868",
     "Name": "Rayan",
     "InternalName": "Rayan",
     "Title": "VFX Artist",
-    "Type": "Contributor"
+    "Type": "Contributor",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/633684386973220868/a_2ca0c48481747b9f5f5ebbba9070750a.png"
   },
-
-
-
   {
     "Name": "Asharpole",
     "Title": "Wiki Editor",
@@ -220,9 +233,6 @@
     "Title": "Wiki Editor",
     "Type": "WikiEditor"
   },
-
-
-
   {
     "Name": "Antho",
     "Title": "French",
@@ -559,29 +569,29 @@
     "Title": "Chinese",
     "Type": "Translator"
   },
-
-  
-
   {
     "DiscordUserId": "530179897633538061",
     "Name": "Freemathieuroy",
     "InternalName": "Mathieu",
     "Title": "Rigging and Cloth Simulation",
-    "Type": "FormerContributor"
+    "Type": "FormerContributor",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/530179897633538061/be4960927f9a469e94e870176a3217db.png"
   },
   {
     "DiscordUserId": "990074875362287676",
     "Name": "Blubber",
     "InternalName": "Blubber",
     "Title": "Animations",
-    "Type": "FormerContributor"
+    "Type": "FormerContributor",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/990074875362287676/1304b7ea0fd81e315f8962af3da20b3b.png"
   },
   {
     "DiscordUserId": "1004836789015560353",
     "Name": "sekirodubi",
     "InternalName": "sekirodubi",
     "Title": "Script Interpreter",
-    "Type": "FormerContributor"
+    "Type": "FormerContributor",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/1004836789015560353/d91d71053a95ffea76672830fda3e83d.png"
   },
   {
     "Name": "Cleverraptor6",
@@ -594,7 +604,8 @@
     "Name": "umbra_Rose",
     "InternalName": "umbra_Rose",
     "Title": "Texture Artist",
-    "Type": "FormerContributor"
+    "Type": "FormerContributor",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/429755235389669377/a_76c36e55cd23c90990d258de508a28f8.png"
   },
   {
     "Name": "Cyanic",
@@ -644,22 +655,21 @@
     "Title": "Wiki Management",
     "Type": "FormerContributor"
   },
-
-
-
   {
     "DiscordUserId": "815065611830951947",
     "Name": "Pear",
     "InternalName": "Pear",
     "Title": "CMI, FLVER Editor, Icon Automator Pro, NavMeshStudio, ERMapGenerator",
-    "Type": "ToolMaker"
+    "Type": "ToolMaker",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/815065611830951947/713aab5f719914f8cd151a40469923e0.png"
   },
   {
     "DiscordUserId": "382638147101655051",
     "Name": "Nordgaren",
     "InternalName": "Nordgaren",
     "Title": "ErdTools, BoundingBoxCalc, General Assistance",
-    "Type": "ToolMaker"
+    "Type": "ToolMaker",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/382638147101655051/fc1a4d036ad5bdd00d74ec8cba20cdbf.png"
   },
   {
     "Name": "DSMS team",
@@ -672,28 +682,32 @@
     "Name": "Vawser",
     "InternalName": "Vawser",
     "Title": "Smithbox",
-    "Type": "ToolMaker"
+    "Type": "ToolMaker",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/228172504554930176/2304327473f7439e8b67e6e5338298d2.png"
   },
   {
     "DiscordUserId": "450973448051752960",
     "Name": "Chainfailure",
     "InternalName": "Chainfailure",
     "Title": "AlternateSaveMod, ReWWise",
-    "Type": "ToolMaker"
+    "Type": "ToolMaker",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/450973448051752960/5e939d9908afa197d0af28e5dc4be978.png"
   },
   {
     "DiscordUserId": "237647551287787520",
     "Name": "ElaDiDu",
     "InternalName": "ElaDiDu",
     "Title": "Script Data Exposer",
-    "Type": "ToolMaker"
+    "Type": "ToolMaker",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/237647551287787520/26c1e1c89ae9dc3a72edbbd69296aeca.png"
   },
   {
     "DiscordUserId": "359354414961524736",
     "Name": "The12thAvenger",
     "InternalName": "The12thAvenger",
     "Title": "FbxImporter, ErClipGen",
-    "Type": "ToolMaker"
+    "Type": "ToolMaker",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/359354414961524736/42cad7e7905cde89d0ce9de33ff6aa45.png"
   },
   {
     "Name": "Grimrukh",
@@ -712,28 +726,32 @@
     "Name": "TKGP",
     "InternalName": "TKGP",
     "Title": "Yapped, SoulsFormats",
-    "Type": "ToolMaker"
+    "Type": "ToolMaker",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/154695351582982144/620c4d33dab4651d376447ac085f537d.png"
   },
   {
     "DiscordUserId": "124218818644934656",
     "Name": "ivi",
     "InternalName": "ivi",
     "Title": "Unpacked hks, WitchyBND",
-    "Type": "ToolMaker"
+    "Type": "ToolMaker",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/124218818644934656/a_902adf3bc2fd385d47e7eb0179e1e400.png"
   },
   {
     "DiscordUserId": "1001001318699253801",
     "Name": "Meowmaritus",
     "InternalName": "Meowmaritus",
     "Title": "DsAnimStudio",
-    "Type": "ToolMaker"
+    "Type": "ToolMaker",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/1001001318699253801/6a7d0c97b286d7014833a2ee0495012d.png"
   },
   {
     "DiscordUserId": "212090123771314177",
     "Name": "Katalash",
     "InternalName": "Katalash",
     "Title": "Mod Engine, LuaDecompiler",
-    "Type": "ToolMaker"
+    "Type": "ToolMaker",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/212090123771314177/68df0cf77d02b0ec01bd92b0ae8d8e08.png"
   },
   {
     "Name": "NamelessHoodie",
@@ -752,18 +770,17 @@
     "Name": "thefifthmatt",
     "InternalName": "thefifthmatt",
     "Title": "ESDLang, DarkScript3",
-    "Type": "ToolMaker"
+    "Type": "ToolMaker",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/147193705013575681/7d459683041c1bc53b84a86902b2d50f.png"
   },
   {
     "DiscordUserId": "341773267406684162",
     "Name": "Gomp",
     "InternalName": "Gomp",
     "Title": "ESDStudio",
-    "Type": "ToolMaker"
+    "Type": "ToolMaker",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/341773267406684162/ec52275db5403ef91db37b3e415ebec5.png"
   },
-
-
-
   {
     "Name": "CarsonDrewIt",
     "InternalName": "CarsonDrewIt",
@@ -775,9 +792,7 @@
     "Name": "BigBoss",
     "InternalName": "BigBoss",
     "Title": "Animation Retargeting Assistance",
-    "Type": "SpecialThanks"
+    "Type": "SpecialThanks",
+    "AvatarUrl": "https://cdn.discordapp.com/avatars/724675471819931777/a_29c93e59ae968b4f5549dff6edf95d96.png"
   }
 ]
-
-
-
