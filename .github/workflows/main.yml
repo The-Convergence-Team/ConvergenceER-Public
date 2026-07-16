@@ -344,9 +344,9 @@ jobs:
             print(f"Saved {manifest_path} ({len(manifest)} entries)")
 
     # -----------------------------------------------------------------------
-    # 1. Commit content changes (deletions, modifications) first.
-    # 2. Commit new part files in batches.
-    # 3. Capture HEAD SHA, inject it into the manifest, then commit the
+    # 1. Commit non-part content changes first.
+    # 2. Commit .p{nn}.part files in batches of 10.
+    # 3. Capture final HEAD SHA, inject it into the manifest, then commit the
     #    manifest on its own as the very last step.
     # -----------------------------------------------------------------------
     - name: Commit and push changes
@@ -356,30 +356,70 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
 
-        # Stage all changes under PublicRelease/ in one inclusive pass:
-        # modifications, tracked deletions, and new part chunks are all
-        # captured without brittle multi-step discovery.
-        echo "Staging all changes in PublicRelease/..."
-        git add -A PublicRelease/
-        STAGED=$(git diff --cached --name-only | wc -l)
-        echo "Staged $STAGED file(s)"
+        BATCH_SIZE=10
+        CONTENT_SHA=$(git rev-parse HEAD)
 
-        # Commit if anything was staged
-        if ! git diff --cached --quiet; then
-          echo "Committing PublicRelease content changes..."
-          git commit -m "Auto-update PublicRelease content"
-          echo "Pushing PublicRelease content..."
-          git push
-          CONTENT_SHA=$(git rev-parse HEAD)
-          echo "[OK] Content commit: $CONTENT_SHA"
-        else
-          echo "No changes to PublicRelease/ - skipping content commit."
-          CONTENT_SHA=$(git rev-parse HEAD)
-          echo "Current HEAD: $CONTENT_SHA"
+        # Collect changed part files (.pNN.part): tracked changes + untracked files.
+        mapfile -t PART_FILES < <(
+          {
+            git diff --name-only -- PublicRelease/
+            git ls-files --others --exclude-standard -- PublicRelease/
+          } | sort -u | grep -E '^PublicRelease/.*\.p[0-9]{2,}\.part$' || true
+        )
+
+        echo "Detected ${#PART_FILES[@]} changed part file(s)"
+
+        # 1) Commit non-part PublicRelease changes first.
+        echo "Staging non-part changes in PublicRelease/..."
+        git add -A PublicRelease/
+
+        # Unstage part files so they can be committed in batches.
+        if [ ${#PART_FILES[@]} -gt 0 ]; then
+          for f in "${PART_FILES[@]}"; do
+            git reset -q HEAD -- "$f" || true
+          done
         fi
 
-        # Capture the SHA of the last content commit, inject it into the
-        # manifest, then commit the manifest on its own as the final step.
+        if ! git diff --cached --quiet; then
+          echo "Committing non-part PublicRelease changes..."
+          git commit -m "Auto-update PublicRelease content (non-part files)"
+          echo "Pushing non-part commit..."
+          git push
+          CONTENT_SHA=$(git rev-parse HEAD)
+          echo "[OK] Non-part content commit: $CONTENT_SHA"
+        else
+          echo "No non-part PublicRelease changes."
+        fi
+
+        # 2) Commit part files in batches of 10.
+        if [ ${#PART_FILES[@]} -gt 0 ]; then
+          total=${#PART_FILES[@]}
+          batch_no=1
+
+          for ((i=0; i<total; i+=BATCH_SIZE)); do
+            batch=( "${PART_FILES[@]:i:BATCH_SIZE}" )
+            end=$(( i + ${#batch[@]} ))
+
+            echo "Staging part batch ${batch_no}: files $((i+1))..${end} of ${total}"
+            git add -A -- "${batch[@]}"
+
+            if ! git diff --cached --quiet; then
+              git commit -m "Auto-update PublicRelease parts batch ${batch_no} (${i+1}-${end})"
+              echo "Pushing part batch ${batch_no}..."
+              git push
+              CONTENT_SHA=$(git rev-parse HEAD)
+              echo "[OK] Pushed part batch ${batch_no}, HEAD=$CONTENT_SHA"
+            else
+              echo "Batch ${batch_no} had no staged changes."
+            fi
+
+            batch_no=$((batch_no+1))
+          done
+        else
+          echo "No part files to batch commit."
+        fi
+
+        # 3) Inject final content SHA into manifest and commit it last.
         echo ""
         echo "Processing manifest..."
         if [ -f "DownloaderContent/manifest_v2.json" ]; then
@@ -414,5 +454,4 @@ jobs:
           exit 1
         fi
         echo "[OK] All commits and pushes completed"
-
 
