@@ -11,6 +11,7 @@ tasklist /fi "imagename eq eldenring.exe" | findstr /b "eldenring.exe" > nul
 if %errorlevel%==0 (
     echo Killing old instance of eldenring.exe which is running in the background.
     taskkill /im eldenring.exe /f >nul
+    taskkill /FI "WINDOWTITLE eq Custom Music Injector" /F > nul
     :: A tiny delay to make sure the process has been killed properly before attempting a launch
     ping /n 2 localhost >nul 
 )
@@ -63,6 +64,19 @@ if %errorlevel%==1 (
     goto wait_loop
 )
 
+:: Launch the Custom Music Injector
+if not exist "%SystemDrive%\Program Files\Windows Media Player\wmplayer.exe" (
+    if not exist "%SystemDrive%\Program Files (x86)\Windows Media Player\wmplayer.exe" (
+        echo:
+        echo Windows Media Player is required for the Convergence's Custom Music Injector to function.
+        echo If you wish to have custom music, please install Windows Media Player.
+        echo:
+        pause
+        exit
+    )
+)
+echo Launching the Custom Music Injector.
+ping /n 1 localhost >nul
 exit
 
 :auto_troubleshooter
