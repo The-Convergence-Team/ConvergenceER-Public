@@ -52,7 +52,14 @@ __gravitySpells = {
     -- Shimmering Rune
     [4710] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rock Sling
     [4110] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rock Blaster
-    [4770] = { SpEffects = { 1477000 }, RestoreFpCost = nil }, -- Gravity Armor
+    [4770] = { SpEffects = { 
+        1477000, -- Gravity Armor
+        1477010, -- Gravity Armor (with Primeval Alignment)
+        1477020, -- Gravity Armor (with Meteoric Alignment)
+        1477100, -- Gravity Armor (with Jewel)
+        1477110, -- Gravity Armor (with Jewel and Primeval Alignment)
+        1477120, -- Gravity Armor (with Jewel and Meteoric Alignment)
+    }, RestoreFpCost = nil },
     [4721] = { SpEffects =         nil, RestoreFpCost = nil }, -- Collapsing Stars
     -- Glowing Rune
     [4700] = { SpEffects =         nil, RestoreFpCost = nil }, -- Meteorite
@@ -72,7 +79,7 @@ __gravitySpells = {
     [4790] = { SpEffects = { 1479000 }, RestoreFpCost = 24 }, -- Primeval Alignment
     [4791] = { SpEffects = { 1479100 }, RestoreFpCost = 10 }, -- Meteoric Alignment
     -- Shadow Rune
-    [2007400] = { { 
+    [2007400] = { SpEffects = { 
         21740000, -- Cosmic Surge 1
         21740001, -- Cosmic Surge 2
         21740002, -- Cosmic Surge 3
@@ -152,13 +159,15 @@ __dragonkinSpells = {
     [4590] = { SpEffects = { 1459005, 1459007 }, RestoreFpCost = nil }, -- Frozen Lightning Armament
     [4530] = { SpEffects =         nil, RestoreFpCost = nil }, -- Cragbolt Wisp
     -- Shimmering Rune
-    [5130] = { { 
+    [5130] = { SpEffects = { 
         1513000, -- Armor of Bubbles (3)
         1513001, -- Armor of Bubbles (2)
         1513002, -- Armor of Bubbles (1)
+        1513005, -- Armor of Bubbles (Duration)
         1513500, -- Armor of Bubbles - Jewel (1)
         1513501, -- Armor of Bubbles - Jewel (2)
         1513502, -- Armor of Bubbles - Jewel (3)
+        1513505, -- Armor of Bubbles - Jewel (Duration)
     }, RestoreFpCost = nil }, 
     [2004310] = { SpEffects =      nil, RestoreFpCost = nil }, -- Cragbolt Trio
     [5110] = { SpEffects =         nil, RestoreFpCost = nil }, -- Great Dragonkin Bubble
@@ -168,6 +177,7 @@ __dragonkinSpells = {
     [4642] = { SpEffects =         nil, RestoreFpCost = nil }, -- Dragonkin Retaliation ++
     -- Glowing Rune
     [4540] = { SpEffects =         nil, RestoreFpCost = nil }, -- Cragbolt Upwelling
+    [5140] = { SpEffects = { 1514000 }, RestoreFpCost = nil}, -- Dragonkin Enervation
     [6921] = { SpEffects =         nil, RestoreFpCost = nil }, -- Frozen Lightning Stake
     [5120] = { SpEffects =         nil, RestoreFpCost = nil }, -- Great Bubble Volley
     -- Shining Rune
@@ -321,7 +331,7 @@ __necroSpells = {
     [5080] = { SpEffects = { 1508000 }, RestoreFpCost = 25 }, -- Accursed Binding
     -- Glowing Rune
     [5001] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ancient Death Rancor
-    [5050] = { SpEffects =         nil, RestoreFpCost = nil }, -- Sacrifice
+    [5050] = { SpEffects = { 1505003 }, RestoreFpCost = nil }, -- Sacrifice
     [5022] = { SpEffects =         nil, RestoreFpCost = nil }, -- Curse of Putrefaction
     [5002] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rancor Bolt
     -- Shining Rune
@@ -397,12 +407,12 @@ __aberrantSpells = {
     [4940] = { SpEffects =         nil, RestoreFpCost = nil }, -- Telekinetic Assault
     -- Glowing Rune
     [4941] = { SpEffects =         nil, RestoreFpCost = nil }, -- Telekinetic Shell
-    [4971] = { SpEffects = { 1497100 }, RestoreFpCost = nil }, -- Ritual of Desecration
+    [4971] = { SpEffects = { 1497101 }, RestoreFpCost = nil }, -- Ritual of Desecration
     [4930] = { SpEffects =         nil, RestoreFpCost = nil }, -- Red Glinstone Razor
-    [4972] = { SpEffects = { 1497200 }, RestoreFpCost = nil }, -- Sadistic Glee
+    [4972] = { SpEffects = { 1497201 }, RestoreFpCost = nil }, -- Sadistic Glee
     -- Shining Rune
     [4911] = { SpEffects =         nil, RestoreFpCost = nil }, -- Crimson Rose
-    [4960] = { SpEffects = { 1496000 }, RestoreFpCost = 24 }, -- Blood Star
+    [4960] = { SpEffects = { 1496001 }, RestoreFpCost = 24 }, -- Blood Star
     [4932] = { SpEffects =         nil, RestoreFpCost = nil }, -- Red Glintstone Shards
     [4950] = { SpEffects =         nil, RestoreFpCost = nil }, -- Eochaid's Sap
     -- Radiant Rune

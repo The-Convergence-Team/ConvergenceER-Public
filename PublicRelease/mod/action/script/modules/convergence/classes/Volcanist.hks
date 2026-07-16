@@ -103,7 +103,6 @@ function VolcanistJewel_Devourer_OnSpell()
 
     for i = 1, #__magmaSpells do
         if LastCastMagicID == __magmaSpells[i][1] then
-            Log(LastCastMagicID)
             break
         elseif i == #__magmaSpells then
             return

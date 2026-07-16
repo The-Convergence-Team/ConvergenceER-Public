@@ -1,4 +1,4 @@
-Num  = 2431
+Num  = 2432
 1    = "AddBlendSpeak"
 2    = "AddDamageDefault"
 3    = "AddDamageDefaultGuard"
@@ -2430,4 +2430,5 @@ Num  = 2431
 2429 = "Event62065"
 2430 = "ItemTransformDaergraf"
 2431 = "ItemTransformDaergraf_Upper"
+2432 = "Event62020"
     

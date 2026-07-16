@@ -151,6 +151,7 @@ function LocalPlayerOnly()
     --Do(ObserveSpEffects)
     Do(MonitorPosition)
     Do(RecallAsh)
+    Do(VerdigrisThrowPrevent)
 
     -- Update rate: 30x p/second
     if not StaggerExecution(2) then return end
@@ -179,6 +180,7 @@ function LocalPlayerOnly()
     Do(BloodInitiateJewel_BloodflameBlade, 1632010, HAND_RIGHT, HAND_LEFT_BOTH, 162)
     Do(BloodInitiateJewel_BloodflameBlade, 1632020, HAND_LEFT, HAND_RIGHT_BOTH, 163)
     Do(FrostbiteProcHandler)
+    Do(NoGreatRuneDetector) -- See DisableSpellOnUnequip
     Do(ToggleTutorials)
 
     -- Update rate: 2x p/second
@@ -187,6 +189,7 @@ function LocalPlayerOnly()
     Do(NoxJewel_OathOfDarknessCostReduction)
     Do(ToggleSpellFPCostManager)
     Do(ShellRingMarksmanLockonRange)
+    Do(FrostbiteProcHandler)
     Do(TwoHandingDetector)
     Do(PowerstanceDetector)
     Do(MountChangeLib) -- See DisableSpellOnUnequip
@@ -202,11 +205,10 @@ function LocalPlayerOnly()
     Do(HeldWeaponTypeDetection)
     Do(FlamingArmamentFaithListener)
     Do(RL1_SpEffect) -- DoOnce + See DisableSpellOnUnequip
-    Do(DisableRaytracing) 
-    Do(NoGreatRuneDetector) -- See DisableSpellOnUnequip
+    Do(DisableRaytracing)
     Do(JewelSpellBan)
-    -- Do(HitboxVisualizer) -- Disable on release
-    -- Do(LogDivider) -- Disable on release
+    Do(HitboxVisualizer) -- Disable on release
+    Do(LogDivider) -- Disable on release
 end
 
 local doOnceEnemy = false
@@ -241,12 +243,17 @@ function ModdedEnemyUpdate()
     Do(PsudoDisableAI, 1515000, true, true) -- needs to stay here because it needs to handle both the turn on and off
     Do(PsudoDisableAI, 1515500, true, true)
     Do(PsudoDisableAI, 100656, false, false)
+    Do(TranquilityAiToggle)
+    Do(DeathblightProcHandler)
     Do(ReapplySpEffectTillIdle, 1515000, 1) -- needs to stay here because it needs to evaluate the reapplication
     Do(ReapplySpEffectTillIdle, 1515500, 1)
+    Do(ReapplySpEffectTillIdle, 1749100, 10)
     Do(SoulTether) -- needs to stay here because it needs to evaluate hp loss
 
-    -- if not StaggerExecution(30) then return end
-    -- Do(LogDivider)
+    if not StaggerExecution(30) then return end
+    Do(FrostbiteProcHandler)
+    Do(FrostWitchFreezeEffect, 1449410, 0, 1449412, 1449411) -- Freeze Solid
+    Do(LogDivider)
 
     if not StaggerExecution(120) then return end
     Do(ImmunityStripping)

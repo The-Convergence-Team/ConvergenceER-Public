@@ -97,7 +97,7 @@ function TriggerAfterSpellcast()
     spellCastCooldown = g_DeltaTimeCount
 
     act(AddSpEffect, 100615)
-    LastCastMagicID = GetSelectedEquipMagicData()
+    _, LastCastMagicID = GetSelectedEquipMagicData()
     FrenzyJewel_ImmuneCast()
     AberrantJewel_RecoveryCast()
     FundiJewel_OffensiveSpellBuff()
@@ -367,7 +367,7 @@ hkbFireEvent = AttachAfter(hkbFireEvent, function(state)
 end)
 
 Fire = AttachBefore(Fire, function(state)
-    AnimationLogger(state)
+    --AnimationLogger(state)
     --Log(state)
     --Log(debug.traceback())
 end)
@@ -502,11 +502,6 @@ act = function(...)
         return
     elseif func == AddSpEffect and args[2] == nil then
         return
-    elseif func == SetAllowedThrowDefenseType then
-        if IsDisableThrowDef() then
-            old_act(func, THROW_STATE_INVALID)
-            return
-        end
     elseif func == SetIsEquipmentMenuAccessOn then
         if env(GetSpEffectID, 100655) == TRUE then
             return

@@ -27,88 +27,123 @@ Jewel_of_the_Alchemist = 392500
 Jewel_of_the_Chained = 392600
 
 -- Jewel: Spellban
-
-local activeSpellBan = -1
 local jewelSpEffects = {
-    { JewelSpEffect = Jewel_of_the_Resolute,   AllowedSpells = nil }, -- Jewel of the Resolute
-    { JewelSpEffect = Jewel_of_the_Valorous,   AllowedSpells = nil }, -- Jewel of the Valorous
-    { JewelSpEffect = Jewel_of_the_Hunt,       AllowedSpells = nil }, -- Jewel of the Hunt
-    { JewelSpEffect = Jewel_of_the_Reckless,   AllowedSpells = nil }, -- Jewel of the Reckless
-    { JewelSpEffect = Jewel_of_the_Immovable,  AllowedSpells = nil }, -- Jewel of the Immovable
-    { JewelSpEffect = Jewel_of_the_Relentless, AllowedSpells = nil }, -- Jewel of the Relentless
-    { JewelSpEffect = Jewel_of_the_Devious,    AllowedSpells = nil }, -- Jewel of the Devious
-    { JewelSpEffect = Jewel_of_the_Primeval,   AllowedSpells = __glintSpells }, -- Jewel of the Primeval
-    { JewelSpEffect = Jewel_of_the_Cosmos,     AllowedSpells = __gravitySpells }, -- Jewel of the Cosmos
-    { JewelSpEffect = Jewel_of_the_Underworld, AllowedSpells = __dragonkinSpells }, -- Jewel of the Underworld
-    { JewelSpEffect = Jewel_of_the_Devourer,   AllowedSpells = __magmaSpells }, -- Jewel of the Devourer
-    { JewelSpEffect = Jewel_of_the_Storm,      AllowedSpells = __stormSpells }, -- Jewel of the Storm
-    { JewelSpEffect = Jewel_of_the_Darkness,   AllowedSpells = __nightSpells }, -- Jewel of the Darkness
-    { JewelSpEffect = Jewel_of_the_Prince,     AllowedSpells = __necroSpells }, -- Jewel of the Prince
-    { JewelSpEffect = Jewel_of_the_Dark_Moon,  AllowedSpells = __frostSpells }, -- Jewel of the Dark Moon
-    { JewelSpEffect = Jewel_of_the_Sinner,     AllowedSpells = __aberrantSpells }, -- Jewel of the Sinner
-    { JewelSpEffect = Jewel_of_the_Forge,      AllowedSpells = __giantsflameSpells }, -- Jewel of the Forge
-    { JewelSpEffect = Jewel_of_the_Righteous,  AllowedSpells = __fundiSpells }, -- Jewel of the Righteous
-    { JewelSpEffect = Jewel_of_the_Crucible,   AllowedSpells = __bestialSpells }, -- Jewel of the Crucible
-    { JewelSpEffect = Jewel_of_the_Ancients,   AllowedSpells = __cultSpells }, -- Jewel of the Ancients
-    { JewelSpEffect = Jewel_of_the_Flayer,     AllowedSpells = __godskinSpells }, -- Jewel of the Flayer
-    { JewelSpEffect = Jewel_of_the_Mindless,   AllowedSpells = __frenzySpells }, -- Jewel of the Mindless
-    { JewelSpEffect = Jewel_of_the_Wounded,    AllowedSpells = __bloodflameSpells }, -- Jewel of the Wounded
-    { JewelSpEffect = Jewel_of_the_Sealed,     AllowedSpells = __rotSpells }, -- Jewel of the Sealed
-    { JewelSpEffect = Jewel_of_the_Ancestors,  AllowedSpells = __mysticSpells }, -- Jewel of the Ancestors
-    { JewelSpEffect = Jewel_of_the_Alchemist,  AllowedSpells = nil }, -- Jewel of the Alchemist
+    { JewelSpEffect = Jewel_of_the_Resolute,   AllowedSpellsIndex = nil }, -- Jewel of the Resolute
+    { JewelSpEffect = Jewel_of_the_Valorous,   AllowedSpellsIndex = nil }, -- Jewel of the Valorous
+    { JewelSpEffect = Jewel_of_the_Hunt,       AllowedSpellsIndex = nil }, -- Jewel of the Hunt
+    { JewelSpEffect = Jewel_of_the_Reckless,   AllowedSpellsIndex = nil }, -- Jewel of the Reckless
+    { JewelSpEffect = Jewel_of_the_Immovable,  AllowedSpellsIndex = nil }, -- Jewel of the Immovable
+    { JewelSpEffect = Jewel_of_the_Relentless, AllowedSpellsIndex = nil }, -- Jewel of the Relentless
+    { JewelSpEffect = Jewel_of_the_Devious,    AllowedSpellsIndex = nil }, -- Jewel of the Devious
+    { JewelSpEffect = Jewel_of_the_Primeval,   AllowedSpellsIndex = 1   }, -- Jewel of the Primeval
+    { JewelSpEffect = Jewel_of_the_Cosmos,     AllowedSpellsIndex = 2   }, -- Jewel of the Cosmos
+    { JewelSpEffect = Jewel_of_the_Underworld, AllowedSpellsIndex = 3   }, -- Jewel of the Underworld
+    { JewelSpEffect = Jewel_of_the_Devourer,   AllowedSpellsIndex = 4   }, -- Jewel of the Devourer
+    { JewelSpEffect = Jewel_of_the_Storm,      AllowedSpellsIndex = 5   }, -- Jewel of the Storm
+    { JewelSpEffect = Jewel_of_the_Darkness,   AllowedSpellsIndex = 6   }, -- Jewel of the Darkness
+    { JewelSpEffect = Jewel_of_the_Prince,     AllowedSpellsIndex = 7   }, -- Jewel of the Prince
+    { JewelSpEffect = Jewel_of_the_Dark_Moon,  AllowedSpellsIndex = 8   }, -- Jewel of the Dark Moon
+    { JewelSpEffect = Jewel_of_the_Sinner,     AllowedSpellsIndex = 9   }, -- Jewel of the Sinner
+    { JewelSpEffect = Jewel_of_the_Forge,      AllowedSpellsIndex = 10  }, -- Jewel of the Forge
+    { JewelSpEffect = Jewel_of_the_Righteous,  AllowedSpellsIndex = 11  }, -- Jewel of the Righteous
+    { JewelSpEffect = Jewel_of_the_Crucible,   AllowedSpellsIndex = 12  }, -- Jewel of the Crucible
+    { JewelSpEffect = Jewel_of_the_Ancients,   AllowedSpellsIndex = 13  }, -- Jewel of the Ancients
+    { JewelSpEffect = Jewel_of_the_Flayer,     AllowedSpellsIndex = 14  }, -- Jewel of the Flayer
+    { JewelSpEffect = Jewel_of_the_Mindless,   AllowedSpellsIndex = 15  }, -- Jewel of the Mindless
+    { JewelSpEffect = Jewel_of_the_Wounded,    AllowedSpellsIndex = 16  }, -- Jewel of the Wounded
+    { JewelSpEffect = Jewel_of_the_Sealed,     AllowedSpellsIndex = 17  }, -- Jewel of the Sealed
+    { JewelSpEffect = Jewel_of_the_Ancestors,  AllowedSpellsIndex = 18  }, -- Jewel of the Ancestors
+    { JewelSpEffect = Jewel_of_the_Alchemist,  AllowedSpellsIndex = nil }, -- Jewel of the Alchemist
     --{ Jewel_of_the_Chained, __allSpells }, -- Jewel of the Chained
 }
+local activeJewelIndex = -1
+local activeSpellbanState = 0
 function JewelSpellBan()
-    if activeSpellBan > 0 and env(GetSpEffectID, jewelSpEffects[activeSpellBan].JewelSpEffect) == TRUE then
+    if activeJewelIndex > 0 and env(GetSpEffectID, jewelSpEffects[activeJewelIndex].JewelSpEffect) == TRUE then
         return
     end
 
     for index, data in ipairs(jewelSpEffects) do
-        if env(GetSpEffectID, data.JewelSpEffect) == TRUE then
-            activeSpellBan = index
-            CultStacks_HandleJewelSwap(data.JewelSpEffect)
+        local jewelSpEffect = data.JewelSpEffect
+        if env(GetSpEffectID, jewelSpEffect) == TRUE then
+            activeJewelIndex = index
+            local allowedSpellsIndex = data.AllowedSpellsIndex
 
-            for classIndex, classSpells in ipairs(__allSpells) do
-                if data.AllowedSpells == nil then -- Martials are not allowed any spells
-                    BanSpells(classSpells)
+            CultStacks_HandleJewelSwap(jewelSpEffect)
+
+            -- Martials
+            if allowedSpellsIndex == nil then
+                if activeSpellbanState == -1 then -- All Spells are already banned, no need to reapply
+                    return
+                end
+
+                if activeSpellbanState ~= 0 then
+                    -- Only ban the previously allowed spell list
+                    BanSpells(__allSpells[activeSpellbanState])
                 else
-                    if classSpells == data.AllowedSpells then -- Ensure the allowed spells are the only ones allowed for the class
-                        AllowSpells(classSpells)
-                    else -- Ban any spells that are not in the allowed list for the class
+                    for _, classSpells in ipairs(__allSpells) do
                         BanSpells(classSpells)
                     end
                 end
+
+                activeSpellbanState = -1
+            -- Magic classes but no spell ban is applied yet
+            elseif activeSpellbanState == 0 then
+                for classIndex, classSpells in ipairs(__allSpells) do
+                    if classIndex == allowedSpellsIndex then
+                        AllowSpells(classSpells)
+                    else
+                        BanSpells(classSpells)
+                    end
+                end
+
+                activeSpellbanState = allowedSpellsIndex
+            -- Magic class after martials (all classes already banned)
+            elseif activeSpellbanState == -1 then
+                AllowSpells(__allSpells[allowedSpellsIndex])
+                activeSpellbanState = allowedSpellsIndex
+            -- Magic classes had jewel swapped
+            elseif activeSpellbanState ~= allowedSpellsIndex then
+                BanSpells(__allSpells[activeSpellbanState])
+                AllowSpells(__allSpells[allowedSpellsIndex])
+                activeSpellbanState = allowedSpellsIndex
             end
+
             return
         end
     end
 
-    if activeSpellBan == 0 then -- Nothing changed since last check, no need to log or reapply spell bans
+    if activeJewelIndex == 0 then return end -- Nothing changed since last check, no need to log or reapply spell bans
+    
+    activeJewelIndex = 0 -- No Jewels detected, remove all spell bans
+    CultStacks_HandleJewelSwap(0)
+
+    if activeSpellbanState == 0 then
         return
     end
-    activeSpellBan = 0 -- No Jewels detected, remove all spell bans
-    CultStacks_HandleJewelSwap(0)
-    for _, classSpells in ipairs(__allSpells) do
-        AllowSpells(classSpells)
+
+    for index, classSpells in ipairs(__allSpells) do
+        if index ~= activeSpellbanState then
+            AllowSpells(classSpells)
+        end
+    end
+
+    activeSpellbanState = 0
+end
+
+function AllowSpells(spellList)
+    for spellId, spellData in pairs(spellList) do
+        if GetParamValue(PARAM.Magic.MAX_USES, spellId) ~= -1 then
+            SetParamValue(PARAM.Magic.MAX_USES, spellId, -1)
+        end
     end
 end
 
-function AllowSpells(spellList) BanSpellClass(spellList, -1) end
-function BanSpells(spellList) BanSpellClass(spellList, 0) end
-
-function BanSpellClass(spellList, quantity)
+function BanSpells(spellList)
     for spellId, spellData in pairs(spellList) do
-        if quantity == 0 and spellData.SpEffects ~= nil then
-            for _, spEffect in ipairs(spellData.SpEffects) do
-                if env(GetSpEffectID, spEffect) == TRUE then
-                    act(ClearSpEffect, spEffect)
-                end
-            end
-        end
-
-        if GetParamValue(PARAM.Magic.MAX_USES, spellId) ~= quantity then
-            SetParamValue(PARAM.Magic.MAX_USES, spellId, quantity)
-            --Log("BanSpellClass:", spellId, spellData, quantity)
+        ClearSpEffectArray(spellData.SpEffects)
+        if GetParamValue(PARAM.Magic.MAX_USES, spellId) ~= 0 then
+            SetParamValue(PARAM.Magic.MAX_USES, spellId, 0)
         end
     end
 end

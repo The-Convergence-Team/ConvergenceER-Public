@@ -43,7 +43,8 @@ function CultSpellStack_Use(checkSpEffect, subtraction)
 end
 
 function CultSpellStack_Apply(magicParam, appliedSpeffect, reduction)
-    if GetSelectedEquipMagicData() ~= magicParam then
+    local _, currentMagicParam = GetSelectedEquipMagicData()
+    if currentMagicParam ~= magicParam then
         return
     end
 

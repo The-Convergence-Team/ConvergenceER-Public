@@ -38,19 +38,19 @@ function SkardeShieldHandler(on, noFpCost)
     end
 end
 
+local SkardeShieldAshesCost = {
+    [90] = true, -- Shield Bash
+    [91] = true, -- Barricade Shield
+    [92] = true, -- Parry
+    [93] = true, -- Bucklet Parry
+    --95, -- Carian Retaliation
+    [97] = true, -- Golden Parry
+    [98] = true, -- Shield Crash
+    [152] = true, -- Holy Ground
+    --399, -- Shield Strike
+}
 function SkardeShieldAltAshHandler()
 	local c_WeaponSwordArts = GetWeaponID(c_SwordArtsHand)
-    local SkardeShieldAshesCost = {
-        [90] = true, -- Shield Bash
-        [91] = true, -- Barricade Shield
-        [92] = true, -- Parry
-        [93] = true, -- Bucklet Parry
-        --95, -- Carian Retaliation
-        [97] = true, -- Golden Parry
-        [98] = true, -- Shield Crash
-        [152] = true, -- Holy Ground
-        --399, -- Shield Strike
-    }
     if c_WeaponSwordArts == "31350000" and SkardeShieldAshesCost[c_SwordArtsID] then
         act(AddSpEffect, 5322511) -- 3 FP Cost
     end
@@ -140,12 +140,12 @@ function BlightpoleOffHandler()
 end
 
 local equippedWeaponSlots = {
-    CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.R_HAND_WEAPON_GA_ITEM_HANDLE(0),
-    CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.R_HAND_WEAPON_GA_ITEM_HANDLE(1),
-    CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.R_HAND_WEAPON_GA_ITEM_HANDLE(2),
-    CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.L_HAND_WEAPON_GA_ITEM_HANDLE(0),
-    CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.L_HAND_WEAPON_GA_ITEM_HANDLE(1),
-    CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.L_HAND_WEAPON_GA_ITEM_HANDLE(2),
+    { ptr = CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.R_HAND_WEAPON_GA_ITEM_HANDLE(0), found = false },
+    { ptr = CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.R_HAND_WEAPON_GA_ITEM_HANDLE(1), found = false },
+    { ptr = CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.R_HAND_WEAPON_GA_ITEM_HANDLE(2), found = false },
+    { ptr = CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.L_HAND_WEAPON_GA_ITEM_HANDLE(0), found = false },
+    { ptr = CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.L_HAND_WEAPON_GA_ITEM_HANDLE(1), found = false },
+    { ptr = CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.CHR_ASM.L_HAND_WEAPON_GA_ITEM_HANDLE(2), found = false },
 }
 local _recallAsh_fpContainer = -1
 function RecallAsh()
@@ -161,30 +161,41 @@ function RecallAsh()
     if not StaggerExecution(6) then return end
     PositionTrackerReset(false)
     RecallAshBulletEnabler()
-    
-    if not StaggerExecution(30) then return end
     RecallAshMonitor()
 end
 
+local recallAshMonitorIndex = 1;
 function RecallAshMonitor()
     if env(GetSpEffectID, 2052) == TRUE or env(IsOnMount) == TRUE then
         return
     end
 
-    for _, slot in ipairs(equippedWeaponSlots) do
-        local weaponGa = GetPointerValue(slot)
-        local gaItem = GetGaItemByHandle(weaponGa)
-        if gaItem ~= nil and tostring(gaItem.Id) ~= "110000" then
-            if gaItem.GemGaItemHandle ~= 0 then
-                local gemItem = GetGaItemByHandle(gaItem.GemGaItemHandle)
-                if gemItem ~= nil and tostring(gemItem.Id) == "80500" then
-                    MONITOR_POSITION = true
-                    return
-                end
+    local slot = equippedWeaponSlots[recallAshMonitorIndex]
+    local weaponGa = GetPointerValue(slot.ptr)
+    local gaItem = GetGaItemByHandle(weaponGa)
+    slot.found = false
+
+    if gaItem ~= nil and tostring(gaItem.Id) ~= "110000" then
+        if gaItem.GemGaItemHandle ~= 0 then
+            local gemItem = GetGaItemByHandle(gaItem.GemGaItemHandle)
+            if gemItem ~= nil and tostring(gemItem.Id) == "80500" then
+                slot.found = true
             end
         end
     end
-    MONITOR_POSITION = false
+
+    recallAshMonitorIndex = recallAshMonitorIndex + 1
+    if recallAshMonitorIndex > 6 then
+        recallAshMonitorIndex = 1
+    end
+
+    MONITOR_POSITION = 
+        equippedWeaponSlots[1].found or
+        equippedWeaponSlots[2].found or
+        equippedWeaponSlots[3].found or
+        equippedWeaponSlots[4].found or
+        equippedWeaponSlots[5].found or
+        equippedWeaponSlots[6].found
 end
 
 function RecallAshBulletEnabler()
@@ -210,6 +221,7 @@ function RecallAshBulletHandler()
         return
     end
 
+    local fieldInsHandle = GetFieldInsHandle()
     local index = 0
     while true do
         local bulletExists = GetPointerValue(GAME_BASE.CS_BULLET_MANAGER.BULLET_LIST.EXISTS(index))
@@ -218,7 +230,7 @@ function RecallAshBulletHandler()
         end
 
         local isOwnedByCurrentChrIns = false
-        if GetPointerValue(GAME_BASE.CS_BULLET_MANAGER.BULLET_LIST.OWNER_CHR_HANDLE(index)) == GetPointerValue(CHR_INS_BASE.FIELD_INS_HANDLE) then
+        if GetPointerValue(GAME_BASE.CS_BULLET_MANAGER.BULLET_LIST.OWNER_CHR_HANDLE(index)) == fieldInsHandle then
             isOwnedByCurrentChrIns = true
         end
 
@@ -250,7 +262,7 @@ function RecallAshBulletHandler()
 
         index = index + 1
     end
-    
+
     bulletEnabled = false
 end
 
@@ -285,7 +297,7 @@ function RecallAshUsage()
         local entry = hpTrackerTable[i]
         if entry.timeStamp <= targetTime then
             if entry.hp > env(GetHP) then
-                DealCalculatedDamage(-(entry.hp - env(GetHP)))
+                CalculatedHeal(entry.hp - env(GetHP))
             end
             break
         end

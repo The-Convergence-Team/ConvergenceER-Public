@@ -20,6 +20,7 @@ local QUATERNION = 103 -- returns 4 elements: x, y, z, w
 local CHARACTERMODEL = 104 -- returns a 4 digit ID
 local MAPID = 105 -- returns 4 elements: areaId, blockId, regionId, indexId
 local CHRINS = 106 -- Should not be used in this file, only GameBasePointers, just here for completionism
+local BIG_UNSIGNED_INT = 107
 
 ---------------------------------------------------------------------------
 -- Pointer Tables
@@ -145,19 +146,19 @@ CHR_INS_BASE = {
                 CURR_WEP_SLOT_OFFSET_LEFT = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x328 - 0x328) },
                 CURR_WEP_SLOT_OFFSET_RIGHT = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x32C - 0x328) },
                 L_HAND_WEAPON_GA_ITEM_HANDLE = function(index)
-                    return { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + ((0x340 + (index * 0x8)) - 0x328) }
+                    return { _CHR_INS_BASE, BIG_UNSIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + ((0x340 + (index * 0x8)) - 0x328) }
                 end,
                 R_HAND_WEAPON_GA_ITEM_HANDLE = function(index)
-                    return { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + ((0x344 + (index * 0x8)) - 0x328) }
+                    return { _CHR_INS_BASE, BIG_UNSIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + ((0x344 + (index * 0x8)) - 0x328) }
                 end,
-                ARROW_1_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x358 - 0x328) },
-                ARROW_2_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x35C - 0x328) },
-                BOLT_1_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x360 - 0x328) },
-                BOLT_2_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x364 - 0x328) },
-                HELMET_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x370 - 0x328) },
-                ARMOR_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x374 - 0x328) },
-                GAUNTLETS_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x378 - 0x328) },
-                LEGGINGS_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x37C - 0x328) },
+                ARROW_1_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_UNSIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x358 - 0x328) },
+                ARROW_2_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_UNSIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x35C - 0x328) },
+                BOLT_1_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_UNSIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x360 - 0x328) },
+                BOLT_2_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_UNSIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x364 - 0x328) },
+                HELMET_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_UNSIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x370 - 0x328) },
+                ARMOR_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_UNSIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x374 - 0x328) },
+                GAUNTLETS_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_UNSIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x378 - 0x328) },
+                LEGGINGS_GA_ITEM_HANDLE = { _CHR_INS_BASE, BIG_UNSIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + (0x37C - 0x328) },
                 L_HAND_WEAPON = function(index)
                     return { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x70 + 0x08 + ((0x398 + (index * 0x8)) - 0x328) }
                 end,
@@ -182,7 +183,7 @@ CHR_INS_BASE = {
             EQUIP_ITEM_DATA = { -- 0x288
                 QUICKSLOTS = { -- 0x8
                     GA_ITEM_HANDLE = function(index)
-                        return { _CHR_INS_BASE, BIG_SIGNED_INT, 0x580, 0x2B0 + 0x288 + 0x8 + (index * 0x8) }
+                        return { _CHR_INS_BASE, BIG_UNSIGNED_INT, 0x580, 0x2B0 + 0x288 + 0x8 + (index * 0x8) }
                     end,
                     INDEX = function(index)
                         return { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x2B0 + 0x288 + 0x8 + (index * 0x8) + 0x4 }

@@ -3,7 +3,189 @@
 ------------------------------------------
 EnableDebugLogger = false
 
+------------------------------------------
+-- Importing Convergence Modules
+------------------------------------------
+local script_dir = debug.getinfo(1, "S").source:sub(2):match("(.*/)"):gsub("/", "\\") .. "modules\\"
+function LoadFile(path)
+    if path == nil then return end
+    local success, err = pcall(function() return dofile(script_dir .. path) end)
+    if not success then
+        act(10001, "Failed to import module: " .. path .. "\nError: " .. err)
+    end
+end
+function LoadFileArray(path_array)
+    if path_array == nil then return end
+    for i = 1, #path_array, 1 do
+        LoadFile(path_array[i])
+    end
+end
 
+LoadFile("vanilla\\ActDictionary.hks")
+LoadFile("vanilla\\EnvDictionary.hks")
+ImportModules()
+
+local basic_modules = { -- 5
+    "vanilla\\CommonIncludes.hks",
+    "vanilla\\Globals.hks",
+    
+    "exposer\\ExposerVariables.hks",
+    "exposer\\ChrInsPointers.hks",
+    "convergence\\EnemyInfo.hks",
+}
+
+local addative_modules = { -- 27
+    "vanilla\\CMSGLibrary.hks",
+
+    "exposer\\GameBasePointers.hks",
+    "exposer\\ParamPointers.hks",
+    
+    "convergence\\Diversions.hks",
+    "convergence\\Math.hks",
+    "convergence\\Multiplayer.hks",
+    "convergence\\OS.hks",
+    "convergence\\Utility.hks",
+    "convergence\\Status.hks",
+    "convergence\\Animations.hks",
+    "convergence\\Position.hks",
+    "convergence\\ChrModelDictionary.hks",
+    "convergence\\SpEffects.hks",
+
+    "convergence\\equipment\\WeaponsGeneric.hks",
+    "convergence\\equipment\\WeaponsUnique.hks",
+
+    "convergence\\classes\\BloodInitiate.hks",
+    "convergence\\classes\\FlameProphet.hks",
+    "convergence\\classes\\FrenziedZealot.hks",
+    "convergence\\classes\\GodskinCelebrant.hks",
+    "convergence\\classes\\Mystic.hks",
+    "convergence\\classes\\Necromancer.hks",
+    "convergence\\classes\\NoxOracle.hks",
+    "convergence\\classes\\ServantOfRot.hks",
+    "convergence\\classes\\BestialDevout.hks",
+    "convergence\\classes\\Marksman.hks",
+    "convergence\\classes\\FrostWitch.hks",
+}
+-- In the case of the local player these modules have to be loaded later
+local addative_modules_delayed = { -- 1
+    "convergence\\equipment\\Spells.hks", -- After spell Dictionaries
+}
+-- Must be loaded last to avoid errors
+local final_modules = { -- 1
+    "convergence\\Update.hks",
+}
+
+local bannedNpcParams = {
+    0, -- None
+    1000000, -- Buddystone
+    10000000, -- Bonfire
+    10003000, -- Talk Dummy
+}
+
+local modulesLoaded = false
+local delayedModulesLoaded = false
+local modulesAmountLoaded = 0
+function ImportModules()
+    if modulesLoaded then return end
+    local isNPC = env(IsCOMPlayer) == TRUE
+
+    if isNPC then
+        if #basic_modules > modulesAmountLoaded then
+            modulesAmountLoaded = modulesAmountLoaded + 1
+            LoadFile(basic_modules[modulesAmountLoaded])
+            if #basic_modules == modulesAmountLoaded then return end
+            modulesAmountLoaded = modulesAmountLoaded + 1
+            LoadFile(basic_modules[modulesAmountLoaded])
+            return
+        end
+
+        if bannedNpcParams[GetNpcParamId()] then
+            modulesLoaded = true
+            bannedNpcParams = nil
+            basic_modules = nil
+            addative_modules = nil
+            addative_modules_delayed = nil
+            final_modules = nil
+            return
+        end
+
+        if #addative_modules + #basic_modules > modulesAmountLoaded then
+            modulesAmountLoaded = modulesAmountLoaded + 1
+            LoadFile(addative_modules[modulesAmountLoaded - #basic_modules])
+            if #addative_modules == modulesAmountLoaded - #basic_modules then return end
+            modulesAmountLoaded = modulesAmountLoaded + 1
+            LoadFile(addative_modules[modulesAmountLoaded - #basic_modules])
+            return
+        end
+        
+        if not delayedModulesLoaded then
+            LoadFileArray(addative_modules_delayed)
+            delayedModulesLoaded = true
+            return
+        end
+        
+        LoadFileArray(final_modules)
+
+        modulesLoaded = true
+        bannedNpcParams = nil
+        basic_modules = nil
+        addative_modules = nil
+        addative_modules_delayed = nil
+        final_modules = nil
+        return
+    end
+
+    local player_only_modules = { -- 7
+        "convergence\\LogicModification.hks", -- Unsure about this one
+
+        "convergence\\equipment\\EquipmentGeneric.hks",
+
+        "convergence\\classes\\AberrantHeretic.hks",
+        "convergence\\classes\\DragonCultist.hks",
+        "convergence\\classes\\Dreadnought.hks",
+        "convergence\\classes\\Rogue.hks",
+        "convergence\\classes\\Sellsword.hks",
+    }
+    
+    LoadFileArray(basic_modules)
+    LoadFileArray(addative_modules)
+    LoadFileArray(player_only_modules)
+
+    if IsLocalPlayer() then
+        local local_player_only_modules = { -- 16
+            "convergence\\Buddies.hks",
+            "convergence\\LoadingScreens.hks",
+            "convergence\\Bullets.hks",
+            "convergence\\Settings.hks",
+            "convergence\\Stats.hks",
+            --"convergence\\Minions.hks",
+            
+            "convergence\\equipment\\Inventory.hks",
+            "convergence\\equipment\\Consumables.hks",
+            "convergence\\equipment\\SorceryDictionary.hks",
+            "convergence\\equipment\\IncantationDictionary.hks",
+            "convergence\\equipment\\Talismans.hks",
+
+            "convergence\\classes\\Fundamentalist.hks",
+            "convergence\\classes\\GlintstoneSorcerer.hks",
+            "convergence\\classes\\Prisoner.hks",
+            "convergence\\classes\\Retainer.hks",
+            "convergence\\classes\\Stormcaller.hks",
+            "convergence\\classes\\Volcanist.hks", 
+        }
+
+        LoadFileArray(local_player_only_modules)
+    end
+
+    LoadFileArray(addative_modules_delayed)
+    LoadFileArray(final_modules)
+    
+    modulesLoaded = true
+    basic_modules = nil
+    addative_modules = nil
+    addative_modules_delayed = nil
+    final_modules = nil
+end
 
 ------------------------------------------
 -- Core: Functions
@@ -2648,6 +2830,8 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
             arts_idx = 11
 		elseif c_SwordArtsID == 173 and env(GetSpEffectID, 2101) == TRUE then -- Mystic Huntress Sword
             arts_idx = 1
+		elseif c_SwordArtsID == 320 and env(GetSpEffectID, 2102) == TRUE then -- Idris' Halberd
+            arts_idx = 1
 		elseif c_WeaponSwordArts == "10070000" then -- Godwyn's cragblade
 			arts_idx = 4
 		elseif c_SwordArtsID == 388 then --smithscript rosary
@@ -2695,6 +2879,8 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
 		elseif c_SwordArtsID == 312 and env(GetSpEffectID, 1878) == TRUE then  -- Fire Swordspear
 			combo_idx = 1
 		elseif c_SwordArtsID == 173 and env(GetSpEffectID, 2101) == TRUE then  -- Mystic Huntress Sword
+			combo_idx = 1
+		elseif c_SwordArtsID == 320 and env(GetSpEffectID, 2102) == TRUE then  -- Idris' Halberd
 			combo_idx = 1
 		elseif c_SwordArtsID == 388 then --smithscript rosary
 			if env(GetSpEffectID, 2422) == TRUE then -- 044200 -- Axe
@@ -3256,7 +3442,7 @@ function GetAttackMaxNumber(hand)
         elseif hand == HAND_LEFT then
             max_num = 3
         else
-            max_num = 3
+            max_num = 4
         end
         return max_num
     end
@@ -5900,6 +6086,9 @@ function ExecDamage(is_parry, is_attackwhileguard)
     if env(GetBehaviorID, 1) == TRUE then
         return FALSE
     end
+
+    OnExecDamageTrue()
+
     -- Raptors of the Mist Dodge
     if env(GetSpEffectID, 100500) == TRUE then
         ExecEventAllBody("W_SwordArtsStandDodge")
@@ -5916,7 +6105,7 @@ function ExecDamage(is_parry, is_attackwhileguard)
     end
 	
 		-- Raptors of Conv Marika Hammer dodge
-    if env(GetSpEffectID, 100510) == TRUE then
+    if env(GetSpEffectID, 100510) == TRUE and GetVariable("IsEnoughArtPointsL2") == 1 then
         ExecEventAllBody("W_SwordArtsOneShotShieldLeft_Cancel")
         act(AddSpEffect, 5635)
         ResetDamageCount()
@@ -19761,6 +19950,7 @@ function Update()
         act(AddSpEffect, 102381)
     end
 
+    ImportModules()
     ModdedUpdate()
     g_FrameCount = g_FrameCount + 1
 end
@@ -26644,76 +26834,6 @@ end
 local blendtimemax = 0
 local blendtime = 0
 local EVENT_BLEND_RATE = 1000
-
-------------------------------------------
--- Importing Convergence Modules
-------------------------------------------
-local script_dir = debug.getinfo(1, "S").source:sub(2):match("(.*/)"):gsub("/", "\\") .. "modules\\"
-
-pcall(loadfile(script_dir .. "vanilla\\ActDictionary.hks"))
-pcall(loadfile(script_dir .. "vanilla\\CMSGLibrary.hks"))
-pcall(loadfile(script_dir .. "vanilla\\CommonIncludes.hks"))
-pcall(loadfile(script_dir .. "vanilla\\EnvDictionary.hks"))
-pcall(loadfile(script_dir .. "vanilla\\Globals.hks"))
-
-pcall(loadfile(script_dir .. "exposer\\ChrInsPointers.hks"))
-pcall(loadfile(script_dir .. "exposer\\ExposerVariables.hks"))
-pcall(loadfile(script_dir .. "exposer\\GameBasePointers.hks"))
-pcall(loadfile(script_dir .. "exposer\\ParamPointers.hks"))
-
-pcall(loadfile(script_dir .. "convergence\\Animations.hks"))
-pcall(loadfile(script_dir .. "convergence\\Buddies.hks"))
-pcall(loadfile(script_dir .. "convergence\\Bullets.hks"))
-pcall(loadfile(script_dir .. "convergence\\ChrModelDictionary.hks"))
-pcall(loadfile(script_dir .. "convergence\\Diversions.hks"))
-pcall(loadfile(script_dir .. "convergence\\EnemyInfo.hks"))
-pcall(loadfile(script_dir .. "convergence\\LoadingScreens.hks"))
-pcall(loadfile(script_dir .. "convergence\\LogicModification.hks"))
-pcall(loadfile(script_dir .. "convergence\\Math.hks"))
---pcall(loadfile(script_dir .. "convergence\\Minions.hks"))
-pcall(loadfile(script_dir .. "convergence\\Multiplayer.hks"))
-pcall(loadfile(script_dir .. "convergence\\OS.hks"))
-pcall(loadfile(script_dir .. "convergence\\Position.hks"))
-pcall(loadfile(script_dir .. "convergence\\Settings.hks"))
-pcall(loadfile(script_dir .. "convergence\\SpEffects.hks"))
-pcall(loadfile(script_dir .. "convergence\\Stats.hks"))
-pcall(loadfile(script_dir .. "convergence\\Status.hks"))
-pcall(loadfile(script_dir .. "convergence\\Utility.hks"))
-pcall(loadfile(script_dir .. "convergence\\Update.hks"))
-
-pcall(loadfile(script_dir .. "convergence\\equipment\\Consumables.hks"))
-pcall(loadfile(script_dir .. "convergence\\equipment\\EquipmentGeneric.hks"))
-pcall(loadfile(script_dir .. "convergence\\equipment\\IncantationDictionary.hks"))
-pcall(loadfile(script_dir .. "convergence\\equipment\\Inventory.hks"))
-pcall(loadfile(script_dir .. "convergence\\equipment\\SorceryDictionary.hks"))
-pcall(loadfile(script_dir .. "convergence\\equipment\\Spells.hks"))
-pcall(loadfile(script_dir .. "convergence\\equipment\\Talismans.hks"))
-pcall(loadfile(script_dir .. "convergence\\equipment\\WeaponsGeneric.hks"))
-pcall(loadfile(script_dir .. "convergence\\equipment\\WeaponsUnique.hks"))
-
-pcall(loadfile(script_dir .. "convergence\\classes\\AberrantHeretic.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\BestialDevout.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\BloodInitiate.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\DragonCultist.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\Dreadnought.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\FlameProphet.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\FrostWitch.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\FrenziedZealot.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\Fundamentalist.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\GlintstoneSorcerer.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\Marksman.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\Mystic.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\FrostWitch.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\GodskinCelebrant.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\Necromancer.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\NoxOracle.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\Prisoner.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\Retainer.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\Rogue.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\Sellsword.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\ServantOfRot.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\Stormcaller.hks"))
-pcall(loadfile(script_dir .. "convergence\\classes\\Volcanist.hks"))
 
 ------------------------------------------
 -- Must be last for the global variables to be read

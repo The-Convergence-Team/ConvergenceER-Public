@@ -13,6 +13,9 @@ local exceptionSpEffects = {
     8000000 -- Ammo is Drawn
 }
 function IsForceSprint()
+    local sleathState = GetVariable("StealthState")
+    if sleathState == STEALTH_TO_STEALTHIDLE or sleathState == STEALTH_TO_IDLE then return end
+
     for i = 1, #exceptionSpEffects, 1 do
         if env(GetSpEffectID, exceptionSpEffects[i]) == TRUE then
             return FALSE

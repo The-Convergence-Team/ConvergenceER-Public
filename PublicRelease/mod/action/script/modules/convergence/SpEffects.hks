@@ -36,7 +36,13 @@ weaponBuffSpEffects = {
     [1723000]  = true,                                                          -- Poison Armament
                                           [1447000] = true,                     -- Scholar's Shield
                                           [1674000] = true,                     -- Immutable Shield
-    [2080] = true,                		  [2090] = true,						-- Underworld Frozen Lightning Weapon Buff
+    [2083] = true,                		  [2093] = true,						-- Underworld Frozen Lightning Weapon Buff
+	[2084] = true,                		  [2094] = true,						-- Underworld Frozen Lightning Weapon Buff w/ Jewel
+	[1459005] = true,															-- Frozen Lightning Armament
+	[1459007] = true,															-- Frozen Lightning Armament w/ Jewel
+	[1739000] = true,															-- Frenzied Armament
+	[1608005] = true,															-- Flaming Armament
+	
 }
 
 local savedSpEffects = {}
@@ -261,6 +267,15 @@ function GetChrInsWithSpEffect(spEffectID)
     end
 
     return nil
+end
+
+function ClearSpEffectArray(spEffectArray)
+    if spEffectArray == nil then return end
+    for i = 1, #spEffectArray do
+        if env(GetSpEffectID, spEffectArray[i]) == TRUE then
+            act(ClearSpEffect, spEffectArray[i])
+        end
+    end
 end
 
 local spEffectIdleSucceeded = {}

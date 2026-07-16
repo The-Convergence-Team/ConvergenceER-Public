@@ -181,3 +181,74 @@ function CorpaMagica()
         end
     end
 end
+
+local __hpLastTick = -1
+local __manaShieldFullHP = FALSE
+function ManaShield()
+    if env(GetSpEffectID, 1416000) == FALSE or
+        env(GetHP) <= 0 or
+        env(GetSpEffectID, 148) == TRUE then
+        __hpLastTick = -1
+        __manaShieldFullHP = FALSE
+        return
+    end
+
+    if env(GetFP) == 0 then
+        act(ClearSpEffect, 1416000) -- Remove Mana Shield
+        act(AddSpEffect, 1416005) -- Termination VFX
+        SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_HIT, FALSE)
+        return
+    end
+
+    local hp = env(GetHP)
+    if __hpLastTick == -1 then
+        __hpLastTick = hp
+        return
+    end
+
+    if __manaShieldFullHP == FALSE and hp == env(GetMaxHP) then
+        __manaShieldFullHP = TRUE
+    end
+
+    local hpLastTick = __hpLastTick
+    __hpLastTick = hp
+    if hp >= hpLastTick then
+        return
+    end
+
+    local healthLost = math.abs(hp - hpLastTick)
+    local ratio = 3.5
+    local fpCostInit = math.ceil(healthLost / ratio)
+    local fpCost = fpCostInit + 3
+    
+    if hp <= 1 then
+        fpCost = fpCost + (env(GetMaxFP) / 3)
+    end
+
+    -- You run out of FP, remove the shield and take damage equal to the amount of health lost minus the amount of FP you had left
+    if fpCost >= env(GetFP) then
+        act(ClearSpEffect, 1416000) -- Remove Mana Shield
+        act(AddSpEffect, 1416005) -- Termination VFX
+        SetFP(0)
+
+        CalculatedHeal(env(GetHP) - (hpLastTick - (healthLost - (fpCost * ratio))))
+        return
+    end
+
+    -- You are NOT using Mana Shield whilst at full HP
+    if __manaShieldFullHP == FALSE then
+        CalculatedHeal(hpLastTick - env(GetHP))
+        SetFP(env(GetFP) - fpCost)
+        return
+    end
+
+    -- Destined Death
+    if env(GetSpEffectID, 6860) == TRUE or env(GetSpEffectID, 6865) == TRUE then
+        CalculatedHeal((env(GetMaxHP) * 0.9) - env(GetHP))
+        SetFP(env(GetFP) - fpCost)
+        return
+    end
+    
+    FullHeal()
+    SetFP(env(GetFP) - fpCost)
+end

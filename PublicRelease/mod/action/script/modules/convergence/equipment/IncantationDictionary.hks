@@ -44,47 +44,48 @@ __fundiSpells = {
     [6400] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rejection
     [6610] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rune Shards
     [6750] = { SpEffects =         nil, RestoreFpCost = nil }, -- Sacred Ground
-    [6790] = { {
+    [6790] = { SpEffects = {
         1679000, -- Blessing of Grace
         1679005, -- Blessing of Grace (Greater)
-    }, true  },
+    }, RestoreFpCost = 30 },
     [6740] = { SpEffects = { 1674000 }, RestoreFpCost = nil }, -- Immutable Shield
     -- Shimmering Rune
     [6420] = { SpEffects =         nil, RestoreFpCost = nil }, -- Urgent Heal
     [6700] = { SpEffects =         nil, RestoreFpCost = nil }, -- Discus of Light
     [6770] = { SpEffects = { 1677000 }, RestoreFpCost = nil }, -- Order's Blade
     [6730] = { SpEffects =         nil, RestoreFpCost = nil }, -- Law of Regression
-    [6791] = { {
+    [6791] = { SpEffects = {
         1679100, -- Blessing of Protection
         1679105, -- Blessing of Protection (Greater)
-    }, true  },
+    }, RestoreFpCost = 30 },
     -- Glowing Rune
     [6410] = { SpEffects =         nil, RestoreFpCost = nil }, -- Wrath of Gold
     [6701] = { SpEffects =         nil, RestoreFpCost = nil }, -- Triple Rings of Light
     [6641] = { SpEffects =         nil, RestoreFpCost = nil }, -- Morgott's Spear
     [6422] = { SpEffects =         nil, RestoreFpCost = nil }, -- Great Heal
-    [6792] = { {
+    [6792] = { SpEffects = {
         1679200, -- Blessing of Wisdom
         1679205, -- Blessing of Wisdom (Greater)
-    }, true  },
+    }, RestoreFpCost = 30 },
     -- Shining Rune
-    [6760] = { {
+    [6760] = { SpEffects = {
         1676000, -- Law of Causality
         1676005, -- Law of Causality (Chained)
-    }, false },
+    }, RestoreFpCost = nil },
     [6741] = { SpEffects =         nil, RestoreFpCost = nil }, -- Golden Displacement
     [6710] = { SpEffects =         nil, RestoreFpCost = nil }, -- Radagon's Rings of Light
     [6423] = { SpEffects =         nil, RestoreFpCost = nil }, -- Lord's Heal
-    [6793] = { {
+    [6793] = { SpEffects = {
         1679300, -- Blessing of Power
         1679305, -- Blessing of Power (Greater)
-    }, true  },
+    }, RestoreFpCost = 30 },
     -- Radiant Rune
     [6640] = { SpEffects =         nil, RestoreFpCost = nil }, -- Golden Spear
     [6630] = { SpEffects =         nil, RestoreFpCost = nil }, -- Elden Blade
     [6720] = { SpEffects =         nil, RestoreFpCost = nil }, -- Elden Stars
     [6424] = { SpEffects =         nil, RestoreFpCost = nil }, -- Erdtree Heal
     [6794] = { SpEffects = { 
+        1679400, -- Elden Benediction (Primairy)
         1679405, -- Elden Benediction (No Blessing)
         1679005, -- Blessing of Grace (Greater)
         1679105, -- Blessing of Protection (Greater)
@@ -111,32 +112,32 @@ __bestialSpells = {
     -- Shimmering Rune
     [6822] = { SpEffects =         nil, RestoreFpCost = nil }, -- Savage Lunge
     [6820] = { SpEffects =         nil, RestoreFpCost = nil }, -- Beast Claw
-    [6840] = { {
+    [6840] = { SpEffects = {
         1684000, -- Crucible Vitality
         1684050, -- Crucible Vitality (Greater)
-    }, false }, 
+    }, RestoreSpEffects = nil }, 
     [6860] = { SpEffects =         nil, RestoreFpCost = nil }, -- Earthen Spikes
     [2006650] = { SpEffects =         nil, RestoreFpCost = nil }, -- Crucible Quills
     -- Glowing Rune
     [6891] = { SpEffects =         nil, RestoreFpCost = nil }, -- Stone Spears
-    [6850] = { { 
+    [6850] = { SpEffects = {
         1685000, -- Bestial Strength
         1685050, -- Bestial Strength (Greater)
-    }, false }, -- Bestial Strength
+    }, RestoreFpCost = nil }, -- Bestial Strength
     [6871] = { SpEffects =         nil, RestoreFpCost = nil }, -- Seismic Instability
     [7500] = { SpEffects =         nil, RestoreFpCost = nil }, -- Crucible Tail
-    [6842] = { {
+    [6842] = { SpEffects = {
         1684200, -- Stone Skin
         1684210, -- Stone Skin (Greater)
         1684220, -- Stone Skin (Greater 1)
-    }, false },
+    }, RestoreFpCost = nil },
     -- Shining Rune
     [6810] = { SpEffects =         nil, RestoreFpCost = nil }, -- Stone of Gurranq
     [6890] = { SpEffects =         nil, RestoreFpCost = nil }, -- Crucible Spear
-    [6841] = { { 
+    [6841] = { SpEffects = {
         1684100, -- Crucible Regeneration
         1684150, -- Crucible Regeneration (Greater)
-    }, false }, 
+    }, RestoreFpCost = nil },
     [6861] = { SpEffects =         nil, RestoreFpCost = nil }, -- Landslide
     [6830] = { SpEffects =         nil, RestoreFpCost = nil }, -- Gurranq's Beast Claw
     -- Radiant Rune
@@ -180,7 +181,7 @@ __cultSpells = {
     [6922] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ancient Lightning Strike
     [6903] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ancient Lightning Spear
     [6970] = { SpEffects = { 1697001 }, RestoreFpCost = nil }, -- Vyke's Dragonbolt
-    [6990] = { {
+    [6990] = { SpEffects = {
         1699015, -- Time Warp 15 stacks
         1699014, -- Time Warp 14 stacks
         1699013, -- Time Warp 13 stacks
@@ -196,7 +197,7 @@ __cultSpells = {
         1699003, -- Time Warp 3 stacks
         1699002, -- Time Warp 2 stacks
         1699001, -- Time Warp 1 stacks 
-    }, false },
+    }, RestoreFpCost = nil },
     -- Radiant Rune
     [6941] = { SpEffects =         nil, RestoreFpCost = nil }, -- Fortissax's Lightning Stake
     [6910] = { SpEffects =         nil, RestoreFpCost = nil }, -- Ancient Lightning Storm
@@ -363,7 +364,11 @@ __rotSpells = {
     }, RestoreFpCost = nil },
     [7260] = { SpEffects =         nil, RestoreFpCost = nil }, -- Carrion Swarm
     -- Shining Rune
-    [7292] = { SpEffects = { 1729200 }, RestoreFpCost = nil }, -- Gaze of the Basilisk
+    [7292] = { SpEffects = {
+        1729200, -- Gaze of the Basilisk
+        1729250, -- Gaze of the Basilisk (Blessing of the Sealed God)
+        1729260, -- Gaze of the Basilisk (Aspect of the Scorpion)
+    }, RestoreFpCost = nil },
     [7201] = { SpEffects =         nil, RestoreFpCost = nil }, -- Pest Darts
     [7280] = { SpEffects =         nil, RestoreFpCost = nil }, -- Toxic Spear
     [7241] = { SpEffects =         nil, RestoreFpCost = nil }, -- Rotten Burst
@@ -399,7 +404,7 @@ __mysticSpells = {
     [7421] = { SpEffects =         nil, RestoreFpCost = nil }, -- Blinding Veil
     -- Glowing Rune
     [7420] = { SpEffects =         nil, RestoreFpCost = nil }, -- Vapor Spray
-    [7482] = { SpEffects =         nil, RestoreFpCost = nil }, -- Spiritual Equilibrium (has SpEffect but is mutliplayer dependant which can cause weirdness)
+    [7482] = { SpEffects = { 1748200 }, RestoreFpCost = nil }, -- Spiritual Equilibrium
     [7470] = { SpEffects =         nil, RestoreFpCost = nil }, -- Fleeting Vapor-fly 
     [7432] = { SpEffects =         nil, RestoreFpCost = nil }, -- Recurring Nightmare
     [7431] = { SpEffects =         nil, RestoreFpCost = nil }, -- Psychic Corrosion

@@ -83,49 +83,56 @@ local hasTurned = false
 local isRightHanded = math.random(10) ~= 10 -- 10% chance to be left handed, as per global statistics
 completedTurn = true
 function FearEffect(spEffect, immunitySpEffect)
-    if env(GetSpEffectID, spEffect) == TRUE and env(GetSpEffectID, immunitySpEffect) == FALSE -- Main Effects
-            and env(GetSpEffectID, "20297000") == FALSE -- Is not Spirit Summon
-            and env(GetHP) > 0 then -- Is not dead
-        Log("Fear Effect Active")
-        if env(GetPoise) <= 0 then
-            act(ClearSpEffect, spEffect)
-            Log("Fear Effect Cleared due to Poise")
-        else
-            Log("Fear Effect Active, but Poise is above 0")
-            if ((env(GetAITargetAwareState) == 6 and env(GetAITargetAwareStatePreviousFrame) == 6) or hasTurned) and completedTurn then
-                Log("AITargetAwareState is 6, or hasTurned is true, and completedTurn is true")
-                if not hasTurned then
-                    Log("Turning 180 degrees")
-                    SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_ATTACK, TRUE)
-                    SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_MOVE, TRUE)
+    local fearActive = env(GetSpEffectID, spEffect) == TRUE -- Main Effects
+        and env(GetSpEffectType, SP_EFFECT_TYPE_MADNESS) == TRUE -- Has Frenzy Effect
+        and env(GetSpEffectID, immunitySpEffect) == FALSE -- Is not immune to fear
+        and env(GetSpEffectID, "20297000") == FALSE -- Is not Spirit Summon
+        and env(GetHP) > 0 -- Is not dead
 
-                    completedTurn = false
-                    EnemyAnimSlowdownLib()
-
-                    if isRightHanded then
-                        Log("Right Handed, turning right")
-                        Fire("W_TurnBattle_Right180")
-                    else
-                        Log("Left Handed, turning left")
-                        Fire("W_TurnBattle_Left180")
-                    end
-
-                    hasTurned = true
-                else
-                    Fire("W_RunBattle")
-                    Log("Already turned, running in place")
-
-                    -- WIP
-                    --Fire("W_Idle")
-                    --LookAtPlayer(180)
-                end
-            end
+    if not fearActive then
+        if hasTurned then
+            Log("Fear Effect Cleared, hasTurned is true")
+            SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_ATTACK, FALSE)
+            SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_MOVE, FALSE)
+            hasTurned = false
         end
-    elseif hasTurned then
-        Log("Fear Effect Cleared, hasTurned is true")
-        SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_ATTACK, FALSE)
-        SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_MOVE, FALSE)
-
-        hasTurned = false
+        return
     end
+
+    if env(GetPoise) <= 0 then
+        act(ClearSpEffect, spEffect)
+        Log("Fear Effect Cleared due to Poise")
+        return
+    end
+
+    local shouldAct = ((env(GetAITargetAwareState) == 6 and env(GetAITargetAwareStatePreviousFrame) == 6) or hasTurned) and completedTurn
+    if not shouldAct then
+        return
+    end
+
+    if hasTurned then
+        Fire("W_RunBattle")
+        Log("Already turned, running in place")
+
+        -- WIP
+        --Fire("W_Idle")
+        --LookAtPlayer(180)
+        return
+    end
+
+    SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_ATTACK, TRUE)
+    SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_MOVE, TRUE)
+
+    completedTurn = false
+    EnemyAnimSlowdownLib()
+
+    if isRightHanded then
+        Log("Right Handed, turning right")
+        Fire("W_TurnBattle_Right180")
+    else
+        Log("Left Handed, turning left")
+        Fire("W_TurnBattle_Left180")
+    end
+
+    hasTurned = true
 end

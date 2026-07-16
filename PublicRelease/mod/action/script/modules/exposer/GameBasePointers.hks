@@ -20,6 +20,7 @@ local QUATERNION = 103 -- returns 4 elements: x, y, z, w
 local CHARACTERMODEL = 104 -- returns a 4 digit ID
 local MAPID = 105 -- returns 4 elements: areaId, blockId, regionId, indexId
 local CHRINS = 106 -- returns a CHR_INS_BASE that can be used with the Get-/SetAltChrInsPointerValue functions
+local BIG_UNSIGNED_INT = 107
 
 ---------------------------------------------------------------------------
 -- Reserved for pointers that tend to change with updates
@@ -57,7 +58,7 @@ GAME_BASE = {
             CLASS_INDEX = { _GAME_BASE, UNSIGNED_BYTE, _GAME_DATA_MAN, 0x8, 0xBF },
             STORAGE_INVENTORY = { -- 0x5D0
                 GA_ITEM_HANDLE = function(itemIndex, isKey)
-                    return { _GAME_BASE, BIG_SIGNED_INT, _GAME_DATA_MAN, 0x8, 0x5D0, isKey or FALSE * 0x10 + 0x10, (itemIndex * 0x18) }
+                    return { _GAME_BASE, BIG_UNSIGNED_INT, _GAME_DATA_MAN, 0x8, 0x5D0, isKey or FALSE * 0x10 + 0x10, (itemIndex * 0x18) }
                 end,
                 FULL_ITEM_ID = function(itemIndex, isKey)
                     return { _GAME_BASE, BIG_SIGNED_INT, _GAME_DATA_MAN, 0x8, 0x5D0, isKey or FALSE * 0x10 + 0x10, (itemIndex * 0x18 + 4) }
@@ -75,7 +76,7 @@ GAME_BASE = {
             },
             STORAGE_CHEST = { -- 0x8D0
                 GA_ITEM_HANDLE = function(itemIndex, isKey)
-                    return { _GAME_BASE, ARRAY_OF_BYTES, _GAME_DATA_MAN, 0x8, 0x8D0, isKey or FALSE * 0x10 + 0x10, (itemIndex * 0x18) }
+                    return { _GAME_BASE, BIG_UNSIGNED_INT, _GAME_DATA_MAN, 0x8, 0x8D0, isKey or FALSE * 0x10 + 0x10, (itemIndex * 0x18) }
                 end,
                 FULL_ITEM_ID = function(itemIndex, isKey)
                     return { _GAME_BASE, BIG_SIGNED_INT, _GAME_DATA_MAN, 0x8, 0x8D0, isKey or FALSE * 0x10 + 0x10, (itemIndex * 0x18 + 4) }
@@ -181,13 +182,13 @@ GAME_BASE = {
     CS_GA_ITEM = {
         GA_ITEMS = { -- 0x8
             GA_ITEM_HANDLE = function(index)
-                return { _GAME_BASE, BIG_SIGNED_INT, _CS_GA_ITEM, 0x8 + (index * 0x8), 0x8 }
+                return { _GAME_BASE, BIG_UNSIGNED_INT, _CS_GA_ITEM, 0x8 + (index * 0x8), 0x8 }
             end,
             ITEM_ID = function(index)
                 return { _GAME_BASE, BIG_SIGNED_INT, _CS_GA_ITEM, 0x8 + (index * 0x8), 0xC }
             end,
             GEM_GA_ITEM_HANDLE = function(index)
-                return { _GAME_BASE, BIG_SIGNED_INT, _CS_GA_ITEM, 0x8 + (index * 0x8), 0x18 + 0x8 + 0x8 }
+                return { _GAME_BASE, BIG_UNSIGNED_INT, _CS_GA_ITEM, 0x8 + (index * 0x8), 0x18 + 0x8 + 0x8 }
             end,
         },
     },

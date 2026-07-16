@@ -77,7 +77,25 @@ function multiplyStrings(a, b)
     return result
 end
 
-function bytesToInt32(b1, b2, b3, b4)
+local INT32_MOD = "4294967296"
+local function toUint32DecimalString(decValue)
+    local value = tostring(decValue or "0")
+    local isNegative = value:sub(1, 1) == "-"
+
+    if isNegative then
+        -- Convert signed negative decimal to uint32 decimal using two's complement.
+        local absValue = value:sub(2):gsub("^0+", "")
+        if absValue == "" then
+            return "0"
+        end
+        return subtractStrings(INT32_MOD, absValue)
+    end
+
+    value = value:gsub("^0+", "")
+    return value == "" and "0" or value
+end
+
+local function bytesToU32String(b1, b2, b3, b4)
     if b1 == nil or b2 == nil or b3 == nil or b4 == nil then
         return nil
     end
@@ -93,8 +111,26 @@ function bytesToInt32(b1, b2, b3, b4)
     local part4 = multiplyStrings(tostring(b4), "16777216")
 
     local result = addStrings(part1, addStrings(part2, addStrings(part3, part4)))
-    result = result:gsub("^0+", "") -- Remove leading zeros
-    return result == "" and "0" or result
+    result = result:gsub("^0+", "")
+    return result == "" and "0" or result, b4
+end
+
+function bytesToInt32(b1, b2, b3, b4)
+    local unsigned, highByte = bytesToU32String(b1, b2, b3, b4)
+    if unsigned == nil then
+        return nil
+    end
+
+    if highByte >= 128 then
+        return "-" .. subtractStrings(INT32_MOD, unsigned)
+    end
+
+    return unsigned
+end
+
+function bytesToUInt32(b1, b2, b3, b4)
+    local unsigned = bytesToU32String(b1, b2, b3, b4)
+    return unsigned
 end
 
 function decToBinaryString(decStr)
@@ -127,7 +163,8 @@ end
 
 -- Extract low 28 and high 4 from binary string
 function extractBits32String(decimalStr)
-    local bin = decToBinaryString(decimalStr)
+    local unsignedDec = toUint32DecimalString(decimalStr)
+    local bin = decToBinaryString(unsignedDec)
     local high4 = tonumber(bin:sub(1, 4), 2)
     local low28 = tonumber(bin:sub(5), 2)
     return high4, low28

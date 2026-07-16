@@ -36,11 +36,11 @@ function PageSetAnimSpeedIncrease()
     end
 
     if GetEquipType(wepHand, WEAPON_CATEGORY_LARGE_ARROW) == TRUE then
-        if IsNodeActive("AttackCrossbowBothRight_Upper_SM", "AttackCrossbowBothLeft_Upper_SM") == FALSE then
+        if IsNodeActive("AttackArrowRight_Upper_SM", "AttackArrowLeft_Upper_SM") == FALSE then
             return 1
         end
     elseif GetEquipType(wepHand, WEAPON_CATEGORY_BALLISTA) == TRUE then
-        if IsNodeActive("AttackArrowRight_Upper_SM", "AttackArrowLeft_Upper_SM") == FALSE then
+        if IsNodeActive("AttackCrossbowBothRight_Upper_SM", "AttackCrossbowBothLeft_Upper_SM") == FALSE then
             return 1
         end
     else
@@ -83,14 +83,16 @@ function ShellRingMarksmanLockonRange()
 end
 
 function ShellRingMarksmanHyperArmor(category)
+    if env(GetSpEffectID, Jewel_of_the_Hunt) == FALSE then
+        return
+    end
+
     local wepHand = HAND_RIGHT
     if c_Style == HAND_LEFT_BOTH then
         wepHand = HAND_LEFT
     end
 
     if GetEquipType(wepHand, category) == FALSE then
-        return
-    elseif env(GetSpEffectID, Jewel_of_the_Hunt) == FALSE then
         return
     elseif c_Style < HAND_LEFT_BOTH then
         return

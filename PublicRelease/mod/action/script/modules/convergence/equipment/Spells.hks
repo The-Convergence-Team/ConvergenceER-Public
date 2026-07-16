@@ -4,7 +4,8 @@ LastCastMagicID = -1
 -- Getters
 function GetSelectedEquipMagicData()
     local selectedIndex = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.SELECTED_MAGIC_SLOT_INDEX)
-    return GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(selectedIndex))
+    local magicId = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(selectedIndex))
+    return selectedIndex, magicId
 end
 
 -- Logic
@@ -16,13 +17,25 @@ function IsCastingSpell()
     return LastHeldMagicButton ~= -1 and IsNodeActive("Magic_Upper_SM") == TRUE
 end
 
+function FindSpellEquipIndex(spellId)
+    for i = 0, 13, 1 do
+        local magicId = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(i))
+        if magicId == spellId then
+            return i
+        elseif magicId == -1 then -- Empty slot, no need to continue searching
+            return -1
+        end
+    end
+    return -1
+end
+
 -- Spell Losses
 local __buffSpells = {}
 local __isBuffSpellInitialized = false
 function DisableSpellsOnStatLoss()
     if not __isBuffSpellInitialized then
-        for classIndex = 1, #__allSpells, 1 do
-            for spellId, spellData in pairs(__allSpells[classIndex]) do
+        for _, classSpells in pairs(__allSpells) do
+            for spellId, spellData in pairs(classSpells) do
                 if spellData.SpEffects ~= nil then
                     __buffSpells[spellId] = spellData
                 end
@@ -57,8 +70,8 @@ function DisableSpellsOnMeleeAbility()
     end
     act(ClearSpEffect, 197)
 
-    for i = 1, #__buffSpells, 1 do
-        act(ClearSpEffect, __buffSpells[i][2])
+    for spellId, spellData in pairs(__buffSpells) do
+        ClearSpEffectArray(spellData.SpEffects)
     end
 end
 
@@ -86,19 +99,9 @@ function DisableSpellOnUnequip()
     for spellId, spellData in pairs(__infiniteSpells) do
         if not IsJewelGrantedSpell(spellId) then
             for _, spEffect in pairs(spellData.SpEffects) do
-                if env(GetSpEffectID, spEffect) == TRUE then
-                    local spellIsEquipped = false
-                    for j = 0, 11, 1 do
-                        local equipMagicData = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(j))
-                        if equipMagicData == spellId then
-                            spellIsEquipped = true
-                            break
-                        end
-                    end
-
-                    if not spellIsEquipped then
+                if env(GetSpEffectID, spEffect) == TRUE then                    
+                    if FindSpellEquipIndex(spellId) == -1 then
                         act(ClearSpEffect, spEffect)
-                        Log("Cleared Spell", spellId, "due to unequip SpEffect", spEffect)
                     end
                 end
             end
@@ -117,67 +120,6 @@ end
 
 
 -- Specific Spells
-local __hpLastTick = -1
-local __manaShieldFullHP = FALSE
-function ManaShield()
-    if env(GetSpEffectID, 1416000) == FALSE or env(GetSpEffectID, 148) == TRUE then
-        __hpLastTick = -1
-        __manaShieldFullHP = FALSE
-        return
-    end
-
-    if env(GetFP) == 0 then
-        act(ClearSpEffect, 1416000)
-        act(AddSpEffect, 1416005)
-        SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_HIT, FALSE)
-        return
-    end
-
-    local hp = env(GetHP)
-    if __hpLastTick == -1 then
-        __hpLastTick = hp
-        return
-    end
-
-    if __manaShieldFullHP == FALSE and hp == env(GetMaxHP) then
-        __manaShieldFullHP = TRUE
-    end
-
-    local hpLastTick = __hpLastTick
-    __hpLastTick = hp
-    if hp >= hpLastTick then
-        return
-    end
-
-    local healthLost = math.abs(hp - hpLastTick)
-    local ratio = 3.5
-    local fpCostInit = math.ceil(healthLost / ratio)
-    local fpCost = fpCostInit + 3
-    
-    if hp <= 1 then
-        fpCost = fpCost + (env(GetMaxFP) / 3)
-    end
-
-    if fpCost >= env(GetFP) then
-        act(ClearSpEffect, 1416000)
-        act(AddSpEffect, 1416005)
-        SetFP(0)
-
-        DealCalculatedDamage(-(env(GetHP) - (hpLastTick - (healthLost - (fpCost * ratio)))))
-    else
-        if __manaShieldFullHP == TRUE then -- Destined Death
-            if env(GetSpEffectID, 6860) == TRUE or env(GetSpEffectID, 6865) == TRUE then
-                DealCalculatedDamage(-(env(GetMaxHP) * 0.9) - env(GetHP))
-            else
-                FullHeal()
-            end
-        else
-            DealCalculatedDamage(-(hpLastTick - env(GetHP)))
-        end
-        SetFP(env(GetFP) - fpCost)
-    end
-end
-
 local __toggleSpells = {}
 local __toggledSpells = {}
 local __toggleSpellsInitialized = false
@@ -195,20 +137,23 @@ function ToggleSpellFPCostManager()
     end
 
     for spellId, spellData in pairs(__toggleSpells) do
+        local isSpellActive = false
         for _, spEffect in pairs(spellData.SpEffects) do
-            -- Set FP cost to 0 if spell is active
             if env(GetSpEffectID, spEffect) == TRUE then
-                local fpCostValue = GetParamValue(fpCost, spellId)
-                if fpCostValue > 0 then
-                    __toggledSpells[spellId] = fpCostValue
-                    SetParamValue(fpCost, spellId, 0)
-                end
-            -- Restore original FP cost if spell is inactive
-            elseif __toggledSpells[spellId] ~= nil then
-                Log(__toggledSpells[spellId])
-                SetParamValue(fpCost, spellId, __toggledSpells[spellId])
-                __toggledSpells[spellId] = nil
+                isSpellActive = true
+                break
             end
+        end
+        -- Set FP cost to 0 if spell is active
+        if isSpellActive then
+            if __toggledSpells[spellId] == nil then
+                __toggledSpells[spellId] = spellData.RestoreFpCost
+                SetParamValue(fpCost, spellId, 0)
+            end
+        -- Restore original FP cost if spell is inactive
+        elseif __toggledSpells[spellId] ~= nil then
+            SetParamValue(fpCost, spellId, __toggledSpells[spellId])
+            __toggledSpells[spellId] = nil
         end
     end
 end
@@ -243,23 +188,20 @@ function SetMagicParam(originalMagicParam, newMagicParam)
         return
     end
     
-    local currentSlot = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.SELECTED_MAGIC_SLOT_INDEX)
-    local currentMagicId = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(currentSlot))
+    local currentSlot, currentMagicId = GetSelectedEquipMagicData()
     if currentMagicId == originalMagicParam then
         SetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(currentSlot), newMagicParam)
         return
     end
 
-    for i = 0, 11, 1 do
-        local magicId = GetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(i))
-        if magicId == originalMagicParam then
-            SetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(i), newMagicParam)
-            return
-        end
+    local originalIndex = FindSpellEquipIndex(originalMagicParam)
+    if originalIndex ~= -1 then
+        SetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(originalIndex), newMagicParam)
     end
 end
 
 --  Dictionary
+-- ORDER MATTERS: The index of the spell list in __allSpells must match the ordering of the classes for spellBan logic to work correctly
 __allSpells = {
     __glintSpells,
     __gravitySpells,

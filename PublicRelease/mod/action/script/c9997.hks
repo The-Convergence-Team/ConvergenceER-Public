@@ -4099,9 +4099,9 @@ function ExecDamage(is_weak, ignore_guard_block)
     if env(GetBehaviorID, BEH_IDENTIFIER_MARIQUES_PARRY) == TRUE and env(GetSpEffectID, 15280) == FALSE and env(GetSpEffectID, 15281) == FALSE then
         return FALSE
     end
-    if env(GetBehaviorID, BEH_IDENTIFIER_TRAUMA_MORGOTT) == TRUE and env(GetSpEffectID, 16248) == FALSE then
-        return FALSE
-    end
+    -- if env(GetBehaviorID, BEH_IDENTIFIER_TRAUMA_MORGOTT) == TRUE and env(GetSpEffectID, 16248) == FALSE then
+    --     return FALSE
+    -- end
     if env(GetBehaviorID, BEH_IDENTIFIER_TRAUMA_GREATER_DEMON) == TRUE and env(GetSpEffectID, 10680) == FALSE then
         return FALSE
     end
@@ -8461,6 +8461,7 @@ end
 function Sleep_Loop_onUpdate()
     local hp = env(GetHP)
     if env(GetSpEffectID, SP_EFFECT_DEEP_SLEEP) == TRUE and hp > 0 then
+        InvocationOfSaintTrina()
         return
     end
     if SleepCommonFunction(12000) == TRUE then
@@ -13472,123 +13473,135 @@ end
 -- LoadFile("vanilla\\EnvDictionary.hks")
 
 local modulesLoaded = false
-local modulesLoadDelay = 0
+local modulesAmountLoaded = 0
+
+local blacklistedCharacterModels = {
+    [0000] = true, -- Player
+    [0100] = true, -- Dummy
+    [0110] = true, -- Dummy
+    [0120] = true, -- Dummy
+    [0130] = true, -- Dummy
+    [1000] = true, -- Dummy
+    [2050] = true, -- Ranni the Witch
+    [2051] = true, -- Ranni the Witch
+    [2060] = true, -- The Two Fingers
+    [2070] = true, -- The Three Fingers
+    [2131] = true, -- Morgott (Dead)
+    [2150] = true, -- Lightning Ball
+    [2160] = true, -- Finger Reader Crone
+    [2170] = true, -- Finger Reader Crone
+    [2191] = true, -- Radagon (Crucified)
+    [3171] = true, -- Phillia- Towering Little Sister
+    --[3665] = true, -- Gostoc
+    [3666] = true, -- The Noble Goldmask
+    [3710] = true, -- Azur
+    [3720] = true, -- Lusat
+    [4072] = true, -- [CONV] Caimar's Wolf
+    [4450] = true, -- Walking Mausoleum
+    [4492] = true, -- Greatjar
+    [4604] = true, -- War Counselor Iji
+    [5180] = true, -- [DLC] Dummy Entity
+    [5181] = true, -- [DLC] Dummy Entity
+    [5221] = true, -- [DLC] Miquella's Arms
+    [5330] = true, -- [DLC] St. Trina
+    [5340] = true, -- [DLC] Dummy Entity
+    [5350] = true, -- [DLC] Basilisk Eyes
+    [5401] = true, -- [DLC] Eagle
+    [5410] = true, -- [DLC] Deer
+    [5430] = true, -- [DLC] Owl
+    [5440] = true, -- [DLC] Boar
+    [5450] = true, -- [DLC] Ram
+    [5460] = true, -- [DLC] Murre
+    -- [5470] = true, -- [DLC] Dragonfly
+    -- [5471] = true, -- [DLC] Yellow Dragonfly
+    [5480] = true, -- [DLC] Turtle
+    [5490] = true, -- [DLC] Springhare
+    [5680] = true, -- [DLC] Wheeled Ballista
+    [5690] = true, -- [DLC] Dragon-faced Flamethrower
+    [5910] = true, -- [DLC] Hornsent Grandam
+    [6001] = true, -- Eagle
+    [6010] = true, -- Deer
+    [6040] = true, -- Owl
+    [6050] = true, -- Boar
+    [6060] = true, -- Goat
+    [6070] = true, -- Murre
+    [6072] = true, -- Carrier Pigeon
+    -- [6080] = true, -- Dragonfly
+    -- [6081] = true, -- Yellow Dragonfly
+    [6090] = true, -- Turtle
+    [6091] = true, -- Miriel- Pastor of Vows
+    [6100] = true, -- Springhare
+    [6240] = true, -- [DLC] Dummy
+    [8000] = true, -- Torrent
+    [8001] = true, -- [CONV] Torrent
+    [8002] = true, -- [CONV] Torrent
+    [8003] = true, -- [CONV] Torrent
+    [8004] = true, -- [CONV] Torrent
+    [8005] = true, -- [CONV] Torrent
+    [8100] = true, -- Ballista
+    [8101] = true, -- Trebuchet
+    [8110] = true, -- Dragon-faced Flamethrower
+    [8120] = true, -- Merciless Chariot
+}
+
+local basic_modules = {
+    "exposer\\ChrInsPointers.hks",
+    "exposer\\ExposerVariables.hks",
+    "convergence\\EnemyInfo.hks",
+}
+
+local addative_modules = {
+    "exposer\\GameBasePointers.hks",
+    "exposer\\ParamPointers.hks",
+
+    "convergence\\Animations.hks",
+    "convergence\\Diversions.hks",
+    "convergence\\Math.hks",
+    "convergence\\SpEffects.hks",
+    "convergence\\Status.hks",
+    "convergence\\Utility.hks",
+    "convergence\\ChrModelDictionary.hks",
+    "convergence\\classes\\BloodInitiate.hks",
+    "convergence\\classes\\FlameProphet.hks",
+    "convergence\\classes\\FrenziedZealot.hks",
+    "convergence\\classes\\FrostWitch.hks",
+    "convergence\\classes\\GodskinCelebrant.hks",
+    "convergence\\classes\\Mystic.hks",
+    "convergence\\classes\\Necromancer.hks",
+    "convergence\\classes\\NoxOracle.hks",
+    "convergence\\classes\\ServantOfRot.hks",
+    
+    "convergence\\Update.hks", -- Must be last
+}
+
 function ImportModules()
     if modulesLoaded then return end
-    if modulesLoadDelay < 50 then
-        modulesLoadDelay = modulesLoadDelay + 1
+    if modulesAmountLoaded < #basic_modules then
+
+        modulesAmountLoaded = modulesAmountLoaded + 1
+        LoadFile(basic_modules[modulesAmountLoaded])
         return
     end
-    modulesLoaded = true
-
-    local basic_modules = {
-        "exposer\\ChrInsPointers.hks",
-        "exposer\\ExposerVariables.hks",
-        "convergence\\EnemyInfo.hks",
-    }
-
-    for _, module in ipairs(basic_modules) do
-        LoadFile(module)
+ 
+    if blacklistedCharacterModels[GetModel()] then
+        modulesLoaded = true
+        basic_modules = nil
+        addative_modules = nil
+        blacklistedCharacterModels = nil
+        return
     end
-    
-    local blacklistedCharacterModels = {
-        [0000] = true, -- Player
-        [0100] = true, -- Dummy
-        [0110] = true, -- Dummy
-        [0120] = true, -- Dummy
-        [0130] = true, -- Dummy
-        [1000] = true, -- Dummy
-        [2050] = true, -- Ranni the Witch
-        [2051] = true, -- Ranni the Witch
-        [2060] = true, -- The Two Fingers
-        [2070] = true, -- The Three Fingers
-        [2131] = true, -- Morgott (Dead)
-        [2150] = true, -- Lightning Ball
-        [2160] = true, -- Finger Reader Crone
-        [2170] = true, -- Finger Reader Crone
-        [2191] = true, -- Radagon (Crucified)
-        [3171] = true, -- Phillia- Towering Little Sister
-        [3665] = true, -- Gostoc
-        [3666] = true, -- The Noble Goldmask
-        [3710] = true, -- Azur
-        [3720] = true, -- Lusat
-        [4072] = true, -- [CONV] Caimar's Wolf
-        [4450] = true, -- Walking Mausoleum
-        [4492] = true, -- Greatjar
-        [4604] = true, -- War Counselor Iji
-        [5180] = true, -- [DLC] Dummy Entity
-        [5181] = true, -- [DLC] Dummy Entity
-        [5221] = true, -- [DLC] Miquella's Arms
-        [5330] = true, -- [DLC] St. Trina
-        [5340] = true, -- [DLC] Dummy Entity
-        [5350] = true, -- [DLC] Basilisk Eyes
-        [5401] = true, -- [DLC] Eagle
-        [5410] = true, -- [DLC] Deer
-        [5430] = true, -- [DLC] Owl
-        [5440] = true, -- [DLC] Boar
-        [5450] = true, -- [DLC] Ram
-        [5460] = true, -- [DLC] Murre
-        -- [5470] = true, -- [DLC] Dragonfly
-        -- [5471] = true, -- [DLC] Yellow Dragonfly
-        [5480] = true, -- [DLC] Turtle
-        [5490] = true, -- [DLC] Springhare
-        [5680] = true, -- [DLC] Wheeled Ballista
-        [5690] = true, -- [DLC] Dragon-faced Flamethrower
-        [5910] = true, -- [DLC] Hornsent Grandam
-        [6001] = true, -- Eagle
-        [6010] = true, -- Deer
-        [6040] = true, -- Owl
-        [6050] = true, -- Boar
-        [6060] = true, -- Goat
-        [6070] = true, -- Murre
-        [6072] = true, -- Carrier Pigeon
-        -- [6080] = true, -- Dragonfly
-        -- [6081] = true, -- Yellow Dragonfly
-        [6090] = true, -- Turtle
-        [6091] = true, -- Miriel- Pastor of Vows
-        [6100] = true, -- Springhare
-        [6240] = true, -- [DLC] Dummy
-        [8000] = true, -- Torrent
-        [8001] = true, -- [CONV] Torrent
-        [8002] = true, -- [CONV] Torrent
-        [8003] = true, -- [CONV] Torrent
-        [8004] = true, -- [CONV] Torrent
-        [8005] = true, -- [CONV] Torrent
-        [8100] = true, -- Ballista
-        [8101] = true, -- Trebuchet
-        [8110] = true, -- Dragon-faced Flamethrower
-        [8120] = true, -- Merciless Chariot
-    }
-
-    if blacklistedCharacterModels[GetModel()] then return end
-
-    local addative_modules = {
-        "exposer\\GameBasePointers.hks",
-        "exposer\\ParamPointers.hks",
-
-        "convergence\\Animations.hks",
-        "convergence\\ChrModelDictionary.hks",
-        "convergence\\Diversions.hks",
-        "convergence\\EnemySpecific.hks",
-        "convergence\\Math.hks",
-        "convergence\\SpEffects.hks",
-        "convergence\\Status.hks",
-        "convergence\\Utility.hks",
-        "convergence\\Update.hks",
-        "convergence\\classes\\BloodInitiate.hks",
-        "convergence\\classes\\FlameProphet.hks",
-        "convergence\\classes\\FrenziedZealot.hks",
-        "convergence\\classes\\FrostWitch.hks",
-        "convergence\\classes\\GodskinCelebrant.hks",
-        "convergence\\classes\\Mystic.hks",
-        "convergence\\classes\\Necromancer.hks",
-        "convergence\\classes\\NoxOracle.hks",
-        "convergence\\classes\\ServantOfRot.hks",
-    }
-
-    for _, module in ipairs(addative_modules) do
-        LoadFile(module)
+ 
+    modulesAmountLoaded = modulesAmountLoaded + 1
+    local moduleToLoad = addative_modules[modulesAmountLoaded - #basic_modules]
+    if moduleToLoad == nil then
+        modulesLoaded = true
+        basic_modules = nil
+        addative_modules = nil
+        blacklistedCharacterModels = nil
+        return
     end
+
+    LoadFile(moduleToLoad)
 end
 
 ------------------------------------------

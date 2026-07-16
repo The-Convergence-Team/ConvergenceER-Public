@@ -75,17 +75,17 @@ end
 
 function GetBulletParam(index)
     local param_wait = GetPointerValue(GAME_BASE.CS_BULLET_MANAGER.BULLET_LIST.PARAM_ROW_WAIT(index))
-    if param_wait ~= "4294967295" then
+    if param_wait ~= nil and param_wait ~= "-1" then
         return param_wait
     end
 
     local param_fly = GetPointerValue(GAME_BASE.CS_BULLET_MANAGER.BULLET_LIST.PARAM_ROW_FLY(index))
-    if param_fly ~= "4294967295" then
+    if param_fly ~= nil and param_fly ~= "-1" then
         return param_fly
     end
 
     local param_explosion = GetPointerValue(GAME_BASE.CS_BULLET_MANAGER.BULLET_LIST.PARAM_ROW_EXPLOSION(index))
-    if param_explosion ~= "4294967295" then
+    if param_explosion ~= nil and param_explosion ~= "-1" then
         return param_explosion
     end
 

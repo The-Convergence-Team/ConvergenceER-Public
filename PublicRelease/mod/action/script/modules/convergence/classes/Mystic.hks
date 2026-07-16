@@ -1,19 +1,14 @@
 function Tranquility()
-    ReapplySpEffectTillIdle(1749100, 10)
-    TranquilityAiToggle()
-
     if env(GetSpEffectID, 1749100) == FALSE then
         return FALSE
     end
     act(ClearSpEffect, 1749100)
 
     local threatLevel = GetThreatLevel()
-    if threatLevel > ThreatLevel.None then
-        act(AddSpEffect, 1749100 + (threatLevel * 10))
-        return TRUE
-    end
+    if threatLevel == ThreatLevel.None then return FALSE end
 
-    return FALSE
+    act(AddSpEffect, 1749100 + (threatLevel * 10))
+    return TRUE
 end
 
 local TranqActive = false
@@ -40,20 +35,25 @@ function InvocationOfSaintTrina()
     end
     act(ClearSpEffect, 1749220)
 
-    if env(GetSpEffectType, SP_EFFECT_TYPE_SLEEP) == FALSE and env(GetSpEffectType, 560) == FALSE and IsNodeActive("Sleep_SM") == FALSE then
+    local threatLevel = GetThreatLevel()
+    if threatLevel == ThreatLevel.None then return FALSE end
+
+    if env(GetSpEffectType, SP_EFFECT_TYPE_SLEEP) == FALSE and 
+        env(GetSpEffectType, 560) == FALSE and
+        IsNodeActive("Sleep_SM") == FALSE and 
+        env(GetSpEffectID, 102320) == FALSE then
+
         act(AddSpEffect, 1749200) -- Sleep Buildup
         return TRUE
     end
 
-    local threatLevel = GetThreatLevel()
-    local newHP = env(GetHP) - ((env(GetMaxHP) * 0.13) + 400)
-
-    if threatLevel ~= ThreatLevel.LesserEnemy and newHP > 0 then
+    if threatLevel > ThreatLevel.LesserEnemy then
         local multiplier = 1
         if GetEntityId() == 17000850 then -- Quicksilver Husk
             multiplier = 0.5
         end
-        DealCalculatedDamage(((env(GetMaxHP) * 0.13) + 400) * multiplier) -- Sleep Damage
+        local damage = (env(GetMaxHP) * 0.13) + 400
+        DealCalculatedDamage(damage * multiplier) -- Sleep Damage
         return TRUE
     end
 

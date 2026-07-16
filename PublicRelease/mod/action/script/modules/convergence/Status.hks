@@ -48,7 +48,8 @@ function RemoveStatusByType(statusType)
         return
     end
 
-    for _, spEffect in ipairs(GetSpEffectsInfo()) do
+    local spEffects = GetSpEffectsInfo()
+    for _, spEffect in ipairs(spEffects) do
         if GetParamValue(PARAM.SpEffectParam.STATE_INFO, spEffect.ID) == stateInfo then
             act(ClearSpEffect, spEffect.ID)
         end
@@ -132,6 +133,7 @@ function StripImmunity(statusToStrip, triggerSpEffect, immunitySpEffect, reducti
     
     local currentResistance = GetPointerValue(GetStatusEffectInfo(statusToStrip).maximum)    
     if currentResistance <= highestMaxStatusResist or highestMaxStatusResist < 0 then
+        act(AddSpEffect, reductionSpEffects[6]) -- Lowered resistance by 60% on enemies who are immune to everything
         return
     end
 

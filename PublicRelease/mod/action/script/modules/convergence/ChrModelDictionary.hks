@@ -35,13 +35,14 @@ CHR_MODEL_DICTIONARY = {
     { ChrId = 2060, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- The Two Fingers
     { ChrId = 2070, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- The Three Fingers
     { ChrId = 2100, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- Black Knife Assassin
+    { ChrId = 2105, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- Quicksilver Husk (Body)
     { ChrId = 2110, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Beast Clergyman
     { ChrId = 2120, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Malenia
     { ChrId = 2130, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- Morgott
     { ChrId = 2131, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Morgott (Dead)
     { ChrId = 2140, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.M }, -- Omen
     { ChrId = 2150, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Lightning Ball
-    { ChrId = 2151, ThreatLevel = ThreatLevel.BossEnemy,  DeathBlightSize = DeathBlightSize.S }, -- Quicksilver Husk
+    { ChrId = 2151, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- Quicksilver Husk (Soul)
     { ChrId = 2160, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Finger Reader Crone
     { ChrId = 2170, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- Finger Reader Crone
     { ChrId = 2180, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.S }, -- Melina
@@ -459,6 +460,7 @@ CHR_MODEL_DICTIONARY = {
     { ChrId = 6220, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Wolf
     { ChrId = 6221, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Wolf
     { ChrId = 6231, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Perfumer
+    { ChrId = 6232, ThreatLevel = ThreatLevel.LesserEnemy,  DeathBlightSize = DeathBlightSize.S }, -- [DLC] Glintstone Sorcerer
     { ChrId = 6233, ThreatLevel = ThreatLevel.GreaterEnemy, DeathBlightSize = DeathBlightSize.S }, -- [DLC] Page
     { ChrId = 6240, ThreatLevel = ThreatLevel.None,         DeathBlightSize = DeathBlightSize.None }, -- [DLC] Dummy
     { ChrId = 6251, ThreatLevel = ThreatLevel.BossEnemy,    DeathBlightSize = DeathBlightSize.M }, -- [DLC] Tree Sentinel

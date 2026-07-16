@@ -257,17 +257,22 @@ function EnemyAnimSlowdownLib()
     end
 end
 
-function IsDisableThrowDef()
-    local disableThrowSpEffects = {
-        19986, -- Verdigris Discus (Heavy)
-        19987, -- Verdigris Discus (Overweight)
-    }
+local disableThrowSpEffects = {
+    19986, -- Verdigris Discus (Heavy)
+    19987, -- Verdigris Discus (Overweight)
+}    
+function VerdigrisThrowPrevent()
+    if env(GetSpEffectID, 19985) == FALSE then
+        return
+    end
+
+
     for i = 1, #disableThrowSpEffects, 1 do
         if env(GetSpEffectID, disableThrowSpEffects[i]) == TRUE then
-            return true
+            act(SetAllowedThrowDefenseType, THROW_STATE_INVALID)
+            return
         end
     end
-    return false
 end
 
 function ForceGesture(spEffectId, gestureId)
@@ -314,6 +319,7 @@ function ForceGestureLib()
     ForceGesture(103009, 52) -- Gesture: By my Sword
     ForceGesture(103010, 23) -- Gesture: Beckon
     ForceGesture(103011, 80) -- Gesture: Dejection
+    ForceGesture(103012, 54) -- Gesture: Fire Spur Me
 
     if env(GetSpEffectID, 103049) == TRUE and env(GetSpEffectID, 100200) == TRUE then
         ExecEventHalfBlend(Event_GestureEnd, ALLBODY) -- Force Gesture End
@@ -419,7 +425,7 @@ end
 
 local animationLogEnabled = false
 local animationLogCharacterFilter = 0
-local lastAnimation = "4294967295"
+local lastAnimation = "-1"
 local lastState = "W_Idle"
 function AnimationLoggerPrep(state)
     lastState = state
@@ -463,7 +469,6 @@ function ForcePoiseBreak()
     SetPointerValue(CHR_INS_BASE.CHR_MODULES.SUPER_ARMOR_MODULE.POISE, 0)
     SetVariable("IndexDamageDirection", 2)
     act(SetDamageAnimType, DAMAGE_FLAG_MIDDLE)
-    act(TurnTowardAttacker, 0)
     Replanning()
     Fire("W_SABreak")
 end

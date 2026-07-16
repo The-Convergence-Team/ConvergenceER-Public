@@ -352,7 +352,6 @@ function MagicWeaponDetection()
     end
 end
 
-local infiniteAmmoActive = false
 function InfiniteAmmo()
     local infiniteAmmoShouldBeActive = false
     if env(GetSpEffectID, 7006100) == TRUE then -- Page Armor        
@@ -361,22 +360,16 @@ function InfiniteAmmo()
         infiniteAmmoShouldBeActive = true
     elseif env(GetSpEffectID, Jewel_of_the_Hunt) == TRUE then
         infiniteAmmoShouldBeActive = true
-	elseif c_SwordArtsID == 344 and env(GetSpEffectID, 100420) == TRUE then -- scadu bow
+	elseif c_SwordArtsID == 344 and env(GetSpEffectID, 100420) == TRUE then -- Scadu Bow
         infiniteAmmoShouldBeActive = true        
     elseif env(GetEventFlag, "1099002105") == TRUE then -- Training Grounds
         infiniteAmmoShouldBeActive = true
     end
 
-    if infiniteAmmoActive then
-        if not infiniteAmmoShouldBeActive then
-            infiniteAmmoActive = false
-            SetPointerValue(GAME_BASE.DEBUG_FLAGS.ALL_NO_ARROW_CONSUME, FALSE)
-        end
+    if infiniteAmmoShouldBeActive then
+        SetPointerValue(GAME_BASE.DEBUG_FLAGS.ALL_NO_ARROW_CONSUME, TRUE)
     else
-        if infiniteAmmoShouldBeActive then
-            infiniteAmmoActive = true
-            SetPointerValue(GAME_BASE.DEBUG_FLAGS.ALL_NO_ARROW_CONSUME, TRUE)
-        end
+        SetPointerValue(GAME_BASE.DEBUG_FLAGS.ALL_NO_ARROW_CONSUME, FALSE)
     end
 end
 

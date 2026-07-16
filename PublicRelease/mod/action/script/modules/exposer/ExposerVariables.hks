@@ -24,6 +24,7 @@ local QUATERNION = 103
 local CHARACTERMODEL = 104
 local MAPID = 105
 local CHRINS = 106
+local BIG_UNSIGNED_INT = 107
 
 UpdateMagicIdToActive = 10002
 SetEventFlag = 10003 --args <flagId>, <value>
@@ -82,6 +83,13 @@ function GetPointerValue(pointerTable)
         local byte4 = env(TraversePointerChain, pointerTable[1], SIGNED_BYTE, HandlePointerIncriment(pointerTable, 3, 3))
 
         return bytesToInt32(byte1, byte2, byte3, byte4)
+    elseif objectType == BIG_UNSIGNED_INT then
+        local byte1 = env(TraversePointerChain, pointerTable[1], UNSIGNED_BYTE, unpack(pointerTable, 3, _end))
+        local byte2 = env(TraversePointerChain, pointerTable[1], UNSIGNED_BYTE, HandlePointerIncriment(pointerTable, 3, 1))
+        local byte3 = env(TraversePointerChain, pointerTable[1], UNSIGNED_BYTE, HandlePointerIncriment(pointerTable, 3, 2))
+        local byte4 = env(TraversePointerChain, pointerTable[1], UNSIGNED_BYTE, HandlePointerIncriment(pointerTable, 3, 3))
+
+        return bytesToUInt32(byte1, byte2, byte3, byte4)
     elseif objectType == COORDINATES then
         local x = env(TraversePointerChain, pointerTable[1], FLOAT, unpack(pointerTable, 3, _end))
         local y = env(TraversePointerChain, pointerTable[1], FLOAT, HandlePointerIncriment(pointerTable, 3, 4))

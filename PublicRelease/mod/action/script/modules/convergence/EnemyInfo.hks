@@ -2,8 +2,13 @@ function GetNpcThinkParamId()
     return GetPointerValue(CHR_INS_BASE.CHR_CTRL.CHR_MANIPULATOR.AI.NPC_THINK_ID)
 end
 
+local npcParam = -1
 function GetNpcParamId()
-    return GetPointerValue(CHR_INS_BASE.NPC_PARAM_ID)
+    if npcParam ~= -1 then
+        return npcParam
+    end
+    npcParam = GetPointerValue(CHR_INS_BASE.NPC_PARAM_ID)
+    return npcParam
 end
 
 local model = -1
@@ -16,12 +21,21 @@ function GetModel()
 end
 
 local entityId = -1
-function GetEntityId()    
+function GetEntityId()
     if entityId ~= -1 then
         return entityId
     end
     entityId = GetPointerValue(CHR_INS_BASE.EVENT_ENTITY_ID)
     return entityId
+end
+
+local fieldInsHandle = nil
+function GetFieldInsHandle()
+    if fieldInsHandle ~= nil then
+        return fieldInsHandle
+    end
+    fieldInsHandle = GetPointerValue(CHR_INS_BASE.FIELD_INS_HANDLE)
+    return fieldInsHandle
 end
 
 local nonHostileTeams = {
@@ -129,14 +143,23 @@ function PsudoDisableAI(triggerSpEffect, doThreatSpEffect, doStagger)
 end
 
 function DealCalculatedDamage(damage)
+    if damage == nil or damage <= 0 then return end
+    damage = math.floor(damage + 0.5)
     SetParamValue(PARAM.SpEffectParam.CHANGE_HP_FLAT, 100657, damage)
     act(AddSpEffect, 100657)
 end
 
+function CalculatedHeal(healAmount)
+    if healAmount == nil or healAmount <= 0 then return end
+    healAmount = math.floor(healAmount + 0.5)
+    SetParamValue(PARAM.SpEffectParam.CHANGE_HP_FLAT, 100658, healAmount * -1)
+    Log(GetParamValue(PARAM.SpEffectParam.CHANGE_HP_FLAT, 100658))
+end
+
 function ForceKill()
-    DealCalculatedDamage(env(GetHP))
+    act(AddSpEffect, 13476)
 end
 
 function FullHeal()
-    DealCalculatedDamage(-(env(GetMaxHP) - env(GetHP())))
+    act(AddSpEffect, 3000)
 end
