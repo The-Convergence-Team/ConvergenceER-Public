@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6
+// @version    3.6.3
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -415,10 +415,10 @@ $Event(2049410946, Restart, function() {
     EnableCharacter(2049411900);
     WaitFixedTimeSeconds(3);
     WaitFor(!EntityInRadiusOfEntity(10000, 2049410900, 45, 1))
-    EndIf(CharacterDead(2049410245));
+    //EndIf(CharacterDead(2049410245));
     DeleteAssetfollowingSFX(2049410900, false);
     SpawnOneshotSFX(TargetEntityType.Asset, 2049410900, -1, 652815);
-    DisableCharacter(2049410900);
+    DisableCharacter(2049411900);
     WaitFixedTimeSeconds(3);
     RestartEvent();
 });

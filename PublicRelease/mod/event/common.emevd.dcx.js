@@ -1020,7 +1020,7 @@ $Event(9008000, Default, function() {
     InitializeEvent(12, 9006051, 1499000, 1499010);
     InitializeEvent(13, 9006050, 1499100, 1499110); //Blood Revelry
     InitializeEvent(13, 9006051, 1499100, 1499110);
-    InitializeEvent(14, 9006050, 1496000, 1496010); //Blood Star
+    InitializeEvent(14, 9006050, 1496001, 1496010); //Blood Star
     InitializeEvent(14, 9006051, 1496001, 1496010);
     InitializeEvent(15, 9006050, 1685100, 1685110); //Bestial Fervor
     InitializeEvent(15, 9006051, 1685100, 1685110);
@@ -1060,12 +1060,16 @@ $Event(9008000, Default, function() {
     InitializeEvent(32, 9006051, 1413110, 1413120);
     InitializeEvent(33, 9006050, 1485400, 1485410); // Living Forge
     InitializeEvent(33, 9006051, 1485400, 1485410);
-    InitializeEvent(34, 9006050, 1441500, 1441510); //Ice Guardian's Reckoning
+    InitializeEvent(34, 9006050, 1441500, 1441510); // Ice Guardian's Reckoning
     InitializeEvent(34, 9006051, 1441500, 1441510);
-    InitializeEvent(0, 9006080, 1508000, 1508010, 1508001); //Accursed Binding
-    InitializeEvent(0, 9006081, 1508000, 1508010, 1508001);
-    InitializeEvent(1, 9006080, 1741300, 1741310, 1741301); //Spirit Link
-    InitializeEvent(1, 9006081, 1741300, 1741310, 1741301);
+    InitializeEvent(39, 9006050, 1508000, 1508010); // Accursed Binding
+    InitializeEvent(39, 9006051, 1508000, 1508010);
+    InitializeEvent(40, 9006050, 1741300, 1741310); // Spirit Link
+    InitializeEvent(40, 9006051, 1741300, 1741310);
+    InitializeEvent(5, 9007012, 1508000, 1508001); // Accursed Binding secondary effect
+    InitializeEvent(5, 9007035, 1508000, 1508001);
+    InitializeEvent(6, 9007012, 1741300, 1741301); // Spirit Link secondary effect
+    InitializeEvent(6, 9007035, 1741300, 1741301);
     InitializeEvent(0, 9006058, 1679000, 1679010, 1679005); //Blessing of Grace
     InitializeEvent(0, 9006059, 1679000, 1679010);
     InitializeEvent(1, 9006058, 1679100, 1679110, 1679105); //Blessing of Protection
@@ -1116,6 +1120,10 @@ $Event(9008000, Default, function() {
     InitializeEvent(0, 9006076, 1477000, 1479000, 1477010);
     InitializeEvent(1, 9006075, 1477000, 1479100, 1477020);
     InitializeEvent(1, 9006076, 1477000, 1479100, 1477020);
+    InitializeEvent(42, 9006075, 1477100, 1479000, 1477110);
+    InitializeEvent(42, 9006076, 1477100, 1479000, 1477110);
+    InitializeEvent(43, 9006075, 1477100, 1479100, 1477120);
+    InitializeEvent(43, 9006076, 1477100, 1479100, 1477120);
     //Cosmic Surge toggle scripts - tier 1
     InitializeEvent(2, 9006075, 21740000, 1479000, 21740030);
     InitializeEvent(2, 9006076, 21740000, 1479000, 21740030);
@@ -1260,7 +1268,8 @@ $Event(9008000, Default, function() {
     // Spiritual Equiliburium
     InitializeEvent(0, 9006097, 1748200, 1748212, 1748215); // Heal Caster if any Ally is damaged
     InitializeEvent(1, 9006097, 1748210, 1748202, 1748205); // Heal Ally if caster is damaged
-    InitializeEvent(0, 9006098, 0); // Heal Spirit Summon if caster is damaged 
+    $InitializeEvent(0, 9006098); // Heal Spirit Summon if caster is damaged
+    $InitializeEvent(0, 9006036);
     
     InitializeEvent(5, 9007122, 1485300, 1485310); // Superheat enemy speffect application
     
@@ -1312,6 +1321,10 @@ $Event(9008000, Default, function() {
     $InitializeEvent(0, 9006005); // Mark Recall expired
     InitializeEvent(2, 9007129, 295940, 1622401, 1622415) // Soul Tether Death/Expire Heal
     $InitializeEvent(0, 9006002); // Soul Tether Cleanup
+    
+    $InitializeEvent(0, 9006035); // Blood Rev heal on self
+    
+    InitializeEvent(10, 9007122, 1467200, 1467205); // Attune to the Black Moon - Enemy Detection
 });
 
 // Spirit Summons
@@ -2041,7 +2054,7 @@ $Event(9008003, Default, function() {
 
 // Items Acquisition
 $Event(9008004, Default, function() {
-    InitializeEvent(0, 9006024, ItemType.Goods, 1290, ItemType.Goods, 1291); // Replace starlight shard pickup with consumable
+    InitializeEvent(0, 9006024, ItemType.Goods, 1291, ItemType.Goods, 1290); // Replace starlight shard pickup with consumable
     
     InitializeEvent(0, 65810, 65817, 100750, 0, 0, 0, 0); //Ash of War: Impaling Thrust
     InitializeEvent(1, 65810, 65811, 400163, 0, 0, 0, 0); //Ash of War: Piercing Fang
@@ -2134,10 +2147,10 @@ $Event(9008004, Default, function() {
     InitializeEvent(89, 65810, 65899, 540334, 0, 0, 0, 0); //Ash of War: Through and Through
     InitializeEvent(90, 65810, 65900, 540646, 0, 0, 0, 0); //Ash of War: Enchanted Shot
     InitializeEvent(91, 65810, 65901, 580360, 0, 0, 0, 0); //Ash of War: Rain of Arrows
-    InitializeEvent(92, 65810, 65902, 112092, 0, 0, 0, 0); //Ash of War: Assassin's Feint
-    InitializeEvent(93, 65810, 65903, 112093, 0, 0, 0, 0); //Ash of War: Flame Arc
-    InitializeEvent(94, 65810, 65904, 112094, 0, 0, 0, 0); //Ash of War: Dragon Lord's Recall
-    InitializeEvent(95, 65810, 65905, 112096, 0, 0, 0, 0); //Ash of War: Deflecting Ash
+    InitializeEvent(92, 65810, 65902, 510360, 0, 0, 0, 0); //Ash of War: Assassin's Feint
+    InitializeEvent(93, 65810, 65903, 530730, 0, 0, 0, 0); //Ash of War: Flame Arc
+    InitializeEvent(94, 65810, 65904, 13007625, 0, 0, 0, 0); //Ash of War: Dragon Lord's Recall
+    InitializeEvent(95, 65810, 65905, 520750, 0, 0, 0, 0); //Ash of War: Stormbreaker's Deflection
     
     //Spell Runes - Incantations
     InitializeEvent(0, 1500, 9000, 7000);  //Bestial 1
@@ -12080,12 +12093,22 @@ $Event(9006034, Restart, function() {
     RestartEvent();
 });
 
-// UNUSED
+// Blood Reverly self heal
 $Event(9006035, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 1499100) && CharacterHasStateInfo(10000, 6));
+    SetSpEffect(10000, 1499103);
+    WaitFor(!CharacterHasSpEffect(10000, 1499100) || !CharacterHasStateInfo(10000, 6));
+    RestartEvent();
 });
 
-// UNUSED
+// Spiritual Equilibrium cleanup
 $Event(9006036, Restart, function() {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, 1748210) && CharacterHasSpEffect(20000, 1748200, Less, 1));
+    ClearSpEffect(10000, 1748210);
+    WaitFor(!CharacterHasSpEffect(10000, 1748210));
+    RestartEvent();
 });
 
 //Godslayer's Devotion Scripts
@@ -12520,24 +12543,14 @@ $Event(9006078, Restart, function() {
     RestartEvent();
 });
 
-//Spirit Link/Accursed Toggle On
-$Event(9006080, Restart, function(X0_4, X4_4, X8_4) {
-    DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, X4_4) && !CharacterHasSpEffect(10000, X0_4));
-    ClearSpEffect(10000, X4_4);
-    SetSpEffect(10000, X0_4);
-    SetSpEffect(10000, X8_4);
-    RestartEvent();
+// UNUSED
+$Event(9006080, Restart, function() {
+    
 });
 
-//Spirit Link/Accursed Toggle Off
-$Event(9006081, Restart, function(X0_4, X4_4, X8_4) {
-    DisableNetworkSync();
-    WaitFor(CharacterHasSpEffect(10000, X4_4) && CharacterHasSpEffect(10000, X0_4));
-    ClearSpEffect(10000, X4_4);
-    ClearSpEffect(10000, X0_4);
-    ClearSpEffect(10000, X8_4);
-    RestartEvent();
+// UNUSED
+$Event(9006081, Restart, function() {
+    
 });
 
 // Pocket dimension tool
@@ -12565,9 +12578,7 @@ $Event(9006083, Restart, function() {
     WaitFor(CharacterHasSpEffect(10000, 250) && !MapLoaded(31, 80, 0, 0) && !InArea(10000, 11102700) && !InArea(10000, 11102620));
     // Your Code Below
 
-    
-    SetSpEffect(10000, 1622410);
-    SaveRequest();
+    //SaveRequest();
     //AwardItemLot(998100);
     
     // Your Code Above
@@ -12975,7 +12986,7 @@ $Event(9007000, Default, function() {
     InitializeEvent(37, 9007002, 6022030, Consumable.Blue_Flask, 7005300, 2); // Legs
     
     InitializeEvent(10, 9007003, 7005100, 8000010, 7005101, 2); // Armor - Resource Recovery on Trigger
-    InitializeEvent(0, 9007056, 6022020, 7005200, 7005201); // Arms - Debuff Application
+    InitializeEvent(0, 9007056, 6022020, 7005200, 7005201, 7005250, 7005251); // Arms - Debuff Application
     
     InitializeEvent(113, 9007030, 6022000, 7005000, 2); // Head
     InitializeEvent(114, 9007030, 6022010, 7005100, 2); // Armor AND Altar Armor
@@ -12992,7 +13003,7 @@ $Event(9007000, Default, function() {
     InitializeEvent(0, 9007054, 0); // Head - Buffs
     InitializeEvent(8, 9007003, 7006100, 8000010, 7006101, 2); // Armor - Resource Recovery on Trigger
     InitializeEvent(9, 9007003, 7006300, 8000010, 7006301, 2); // Legs - Resource Recovery on Trigger
-    InitializeEvent(1, 9007056, 6199020, 7006200, 7006201); // Arms - Debuff Application
+    InitializeEvent(1, 9007056, 6199020, 7006200, 7006201, 7006250, 7006251); // Arms - Debuff Application
     InitializeEvent(0, 9007057, 7006211, 9000031, 7006220); // Arms - Melee Hit
     InitializeEvent(1, 9007057, 7006211, 8000010, 7006220); // Arms - Ammo Hit
     InitializeEvent(2, 9007057, 7006211, 8000090, 7006220); // Arms - Sorcery Hit
@@ -13024,7 +13035,7 @@ $Event(9007000, Default, function() {
     InitializeEvent(60, 9007002, 6602300, Consumable.Blue_Flask, 7019300, 2); // Legs
     InitializeEvent(61, 9007002, 7019300, Consumable.Throwing_Knives, 7019301, 2); // Legs - Throwing Knives
     InitializeEvent(21, 9007003, 7019300, 8000030, 7019301, 2); // Legs - Arrow/Bolt
-    InitializeEvent(2, 9007056, 6602200, 7019200, 7019201); // Arms - Debuff Application
+    InitializeEvent(2, 9007056, 6602200, 7019200, 7019201, 7019250, 7019251); // Arms - Debuff Application
     InitializeEvent(4, 9007057, 7019211, 9000031, 7019220); // Arms - Melee Hit
     InitializeEvent(5, 9007057, 7019211, 8000010, 7019221); // Arms - Ammo Hit
     InitializeEvent(6, 9007057, 7019211, 8000090, 7019222); // Arms - Sorcery Hit
@@ -14359,12 +14370,29 @@ $Event(9007055, Restart, function() {
 });
 
 // Marksman Gloves - Weaponbuff /w Debuff application
-$Event(9007056, Restart, function(gloveSpEffect, weaponBuffSpEffectR, weaponBuffSpEffectL) {
+$Event(9007056, Restart, function(gloveSpEffect, weaponBuffSpEffectR, weaponBuffSpEffectL, serpentAltSpEffectR, serpentAltSpEffectL) {
     DisableNetworkSync();
     
     WaitFor(CharacterHasSpEffect(10000, 8000000) && CharacterHasSpEffect(10000, gloveSpEffect) && !CharacterHasSpEffect(10000, 109000));
     WaitFor(ElapsedSeconds(1) || !CharacterHasSpEffect(10000, 8000000));
     RestartIf(!CharacterHasSpEffect(10000, 8000000));
+    
+    // Serpent Bow Handling
+    if (CharacterHasSpEffect(10000, 1938)) {
+        ClearSpEffect(10000, 1938);
+        SetSpEffect(10000, serpentAltSpEffectR);
+        SetSpEffect(10000, serpentAltSpEffectL);
+        
+        WaitFor(!CharacterHasSpEffect(10000, 8000000));
+        WaitFor(ElapsedSeconds(3) || CharacterHasSpEffect(10000, 8000010));
+
+        WaitFixedTimeFrames(3);
+        ClearSpEffect(10000, serpentAltSpEffectR);
+        ClearSpEffect(10000, serpentAltSpEffectL);
+        SetSpEffect(10000, 1938);
+        RestartEvent();
+    }
+    
     SetSpEffect(10000, weaponBuffSpEffectR);
     SetSpEffect(10000, weaponBuffSpEffectL);
     

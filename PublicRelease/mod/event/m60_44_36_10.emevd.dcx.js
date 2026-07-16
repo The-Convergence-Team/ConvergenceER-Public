@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.3
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -312,9 +312,11 @@ $Event(1044362810, Restart, function() {
         DisableCharacter(1044360800);
         DisableCharacterCollision(1044360800);
         ForceCharacterDeath(1044360800, false);
+        DisableCharacterInvincibility(1044360700);
         EndEvent();
     }
 L0:
+    EnableCharacterInvincibility(1044360700);
     EnableCharacterInvincibility(1044360800);
     DisableCharacterAI(1044360800);
     WaitFor(EventFlag(1044362805) && InArea(10000, 1044362800));

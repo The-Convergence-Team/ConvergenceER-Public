@@ -4,12 +4,15 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.3
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
     RegisterBonfire(2053410000, 2053411950, 0, 0, 0, 5);
     InitializeEvent(0, 2053413780, 0); // Warp to Proscription
+    
+    //Abandoned Church Waygate Realm of Shadows Map Flag Handler Initialization
+    InitializeEvent(0, 2053413781, 0);
 });
 
 $Event(2053413780, Default, function() {
@@ -22,4 +25,12 @@ $Event(2053413780, Default, function() {
     SaveRequest();
     SetPlayerRespawnPoint(35001616);
     RestartEvent();
+});
+
+//Abandoned Church Waygate Realm of Shadows Map Flag Handler
+$Event(2053413781, Restart, function() {
+    if (!EventFlag(62002)) { // Open up DLC map stuff
+        SetEventFlagID(62002, ON);
+        SetEventFlagID(82002, ON);
+    }
 });

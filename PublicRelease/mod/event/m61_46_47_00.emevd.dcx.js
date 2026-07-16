@@ -9,7 +9,7 @@
 
 $Event(0, Default, function() {
     RegisterBonfire(76941, 2046471950, 0, 0, 0, 5);
-    RegisterBonfire(76942, 2046471951, 0, 0, 0, 5);
+    RegisterBonfire(76946, 2046471951, 0, 0, 0, 5);
     InitializeCommonEvent(0, 90005102, 76945, 76941, 2046471980, 77900, 3, 78900, 78901, 78902, 78903, 78904, 78905, 78906, 78907, 78908, 78909, 9146);
     InitializeCommonEvent(0, 90005221, 2046470300, 30013, 20013, 0, 0);
     InitializeCommonEvent(0, 90005221, 2046470305, 30002, 20002, 0, 0);

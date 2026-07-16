@@ -35,6 +35,9 @@ $Event(0, Default, function() {
     
     //Farum Waygate VFX Enable Handler Initialization
     $InitializeEvent(0, 2051412501);
+    
+    //Jagged Peak Waygate Realm of Shadows Map Flag Handler Initialization
+    InitializeEvent(0, 2051412502, 0);
 });
 
 $Event(2051412200, Restart, function(chrEntityId, chrEntityId2) {
@@ -130,5 +133,13 @@ $Event(2051412500, Restart, function(entityId, areaEntityId) {
 $Event(2051412501, Restart, function() {
     if (!EventFlag(13000860)) { //If Lansseax not Dead
         DeleteMapSFX(2051411501, false); //Remove Waygate visual
+    }
+});
+
+//Jagged Peak Waygate Realm of Shadows Map Flag Handler
+$Event(2051412502, Restart, function() {
+    if (!EventFlag(62002)) { // Open up DLC map stuff
+        SetEventFlagID(62002, ON);
+        SetEventFlagID(82002, ON);
     }
 });

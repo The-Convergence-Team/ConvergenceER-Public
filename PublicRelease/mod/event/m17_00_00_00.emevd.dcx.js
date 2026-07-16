@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -435,7 +435,7 @@ $Event(17000849, Restart, function() {
     InitializeCommonEvent(0, 9005800, 17000850, 17001850, 17002870, 17002855, 17005850, 10000, 0, 0);
     InitializeCommonEvent(0, 9005801, 17000850, 17001850, 17002870, 17002855, 17002856, 10000);
     InitializeCommonEvent(0, 9005811, 17000850, 17001850, 21, 0);
-    InitializeCommonEvent(0, 9005822, 17000850, 391300, 17002855, 17002856, 0, 0, 0, 0);
+    //InitializeCommonEvent(0, 9005822, 17000850, 391300, 17002855, 17002856, 0, 0, 0, 0);
 });
     
 // Init Husk
@@ -482,9 +482,11 @@ $Event(17000853, Restart, function() {
     }
     else {
         WaitFor(EventFlag(17002855) || EntityInRadiusOfEntity(20000, 17000850, 5, 1));
+        SetBossBGM(391300, BossBGMState.Start);
     }
     
     ForceAnimationPlayback(17000850, 20000, false, false, true);
+    SetBossBGM(391300, BossBGMState.Start);
     EnableLockOnPoint(17000850, 220);
     EnableCharacterAI(17000850);
     DisplayBossHealthBar(Enabled, 17000852, 1, 902036020);
@@ -504,7 +506,7 @@ $Event(17000854, Restart, function() {
     ForceCharacterDeath(17000852, false);
     
     WaitFixedTimeSeconds(4);
-    // Music Disable Flag Here
+    SetBossBGM(391300, BossBGMState.Stop1);
     PlaySE(17000850, SoundType.SFX, 888880000);
     
     WaitFor(CharacterDead(17000850));

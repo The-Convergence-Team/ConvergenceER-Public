@@ -510,6 +510,8 @@ $Event(1035500800, Restart, function() {
     //SetEventFlagID(1035505814, OFF); //music handler eventflag
     //SetEventFlagID(1035505815, ON); //music handler eventflag
     SetEventFlagID(9181, ON);
+    SetBossBGM(391800, BossBGMState.Stop1);
+    SetBossBGM(391800, BossBGMState.Stop2);
     if (PlayerIsInOwnWorld()) {
         SetEventFlagID(61181, ON);
     }
@@ -541,11 +543,13 @@ L0:
     SpawnOneshotSFX(TargetEntityType.Character, 1035500800, 240, 632585);
     PlaySE(1035500800, SoundType.SFX, 632650);
     SetEventFlagID(1035502806, ON);
+    SetBossBGM(391800, BossBGMState.Start);
     //SetEventFlagID(1035505814, ON); //music handler eventflag
 L2:
     EnableCharacterAI(1035500800);
     DisableCharacterInvincibility(1035500800);
     SetNetworkUpdateRate(1035500800, true, CharacterUpdateFrequency.AlwaysUpdate);
+    SetBossBGM(391800, BossBGMState.Start);
     DisplayBossHealthBar(Enabled, 1035500800, 0, 904813000);
 });
 
@@ -688,7 +692,7 @@ $Event(1035502849, Restart, function() {
     InitializeCommonEvent(0, 9005813, 1035500800, 1035501807, 17, 0, 3);
     InitializeCommonEvent(0, 9005813, 1035500800, 1035501808, 17, 0, 3);
     InitializeCommonEvent(0, 9005813, 1035500800, 1035501809, 17, 0, 3);
-    InitializeCommonEvent(0, 9005822, 1035500800, 391800, 1035502805, 6000, 1035500801, 0, 0, 0);
+    //InitializeCommonEvent(0, 9005822, 1035500800, 391800, 1035502805, 6000, 1035500801, 0, 0, 0);
 });
 
 // Boss Defeat (Ainar)
@@ -704,6 +708,7 @@ $Event(1035500850, Restart, function() {
     SetEventFlagID(1035502852, OFF);
     SetEventFlagID(1035502855, OFF);
     SetBossBGM(391700, BossBGMState.Stop1);
+    SetBossBGM(391700, BossBGMState.Stop2);
     SetEventFlagID(9189, ON);
     if (PlayerIsInOwnWorld()) {
         SetEventFlagID(61189, ON);

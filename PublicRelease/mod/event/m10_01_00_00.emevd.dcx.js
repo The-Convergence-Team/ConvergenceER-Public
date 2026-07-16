@@ -23,33 +23,33 @@ $Event(0, Default, function() {
     InitializeEvent(0, 10012503, 0); //starting class warp script
     
     //weapon/goods check script for eventflag setup + additional spells for bigger spellrunes
-    InitializeEvent(0, 10012510, 60900, 26, 0, 0, 0); //Prisoner
-    InitializeEvent(1, 10012510, 60901, 1, 0, 0, 0); //Vanguard
-    InitializeEvent(2, 10012510, 60902, 2, 0, 0, 0); //Marksman
-    InitializeEvent(3, 10012510, 60903, 0, 0, 0, 0); //Retainer
-    InitializeEvent(4, 10012510, 60904, 3, 0, 0, 0); //Berserker
-    InitializeEvent(5, 10012510, 60905, 4, 0, 0, 0); //Dreadnought
-    InitializeEvent(6, 10012510, 60906, 5, 0, 0, 0); //Sellsword
-    InitializeEvent(7, 10012510, 60907, 6, 0, 0, 0); //Rogue
-    InitializeEvent(8, 10012510, 60908, 7, 4160, 0, 0); //Astrologer
-    InitializeEvent(9, 10012510, 60909, 8, 0, 0, 0); //Starcaller
-    InitializeEvent(10, 10012510, 60910, 9, 4530, 0, 0); //Dragon Mage
-    InitializeEvent(11, 10012510, 60911, 16, 6080, 0, 0); //Flame Prophet
-    InitializeEvent(12, 10012510, 60912, 17, 6790, 6740, 0); //Fundamentalist
-    InitializeEvent(13, 10012510, 60913, 18, 7510, 2007740, 0); //Bestial Devout
-    InitializeEvent(14, 10012510, 60914, 19, 6960, 2006920, 0); //Dragon Cultist
-    InitializeEvent(15, 10012510, 60915, 13, 5031, 5070, 8158); //Necromancer
-    InitializeEvent(16, 10012510, 60916, 10, 0, 0, 0); //Volcanist
-    InitializeEvent(17, 10012510, 60917, 12, 6520, 0, 0); //Nox Oracle
-    InitializeEvent(18, 10012510, 60918, 11, 5271, 0, 0); //Storm Caller
-    InitializeEvent(19, 10012510, 60919, 20, 0, 0, 0); //Godskin Celebrant
-    InitializeEvent(20, 10012510, 60920, 21, 7322, 0, 0); //Frenzied Zealot
-    InitializeEvent(21, 10012510, 60921, 14, 4400, 0, 0); //Frost Witch
-    InitializeEvent(22, 10012510, 60922, 15, 4980, 0, 0); //Aberrant Heretic
-    InitializeEvent(23, 10012510, 60923, 22, 6320, 0, 0); //Blood Initiate
-    InitializeEvent(24, 10012510, 60924, 23, 7230, 0, 0); //Servant of Rot
-    InitializeEvent(25, 10012510, 60925, 24, 7442, 8158, 0); //Mystic
-    InitializeEvent(26, 10012510, 60926, 25, 0, 0, 0); //Perfumer
+    InitializeEvent(0, 10012510, 60900, 26, 0, 0, 0, 0); //Prisoner
+    InitializeEvent(1, 10012510, 60901, 1, 0, 0, 0, 0); //Vanguard
+    InitializeEvent(2, 10012510, 60902, 2, 0, 0, 0, 0); //Marksman
+    InitializeEvent(3, 10012510, 60903, 0, 0, 0, 0, 0); //Retainer
+    InitializeEvent(4, 10012510, 60904, 3, 0, 0, 0, 0); //Berserker
+    InitializeEvent(5, 10012510, 60905, 4, 0, 0, 0, 0); //Dreadnought
+    InitializeEvent(6, 10012510, 60906, 5, 0, 0, 0, 0); //Sellsword
+    InitializeEvent(7, 10012510, 60907, 6, 0, 0, 0, 0); //Rogue
+    InitializeEvent(8, 10012510, 60908, 7, 4160, 0, 0, 0); //Astrologer
+    InitializeEvent(9, 10012510, 60909, 8, 0, 0, 0, 0); //Starcaller
+    InitializeEvent(10, 10012510, 60910, 9, 4530, 0, 0, 0); //Dragon Mage
+    InitializeEvent(11, 10012510, 60911, 16, 6080, 0, 0, 0); //Flame Prophet
+    InitializeEvent(12, 10012510, 60912, 17, 6790, 6740, 0, 0); //Fundamentalist
+    InitializeEvent(13, 10012510, 60913, 18, 7510, 2007740, 0, 65919); //Bestial Devout
+    InitializeEvent(14, 10012510, 60914, 19, 6960, 2006920, 0, 0); //Dragon Cultist
+    InitializeEvent(15, 10012510, 60915, 13, 5031, 5070, 8158, 0); //Necromancer
+    InitializeEvent(16, 10012510, 60916, 10, 0, 0, 0, 0); //Volcanist
+    InitializeEvent(17, 10012510, 60917, 12, 6520, 0, 0, 0); //Nox Oracle
+    InitializeEvent(18, 10012510, 60918, 11, 5271, 0, 0, 0); //Storm Caller
+    InitializeEvent(19, 10012510, 60919, 20, 0, 0, 0, 0); //Godskin Celebrant
+    InitializeEvent(20, 10012510, 60920, 21, 7322, 0, 0, 0); //Frenzied Zealot
+    InitializeEvent(21, 10012510, 60921, 14, 4400, 0, 0, 0); //Frost Witch
+    InitializeEvent(22, 10012510, 60922, 15, 4980, 0, 0, 0); //Aberrant Heretic
+    InitializeEvent(23, 10012510, 60923, 22, 6320, 0, 0, 0); //Blood Initiate
+    InitializeEvent(24, 10012510, 60924, 23, 7230, 0, 0, 0); //Servant of Rot
+    InitializeEvent(25, 10012510, 60925, 24, 7442, 8158, 0, 0); //Mystic
+    InitializeEvent(26, 10012510, 60926, 25, 0, 0, 0, 0); //Perfumer
     
     InitializeCommonEvent(0, 98005307, 10011660, 60, 39, 50, 0, 1039502811, 0); // Waygate
     InitializeCommonEvent(0, 90005250, 10010100, 10011100, 0, -1); // Bird
@@ -191,7 +191,6 @@ $Event(0, Default, function() {
     InitializeEvent(31, 10015715, 10015504, 10011704, 11797, 1);
     
     InitializeCommonEvent(0, 90005525, 10010545, 10011545); // Illusory Wall
-    InitializeEvent(0, 10015714, 0); // Ambient Music
     InitializeEvent(0, 10015717, 0); // Stone msg
 });
 
@@ -527,8 +526,8 @@ $Event(10012506, Restart, function() {
     CreateAssetfollowingSFX(10011541, 101, 1530); //asset AEG099_003
 });
 
-// Set Class Flags - EventFlag, Class Index, Missing Goods 1,  Missing Goods 2, Missing Goods 3
-$Event(10012510, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
+// Set Class Flags - EventFlag, Class Index, Missing Goods 1,  Missing Goods 2, Missing Goods 3, Acquisition Flag 1
+$Event(10012510, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4) {
     EndIf(!PlayerIsInOwnWorld() || AnyBatchEventFlags(60900, 60926) || !PlayersClass(X4_4));
     
     if (Signed(X8_4) != 0 && !PlayerHasItemIncludingBBox(ItemType.Goods, X8_4))
@@ -537,6 +536,8 @@ $Event(10012510, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
         DirectlyGivePlayerItem(ItemType.Goods, X12_4, 6001, 1);
     if (Signed(X16_4) != 0 && !PlayerHasItemIncludingBBox(ItemType.Goods, X16_4))
         DirectlyGivePlayerItem(ItemType.Goods, X16_4, 6001, 1);
+    if (Signed(X20_4) != 0 && !EventFlag(X20_4))
+        SetEventFlagID(X20_4, ON);
     
     if (PlayerHasItem(ItemType.Goods, 8158))
         SetEventFlagID(60110, ON); // Allow spirit summoning if starting with a bell
@@ -789,14 +790,6 @@ $Event(10015713, Default, function() {
         SpawnOneshotSFX(TargetEntityType.Asset, 10010704, 200, 806831);
         EnableCharacter(10011704);
     }
-});
-
-// Ambient Music Handler
-$Event(10015714, Default, function() {
-    DisableNetworkSync();
-    EndIf(!InArea(10000, 10012705));
-    WaitFixedTimeFrames(1);
-    SetBossBGM(393200, BossBGMState.Start);
 });
 
 // Owl Forced Hoot x4

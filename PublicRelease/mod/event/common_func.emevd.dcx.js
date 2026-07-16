@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    ""
 // @linked    []
-// @version    3.6.1
+// @version    3.5
 // ==/EMEVD==
 
 $Event(90005200, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4, X28_4, X32_4) {
@@ -7544,7 +7544,7 @@ L1:
 });
 
 //custom field boss death for music handler
-$Event(90005863, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4, X28_4) {
+$Event(90005863, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4, X28_4, X32_4) {
     if (Signed(X16_4) != 0) {
         Unknown200476(X0_4, X16_4);
     }
@@ -7563,6 +7563,7 @@ L0:
     WaitFixedTimeSeconds(2);
     PlaySE(X8_4, SoundType.SFX, 888880000);
     WaitFor(CharacterDead(X8_4));
+    SetBossBGM(X32_4, BossBGMState.Stop1);
     GotoIf(S0, X12_4 == 3);
     if (X12_4 != 2) {
         if (X12_4 != 1) {
@@ -7736,7 +7737,7 @@ $Event(90005872, Default, function(X0_4, X4_4, X8_4) {
 });
 
 //custom field boss encounter for music handler
-$Event(90005873, Default, function(X0_4, X4_4, X8_4) {
+$Event(90005873, Default, function(X0_4, X4_4, X8_4, X12_4) {
     DisableNetworkSync();
     WaitFor(
         CharacterAIState(X0_4, AIStateType.Combat) && CharacterHPValue(X0_4) > 0 && !EventFlag(9000));
@@ -7748,6 +7749,7 @@ L0:
     SetEventFlagID(9290, ON);
     WaitFixedTimeSeconds(1);
     SetEventFlagID(X8_4, ON);
+    SetBossBGM(X12_4, BossBGMState.Start);
     DisplayBossHealthBar(Enabled, X0_4, 0, X4_4);
     if (PlayerIsInOwnWorld()) {
         SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Forced);
@@ -7763,6 +7765,7 @@ L0:
         WaitFixedTimeSeconds(1);
     }
     SetEventFlagID(X8_4, OFF);
+    SetBossBGM(X12_4, BossBGMState.Stop1);
     DisplayBossHealthBar(Disabled, X0_4, 0, X4_4);
     if (PlayerIsInOwnWorld()) {
         SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Normal);
@@ -7774,6 +7777,7 @@ L1:
     SetEventFlagID(9291, ON);
     WaitFixedTimeSeconds(1);
     SetEventFlagID(X8_4, ON);
+    SetBossBGM(X12_4, BossBGMState.Start);
     DisplayBossHealthBar(Enabled, X0_4, 1, X4_4);
     if (PlayerIsInOwnWorld()) {
         SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Forced);
@@ -7789,6 +7793,7 @@ L1:
         WaitFixedTimeSeconds(1);
     }
     SetEventFlagID(X8_4, OFF);
+    SetBossBGM(X12_4, BossBGMState.Stop1);
     DisplayBossHealthBar(Disabled, X0_4, 1, X4_4);
     if (PlayerIsInOwnWorld()) {
         SetNetworkUpdateAuthority(X0_4, AuthorityLevel.Normal);

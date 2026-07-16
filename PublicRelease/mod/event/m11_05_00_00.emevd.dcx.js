@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0]
-// @version    3.5
+// @version    3.6
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -77,6 +77,7 @@ $Event(0, Default, function() {
     //Mimic
     InitializeCommonEvent(0, 20000352, 11050660);
     InitializeCommonEvent(0, 20000353, 11001660, 11050660, 511000660);
+    InitializeEvent(0, 11053791, 0) //mimic invun
 });
 
 $Event(50, Default, function() {
@@ -723,4 +724,11 @@ $Event(11053731, Restart, function(X0_4) {
     WaitFor(EntityInRadiusOfEntity(X0_4, 20000, 4, 1) && CharacterHasSpEffect(20000, 9690));
     SetNetworkconnectedEventFlagID(1039402710, ON);
     EndEvent();
+});
+$Event(11053791, Default, function() { //mimic invunerability
+    EndIf(EventFlag(11050850));
+    EnableCharacterInvincibility(11050660);
+    WaitFor(EventFlag(11050850));
+    DisableCharacterInvincibility(11050660);
+    
 });

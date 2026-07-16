@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.5
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -793,6 +793,7 @@ $Event(15002811, Restart, function() {
         CharacterHPValue(15000800) <= 1
             //&& !CharacterHasSpEffect(15000800, 18480)
             && HasDamageType(15000800, 0, DamageType.Unspecified));
+    DisableCharacterFadeOnEnable(15000806); //Phase 2 Malenia (Removes fade in)
     if (PlayerIsInOwnWorld()) {
         PlayCutsceneToPlayerAndWarp(15000010, CutscenePlayMode.Skippable, 15002815, 15000000, 10000, 0, false);
     } else {

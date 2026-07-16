@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -60,6 +60,9 @@ $Event(50, Default, function() {
     // NPC
     InitializeCommonEvent(0, 90005250, 32110301, 32112301, 0, -1);
     InitializeCommonEvent(0, 90005300, 32110301, 32110301, 108900, 0, 0);
+    // NPC Astel Prevention
+    InitializeEvent(0, 32110520, 0);
+    
 });
 
 $Event(32112510, Default, function() {
@@ -70,6 +73,17 @@ $Event(32110519, Default, function() {
     EndIf(ThisEventSlot());
     SetEventFlagID(32110510, ON);
     SetThisEventSlot(ON);
+});
+
+$Event(32110520, Restart, function() {
+    WaitFor(InArea(32110301, 32112302));
+    IssueShortWarpRequest(32110301, TargetEntityType.Area, 32112303, -1);
+    SpawnOneshotSFX(TargetEntityType.Character, 32110301, 201, 646282);
+    DisableCharacter(32110301);
+    WaitFor(!InArea(10000, 32112302));
+    EnableCharacter(32110301);
+    SpawnOneshotSFX(TargetEntityType.Area, 32112303, 0, 529983);
+    RestartEvent();
 });
 
 $Event(32112580, Default, function() {

@@ -325,6 +325,7 @@ $Event(1052522350, Restart, function() {
         ShowTutorialPopup(3002, true, true);
     if ((!PlayerHasItem(ItemType.Goods, 8063) && !EventFlag(1052520357)) || 
         (!PlayerHasItem(ItemType.Goods, 8064) && !EventFlag(1052520358)))
+        ShowTutorialPopup(3003, true, true);
 
     ClearSpEffect(10000, 101200);
     RestartEvent();

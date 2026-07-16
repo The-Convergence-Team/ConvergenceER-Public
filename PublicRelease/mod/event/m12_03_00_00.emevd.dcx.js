@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.3
+// @version    3.5
 // ==/EMEVD==
 
 // コンストラクタ -- constructor
@@ -296,7 +296,6 @@ $Event(12032060, Restart, function() {
     DisableHit(12031634);
     DisableHit(12031635);
     DisableHit(12031637);
-    DisableMapPart(12031636);
 });
 
 // 歩く霊廟設定 -- walking mausoleum setting

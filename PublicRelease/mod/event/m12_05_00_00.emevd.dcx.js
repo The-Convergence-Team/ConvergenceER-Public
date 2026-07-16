@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -209,11 +209,11 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005540, 12050565, 12051530, 12051531, 12053530, -1, 1, 2); //(eventflag, gate id, lever id, objacteventflag, objactparamid, anim id, anim id)
     
     //Bloodflame Dragon Scripts
-    //InitializeCommonEvent(0, 90005873, 12050810, 904500602, 12052865); //Custom Field Boss Start
-    //InitializeCommonEvent(0, 90005863, 12050810, 0, 12050810, 1, 30580, 0, 12055870, 12052865); //Custom Field Boss End
-    //InitializeCommonEvent(0, 9005822, 12050810, 921600, 12052865, 12052866, 0, 0, 0, 0);
-    InitializeCommonEvent(0, 90005860, 12050810, 0, 12050810, 1, 30580, 0); //Field Boss End
-    InitializeCommonEvent(0, 90005870, 12050810, 904500602, 25); //Field Boss Start
+    InitializeCommonEvent(0, 90005873, 12050810, 904500602, 12052865, 393100); //Custom Field Boss Start
+    InitializeCommonEvent(0, 90005863, 12050810, 0, 12050810, 1, 30580, 0, 12055870, 12052865, 393100); //Custom Field Boss End
+    //InitializeCommonEvent(0, 9005822, 12050810, 393100, 12052865, 12052866, 0, 0, 0, 0);
+    //InitializeCommonEvent(0, 90005860, 12050810, 0, 12050810, 1, 30580, 0); //Field Boss End
+    //InitializeCommonEvent(0, 90005870, 12050810, 904500602, 25); //Field Boss Start
     InitializeEvent(0, 12052230, 0);
     
     // Blood Smoke Statues - Statue, BulletOwner

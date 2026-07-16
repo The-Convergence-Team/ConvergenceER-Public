@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.5
+// @version    3.6.1
 // ==/EMEVD==
 
 // Generic EventFlags
@@ -141,10 +141,7 @@ $Event(31812840, Default, function(typeEventFlag, area, block, region, index, sp
         CreateAssetfollowingSFX(32811840, 190, 1300);
     }
     
-    WaitFor(
-        !(HasMultiplayerState(MultiplayerState.MultiplayerPending)
-            || HasMultiplayerState(MultiplayerState.Multiplayer))
-            && ActionButtonInArea(9290, 32811840));
+    WaitFor(ActionButtonInArea(9290, 32811840));
             
     DisplayGenericDialogAndSetEventFlags(4100, PromptType.YESNO, NumberofOptions.TwoButtons, 32811840, 3, 2055552841, 6001, 6001);
     if (!EventFlag(2055552841)) {

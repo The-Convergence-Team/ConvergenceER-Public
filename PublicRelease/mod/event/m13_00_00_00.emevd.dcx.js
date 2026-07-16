@@ -134,9 +134,6 @@ $Event(0, Default, function() {
     InitializeEvent(0, 13003788, 13008560, 13001560, 13002561);
     InitializeEvent(1, 13003788, 13008561, 13001561, 13002562);
     
-    //Jagged Peak Waygate Initialization
-    //InitializeEvent(0, 13003790, 0);
-    
     //Jagged Peak Waygate Fire Lightning Field Initialization
     InitializeEvent(0, 13003791, 13000790, 13002501);
     InitializeEvent(1, 13003791, 13000791, 13002501);
@@ -912,6 +909,7 @@ L0:
     SetNetworkUpdateRate(13000720, true, CharacterUpdateFrequency.AlwaysUpdate);
 });
 
+//Seera Boss Initial Handler
 $Event(13003783, Restart, function() {
     if (EventFlag(13000850)) {
         DisableCharacter(13000855);
@@ -926,10 +924,8 @@ L6:
     DisableCharacterAI(13000855);
     DisableCharacterAI(13000856);
     DisableCharacter(13000855);
-    DisableCharacterGravity(13000855);
     DisableCharacterCollision(13000855);
     DisableCharacter(13000856);
-    DisableCharacterGravity(13000856);
     DisableCharacterCollision(13000856);
     if (!EventFlag(13000851)) {
         DisableCharacter(13000855);
@@ -1486,25 +1482,7 @@ SetEventFlagID(13010500, ON);
 $Event(13000789, Restart, function(X0_4) {
     ForceCharacterDeath(X0_4, false);
 });
-
-//Jagged Peak Waygate Handler
-$Event(13003790, Restart, function() {
-    IfActionButtonInArea(MAIN, 6350, 13001789);
-    RotateCharacter(10000, 13001789, -1, true);
-    ForceAnimationPlayback(10000, 60010, false, false, false, Equal, 1);
-    WaitFixedTimeSeconds(2);
     
-    //SpawnOneshotSFX(TargetEntityType.Area, 13001774, -1, 530365);
-    //SpawnOneshotSFX(TargetEntityType.Area, 13001774, -1, 303150);
-    //SpawnOneshotSFX(TargetEntityType.Area, 13001774, -1, 450153);
-    WaitFixedTimeSeconds(1.5);
-    
-    WarpPlayer(61, 51, 41, 0, 2051411565, 0); //(Moorth Ruins Spawn Point ID 2049442722) [Needs to be setup for Jagged Peak]
-    SaveRequest();
-    SetPlayerRespawnPoint(2051411565);
-    RestartEvent();
-});
-
 //WIP Jagged Peak Lightning for Jagged Peak Waygate area
 //Uses NG+ cycles to scale the lightning bolt damage
 //(characterEntityID, areaEntityID)

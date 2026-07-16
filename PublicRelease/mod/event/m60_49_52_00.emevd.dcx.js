@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.2
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -137,8 +137,12 @@ $Event(1049523700, Restart, function() {
 });
     
 $Event(1049520855, Restart, function() {
+    DisableAsset(1049525100);
     EndIf(EventFlag(1049520850));
     ForceAnimationPlayback(1049520850, 30000, true, false, false);
     WaitFor(InArea(10000, 1049520851));
+    EnableAsset(1049525100);
     ForceAnimationPlayback(1049520850, 20000, true, false, false);
+    WaitFor(CharacterDead(1049520850));
+    DisableAsset(1049525100);
 });

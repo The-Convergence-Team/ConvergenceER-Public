@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.3
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -206,6 +206,7 @@ L0:
     SetNetworkconnectedEventFlagID(2054390801, ON);
     SetSpEffect(2054390102, 9532);
     ForceAnimationPlayback(2054390800, 20000, false, false, true);
+    SetNetworkconnectedEventFlagID(2054392807, ON);
     WaitFixedTimeSeconds(7);
     EnableCharacterHPBarDisplay(2054390800);
 //    } else {
@@ -254,7 +255,7 @@ $Event(2054392849, Restart, function() {
     InitializeCommonEvent(0, 9005800, 2054390800, 2054391800, 2054392800, 2054392805, 2054395800, 10000, 2054390801, 0);
     InitializeCommonEvent(0, 9005801, 2054390800, 2054391800, 2054392800, 2054392805, 2054392806, 10000);
     InitializeCommonEvent(0, 9005811, 2054390800, 2054391800, 1560, 2054390801);
-    InitializeCommonEvent(0, 9005822, 2054390800, 512000, 2054392805, 2054392806, 0, 2054392802, 0, 0);
+    InitializeCommonEvent(0, 9005822, 2054390800, 512000, 2054392807, 2054392806, 0, 2054392802, 0, 0);
     PlaySE(0, SoundType.EnvironmentalSound, 0);
 });
 

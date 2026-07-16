@@ -22,15 +22,15 @@ $Event(0, Default, function() {
     InitializeEvent(0, 1036452602, 0); // Grant Access
     
     // Portals
-    // Way-Gate - Asset, areaID, blockID, regionID, indexID, initialAreaEntityID, (optional) awaited eventflag
-    InitializeCommonEvent(1, 98005307, 1036451620, 60, 34, 47, 0, 1034472620, 76246); // Four Belfries
-    InitializeCommonEvent(0, 98005307, 1036451621, 60, 34, 48, 0, 1034482620, 76246); // Kingsrealms Ruins
-    InitializeCommonEvent(2, 98005307, 1036451622, 60, 36, 48, 0, 1036482620, 76246); // Bellum Highway
-    InitializeCommonEvent(3, 98005307, 1036451623, 60, 37, 46, 0, 1037462650, 76246); // Church of Vows
-    InitializeCommonEvent(4, 98005307, 1036451624, 60, 39, 45, 0, 1039452620, 76246); // Carian Study Hall
-    InitializeCommonEvent(5, 98005307, 1036451625, 60, 39, 40, 0, 1039402620, 76246); // Church of Irith
-    InitializeCommonEvent(6, 98005307, 1036451626, 60, 35, 42, 0, 1035422620, 76246); // Village of the Albunaurics
-    InitializeCommonEvent(7, 98005307, 1036451627, 60, 33, 42, 0, 1033422620, 76246); // Converted Tower
+    // Nexus Portal Scripts - Asset, areaID, blockID, regionID, indexID, initialAreaEntityID, (optional) awaited eventflag
+    InitializeEvent(1, 1036452603, 1036451620, 60, 34, 47, 0, 1034472620, 76246); // Four Belfries
+    InitializeEvent(0, 1036452603, 1036451621, 60, 34, 48, 0, 1034482620, 76246); // Kingsrealms Ruins
+    InitializeEvent(2, 1036452603, 1036451622, 60, 36, 48, 0, 1036482620, 76246); // Bellum Highway
+    InitializeEvent(3, 1036452603, 1036451623, 60, 37, 46, 0, 1037462650, 76246); // Church of Vows
+    InitializeEvent(4, 1036452603, 1036451624, 60, 39, 45, 0, 1039452620, 76246); // Carian Study Hall
+    InitializeEvent(5, 1036452603, 1036451625, 60, 39, 40, 0, 1039402620, 76246); // Church of Irith
+    InitializeEvent(6, 1036452603, 1036451626, 60, 35, 42, 0, 1035422620, 76246); // Village of the Albunaurics
+    InitializeEvent(7, 1036452603, 1036451627, 60, 33, 42, 0, 1033422620, 76246); // Converted Tower
 });
 
 $Event(50, Default, function() {
@@ -165,4 +165,33 @@ $Event(1036452602, Restart, function() {
     // Enable Teleport Interact
     WaitFixedTimeFrames(120);
     SetEventFlagID(1036454610, ON);
+});
+
+//Nexus Portal Script
+$Event(1036452603, Default, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4) {
+    DisableNetworkSync();
+    if (Signed(X24_4) != 0)
+        WaitFor(EventFlag(X24_4));
+    
+    DeleteAssetfollowingSFX(X0_4, false);
+    CreateAssetfollowingSFX(X0_4, 100, 806873);
+    IfActionButtonInArea(MAIN, 9140, X0_4);
+    
+    RotateCharacter(10000, X0_4, -1, true);
+    ForceAnimationPlayback(10000, 60470, false, false, false, Equal, 1);
+    
+    WaitFixedTimeSeconds(1.5);
+    FadeToBlack(1, 0.8, false, -1);
+    
+    WarpPlayer(X4_4, X8_4, X12_4, X16_4, X20_4, 60);
+    
+    //if (!MapLoaded(X4_4, X8_4, X12_4, X16_4)) {
+        //    WarpPlayer(X4_4, X8_4, X12_4, X16_4, X20_4, 60);
+    //}
+    //else {
+        //    WarpCharacterAndCopyFloorWithFadeout(10000, TargetEntityType.Area, X20_4, -1, X20_4, false, true);
+    //}
+    SetPlayerRespawnPoint(X20_4);
+    SaveRequest();
+    RestartEvent();
 });

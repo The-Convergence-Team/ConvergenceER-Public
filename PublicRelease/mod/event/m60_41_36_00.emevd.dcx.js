@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -27,6 +27,8 @@ $Event(0, Default, function() {
     RegisterLadder(1041360580, 1041360851, 1041361580);
     RegisterLadder(1041360582, 1041360853, 1041361582);
     RegisterLadder(1041360584, 1041360855, 1041361584);
+    
+    InitializeEvent(0, 1041362501, 0); // Start seated
 });
 
 $Event(50, Default, function() {
@@ -157,4 +159,15 @@ L10:
     WaitFor(EventFlag(X24_4));
     SetNetworkconnectedEventFlagID(X24_4, OFF);
     EndEvent();
+});
+
+// Force sit anim and rotate cam on first spawn
+$Event(1041362501, Restart, function() {
+    EndIf(!EventFlag(60903) || EventFlag(1041360501) || !InArea(10000, 1041360985));
+    SetCameraAngle(19, 137.83);
+    FadeToBlack(1, 0, true, 3)
+    SetSpEffect(10000, 103000); // Rest
+    WaitFixedTimeSeconds(4);
+    FadeToBlack(0, 3, false, 0.1)
+    SetEventFlagID(1041360501, ON);
 });

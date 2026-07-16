@@ -1205,6 +1205,8 @@ $Event(40002800, Restart, function() {
     HandleBossDefeatAndDisplayBanner(40000800, TextBannerType.EnemyFelled);
     SetEventFlagID(40000800, ON);
     SetEventFlagID(9270, ON);
+    SetBossBGM(393500, BossBGMState.Stop1);
+    SetBossBGM(393500, BossBGMState.Stop2);
     if (PlayerIsInOwnWorld()) {
         SetEventFlagID(61270, ON);
     }
@@ -1223,6 +1225,7 @@ L0:
     WaitFor(EventFlag(40002805) && InArea(10000, 40002800));
     EnableCharacterAI(40005800);
     DisableCharacterInvincibility(40005800);
+    SetBossBGM(393500, BossBGMState.Start);
     SetNetworkUpdateRate(40005800, true, CharacterUpdateFrequency.AlwaysUpdate);
     DisplayBossHealthBar(Enabled, 40000800, 0, 905070400);
 });
@@ -1231,6 +1234,7 @@ $Event(40002811, Restart, function() {
     EndIf(EventFlag(40000800));
     WaitFor(CharacterHasSpEffect(40000800, 16990)); //Blackflame Commander Phase 2 SpEffect
     SetEventFlagID(40002802, ON);
+    SetBossBGM(393500, BossBGMState.HeatUp);
 });
 
 

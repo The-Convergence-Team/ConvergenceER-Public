@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.6.3
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -2201,7 +2201,7 @@ $Event(11100040, Restart, function(X0_4, X4_4) {
     //SetCharacterBackreadState(X0_4, false);
     
     rememberance = AnyBatchEventFlags(97510, 97541);
-    nonRememberance = AnyBatchEventFlags(97600, 97626);
+    nonRememberance = AnyBatchEventFlags(97600, 97627);
     
     WaitFor(rememberance || nonRememberance);
     
@@ -2267,15 +2267,6 @@ L0:     // - - Rememberance Bosses - -
             SetEventFlagID(97512, OFF);
             WarpPlayer(60, 51, 37, 0, 1051373900, 60);
             SetPlayerRespawnPoint(1051373900);
-        } 
-        //Regal Ancestor Spirit
-        else if (EventFlag(97513)) {
-            SetEventFlagID(61133, OFF);
-            SetEventFlagID(12090800, OFF);
-            
-            SetEventFlagID(97513, OFF);
-            WarpPlayer(12, 9, 0, 0, 12090999, 60);
-            SetPlayerRespawnPoint(12090999);
         } 
         //Astel, Naturalborn of the Void
         else if (EventFlag(97514)) {
@@ -2585,7 +2576,7 @@ L1:     // - - Non-Rememberance Bosses - -
             WarpPlayer(12, 1, 0, 0, 12010803, 60);
             SetPlayerRespawnPoint(12010803);
         }
-        // Bear
+        // Goras
         else if (EventFlag(97603)) {
             SetEventFlagID(12020850, OFF);
             SetEventFlagID(71221, OFF);
@@ -2610,7 +2601,7 @@ L1:     // - - Non-Rememberance Bosses - -
             WarpPlayer(12, 3, 0, 0, 12030395, 60);
             SetPlayerRespawnPoint(12030395);
         }
-        // Dragonkin Soldier (Deeproot Depths)
+        // Death Knight (Deeproot Depths)
         else if (EventFlag(97606)) {
             SetEventFlagID(12030393, OFF);
             
@@ -2680,7 +2671,7 @@ L1:     // - - Non-Rememberance Bosses - -
             WarpPlayer(39, 20, 0, 0, 39202952, 60);
             SetPlayerRespawnPoint(39202952);
         }
-        // Royal Knight Loretta
+        // Rhys
         else if (EventFlag(97614)) {
             SetEventFlagID(1035500800, OFF);
             SetEventFlagID(76232, OFF);
@@ -2808,6 +2799,15 @@ L1:     // - - Non-Rememberance Bosses - -
             WarpPlayer(13, 0, 0, 0, 13002888, 60);
             SetPlayerRespawnPoint(13002888);
         }
+        //Regal Ancestor Spirit
+        else if (EventFlag(97627)) {
+            SetEventFlagID(61133, OFF);
+            SetEventFlagID(12090800, OFF);
+            
+            SetEventFlagID(97627, OFF);
+            WarpPlayer(12, 9, 0, 0, 12090999, 60);
+            SetPlayerRespawnPoint(12090999);
+        } 
         else EndEvent();
     }
 });
