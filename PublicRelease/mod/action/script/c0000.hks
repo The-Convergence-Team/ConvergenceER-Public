@@ -6105,7 +6105,7 @@ function ExecDamage(is_parry, is_attackwhileguard)
     end
 	
 		-- Raptors of Conv Marika Hammer dodge
-    if env(GetSpEffectID, 100510) == TRUE and GetVariable("IsEnoughArtPointsL2") == 1 then
+    if env(GetSpEffectID, 100510) == TRUE then
         ExecEventAllBody("W_SwordArtsOneShotShieldLeft_Cancel")
         act(AddSpEffect, 5635)
         ResetDamageCount()
