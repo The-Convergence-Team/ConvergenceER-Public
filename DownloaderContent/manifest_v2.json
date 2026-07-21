@@ -1,5 +1,5 @@
 {
-  "commitHash": "c8083f576e72ae88fecc10a7fb82f8e57b3939b5",
+  "commitHash": "e809961c0a530d6d5cb2f344f1669fc9f5cd927d",
   "files": {
     "Start_Convergence.bat": {
       "sha256": "3e846b4975501efe68958c27ef7023bb9ddb2becb609ea6cd4b81ae4c7f9d83f",
@@ -10,8 +10,8 @@
       "size": 1046
     },
     "me3/Linux/me3": {
-      "sha256": "2e138f440adb7d5bb194439f6f320d8e1ea6b009b850e2f42263f018457ad350",
-      "size": 6325464
+      "sha256": "25fbde9acadc2bb98728f4f332a39ba31475d358f6e2555541e08e10d0e54f93",
+      "size": 6438328
     },
     "me3/Linux/win64/me3-launcher.exe": {
       "sha256": "b3c5a7d23d4eeb67b452d1526a65cea5685549b93fd7e3361546a4d7a0cd1b92",
