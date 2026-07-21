@@ -1,6 +1,7 @@
 local bestialAshes = {
     [118] = true, -- Hoarah Loux's Earthshaker
     [143] = true, -- Troll's Roar
+	[147] = true, -- Archea's Dance
     [198] = true, -- Ordovis's Greatsword
     [209] = true, -- Siluria's Woe
     [256] = true, -- Aspects of the Crucible: Wings

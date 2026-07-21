@@ -1903,6 +1903,8 @@ $Event(12012590, Restart, function() {
 L0:
     ChangeAssetEnableState(12011597, Disabled);
     ChangeAssetEnableState(12011598, Disabled);
+    ChangeAssetEnableState(12014000, Disabled); //custom_collision_01
+    ChangeAssetEnableState(12014001, Disabled); //custom_collision_02
     ReproduceAssetAnimation(12011591, 1);
     ReproduceAssetAnimation(12011592, 1);
     ReproduceAssetAnimation(12011593, 0);
@@ -1917,6 +1919,8 @@ L0:
     ChangeAssetEnableState(12011597, Enabled);
     ChangeAssetEnableState(12011598, Enabled);
     ChangeAssetEnableState(12011685, Enabled);
+    ChangeAssetEnableState(12014000, Enabled); //custom_collision_01
+    ChangeAssetEnableState(12014001, Enabled); //custom_collision_02
     SetAssetTreasureState(12011685, Enabled);
     EndEvent();
 });

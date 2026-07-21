@@ -57,7 +57,13 @@ local jewelSpEffects = {
     --{ Jewel_of_the_Chained, __allSpells }, -- Jewel of the Chained
 }
 local activeJewelIndex = -1
-local activeSpellbanState = 0
+local activeSpellbanState = -2
+-- Spellban states:
+-- -2: Initialization state, no spell bans are applied
+-- -1: All spell bans are applied
+--  0: No spell bans are applied
+--  1-18: Only the spell ban for the corresponding magic class is applied
+
 function JewelSpellBan()
     if activeJewelIndex > 0 and env(GetSpEffectID, jewelSpEffects[activeJewelIndex].JewelSpEffect) == TRUE then
         return
@@ -77,7 +83,7 @@ function JewelSpellBan()
                     return
                 end
 
-                if activeSpellbanState ~= 0 then
+                if activeSpellbanState > 0 then
                     -- Only ban the previously allowed spell list
                     BanSpells(__allSpells[activeSpellbanState])
                 else

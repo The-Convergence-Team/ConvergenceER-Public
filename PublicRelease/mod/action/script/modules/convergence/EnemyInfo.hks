@@ -153,7 +153,7 @@ function CalculatedHeal(healAmount)
     if healAmount == nil or healAmount <= 0 then return end
     healAmount = math.floor(healAmount + 0.5)
     SetParamValue(PARAM.SpEffectParam.CHANGE_HP_FLAT, 100658, healAmount * -1)
-    Log(GetParamValue(PARAM.SpEffectParam.CHANGE_HP_FLAT, 100658))
+    act(AddSpEffect, 100658)
 end
 
 function ForceKill()

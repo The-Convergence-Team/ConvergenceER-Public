@@ -4,9 +4,17 @@
 local script_dir = debug.getinfo(1, "S").source:sub(2):match("(.*/)"):gsub("/", "\\") .. "modules\\"
 function LoadFile(path)
     if path == nil then return end
-    local success, err = pcall(function() return dofile(script_dir .. path) end)
-    if not success then
-        act(10001, "Failed to import module: " .. path .. "\nError: " .. err)
+
+    local chunk, loadErr = loadfile(script_dir .. path)
+    if not chunk then
+        act(10001, "Compile fail: " .. path .. " :: " .. tostring(loadErr))
+        return
+    end
+
+    local ok, runErr = pcall(chunk)
+    if not ok then
+        act(10001, "Runtime fail: " .. path .. " :: " .. tostring(runErr))
+        return
     end
 end
 
