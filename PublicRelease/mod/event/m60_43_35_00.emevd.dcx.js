@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000N:\\GR\\data\\Param\\event\\common.emevd\u0000N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\m60.emevd\u0000"
 // @linked    [0,84,156,238]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -18,6 +18,7 @@ $Event(0, Default, function() {
     InitializeEvent(0, 1043353710, 1043350710);
     InitializeEvent(0, 1043353711, 1043350710);
     InitializeEvent(0, 1043352272, 0);
+    InitializeCommonEvent(0, 900005590, 6953, 1043351610, 0); //Reed Great Katana Tarnished Edition Flag Check
 });
 
 $Event(50, Default, function() {

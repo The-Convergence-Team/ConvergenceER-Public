@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.5
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -29,6 +29,7 @@ $Event(0, Default, function() {
     InitializeEvent(0, 31172403, 31173098, 24, 31172101);
     InitializeEvent(1, 31172403, 31173099, 24, 31172101);
     InitializeEvent(2, 31172403, 31173100, 6, 31172101);
+    InitializeCommonEvent(0, 900005590, 6953, 31173114, 31178104); //Hefty Scimitar Tarnished Edition Flag Check
 });
 
 $Event(50, Default, function() {

@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -38,6 +38,7 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005250, 31040435, 31040431, 0, -1); // Fingers Crossed enemy activation
     InitializeCommonEvent(0, 90005250, 31040437, 31040438, 0, -1); // Fingers Crossed enemy activation
     InitializeCommonEvent(0, 90005250, 31040439, 31040438, 0, -1); // Fingers Crossed enemy activation
+    InitializeCommonEvent(0, 900005590, 6953, 31041101, 0); //Reverse-Bladed Sword Tarnished Edition Flag Check
 });
 
 $Event(50, Default, function() {

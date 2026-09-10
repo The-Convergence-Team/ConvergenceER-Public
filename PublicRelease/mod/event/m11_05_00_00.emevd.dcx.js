@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0]
-// @version    3.6
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -104,7 +104,7 @@ $Event(50, Default, function() {
 $Event(11052500, Default, function() {
     EndIf(!PlayerIsInOwnWorld());
     EndIf(EventFlag(11050500));
-    WaitFor(PlayerIsInOwnWorld() && EventFlag(9116) && PlayerInMap(11, 5, 0, 0));
+    WaitFor(PlayerIsInOwnWorld() && EventFlag(110) && PlayerInMap(11, 5, 0, 0)); //Awaiting player in Ashen and Forge ignited
     PlayCutsceneToPlayer(13000060, CutscenePlayMode.Skippable, 10000);
     WaitFixedTimeRealFrames(1);
     SetEventFlagID(11050500, ON);
@@ -373,17 +373,20 @@ $Event(11052862, Restart, function() {
         DisableCharacter(11050850);
         DisableCharacterCollision(11050850);
         ForceCharacterDeath(11050850, false);
+        SetEventFlagID(11050860, ON); //Gideon Gone from Roundtable (For retroactivity)
         EndEvent(); 
     } else {
 L1:
         if (EventFlag(11050858)) {
             cond = EventFlag(11052855);
-        WaitFor(InArea(10000, 11052850) || InArea(10000, 11052855));
-        WaitFor(cond);
-        DisplayBossHealthBar(Enabled, 11050850, 0, 904720003);
-        EnableLockOnPoint(11050850, 220);
-        EndEvent(); 
-    }
+            WaitFor(InArea(10000, 11052850) || InArea(10000, 11052855));
+            WaitFor(cond);
+            DisplayBossHealthBar(Enabled, 11050850, 0, 904720003);
+            EnableLockOnPoint(11050850, 220);
+            EndEvent(); 
+        }
+    WaitFor(InArea(10000, 11052527)); //Elevator Shaft (bottom button) up to Erdtree Sanctuary
+    SetEventFlagID(11050860, ON); //Gideon Gone from Roundtable
     EndEvent(); 
     }
 });
@@ -609,7 +612,8 @@ L0:
     EnableLockOnPoint(11050850, 220);
     //SetCharacterTeamType(X0_4, TeamType.FriendlyNPC);
     WaitFor(CharacterHPValue(X0_4) <= 0);
-    SetEventFlagID(11050858, ON);
+    SetEventFlagID(11050858, ON); //Gideon Dead
+    SetEventFlagID(11050860, ON); //Gideon Gone from Roundtable (For retroactivity)
     EndEvent();
 L1:
     DisableCharacter(11050851);
@@ -648,9 +652,10 @@ $Event(11053711, Restart, function(X0_4) {
 
 //Making sure gideon stays dead and doesnt bug the fight
 $Event(11053712, Restart, function(X0_4) {
-    EndIf(EventFlag(11050858) && EventFlag(11050851));
+    EndIf(EventFlag(11050858) && EventFlag(11050851) && EventFlag(11050851));
     WaitFor(EventFlag(11050851));
-    SetEventFlagID(11050858, ON);
+    SetEventFlagID(11050858, ON); //Gideon Dead
+    SetEventFlagID(11050860, ON); //Gideon Gone from Roundtable (For retroactivity)
 });
 
 $Event(11053720, Restart, function() {

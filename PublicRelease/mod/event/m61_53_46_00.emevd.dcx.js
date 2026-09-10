@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -460,6 +460,7 @@ $Event(2053462600, Default, function() {
                 && PlayerHasItem(ItemType.Goods, 2008008)
                 && ObjActEventFlag(2053463600));
         SetNetworkconnectedEventFlagID(2053460600, ON);
+        SetEventFlagID(2051459205, ON); //Jolan Quest Flag
         WaitFixedTimeSeconds(10);
         EndEvent();
     }

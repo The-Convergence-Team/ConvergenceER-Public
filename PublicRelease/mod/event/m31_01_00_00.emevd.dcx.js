@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.2
+// @version    3.6.3
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -13,6 +13,7 @@ $Event(0, Default, function() {
     InitializeEvent(0, 31012810, 0);
     InitializeEvent(0, 31012849, 0);
     InitializeEvent(0, 31012811, 0);
+    InitializeEvent(0, 31012820, 0); //Harpy boss moveset handler
     InitializeEvent(0, 31012830, 0);
     InitializeCommonEvent(0, 90005646, 31010800, 31012840, 31012841, 31011840, 31012840, 287);
     InitializeEvent(0, 31012500, 0);
@@ -333,6 +334,19 @@ $Event(31012811, Restart, function() {
     EndIf(EventFlag(31010800));
     WaitFor(HPRatio(31010800) <= 0.6);
     SetEventFlagID(31012802, ON);
+});
+
+//Harpy boss moveset handler
+$Event(31012820, Restart, function() {
+    EndIf(EventFlag(31010800));
+    WaitFor(CharacterHasSpEffect(31010800, 17070));
+    SetSpEffect(31010800, 5401);
+    SetSpEffect(31010800, 5361);
+    ClearSpEffect(31010800, 471);
+    WaitFor(!CharacterHasSpEffect(31010800, 17070));
+    SetSpEffect(31010800, 5403);
+    SetSpEffect(31010800, 5365);
+    SetSpEffect(31010800, 471);
 });
 
 $Event(31012830, Restart, function() {

@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -42,6 +42,7 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005774, 7606, 39200500, 39207500);
     InitializeEvent(0, 39203710, 0);
     InitializeEvent(0, 39203720, 0);
+    InitializeCommonEvent(0, 900005590, 6953, 39201680, 0); //Steel Set Tarnished Edition Flag Check
 });
 
 $Event(50, Default, function() {

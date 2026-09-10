@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.5
+// @version    3.6.1
 // ==/EMEVD==
 
 // コンストラクタ -- constructor
@@ -1367,11 +1367,11 @@ $Event(12022822, Restart, function() {
 // 本ボス_イベント起動 -- Main boss_event activation
 $Event(12022849, Restart, function() {
     InitializeCommonEvent(0, 9005811, 12020800, 12021801, 5, 12020801);
-    InitializeCommonEvent(0, 9005822, 12020800, 392500, 12022811, 12022806, 0, 12022802, 0, 0);
+    //InitializeCommonEvent(0, 9005822, 12020800, 392500, 12022811, 12022806, 0, 12022802, 0, 0); //???
     InitializeCommonEvent(0, 9005800, 12020800, 12021800, 12022800, 12022811, 12025800, 10000, 12020801, 12022801);
     InitializeCommonEvent(0, 9005801, 12020800, 12021800, 12022800, 12022811, 12022806, 10000);
     InitializeCommonEvent(0, 9005811, 12020800, 12021800, 3, 12020801);
-    InitializeCommonEvent(0, 9005822, 12020800, 392500, 12022807, 12022806, 0, 12022802, 0, 0);
+    InitializeCommonEvent(0, 9005822, 12020800, 392500, 12022807, 12022806, 0, 12022802, 0, 0); //???
 });
 
 // NPC319ダニー_NPC初期化イベント -- NPC319 Danny_NPC initialization event

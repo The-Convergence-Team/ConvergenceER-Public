@@ -139,55 +139,27 @@ $Event(0, Default, function() {
     InitializeEvent(0, 9007103, 0);
     
     // Mounts
-    InitializeEvent(0, 9007104, 0); // Menu Visibility
-    InitializeEvent(0, 9007105, 63100, 130); // Unlocks
-    InitializeEvent(1, 9007105, 63101, 2500);
-    InitializeEvent(2, 9007105, 63102, 2503);
-    InitializeEvent(3, 9007105, 63103, 2501);
-    InitializeEvent(4, 9007105, 63104, 2502);
-    InitializeEvent(0, 9007106, 63200); // Selection Management
-    InitializeEvent(1, 9007106, 63201);
-    InitializeEvent(2, 9007106, 63202);
-    InitializeEvent(3, 9007106, 63203);
-    InitializeEvent(4, 9007106, 63204);
-    InitializeEvent(0, 9007109, 0); // Forced map reload on char spawn
     // - Mount Specific
-    InitializeEvent(0, 9007107, 63200, 90000, 40000); // Torrent - Poison Immunity OFF
-    InitializeEvent(1, 9007107, 63200, 90010, 40000); // Torrent - Rot Immunity OFF
-    InitializeEvent(2, 9007107, 63200, 90020, 40000); // Torrent - Bleed Immunity OFF
-    InitializeEvent(3, 9007107, 63200, 90030, 40000); // Torrent - Death Immunity OFF
-    InitializeEvent(4, 9007107, 63200, 90040, 40000); // Torrent - Frost Immunity OFF
-    InitializeEvent(5, 9007107, 63200, 90300, 40000); // Torrent - Sleep Immunity OFF
-    InitializeEvent(6, 9007107, 63200, 90006, 40000); // Torrent - Madness Immunity OFF
-    InitializeEvent(0, 9007108, 63200, 90000, 40000); // Torrent - Poison Immunity ON
-    InitializeEvent(1, 9007108, 63200, 90010, 40000); // Torrent - Rot Immunity ON
-    InitializeEvent(2, 9007108, 63200, 90020, 40000); // Torrent - Bleed Immunity ON
-    InitializeEvent(3, 9007108, 63200, 90030, 40000); // Torrent - Death Immunity ON
-    InitializeEvent(4, 9007108, 63200, 90040, 40000); // Torrent - Frost Immunity ON
-    InitializeEvent(5, 9007108, 63200, 90300, 40000); // Torrent - Sleep Immunity ON
-    InitializeEvent(6, 9007108, 63200, 90006, 40000); // Torrent - Madness Immunity ON
-    InitializeEvent(7, 9007107, 63202, 100960, 10000); // Erdtree Steed - Stagger Resistance (Player) OFF
-    InitializeEvent(8, 9007107, 63202, 100960, 40000); // Erdtree Steed - Stagger Resistance (Steed) OFF
-    InitializeEvent(7, 9007108, 63202, 100960, 10000); // Erdtree Steed - Stagger Resistance (Player) ON
-    InitializeEvent(8, 9007108, 63202, 100960, 40000); // Erdtree Steed - Stagger Resistance (Steed) ON
-    InitializeEvent(8, 9007107, 63103, 100970, 10000); // Frenzied Mule - Stamina Recovery OFF
-    InitializeEvent(8, 9007108, 63103, 100970, 10000); // Frenzied Mule - Stamina Recovery ON
-    InitializeEvent(0, 9006087, 63103, 108); // Frenzied Mule - Glowing Scars Mask Toggle
-    InitializeEvent(9, 9007107, 63204, 100950, 10000); // Carian Knight Steed - FP Recovery (Player) OFF
-    InitializeEvent(9, 9007108, 63204, 100950, 10000); // Carian Knight Steed - FP Recovery (Player) ON
+    InitializeEvent(7, 9007107, 6705, 100960, 10000); // Erdtree Steed - Stagger Resistance (Player) OFF
+    InitializeEvent(7, 9007108, 6705, 100960, 10000); // Erdtree Steed - Stagger Resistance (Player) ON
+    InitializeEvent(8, 9007107, 6706, 100970, 10000); // Frenzied Mule - Stamina Recovery OFF
+    InitializeEvent(8, 9007108, 6706, 100970, 10000); // Frenzied Mule - Stamina Recovery ON
+    InitializeEvent(0, 9006087, 6706, 108); // Frenzied Mule - Glowing Scars Mask Toggle
+    InitializeEvent(9, 9007107, 6707, 100950, 10000); // Carian Knight Steed - FP Recovery (Player) OFF
+    InitializeEvent(9, 9007108, 6707, 100950, 10000); // Carian Knight Steed - FP Recovery (Player) ON
     // - Talisman Share
-    InitializeEvent(0, 9007110, 311600, 90020, 63200); // Talisman Share - Stalward Horn Charm (Blood) OFF
-    InitializeEvent(0, 9007111, 311600, 90020, 63200); // Talisman Share - Stalward Horn Charm (Blood) ON
-    InitializeEvent(1, 9007110, 311700, 90000, 63200); // Talisman Share - Immunizing Horn Charm (Poison) OFF
-    InitializeEvent(1, 9007111, 311700, 90000, 63200); // Talisman Share - Immunizing Horn Charm (Poison) ON
-    InitializeEvent(2, 9007110, 311800, 90300, 63200); // Talisman Share - Rousing Horn Charm (Sleep) OFF
-    InitializeEvent(2, 9007111, 311800, 90300, 63200); // Talisman Share - Rousing Horn Charm (Sleep) ON
-    InitializeEvent(3, 9007110, 312600, 90040, 63200); // Talisman Share - Warming Horn Charm (Frost) OFF
-    InitializeEvent(3, 9007111, 312600, 90040, 63200); // Talisman Share - Warming Horn Charm (Frost) ON
-    InitializeEvent(4, 9007110, 312700, 90006, 63200); // Talisman Share - Clarifying Horn Charm (Frenzy) OFF
-    InitializeEvent(4, 9007111, 312700, 90006, 63200); // Talisman Share - Clarifying Horn Charm (Frenzy) ON
-    InitializeEvent(5, 9007110, 312800, 90010, 63200); // Talisman Share - Curative Horn Charm (Rot) OFF
-    InitializeEvent(5, 9007111, 312800, 90010, 63200); // Talisman Share - Curative Horn Charm (Rot) ON
+    InitializeEvent(0, 9007110, 311600, 90020, 6000); // Talisman Share - Stalward Horn Charm (Blood) OFF
+    InitializeEvent(0, 9007111, 311600, 90020, 6000); // Talisman Share - Stalward Horn Charm (Blood) ON
+    InitializeEvent(1, 9007110, 311700, 90000, 6000); // Talisman Share - Immunizing Horn Charm (Poison) OFF
+    InitializeEvent(1, 9007111, 311700, 90000, 6000); // Talisman Share - Immunizing Horn Charm (Poison) ON
+    InitializeEvent(2, 9007110, 311800, 90300, 6000); // Talisman Share - Rousing Horn Charm (Sleep) OFF
+    InitializeEvent(2, 9007111, 311800, 90300, 6000); // Talisman Share - Rousing Horn Charm (Sleep) ON
+    InitializeEvent(3, 9007110, 312600, 90040, 6000); // Talisman Share - Warming Horn Charm (Frost) OFF
+    InitializeEvent(3, 9007111, 312600, 90040, 6000); // Talisman Share - Warming Horn Charm (Frost) ON
+    InitializeEvent(4, 9007110, 312700, 90006, 6000); // Talisman Share - Clarifying Horn Charm (Frenzy) OFF
+    InitializeEvent(4, 9007111, 312700, 90006, 6000); // Talisman Share - Clarifying Horn Charm (Frenzy) ON
+    InitializeEvent(5, 9007110, 312800, 90010, 6000); // Talisman Share - Curative Horn Charm (Rot) OFF
+    InitializeEvent(5, 9007111, 312800, 90010, 6000); // Talisman Share - Curative Horn Charm (Rot) ON
     InitializeEvent(6, 9007110, 10235, 10235, 6000); // Talisman Share - Blasphemer's Crest (Lava) OFF
     InitializeEvent(6, 9007111, 10235, 10235, 6000); // Talisman Share - Blasphemer's Crest (Lava) ON
     
@@ -294,32 +266,26 @@ $Event(0, Default, function() {
     InitializeEvent(54, 9007111, 511026, 511026, 6000); // Stone Barb Cracked Tear
     InitializeEvent(55, 9007110, 3507, 3507, 6000); // Opaline Bubbletear
     InitializeEvent(55, 9007111, 3507, 3507, 6000); // Opaline Bubbletear
-    InitializeEvent(56, 9007110, 511051, 511051, 63200); // Purifying Crystal Tear
-    InitializeEvent(56, 9007111, 511051, 511051, 63200); // Purifying Crystal Tear
+    InitializeEvent(56, 9007110, 511051, 511051, 6000); // Purifying Crystal Tear
+    InitializeEvent(56, 9007111, 511051, 511051, 6000); // Purifying Crystal Tear
     
     // - Misc Share
     InitializeEvent(57, 9007110, 503550, 503550, 6000); // Bloodboil Aromatic
     InitializeEvent(57, 9007111, 503550, 503550, 6000); // Bloodboil Aromatic
-    InitializeEvent(58, 9007110, 1768, 1768, 63200); // Commander's Standard
-    InitializeEvent(58, 9007111, 1768, 1768, 63200); // Commander's Standard
-    InitializeEvent(59, 9007110, 1730, 1730, 63200); // Golden Vow (Ash)
-    InitializeEvent(59, 9007111, 1730, 1730, 63200); // Golden Vow (Ash)
-    InitializeEvent(60, 9007110, 20503170, 20503170, 63200); // Golden Vow (Item)
-    InitializeEvent(60, 9007111, 20503170, 20503170, 63200); // Golden Vow (Item)
+    InitializeEvent(58, 9007110, 1768, 1768, 6000); // Commander's Standard
+    InitializeEvent(58, 9007111, 1768, 1768, 6000); // Commander's Standard
+    InitializeEvent(59, 9007110, 1730, 1730, 6000); // Golden Vow (Ash)
+    InitializeEvent(59, 9007111, 1730, 1730, 6000); // Golden Vow (Ash)
+    InitializeEvent(60, 9007110, 20503170, 20503170, 6000); // Golden Vow (Item)
+    InitializeEvent(60, 9007111, 20503170, 20503170, 6000); // Golden Vow (Item)
     
     // - Iframes
-    InitializeEvent(10, 9007107, 63200, 187, 10000); // Torrent - Player OFF
-    InitializeEvent(10, 9007108, 63200, 187, 10000); // Torrent - Player ON
-    InitializeEvent(11, 9007107, 63200, 187, 40000); // Torrent - Mount OFF
-    InitializeEvent(11, 9007108, 63200, 187, 40000); // Torrent - Mount ON
-    InitializeEvent(12, 9007107, 63202, 188, 10000); // Frenzied Mule - Player OFF
-    InitializeEvent(12, 9007108, 63202, 188, 10000); // Frenzied Mule - Player ON
-    InitializeEvent(13, 9007107, 63202, 188, 40000); // Frenzied Mule - Mount OFF
-    InitializeEvent(13, 9007108, 63202, 188, 40000); // Frenzied Mule - Mount ON
-    InitializeEvent(14, 9007107, 63201, 187, 10000); // Funeral Steed - Player OFF
-    InitializeEvent(14, 9007108, 63201, 187, 10000); // Funeral Steed - Player ON
-    InitializeEvent(15, 9007107, 63201, 187, 40000); // Funeral Steed - Mount OFF
-    InitializeEvent(15, 9007108, 63201, 187, 40000); // Funeral Steed - Mount ON
+    InitializeEvent(10, 9007107, 6700, 187, 10000); // Torrent - Player OFF
+    InitializeEvent(10, 9007108, 6700, 187, 10000); // Torrent - Player ON
+    InitializeEvent(12, 9007107, 6706, 188, 10000); // Frenzied Mule - Player OFF
+    InitializeEvent(12, 9007108, 6706, 188, 10000); // Frenzied Mule - Player ON
+    InitializeEvent(14, 9007107, 6706, 187, 10000); // Funeral Steed - Player OFF
+    InitializeEvent(14, 9007108, 6706, 187, 10000); // Funeral Steed - Player ON
     
     // HKS inventory request updaters
     InitializeEvent(0, 9006031, 101401, ItemType.Weapon, 18110000) // Guardian Swordspear (Sword)
@@ -581,6 +547,15 @@ $Event(0, Default, function() {
     InitializeEvent(6, 960, 76111);
     InitializeEvent(7, 960, 76157);
     InitializeEvent(8, 960, 76113);
+    InitializeEvent(0, 780, 0);
+    InitializeEvent(0, 790, 900, 6700); // Summon Torrent
+    InitializeEvent(1, 790, 901, 6701); // Summon Torrent (Erdtree)
+    InitializeEvent(2, 790, 902, 6702); // Summon Torrent (Carian)
+    InitializeEvent(3, 790, 903, 6703); // Summon Torrent (Night Cav)
+    InitializeEvent(4, 790, 904, 6704); // Summon Funeral Steed
+    InitializeEvent(5, 790, 905, 6705); // Summon Erdtree Steed
+    InitializeEvent(6, 790, 906, 6706); // Summon Frenzied Mule
+    InitializeEvent(7, 790, 907, 6707); // Summon Carian Steed
     InitializeEvent(0, 720, 160, 0);
     InitializeEvent(1, 720, 161, 1);
     InitializeEvent(2, 720, 162, 2);
@@ -912,6 +887,7 @@ L0:
     InitializeEvent(0, 6908, 0);
     InitializeEvent(0, 6909, 0); // DLC
     InitializeEvent(0, 6910, 0); // DLC
+    InitializeEvent(0, 6911, 0); // Tarnished Edition Regalia Cleanup
     
     EndEvent();
 });
@@ -3254,6 +3230,30 @@ $Event(760, Restart, function(X0_4, X4_4) {
     SetEventFlagID(X0_4, ON);
 });
 
+// Horse default flag setter (Tarnished Edition)
+$Event(780, Default, function() {
+    EndIf(AnyBatchEventFlags(6700, 6707));
+    SetEventFlagID(6700, ON);
+});
+
+// Horse Selector
+$Event(790, Default, function(triggerSpEffect, eventFlag) {
+    DisableNetworkSync();
+    WaitFor(CharacterHasSpEffect(10000, triggerSpEffect));
+    
+    BatchSetEventFlags(6700, 6707, OFF);
+    if (!EventFlag(6953) && eventFlag >= 6701 && eventFlag <= 6703)
+        SetEventFlagID(6700, ON);
+    else
+        SetEventFlagID(eventFlag, ON);
+    
+    WaitFixedTimeFrames(1);
+    SetSpEffect(10000, 81);
+    
+    WaitFor(!CharacterHasSpEffect(10000, triggerSpEffect));
+    RestartEvent();
+});
+
 $Event(810, Restart, function() {
     GotoIf(L1, TimeOfDayInRange(5, 30, 0, 11, 59, 59));
     GotoIf(L2, TimeOfDayInRange(12, 0, 0, 19, 59, 59));
@@ -3393,12 +3393,13 @@ $Event(841, Restart, function() {
     RestartEvent();
 });
 
+//Maliketh Death Related Activity
 $Event(900, Default, function() {
     EndIf(!PlayerIsInOwnWorld());
     //maliketh kill = 9116
     GotoIf(L0, !EventFlag(9116));
-    //finger reader dead state = 118
-    GotoIf(L1, !EventFlag(118));
+    //Various scripts related to defeating Maliketh = 118
+    //GotoIf(L1, !EventFlag(118));
     EndEvent();
 L0:
     WaitFor(PlayerIsInOwnWorld() && EventFlag(9116));
@@ -3425,12 +3426,12 @@ L1:
     //PlayCutsceneToPlayer(13000050, CutscenePlayMode.Skippable, 10000);
     //WaitFixedTimeRealFrames(1);
     //SetPlayerRespawnPoint(11052010);
-    SaveRequest();
-    //Finger Reader State = 118
-    SetEventFlagID(118, ON);
+    //SaveRequest();
+    //Various scripts related to defeating Maliketh = 118 (Moved to 901)
+    //SetEventFlagID(118, ON);
 });
 
-$Event(901, Restart, function() {  //Melina Burns Erdtree Event
+$Event(901, Restart, function() {  //Forge of the Giants Erdtree Burning Event (Both Melina or Frenzied Flame)
     EndIf(EventFlag(110));
     WaitFor(
         PlayerIsInOwnWorld()
@@ -3447,6 +3448,8 @@ $Event(901, Restart, function() {  //Melina Burns Erdtree Event
     //sets visuals in Roundtable = 302
     SetEventFlagID(302, OFF);
     SetEventFlagID(110, ON);
+    //Various scripts related to defeating Maliketh = 118
+    SetEventFlagID(118, ON);
     //SetEventFlagID(302, ON);
     SetEventFlagID(9021, ON);
     
@@ -3504,7 +3507,7 @@ L1:
     EndEvent();
 });
 
-$Event(902, Restart, function() {  //Frenzy Self Burns Erdtree Event
+$Event(902, Restart, function() {  //Forge of the Giants Erdtree Burning Event (Failsafe)
     WaitFor(
         PlayerIsInOwnWorld()
             && EventFlag(1054539206)
@@ -3558,7 +3561,7 @@ $Event(902, Restart, function() {  //Frenzy Self Burns Erdtree Event
             SetEventFlagID(780011, ON);
         }
         SetEventFlagID(111, ON);
-        PlayCutsceneToPlayerAndWarp(13000050, CutscenePlayMode.Skippable, 11052010, 11050000, 10000, 0, true);
+        PlayCutsceneToPlayerAndWarp(60540000, CutscenePlayMode.Skippable, 11052010, 11050000, 10000, 0, true);
         WaitFixedTimeRealFrames(1);
         //PlayCutsceneToPlayerWithWeatherAndTime(60540010, CutscenePlayMode.SkippableWithFadeOutSkip, 10000, true, Weather.Default, 300, true, 6, 30, 0);
         //WaitFixedTimeRealFrames(1);
@@ -3568,7 +3571,7 @@ $Event(902, Restart, function() {  //Frenzy Self Burns Erdtree Event
 L1:
     SetEventFlagID(9000, OFF);
     SetEventFlagID(112, ON);
-    PlayCutsceneToPlayerAndWarp(13000050, CutscenePlayMode.Skippable, 11052010, 11050000, 10000, 0, true);
+    PlayCutsceneToPlayerAndWarp(60540001, CutscenePlayMode.Skippable, 11052010, 11050000, 10000, 0, true);
     WaitFixedTimeRealFrames(1);
     //PlayCutsceneToPlayerWithWeatherAndTime(60540011, CutscenePlayMode.SkippableWithFadeOutSkip, 10000, true, Weather.Default, 300, true, 6, 30, 0);
     //WaitFixedTimeRealFrames(1);
@@ -5923,6 +5926,27 @@ L15:
     RequestCharacterAIReplan(0);
 });
 
+// Tarnished Edition Regalia Cleanup
+$Event(6911, Restart, function() {
+    DisableNetworkSync();
+    EndIf(ThisEventSlot());
+    EndIf(EventFlag(6953));
+    RemoveItemFromPlayer(ItemType.Goods, 2009600, 1);
+    RemoveItemFromPlayer(ItemType.Goods, 2009610, 1);
+    RemoveItemFromPlayer(ItemType.Goods, 2009620, 1);
+    SetEventFlagID(60101, OFF);
+    SetEventFlagID(60102, OFF);
+    SetEventFlagID(60103, OFF);
+    SetEventFlagID(10008256, OFF);
+    SetEventFlagID(1034508601, OFF);
+    SetEventFlagID(1044528610, OFF);
+    SetEventFlagID(69560, OFF);
+    SetEventFlagID(6700, ON);
+    SetEventFlagID(6701, OFF);
+    SetEventFlagID(6702, OFF);
+    SetEventFlagID(6703, OFF);
+});
+
 // Steam Achievement Awarding - AchievementID, EventFlag, Delay (seconds)
 $Event(9300, Restart, function(X0_4, X4_4, X8_4) {
     EndIf(ThisEventSlot());
@@ -6170,6 +6194,7 @@ $Event(3042, Restart, function() {
     EndEvent();
 });
 
+//Any Liurnia Grace Activated
 $Event(3043, Restart, function() {
     EndIf(!PlayerIsInOwnWorld());
     if (AnyBatchEventFlags(76200, 76299)) {
@@ -7154,6 +7179,7 @@ L0:
     EndEvent();
 });
 
+//Blacksmith Hewg Quest Flag Progression
 $Event(3239, Restart, function() {
     EndIf(!PlayerIsInOwnWorld());
     SetEventFlagID(3238, OFF);
@@ -7172,11 +7198,11 @@ $Event(3239, Restart, function() {
     if (EventFlag(3220)) {
         if (EventFlag(110)) {
             BatchSetNetworkconnectedEventFlags(3225, 3228, OFF);
-            SetNetworkconnectedEventFlagID(3226, ON);
+            SetNetworkconnectedEventFlagID(3226, ON); //Hewg mind begins crumbling
         }
-        if (EventFlag(9116)) {
+        if (EventFlag(9107)) { //Was 9116 (Maliketh), changed to Godfrey to fix Spirit Tuning issue
             BatchSetNetworkconnectedEventFlags(3225, 3228, OFF);
-            SetNetworkconnectedEventFlagID(3227, ON);
+            SetNetworkconnectedEventFlagID(3227, ON); //Hewg mind completely lost
         }
         if (EventFlag(11109246)) {
             BatchSetNetworkconnectedEventFlags(3225, 3228, OFF);
@@ -7949,6 +7975,7 @@ L0:
     RestartEvent();
 });
 
+//Finger Reader Enia Quest Step Progression
 $Event(3499, Restart, function() {
     EndIf(!PlayerIsInOwnWorld());
     if (!AnyBatchEventFlags(3480, 3484)) {
@@ -7976,7 +8003,7 @@ $Event(3499, Restart, function() {
         BatchSetNetworkconnectedEventFlags(3485, 3499, OFF);
         SetEventFlagID(3488, ON);
     }
-    if (EventFlag(118)) {
+    if (EventFlag(9123)) { //Was originally 118, changed to Elden Beast Death Flag
         BatchSetNetworkconnectedEventFlags(3485, 3499, OFF);
         //Finger Reader Death
         SetEventFlagID(3489, ON);
@@ -8219,6 +8246,7 @@ L0:
     RestartEvent();
 });
 
+//Roderika Quest Flag Progression
 $Event(3719, Restart, function() {
     EndIf(!PlayerIsInOwnWorld());
     SetEventFlagID(3718, OFF);
@@ -8244,9 +8272,9 @@ $Event(3719, Restart, function() {
             BatchSetNetworkconnectedEventFlags(3705, 3719, OFF);
             SetNetworkconnectedEventFlagID(3708, ON);
         }
-        if (EventFlag(110)) {
+        if (EventFlag(110)) { //Turned on when Erdtree is burned
             BatchSetNetworkconnectedEventFlags(3705, 3719, OFF);
-            SetNetworkconnectedEventFlagID(3709, ON);
+            SetNetworkconnectedEventFlagID(3709, ON); //Erdtree burned state
         }
     }
 L0:
@@ -9312,6 +9340,7 @@ L0:
     EndEvent();
 });
 
+//Gideon Quest Step Progression
 $Event(3979, Restart, function() {
     EndIf(!PlayerIsInOwnWorld());
     SetEventFlagID(3978, OFF);
@@ -9330,15 +9359,15 @@ S1:
             BatchSetNetworkconnectedEventFlags(3965, 3968, OFF);
             SetNetworkconnectedEventFlagID(3966, ON);
         }
-        if (EventFlag(110)
+        if (EventFlag(110) //Burning the Erdtree at the Forge
             || (EventFlag(3966) && EventFlag(11109358) && EventFlag(11109660))
             || (EventFlag(181) && EventFlag(11109659))) {
             BatchSetNetworkconnectedEventFlags(3965, 3968, OFF);
             SetNetworkconnectedEventFlagID(3967, ON);
         }
-        if (EventFlag(9116)) {
+        if (EventFlag(11050860)) { //Was 9116 (Maliketh's Death Flag), changed to Gideon's initial appearance in Ashen
             BatchSetNetworkconnectedEventFlags(3965, 3968, OFF);
-            SetNetworkconnectedEventFlagID(3968, ON);
+            SetNetworkconnectedEventFlagID(3968, ON); //Gideon leaves Roundtable Hold
         }
         WaitFor(EventFlag(3978));
         RestartEvent();
@@ -9347,6 +9376,7 @@ L0:
     EndEvent();
 });
 
+//Brother Corhyn Quest Step Progression
 $Event(4219, Restart, function() {
     EndIf(!PlayerIsInOwnWorld());
     SetEventFlagID(4218, OFF);
@@ -9382,11 +9412,11 @@ S1:
                 BatchSetNetworkconnectedEventFlags(4205, 4217, OFF);
                 SetNetworkconnectedEventFlagID(4209, ON);
             }
-            if (EventFlag(4209) && EventFlag(9116) && !EventFlag(1051569361)) {
+            if (EventFlag(4209) && EventFlag(110) && !EventFlag(1051569361)) { //If you did not try to give Corhyn the Tonic (used to have 9116 instead of 110)
                 BatchSetNetworkconnectedEventFlags(4205, 4217, OFF);
                 SetNetworkconnectedEventFlagID(4210, ON);
             }
-            if (EventFlag(4209) && EventFlag(9116) && EventFlag(1051569361)) {
+            if (EventFlag(4209) && EventFlag(110) && EventFlag(1051569361)) { //If you did try to give Corhyn the Tonic (used to have 9116 instead of 110)
                 BatchSetNetworkconnectedEventFlags(4205, 4217, OFF);
                 SetNetworkconnectedEventFlagID(4211, ON);
             }
@@ -9447,6 +9477,7 @@ L0:
     EndEvent();
 });
 
+//Nepheli Loux Quest Step Progression
 $Event(4239, Restart, function() {
     EndIf(!PlayerIsInOwnWorld());
     SetEventFlagID(4238, OFF);
@@ -9467,8 +9498,7 @@ $Event(4239, Restart, function() {
         SetNetworkconnectedEventFlagID(4220, ON);
     }
     if (EventFlag(4220)) {
-        if (!(!(AnyBatchEventFlags(4225, 4227) && EventFlag(110))
-            && !(EventFlag(4228) && EventFlag(9116) && !EventFlag(11109921)))) {
+        if (AnyBatchEventFlags(4225, 4228) && EventFlag(110) && !EventFlag(11109921)) { //Any of those four quest states, and erdtree burning, and no birb means death
             BatchSetNetworkconnectedEventFlags(4220, 4223, OFF);
             SetNetworkconnectedEventFlagID(4223, ON);
         } else {
@@ -15121,42 +15151,16 @@ $Event(9007103, Restart, function() {
     RestartEvent();
 });
 
-// Reveal Honse Menu
+// Unused
 $Event(9007104, Restart, function() {
-    DisableNetworkSync();
-    EndIf(EventFlag(63000))
-    SetEventFlagID(63200, ON);
-    for (let i = 0; i < 4; i++)
-        hasHorseItem |= PlayerHasItem(ItemType.Goods, 2500 + i);
-    WaitFor(hasHorseItem);
-    SetEventFlagID(63000, ON);
-    EndEvent();
 });
 
-// Honse Unlock Manager
-$Event(9007105, Restart, function(X0_4, X4_4) {
-    DisableNetworkSync();
-    EndIf(EventFlag(X0_4));
-    WaitFor(PlayerHasItem(ItemType.Goods, X4_4));
-    SetEventFlagID(X0_4, ON);
-    EndEvent();
+// Unused
+$Event(9007105, Restart, function() {
 });
 
-// Honse Selector Flag Manager
-$Event(9007106, Restart, function(X0_4) {
-    DisableNetworkSync();
-    WaitFor(ElapsedFrames(2) && !EventFlag(X0_4));
-    WaitFor(EventFlag(X0_4));
-    
-    BatchSetEventFlags(63200, 63299, OFF);
-    SetEventFlagID(X0_4, ON);
-    SetEventFlagID(1099002202, ON);
-    WaitFor(!EventFlag(1099002202));
-    
-    WaitFixedTimeFrames(3);
-    DisableTextOnLoadingScreen();
-    TriggerAreaReload(true);
-    EndEvent();
+// Unused
+$Event(9007106, Restart, function() {
 });
 
 // Honse SpEffect OFF - Selector EventFlag, spEffect, Target
@@ -15177,18 +15181,8 @@ $Event(9007108, Restart, function(X0_4, X4_4, X8_4) {
     RestartEvent();
 });
 
-// Honse: map reload on startup
+// Unused
 $Event(9007109, Restart, function() {
-    DisableNetworkSync();
-    WaitFixedTimeFrames(2);
-    EndIf(InArea(10000, 10012502));
-    WaitFor(EventFlag(1099002203));
-    
-    SetEventFlagID(1099002203, OFF);
-    WaitFixedTimeFrames(2);
-
-    DisableTextOnLoadingScreen();
-    TriggerAreaReload(true);
 });
 
 // Honse Talisman Share OFF - Talisman SpEffect, Horse SpEffect, Excemption Horse Selector Flag (6000 to ignore check)

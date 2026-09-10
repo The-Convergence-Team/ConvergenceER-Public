@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.5
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -130,6 +130,7 @@ $Event(0, Default, function() {
     InitializeEvent(2, 1051360730, 1051360735, 90101, 0);
     InitializeEvent(0, 1051360734, 1051360735);
     InitializeEvent(0, 1051360735, 1051360725, 0, 1);
+    InitializeEvent(0, 1051360740, 1051360740, 80981, 1, 6953, 9410, 9413);
     InitializeEvent(0, 1051362500, 0);
     InitializeEvent(0, 1051362490, 1051362710);
     //Gate+Lever script
@@ -760,6 +761,35 @@ L0:
         ChangeCharacterCollisionState(X0_4, Disabled);
     }
     WaitFor(!(EventFlag(9410) && !EventFlag(9413) && EventFlag(1051362735)));
+    RestartEvent();
+});
+
+$Event(1051360740, Restart, function(chrEntityId, animationId, value, eventFlagId, eventFlagId2, eventFlagId3) {
+    DisableNetworkSync();
+    WaitFixedTimeFrames(1);
+    if (PlayerIsInOwnWorld()) {
+        SetSpEffect(chrEntityId, 5005);
+    }
+L10:
+    DisableCharacter(chrEntityId);
+    SetCharacterBackreadState(chrEntityId, true);
+    if (!(EventFlag(eventFlagId) && EventFlag(eventFlagId2) && !EventFlag(eventFlagId3))) {
+        WaitFor(EventFlag(eventFlagId) && EventFlag(eventFlagId2) && !EventFlag(eventFlagId3));
+        RestartEvent();
+    }
+L0:
+    EnableCharacter(chrEntityId);
+    SetCharacterBackreadState(chrEntityId, false);
+    ForceAnimationPlayback(chrEntityId, animationId, false, false, false);
+    DisableCharacterGravity(chrEntityId);
+    SetCharacterMaphit(chrEntityId, false);
+    ResetCharacterPosition(chrEntityId);
+    if (value != 0) {
+        DisableCharacterCollision(chrEntityId);
+    }
+    Goto(L20);
+L20:
+    WaitFor(!(EventFlag(eventFlagId) && EventFlag(eventFlagId2) && !EventFlag(eventFlagId3)));
     RestartEvent();
 });
 

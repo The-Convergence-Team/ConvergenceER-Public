@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    ""
 // @linked    []
-// @version    3.5
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(90005200, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4, X28_4, X32_4) {
@@ -3989,6 +3989,26 @@ $Event(900005580, Restart, function(X0_4, X4_4, X8_4) {
     WaitFor(EventFlag(X0_4));
     DisableAsset(X4_4);
     DisableAssetTreasure(X4_4);
+});
+
+// ? (Tarnished Edition)
+$Event(900005590, Default, function(eventFlagId, assetEntityId, eventFlagId2) {
+    DisableAsset(assetEntityId);
+    DisableAssetTreasure(assetEntityId);
+    if (PlayerIsInOwnWorld()) {
+        DisableObjAct(assetEntityId, -1);
+    }
+    EndIf(!EventFlag(eventFlagId));
+    WaitFor(EventFlag(eventFlagId));
+    EnableAsset(assetEntityId);
+    if (eventFlagId2 != 0) {
+        if (PlayerIsInOwnWorld()) {
+            EnableObjAct(assetEntityId, -1);
+        }
+    }
+    if (!(eventFlagId2 != 0 && !EventFlag(eventFlagId2))) {
+        EnableAssetTreasure(assetEntityId);
+    }
 });
 
 $Event(90005600, Restart, function(X0_4, X4_4, X8_4, X12_4) {

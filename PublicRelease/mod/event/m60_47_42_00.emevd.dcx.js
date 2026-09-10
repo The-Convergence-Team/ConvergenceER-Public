@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.5
+// @version    3.6.1
 // ==/EMEVD==
 
 // コンストラクタ -- constructor
@@ -17,6 +17,7 @@ $Event(0, Default, function() {
     
     $InitializeEvent(0, 1047422601);
     InitializeCommonEvent(0, 900005610, 1047421690, 100, 800, 1047428560);
+    $InitializeCommonEvent(0, 900005590, 6953, 1047421680, 0);
 });
 
 // チュートリアルメッセージ_ケイリッド闘技場 -- Tutorial message_Keilid Arena
@@ -86,5 +87,3 @@ L0:
     EnableObjAct(1047421601, 400655);
     RestartEvent();
 });
-
-

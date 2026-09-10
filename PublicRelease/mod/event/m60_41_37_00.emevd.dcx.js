@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.4.2
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -37,6 +37,7 @@ $Event(1041370880, Default, function() {
     RegisterLadder(1041370580, 1041370851, 1041371580);
     RegisterLadder(1041370582, 1041370853, 1041371582);
     RegisterLadder(1041370584, 1041370855, 1041371584);
+    EnableAssetInvunerability(1041371590);
 });
 
 $Event(1041372340, Restart, function() {    

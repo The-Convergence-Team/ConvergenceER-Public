@@ -48,6 +48,7 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005620, 10000575, 10001575, 10001576, 0, 10002575, 10002576, 10002577);
     InitializeCommonEvent(0, 90005621, 10000575, 10001578);
     InitializeCommonEvent(0, 90005621, 10000575, 10001579);
+    InitializeCommonEvent(0, 900005590, 6953, 10001256, 10008256);
     InitializeEvent(0, 10002800, 0);
     InitializeEvent(0, 10002810, 0);
     InitializeEvent(0, 10002811, 0);

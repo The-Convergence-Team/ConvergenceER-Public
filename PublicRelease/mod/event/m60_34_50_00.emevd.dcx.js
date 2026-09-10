@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.5
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -30,6 +30,7 @@ $Event(0, Default, function() {
     InitializeEvent(0, 1034502580, 0);
     InitializeEvent(0, 1034502510, 0);
     InitializeCommonEvent(0, 90005501, 1034500510, 1034500511, 0, 1034501510, 1034501511, 1034501512, 1034500512);
+    $InitializeCommonEvent(0, 900005590, 6953, 1034501601, 1034508601);
     InitializeCommonEvent(0, 90005704, 1034500705, 1034509258, 3460, 1034502711, 3);
     InitializeCommonEvent(0, 90005703, 1034500705, 3461, 3462, 1034502711, 1034509258, 3460, 3463, -1);
     InitializeCommonEvent(0, 90005702, 1034500705, 3463, 3460, 3463);

@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -144,7 +144,12 @@ $Event(0, Default, function() {
     InitializeCommonEvent(0, 90005782, 11002164, 11002805, 11000730, 11002800, 11002809, 20029);
     InitializeCommonEvent(0, 90005780, 11000800, 11002168, 11002169, 11000760, 20, 11002761, 35009317, 1, 0);
     InitializeCommonEvent(0, 90005781, 11000800, 11002168, 11002169, 11000760);
-    InitializeCommonEvent(0, 90005782, 11002168, 11002805, 11000760, 11002800, 11002809, 0);
+    InitializeCommonEvent(0, 90005782, 11002168, 11002805, 11000760, 11002800, 11002809, 0);    
+    InitializeCommonEvent(0, 90005790, 0, 11000180, 11002181, 11002182, 11000180, 23, 11002180, 11002181, 0, 11000930, false, 0);
+    InitializeCommonEvent(0, 90005791, 11000180, 11002181, 11002182, 11000180);
+    InitializeCommonEvent(0, 90005792, 11000180, 11002181, 11002182, 11000180, 11001952, 0);
+    InitializeCommonEvent(0, 90005793, 11000180, 11002181, 11002182, 11000180, 11002181, 11002182, 0);
+    InitializeEvent(0, 11002930, 0);
     InitializeCommonEvent(0, 90005703, 11000710, 3941, 3942, 1039409251, 3941, 3940, 3943, 0);
     InitializeCommonEvent(0, 90005704, 11000710, 3941, 3940, 1039409251, 3);
     InitializeCommonEvent(0, 90005702, 11000710, 3943, 3940, 3944);
@@ -1385,6 +1390,17 @@ $Event(11002920, Default, function(X0_4, X4_4) {
     EndIf(EventFlag(X0_4));
     DisplayGenericDialog(10010170, PromptType.OKCANCEL, NumberofOptions.OneButton, X4_4, 3);
     RestartEvent();
+});
+
+$Event(11002930, Restart, function() {
+    EndIf(!PlayerIsInOwnWorld());
+    if (!EventFlag(6953)) {
+        SetEventFlagID(11000930, OFF);
+        EndEvent();
+    }
+L0:
+    WaitFor(EventFlag(6953) && EventFlag(11009556));
+    SetEventFlagID(11000930, ON);
 });
 
 $Event(11003710, Restart, function(X0_4) {

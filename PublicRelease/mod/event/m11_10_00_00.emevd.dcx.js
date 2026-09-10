@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.3
+// @version    3.6.1
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -99,66 +99,83 @@ $Event(0, Default, function() {
     
     // - - - Stables - - -
     // Torrent
-    InitializeEvent(0, 11100050, 63100, 63200, 11101500); // PhantomParam
+    InitializeEvent(0, 11100050, 130, 6700, 11101500); // PhantomParam
     //InitializeEvent(0, 11100052, 63200, 11105500, 0); // Graves disable on ride
-    InitializeEvent(0, 11100054, 63200, 11101501); // Disable flies during ride
-    InitializeEvent(0, 11100055, 63100, 63200, 11101500, 80230, 135, 0); // Activate / Pet (Beckon)
-    InitializeEvent(0, 11100056, 63100, 11101500); // Wander AI Toggle
-    InitializeEvent(0, 11100057, 63100, 11101500, 3020); // Emote: Shake Face
-    InitializeEvent(1, 11100057, 63100, 11101500, 3021); // Emote: Eat Grass
+    InitializeEvent(0, 11100054, 6700, 11101501); // Disable flies during ride
+    InitializeEvent(0, 11100055, 130, 11101500, 0); // Activate / Pet (Beckon)
+    InitializeEvent(0, 11100056, 130, 11101500); // Wander AI Toggle
+    InitializeEvent(0, 11100057, 130, 11101500, 3020); // Emote: Shake Face
+    InitializeEvent(1, 11100057, 130, 11101500, 3021); // Emote: Eat Grass
     
-    // Funeral Steed
-    InitializeEvent(1, 11100050, 63101, 63201, 11101510); // Unlock / PhantomParam
-    InitializeEvent(0, 11100051, 63101, 11105510, 0); // Disable Ingredients before unlock
-    InitializeEvent(1, 11100053, 63101, 11101511); // Disable flies before unlock
-    InitializeEvent(1, 11100054, 63201, 11101511); // Disable flies during ride
-    InitializeEvent(2, 11100053, 63101, 11101512); // Disable statue Fire before unlock - L
-    InitializeEvent(2, 11100054, 63201, 11101512); // Disable statue Fire during ride - L
-    InitializeEvent(3, 11100053, 63101, 11101513); // Disable statue Fire before unlock - R
-    InitializeEvent(3, 11100054, 63201, 11101513); // Disable statue Fire during ride - R
-    InitializeEvent(4, 11100053, 63101, 11101514); // Disable lantern before unlock 1
-    InitializeEvent(5, 11100053, 63101, 11101515); // Disable lantern before unlock 2
-    InitializeEvent(6, 11100053, 63101, 11101516); // Disable lantern before unlock 3
-    InitializeEvent(7, 11100053, 63101, 11101517); // Disable lantern before unlock 4
-    InitializeEvent(8, 11100053, 63101, 11101518); // Disable lantern before unlock 5
-    InitializeEvent(9, 11100053, 63101, 11101519); // Disable lantern before unlock 6
-    InitializeEvent(1, 11100055, 63101, 63201, 11101510, 80520, 100, 4060); // Activate / Pet (By my Sword)
-    InitializeEvent(1, 11100056, 63101, 11101510); // Wander AI Toggle
-    InitializeEvent(2, 11100057, 63101, 11101510, 3020); // Emote: Shake Face
+    // Night's Cavalry
+    InitializeEvent(1, 11100050, 140, 6704, 11101510); // Unlock / PhantomParam
+    InitializeEvent(0, 11100051, 140, 11105510, 0); // Disable Ingredients before unlock
+    InitializeEvent(1, 11100053, 140, 11101511); // Disable flies before unlock
+    InitializeEvent(1, 11100054, 6704, 11101511); // Disable flies during ride
+    InitializeEvent(2, 11100053, 140, 11101512); // Disable statue Fire before unlock - L
+    InitializeEvent(2, 11100054, 6704, 11101512); // Disable statue Fire during ride - L
+    InitializeEvent(3, 11100053, 140, 11101513); // Disable statue Fire before unlock - R
+    InitializeEvent(3, 11100054, 6704, 11101513); // Disable statue Fire during ride - R
+    InitializeEvent(4, 11100053, 140, 11101514); // Disable lantern before unlock 1
+    InitializeEvent(5, 11100053, 140, 11101515); // Disable lantern before unlock 2
+    InitializeEvent(6, 11100053, 140, 11101516); // Disable lantern before unlock 3
+    InitializeEvent(7, 11100053, 140, 11101517); // Disable lantern before unlock 4
+    InitializeEvent(8, 11100053, 140, 11101518); // Disable lantern before unlock 5
+    InitializeEvent(9, 11100053, 140, 11101519); // Disable lantern before unlock 6
+    InitializeEvent(1, 11100055, 140, 11101510, 4060); // Activate / Pet (By my Sword)
+    InitializeEvent(1, 11100056, 140, 11101510); // Wander AI Toggle
+    InitializeEvent(2, 11100057, 140, 11101510, 3020); // Emote: Shake Face
     
     // Erdtree Steed
-    InitializeEvent(2, 11100050, 63102, 63202, 11101520); // Unlock / PhantomParam
-    InitializeEvent(1, 11100051, 63102, 11105520, 0); // Disable trees / Ingredients before unlock
-    InitializeEvent(10, 11100053, 63102, 11101521); // Disable t before unlock
-    InitializeEvent(4, 11100054, 63202, 11101521); // Disable flies during ride
-    InitializeEvent(2, 11100055, 63102, 63202, 11101520, 80010, 91, 4061); // Activate / Pet (Polite Bow)
-    InitializeEvent(2, 11100056, 63102, 11101520); // Wander AI Toggle
-    InitializeEvent(4, 11100057, 63101, 11101520, 3021); // Emote: Eat Grass
+    InitializeEvent(2, 11100050, 141, 6705, 11101520); // Unlock / PhantomParam
+    InitializeEvent(1, 11100051, 141, 11105520, 0); // Disable trees / Ingredients before unlock
+    InitializeEvent(10, 11100053, 141, 11101521); // Disable t before unlock
+    InitializeEvent(4, 11100054, 6705, 11101521); // Disable flies during ride
+    InitializeEvent(2, 11100055, 141, 11101520, 4061); // Activate / Pet (Polite Bow)
+    InitializeEvent(2, 11100056, 141, 11101520); // Wander AI Toggle
+    InitializeEvent(4, 11100057, 141, 11101520, 3021); // Emote: Eat Grass
     
     // Frenzied Mule
-    InitializeEvent(3, 11100050, 63103, 63203, 11101530); // Unlock / PhantomParam
-    InitializeEvent(2, 11100051, 63103, 11105530, 0); // Disable Merchant and ingredient before unlock
-    InitializeEvent(11, 11100053, 63103, 11101532); // Disable fire before unlock
-    InitializeEvent(5, 11100054, 63203, 11101532); // Disable fire during ride
-    InitializeEvent(3, 11100055, 63103, 63203, 11101530, 80730, 45, 4062); // Activate / Pet (Finger Snap)
-    InitializeEvent(3, 11100056, 63103, 11101530); // Wander AI Toggle
-    InitializeEvent(5, 11100057, 63101, 11101530, 3020); // Emote: Shake Face
-    InitializeEvent(6, 11100057, 63101, 11101530, 3021); // Emote: Eat Grass
-    InitializeEvent(0, 11100058, 63103, 11101530, 108, 10); // Frenzied Scar Mask
+    InitializeEvent(3, 11100050, 142, 6706, 11101530); // Unlock / PhantomParam
+    InitializeEvent(2, 11100051, 142, 11105530, 0); // Disable Merchant and ingredient before unlock
+    InitializeEvent(11, 11100053, 142, 11101532); // Disable fire before unlock
+    InitializeEvent(5, 11100054, 6706, 11101532); // Disable fire during ride
+    InitializeEvent(3, 11100055, 142, 11101530, 4062); // Activate / Pet (Finger Snap)
+    InitializeEvent(3, 11100056, 142, 11101530); // Wander AI Toggle
+    InitializeEvent(5, 11100057, 142, 11101530, 3020); // Emote: Shake Face
+    InitializeEvent(6, 11100057, 142, 11101530, 3021); // Emote: Eat Grass
+    InitializeEvent(0, 11100058, 142, 11101530, 108, 10); // Frenzied Scar Mask
     
-    // Carian Knight Steed
-    InitializeEvent(4, 11100050, 63104, 63204, 11101540); // Unlock / PhantomParam
-    InitializeEvent(3, 11100051, 63104, 11105540, 0); // Disable ingredients before unlock
-    InitializeEvent(12, 11100053, 63104, 11101541); // Disable flies before unlock
-    InitializeEvent(13, 11100053, 63104, 11101542); // Disable fire before unlock
-    InitializeEvent(14, 11100053, 63104, 11101543); // Disable astrolobe before unlock
-    InitializeEvent(6, 11100054, 63204, 11101541); // Disable flies during ride
-    InitializeEvent(7, 11100054, 63204, 11101542); // Disable fire during ride
-    InitializeEvent(4, 11100055, 63104, 63204, 11101540, 80000, 120, 4063); // Activate / Pet (Bow)
-    InitializeEvent(4, 11100056, 63104, 11101540); // Wander AI Toggle
-    InitializeEvent(7, 11100057, 63101, 11101540, 3021); // Emote: Eat Grass
+    // Royal Knight Steed
+    InitializeEvent(4, 11100050, 143, 6707, 11101540); // Unlock / PhantomParam
+    InitializeEvent(3, 11100051, 143, 11105540, 0); // Disable ingredients before unlock
+    InitializeEvent(12, 11100053, 143, 11101541); // Disable flies before unlock
+    InitializeEvent(13, 11100053, 143, 11101542); // Disable fire before unlock
+    InitializeEvent(14, 11100053, 143, 11101543); // Disable astrolobe before unlock
+    InitializeEvent(6, 11100054, 6707, 11101541); // Disable flies during ride
+    InitializeEvent(7, 11100054, 6707, 11101542); // Disable fire during ride
+    InitializeEvent(4, 11100055, 143, 11101540, 4063); // Activate / Pet (Bow)
+    InitializeEvent(4, 11100056, 143, 11101540); // Wander AI Toggle
+    InitializeEvent(7, 11100057, 143, 11101540, 3021); // Emote: Eat Grass
     
     InitializeEvent(0, 11100059, 0); // Easter Egg
+    
+    // - Tarnished Edition Mounts -
+    // Unlocks
+    InitializeEvent(0, 11100060, 144, 6701, 11101585); // Tree Sentinel Steed
+    InitializeEvent(1, 11100060, 145, 6702, 11101550); // Carian Silver Steed
+    InitializeEvent(2, 11100060, 146, 6703, 11101565); // Funereal Night Steed
+    
+    // Interacts
+    InitializeEvent(0, 11100061, 144, 11101585, 4064); // Activate / Tree Sentinel / Pet
+    InitializeEvent(1, 11100061, 145, 11101550, 4065); // Activate / Carian Silver / Pet
+    InitializeEvent(2, 11100061, 146, 11101565, 4066); // Activate / Funereal Night / Pet
+    
+    // Passive Emotes
+    InitializeEvent(0, 11100062, 144, 11101585, 3021); // Tree Sentinel / Emote: Eat Grass
+    InitializeEvent(1, 11100062, 144, 11101585, 3020); // Tree Sentinel / Emote: Shake Face
+    InitializeEvent(2, 11100062, 145, 11101550, 3021); // Carian Silver / Emote: Eat Grass   
+    InitializeEvent(3, 11100062, 146, 11101565, 3020); // Funereal Steed / Emote: Shake Face
     
     // - - - Training Hall - - -
     // Bonfire like recovery on dummy altar
@@ -1628,13 +1645,13 @@ $Event(11100500, Restart, function() {
     ForceAnimationPlayback(11100510, 90100, false, false, false);
 });
 
-// Honse Dynamic Disables Mount - Honse Unlock EventFlag, Honse Active EventFlag, Character EntityID
+// Honse Dynamic Disables Mount - Honse Whistle Goods ID, Honse Active EventFlag, Character EntityID
 $Event(11100050, Restart, function(X0_4, X4_4, X8_4) {
-    if (!EventFlag(X0_4)) {
+    if (!PlayerHasItem(ItemType.Goods, X0_4)) {
         DisableCharacterGravity(X8_4);
         DisableCharacterCollision(X8_4);
         SetSpEffect(X8_4, 10225);
-        WaitFor(EventFlag(X0_4));
+        WaitFor(PlayerHasItem(ItemType.Goods, X0_4));
         SetSpEffect(X8_4, 10124); // Fade
         WaitFixedTimeFrames(20);
         ClearSpEffect(X8_4, 10225);
@@ -1657,17 +1674,17 @@ $Event(11100050, Restart, function(X0_4, X4_4, X8_4) {
     RestartEvent();
 });
 
-// Honse Dynamic Disables Assets (Unlock) - Honse Unlock EventFlag, Asset EntityID, Swapped Asset EntityID
+// Honse Dynamic Disables Assets (Unlock) - Honse Whistle Goods ID, Asset EntityID, Swapped Asset EntityID
 $Event(11100051, Restart, function(X0_4, X4_4, X8_4) {
     if (Signed(X8_4) != 0)
         DisableAsset(X8_4);
-    if (EventFlag(X0_4)) {
+    if (PlayerHasItem(ItemType.Goods, X0_4)) {
         if (Signed(X8_4) != 0)
             EnableAsset(X8_4);
         EndEvent();
     }
     DisableAsset(X4_4);
-    WaitFor(EventFlag(X0_4));
+    WaitFor(PlayerHasItem(ItemType.Goods, X0_4));
     EnableAsset(X4_4);
     if (Signed(X8_4) != 0)
         DisableAsset(X8_4);
@@ -1692,9 +1709,9 @@ $Event(11100052, Restart, function(X0_4, X4_4, X8_4) {
 });
 
 
-// Honse Dynamic Disables SFX (Unlock) - Honse Unlock EventFlag, SFX EntityID
+// Honse Dynamic Disables SFX (Unlock) - Honse Whistle Goods ID, SFX EntityID
 $Event(11100053, Restart, function(X0_4, X4_4) {
-    WaitFor(EventFlag(X0_4));
+    WaitFor(PlayerHasItem(ItemType.Goods, X0_4));
     SpawnMapSFX(X4_4);
     EndEvent();
 });
@@ -1708,34 +1725,25 @@ $Event(11100054, Restart, function(X0_4, X4_4) {
     RestartEvent();
 });
 
-// Honse Swap on spot - Honse Unlock EventFlag, Honse Active EventFlag, Honse EntityID, Gesture SpEffect, Gesture Frames
-$Event(11100055, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4) {
-    if (!EventFlag(X0_4)) {
-        WaitFor(ActionButtonInArea(6700, X8_4));
-        DisplayFullScreenMessage(X20_4);
+// Honse Interact - Honse Whistle Goods ID, Honse EntityID, Message ID
+$Event(11100055, Restart, function(X0_4, X4_4, X8_4) {
+    if (!PlayerHasItem(ItemType.Goods, X0_4)) {
+        WaitFor(ActionButtonInArea(6700, X4_4));
+        DisplayFullScreenMessage(X8_4);
         WaitFixedTimeSeconds(2);
     }
-    else if (EventFlag(X4_4)) {
-        WaitFor(!CharacterRidingMount(10000) && ActionButtonInArea(6800, X8_4));
-        IssueShortWarpRequest(10000, TargetEntityType.Character, X8_4, 242);
-        RotateCharacter(10000, X4_4, -1, true);
+    else {
+        WaitFor(!CharacterRidingMount(10000) && ActionButtonInArea(6800, X4_4));
+        IssueShortWarpRequest(10000, TargetEntityType.Character, X4_4, 242);
         ForceAnimationPlayback(10000, 60010, false, false, false);
         WaitFixedTimeFrames(112);
-    }
-    else {
-        WaitFor(ActionButtonInArea(6810, X8_4));
-        RotateCharacter(10000, X4_4, -1, true);
-        //SetSpEffect(10000, X12_4); // Forced Gesture
-        ForceAnimationPlayback(10000, X12_4, false, false, false);
-        WaitFixedTimeFrames(X16_4);
-        SetEventFlagID(X4_4, ON);
     }
     RestartEvent();
 });
 
-// Honse AI Manager - Honse Unlock EventFlag, Honse EntityID
+// Honse AI Manager - Honse Whistle Goods ID, Honse EntityID
 $Event(11100056, Restart, function(X0_4, X4_4) {
-    WaitFor(EventFlag(X0_4));
+    WaitFor(PlayerHasItem(ItemType.Goods, X0_4));
     WaitFor(RandomElapsedSeconds(1, 4) || EntityInRadiusOfEntity(10000, X4_4, 3, 1));
     DisableCharacterAI(X4_4);
     WaitFor(RandomElapsedSeconds(4, 8) && !EntityInRadiusOfEntity(10000, X4_4, 3, 1));
@@ -1743,9 +1751,9 @@ $Event(11100056, Restart, function(X0_4, X4_4) {
     RestartEvent();
 });
 
-// Honse Random Emote - Honse Unlock EventFlag, Honse EntityID, Rando Min, Rando Max, Anim ID
+// Honse Random Emote - Honse Whistle Goods ID, Honse EntityID, Rando Min, Rando Max, Anim ID
 $Event(11100057, Restart, function(X0_4, X4_4, X8_4) {
-    WaitFor(EventFlag(X0_4))
+    WaitFor(PlayerHasItem(ItemType.Goods, X0_4))
     WaitRandomTimeSeconds(1, 5);
     WaitFor(!CharacterHasSpEffect(X4_4, 10126) && RandomElapsedSeconds(20, 90) && !EntityInRadiusOfEntity(10000, X4_4, 4, 1));
     ForceAnimationPlayback(X4_4, X8_4, false, true, false);
@@ -1753,9 +1761,9 @@ $Event(11100057, Restart, function(X0_4, X4_4, X8_4) {
     RestartEvent();
 });
 
-// Honse Mask Toggle - Honse Unlock EventFlag, Honse EntityID, Mask Unlock EventFlag, Mask ID
+// Honse Mask Toggle - Honse Whistle Goods ID, Honse EntityID, Mask Unlock EventFlag, Mask ID
 $Event(11100058, Restart, function(X0_4, X4_4, X8_4, X12_4) {
-    WaitFor(EventFlag(X0_4));
+    WaitFor(PlayerHasItem(ItemType.Goods, X0_4));
     ChangeCharacterDispmask(X4_4, 10, OFF);
     WaitFor(EventFlag(X8_4));
     ChangeCharacterDispmask(X4_4, 10, ON);
@@ -1763,13 +1771,10 @@ $Event(11100058, Restart, function(X0_4, X4_4, X8_4, X12_4) {
 });
 
 // Honse Easter Egg
-const honseObtainFlags = [ 63100, 63101, 63102, 63103, 63104 ]
-$Event(11100059, Restart, function(X0_4, X4_4, X16_4) {
-    for (let i = 0; i < honseObtainFlags.length; i++) {
-        hasAllHorses &= EventFlag(honseObtainFlags[i]);
-    }
+$Event(11100059, Restart, function() {
     DisableAsset(11101901);
-    WaitFor(hasAllHorses);
+    //Has Torrent and all Convergence Steeds
+    WaitFor(PlayerHasItem(ItemType.Goods, 130) && PlayerHasItem(ItemType.Goods, 140) && PlayerHasItem(ItemType.Goods, 141) && PlayerHasItem(ItemType.Goods, 142) && PlayerHasItem(ItemType.Goods, 143));
     if (!EventFlag(11107058)) {
         EnableAsset(11101901);
         WaitFixedTimeFrames(1);
@@ -1784,6 +1789,73 @@ $Event(11100059, Restart, function(X0_4, X4_4, X16_4) {
         WaitFor(ActionButtonInArea(6820, 11101902));
         SetEventFlagID(11107058, OFF);
     }
+    RestartEvent();
+});
+
+// Tarnished Edition Mounts Dynamic Disables - Honse Whistle Goods ID, Honse Active EventFlag, Character EntityID
+$Event(11100060, Restart, function(X0_4, X4_4, X8_4) {
+    //Player does not own Tarnished Edition
+    if (!EventFlag(6953)) {
+        DisableCharacter(X8_4);
+        EndEvent();
+    }    
+    //Player owns Tarnished Edition, but not the Whistle
+    if (!PlayerHasItem(ItemType.Goods, X0_4)) {
+        DisableCharacterGravity(X8_4);
+        DisableCharacterCollision(X8_4);
+        SetSpEffect(X8_4, 10225);
+        WaitFor(PlayerHasItem(ItemType.Goods, X0_4));
+        SetSpEffect(X8_4, 10124); // Fade
+        WaitFixedTimeFrames(20);
+        ClearSpEffect(X8_4, 10225);
+        ClearSpEffect(X8_4, 10124);
+        EnableCharacterCollision(X8_4);
+        EnableCharacterGravity(X8_4);
+    }
+    WaitFor(EventFlag(X4_4) && CharacterRidingMount(10000));
+    DisableCharacterAI(X8_4);
+    SetSpEffect(X8_4, 10124); // Fade
+    WaitFixedTimeFrames(20);
+    ClearSpEffect(X8_4, 10124);
+    SetSpEffect(X8_4, 10126); // Phantom Param
+    WaitFor(!EventFlag(X4_4) || !CharacterRidingMount(10000));
+    SetSpEffect(X8_4, 10124);
+    WaitFixedTimeFrames(20);
+    ClearSpEffect(X8_4, 10124);
+    ClearSpEffect(X8_4, 10126);
+    EnableCharacterAI(X8_4);
+    RestartEvent();
+});
+
+// Tarnished Edition Honse Interact - Honse Whistle Goods ID, Honse EntityID, Message ID
+$Event(11100061, Restart, function(X0_4, X4_4, X8_4) {
+    if (!EventFlag(6953)) {
+        EndEvent();
+    }
+    else if (!PlayerHasItem(ItemType.Goods, X0_4)) {
+        WaitFor(ActionButtonInArea(6700, X4_4));
+        DisplayFullScreenMessage(X8_4);
+        WaitFixedTimeSeconds(2);
+    }
+    else {
+        WaitFor(!CharacterRidingMount(10000) && ActionButtonInArea(6800, X4_4));
+        IssueShortWarpRequest(10000, TargetEntityType.Character, X4_4, 242);
+        ForceAnimationPlayback(10000, 60010, false, false, false);
+        WaitFixedTimeFrames(112);
+    }
+    RestartEvent();
+});
+
+// Tarnished Edition Honse Random Emote - Honse Whistle Goods ID, Honse EntityID, Rando Min, Rando Max, Anim ID
+$Event(11100062, Restart, function(X0_4, X4_4, X8_4) {
+    if (!EventFlag(6953)) {
+        EndEvent();
+    }
+    WaitFor(PlayerHasItem(ItemType.Goods, X0_4))
+    WaitRandomTimeSeconds(1, 5);
+    WaitFor(!CharacterHasSpEffect(X4_4, 10126) && RandomElapsedSeconds(20, 90) && !EntityInRadiusOfEntity(10000, X4_4, 4, 1));
+    ForceAnimationPlayback(X4_4, X8_4, false, true, false);
+    WaitFixedTimeSeconds(10);
     RestartEvent();
 });
 
