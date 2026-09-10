@@ -12,8 +12,20 @@
 ------------------------------------------
 -- Convergence Code
 ------------------------------------------
+
+local function GetMovementSpeed()
+    if env(GetSpEffectID, 950) == TRUE then
+        return 0.95
+    elseif env(GetSpEffectID, 951) == TRUE then
+        return 1.1
+    else
+        return 1.0
+    end
+end
+
 function MountSpeedIncrease()
-    act(SetMovementScaleMult, 1.0)
+    local speed = GetMovementSpeed()
+    act(SetMovementScaleMult, speed)
 end
 
 ------------------------------------------

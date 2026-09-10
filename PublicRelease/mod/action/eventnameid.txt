@@ -1,4 +1,4 @@
-Num  = 3087
+Num  = 3088
 1    = "a000_000052.hkt_WC"
 2    = "a000_000515.hkt_WC"
 3    = "AddDamageGuardStartBack_to_AddDamageDefaultGuard"
@@ -3086,4 +3086,5 @@ Num  = 3087
 3085 = "W_ItemTransformDaergraf"
 3086 = "W_ItemTransformDaergraf_Upper"
 3087 = "W_Event62020"
-    
+3088 = "W_DrawStanceRightAttackHeavyCancel"
+    

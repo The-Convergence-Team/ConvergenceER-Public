@@ -1055,7 +1055,9 @@ function IsStanceArts(arts_id)
         [346] = true, -- UNUSED
         [347] = true, -- UNUSED
         [357] = true, -- Igor's Drake Hunt
-        [371] = true  -- Rancor Shot
+        [371] = true, -- Rancor Shot
+
+        [372] = true, -- [Tarnished Edition] Muleta
     }
 
     if aow_list[arts_id] then
@@ -1101,7 +1103,6 @@ function IsAttackStanceArts(arts_id)
         [239] = true, -- Spinning Wheel
 
         [309] = true, -- Unending Dance
-        [340] = true, -- UNUSED
         [341] = true  -- UNUSED
     }
 
@@ -1211,6 +1212,8 @@ function SetSwordArtsPointInfo(button, is_point_consume, to_state_event)
         [17] = true, -- Torch Attack
         [92] = true, -- Parry
         [93] = true, -- Buckler Parry
+        [96] = true, -- Storm Wall
+        [99] = true, -- Thops's Barrier
         [112] = true -- Kick
     }
 
@@ -1227,6 +1230,8 @@ function SetSwordArtsPointInfo(button, is_point_consume, to_state_event)
 
     if aow_list_noFPUse[artsID] then
         isNoMPUse = TRUE
+    elseif artsID == 373 and (env(GetSpEffectID, 190002) == TRUE or env(GetSpEffectID, 190001) == TRUE or env(GetSpEffectID, 190000) == TRUE) then
+        isNoMPUse = TRUE
     end
 
     if env(HasEnoughArtsPoints, button, hand) == FALSE and isNoMPUse == FALSE then
@@ -1240,7 +1245,7 @@ function SetSwordArtsPointInfo(button, is_point_consume, to_state_event)
     local val = "IsEnoughArtPointsL2"
 
     if button == ACTION_ARM_R1 then
-        if (c_SwordArtsID == 318 or c_SwordArtsID == 287 or  c_SwordArtsID == 299 or artsID == 266 or c_SwordArtsID == 340) and IsNodeActive("DrawStanceRightAttackLight_Selector") == TRUE then -- conv marika hammer
+        if (c_SwordArtsID == 318 or c_SwordArtsID == 287 or c_SwordArtsID == 299 or artsID == 266 or c_SwordArtsID == 340) and IsNodeActive("DrawStanceRightAttackLight_Selector") == TRUE then -- conv marika hammer
             val = "IsEnoughArtPointsR2_MesmerSowrdArts"
         else
             val = "IsEnoughArtPointsR1"
@@ -2123,6 +2128,9 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
     end
 
     if request == ATTACK_REQUEST_RIGHT_LIGHT then
+        if c_SwordArtsID == 372 and r1 == "W_DrawStanceRightAttackLight" and env(GetSpEffectID, 191000) == TRUE and env(ActionDuration, ACTION_ARM_L2) <= 0 then
+            return FALSE
+        end
         if artsr1 == TRUE then
             SetSwordArtsPointInfo(ACTION_ARM_R1, TRUE, r1)
 
@@ -2180,6 +2188,9 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
         ExecEventAllBody(r1)
 
     elseif request == ATTACK_REQUEST_RIGHT_HEAVY then
+        if c_SwordArtsID == 372 and r2 == "W_DrawStanceRightAttackHeavy" and env(GetSpEffectID, 191000) == TRUE and env(ActionDuration, ACTION_ARM_L2) <= 0 then
+            return FALSE
+        end
         if (c_SwordArtsID == 313 or c_SwordArtsID == 273)
             and (r2 == "W_SwordArtsOneShotComboEnd" or r2 == "W_SwordArtsOneShotComboEnd_2") then
             artsr2 = TRUE
@@ -2299,6 +2310,9 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
         guard_hand = HAND_LEFT
         ExecEventAllBody(l2)
     elseif request == ATTACK_REQUEST_BOTH_LIGHT then
+        if c_SwordArtsID == 372 and b1 == "W_DrawStanceRightAttackLight" and env(GetSpEffectID, 191000) == TRUE and env(ActionDuration, ACTION_ARM_L2) <= 0 then
+            return FALSE
+        end
         if (c_SwordArtsID == 318 or c_SwordArtsID == 287 or c_SwordArtsID == 299 or artsID == 266 or artsID == 340) and r1 == "W_SwordArtsOneShotComboEnd_MesmerSowrdArts" then -- conv marika hammer
             artsr1 = TRUE
         end
@@ -2384,6 +2398,9 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
 
         ExecEventAllBody(l1)
     elseif request == ATTACK_REQUEST_BOTH_HEAVY then
+        if c_SwordArtsID == 372 and b2 == "W_DrawStanceRightAttackHeavy" and env(GetSpEffectID, 191000) == TRUE and env(ActionDuration, ACTION_ARM_L2) <= 0 then
+            return FALSE
+        end
         -- DLC 1.13.1: Dynastic Sickleplay, Raging Beast
         if (c_SwordArtsID == 313 or c_SwordArtsID == 273) and (r2 == "W_SwordArtsOneShotComboEnd" or r2 == "W_SwordArtsOneShotComboEnd_2") then
             artsr2 = TRUE
@@ -2824,6 +2841,10 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
             arts_idx = 12
         elseif c_SwordArtsID == 328 and env(GetSpEffectID, 19874) == TRUE and GetVariable("IsEnoughArtPointsL2") == 0 then
             arts_idx = 11
+        elseif c_SwordArtsID == 373 and env(GetSpEffectID, 190002) == TRUE then
+            arts_idx = 12
+        elseif c_SwordArtsID == 373 and env(GetSpEffectID, 190001) == TRUE then
+            arts_idx = 11
 		elseif c_SwordArtsID == 295 and (env(GetSpEffectID, 100114) == FALSE and env(GetSpEffectID, 100109) == FALSE and env(GetSpEffectID, 1441500) == FALSE) then -- conv Moon cirque
             arts_idx = 1
 		elseif c_SwordArtsID == 9 and env(GetSpEffectID, 1879) == TRUE then -- Sleep Estoc
@@ -2911,6 +2932,8 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
             else
                 ExecEventAllBody("W_SwordArtsOneShot")
             end
+        elseif c_SwordArtsID == 373 and env(GetSpEffectID, 190000) == TRUE then
+            ExecEventAllBody("W_SwordArtsOneShotComboEnd")
         elseif c_SwordArtsID == 34 then -- guardian Swordspear
             if wep_cat == WEAPON_CATEGORY_STRAIGHT_SWORD then
                 ExecEventHalfBlend(Event_SwordArtsHalfOneShot, blend_type)
@@ -3825,7 +3848,7 @@ function ExecArtsStance(blend_type)
         SetSwordArtsPointInfo(ACTION_ARM_L2, TRUE)
     end
 
-    if env(GetSpEffectID, 19921) == TRUE then
+    if env(GetSpEffectID, 19921) == TRUE or env(GetSpEffectID, 191001) == TRUE then
         ExecEventHalfBlendNoReset(Event_DrawStanceRightLoop, blend_type)
     else
         ExecEventHalfBlend(Event_DrawStanceRightStart, blend_type)
@@ -5645,6 +5668,9 @@ end
 
 function ExecFallStart(fall_type)
     if env(IsFalling) == FALSE then
+        return FALSE
+    end
+    if env(GetSpEffectID, 4070) == TRUE then
         return FALSE
     end
     if fall_type == FALL_TYPE_DEFAULT then
@@ -12809,7 +12835,7 @@ function DrawStanceRightStart_Upper_onUpdate()
     end
     if env(IsAnimEnd, 1) == TRUE or env(GetEventEzStateFlag, 0) == TRUE then
         local index = c_SwordArtsID
-        if index == 10 or index == 11 or index == 340 or index == 341 or index == 309 or index == 121 then
+        if index == 10 or index == 11 or index == 341 or index == 309 or index == 121 then
             drawStanceNoSyncLoop_NoMP = GetVariable("IsEnoughArtPointsL2")
             ExecEventHalfBlendNoReset(Event_DrawStanceNoSyncLoop, blend_type)
         else
@@ -13085,7 +13111,16 @@ function DrawStanceRightAttackLight_onUpdate()
         artsr2 = TRUE
     end
 
-    if c_SwordArtsID == 318 or c_SwordArtsID == 287 or c_SwordArtsID == 266 or c_SwordArtsID == 340 then
+    if c_SwordArtsID == 372 and env(GetSpEffectID, 191000) == TRUE then
+        r1 = "W_DrawStanceRightAttackLight"
+        r2 = "W_DrawStanceRightAttackHeavy"
+        b1 = "W_DrawStanceRightAttackLight"
+        b2 = "W_DrawStanceRightAttackHeavy"
+        artsr1 = TRUE
+        artsr2 = TRUE
+    end
+
+    if c_SwordArtsID == 318 or c_SwordArtsID == 287 or c_SwordArtsID == 266 then
         if env(GetSpEffectID, 100054) == TRUE then
             r1 = "W_SwordArtsOneShotComboEnd_MesmerSowrdArts"
             b1 = "W_SwordArtsOneShotComboEnd_MesmerSowrdArts"
@@ -13094,6 +13129,18 @@ function DrawStanceRightAttackLight_onUpdate()
             b1 = "W_SwordArtsOneShotComboEnd_2"
         end
     end
+	
+	if c_SwordArtsID == 340 then
+        if env(GetSpEffectID, 100054) == TRUE then
+			SetSwordArtsPointInfo(ACTION_ARM_R1, TRUE)
+            r1 = "W_SwordArtsOneShotComboEnd_MesmerSowrdArts"
+            b1 = "W_SwordArtsOneShotComboEnd_MesmerSowrdArts"
+        elseif env(GetSpEffectID, 100055) == TRUE then
+            r1 = "W_SwordArtsOneShotComboEnd_2"
+            b1 = "W_SwordArtsOneShotComboEnd_2"
+        end
+    end
+	
 
 	if c_SwordArtsID == 299 then -- Conv Marika Hammer
         if env(GetSpEffectID, 100054) == TRUE then
@@ -13263,6 +13310,9 @@ function DrawStanceRightAttackHeavy_onUpdate()
         r2 = "W_AttackRightHeavy1Start"
         b2 = "W_AttackBothHeavy1Start"
     end
+    
+    local artsr1 = FALSE
+    local artsr2 = FALSE
 
     if env(GetEquipWeaponCategory, HAND_RIGHT) == WEAPON_CATEGORY_STRAIGHT_SWORD then
         r1 = "W_AttackRightLight2"
@@ -13284,11 +13334,30 @@ function DrawStanceRightAttackHeavy_onUpdate()
         ExecEventAllBody("W_SwordArtsChargeCancelEarly")
     end
 
-    if ArtsCommonFunction(r1, r2, "W_AttackLeftLight1", "W_AttackLeftHeavy1", b1, b2, FALSE, FALSE, FALSE, TRUE, FALSE,
-        ALLBODY) == TRUE then
+    if c_SwordArtsID == 372 then
+        if env(GetSpEffectID, 100285) == TRUE and env(ActionDuration, ACTION_ARM_R2) <= 0 then
+            ExecEventAllBody("W_DrawStanceRightAttackHeavyCancel")
+            return
+        end
+
+        if env(GetSpEffectID, 191000) == TRUE then
+            r1 = "W_DrawStanceRightAttackLight"
+            r2 = "W_DrawStanceRightAttackHeavy"
+            b1 = "W_DrawStanceRightAttackLight"
+            b2 = "W_DrawStanceRightAttackHeavy"
+            artsr1 = TRUE
+            artsr2 = TRUE
+            if env(1116, 100050) == TRUE then
+                r2 = "W_SwordArtsOneShotComboEnd"
+                b2 = "W_SwordArtsOneShotComboEnd"
+            end
+        end
+    end
+
+    if ArtsCommonFunction(r1, r2, "W_AttackLeftLight1", "W_AttackLeftHeavy1", b1, b2, FALSE, artsr1, artsr2, TRUE, FALSE, ALLBODY) == TRUE then
         return
     end
-	
+
 	if env(ActionDuration, ACTION_ARM_R2) <= 0 then -- conv marika hammer
         if env(GetSpEffectID, 100285) == TRUE then
             ExecEventAllBody("W_SwordArtsChargeCancelEarly")
@@ -13297,6 +13366,54 @@ function DrawStanceRightAttackHeavy_onUpdate()
             ExecEventAllBody("W_SwordArtsChargeCancelLate")
             return
         end
+    end
+
+    if env(IsAnimEnd, 0) == TRUE then
+        SetArtsGeneratorTransitionIndex()
+        ExecEventAllBody("W_Idle")
+        return
+    end
+end
+
+function DrawStanceRightAttackHeavyCancel_onUpdate()
+    local r1 = "W_AttackRightLight1"
+    local r2 = "W_AttackRightHeavy1Start"
+    local b1 = "W_AttackBothLight1"
+    local b2 = "W_AttackBothHeavy1Start"
+
+    if env(GetSpEffectID, 100250) == TRUE then
+        r2 = "W_DrawStanceRightAttackHeavy2"
+        b2 = "W_DrawStanceRightAttackHeavy2"
+    else
+        r2 = "W_AttackRightHeavy1Start"
+        b2 = "W_AttackBothHeavy1Start"
+    end
+
+    local artsr1 = FALSE
+    local artsr2 = FALSE
+
+    if env(GetEquipWeaponCategory, HAND_RIGHT) == WEAPON_CATEGORY_STRAIGHT_SWORD then
+        r1 = "W_AttackRightLight2"
+        r2 = "W_AttackRightHeavy2Start"
+        b1 = "W_AttackBothLight2"
+        b2 = "W_AttackBothHeavy2Start"
+    end
+
+    if c_SwordArtsID == 372 and env(GetSpEffectID, 191000) == TRUE then
+        r1 = "W_DrawStanceRightAttackLight"
+        r2 = "W_DrawStanceRightAttackHeavy"
+        b1 = "W_DrawStanceRightAttackLight"
+        b2 = "W_DrawStanceRightAttackHeavy"
+        artsr1 = TRUE
+        artsr2 = TRUE
+        if env(1116, 100050) == TRUE then
+            r2 = "W_SwordArtsOneShotComboEnd"
+            b2 = "W_SwordArtsOneShotComboEnd"
+        end
+    end
+    
+    if ArtsCommonFunction(r1, r2, "W_AttackLeftLight1", "W_AttackLeftHeavy1", b1, b2, FALSE, artsr1, artsr2, TRUE, FALSE, ALLBODY) == TRUE then
+        return
     end
 
     if env(IsAnimEnd, 0) == TRUE then
@@ -13363,7 +13480,7 @@ function SwordArtsOneShot_onUpdate()
     local canThrow = FALSE
 	local c_WeaponSwordArts = GetWeaponID(c_SwordArtsHand)
 	
-    if c_SwordArtsID == 130 or c_SwordArtsID == 55 or c_SwordArtsID == 323 or c_SwordArtsID == 259 then
+    if c_SwordArtsID == 130 or c_SwordArtsID == 131 or c_SwordArtsID == 55 or c_SwordArtsID == 323 or c_SwordArtsID == 92 or c_SwordArtsID == 259 then
         canThrow = TRUE
     end
 
@@ -13386,6 +13503,7 @@ function SwordArtsOneShot_onUpdate()
         r1 = "W_SwordArtsOneShotComboEnd_2"
         b1 = "W_SwordArtsOneShotComboEnd_2"
     end
+
     if env(GetSpEffectID, 100050) == TRUE then
         r2 = "W_SwordArtsOneShotComboEnd"
         b2 = "W_SwordArtsOneShotComboEnd"
@@ -13397,7 +13515,8 @@ function SwordArtsOneShot_onUpdate()
 	if env(GetSpEffectID, 100058) == TRUE then -- Conv Marika Hammer
         r1 = "W_DrawStanceRightAttackLight"
         b1 = "W_DrawStanceRightAttackLight"
-    end          
+    end        
+    
     if env(GetSpEffectID, 100059) == TRUE then -- Conv Marika Hammer
         r2 = "W_DrawStanceRightAttackHeavy"
         b2 = "W_DrawStanceRightAttackHeavy"
@@ -13407,6 +13526,7 @@ function SwordArtsOneShot_onUpdate()
         r1 = "W_AttackRightLightStep"
         b1 = "W_AttackBothLightStep"
     end
+
     if c_SwordArtsID == 1 or c_SwordArtsID == 2 or c_SwordArtsID == 6 or c_SwordArtsID == 7 or c_SwordArtsID == 130
         or c_SwordArtsID == 131 or c_SwordArtsID == 170 or c_SwordArtsID == 171 or c_SwordArtsID == 191 or c_SwordArtsID
         == 198 or c_SwordArtsID == 65 or c_SwordArtsID == 243 or c_SwordArtsID == 283 or c_SwordArtsID == 300
@@ -13669,6 +13789,13 @@ function SwordArtsOneShotComboEnd_onUpdate()
         r1 = "W_AttackRightLightStep"
         b1 = "W_AttackBothLightStep"
     end
+    
+    if c_SwordArtsID == 372 and env(GetSpEffectID, 191000) == TRUE then
+        r1 = "W_DrawStanceRightAttackLight"
+        r2 = "W_DrawStanceRightAttackHeavy"
+        b1 = "W_DrawStanceRightAttackLight"
+        b2 = "W_DrawStanceRightAttackHeavy"
+    end
 
     if env(ActionDuration, ACTION_ARM_L2) <= 0 then
         if env(GetSpEffectID, 100285) == TRUE then
@@ -13689,10 +13816,10 @@ function SwordArtsOneShotComboEnd_onUpdate()
         return
     end
 
-    if ArtsCommonFunction(r1, r2, "W_AttackLeftLight1", "W_AttackLeftHeavy1", b1, b2, FALSE, TRUE, TRUE, TRUE, FALSE,
-        ALLBODY) == TRUE then
+    if ArtsCommonFunction(r1, r2, "W_AttackLeftLight1", "W_AttackLeftHeavy1", b1, b2, FALSE, TRUE, TRUE, TRUE, FALSE, ALLBODY) == TRUE then
         return
     end
+
     if env(IsAnimEnd, 0) == TRUE then
         SetArtsGeneratorTransitionIndex()
         ExecEventAllBody("W_Idle")

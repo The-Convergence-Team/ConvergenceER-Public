@@ -65,7 +65,7 @@ local frenzyApplyingWeaponArts = {
     [288] = true, -- Blade of Distant Light
     [296] = true, -- Maddening Brand
     [316] = true, -- Greatsword of Midra
-    [373] = true, -- Fingerprint Hexmark
+    [374] = true, -- Fingerprint Hexmark
     [393] = true  -- Three Finger Blade
 }
 

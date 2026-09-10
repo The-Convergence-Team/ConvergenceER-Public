@@ -192,7 +192,6 @@ function LocalPlayerOnly()
     Do(FrostbiteProcHandler)
     Do(TwoHandingDetector)
     Do(PowerstanceDetector)
-    Do(MountChangeLib) -- See DisableSpellOnUnequip
     Do(MagicWeaponDetection)
     Do(OpenURLLib)
     Do(ResetStats) -- See DisableSpellOnUnequip

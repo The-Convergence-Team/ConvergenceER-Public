@@ -94,7 +94,7 @@ function JewelSpellBan()
 
                 activeSpellbanState = -1
             -- Magic classes but no spell ban is applied yet
-            elseif activeSpellbanState == 0 then
+            elseif activeSpellbanState == 0 or activeSpellbanState == -2 then
                 for classIndex, classSpells in ipairs(__allSpells) do
                     if classIndex == allowedSpellsIndex then
                         AllowSpells(classSpells)

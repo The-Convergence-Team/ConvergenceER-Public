@@ -26,25 +26,25 @@ local BIG_UNSIGNED_INT = 107
 -- Reserved for pointers that tend to change with updates
 ---------------------------------------------------------------------------
 
-local _GAME_DATA_MAN =         0x3D5DF38 -- 1.16
-local _CS_NOW_LOADING_HELPER = 0x3D60EC8 -- 1.16
-local _CS_BULLET_MANAGER =     0x3D62748 -- 1.16
-local _WORLD_CHR_MAN =         0x3D65F88 -- 1.16
-local _DMG_MAN =               0x3D66378 -- 1.16
-local _CS_GA_ITEM =            0x3D69890 -- 1.16
-local _GAME_MAN =              0x3D69918 -- 1.16
-local _LOCK_TGT_MAN =          0x3D6A208 -- 1.16
-local _WORLD_MAP_MAN =         0x3D6A320 -- 1.16
-local _CS_FE_MAN =             0x3D6B880 -- 1.16
-local _CS_SESSION_MANAGER =    0x3D7A4D0 -- 1.16
-local _CS_WINDOW =             0x458B890 -- 1.16
+local _GAME_DATA_MAN =         0x3D61F98 -- 1.17
+local _CS_NOW_LOADING_HELPER = 0x3D64F28 -- 1.17
+local _CS_BULLET_MANAGER =     0x3D667A8 -- 1.17
+local _WORLD_CHR_MAN =         0x3D69FF8 -- 1.17
+local _DMG_MAN =               0x3D6A3E8 -- 1.17
+local _CS_GA_ITEM =            0x3D6D900 -- 1.17
+local _GAME_MAN =              0x3D6D988 -- 1.17
+local _LOCK_TGT_MAN =          0x3D6E278 -- 1.17
+local _WORLD_MAP_MAN =         0x3D6E390 -- 1.17
+local _CS_FE_MAN =             0x3D6F8F0 -- 1.17
+local _CS_SESSION_MANAGER =    0x3D7E540 -- 1.17
+local _CS_WINDOW =             0x458F910 -- 1.17
 
 -- In WORLD_CHR_MAN
-local _BUDDY_CHR_SET =            0x10FA8 -- 1.16
-local _LOCAL_PLAYER_OFFSET =      0x1E508 -- 1.16
-local _DEBUG_CHR_CREATOR =        0x1E648 -- 1.16
-local _CHR_CAM =                  0x1ECE0 -- 1.16
-local _CHR_INS_LIST_BY_DISTANCE = 0x1F1D0 -- 1.16
+local _BUDDY_CHR_SET =            0x10FA8 -- 1.17 ?
+local _LOCAL_PLAYER_OFFSET =      0x1E508 -- 1.17
+local _DEBUG_CHR_CREATOR =        0x1E648 -- 1.17
+local _CHR_CAM =                  0x1ECE0 -- 1.17
+local _CHR_INS_LIST_BY_DISTANCE = 0x1F1D0 -- 1.16 ?
 
 ---------------------------------------------------------------------------
 -- Pointer Tables
@@ -97,7 +97,7 @@ GAME_BASE = {
             SETTING_SHOW_TUTORIALS = { _GAME_BASE, SIGNED_BYTE, _GAME_DATA_MAN, 0x58, 0x2E },
         },
     },
-    CS_NOW_LOADING_HELPER = { -- 0x3D60EC8
+    CS_NOW_LOADING_HELPER = {
         MENU_LOAD_ENTRIES = function(index)
             return { _GAME_BASE, UNSIGNED_INT, _CS_NOW_LOADING_HELPER, 0x48 + (index * 0x4)}
         end,
@@ -144,14 +144,14 @@ GAME_BASE = {
         }
     },
     WORLD_CHR_MAN = {
-        BUDDY_CHR_SET = { -- 0x10FA8
+        BUDDY_CHR_SET = {
             TORRENT_CHR_INS = { _GAME_BASE, CHRINS, _WORLD_CHR_MAN, _BUDDY_CHR_SET, 0x0 },
             SPIRIT_SUMMON_CHR_INS = function(index)
                 return { _GAME_BASE, CHRINS, _WORLD_CHR_MAN, _BUDDY_CHR_SET, 0x140 + (index * 0x10) }
             end
         },
         LOCAL_PLAYER_CHR_INS = { _GAME_BASE, CHRINS, _WORLD_CHR_MAN, _LOCAL_PLAYER_OFFSET },
-        DEBUG_CHR_CREATOR = { -- 0x1E648
+        DEBUG_CHR_CREATOR = {
             IS_SPAWN = { _GAME_BASE, SIGNED_BYTE, _WORLD_CHR_MAN, _DEBUG_CHR_CREATOR, 0x44 },
             CHR_POS = { _GAME_BASE, COORDINATES, _WORLD_CHR_MAN, _DEBUG_CHR_CREATOR, 0xB0 },
             CHR_NPC_PARAM = { _GAME_BASE, SIGNED_INT, _WORLD_CHR_MAN, _DEBUG_CHR_CREATOR, 0xF0 },
@@ -164,11 +164,11 @@ GAME_BASE = {
             IS_PLAYER = { _GAME_BASE, SIGNED_BYTE, _WORLD_CHR_MAN, _DEBUG_CHR_CREATOR, 0x178 },
             CHR_CHARA_INIT_PARAM = { _GAME_BASE, SIGNED_INT, _WORLD_CHR_MAN, _DEBUG_CHR_CREATOR, 0x17C },
         },
-        CHR_CAM = { -- 0x1ECE0
+        CHR_CAM = {
             REQUEST_CAMERA_RESET = { _GAME_BASE, SIGNED_BYTE, _WORLD_CHR_MAN, _CHR_CAM, 0x78 },
             CAMERA_TYPE = { _GAME_BASE, UNSIGNED_INT, _WORLD_CHR_MAN, _CHR_CAM, 0x7C },
         },
-        CHR_INS_LIST_BY_DISTANCE = { -- 0x1F1D0
+        CHR_INS_LIST_BY_DISTANCE = {
             START_PTR = { _GAME_BASE, UNSIGNED_INT, _WORLD_CHR_MAN, _CHR_INS_LIST_BY_DISTANCE + 0x8 },
             END_PTR = { _GAME_BASE, UNSIGNED_INT, _WORLD_CHR_MAN, _CHR_INS_LIST_BY_DISTANCE + 0x10 },
             CHR_INS = function(index)
@@ -264,15 +264,15 @@ GAME_BASE = {
         RTX_QUALITY = { _GAME_BASE, SIGNED_INT, _CS_WINDOW, 0x128 },
     },
     DEBUG_FLAGS = { -- TODO Move to ChrIns with propper offsets
-        NO_DEATH_PLAYER = { _GAME_BASE, SIGNED_BYTE, "0x3D661A0" },
-        NO_DEATH_TORRENT = { _GAME_BASE, SIGNED_BYTE, "0x3D661A1" },
-        ONE_SHOT_EVERYTHING = { _GAME_BASE, SIGNED_BYTE, "0x3D661A2" },
-        ALL_NO_CONSUMABLES_CONSUME = { _GAME_BASE, SIGNED_BYTE, "0x3D661A3" },
-        UNLIMITED_SP = { _GAME_BASE, SIGNED_BYTE, "0x3D661A4" },
-        UNLIMITED_FP = { _GAME_BASE, SIGNED_BYTE, "0x3D661A5" },
-        ALL_NO_ARROW_CONSUME = { _GAME_BASE, SIGNED_BYTE, "0x3D661A6" },
-        HIDE_PLAYER = { _GAME_BASE, SIGNED_BYTE, "0x3D661A8" },
-        SILENCE_PLAYER = { _GAME_BASE, SIGNED_BYTE, "0x3D661A9" },
-        FORCED_PARRY = { _GAME_BASE, SIGNED_BYTE, "0x3D661AD" },
+        NO_DEATH_PLAYER = { _GAME_BASE, SIGNED_BYTE, "0x3D6A210" }, -- 1.17
+        NO_DEATH_TORRENT = { _GAME_BASE, SIGNED_BYTE, "0x3D6A211" },  -- 1.17
+        ONE_SHOT_EVERYTHING = { _GAME_BASE, SIGNED_BYTE, "0x3D6A212" }, -- 1.17
+        ALL_NO_CONSUMABLES_CONSUME = { _GAME_BASE, SIGNED_BYTE, "0x3D6A213" }, -- 1.17
+        UNLIMITED_SP = { _GAME_BASE, SIGNED_BYTE, "0x3D6A214" }, -- 1.17
+        UNLIMITED_FP = { _GAME_BASE, SIGNED_BYTE, "0x3D6A215" }, -- 1.17
+        ALL_NO_ARROW_CONSUME = { _GAME_BASE, SIGNED_BYTE, "0x3D6A216" }, -- 1.17
+        HIDE_PLAYER = { _GAME_BASE, SIGNED_BYTE, "0x3D6A218" }, -- 1.17
+        SILENCE_PLAYER = { _GAME_BASE, SIGNED_BYTE, "0x3D6A219" }, -- 1.17
+        FORCED_PARRY = { _GAME_BASE, SIGNED_BYTE, "0x3D6A21D" }, -- 1.17
     }
 }

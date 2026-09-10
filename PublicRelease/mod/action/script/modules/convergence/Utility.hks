@@ -43,8 +43,7 @@ function Log( ... )
     if noLog == true
     or EnableDebugLogger ~= true
     or debug.getinfo(2, 'n').name == 'print'
-    or (not fileExists("C:\\Convergence\\Tools\\StartMod.bat") and 
-        not fileExists("C:\\Jesse\\Convergence\\ConvergenceWIP\\Start_Convergence.bat") and
+    or (not fileExists("F:\\Convergence\\Tools\\StartMod.bat") and 
         not fileExists("K:\\Games\\ELDEN RING v.1.12 (2022)\\1.16\\ELDEN RING\\Game\\mod (convergencation)\\launch-eldenring-mods.bat") and
         not fileExists("D:\\ConvergenceProject\\Chunko 1\\3 Chunko\\bun.png"))
     then -- Personal check so it only runs for me ever

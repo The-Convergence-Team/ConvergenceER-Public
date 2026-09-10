@@ -113,12 +113,13 @@ CHR_INS_BASE = {
             IS_JUMPING = { _CHR_INS_BASE, SIGNED_BYTE, 0x190, 0x68, 0x1D2 },
         }
     },
-    CHR_FLAGS = { -- 0x530 / 0x533
-        NO_HIT = { _CHR_INS_BASE, BIT, 3, 0x530 },
-        NO_ATTACK = { _CHR_INS_BASE, BIT, 4, 0x530 },
-        NO_MOVE = { _CHR_INS_BASE, BIT, 5, 0x530 },
-        NO_UPDATE = { _CHR_INS_BASE, BIT, 0, 0x531 },
-        NO_GOODS_CONSUME = { _CHR_INS_BASE, BIT, 0, 0x532 },
+    FALL_CAMERA = { _CHR_INS_BASE, BIT, 2, 0x1C8 },
+    CHR_FLAGS = { -- 0x538 (24 bit long)
+        NO_HIT = { _CHR_INS_BASE, BIT, 3, 0x538 },
+        NO_ATTACK = { _CHR_INS_BASE, BIT, 4, 0x538 },
+        NO_MOVE = { _CHR_INS_BASE, BIT, 5, 0x538 },
+        NO_UPDATE = { _CHR_INS_BASE, BIT, 0, 0x538 + 0x1 },
+        NO_GOODS_CONSUME = { _CHR_INS_BASE, BIT, 0, 0x538 + 0x2 },
     },
     PLAYER_GAME_DATA = { -- 0x580
         LEVELED_VIGOR = { _CHR_INS_BASE, SIGNED_INT, 0x580, 0x3C },
@@ -193,6 +194,5 @@ CHR_INS_BASE = {
                 SELECTED_QUICKSLOT = { _CHR_INS_BASE, UNSIGNED_SHORT, 0x580, 0x2B0 + 0x288 + 0xA0 },
             },
         },
-    },
-    FALL_CAMERA = { _CHR_INS_BASE, BIT, 2, 0x1C8 }
+    }
 }
