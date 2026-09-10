@@ -21,10 +21,7 @@ path = './../mod/dll/ertransmogrify.dll'
 path = './../mod/dll/Scripts-Data-Exposer-FS.dll'
 
 [[natives]]
-path = './../mod/dll/fxr_ws_reloader.dll'
-
-[[natives]]
-path = './../mod/dll/debug.dll'
+path = './../mod/dll/er_torrent_skin_slots.dll'
 
 [[natives]]
 path = './../mod/dll/unlock_wwise_states_er.dll'
