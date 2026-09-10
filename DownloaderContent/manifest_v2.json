@@ -1,5 +1,5 @@
 {
-  "commitHash": "761383cbf752c370f08caed7b67ca6746d45b3c3",
+  "commitHash": "f9820a30ca87827b7d5344ae7bdc10b53b8ced66",
   "files": {
     "Start_Convergence.bat": {
       "sha256": "3e846b4975501efe68958c27ef7023bb9ddb2becb609ea6cd4b81ae4c7f9d83f",
@@ -10,40 +10,40 @@
       "size": 1046
     },
     "me3/Linux/me3": {
-      "sha256": "25fbde9acadc2bb98728f4f332a39ba31475d358f6e2555541e08e10d0e54f93",
-      "size": 6438328
+      "sha256": "33813a5642cd2a1ad0e88484b71e153747227cc00f8ca073bc7a7439fc64d185",
+      "size": 6438352
     },
     "me3/Linux/win64/me3-launcher.exe": {
-      "sha256": "b3c5a7d23d4eeb67b452d1526a65cea5685549b93fd7e3361546a4d7a0cd1b92",
+      "sha256": "4195535ac8448d20e620bc911772a18fc75462e4c36668968164842d787d0011",
       "size": 4649256
     },
     "me3/Linux/win64/me3.exe": {
-      "sha256": "08ad6d55a3c98f0a32ceb0d4ea400039d49abb8337b2f33b6f40e75d14b748bf",
+      "sha256": "203a726ab40ecac6ee9deaba1aa96f741d87e12def549cdeb48f99e5fe16d52d",
       "size": 6167824
     },
     "me3/Linux/win64/me3_mod_host.dll": {
-      "sha256": "04a3261cec655208121b4a8e7b928896e4aa9825e8fff885426a57a5a10e9b09",
-      "size": 6531368
+      "sha256": "e08af3dd9d7be2655e2f245fa2bfc316aa8c6af74a3f2dc7cb0598f96c769317",
+      "size": 6571816
     },
     "me3/Windows/me3-launcher.exe": {
-      "sha256": "b3c5a7d23d4eeb67b452d1526a65cea5685549b93fd7e3361546a4d7a0cd1b92",
+      "sha256": "4195535ac8448d20e620bc911772a18fc75462e4c36668968164842d787d0011",
       "size": 4649256
     },
     "me3/Windows/me3.exe": {
-      "sha256": "08ad6d55a3c98f0a32ceb0d4ea400039d49abb8337b2f33b6f40e75d14b748bf",
+      "sha256": "203a726ab40ecac6ee9deaba1aa96f741d87e12def549cdeb48f99e5fe16d52d",
       "size": 6167824
     },
     "me3/Windows/me3_mod_host.dll": {
-      "sha256": "04a3261cec655208121b4a8e7b928896e4aa9825e8fff885426a57a5a10e9b09",
-      "size": 6531368
+      "sha256": "e08af3dd9d7be2655e2f245fa2bfc316aa8c6af74a3f2dc7cb0598f96c769317",
+      "size": 6571816
     },
     "me3/convergence - seamless.me3": {
-      "sha256": "31d94d60d68ca3c2ef490c15d736b5734575150b2c592317aaded7deaac0d081",
-      "size": 545
+      "sha256": "c19f0906cafc95916b6ed17d7ba61862ff542955ba9e0d6538793701772eceb6",
+      "size": 609
     },
     "me3/convergence.me3": {
-      "sha256": "ba395904163b224fbecdbaea5ef85696b81947699d8a5c7f09a33693be178054",
-      "size": 533
+      "sha256": "1c2b141eae7c097fc89c43361c1dcb353031c36fa21976d033cf2e85e9c7fec6",
+      "size": 491
     },
     "mod/action/eventnameid.txt": {
       "sha256": "2111f205a278760c9385da8f4feb29d1afdd0e5eaa6913148f71a7a3dc66f08f",
