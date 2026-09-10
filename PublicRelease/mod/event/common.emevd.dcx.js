@@ -2804,7 +2804,6 @@ $Event(9008007, Default, function() {
     InitializeEvent(234, 9006084, 2052430800, 2052430800, 2052439800,      76862, 2052439801, 2052439802, 1099000408, 2052439800, 0); // Forsaken Graveyard - Jori, Elder Inquisitor
     InitializeEvent(235, 9006084, 2052480800, 2052480800, 2052489800,          0,          0,          0, 1099000408,          0, 0); // Scaduview - Fallingstar Beast
     InitializeEvent(236, 9006084, 2054390800, 2054390800, 2054399800,      76853, 2054399801, 2054399802, 1099000408, 2054399800, 0); // Jagged Peak - Bayle the Dread
-
 });
 
 // Save Fixer X.X.X -> X.X.X
@@ -15440,8 +15439,8 @@ $Event(9007130, Default, function() {
     EndIf(!HasMultiplayerState(MultiplayerState.Singleplayer)); // Seamless 3
     EndIf(!EventFlag(6951)); // Dont conflict with no-dlc msg
 
-    EndIf(EventFlag(10010601)); // Show Message only once
-    SetEventFlagID(10010601, ON); // 2.3
+    EndIf(EventFlag(10010602)); // Show Message only once
+    SetEventFlagID(10010602, ON); // 3.0.2
     
     EndIf(InArea(10000, 10012680) && !EventFlag(60210)); // End if in Chapel of the Anticiaption start room and didnt pickup finger yet
     if (AnyBatchEventFlags(60900, 60926)) // Outdated Save
