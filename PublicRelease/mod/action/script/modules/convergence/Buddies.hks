@@ -1,3 +1,43 @@
+-- Torrent
+local extraTorrentJumps_limiter = 1 -- <- Change this value to set the maximum number of extra Torrent jumps allowed
+local extraTorrentJumps_bypassSpecificMountCondition = false
+
+local extraTorrentJumps_counter = 0
+local extraTorrentJumps_isQueued = false
+local extraTorrentJumps_hasLetGoOfInput = false
+function TorrentExtraDoubleJumps()
+    if env(GetMountSpEffectID, 960) == FALSE and not extraTorrentJumps_bypassSpecificMountCondition then return FALSE -- Mount does not have the Triple Jump effect
+    elseif RIDE_ISENABLE_DOUBLEJUMP == TRUE then -- Hasn't performed the double jump yet
+        extraTorrentJumps_isQueued = false
+        extraTorrentJumps_counter = 0
+        extraTorrentJumps_hasLetGoOfInput = false
+        return FALSE
+    end
+
+    if not extraTorrentJumps_hasLetGoOfInput and env(ActionDuration, ACTION_ARM_CHANGE_STYLE) <= 0 then
+        extraTorrentJumps_hasLetGoOfInput = true
+    end
+    if not extraTorrentJumps_hasLetGoOfInput then return FALSE -- User hasn't let go of initial double jump input yet
+    elseif extraTorrentJumps_counter >= extraTorrentJumps_limiter then return FALSE -- Reached the limit of extra Torrent jumps
+    elseif env(ActionDuration, ACTION_ARM_CHANGE_STYLE) <= 0 and not extraTorrentJumps_isQueued then return FALSE end -- No input or queue
+
+    extraTorrentJumps_isQueued = true
+    if env(GetSpEffectID, 100905) == FALSE then return FALSE end -- Not in the correct timing yet
+
+    if GetVariable("MoveSpeedLevel") >= 1.5 then
+        FireRideEvent("W_RideJump2_D", "W_RideJump2_D", FALSE)
+    elseif GetVariable("MoveSpeedLevel") >= 0.6 then
+        FireRideEvent("W_RideJump2_F", "W_RideJump2_F", FALSE)
+    else
+        FireRideEvent("W_RideJump2_N", "W_RideJump2_N", FALSE)
+    end
+
+    extraTorrentJumps_counter = extraTorrentJumps_counter + 1
+    extraTorrentJumps_isQueued = false
+    extraTorrentJumps_hasLetGoOfInput = false
+    return TRUE
+end
+
 -- Spirit Summons
 function SummonActive_SpEffect()
     if GetPointerValue(GAME_BASE.CS_FE_MAN.CS_FE_SPIRIT_ASH_DISPLAY.SPIRIT_SUMMON_DISPLAY_COUNT) > 0 then

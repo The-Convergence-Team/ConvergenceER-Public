@@ -25,7 +25,7 @@ function BloodflameHPReduction(spEffect, hpPercentage)
     if env(GetSpEffectID, Jewel_of_the_Wounded) == TRUE then
         newHpPercentage = newHpPercentage * 0.5
     end
-    
+
     DealCalculatedDamage(env(GetMaxHP) * newHpPercentage)
 end
 
@@ -53,41 +53,6 @@ function BloodOfTheMaiden()
     end
 
     return doneSomething
-end
-
-local bloodflameBlade_timingOffset = 0
-function BloodInitiateJewel_BloodflameBlade(spEffect, hand, disableTwoHand, spCategory)
-    if env(GetSpEffectID, Jewel_of_the_Wounded) == FALSE then
-        if env(GetSpEffectID, spEffect) == TRUE then -- Bloodflame Blade
-            act(ClearSpEffect, spEffect)
-        end
-        return
-    elseif env(GetSpEffectID, spEffect) == TRUE or c_Style == disableTwoHand then
-        return
-    end
-
-    bloodflameBlade_timingOffset = bloodflameBlade_timingOffset + 1
-    if bloodflameBlade_timingOffset > 4 then
-        bloodflameBlade_timingOffset = 0
-    else
-        return
-    end
-
-    local weaponId = GetWeaponID(hand)
-    local isBuffable = GetParamValue(PARAM.EquipParamWeapon.IS_BUFFABLE, weaponId)
-    if isBuffable == FALSE then
-        return
-    end
-
-    local spEffects = GetSpEffectsInfo()
-    for _, spEffect in ipairs(spEffects) do
-        local category = GetParamValue(PARAM.SpEffectParam.EFFECT_CATEGORY, spEffect.ID)
-        if category == spCategory then -- Has a weapon buff already
-            return
-        end
-    end
-    
-    act(AddSpEffect, spEffect)
 end
 
 local bleedCooldown = 0

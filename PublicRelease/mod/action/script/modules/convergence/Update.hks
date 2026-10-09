@@ -128,6 +128,8 @@ end
 
 local aspectOfTheScorpion_timingOffset1 = { 0 }
 local aspectOfTheScorpion_timingOffset2 = { 0 }
+local bloodflameBlade_timingOffset1 = { 0 }
+local bloodflameBlade_timingOffset2 = { 0 }
 function LocalPlayerOnly()
     if not doOnceLocal then
         doOnceLocal = true
@@ -137,12 +139,12 @@ function LocalPlayerOnly()
         Do(LoadingScreenHandler)
         Do(DateDetectorLib)
     end
-    
+
     if not doOnceLocalDelayed and g_DeltaTimeCount > 0 then
         doOnceLocalDelayed = true
         Do(InventoryManagerInit)
     end
-    
+
     -- if StaggerExecution(401) then
     --     Profiler:report()
     -- end
@@ -175,10 +177,8 @@ function LocalPlayerOnly()
     Do(PrisonerJewelLib)
     Do(ForceGestureLib)
     --Do(DeathblightProcHandler)
-    Do(AspectOfTheScorpion_WeaponBuff, 1729050, HAND_RIGHT, HAND_LEFT_BOTH, aspectOfTheScorpion_timingOffset1)
-    Do(AspectOfTheScorpion_WeaponBuff, 1729055, HAND_LEFT, HAND_RIGHT_BOTH, aspectOfTheScorpion_timingOffset2)
-    Do(BloodInitiateJewel_BloodflameBlade, 1632010, HAND_RIGHT, HAND_LEFT_BOTH, 162)
-    Do(BloodInitiateJewel_BloodflameBlade, 1632020, HAND_LEFT, HAND_RIGHT_BOTH, 163)
+    Do(UniqueWeaponbuffApplicationEffect, 1729000, 1729050, 1729055, aspectOfTheScorpion_timingOffset1, aspectOfTheScorpion_timingOffset2)
+    Do(UniqueWeaponbuffApplicationEffect, Jewel_of_the_Wounded, 1632010, 1632020, bloodflameBlade_timingOffset1, bloodflameBlade_timingOffset2)
     Do(FrostbiteProcHandler)
     Do(NoGreatRuneDetector) -- See DisableSpellOnUnequip
     Do(ToggleTutorials)
@@ -261,8 +261,6 @@ end
 
 local blockingFuncs = {
     { name = "EnemyFrenzyProcHandler" },
-    { name = "DeathblightProcHandler" },
-    { name = "NecromancerJewel_DeathblightHandler" }, -- Can this be merged with the generic?
     { name = "FrostbiteProcHandler" },
 
     { name = "FulminatedQuicksilver" },
@@ -321,6 +319,7 @@ function OnEnemyGetAttacked()
 
     -- non-blocking functions
     -- likely on weapon buff like spEffect logic
+    DeathblightProcHandler()
     ShellRingFlameProphetBetterImmolation()
     FrostWitchFreezeEffect(1441530, 5, 1441525, 1441520) -- Ice Guardian's Reckoning
     BloodflameBladeBleedHandler()

@@ -187,7 +187,7 @@ function SetMagicParam(originalMagicParam, newMagicParam)
     if originalMagicParam == nil or newMagicParam == nil or originalMagicParam == newMagicParam then
         return
     end
-    
+
     local currentSlot, currentMagicId = GetSelectedEquipMagicData()
     if currentMagicId == originalMagicParam then
         SetPointerValue(CHR_INS_BASE.PLAYER_GAME_DATA.EQUIP_GAME_DATA.EQUIP_MAGIC_DATA.MAGIC_SLOT(currentSlot), newMagicParam)

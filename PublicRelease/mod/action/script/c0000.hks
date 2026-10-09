@@ -541,7 +541,7 @@ function IsEnableGuard()
     if style == HAND_RIGHT and GetEquipType(hand, WEAPON_CATEGORY_STAFF) == TRUE then
         return FALSE
     end
-    if (sp_kind == 249 or sp_kind == 748 or sp_kind == 107 or sp_kind == 943) and (style == HAND_LEFT_BOTH or style == HAND_RIGHT_BOTH) then -- Dragonkin twinblade/Fingerslayer
+    if (sp_kind == 249 or sp_kind == 748 or sp_kind == 107 or sp_kind == 943 or sp_kind == 724) and (style == HAND_LEFT_BOTH or style == HAND_RIGHT_BOTH) then -- Dragonkin twinblade/Fingerslayer
         return FALSE
     end
     if IsWeaponCanGuard() == FALSE then
@@ -1034,6 +1034,7 @@ function IsStanceArts(arts_id)
         [107] = true, -- UNUSED
         [108] = true, -- Sky Shot
         [121] = true, -- Varre's Bouquet and Seething Flail stance
+		[124] = true, -- Dual Katana
         [161] = true, -- Marai's Stance
         [169] = true, -- Radahn's Rain
         [178] = true, -- Transient Moonlight
@@ -1245,7 +1246,7 @@ function SetSwordArtsPointInfo(button, is_point_consume, to_state_event)
     local val = "IsEnoughArtPointsL2"
 
     if button == ACTION_ARM_R1 then
-        if (c_SwordArtsID == 318 or c_SwordArtsID == 287 or c_SwordArtsID == 299 or artsID == 266 or c_SwordArtsID == 340) and IsNodeActive("DrawStanceRightAttackLight_Selector") == TRUE then -- conv marika hammer
+        if (c_SwordArtsID == 318 or c_SwordArtsID == 287 or c_SwordArtsID == 299 or artsID == 266 or c_SwordArtsID == 340 or c_SwordArtsID == 124) and IsNodeActive("DrawStanceRightAttackLight_Selector") == TRUE then -- conv marika hammer
             val = "IsEnoughArtPointsR2_MesmerSowrdArts"
         else
             val = "IsEnoughArtPointsR1"
@@ -1280,12 +1281,12 @@ function SetSwordArtsPointInfo(button, is_point_consume, to_state_event)
         end
     end
 
-    if artsID == 309 or artsID == 318 or artsID == 287 or artsID == 299 or artsID == 266 or artsID == 340 then -- conv marika hammer
+    if artsID == 309 or artsID == 318 or artsID == 287 or artsID == 299 or artsID == 266 or artsID == 340 or artsID == 124 then -- conv marika hammer
         SetVariable("IsEnoughArtPointsL2_DrawStanceRightStart", sel)
     else
         SetVariable("IsEnoughArtPointsL2_DrawStanceRightStart", 0)
     end
-    if artsID == 318 or artsID == 287 or artsID == 299 or artsID == 266 or artsID == 340 then -- conv marika hammer
+    if artsID == 318 or artsID == 287 or artsID == 299 or artsID == 266 or artsID == 340 or artsID == 124 then -- conv marika hammer
         SetVariable("IsEnoughArtPointsL2_DrawStanceRightEnd", sel)
     else
         SetVariable("IsEnoughArtPointsL2_DrawStanceRightEnd", 0)
@@ -1761,7 +1762,7 @@ function GetAttackRequest(is_guard, is_ride)
         local is_shield_right = GetEquipType(HAND_RIGHT, WEAPON_CATEGORY_SMALL_SHIELD, WEAPON_CATEGORY_MIDDLE_SHIELD,
             WEAPON_CATEGORY_LARGE_SHIELD, WEAPON_CATEGORY_TORCH)
         local sp_kind = env(GetEquipWeaponSpecialCategoryNumber, hand)
-        if is_both == TRUE and (sp_kind == 249 or sp_kind == 748 or sp_kind == 107 or sp_kind == 943) then -- dragonkin twinblade/Fingerslayer
+        if is_both == TRUE and (sp_kind == 249 or sp_kind == 748 or sp_kind == 107 or sp_kind == 943 or sp_kind == 724) then -- dragonkin twinblade/Fingerslayer
             return ATTACK_REQUEST_BOTH_LEFT
         end
         if is_shield_left == TRUE then
@@ -2139,7 +2140,7 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
             end
         end
 
-        if c_SwordArtsID == 318 or c_SwordArtsID == 287 or c_SwordArtsID == 299 or artsID == 266 or c_SwordArtsID == 340 then
+        if c_SwordArtsID == 318 or c_SwordArtsID == 287 or c_SwordArtsID == 299 or artsID == 266 or c_SwordArtsID == 340 or c_SwordArtsID == 124 then
             if r1 == "W_SwordArtsOneShotComboEnd_MesmerSowrdArts" then
                 SetSwordArtsPointInfo(ACTION_ARM_R1, TRUE)
             elseif r1 == "W_SwordArtsOneShotComboEnd_2" then
@@ -2313,7 +2314,7 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
         if c_SwordArtsID == 372 and b1 == "W_DrawStanceRightAttackLight" and env(GetSpEffectID, 191000) == TRUE and env(ActionDuration, ACTION_ARM_L2) <= 0 then
             return FALSE
         end
-        if (c_SwordArtsID == 318 or c_SwordArtsID == 287 or c_SwordArtsID == 299 or artsID == 266 or artsID == 340) and r1 == "W_SwordArtsOneShotComboEnd_MesmerSowrdArts" then -- conv marika hammer
+        if (c_SwordArtsID == 318 or c_SwordArtsID == 287 or c_SwordArtsID == 299 or artsID == 266 or artsID == 340 or artsID == 124) and r1 == "W_SwordArtsOneShotComboEnd_MesmerSowrdArts" then -- conv marika hammer
             artsr1 = TRUE
         end
         if artsr1 == TRUE then
@@ -3842,7 +3843,7 @@ function ExecArtsStance(blend_type)
 
     SetVariable("SwordArtsOneShotComboCategory", 0)
 
-    if c_SwordArtsID == 318 or c_SwordArtsID == 287 or c_SwordArtsID == 299 or c_SwordArtsID == 266 or c_SwordArtsID == 340 then -- conv marika hammer
+    if c_SwordArtsID == 318 or c_SwordArtsID == 287 or c_SwordArtsID == 299 or c_SwordArtsID == 266 or c_SwordArtsID == 340 or c_SwordArtsID == 124 then -- conv marika hammer
         SetSwordArtsPointInfo(ACTION_ARM_R1, TRUE)
     else
         SetSwordArtsPointInfo(ACTION_ARM_L2, TRUE)
@@ -6589,7 +6590,7 @@ function FallCommonFunction(is_enable_falling_death, is_jump, fall_style)
         end
         return TRUE
     end
-    if is_enable_falling_death ~= TRUE or not (height >= 60) or env(GetStateChangeType, 266) == TRUE then
+    if is_enable_falling_death ~= TRUE or not (height >= 60) or (env(GetStateChangeType, 266) == TRUE and env(GetSpEffectID, Jewel_of_the_Cosmos) == FALSE) then
     else
         BlightpoleOffHandler()
         if fall_style == FALL_FACEUP then
@@ -12849,7 +12850,7 @@ function DrawStanceRightStart_Upper_onUpdate()
 end
 
 function DrawStanceRightLoop_Upper_onUpdate()
-    if c_SwordArtsID == 318 or c_SwordArtsID == 287 or c_SwordArtsID == 299 or c_SwordArtsID == 266 or c_SwordArtsID == 340 then -- conv marika hammer 
+    if c_SwordArtsID == 318 or c_SwordArtsID == 287 or c_SwordArtsID == 299 or c_SwordArtsID == 266 or c_SwordArtsID == 340 or c_SwordArtsID == 124 then -- conv marika hammer 
         SetSwordArtsPointInfo(ACTION_ARM_R1, TRUE)
     else
         SetSwordArtsPointInfo(ACTION_ARM_L2, TRUE)
@@ -13141,6 +13142,16 @@ function DrawStanceRightAttackLight_onUpdate()
         end
     end
 	
+	if c_SwordArtsID == 124 then
+        if env(GetSpEffectID, 100054) == TRUE then
+			SetSwordArtsPointInfo(ACTION_ARM_R1, TRUE)
+            r1 = "W_SwordArtsOneShotComboEnd_MesmerSowrdArts"
+            b1 = "W_SwordArtsOneShotComboEnd_MesmerSowrdArts"
+        elseif env(GetSpEffectID, 100055) == TRUE then
+            r1 = "W_SwordArtsOneShotComboEnd_2"
+            b1 = "W_SwordArtsOneShotComboEnd_2"
+        end
+    end
 
 	if c_SwordArtsID == 299 then -- Conv Marika Hammer
         if env(GetSpEffectID, 100054) == TRUE then
@@ -20567,6 +20578,7 @@ function RideFallCommonFunction()
         FireRideEvent("W_RideDeath", "W_RideDeath", FALSE)
         return TRUE
     end
+
     if env(ActionRequest, 6) == TRUE and env(GetSpEffectID, 100902) == TRUE and RIDE_ISENABLE_DOUBLEJUMP == TRUE then
         local height = env(GetMountFallHeight) / 100
         if env(GetStamina) <= 0 or height > DISABLEJUMP_FALLDIST then
@@ -20588,6 +20600,11 @@ function RideFallCommonFunction()
         RIDE_ISENABLE_DOUBLEJUMP = FALSE
         return TRUE
     end
+
+    if TorrentExtraDoubleJumps() == TRUE then
+        return TRUE
+    end
+
     return FALSE
 end
 
@@ -24065,16 +24082,17 @@ function RideJumpCommonFunction(jump_type, lower_only, isSecond, isHighJump)
     end
 
     local height = env(GetMountFallHeight) / 100
-
     if env(IsMountTrulyLanding) == TRUE and IsLandDead(height) == TRUE and isHighJump == FALSE
         and env(GetSpEffectID, 185) == FALSE then
         act(DebugLogOutput, height)
         FireRideEvent("W_RideDeath", "W_RideDeath", FALSE)
         return
     end
+
     if RideReActionFunction() == TRUE then
         return TRUE
     end
+
     if env(ActionRequest, 6) == TRUE and env(GetSpEffectID, 100902) == TRUE and RIDE_ISENABLE_DOUBLEJUMP == TRUE then
         if env(GetStamina) <= 0 or height > DISABLEJUMP_FALLDIST then
             ResetRequest()
@@ -24094,6 +24112,10 @@ function RideJumpCommonFunction(jump_type, lower_only, isSecond, isHighJump)
             RIDE_ISENABLE_DOUBLEJUMP = FALSE
             return TRUE
         end
+    end
+
+    if TorrentExtraDoubleJumps() == TRUE then
+        return TRUE
     end
 
     if env(IsMountTrulyLanding) == TRUE and env(GetMountSpEffectID, 98) == TRUE and env(GetMountSpEffectID, 140) == FALSE then
@@ -26076,7 +26098,7 @@ function Jump_Loop_onUpdate()
 
     local height = env(GetFallHeight) / 100
 
-    if not (height >= 60) or env(GetStateChangeType, 266) == TRUE then
+    if not (height >= 60) or (env(GetStateChangeType, 266) == TRUE and env(GetSpEffectID, Jewel_of_the_Cosmos) == FALSE) then
     else
         ExecEventAllBody("W_FallDeath")
         return TRUE

@@ -13,7 +13,7 @@ function DealDamageToSpiritAshes(ashHandles, ashHandlesCount, damage)
                     newHp = 0 
                 end
                 SetAltChrInsPointerValue(chrInsPointer, hpPtr, newHp)
-                
+
                 hurtSummons = hurtSummons + 1
                 if hurtSummons >= ashHandlesCount then
                     break
@@ -46,7 +46,7 @@ function NecromancerJewel_DivideDamageToSpiritAsh()
         end
     end
 
-    if ashHandlesCount == 0 then 
+    if ashHandlesCount == 0 then
         return 
     end
 
@@ -55,26 +55,15 @@ function NecromancerJewel_DivideDamageToSpiritAsh()
     DealDamageToSpiritAshes(spiritSummons, ashHandlesCount, damagePerSpirit)
 end
 
-local isBlighted = false
 function NecromancerJewel_DeathblightHandler()
-    local hasBlightState = env(GetSpEffectType, 117) == TRUE
-    if (hasBlightState or g_BlightImmuneSpEffectID > 0) and env(GetSpEffectID, 391331) == TRUE then
-        act(ClearSpEffect, 391331)
+    act(ClearSpEffect, 391331) -- Lingering blight can be removed upon being blighted
+
+    if env(GetSpEffectID, 391320) == FALSE then -- player does not have jewel equipped
+        return
     end
 
-    if env(GetSpEffectID, 391320) == FALSE then
-        return FALSE
-    elseif not hasBlightState then
-        isBlighted = false
-        return FALSE
-    elseif isBlighted then
-        return FALSE
-    end
-
-    isBlighted = true
-    act(AddSpEffect, 391330)
-    act(AddSpEffect, 391333)
-    return TRUE
+    act(AddSpEffect, 391330) -- lingering blight aura
+    act(AddSpEffect, 391333) -- percentage damage
 end
 
 function TibiasConversionHandler()

@@ -1,4 +1,4 @@
-local hkbStateBeforeDeletion = 
+local hkbStateBeforeDeletion =
 {
     ["W_MagicFireLeft_Upper"] = true,
     ["W_MagicFireLeft"] = true,
@@ -83,8 +83,10 @@ local hkbStateBeforeDeletion =
     ["W_SwordArtsStanceAttackLight180"] = true,
     ["W_SwordArtsStanceAttackLightStart"] = true,
     ["W_SwordArtsStandDodge"] = true,
+    ["W_DrawStanceRightAttackLight"] = true,
+    ["W_DrawStanceRightAttackHeavy"] = true,
 }
-local followups = 
+local followups =
 {
     ["W_MagicFireLeft2_Upper"] = true,
     ["W_MagicFireLeft2"] = true,

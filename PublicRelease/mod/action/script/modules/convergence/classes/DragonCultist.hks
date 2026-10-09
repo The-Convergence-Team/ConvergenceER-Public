@@ -190,13 +190,13 @@ local hkbStatesToAllowLoop =
 local LightningArts = 
 {
     { artsID = 381, boostSpEffect = 391930, secondaryCondition = true }, -- Ancient Thunderclap             +DMG
-    { artsID = 061, boostSpEffect = 391931, secondaryCondition = true }, -- Call to Thunder                 +DMG to alt attack
+    { artsID = 208, boostSpEffect = 391931, secondaryCondition = true }, -- Call to Thunder                 +DMG to alt attack
     { artsID = 062, boostSpEffect = 391932, secondaryCondition = true }, -- Thunderclap                     +DMG
     { artsID = 063, boostSpEffect = 391933, secondaryCondition = true }, -- Thunderbolt Slash               +DMG
     { artsID = 064, boostSpEffect = 391932, secondaryCondition = true }, -- Thunderbolt                     +DMG
     { artsID = 065, boostSpEffect = 391933, secondaryCondition = true }, -- Lightning Slash                 +DMG
     { artsID = 113, boostSpEffect = 391934, secondaryCondition = true }, -- Lightning Ram                   +Speed x2
-    { artsID = 135, boostSpEffect = 391935, secondaryCondition = true }, -- Storm of the Ancients           +DMG
+    { artsID = 395, boostSpEffect = 391935, secondaryCondition = true }, -- Storm of the Ancients           +DMG
     { artsID = 159, boostSpEffect = 391936, secondaryCondition = true }, -- Wrath of the Ancients           +DMG
     { artsID = 190, boostSpEffect = 391938, secondaryCondition = true }, -- Storm Kick                      +DMG
     { artsID = 226, boostSpEffect = 391939, secondaryCondition = true }, -- Thundercloud Form               +Root Motion x1.35

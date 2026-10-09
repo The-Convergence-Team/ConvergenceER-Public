@@ -556,6 +556,8 @@ $Event(0, Default, function() {
     InitializeEvent(5, 790, 905, 6705); // Summon Erdtree Steed
     InitializeEvent(6, 790, 906, 6706); // Summon Frenzied Mule
     InitializeEvent(7, 790, 907, 6707); // Summon Carian Steed
+    InitializeEvent(8, 790, 908, 6708); // Summon Death Steed
+    InitializeEvent(9, 790, 909, 6709); // Summon Mystic Steed
     InitializeEvent(0, 720, 160, 0);
     InitializeEvent(1, 720, 161, 1);
     InitializeEvent(2, 720, 162, 2);
@@ -1625,7 +1627,7 @@ $Event(9008002, Default, function() {
     InitializeEvent(67, 1200, 9267, 20670, 0, 520670);
     InitializeEvent(68, 1200, 9268, 20680, 0, 520680);
     InitializeEvent(69, 1200, 9269, 30430, 0, 520690);
-    InitializeEvent(70, 1200, 9270, 20700, 0, 520700); // ? (DLC)
+    InitializeEvent(70, 1200, 9270, 20700, 0, 520700); // Idris, Blackflame Commander
     InitializeEvent(71, 1200, 9271, 20710, 0, 520710); // ? (DLC)
     InitializeEvent(72, 1200, 9272, 20720, 0, 520720); // ? (DLC)
     InitializeEvent(75, 1200, 9275, 20750, 0, 520750); // ? (DLC)
@@ -1739,7 +1741,7 @@ $Event(9008002, Default, function() {
 // One Time Flags
 $Event(9008003, Default, function() {
     // Version Fixers
-    //InitializeEvent(0, 9008010, 0); // 2.0.1 -> 2.0.2
+    InitializeEvent(0, 9008010, 0); // 3.0.2 -> 3.0.3
     
     EndIf(EventFlag(60120));
    
@@ -2806,12 +2808,24 @@ $Event(9008007, Default, function() {
     InitializeEvent(236, 9006084, 2054390800, 2054390800, 2054399800,      76853, 2054399801, 2054399802, 1099000408, 2054399800, 0); // Jagged Peak - Bayle the Dread
 });
 
-// Save Fixer X.X.X -> X.X.X
+// Save Fixer 3.0.2 -> 3.0.3
 $Event(9008010, Default, function() {
-    EndEvent();
-    EndIf(EventFlag(0));
+    EndIf(EventFlag(1038481700)); //Bellum Highway Flag
     
-    SetEventFlagID(0, ON);
+    if (EventFlag(530200)) { //Acquisition Flag
+        AwardItemLot(30203); //Huntress's Estoc
+    }
+    
+    if (EventFlag(9194)) { //Farum Huntress Death Flag
+        AwardItemLot(13000912); //Spear of the Dreaming
+    }
+    
+    if (EventFlag(9270)) { //Idris Death Flag
+        AwardItemLot(20701); //Halberd of the Deceiver
+    }
+    
+    SetEventFlagID(1038481700, ON);
+    EndEvent();
 });
     
 $Event(700, Default, function() {
@@ -3240,7 +3254,7 @@ $Event(790, Default, function(triggerSpEffect, eventFlag) {
     DisableNetworkSync();
     WaitFor(CharacterHasSpEffect(10000, triggerSpEffect));
     
-    BatchSetEventFlags(6700, 6707, OFF);
+    BatchSetEventFlags(6700, 6709, OFF);
     if (!EventFlag(6953) && eventFlag >= 6701 && eventFlag <= 6703)
         SetEventFlagID(6700, ON);
     else

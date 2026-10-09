@@ -262,9 +262,11 @@ function SleepLoopImmunityApplication()
 end
 
 -- Deathblight
+local deathblightHandled = false
 function DeathblightProcHandler()
     local blightInfo = GetStatusEffectInfo(StatusEffects.Blight)
     if env(GetSpEffectType, blightInfo.stateInfo) == FALSE then
+        deathblightHandled = false
         return FALSE
     end
 
@@ -274,6 +276,11 @@ function DeathblightProcHandler()
         return FALSE
     end
 
+    if not deathblightHandled then
+        NecromancerJewel_DeathblightHandler()
+        deathblightHandled = true
+    end
+    
     act(AddSpEffect, deathblightSize)
     return TRUE
 end

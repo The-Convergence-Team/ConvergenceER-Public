@@ -124,14 +124,16 @@ function FearEffect(spEffect, immunitySpEffect)
     SetPointerValue(CHR_INS_BASE.CHR_FLAGS.NO_MOVE, TRUE)
 
     completedTurn = false
-    EnemyAnimSlowdownLib()
 
-    if isRightHanded then
-        Log("Right Handed, turning right")
-        Fire("W_TurnBattle_Right180")
-    else
-        Log("Left Handed, turning left")
-        Fire("W_TurnBattle_Left180")
+    if IsExistAnime(ANIME_ID_TURN) == TRUE then
+        EnemyAnimSlowdownLib()
+        if isRightHanded then
+            Log("Right Handed, turning right")
+            Fire("W_TurnBattle_Right180")
+        else
+            Log("Left Handed, turning left")
+            Fire("W_TurnBattle_Left180")
+        end
     end
 
     hasTurned = true

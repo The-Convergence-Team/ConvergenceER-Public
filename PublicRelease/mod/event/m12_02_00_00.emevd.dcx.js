@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000N:\\GR\\data\\Param\\event\\common_macro.emevd\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0,82]
-// @version    3.6.1
+// @version    3.5
 // ==/EMEVD==
 
 // コンストラクタ -- constructor
@@ -1209,6 +1209,10 @@ $Event(12022899, Restart, function() {
     InitializeCommonEvent(0, 9005811, 12020850, 12021850, 8, 0);
     InitializeCommonEvent(0, 9005812, 12020850, 12021851, 8, 0, 0);
     InitializeCommonEvent(0, 9005822, 12020850, 391600, 12022855, 12022856, 0, 12022852, 0, 0);
+    //new_entry_point
+    InitializeCommonEvent(1, 9005800, 12020850, 12021851, 12022852, 12022857, 12025852, 10000, 0, 12022851);
+    InitializeCommonEvent(1, 9005801, 12020850, 12021851, 12022852, 12022857, 12022858, 10000);
+    InitializeCommonEvent(1, 9005822, 12020850, 391600, 12022857, 12022858, 0, 12022853, 0, 0);
 });
 
 // 本ボス撃破 -- Defeat the main boss

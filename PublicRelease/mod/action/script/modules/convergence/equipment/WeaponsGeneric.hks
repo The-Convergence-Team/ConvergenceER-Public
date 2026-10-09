@@ -352,6 +352,49 @@ function MagicWeaponDetection()
     end
 end
 
+local function _uniqueWeaponbuffApplicationEffect(requiredSpEffect, spEffect, hand, disableTwoHand, spCategory, cooldown)
+    if env(GetSpEffectID, requiredSpEffect) == FALSE then
+        if env(GetSpEffectID, spEffect) == TRUE then
+            act(ClearSpEffect, spEffect)
+        end
+        return
+    elseif env(GetSpEffectID, spEffect) == TRUE then
+        return
+    elseif c_Style == disableTwoHand then
+        return
+    elseif GetEquipType(hand,
+            WEAPON_CATEGORY_STAFF,
+            WEAPON_CATEGORY_ARROW, WEAPON_CATEGORY_LARGE_ARROW, WEAPON_CATEGORY_SMALL_ARROW,
+            WEAPON_CATEGORY_CROSSBOW, WEAPON_CATEGORY_BALLISTA,
+            WEAPON_CATEGORY_LARGE_SHIELD, WEAPON_CATEGORY_SMALL_SHIELD, WEAPON_CATEGORY_MIDDLE_SHIELD,
+            WEAPON_CATEGORY_PERFUME_BOTTLE
+            ) == TRUE then
+        return
+    elseif env(GetStateChangeType, spCategory) == TRUE then
+        return
+    end
+
+    cooldown[1] = cooldown[1] + 1
+    if cooldown[1] > 3 then
+        cooldown[1] = 0
+    else
+        return
+    end
+
+    local weaponId = GetWeaponID(hand)
+    local isBuffable = GetParamValue(PARAM.EquipParamWeapon.IS_BUFFABLE, weaponId)
+    if isBuffable == FALSE then
+        return
+    end
+
+    act(AddSpEffect, spEffect)
+end
+
+function UniqueWeaponbuffApplicationEffect(requiredSpEffect, spEffectRight, spEffectLeft, cooldownRight, cooldownLeft)
+    _uniqueWeaponbuffApplicationEffect(requiredSpEffect, spEffectRight, HAND_RIGHT, HAND_LEFT_BOTH, 162, cooldownRight)
+    _uniqueWeaponbuffApplicationEffect(requiredSpEffect, spEffectLeft, HAND_LEFT, HAND_RIGHT_BOTH, 163, cooldownLeft)
+end
+
 function InfiniteAmmo()
     local infiniteAmmoShouldBeActive = false
     if env(GetSpEffectID, 7006100) == TRUE then -- Page Armor        

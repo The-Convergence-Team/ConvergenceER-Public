@@ -84,9 +84,10 @@ $Event(12070510, Default, function() {
     InitializeCommonEvent(0, 90005500, 12070515, 12071515, 7, 12071515, 12071516, 12073516, 12071517, 12073517, 12072516, 12072517, 12070516, 12072517, 0);
 });
 
+//Siofra River Well - Start in down position if starting as Underworld Mage
 $Event(12070519, Default, function() {
     EndIf(ThisEventSlot());
-    if (!PlayersClass(9))
+    if (!PlayersClass(2))
         SetEventFlagID(12070525, ON);
     SetEventFlagID(12070515, OFF);
 });

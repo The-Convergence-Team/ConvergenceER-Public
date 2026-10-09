@@ -4,7 +4,7 @@
 // @game    Sekiro
 // @string    "N:\\GR\\data\\Param\\event\\common_func.emevd\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
 // @linked    [0]
-// @version    3.6.1
+// @version    3.5
 // ==/EMEVD==
 
 $Event(0, Default, function() {
@@ -42,6 +42,7 @@ $Event(0, Default, function() {
     InitializeEvent(0, 11052691, 0);
     InitializeEvent(0, 11052692, 0);
     InitializeCommonEvent(0, 90005605, 11051680, 3874, 34152692, 11050000, 11052680, 11052681, 11052682, 0, 0, 0, 0);
+    InitializeCommonEvent(0, 9005999, 11051000);
     
     //Tutorial Handler: Duels
     //InitializeEvent(0, 11052698, 0);
