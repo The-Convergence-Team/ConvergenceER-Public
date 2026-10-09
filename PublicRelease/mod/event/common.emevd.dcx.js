@@ -147,6 +147,8 @@ $Event(0, Default, function() {
     InitializeEvent(0, 9006087, 6706, 108); // Frenzied Mule - Glowing Scars Mask Toggle
     InitializeEvent(9, 9007107, 6707, 100950, 10000); // Carian Knight Steed - FP Recovery (Player) OFF
     InitializeEvent(9, 9007108, 6707, 100950, 10000); // Carian Knight Steed - FP Recovery (Player) ON
+    InitializeEvent(0, 9007107, 6708, 981, 10000); // Ghoul Horse - HP Recovery (Player) OFF
+    InitializeEvent(0, 9007108, 6708, 981, 10000); // Ghoul Horse - HP Recovery (Player) ON
     // - Talisman Share
     InitializeEvent(0, 9007110, 311600, 90020, 6000); // Talisman Share - Stalward Horn Charm (Blood) OFF
     InitializeEvent(0, 9007111, 311600, 90020, 6000); // Talisman Share - Stalward Horn Charm (Blood) ON
