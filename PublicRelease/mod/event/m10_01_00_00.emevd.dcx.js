@@ -774,8 +774,14 @@ $Event(10015713, Default, function() {
     DisableCharacter(10011703);
     DisableCharacter(10011704);
     
-    RandomlySetEventFlagInRange(10015501, 10015504, ON);
-    //SetEventFlagID(10015502, ON);
+    if (!EventFlag(10014500)) { //  First time forced appear at golden gate
+        SetEventFlagID(10015502, ON);
+        SetEventFlagID(10014500, ON);
+    }
+    else {
+        RandomlySetEventFlagInRange(10015501, 10015504, ON);
+    }
+    
     if (EventFlag(10015501)) {
         SpawnOneshotSFX(TargetEntityType.Asset, 10010701, 200, 806831);
         EnableCharacter(10011701);

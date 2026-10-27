@@ -126,13 +126,13 @@ function GetLoadedMaps()
             else
                 local mapId = 'm' .. areaId .. '_' .. blockId .. '_' .. regionId .. '_' .. indexId
                 maps[mapId] = true
-            end            
+            end
         end
     end
 
     if overworldLoadState == OverworldLoadState.NotLoaded then
         return maps
-    end    
+    end
 
     local stack = {{ 0x8 }}
     while #stack > 0 do

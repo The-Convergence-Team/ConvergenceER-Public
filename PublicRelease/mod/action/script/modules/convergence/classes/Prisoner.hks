@@ -23,7 +23,7 @@ function PrisonerJewel_ItemRestore(spEffect, vfxSpEffect, stateMachine, emptyFla
     else
         for i = 0, iterator * 2, 2 do
             emptyFlasks[emptyFlaskBase + i] = true
-        end        
+        end
     end
 
     local hasItem, item = TryGetAnyItem(ITEMCATEGORY_ID.Goods, emptyFlasks)
@@ -36,7 +36,7 @@ end
 local physicRestoreActive = { false }
 local redRestoreActive = { false }
 local blueRestoreActive = { false }
-function PrisonerJewelLib()    
+function PrisonerJewelLib()
     if env(GetSpEffectID, Jewel_of_the_Chained) == FALSE or env(GetSpEffectID, 8000020) == FALSE then
         physicRestoreActive[1] = false
         redRestoreActive[1] = false

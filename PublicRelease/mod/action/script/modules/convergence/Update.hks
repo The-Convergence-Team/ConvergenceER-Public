@@ -133,9 +133,9 @@ local bloodflameBlade_timingOffset2 = { 0 }
 function LocalPlayerOnly()
     if not doOnceLocal then
         doOnceLocal = true
-        -- Log("Player Loaded")
         Do(CultSpellStack_Visibility)
-        Do(SetMagicParam, 6541, 6540) -- To make recall not active spell on player load
+        SetPointerValue(GAME_BASE.MENU_DELAY, 0)
+        --Do(SetMagicParam, 6541, 6540) -- To make recall not active spell on player load
         Do(LoadingScreenHandler)
         Do(DateDetectorLib)
     end
@@ -256,7 +256,6 @@ function ModdedEnemyUpdate()
 
     if not StaggerExecution(120) then return end
     Do(ImmunityStripping)
-    
 end
 
 local blockingFuncs = {

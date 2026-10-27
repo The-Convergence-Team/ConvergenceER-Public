@@ -3247,7 +3247,7 @@ $Event(760, Restart, function(X0_4, X4_4) {
 
 // Horse default flag setter (Tarnished Edition)
 $Event(780, Default, function() {
-    EndIf(AnyBatchEventFlags(6700, 6707));
+    EndIf(AnyBatchEventFlags(6700, 6709));
     SetEventFlagID(6700, ON);
 });
 

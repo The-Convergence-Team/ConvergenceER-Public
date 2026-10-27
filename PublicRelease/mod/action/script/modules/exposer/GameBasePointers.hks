@@ -26,25 +26,25 @@ local BIG_UNSIGNED_INT = 107
 -- Reserved for pointers that tend to change with updates
 ---------------------------------------------------------------------------
 
-local _GAME_DATA_MAN =         0x3D61F98 -- 1.17
-local _CS_NOW_LOADING_HELPER = 0x3D64F28 -- 1.17
-local _CS_BULLET_MANAGER =     0x3D667A8 -- 1.17
-local _WORLD_CHR_MAN =         0x3D69FF8 -- 1.17
-local _DMG_MAN =               0x3D6A3E8 -- 1.17
-local _CS_GA_ITEM =            0x3D6D900 -- 1.17
-local _GAME_MAN =              0x3D6D988 -- 1.17
-local _LOCK_TGT_MAN =          0x3D6E278 -- 1.17
-local _WORLD_MAP_MAN =         0x3D6E390 -- 1.17
-local _CS_FE_MAN =             0x3D6F8F0 -- 1.17
-local _CS_SESSION_MANAGER =    0x3D7E540 -- 1.17
-local _CS_WINDOW =             0x458F910 -- 1.17
+local _GAME_DATA_MAN =         0x3D64FB8 -- 1.17.2
+local _CS_NOW_LOADING_HELPER = 0x3D67F48 -- 1.17.2
+local _CS_BULLET_MANAGER =     0x3D697C8 -- 1.17.2
+local _WORLD_CHR_MAN =         0x3D6D018 -- 1.17.2
+local _DMG_MAN =               0x3D6D408 -- 1.17.2 (no workey?)
+local _CS_GA_ITEM =            0x3D70920 -- 1.17.2
+local _GAME_MAN =              0x3D709A8 -- 1.17.2
+local _LOCK_TGT_MAN =          0x3D71298 -- 1.17.2
+local _WORLD_MAP_MAN =         0x3D713B0 -- 1.17.2
+local _CS_FE_MAN =             0x3D72910 -- 1.17.2
+local _CS_SESSION_MANAGER =    0x3D81560 -- 1.17.2
+local _CS_WINDOW =             0x4592930 -- 1.17.2
 
 -- In WORLD_CHR_MAN
-local _BUDDY_CHR_SET =            0x10FA8 -- 1.17 ?
-local _LOCAL_PLAYER_OFFSET =      0x1E508 -- 1.17
-local _DEBUG_CHR_CREATOR =        0x1E648 -- 1.17
-local _CHR_CAM =                  0x1ECE0 -- 1.17
-local _CHR_INS_LIST_BY_DISTANCE = 0x1F1D0 -- 1.16 ?
+local _BUDDY_CHR_SET =            0x10FA8 -- 1.17.2
+local _LOCAL_PLAYER_OFFSET =      0x1E508 -- 1.17.2
+local _DEBUG_CHR_CREATOR =        0x1E658 -- 1.17.2
+local _CHR_CAM =                  0x1ECF0 -- 1.17.2
+local _CHR_INS_LIST_BY_DISTANCE = 0x1F1E0 -- 1.17.2
 
 ---------------------------------------------------------------------------
 -- Pointer Tables
@@ -264,15 +264,16 @@ GAME_BASE = {
         RTX_QUALITY = { _GAME_BASE, SIGNED_INT, _CS_WINDOW, 0x128 },
     },
     DEBUG_FLAGS = { -- TODO Move to ChrIns with propper offsets
-        NO_DEATH_PLAYER = { _GAME_BASE, SIGNED_BYTE, "0x3D6A210" }, -- 1.17
-        NO_DEATH_TORRENT = { _GAME_BASE, SIGNED_BYTE, "0x3D6A211" },  -- 1.17
-        ONE_SHOT_EVERYTHING = { _GAME_BASE, SIGNED_BYTE, "0x3D6A212" }, -- 1.17
-        ALL_NO_CONSUMABLES_CONSUME = { _GAME_BASE, SIGNED_BYTE, "0x3D6A213" }, -- 1.17
-        UNLIMITED_SP = { _GAME_BASE, SIGNED_BYTE, "0x3D6A214" }, -- 1.17
-        UNLIMITED_FP = { _GAME_BASE, SIGNED_BYTE, "0x3D6A215" }, -- 1.17
-        ALL_NO_ARROW_CONSUME = { _GAME_BASE, SIGNED_BYTE, "0x3D6A216" }, -- 1.17
-        HIDE_PLAYER = { _GAME_BASE, SIGNED_BYTE, "0x3D6A218" }, -- 1.17
-        SILENCE_PLAYER = { _GAME_BASE, SIGNED_BYTE, "0x3D6A219" }, -- 1.17
-        FORCED_PARRY = { _GAME_BASE, SIGNED_BYTE, "0x3D6A21D" }, -- 1.17
-    }
+        NO_DEATH_PLAYER = { _GAME_BASE, SIGNED_BYTE, "0x3D6D230" }, -- 1.17.2
+        NO_DEATH_TORRENT = { _GAME_BASE, SIGNED_BYTE, "0x3D6D231" },  -- 1.17.2
+        ONE_SHOT_EVERYTHING = { _GAME_BASE, SIGNED_BYTE, "0x3D6D232" }, -- 1.17.2
+        ALL_NO_CONSUMABLES_CONSUME = { _GAME_BASE, SIGNED_BYTE, "0x3D6D233" }, -- 1.17.2
+        UNLIMITED_SP = { _GAME_BASE, SIGNED_BYTE, "0x3D6D234" }, -- 1.17.2
+        UNLIMITED_FP = { _GAME_BASE, SIGNED_BYTE, "0x3D6AD235" }, -- 1.17.2
+        ALL_NO_ARROW_CONSUME = { _GAME_BASE, SIGNED_BYTE, "0x3D6D236" }, -- 1.17.2
+        HIDE_PLAYER = { _GAME_BASE, SIGNED_BYTE, "0x3D6D238" }, -- 1.17.2
+        SILENCE_PLAYER = { _GAME_BASE, SIGNED_BYTE, "0x3D6D239" }, -- 1.17.2
+        FORCED_PARRY = { _GAME_BASE, SIGNED_BYTE, "0x3D6D23D" }, -- 1.17.2
+    },
+    MENU_DELAY = { _GAME_BASE, FLOAT, "0x458FC7C" }, -- 1.17.2
 }

@@ -116,7 +116,7 @@ $Event(0, Default, function() {
     InitializeCommonEvent(1, 9005811, 13000860, 13001862, 5, 0);
     
     //New Elevator
-    InitializeCommonEvent(0, 90005501, 13000534, 13000535, 0, 13001534, 13001536, 13001538, 13000536, 0);
+    //InitializeCommonEvent(0, 90005501, 13000534, 13000535, 0, 13001534, 13001536, 13001538, 13000536, 0);
     InitializeEvent(0, 13002787, 0);
     InitializeEvent(0, 13002550, 13000703, 13007045, 1, 30010, 20010); //dragon wake up script
     //Custom Killbox
@@ -150,19 +150,19 @@ $Event(0, Default, function() {
     //Mystic Huntress Boss Start Handler
     InitializeEvent(0, 13003794, 0);
     
-    //Mystic Huntress Summon Attacks Initialization (Needs updates: dummpolyIds)
-    InitializeEvent(0, 13003795, 13000871, 11641, 246, 20006, 13002882); //Ancestral Spirit 1
-    InitializeEvent(1, 13003795, 13000874, 11642, 246, 20007, 13002883); //Ancestral Spirit 2
-    InitializeEvent(2, 13003795, 13000875, 11643, 247, 20008, 13002884); //Ancestral Spirit 3
-    InitializeEvent(3, 13003795, 13000876, 11644, 247, 3024, 13002885); //Ancestral Spirit 4
-    InitializeEvent(4, 13003795, 13000877, 11645, 247, 3038, 13002886); //Ancestral Spirit 5
+    //Mystic Huntress Summon Attacks Initialization
+    InitializeEvent(0, 13003795, 13000871, 11641, 246, 20006, 13002882, 3807); //Ancestral Spirit (Leaping Ground Thrust)
+    InitializeEvent(1, 13003795, 13000874, 11642, 246, 20007, 13002883, 3806); //Ancestral Spirit (Delayed Spear Thrust)
+    InitializeEvent(2, 13003795, 13000875, 11643, 247, 20008, 13002884, 3806); //Ancestral Spirit (Spear Drag Forward)
+    InitializeEvent(3, 13003795, 13000876, 11644, 247, 3024, 13002885, 3806); //Ancestral Spirit (Block Bash)
+    InitializeEvent(4, 13003795, 13000877, 11645, 247, 3038, 13002886, 3805); //Ancestral Spirit (Phase Transition)
     
     //Mystic Huntress Sound Dummies Initialization (Entity ID)
     InitializeEvent(0, 13003796, 13000872); //Ancestral Follower Shaman
     InitializeEvent(1, 13003796, 13000873); //Depraved Perfumer
     InitializeEvent(2, 13003796, 13000878); //Rellana, Twin Moon Knight
     InitializeEvent(3, 13003796, 13000880); //Ancestral Spirit
-    
+    InitializeEvent(4, 13003796, 13000881); //Small Wormface
     
     //Mystic Huntress Boss Common Scripts (Fogwalls)
     InitializeEvent(0, 13003797, 0);
@@ -187,6 +187,12 @@ $Event(0, Default, function() {
     
     //Sleepy Courtyard Ancient Dragon One Time Kill Handler Initialzation
     InitializeCommonEvent(0, 90005300, 13000703, 13000703, 0);
+    
+    //Moorth Ruins Warp Handler (Asset, areaID, blockID, regionID, indexID, initialAreaEntityID, (optional) awaited eventflag, Asset 2)
+    InitializeEvent(0, 13003803, 13002264, 61, 49, 44, 0, 2049442722, 13000850, 13002264);
+    
+    //Moorth Ruins Statue Guide Handler Initialization (Flag, Asset Entity ID, Dummy Poly, Flag 2)
+    InitializeEvent(0, 13003804, 71315, 13001684, 210, 78191);
 });
 
 $Event(50, Default, function() {
@@ -258,9 +264,9 @@ $Event(50, Default, function() {
     InitializeCommonEvent(0, 90005251, 13000417, 1065353216, 0, -1);
     InitializeCommonEvent(0, 90005250, 13000418, 13002418, 0, 3003);
     InitializeCommonEvent(0, 90005200, 13000419, 30018, 20018, 13002418, 0, 0, 0, 0, 0);
-    InitializeCommonEvent(0, 90005200, 13000243, 30018, 20018, 13002259, 1085276160, 0, 0, 0, 0);
-    InitializeCommonEvent(0, 90005200, 13000242, 30018, 20018, 13002259, 1085276160, 0, 0, 0, 0);
-    InitializeCommonEvent(0, 90005200, 13000241, -1, -1, 13002259, 0, 0, 0, 0, 0);
+    //InitializeCommonEvent(0, 90005200, 13000243, 30018, 20018, 13002259, 1085276160, 0, 0, 0, 0);
+    //InitializeCommonEvent(0, 90005200, 13000242, 30018, 20018, 13002259, 1085276160, 0, 0, 0, 0);
+    //InitializeCommonEvent(0, 90005200, 13000241, -1, -1, 13002259, 0, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005200, 13000255, -1, -1, 13002266, 0, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005200, 13000256, -1, -1, 13002266, 0, 0, 0, 0, 0);
     InitializeCommonEvent(0, 90005200, 13000257, -1, -1, 13002266, 0, 0, 0, 0, 0);
@@ -461,6 +467,7 @@ $Event(13002580, Restart, function() {
     RegisterLadder(13000598, 13000599, 13001595);
     RegisterLadder(13000603, 13000604, 13001597);
     RegisterLadder(13002602, 13002601, 13001602); //Kickdown Ladder
+    RegisterLadder(13000606, 13000605, 13001598);
 });
 
 //Elevators
@@ -473,9 +480,9 @@ $Event(13002510, Default, function() {
 });
 
 //New Elevator
-$Event(13002787, Default, function() {
-    InitializeCommonEvent(0, 90005500, 13000534, 13000535, 0, 13001534, 13001536, 13003537, 13001538, 13003539, 13002540, 13002541, 13000536, 13000537, 0);
-});
+//$Event(13002787, Default, function() {
+    //    InitializeCommonEvent(0, 90005500, 13000534, 13000535, 0, 13001534, 13001536, 13003537, 13001538, 13003539, 13002540, 13002541, 13000536, 13000537, 0);
+//});
 
 $Event(13000788, Default, function() {
 EndIf(ThisEventSlot());
@@ -1433,6 +1440,8 @@ $Event(13003786, Restart, function() {
     DisableHit(13001745);
     DisableHit(13001759);
     DisableHit(13001761);
+    DisableHit(13001775);
+    //DisableHit(13002262);
 });
 
 //Enemy uses Horn and wakes up others
@@ -1457,7 +1466,7 @@ $Event(13003788, Restart, function(X0_4, X4_4, X8_4) {
     }
     if (!EventFlag(X0_4))
     {
-        WaitFixedTimeSeconds(3);
+        WaitFixedTimeSeconds(1);
         RestartEvent();
     }
     else
@@ -1620,9 +1629,9 @@ L0:
 });
 
 //Mystic Huntress Summon Attacks
-//Arguments: (Ancestral Spirit Entity ID, spEffectId, Warp Point dummypolyId, animationId, Hiding Spot Warp Point Entity ID)
+//Arguments: (Ancestral Spirit Entity ID, spEffectId, Warp Point dummypolyId, animationId, Hiding Spot Warp Point Entity ID, LockCamParam)
 //Mystic Huntress Entity ID: 13000870
-$Event(13003795, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
+$Event(13003795, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4) {
     DisableLockOnPoint(X0_4, 220); //removed Ancestral Spirit lock-on point (add other lock-on points to list)
     DisableLockOnPoint(X0_4, 221); //removed Ancestral Spirit lock-on point
     DisableLockOnPoint(X0_4, 222); //removed Ancestral Spirit lock-on point
@@ -1632,6 +1641,7 @@ $Event(13003795, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
     DisableCharacterCollision(X0_4); //disable Ancestral Spirit collision (problematic with current map, requires investigation)
     WarpCharacterAndCopyFloor(X0_4, TargetEntityType.Area, X16_4, -1, X16_4); //Ancestral Summon Attack Hiding Spot
     DisableCharacter(X0_4); //disable Ancestral Spirit
+    ChangeCamera(-1, -1); //Lock Cam Reset
     EndIf(EventFlag(13000870)); //end if mystic huntress is dead
     DisableNetworkSync(); //for seamless coop
     EnableCharacterImmortality(X0_4); //enable Ancestral Spirit immortality
@@ -1639,6 +1649,7 @@ $Event(13003795, Restart, function(X0_4, X4_4, X8_4, X12_4, X16_4) {
     EnableCharacter(X0_4); //enable Ancestral Spirit
     SetNetworkUpdateRate(X0_4, true, CharacterUpdateFrequency.AlwaysUpdate); //Ancestral Spirit rendering at higher framerate
     EnableCharacterAI(X0_4); //enabled Ancestral Spirit ai
+    ChangeCamera(X20_4, X20_4); //Lock Cam Set
     WaitFixedTimeFrames(1);
     WarpCharacterAndCopyFloor(X0_4, TargetEntityType.Character, 13000870, X8_4, 13000870); //New Dami poli created: 246
     RotateCharacter(X0_4, 10000, X12_4, false); //rotate towards player and play unique summon anim
@@ -1732,4 +1743,67 @@ $Event(13003801, Restart, function() {
 $Event(13003802, Restart, function() {
     WaitFor(InArea(10000, 13002050, 1));
     SetSpEffect(10000, 2054);
+});
+
+//Moorth Ruins Warp Handler
+$Event(13003803, Default, function(X0_4, X4_4, X8_4, X12_4, X16_4, X20_4, X24_4, X28_4) {
+    DisableNetworkSync();
+    if (Signed(X24_4) != 0)
+        WaitFor(EventFlag(X24_4)); //Seera Defeated
+    
+    //DeleteAssetfollowingSFX(X0_4, false);
+    //CreateAssetfollowingSFX(X0_4, 200, 806870);
+    WaitFor(ActionButtonInArea(9141, X0_4)); //Plea for Admonishment
+    
+    if (PlayerIsInOwnWorld()) {
+        SetSpEffect(10000, 4280);
+        SetSpEffect(10000, 4282);
+    }
+    EnableCharacterImmortality(10000);
+    EnableCharacterInvincibility(10000);
+    DisableCharacterCollision(10000);
+    RotateCharacter(10000, X28_4, -1, true);
+    ForceAnimationPlayback(10000, 81150, false, true, false, Equal, 1); //O' Mother
+    
+    WaitFixedTimeSeconds(7);
+    DisableCharacterImmortality(10000);
+    DisableCharacterInvincibility(10000);
+    EnableCharacterCollision(10000);
+    
+    if (!MapLoaded(X4_4, X8_4, X12_4, X16_4)) {
+        WarpPlayer(X4_4, X8_4, X12_4, X16_4, X20_4, 60);
+    }
+    else {
+        WarpCharacterAndCopyFloorWithFadeout(10000, TargetEntityType.Area, X20_4, -1, X20_4, false, true);
+    }
+    SetPlayerRespawnPoint(X20_4);
+    SaveRequest();
+    RestartEvent();
+});
+
+//Moorth Ruins Statue Guide Handler (Flag, Asset Entity ID, Dummy Poly, Flag 2)
+$Event(13003804, Default, function(X0_4, X4_4, X8_4, X12_4) {
+    DisableNetworkSync();
+    if (EventFlag(X0_4)) {
+        DeleteAssetfollowingSFX(X4_4, true);
+        SetEventFlagID(X12_4, OFF);
+        EndEvent();
+    }
+L0:
+    if (!EventFlag(X12_4)) {
+        WaitFor(ActionButtonInArea(9260, X4_4));
+        DisplayGenericDialog(4211, PromptType.OKCANCEL, NumberofOptions.NoButtons, X4_4, 3);
+        SetEventFlagID(X12_4, ON);
+    }
+L1:
+    if (1049551600 != X4_4) {
+        CreateAssetfollowingSFX(X4_4, X8_4, 800530);
+    } else {
+L10:
+        CreateAssetfollowingSFX(X4_4, X8_4, 800531);
+    }
+L1:
+    WaitFor(EventFlag(X0_4));
+    RestartEvent();
+    CreateAssetfollowingSFX(X4_4, X8_4, 800530);
 });

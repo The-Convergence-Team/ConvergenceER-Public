@@ -42,7 +42,7 @@ local basic_modules = { -- 5
     "convergence\\EnemyInfo.hks",
 }
 
-local addative_modules = { -- 27
+local addative_modules = { -- 26
     "vanilla\\CMSGLibrary.hks",
 
     "exposer\\GameBasePointers.hks",
@@ -1028,7 +1028,6 @@ function IsStanceArts(arts_id)
         [101] = true, -- Barrage
         [102] = true, -- Mighty Shot
         [103] = true, -- Enchanted Shot
-        [104] = true, -- Carian Bow
         [105] = true, -- Rain of Arrows
         [106] = true, -- UNUSED
         [107] = true, -- UNUSED
@@ -1075,7 +1074,6 @@ function IsArrowStanceArts(arts_id)
         [101] = true, -- Barrage
         [102] = true, -- Mighty Shot
         [103] = true, -- Enchanted Shot
-        [104] = true, -- Carian Bow
         [105] = true, -- Rain of Arrows
         [106] = true, -- UNUSED
         [107] = true, -- UNUSED
@@ -1898,8 +1896,7 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
     act(DebugLogOutput, "ExecAttack request=" .. request)
 
 	-- fingerslayer combo memory convergence	
-	if env(GetSpEffectID, 2340) == TRUE then
-		
+	if env(GetSpEffectID, 2340) == TRUE then		
 		if env(GetSpEffectID, 2345) == TRUE then
 			b1 = "W_AttackBothLight6"
 			r1 = "W_AttackRightLight6"	
@@ -1991,9 +1988,6 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
 		b2 = "W_AttackBothHeavySpecial1Start"
 		r2 = "W_AttackRightHeavySpecial1Start"
 	end
-
-
-
 	-- Kmstr End
 
     local style = c_Style
@@ -2192,10 +2186,13 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
         if c_SwordArtsID == 372 and r2 == "W_DrawStanceRightAttackHeavy" and env(GetSpEffectID, 191000) == TRUE and env(ActionDuration, ACTION_ARM_L2) <= 0 then
             return FALSE
         end
-        if (c_SwordArtsID == 313 or c_SwordArtsID == 273)
-            and (r2 == "W_SwordArtsOneShotComboEnd" or r2 == "W_SwordArtsOneShotComboEnd_2") then
-            artsr2 = TRUE
-            SetVariable("SwordArtsOneShotComboCategory", 0)
+        if r2 == "W_SwordArtsOneShotComboEnd" or r2 == "W_SwordArtsOneShotComboEnd_2" then
+            if c_SwordArtsID == 313 or c_SwordArtsID == 273 then
+                artsr2 = TRUE
+                SetVariable("SwordArtsOneShotComboCategory", 0)
+            elseif c_SwordArtsID == 104 then -- Keystone Sword
+                artsr2 = TRUE
+            end
         end
 
         if artsr2 == TRUE then
@@ -2259,8 +2256,7 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
 	    -- Monk Flamemace: Heavy Special
         if env(GetSpEffectID, 2141) == TRUE or env(GetSpEffectID, 2143) == TRUE then
             IsEnableSpecialAttack = TRUE
-            SetVariable("AttackRightHeavySpecialType", 0)
-		
+            SetVariable("AttackRightHeavySpecialType", 0)		
         end
 
 		-- Skeleton Hands: Heavy Special
@@ -2296,8 +2292,7 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
             end
         end
 
-        if env(GetSpEffectID, 1681) == FALSE and env(GetSpEffectID, 1686) == FALSE and env(GetSpEffectID, 1811) == FALSE
-            and env(GetSpEffectID, 1816) == FALSE and env(GetSpEffectID, 19912) == TRUE then
+        if env(GetSpEffectID, 1681) == FALSE and env(GetSpEffectID, 1686) == FALSE and env(GetSpEffectID, 1811) == FALSE and env(GetSpEffectID, 1816) == FALSE and env(GetSpEffectID, 19912) == TRUE then
             r2 = "W_AttackRightHeavy2Start"
         end
 
@@ -2403,9 +2398,13 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
             return FALSE
         end
         -- DLC 1.13.1: Dynastic Sickleplay, Raging Beast
-        if (c_SwordArtsID == 313 or c_SwordArtsID == 273) and (r2 == "W_SwordArtsOneShotComboEnd" or r2 == "W_SwordArtsOneShotComboEnd_2") then
-            artsr2 = TRUE
-            SetVariable("SwordArtsOneShotComboCategory", 0)
+        if r2 == "W_SwordArtsOneShotComboEnd" or r2 == "W_SwordArtsOneShotComboEnd_2" then
+            if c_SwordArtsID == 313 or c_SwordArtsID == 273 then
+                artsr2 = TRUE
+                SetVariable("SwordArtsOneShotComboCategory", 0)
+            elseif c_SwordArtsID == 104 then -- Keystone Sword
+                artsr2 = TRUE
+            end
         end
 
         if artsr2 == TRUE then
@@ -2866,7 +2865,7 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
 			arts_idx = 4
 		elseif c_SwordArtsID == 388 then --smithscript rosary
 			if env(GetSpEffectID, 2425) == TRUE then -- 040200 -- sword
-				arts_idx = 1				
+				arts_idx = 1
 			elseif env(GetSpEffectID, 2424) == TRUE then -- 040300 -- Quarterstaff
 				arts_idx = 2
 			elseif IsNodeActive("Guard_SM") == TRUE or IsNodeActive("Guard_Upper_SM") == TRUE then -- 042000 -- Shield
@@ -2882,7 +2881,7 @@ function ExecAttack(r1, r2, l1, l2, b1, b2, is_guard, blend_type, artsr1, artsr2
 				arts_idx = 7
 			else
 				arts_idx = 0
-			end	
+			end
 		elseif c_WeaponSwordArts == "11130000" then -- Vanilla ringed finger to account for crystalline crab claw using same tae
 			arts_idx = 11
         end
@@ -6590,7 +6589,7 @@ function FallCommonFunction(is_enable_falling_death, is_jump, fall_style)
         end
         return TRUE
     end
-    if is_enable_falling_death ~= TRUE or not (height >= 60) or (env(GetStateChangeType, 266) == TRUE and env(GetSpEffectID, Jewel_of_the_Cosmos) == FALSE) then
+    if is_enable_falling_death ~= TRUE or not (height >= 60) or env(GetStateChangeType, 266) == TRUE then
     else
         BlightpoleOffHandler()
         if fall_style == FALL_FACEUP then
@@ -13490,6 +13489,41 @@ end
 function SwordArtsOneShot_onUpdate()
     local canThrow = FALSE
 	local c_WeaponSwordArts = GetWeaponID(c_SwordArtsHand)
+    local test = 5 -- Keystone Sword Anim Testing (0 is holy, 1 is magic, 2 is lightning, 3 is fire, 4 is physical, 5 disables test script)
+    if c_SwordArtsID == 104 then
+        if env(GetSpEffectID, 2120) == TRUE then -- Start of Initial Tae
+            rng = math.random(1, 5) -- Keystone Sword Logic
+            rng2 = math.random(1, 4) -- Failsafe Keystone Sword Logic (If rng = 5 on cooldown)
+        end
+    end
+
+    -- Keystone Sword Combo ID cat change
+    if env(ActionRequest, ACTION_ARM_R2) == TRUE then
+        if c_SwordArtsID == 104 then
+                local ComboSS_idx = 0
+
+                if env(GetSpEffectID, 2115) == TRUE then -- 040010 (Holy)
+                    ComboSS_idx = 0
+                elseif env(GetSpEffectID, 2116) == TRUE then -- 040210 (Magic)
+                    ComboSS_idx = 1
+                elseif env(GetSpEffectID, 2117) == TRUE then -- 040310 (Lightning)
+                    ComboSS_idx = 2
+                elseif env(GetSpEffectID, 2118) == TRUE then -- 042410 (Fire)
+                    ComboSS_idx = 3
+                elseif env(GetSpEffectID, 2119) == TRUE then -- 044210 (Physical)
+                    ComboSS_idx = 4
+                end
+                
+                if test ~= 5 then
+                    ComboSS_idx = test
+                end
+                SetSwordArtsPointInfo(ACTION_ARM_R2, TRUE, r2)
+                SetSwordArtsPointInfo(ACTION_ARM_R2, TRUE, b2)
+                SetVariable("SwordArtsOneShotComboCategory", ComboSS_idx)
+                ExecEventAllBody("W_SwordArtsOneShotComboEnd") --04xxx10 --nofp = 04xxx15
+                return
+        end
+    end
 	
     if c_SwordArtsID == 130 or c_SwordArtsID == 131 or c_SwordArtsID == 55 or c_SwordArtsID == 323 or c_SwordArtsID == 92 or c_SwordArtsID == 259 then
         canThrow = TRUE
@@ -13567,6 +13601,103 @@ function SwordArtsOneShot_onUpdate()
     if ArtsCommonFunction(r1, r2, "W_AttackLeftLight1", "W_AttackLeftHeavy1", b1, b2, FALSE, TRUE, TRUE, TRUE, canThrow, ALLBODY) == TRUE then
         return
     end
+
+    -- Keystone Sword StateInfo application for VFX and combo cat change
+    if c_SwordArtsID == 104 then
+        if env(GetSpEffectID, 2120) == TRUE then -- Start of Initial Tae
+            if test ~= 5 then
+                if test == 0 then
+                    act(AddSpEffect, 2115) -- (Holy)
+                elseif test == 1 then
+                    act(AddSpEffect, 2116) -- (Magic)
+                elseif test == 2 then
+                    act(AddSpEffect, 2117) -- (Lightning)
+                elseif test == 3 then
+                    act(AddSpEffect, 2118) -- (Fire)
+                elseif test == 4 then
+                    act(AddSpEffect, 2119) -- (Physical)
+                end
+            elseif rng == 1 then -- (Holy)
+                if env(GetSpEffectID, 2110) == FALSE then -- (Holy) Cooldown
+                    act(AddSpEffect, 2115) -- StateInfos for VFX differences (Holy)
+                elseif rng2 == 1 then
+                    act(AddSpEffect, 2119) -- (Physical)
+                elseif rng2 == 2 then
+                    act(AddSpEffect, 2118) -- (Fire)
+                elseif rng2 == 3 then
+                    act(AddSpEffect, 2117) -- (Lightning)
+                elseif rng2 == 4 then
+                    act(AddSpEffect, 2116) -- (Magic)
+                end
+            elseif rng == 2 then -- (Magic)
+                if env(GetSpEffectID, 2111) == FALSE then -- (Magic) Cooldown
+                    act(AddSpEffect, 2116) -- (Magic) 
+                elseif rng2 == 1 then
+                    act(AddSpEffect, 2115) -- (Holy)
+                elseif rng2 == 2 then
+                    act(AddSpEffect, 2119) -- (Physical)
+                elseif rng2 == 3 then
+                    act(AddSpEffect, 2118) -- (Fire)
+                elseif rng2 == 4 then
+                    act(AddSpEffect, 2117) -- (Lightning)
+                end
+            elseif rng == 3 then -- (Lightning)
+                if env(GetSpEffectID, 2112) == FALSE then -- (Lightning) Cooldown
+                    act(AddSpEffect, 2117) -- (Lightning)
+                elseif rng2 == 1 then
+                    act(AddSpEffect, 2116) -- (Magic)
+                elseif rng2 == 2 then
+                    act(AddSpEffect, 2115) -- (Holy)
+                elseif rng2 == 3 then
+                    act(AddSpEffect, 2119) -- (Physical)
+                elseif rng2 == 4 then
+                    act(AddSpEffect, 2118) -- (Fire)
+                end
+            elseif rng == 4 then -- (Fire)
+                if env(GetSpEffectID, 2113) == FALSE then -- (Fire) Cooldown
+                    act(AddSpEffect, 2118) -- (Fire)
+                elseif rng2 == 1 then
+                    act(AddSpEffect, 2117) -- (Lightning)
+                elseif rng2 == 2 then
+                    act(AddSpEffect, 2116) -- (Magic)
+                elseif rng2 == 3 then
+                    act(AddSpEffect, 2115) -- (Holy)
+                elseif rng2 == 4 then
+                    act(AddSpEffect, 2119) -- (Physical)
+                end
+            elseif rng == 5 then -- (Physical)
+                if env(GetSpEffectID, 2114) == FALSE then -- (Physical) Cooldown
+                    act(AddSpEffect, 2119) -- (Physical)
+                elseif rng2 == 1 then
+                    act(AddSpEffect, 2118) -- (Fire)
+                elseif rng2 == 2 then
+                    act(AddSpEffect, 2117) -- (Lightning)
+                elseif rng2 == 3 then
+                    act(AddSpEffect, 2116) -- (Magic)
+                elseif rng2 == 4 then
+                    act(AddSpEffect, 2115) -- (Holy)
+                end
+            end
+        end
+    end
+
+    -- Keystone Sword Cooldowns
+    if c_SwordArtsID == 104 then
+        if env(GetSpEffectID, 2121) == TRUE then -- Middle of Initial Tae
+            if env(GetSpEffectID, 2115) == TRUE then -- (Holy)
+                act(AddSpEffect, 2110) -- (Holy) Cooldown
+            elseif env(GetSpEffectID, 2116) == TRUE then -- (Magic)
+                act(AddSpEffect, 2111) -- (Magic) Cooldown
+            elseif env(GetSpEffectID, 2117) == TRUE then -- (Lightning)
+                act(AddSpEffect, 2112) -- (Lightning) Cooldown
+            elseif env(GetSpEffectID, 2118) == TRUE then -- (Fire)
+                act(AddSpEffect, 2113) -- (Fire) Cooldown
+            elseif env(GetSpeffectID, 2119) == TRUE then -- (Physical)
+                act(AddSpEffect, 2114) -- (Physical) Cooldown
+            end
+        end
+    end
+
     if env(ActionDuration, ACTION_ARM_L2) <= 0 then
         if env(GetSpEffectID, 100285) == TRUE then
             local idle_cat = env(GetStayAnimCategory)
@@ -26098,7 +26229,7 @@ function Jump_Loop_onUpdate()
 
     local height = env(GetFallHeight) / 100
 
-    if not (height >= 60) or (env(GetStateChangeType, 266) == TRUE and env(GetSpEffectID, Jewel_of_the_Cosmos) == FALSE) then
+    if not (height >= 60) or env(GetStateChangeType, 266) == TRUE then
     else
         ExecEventAllBody("W_FallDeath")
         return TRUE

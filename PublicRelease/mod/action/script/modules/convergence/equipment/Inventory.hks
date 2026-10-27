@@ -8,8 +8,8 @@ ITEMCATEGORY_ID = {
 
 local trackedGoods = {
     [1] = true, -- Dev Tool: Map Reloader
-    [EMPTY_PHYSICK] = true, -- Physick Flask (Empty)
-    [FULL_PHYSICK] = 392610, -- Physick Flask (Full)
+    [250] = 392610, -- Physick Flask (Full)
+    [251] = true, -- Physick Flask (Empty)
     [1000] = true, -- Flask of Crimson Tears (Empty)
     [1001] = 392620, -- Flask of Crimson Tears +0 (Full)
     [1002] = true, -- Flask of Crimson Tears +1 (Empty)
@@ -119,7 +119,7 @@ function CycleGetInventoryItems(storageType)
             tempIndex = 0
             break
         end
-        
+
         tempIndex = tempIndex + 1
         -- We only care about saving weapons for now so we don't bloat the array with other items
         -- Hopefully increases performance by having a smaller array
@@ -192,7 +192,7 @@ function GetInventoryItem(storageType, index, isKey)
     if tonumber(fullItemId) == -1 then -- int max which is the default if the item slot is empty
         return nil
     end
-    
+
     _highestIndexFound = math.max(_highestIndexFound, index)
 
     local itemCategory, itemId = extractBits32String(fullItemId)
