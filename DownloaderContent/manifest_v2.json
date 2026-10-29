@@ -1,7 +1,7 @@
 {
-  "commitHash": "4c83c83be63c552857fa4c5392bacdbedf48d36c",
+  "commitHash": "3457f2dbbc5d4d6c0a99f4b1c9754feefcda9584",
   "files": {
-    "Seamless Coop/ersc_settings.ini": {
+    "SeamlessCoop/ersc_settings.ini": {
       "sha256": "d1850b95b38aa52560fa27385a3fa8300a38b707203c17ca60bce20772f3094f",
       "size": 2298
     },
@@ -5306,8 +5306,8 @@
       "size": 5848
     },
     "mod/chr/c0000.anibnd.dcx": {
-      "sha256": "6a29da1b363f0a1fc07a4505728ce315155240e6acce2f8f39c372bc208dc549",
-      "size": 24553650
+      "sha256": "613f816c7a56b798e5272eac90082056a4292ad90836aedcd6046f73e4a9002b",
+      "size": 25896801
     },
     "mod/chr/c0000.behbnd.dcx": {
       "sha256": "f2a0d46128d35c33af6da732faf8fa5ad64d0e2282b7a8ed44f885fd1c208f90",
@@ -7602,8 +7602,8 @@
       "size": 734
     },
     "mod/dll/unlock_wwise_states_er.dll": {
-      "sha256": "e8931e7bb68a76e5c1dc4636efe14325040c99250801ed73711c665cb21c2ddb",
-      "size": 612864
+      "sha256": "12b27dc86fc7e343e2025e95b62fb14bf32b804312064dde064bba59acccbae7",
+      "size": 500224
     },
     "mod/event/common.emevd.dcx": {
       "sha256": "c437d904f2325213f495e2b8421fa00f621262c813da6646de5cc0066ea0ae41",
@@ -13406,120 +13406,120 @@
       "size": 476272
     },
     "mod/msg/araae/menu_dlc02.msgbnd.dcx": {
-      "sha256": "0cc3f7f512eda4a32d17a9dc2a2a036a1ff0da46a4805e441640fcff65e711c6",
-      "size": 556592
+      "sha256": "6df9ca43248af3c268c79ee021f9bf78323624b7eda9d920813c7ba664efae0f",
+      "size": 556800
     },
     "mod/msg/deude/item_dlc02.msgbnd.dcx": {
       "sha256": "b2b41d53fc4504a2b9ecb9e518a9c67f16d0b501f97fdcd70be089abbf0319cb",
       "size": 476272
     },
     "mod/msg/deude/menu_dlc02.msgbnd.dcx": {
-      "sha256": "0cc3f7f512eda4a32d17a9dc2a2a036a1ff0da46a4805e441640fcff65e711c6",
-      "size": 556592
+      "sha256": "6df9ca43248af3c268c79ee021f9bf78323624b7eda9d920813c7ba664efae0f",
+      "size": 556800
     },
     "mod/msg/engus/item_dlc02.msgbnd.dcx": {
       "sha256": "b2b41d53fc4504a2b9ecb9e518a9c67f16d0b501f97fdcd70be089abbf0319cb",
       "size": 476272
     },
     "mod/msg/engus/menu_dlc02.msgbnd.dcx": {
-      "sha256": "0cc3f7f512eda4a32d17a9dc2a2a036a1ff0da46a4805e441640fcff65e711c6",
-      "size": 556592
+      "sha256": "6df9ca43248af3c268c79ee021f9bf78323624b7eda9d920813c7ba664efae0f",
+      "size": 556800
     },
     "mod/msg/frafr/item_dlc02.msgbnd.dcx": {
       "sha256": "b2b41d53fc4504a2b9ecb9e518a9c67f16d0b501f97fdcd70be089abbf0319cb",
       "size": 476272
     },
     "mod/msg/frafr/menu_dlc02.msgbnd.dcx": {
-      "sha256": "0cc3f7f512eda4a32d17a9dc2a2a036a1ff0da46a4805e441640fcff65e711c6",
-      "size": 556592
+      "sha256": "6df9ca43248af3c268c79ee021f9bf78323624b7eda9d920813c7ba664efae0f",
+      "size": 556800
     },
     "mod/msg/itait/item_dlc02.msgbnd.dcx": {
       "sha256": "b2b41d53fc4504a2b9ecb9e518a9c67f16d0b501f97fdcd70be089abbf0319cb",
       "size": 476272
     },
     "mod/msg/itait/menu_dlc02.msgbnd.dcx": {
-      "sha256": "0cc3f7f512eda4a32d17a9dc2a2a036a1ff0da46a4805e441640fcff65e711c6",
-      "size": 556592
+      "sha256": "6df9ca43248af3c268c79ee021f9bf78323624b7eda9d920813c7ba664efae0f",
+      "size": 556800
     },
     "mod/msg/jpnjp/item_dlc02.msgbnd.dcx": {
       "sha256": "b2b41d53fc4504a2b9ecb9e518a9c67f16d0b501f97fdcd70be089abbf0319cb",
       "size": 476272
     },
     "mod/msg/jpnjp/menu_dlc02.msgbnd.dcx": {
-      "sha256": "0cc3f7f512eda4a32d17a9dc2a2a036a1ff0da46a4805e441640fcff65e711c6",
-      "size": 556592
+      "sha256": "6df9ca43248af3c268c79ee021f9bf78323624b7eda9d920813c7ba664efae0f",
+      "size": 556800
     },
     "mod/msg/korkr/item_dlc02.msgbnd.dcx": {
       "sha256": "b2b41d53fc4504a2b9ecb9e518a9c67f16d0b501f97fdcd70be089abbf0319cb",
       "size": 476272
     },
     "mod/msg/korkr/menu_dlc02.msgbnd.dcx": {
-      "sha256": "0cc3f7f512eda4a32d17a9dc2a2a036a1ff0da46a4805e441640fcff65e711c6",
-      "size": 556592
+      "sha256": "6df9ca43248af3c268c79ee021f9bf78323624b7eda9d920813c7ba664efae0f",
+      "size": 556800
     },
     "mod/msg/polpl/item_dlc02.msgbnd.dcx": {
       "sha256": "b2b41d53fc4504a2b9ecb9e518a9c67f16d0b501f97fdcd70be089abbf0319cb",
       "size": 476272
     },
     "mod/msg/polpl/menu_dlc02.msgbnd.dcx": {
-      "sha256": "0cc3f7f512eda4a32d17a9dc2a2a036a1ff0da46a4805e441640fcff65e711c6",
-      "size": 556592
+      "sha256": "6df9ca43248af3c268c79ee021f9bf78323624b7eda9d920813c7ba664efae0f",
+      "size": 556800
     },
     "mod/msg/porbr/item_dlc02.msgbnd.dcx": {
       "sha256": "b2b41d53fc4504a2b9ecb9e518a9c67f16d0b501f97fdcd70be089abbf0319cb",
       "size": 476272
     },
     "mod/msg/porbr/menu_dlc02.msgbnd.dcx": {
-      "sha256": "0cc3f7f512eda4a32d17a9dc2a2a036a1ff0da46a4805e441640fcff65e711c6",
-      "size": 556592
+      "sha256": "6df9ca43248af3c268c79ee021f9bf78323624b7eda9d920813c7ba664efae0f",
+      "size": 556800
     },
     "mod/msg/rusru/item_dlc02.msgbnd.dcx": {
       "sha256": "b2b41d53fc4504a2b9ecb9e518a9c67f16d0b501f97fdcd70be089abbf0319cb",
       "size": 476272
     },
     "mod/msg/rusru/menu_dlc02.msgbnd.dcx": {
-      "sha256": "0cc3f7f512eda4a32d17a9dc2a2a036a1ff0da46a4805e441640fcff65e711c6",
-      "size": 556592
+      "sha256": "6df9ca43248af3c268c79ee021f9bf78323624b7eda9d920813c7ba664efae0f",
+      "size": 556800
     },
     "mod/msg/spaar/item_dlc02.msgbnd.dcx": {
       "sha256": "b2b41d53fc4504a2b9ecb9e518a9c67f16d0b501f97fdcd70be089abbf0319cb",
       "size": 476272
     },
     "mod/msg/spaar/menu_dlc02.msgbnd.dcx": {
-      "sha256": "0cc3f7f512eda4a32d17a9dc2a2a036a1ff0da46a4805e441640fcff65e711c6",
-      "size": 556592
+      "sha256": "6df9ca43248af3c268c79ee021f9bf78323624b7eda9d920813c7ba664efae0f",
+      "size": 556800
     },
     "mod/msg/spaes/item_dlc02.msgbnd.dcx": {
       "sha256": "b2b41d53fc4504a2b9ecb9e518a9c67f16d0b501f97fdcd70be089abbf0319cb",
       "size": 476272
     },
     "mod/msg/spaes/menu_dlc02.msgbnd.dcx": {
-      "sha256": "0cc3f7f512eda4a32d17a9dc2a2a036a1ff0da46a4805e441640fcff65e711c6",
-      "size": 556592
+      "sha256": "6df9ca43248af3c268c79ee021f9bf78323624b7eda9d920813c7ba664efae0f",
+      "size": 556800
     },
     "mod/msg/thath/item_dlc02.msgbnd.dcx": {
       "sha256": "b2b41d53fc4504a2b9ecb9e518a9c67f16d0b501f97fdcd70be089abbf0319cb",
       "size": 476272
     },
     "mod/msg/thath/menu_dlc02.msgbnd.dcx": {
-      "sha256": "0cc3f7f512eda4a32d17a9dc2a2a036a1ff0da46a4805e441640fcff65e711c6",
-      "size": 556592
+      "sha256": "6df9ca43248af3c268c79ee021f9bf78323624b7eda9d920813c7ba664efae0f",
+      "size": 556800
     },
     "mod/msg/zhocn/item_dlc02.msgbnd.dcx": {
       "sha256": "b2b41d53fc4504a2b9ecb9e518a9c67f16d0b501f97fdcd70be089abbf0319cb",
       "size": 476272
     },
     "mod/msg/zhocn/menu_dlc02.msgbnd.dcx": {
-      "sha256": "0cc3f7f512eda4a32d17a9dc2a2a036a1ff0da46a4805e441640fcff65e711c6",
-      "size": 556592
+      "sha256": "6df9ca43248af3c268c79ee021f9bf78323624b7eda9d920813c7ba664efae0f",
+      "size": 556800
     },
     "mod/msg/zhotw/item_dlc02.msgbnd.dcx": {
       "sha256": "b2b41d53fc4504a2b9ecb9e518a9c67f16d0b501f97fdcd70be089abbf0319cb",
       "size": 476272
     },
     "mod/msg/zhotw/menu_dlc02.msgbnd.dcx": {
-      "sha256": "0cc3f7f512eda4a32d17a9dc2a2a036a1ff0da46a4805e441640fcff65e711c6",
-      "size": 556592
+      "sha256": "6df9ca43248af3c268c79ee021f9bf78323624b7eda9d920813c7ba664efae0f",
+      "size": 556800
     },
     "mod/other/decaltex.tpf.dcx": {
       "sha256": "6a8be573d3aa0ac0a8d19155a69407c123e93bab8e777f107f9d086b5d00bb8a",
@@ -15762,8 +15762,8 @@
       "size": 984784
     },
     "mod/regulation.bin": {
-      "sha256": "0665a3538072b0784887aa0ec4d638323ddf55d2b7cfa7a98645228d214a1d4c",
-      "size": 2987120
+      "sha256": "548bf324d608fb7b48f28b3657fcd2ad41b08b251858847d6ce89663676dd226",
+      "size": 3005712
     },
     "mod/script/010000_logic.luabnd.dcx": {
       "sha256": "1d89cee9c99808ff76885e45e96a7e3afdd7f5ba16abe972d3360eb37dc8f8ee",
@@ -16322,8 +16322,8 @@
       "size": 131745071
     },
     "mod/sfx/sfxbnd_commoneffects_dlc02.ffxbnd.dcx": {
-      "sha256": "99c0b4aa5b05fc9ba9f41c9ae91bed2d31eb0ebe7f40f2f6ee6795767ef03312",
-      "size": 39777181
+      "sha256": "4b0e03828e4200631bcc6820acaf47d1c4b5207eff3422ab7ab33cf55ecea1d4",
+      "size": 40373287
     },
     "mod/sfx/sfxbnd_m11.ffxbnd.dcx": {
       "sha256": "6c242a7798c3e5becde49ca6edc8f91c4481cd03a6d54101247fff2c3345657d",
