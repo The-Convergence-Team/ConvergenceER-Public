@@ -54,8 +54,8 @@ recovery/
 regulation-bin/
 Resources/
 ScalingJsonOutput/
-SeamlessCoop/
-systemparam/
+SeamlessCoop/crashpad/
+SeamlessCoop/locale/
 
 _DSAS_CACHE/
 .smithbox/
